@@ -1,0 +1,225 @@
+<div class="mvndr-dl">
+  <div class="vstr-logo text-center">
+    <img src="{{ logo }}" alt="" title="" class="img-responsive" />
+  </div>
+  <div class="vuser-name text-center">{{ store_name }}</div>
+  <div class="vrating text-center">
+    {% for i in 1..5 %}
+    {% if rating < i %}
+    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+    {% else %}
+    <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+    {% endif %}
+    {% endfor %}
+    <span class="vwrite"><a href="#" data-toggle="modal" data-target="#mv-review">{{ button_write_review }}</a> / <a href="{{ gotoreviews }}">{{ text_reviews }} ({{ total_reviews }})</a></span>
+  </div>
+  <div class="follow-us text-center">
+    <ul class="list-inline">
+      {% if facebook_url %}
+      <li class="fb"><a href="{{ facebook_url }}"><i class="fa fa-facebook-square"></i></a></li>
+      {% endif %}
+      {% if google_plus_url %}
+      <li class="gp"><a href="{{ google_plus_url }}"><i class="fa fa-google-plus-square"></i></a></li>
+      {% endif %}
+
+      {% if twitter_url %}
+      <li class="tw"><a href="{{ twitter_url }}"><i class="fa fa-twitter-square"></i></a></li>
+      {% endif %}
+
+      {% if pinterest_url %}
+      <li class="pr"><a href="{{ pinterest_url }}"><i class="fa fa-pinterest"></i></a></li>
+      {% endif %}
+
+      {% if linkedin_url %}
+      <li class="ld"><a href="{{ linkedin_url }}"><i class="fa fa-linkedin"></i></a></li>
+      {% endif %}
+
+      {% if youtube_url %}
+      <li class="yt"><a href="{{ youtube_url }}"><i class="fa fa-youtube"></i></a></li>
+      {% endif %}
+
+      {% if instagram_url %}
+      <li class="ig"><a href="{{ instagram_url }}"><i class="fa fa-instagram"></i></a></li>
+      {% endif %}
+
+      {% if flickr_url %}
+      <li class="fl"><a href="{{ flickr_url }}"><i class="fa fa-flickr"></i></a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+<div class="vusercntct">
+  <h3>{{ contact_seller_title }}</h3>
+  <form class="form-horizontal">
+  	{% if not customer_logged %}
+  	<div class="form-group">
+  		<div class="col-sm-12">
+  			<input type="text" name="name" class="form-control" placeholder="{{ entry_name }}" value="{{ name }}" />
+  		</div>
+  	</div>
+  	<div class="form-group">
+  		<div class="col-sm-12">
+  			<input type="text" name="email" class="form-control" placeholder="{{ entry_email_address }}" value="{{ customer_email }}" />
+  		</div>
+  	</div>
+  	{% endif %}
+  	<div class="form-group required">
+  		<div class="col-sm-12">
+  			<textarea name="message" cols="25" rows="6" placeholder="{{ entry_message }}" class="form-control"></textarea>
+  		</div>
+  	</div>
+  	<div class="buttons clearfix">
+  		<button type="button" class="btn btn-primary pull-right button-submitcontact">{{ button_send_message }}</button>
+  	</div>
+  </form>
+</div>
+<div class="modal fade" id="mv-review">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ review_title }}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal" id="form-review">
+          <div class="form-group required">
+            <div class="col-sm-12">
+              <label class="control-label">{{ entry_your_name }}</label>
+              <input name="author" value="{{ author }}" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group required">
+            <div class="col-sm-12">
+              <label class="control-label">{{ entry_title }}</label>
+              <input name="title" value="" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group required">
+            <div class="col-sm-12">
+              <label class="control-label">{{ entry_description }}</label>
+              <textarea name="description" rows="5" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group required">
+            <div class="col-sm-2">
+              <label class="control-label" style="padding-top: 0;">{{ entry_rating }}</label>
+            </div>
+            <div class="col-sm-10">
+              <span id="rating" class="stars" data-stars="0"></span>
+            </div>
+          </div>
+          <div class="buttons clearfix">
+            <div class="pull-right">
+              <button type="button" id="button-review" class="btn btn-primary">{{ button_continue }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('#button-review').click(function() {
+  $.ajax({
+    url: 'index.php?route=mpmultivendor/store_profile/addreview&mpseller_id={{ mpseller_id }}',
+    dataType: 'json',
+    type: 'post',
+    data: $('#mv-review input, #mv-review textarea, #mv-review input[type=\'hidden\']'),
+    beforeSend: function() {
+      $('#button-review').button('loading');
+    },
+    complete: function() {
+      $('#button-review').button('reset');
+    },
+    success: function(json) {
+      $('#mv-review .alert, #mv-review .text-danger').remove();
+      $('#mv-review .form-group').removeClass('has-error');
+
+      if(json['error']) {
+        if(json['error']['author']) {
+           $('#mv-review input[name=\'author\']').after('<div class="text-danger">'+ json['error']['author'] +'</div>');
+        }
+
+        if(json['error']['title']) {
+           $('#mv-review input[name=\'title\']').after('<div class="text-danger">'+ json['error']['title'] +'</div>');
+        }
+
+        if(json['error']['description']) {
+           $('#mv-review textarea[name=\'description\']').after('<div class="text-danger">'+ json['error']['description'] +'</div>');
+        }
+
+        if(json['error']['rating']) {
+           $('#mv-review #rating').after('<div class="text-danger">'+ json['error']['rating'] +'</div>');
+        }
+
+        if(json['error']['warning']) {
+           $('#mv-review .modal-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> '+ json['error']['warning'] +'</div>');
+        }
+
+        $('#mv-review .text-danger').parent().parent().addClass('has-error');
+      }
+
+      if(json['success']) {
+        location = json['success'];
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $.ratePicker("#rating");
+});
+</script>
+<script type="text/javascript">
+$('.button-submitcontact').click(function() {
+  $.ajax({
+    url: 'index.php?route=mpmultivendor/store_profile/sendEnquiry&mpseller_id={{ mpseller_id }}',
+    dataType: 'json',
+    type: 'post',
+    data: $('.vusercntct input, .vusercntct textarea'),
+    beforeSend: function() {
+      $('.button-submitcontact').button('loading');
+    },
+    complete: function() {
+      $('.button-submitcontact').button('reset');
+    },
+    success: function(json) {
+      $('.vusercntct .alert, .vusercntct .text-danger').remove();
+      $('.vusercntct .form-group').removeClass('has-error');
+
+      if(json['error']) {
+        if(json['error']['name']) {
+           $('.vusercntct input[name=\'name\']').after('<div class="text-danger">'+ json['error']['name'] +'</div>');
+        }
+
+        if(json['error']['email']) {
+           $('.vusercntct input[name=\'email\']').after('<div class="text-danger">'+ json['error']['email'] +'</div>');
+        }
+
+        if(json['error']['message']) {
+           $('.vusercntct textarea[name=\'message\']').after('<div class="text-danger">'+ json['error']['message'] +'</div>');
+        }
+
+        if(json['error']['warning']) {
+           $('.vusercntct .form-horizontal').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> '+ json['error']['warning'] +'<button type="button" class="close" data-dismiss="alert">×</button></div>');
+        }
+
+        $('.vusercntct .text-danger').parent().parent().addClass('has-error');
+      }
+
+      if(json['success']) {
+        $('.vusercntct .form-horizontal').prepend('<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> '+ json['success'] +'<button type="button" class="close" data-dismiss="alert">×</button></div>');
+
+        $('.vusercntct textarea').val('');
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+</script>

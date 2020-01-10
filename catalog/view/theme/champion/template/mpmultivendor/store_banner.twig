@@ -1,0 +1,43 @@
+<div class="mpseller-wrap">
+  <img src="{{ banner }}" alt="" title="" class="img-responsive"/>
+    <div class="mp-seller-info">
+      <div class="row">
+        <div class="col-sm-5">
+          {% if display_seller_image %}
+          <div class="seller-img">
+            <img src="{{ image }}" alt="" title="" class="img-responsive img-circle"/>
+          </div>
+          {% endif %}
+          <div class="seller-detail">
+            <ul class="list-unstyled">
+              {% if display_seller_name %}
+              <li><i class="fa fa-user"></i> {{ store_owner }}</li>
+              {% endif %}
+
+              {% if display_seller_email %}
+              <li><i class="fa fa-envelope"></i> {{ email }}</li>
+              {% endif %}
+          
+              {% if display_seller_telephone %}
+              <li><i class="fa fa-phone"></i> {{ telephone }}</li>
+              {% endif %}
+
+              {% if display_seller_address %}
+              <li><i class="fa fa-map-marker"></i> {{ address }}</li>
+              {% endif %}
+
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          {% if information_sections %}
+          <ul class="list-unstyled text-right mv-policy">
+            {% for information_section in information_sections %}
+            <li><a href="{{ information_section.href }}">{{ information_section.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>

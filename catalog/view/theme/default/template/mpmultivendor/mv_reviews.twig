@@ -1,0 +1,68 @@
+{{ header }}
+<div id="container" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if success %}
+  <div class="alert alert-success success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  {% if custom_themename != 'journal2' %}<div class="row">{% endif %}{{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="m-multivendor-wrap mv-dashboard-wrap">
+        <div class="row">
+          <div class="col-sm-3">
+            {{ store_profile }}
+          </div>
+          <div class="col-sm-9">
+          	<div class="mpseller-wrap">
+                {{ store_banner }}
+                <div class="mp-reviews">
+                  <h3>{{ title_reviews }}</h3>
+                  <ul class="list-unstyled">
+                    {% if reviews %}
+                    {% for review in reviews %}
+                    <li>
+                      <div class="mp-reviews-comment">
+                        <div class="auther-text">
+                          <p><strong>{{ review.author }}</strong> <time>{{ review.date_added }}</time></p>
+                          <div class="vrating">
+                            {% for i in 1..5 %}
+                            {% if review.rating < i %}
+                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            {% else %}
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            {% endif %}
+                            {% endfor %}
+                          </div>
+                          <div class="description">
+                            <h4>{{ review.title }}</h4>
+                            <p>{{ review.description }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    {% endfor %}
+                    <div class="text-right">{{ pagination }}</div>
+                    {% else %}
+                    <p>{{ text_no_reviews }}</p>
+                    {% endif %}
+                  </ul>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ content_bottom }}</div>
+    {% if custom_themename != 'journal2' %}{{ column_right }}{% endif %}
+  {% if custom_themename != 'journal2' %}</div>{% endif %}
+</div>
+{{ footer }}

@@ -1,0 +1,112 @@
+{{ header }}
+<div id="container" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if custom_themename != 'journal2' %}<div class="row"> {% endif %}
+    {{ column_left }}
+    {% if custom_themename == 'journal2' %} {{ column_right }} {% endif %}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}{{ mpseller_links }}
+
+      <div class="mv-dashboard-wrap">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>{{ text_enquiryby }}</h2>
+            <hr/>
+
+            <h4>{{ text_contact_details }}</h4>
+            <br/>
+
+            <h4>{{ text_name }}{{ customer_name }}</h4>
+            <h4>{{ text_email }}<a href="mailto:{{ customer_email }}">{{ customer_email }}</a></h4>
+            <h4>{{ text_date_added }}{{ date_added }}</h4>
+            <h4>{{ text_date_modified }}{{ date_modified }}</h4>
+            <br/>
+
+            <h4>{{ text_enquiry_details }}</h4>
+            <br/>
+
+            <h4>{{ customer_message }}</h4>
+          </div>
+        </div>
+
+        <hr/>
+
+          {% if chats %}
+          {% for chat in chats %}
+          <div class="reply-wrap reply-chat mpchatting">
+            <div class="ticket-header">
+              <img class="img-circle" src="{{ chat.from_image }}" />
+              <div class="ticket-content">
+                <span class="from_name">
+                  <b>{{ chat.from_name }}</b>
+                  {% if chat.from == 'seller' %}
+                  <div class="namesub">{{ chat.from_store }}</div>
+                  {% endif %}
+                </span>
+                <div class="ticket-time">{{ chat.date_added }}</div>
+                <div class="cnt">{{ chat.message }}</div>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          {% endfor %}
+
+          {% if pagination %}
+          <div class="row">
+            <div class="col-sm-12 text-right">{{ pagination }}</div>
+          </div>
+          {% endif %}
+        {% endif %}
+
+        <div class="reply-section">
+          <div class="form-group row">
+            <label class="col-sm-12 control-label">{{ entry_message }}</label>
+            <div class="col-sm-12">
+              <textarea name="message" rows="8" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="buttons-holder text-center">
+            <button type="button" class="button btn btn-primary button-reply-submit">{{ button_submit }}</button>
+          </div>
+        </div>
+      </div>
+
+      {{ content_bottom }}</div>
+    {% if custom_themename != 'journal2' %} {{ column_right }}</div>{% endif %}
+</div>
+<script type="text/javascript"><!--
+$('.button-reply-submit').click(function() {
+  $.ajax({
+    url: 'index.php?route=account/enquiries/Submitreply&enquiry_id={{ enquiry_id }}',
+    type: 'post',
+    data: $('.reply-section input, .reply-section textarea'),
+    dataType: 'json',
+    beforeSend: function() {
+      $('.button-reply-submit').button('loading');
+    },
+    complete: function() {
+      $('.button-reply-submit').button('reset');
+    },
+    success: function(json) {
+      $('.reply-section .alert, .reply-section .text-danger').remove();
+
+      if (json['redirect']) {
+        location = json['redirect'];
+      } else if (json['warning']) {
+        $('.reply-section').prepend('<div class="alert alert-danger warning"><i class="fa fa-exclamation-circle"></i> ' + json['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+      }
+    }
+  });
+});
+//--></script>
+{{ footer }}

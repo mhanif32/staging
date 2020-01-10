@@ -1,0 +1,104 @@
+{{ header }}
+<div id="container" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if custom_themename != 'journal2' %}<div class="row">{% endif %}
+    {{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}{{ mpseller_links }}
+      <div class="mv-dashboard-wrap">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="mv-dashboard-right">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_sales }}</div>
+                        <div class="count highlight">{{ total_sales }}</div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_orders }} <a  href="{{ all_orders }}">{{ button_viewmore }}</a></div>
+                        <div class="count highlight">
+                        	<span class="cnt"><b>{{ total_orders }}</b></span>
+                        	{% for order_status in order_statuses %}
+                        		<div class="list">
+                              	<a href="{{ order_status.href }}">
+                               {{ order_status.name }}:
+                                <b>{{ order_status.total_orders }}</b>
+                            	</a>
+                          	</div>
+                          {% endfor %}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_reviews }} <a href="{{ all_reviews }}">{{ text_viewmore }}</a></div>
+                        <div class="count highlight">
+                            {{ total_reviews }}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-sm-6">                  
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_commission }}</div>
+                        <div class="highlight">
+                        	<span>{{ total_commission }}</span>
+                        	<div class="list">
+                        		{{ text_recevied_payment }}: <b>{{ recevied_payment }}</b>
+                        	</div>	
+                        	<div class="list">
+                        		{{ text_available_balance }}: <b>{{ available_balance }}</b>
+                        	</div> 
+                        </div>
+                      </li>
+                    </ul>
+                  </div>  
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_products }} <a href="{{ new_product }}">{{ button_new_product }}</a></div>
+                        <div class="count highlight">{{ total_products }}</div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mv-ovrvw">
+                    <ul class="list-unstyled">
+                      <li>
+                        <div class="title">{{ text_services }} <a href="{{ new_service }}">{{ button_new_service }}</a></div>
+                        <div class="count highlight">{{ total_services }}</div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ content_bottom }}</div>
+    {% if custom_themename != 'journal2' %}{{ column_right }}{% endif %}
+  {% if custom_themename != 'journal2' %}</div>{% endif %}
+</div>
+{{ footer }}

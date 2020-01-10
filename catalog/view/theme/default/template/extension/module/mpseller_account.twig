@@ -1,0 +1,31 @@
+<div class="mv-dashboard-wrap">
+    <div class="mv-sidebar">
+      <ul class="list-unstyled">
+        {% if has_seller_profile %}
+        <li><a href="{{ seller_dashboard }}" class="{{ seller_dashboard_class }}"><i class="fa fa-tachometer"></i> {{ text_dashboard }}</a></li>
+        <li><a href="{{ seller_profile }}" class="{{ seller_edit_class }}"><i class="fa fa-user"></i> {{ text_profile }}</a></li>
+        <li><a href="{{ seller_product }}" class="{{ seller_product_class }}"><i class="fa fa-briefcase"></i> {{ text_product }}</a></li>
+        <li><a href="{{ seller_download }}" class="{{ seller_download_class }}"><i class="fa fa-download"></i> {{ text_download }}</a></li>
+        <li><a href="{{ seller_orders }}" class="{{ seller_order_class }}"><i class="fa fa-shopping-cart"></i> {{ text_orders }}</a></li>
+        <li><a href="{{ seller_reviews }}" class="{{ seller_reviews_class }}"><i class="fa fa-comments"></i> {{ text_reviews }}</a></li>
+        <li><a href="{{ seller_commission }}" class="{{ seller_commission_class }}"><i class="fa fa-money"></i> {{ text_commission }}</a></li>
+        <li><a href="{{ seller_payment }}" class="{{ seller_payment_class }}"><i class="fa fa-dollar"></i> {{ text_payment }}</a></li>
+        <li><a href="{{ seller_information_section }}" class="{{ seller_information_section_class }}"><i class="fa fa-tag"></i> {{ text_information_section }}</a></li>
+        <li><a href="{{ seller_store_info }}" class="{{ seller_store_info_class }}"><i class="fa fa-info"></i> {{ text_store_information }}</a></li>
+        <li><a href="{{ seller_store_setting }}" class="{{ seller_store_setting_class }}"><i class="fa fa-cog"></i> {{ text_store_setting }}</a></li>
+        <li><a href="{{ seller_visit_store }}"><i class="fa fa-external-link"></i> {{ text_visit_store }}</a></li>
+        <li><a href="{{ seller_enquiries }}" class="{{ seller_enquiries_class }}"><i class="fa fa-question-circle"></i> {{ text_enquiries }}</a></li>
+        <li>
+            <a href="{{ seller_message }}" class="{{ seller_message_class }}">
+                <i class="fa fa-comments-o"></i> {{ text_seller_message }}
+                {% if unreads_messages %}
+                <label class="label label-danger">{{ unreads_messages }}</label>
+                {% endif %}
+            </a>
+        </li>
+        {% elseif applyseller_page %}
+        <li><a href="{{ seller_store_info }}" class="{{ seller_reviews_class }}"><i class="fa fa-question-circle"></i> {{ text_enabled_seller }}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+</div>
