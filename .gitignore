@@ -3,6 +3,8 @@
 /config.php
 /admin/config.php
 
+/storage
+
 # Image File
 !/image/no_image.jpg
 
