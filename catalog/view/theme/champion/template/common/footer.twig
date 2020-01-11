@@ -1,47 +1,117 @@
-<footer>
+{#<footer>#}
+  {#<div class="container">#}
+    {#<div class="row">#}
+      {#{% if informations %}#}
+      {#<div class="col-sm-3">#}
+        {#<h5>{{ text_information }}</h5>#}
+        {#<ul class="list-unstyled">#}
+         {#{% for information in informations %}#}
+          {#<li><a href="{{ information.href }}">{{ information.title }}</a></li>#}
+          {#{% endfor %}#}
+        {#</ul>#}
+      {#</div>#}
+      {#{% endif %}#}
+      {#<div class="col-sm-3">#}
+        {#<h5>{{ text_service }}</h5>#}
+        {#<ul class="list-unstyled">#}
+          {#<li><a href="{{ contact }}">{{ text_contact }}</a></li>#}
+          {#<li><a href="{{ return }}">{{ text_return }}</a></li>#}
+          {#<li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>#}
+        {#</ul>#}
+      {#</div>#}
+      {#<div class="col-sm-3">#}
+        {#<h5>{{ text_extra }}</h5>#}
+        {#<ul class="list-unstyled">#}
+          {#<li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>#}
+          {#<li><a href="{{ voucher }}">{{ text_voucher }}</a></li>#}
+          {#<li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>#}
+          {#<li><a href="{{ special }}">{{ text_special }}</a></li>#}
+        {#</ul>#}
+      {#</div>#}
+      {#<div class="col-sm-3">#}
+        {#<h5>{{ text_account }}</h5>#}
+        {#<ul class="list-unstyled">#}
+          {#<li><a href="{{ account }}">{{ text_account }}</a></li>#}
+          {#<li><a href="{{ order }}">{{ text_order }}</a></li>#}
+          {#<li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>#}
+          {#<li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>#}
+        {#</ul>#}
+      {#</div>#}
+    {#</div>#}
+    {#<hr>#}
+    {#<p>{{ powered }}</p>#}
+  {#</div>#}
+{#</footer>#}
+
+<footer class="py-5 bg-gray-400">
   <div class="container">
-    <div class="row">
-      {% if informations %}
-      <div class="col-sm-3">
-        <h5>{{ text_information }}</h5>
-        <ul class="list-unstyled">
-         {% for information in informations %}
-          <li><a href="{{ information.href }}">{{ information.title }}</a></li>
-          {% endfor %}
+    <div class="row justify-content-center">
+      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+        <h4 class="text-white">
+          Policy Info
+        </h4>
+        <ul class="text-white">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Sale</a></li>
+          <li><a href="#">Terms of Use</a></li>
         </ul>
       </div>
-      {% endif %}
-      <div class="col-sm-3">
-        <h5>{{ text_service }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="{{ return }}">{{ text_return }}</a></li>
-          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+        <h4>
+          Company
+        </h4>
+        <ul class="text-white">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Delivery Information</a></li>
+
         </ul>
       </div>
-      <div class="col-sm-3">
-        <h5>{{ text_extra }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
-          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
-          <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
-          <li><a href="{{ special }}">{{ text_special }}</a></li>
+      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+        <h4>
+          Need Help ?
+        </h4>
+        <ul class="text-white">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Contact Us</a></li>
         </ul>
       </div>
-      <div class="col-sm-3">
-        <h5>{{ text_account }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ account }}">{{ text_account }}</a></li>
-          <li><a href="{{ order }}">{{ text_order }}</a></li>
-          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+        <h4>
+          Social Media
+        </h4>
+        <ul class="text-white footer-social-icons">
+          <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+          <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+          <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+          <a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
+        </ul>
+      </div>
+      <div class="col-12 col-sm-4 col-md-4 col-lg-2 p-lg-0">
+        <h4 >
+          Champion Mall
+        </h4>
+        <ul class="text-white">
+          <li>Login</li>
+          <li>Register</li>
+          <li>Become a Seller</li>
         </ul>
       </div>
     </div>
-    <hr>
-    <p>{{ powered }}</p>
+    <div class="d-flex justify-content-between mt-5 pt-4 mx-lg-5 px-lg-4">
+      <div class="col-lg-6">
+        <p style="font-size: 0.75rem; font-weight: 400; color: #BFBFBF;"><a href="index.html">Copyright © 2019 Next
+            Wholesale</a></p>
+      </div>
+      <div class="col-lg-6 text-right">
+        <img src="images/icons/Layer 107.png" alt="" class="img-fluid"> </div>
+    </div>
   </div>
+
 </footer>
+
+
+
+
 {% for script in scripts %}
 <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}

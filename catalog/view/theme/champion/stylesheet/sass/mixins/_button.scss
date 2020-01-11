@@ -1,0 +1,38 @@
+$button-background: $success !default;
+$button-background-hover: darken($success, 15) !default;
+
+$button-color: $white !default;
+$button-color-hover: $button-color !default;
+
+$button-border: 0px solid $success !default;
+$button-border-hover: $button-border !default;
+
+@mixin button($bu-background: $button-background,
+      $bu-background-hover: $button-background-hover,
+      $bu-color: $button-color,
+      $bu-color-hover: $button-color-hover,
+      $bu-border: $button-border,
+      $bu-border-hover: $button-border-hover) {
+    display: inline-block;
+    line-height: 3em; padding: 0 2.5rem;
+    border-radius: 0;
+    background: $bu-background; border: $bu-border;
+    color: $bu-color; text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+  &:hover {
+      background: $bu-background-hover; border: $bu-border-hover;
+      color: $bu-color-hover;
+  }
+  &:after{
+    border: 1px solid #000;
+    position: absolute;
+    top: 0.3rem;
+    z-index: -1;
+    left: 0.5rem;
+    content: "";
+    padding: 1.4rem 49%;
+  }
+  i { padding-left: 16px; }
+}

@@ -1,0 +1,8 @@
+// stylelint-disable declaration-no-important
+@for $i from 1 through 20 {
+	.w-#{$i * 5} {
+		width: #{percentage($i/20)} !important;
+	}
+}
+
+

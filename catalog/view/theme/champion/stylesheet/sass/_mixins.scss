@@ -1,0 +1,29 @@
+
+// // Skins
+@import "mixins/box-shadow";
+@import "mixins/transition";
+@import "mixins/font-face";
+@import "mixins/button";
+
+
+@mixin full-width() {width: 100%; float: left; position: relative;}
+
+@mixin list-arrow($color: $gray-600) {list-style: none; padding-left: 20px; line-height: 30px;
+  li {padding-left: 0px;
+    &:before {content: "\f101"; color: $color; font-family: FontAwesome; display: inline-block; padding-right: 10px; font-style: normal; margin-left: -20px;}
+    a {color: $color;}
+  }
+}
+
+@mixin list-check($color: $gray-600) {list-style: none; padding-left: 20px; line-height: 30px;
+	li {padding-left: 0px;
+	  &:before {content: "\f00c"; color: $color; font-family: FontAwesome; display: inline-block; padding-right: 10px; font-style: normal; margin-left: -20px;}
+	  a {color: $color;}
+	  a:hover {text-decoration: none; color: darken($color, 20%);}
+	}
+} // list check css end
+
+
+
+
+
