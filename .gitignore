@@ -13,8 +13,8 @@
 !/image/cache/index.html
 
 # Templates Files
-/image/templates/*
-/image/templates/default.jpg
+#/image/templates/*
+#/image/templates/default.jpg
 
 # Backup Files
 /system/storage/backup/*
