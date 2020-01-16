@@ -104,6 +104,7 @@
     {#</div>#}
 {#</header>#}
 
+{% if show_top_bar %}
 <section class="top-headerbar bg-success">
     <div class="container">
         <div class="row py-4">
@@ -133,6 +134,7 @@
             </div>
         </div>
 </section>
+{% endif %}
 
 <header>
     <div class="container-fluid">
@@ -162,9 +164,9 @@
                     </li>
                     {% if logged %}
                         <li class="nav-item"><a class="nav-link" href="{{ account }}">{{ text_account }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>
+{#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
+{#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
+{#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
                         <li class="nav-item"><a class="nav-link" href="{{ logout }}">{{ text_logout }}</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link" href="{{ login }}">{{ text_login }}</a></li>

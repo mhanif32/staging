@@ -335,6 +335,7 @@ footer h5 {
 }
 /* alert */
 .alert {
+	margin-top: 15px;
 	padding: 8px 14px 8px 14px;
 }
 /* breadcrumb */
