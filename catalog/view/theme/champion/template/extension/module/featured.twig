@@ -99,10 +99,12 @@
             {% for product in products %}
                 <div class="col-lg-3 col-md-3 col-sm-6 px-2 mb-4 product-layout">
                     <div class="card product-card h-100">
-                        <a class="card-img-top d-block overflow-hidden p-3 text-center h-100" href="{{ product.href }}"><img
+                        <a class="card-img-top d-block overflow-hidden p-3 text-center h-100" href="{{ product.href }}">
+                            <img
                                     src="{{ product.thumb }}"
                                     alt="{{ product.name }}"
-                                    title="{{ product.name }}" class="img-fluid"></a>
+                                    title="{{ product.name }}" class="img-fluid">
+                        </a>
                         <div class="card-body p-3">
                             <h4 class="product-title"><a {{ product.href }}
                                         class="f-15 font-weight-medium text-primary">{{ product.name }}</a>

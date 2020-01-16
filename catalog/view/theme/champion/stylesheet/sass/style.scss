@@ -18,7 +18,7 @@ h5 {font-size: 2.5rem;font-weight: 700;}
 .font-weight-medium{font-weight:500;}
 .font-family-opensans{font-family: 'Open Sans', sans-serif;}
 .f-25{font-size: 1.5625rem;}
-
+.justify-content-flex-end {justify-content: flex-end;}
 p {font-size: 0.9375rem;}
 .btn-border-div {z-index: 1;}
 .custom-btn {
@@ -228,9 +228,10 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
 
 // top-collection
 
-.top-collection { 
+.top-collection {
+  a{text-decoration: none;}
   .card-body {padding: 0;}
-  .product-card:hover .view-details{background-color: $success !important; transition: all .7s ease;} 
+  .product-card:hover .view-details{background-color: $success !important; transition: all .7s ease;}
 }
 
 
@@ -424,219 +425,63 @@ footer {
   /* Position the image container (needed to position the left and right arrows) */
   .product-images {
     position: relative;
-
     /* Hide the images by default */
-    .mySlides {
-      display: none;
-    }
-
+    .mySlides {display: none;}
     /* Add a pointer when hovering over the thumbnail images */
-    .cursor {
-      cursor: pointer;
-    }
-
+    .cursor {cursor: pointer;}
     /* Next & previous buttons */
-    .prev,
-    .next {
-      cursor: pointer;
-      position: absolute;
-      top: 40%;
-      width: auto;
-      padding: 16px;
-      margin-top: -50px;
-      color: #8d8d8d;
-      font-weight: bold;
-      font-size: 20px;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
+    .prev,.next {cursor: pointer;position: absolute;top: 40%;width: auto;padding: 16px;margin-top: -50px;color: #8d8d8d;
+      font-weight: bold;font-size: 20px;border-radius: 0 3px 3px 0;user-select: none;-webkit-user-select: none;}
     /* Position the "next button" to the right */
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-
+    .next { right: 0;border-radius: 3px 0 0 3px;    }
     /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,
-    .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Number text (1/3 etc) */
-    .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
-      padding: 8px 12px;
-      position: absolute;
-      top: 0;
-    }
-
+    .prev:hover,.next:hover {background-color: rgba(0, 0, 0, 0.8);}
     /* Container for image text */
-
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
+    .row:after {content: "";display: table;clear: both;}
     /* Six columns side by side */
-    .column {
-      width: 23%;
-      text-align: center;
-      border: 1px solid #dcdcdc;
-      padding: 0;
-      margin: 0 4px 4px;
-    }
-
+    .column {width: 23%;text-align: center;border: 1px solid #dcdcdc;padding: 0;margin: 0 4px 4px;}
     /* Add a transparency effect for thumnbail images */
-    .demo {
-      opacity: 0.6;
-    }
-
-    .active,
-    .demo:hover {
-      opacity: 1;
-    }
+    .demo {opacity: 0.6;}
+    .active,.demo:hover {opacity: 1;}
   }
   // select options
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-
-    background: #fff;
-    background-image: none;
-  }
+  select { -webkit-appearance: none;-moz-appearance: none;-ms-appearance: none;appearance: none;outline: 0;box-shadow: none;
+    background: #fff;background-image: none;}
   /* Remove IE arrow */
-  select::-ms-expand {
-    display: none;
-  }
+  select::-ms-expand {display: none;}
   /* Custom Select */
-  .select {
-    position: relative;
-    display: inline-flex;
-    width: 12rem;
-    height: 3em;
-    line-height: 3;
-    background: #fff;
-    overflow: hidden;
-  }
-  @media only screen and (max-width: 991px) {
-    .select {
-      width: 6rem;
-    }
-  }
+  .select {position: relative;display: inline-flex;width: 12rem;height: 3em;line-height: 3;background: #fff;overflow: hidden;  }
+  @media only screen and (max-width: 991px) {.select {width: 6rem;}}
 
-  select {
-    flex: 1;
-    padding: 0 0.5em;
-    color: #b4b4b4;
-    cursor: pointer;
-  }
-  /* Arrow */
-  .select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    color: #b4b4b4;
-    cursor: pointer;
-    pointer-events: none;
-    -webkit-transition: 0.25s all ease;
-    -o-transition: 0.25s all ease;
-    transition: 0.25s all ease;
-  }
+  select {flex: 1;padding: 0 0.5em;color: #b4b4b4;cursor: pointer;}  /* Arrow */
+  .select::after {content: "\25BC";position: absolute;top: 0;right: 0;padding: 0 1em;color: #b4b4b4;cursor: pointer;
+    pointer-events: none;-webkit-transition: 0.25s all ease;-o-transition: 0.25s all ease;transition: 0.25s all ease;}
   /* Transition */
-  .select:hover::after {
-    color: #f39c12;
-  }
-
+  .select:hover::after {color: #f39c12;}
   //   color radios
-
-  .custom-radios {
-    div {
-      display: inline-block;
-    }
-
-    input[type="radio"] {
-      display: none;
-
-      + label {
-        color: #333;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-
-        span {
-          display: inline-block;
-          width: 25px;
-          height: 25px;
-          margin: -1px 4px 0 0;
-          vertical-align: middle;
-          cursor: pointer;
-          border-radius: 50%;
-          border: 2px solid #ffffff;
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
-          background-repeat: no-repeat;
-          background-position: center;
-          text-align: center;
-          line-height: 20px;
-
-          img {
-            opacity: 0;
-            transition: all 0.3s ease;
-          }
+  .custom-radios {div {display: inline-block;}
+    input[type="radio"] {display: none;
+      + label {color: #333; font-family: Arial, sans-serif;font-size: 14px;
+        span {display: inline-block;width: 25px;height: 25px;margin: -1px 4px 0 0;vertical-align: middle;cursor: pointer;
+          border-radius: 50%;border: 2px solid #ffffff;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);background-repeat: no-repeat;background-position: center;text-align: center;line-height: 20px;
+          img {opacity: 0;transition: all 0.3s ease;}
         }
       }
-
-      &#color-1 + label span {
-        background-color: #fc0707;
-      }
-
-      &#color-2 + label span {
-        background-color: #000000;
-      }
-
-      &#color-3 + label span {
-        background-color: #ffffff;
-      }
-
-      &#color-4 + label span {
-        background-color: #5271ff;
-      }
-
-      &:checked + label span {
-        opacity: 1;
-        width: 30px;
-        height: 30px;
-        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      }
+      &#color-1 + label span {background-color: #fc0707;}
+      &#color-2 + label span {background-color: #000000;}
+      &#color-3 + label span {background-color: #ffffff;}
+      &#color-4 + label span {background-color: #5271ff;}
+      &:checked + label span {opacity: 1;width: 30px;height: 30px;-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
     }
   }
-
   //   add to cart buttons
-  .add-to-cart,
-  .buy-now {
-    .custom-btn {
-      width: 90%;
-      background-color: #272727;
-      &:after {
-        padding: 1.4rem 49%;
-      }
-    }
+  .add-to-cart,.buy-now {.custom-btn { width: 90%;background-color: #272727;
+    &:after { padding: 1.4rem 49%;}}
   }
-  .buy-now {
-    .custom-btn {
-      background-color: #f15a29;
-    }
-  }
+  .buy-now {.custom-btn {background-color: #f15a29;}}
+  .panel-title > a:before {float: right !important;font-family: FontAwesome;content:"\f068";padding-right: 5px;}
+  .panel-title > a.collapsed:before {float: right !important;content:"\f067";}
+  .panel-title > a:hover,.panel-title > a:active,.panel-title > a:focus  {text-decoration:none;}
 }
 
 // rating-and-review
@@ -1054,20 +899,3 @@ footer {
   }
 }
 
-
-
-.panel-title > a:before {
-  float: right !important;
-  font-family: FontAwesome;
-  content:"\f068";
-  padding-right: 5px;
-}
-.panel-title > a.collapsed:before {
-  float: right !important;
-  content:"\f067";
-}
-.panel-title > a:hover,
-.panel-title > a:active,
-.panel-title > a:focus  {
-  text-decoration:none;
-}
