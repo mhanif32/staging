@@ -305,6 +305,7 @@
                                     <div class="text-danger">{{ error_password }}</div>
                                 {% endif %} </div>
                         </div>
+
                         <div class="form-group required">
                             <label class="control-label" for="input-confirm">{{ entry_confirm }}</label>
                             <div class="w-100">
@@ -315,16 +316,17 @@
                                 {% endif %} </div>
                         </div>
 
-
                         <div class="checkbox mb-3">
                             <div class="form-group form-group-check my-3">
-                            {% if agree %}
-                                <input type="checkbox" name="agree" value="1" checked="checked"/>
-                            {% else %}
-                                <input type="checkbox" name="agree" value="1"/>
-                            {% endif %}
-                            &nbsp;<lable><span class="text-secondary">Accept the terms and condition of the website.</span></lable>
-                        </div>
+                                {% if agree %}
+                                    <input type="checkbox" name="agree" value="1" checked="checked"/>
+                                {% else %}
+                                    <input type="checkbox" name="agree" value="1"/>
+                                {% endif %}
+                                &nbsp;<lable><span
+                                            class="text-secondary">Accept the terms and condition of the website.</span>
+                                </lable>
+                            </div>
                         </div>
                         <div class="buttons">
 
@@ -335,8 +337,9 @@
                         </div>
 
                         <div class="w-100 d-inline-block my-3">
-                            <p style="font-size: 0.7rem;" class="text-secondary">Already have an Account?<a href="{{ login }}"
-                                                                                     class="text-success"> Login </a>
+                            <p style="font-size: 0.7rem;" class="text-secondary">Already have an Account?<a
+                                        href="{{ login }}"
+                                        class="text-success"> Login </a>
                             </p>
                         </div>
                     </fieldset>
