@@ -26,7 +26,7 @@ p {font-size: 0.9375rem;}
 }
 .before-verticle-line{position: relative;
   &::before{content: "|";left: 0; position: absolute;
-    top: 7px;}
+    top: 23px;}
 }
 .wish-list {
   color: #8d8d8d;
@@ -152,7 +152,11 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       }
     }
   }
-
+  #cart{
+    .dropdown-toggle{
+      &:after{display: none}
+    }
+  }
   
 
   a {font-family: "Poppins", sans-serif;font-weight: 400;}

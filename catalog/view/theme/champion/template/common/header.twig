@@ -120,7 +120,7 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center my-2 py-2 order-3" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center order-3" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active mr-lg-5">
                         {{ search }}
@@ -132,14 +132,14 @@
                         {{ currency }}
                     </li>
                     {% if logged %}
-                        <li class="nav-item"><a class="nav-link" href="{{ account }}">{{ text_account }}</a></li>
+                        <li class="nav-item"><a class="nav-link mt-3" href="{{ account }}">{{ text_account }}</a></li>
 {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
 {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
 {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
-                        <li class="nav-item"><a class="nav-link" href="{{ logout }}">{{ text_logout }}</a></li>
+                        <li class="nav-item"><a class="nav-link mt-3" href="{{ logout }}">{{ text_logout }}</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ login }}">{{ text_login }}</a></li>
-                        <li class="nav-item before-verticle-line"><a class="nav-link" href="{{ register }}">{{ text_register }}</a></li>
+                        <li class="nav-item"><a class="nav-link mt-3" href="{{ login }}">{{ text_login }}</a></li>
+                        <li class="nav-item before-verticle-line"><a class="nav-link mt-3" href="{{ register }}">{{ text_register }}</a></li>
 
                     {% endif %}
 
