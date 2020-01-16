@@ -52,7 +52,7 @@
                             <tbody class="text-left">
                             {% for product in products %}
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="text-left">
                                         {% if product.thumb %}
                                             <a href="{{ product.href }}">
                                                 <img
@@ -117,18 +117,9 @@
                                 </tr>
                             {% endfor %}
                             </tbody>
-
                         </table>
                     </div>
                 </form>
-
-                <div class="row justify-content-flex-end">
-                    <div class="col-sm-4">
-                        <table class="table table-bordered">
-
-                        </table>
-                    </div>
-                </div>
 
                 {% if modules %}
                     <h4>{{ text_next }}</h4>
