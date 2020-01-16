@@ -91,13 +91,6 @@
                                     {#<td class="text-right">{{ product.total }}</td>#}
                                 </tr>
                             {% endfor %}
-                            {% for total in totals %}
-                                <tr>
-                                    <td class="border-0"></td>
-                                    <td class="text-right"><strong>{{ total.title }}:</strong></td>
-                                    <td class="text-center">{{ total.text }}</td>
-                                </tr>
-                            {% endfor %}
                             {% for voucher in vouchers %}
                                 <tr>
                                     <td></td>
@@ -114,6 +107,13 @@
                                     </td>
                                     <td class="text-right">{{ voucher.amount }}</td>
                                     <td class="text-right">{{ voucher.amount }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for total in totals %}
+                                <tr>
+                                    <td class="border-0"></td>
+                                    <td class="text-right"><strong>{{ total.title }}:</strong></td>
+                                    <td class="text-center">{{ total.text }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
