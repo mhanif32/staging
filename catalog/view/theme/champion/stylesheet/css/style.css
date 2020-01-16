@@ -108,6 +108,11 @@ h5 {
 .f-25 {
   font-size: 1.5625rem; }
 
+.justify-content-flex-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
 p {
   font-size: 0.9375rem; }
 
@@ -340,6 +345,8 @@ header {
 .home-categories p {
   font-size: 1.25rem; }
 
+.top-collection a {
+  text-decoration: none; }
 .top-collection .card-body {
   padding: 0; }
 .top-collection .product-card:hover .view-details {
@@ -584,7 +591,6 @@ footer ul {
     /* Next & previous buttons */
     /* Position the "next button" to the right */
     /* On hover, add a black background color with a little bit see-through */
-    /* Number text (1/3 etc) */
     /* Container for image text */
     /* Six columns side by side */
     /* Add a transparency effect for thumnbail images */ }
@@ -592,8 +598,7 @@ footer ul {
       display: none; }
     .product-details .product-images .cursor {
       cursor: pointer; }
-    .product-details .product-images .prev,
-    .product-details .product-images .next {
+    .product-details .product-images .prev, .product-details .product-images .next {
       cursor: pointer;
       position: absolute;
       top: 40%;
@@ -611,15 +616,8 @@ footer ul {
     .product-details .product-images .next {
       right: 0;
       border-radius: 3px 0 0 3px; }
-    .product-details .product-images .prev:hover,
-    .product-details .product-images .next:hover {
+    .product-details .product-images .prev:hover, .product-details .product-images .next:hover {
       background-color: rgba(0, 0, 0, 0.8); }
-    .product-details .product-images .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
-      padding: 8px 12px;
-      position: absolute;
-      top: 0; }
     .product-details .product-images .row:after {
       content: "";
       display: table;
@@ -632,8 +630,7 @@ footer ul {
       margin: 0 4px 4px; }
     .product-details .product-images .demo {
       opacity: 0.6; }
-    .product-details .product-images .active,
-    .product-details .product-images .demo:hover {
+    .product-details .product-images .active, .product-details .product-images .demo:hover {
       opacity: 1; }
   .product-details select {
     -webkit-appearance: none;
@@ -721,15 +718,23 @@ footer ul {
       height: 30px;
       -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
-  .product-details .add-to-cart .custom-btn,
-  .product-details .buy-now .custom-btn {
+  .product-details .add-to-cart .custom-btn, .product-details .buy-now .custom-btn {
     width: 90%;
     background-color: #272727; }
-    .product-details .add-to-cart .custom-btn:after,
-    .product-details .buy-now .custom-btn:after {
+    .product-details .add-to-cart .custom-btn:after, .product-details .buy-now .custom-btn:after {
       padding: 1.4rem 49%; }
   .product-details .buy-now .custom-btn {
     background-color: #f15a29; }
+  .product-details .panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content: "\f068";
+    padding-right: 5px; }
+  .product-details .panel-title > a.collapsed:before {
+    float: right !important;
+    content: "\f067"; }
+  .product-details .panel-title > a:hover, .product-details .panel-title > a:active, .product-details .panel-title > a:focus {
+    text-decoration: none; }
 
 .rating-and-review {
   background-color: #fafafa; }
@@ -1009,18 +1014,3 @@ footer ul {
 @media only screen and (min-width: 600px) {
   .change-password .login-form form.form-signin {
     max-width: 600px; } }
-
-.panel-title > a:before {
-  float: right !important;
-  font-family: FontAwesome;
-  content: "\f068";
-  padding-right: 5px; }
-
-.panel-title > a.collapsed:before {
-  float: right !important;
-  content: "\f067"; }
-
-.panel-title > a:hover,
-.panel-title > a:active,
-.panel-title > a:focus {
-  text-decoration: none; }
