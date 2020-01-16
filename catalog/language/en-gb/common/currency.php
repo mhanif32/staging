@@ -1,3 +1,3 @@
 <?php
 // Text
-$_['text_currency'] = 'Select currency';
+$_['text_currency'] = 'Choose Preferred Currency';

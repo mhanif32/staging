@@ -57,6 +57,12 @@ $theme-colors: (
     background-color: $success !important;
     border-color: $success !important;
 }
+a.btn-primary:hover {
+    color: $white;
+    background-color: $success !important;
+    border-color: $success !important;
+}
+
 
 // Options
 //
@@ -66,4 +72,6 @@ $enable-shadows:                              false !default;
 $enable-gradients:                            false !default;
 $enable-hover-media-query:                    true !default;
 $enable-responsive-font-sizes:                true !default;
+
+
 

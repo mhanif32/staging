@@ -1,5 +1,5 @@
 {{ header }}
-<div id="account-register" class="container-fluid">
+<div id="account-register" class="account-login container-fluid">
     {% if error_warning %}
         <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
         </div>
@@ -7,7 +7,7 @@
 
     <div id="content" class="register">{{ content_top }}
         <section class="register">
-            <div class="login-form my-5 py-5">
+            <div class="login-form py-5">
                 <!--<form class="form-signin">
 
                     <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
@@ -37,7 +37,7 @@
                         <p style="font-size: 0.7rem;">Already have an Account?<a href="#" style="color: #F15A29;">  Register </a></p>
                     </div>
                 </form>-->
-                <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin my-5">
                     <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
                     <fieldset id="account">
                         <div class="form-group required"
@@ -314,13 +314,17 @@
                                     <div class="text-danger">{{ error_confirm }}</div>
                                 {% endif %} </div>
                         </div>
-                        <div class="my-3">
+
+
+                        <div class="checkbox mb-3">
+                            <div class="form-group form-group-check my-3">
                             {% if agree %}
                                 <input type="checkbox" name="agree" value="1" checked="checked"/>
                             {% else %}
                                 <input type="checkbox" name="agree" value="1"/>
                             {% endif %}
-                            &nbsp;<span class="">Accept the terms and condition of the website.</span>
+                            &nbsp;<lable><span class="text-secondary">Accept the terms and condition of the website.</span></lable>
+                        </div>
                         </div>
                         <div class="buttons">
 
@@ -331,8 +335,8 @@
                         </div>
 
                         <div class="w-100 d-inline-block my-3">
-                            <p style="font-size: 0.7rem;">Already have an Account?<a href="{{ login }}"
-                                                                                     style="color: #F15A29;"> Login </a>
+                            <p style="font-size: 0.7rem;" class="text-secondary">Already have an Account?<a href="{{ login }}"
+                                                                                     class="text-success"> Login </a>
                             </p>
                         </div>
                     </fieldset>

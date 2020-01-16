@@ -3,6 +3,11 @@
   background-color: #01B0F1 !important;
   border-color: #01B0F1 !important; }
 
+a.btn-primary:hover {
+  color: #fff;
+  background-color: #01B0F1 !important;
+  border-color: #01B0F1 !important; }
+
 .w-5 {
   width: 5% !important; }
 
@@ -87,6 +92,9 @@ h5 {
 
 .f-15 {
   font-size: 0.9375rem; }
+
+.f-14 {
+  font-size: 0.875rem; }
 
 .f-18 {
   font-size: 1.125rem; }
@@ -244,6 +252,8 @@ header {
           box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.75);
   /* Remove IE arrow */
   /* Custom Select */ }
+  header .container-fluid {
+    max-width: 1500px; }
   header .navbar-light .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -361,33 +371,36 @@ header {
   -webkit-box-shadow: 0px 0px 0px 2px #fff inset;
           box-shadow: 0px 0px 0px 2px #fff inset; }
 
-.our-partner .table.our-partner-table tr.tr-top td {
-  border: none;
-  position: relative; }
-  .our-partner .table.our-partner-table tr.tr-top td:after, .our-partner .table.our-partner-table tr.tr-top td:first-child:after, .our-partner .table.our-partner-table tr.tr-top td:last-child:after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 20px;
-    right: 20px;
-    height: 0.5em;
-    border-top: 1px solid #DCDCDC;
-    z-index: -1; }
-  .our-partner .table.our-partner-table tr.tr-top td:first-child:after {
-    left: 0;
-    right: 30px; }
-  .our-partner .table.our-partner-table tr.tr-top td:last-child:after {
-    left: 30px;
-    right: 0; }
-  .our-partner .table.our-partner-table tr.tr-top td:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -1px;
-    width: 1px;
-    background-color: #DCDCDC;
-    height: 86%;
-    z-index: -1; }
+.our-partner .table.our-partner-table tr.tr-top {
+  text-align: center; }
+  .our-partner .table.our-partner-table tr.tr-top td {
+    vertical-align: middle;
+    border: none;
+    position: relative; }
+    .our-partner .table.our-partner-table tr.tr-top td:after, .our-partner .table.our-partner-table tr.tr-top td:first-child:after, .our-partner .table.our-partner-table tr.tr-top td:last-child:after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 20px;
+      right: 20px;
+      height: 0.5em;
+      border-top: 1px solid #DCDCDC;
+      z-index: -1; }
+    .our-partner .table.our-partner-table tr.tr-top td:first-child:after {
+      left: 0;
+      right: 30px; }
+    .our-partner .table.our-partner-table tr.tr-top td:last-child:after {
+      left: 30px;
+      right: 0; }
+    .our-partner .table.our-partner-table tr.tr-top td:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 1px;
+      background-color: #DCDCDC;
+      height: 86%;
+      z-index: -1; }
 .our-partner .table.our-partner-table tr.tr-bottom td {
   border: none;
   position: relative; }
@@ -470,27 +483,29 @@ footer ul {
       margin-right: 5px;
       color: #8B8B8B; }
 
-#account-login {
-  background-image: url("../image/footwear_banner_v01.png"); }
-  #account-login .login-form label {
+#account-login .login-form, .account-login .login-form {
+  background-image: url("../../image/footwear-banner.png");
+  background-repeat: no-repeat;
+  background-size: cover; }
+  #account-login .login-form label, .account-login .login-form label {
     font-size: 0.9375rem;
     font-weight: 400; }
-  #account-login .login-form form.form-signin {
+  #account-login .login-form form.form-signin, .account-login .login-form form.form-signin {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto; }
-    #account-login .login-form form.form-signin .form-control {
+    #account-login .login-form form.form-signin .form-control, .account-login .login-form form.form-signin .form-control {
       border: 1px solid #d1cdcd;
       border-radius: 0; }
-  #account-login .login-form .checkbox .form-group input {
+  #account-login .login-form .checkbox .form-group input, .account-login .login-form .checkbox .form-group input {
     display: none;
     cursor: pointer; }
-  #account-login .login-form .checkbox .form-group label {
+  #account-login .login-form .checkbox .form-group label, .account-login .login-form .checkbox .form-group label {
     position: relative;
     cursor: pointer;
     font-size: 0.8125rem; }
-  #account-login .login-form .checkbox .form-group label:before {
+  #account-login .login-form .checkbox .form-group label:before, .account-login .login-form .checkbox .form-group label:before {
     content: "";
     -webkit-appearance: none;
     background-color: transparent;
@@ -504,7 +519,7 @@ footer ul {
     cursor: pointer;
     margin-right: 5px;
     border-radius: 4px; }
-  #account-login .login-form .checkbox .form-group input:checked + label:after {
+  #account-login .login-form .checkbox .form-group input:checked + label:after, .account-login .login-form .checkbox .form-group input:checked + label:after {
     content: "";
     display: block;
     position: absolute;
@@ -517,7 +532,7 @@ footer ul {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg); }
   @media only screen and (min-width: 600px) {
-    #account-login .login-form form.form-signin {
+    #account-login .login-form form.form-signin, .account-login .login-form form.form-signin {
       max-width: 500px;
       padding: 0px 70px 50px;
       border: 1px solid #00000029;
@@ -525,6 +540,31 @@ footer ul {
       -webkit-box-shadow: 0px 0px 6px #00000029;
               box-shadow: 0px 0px 6px #00000029;
       opacity: 1; } }
+  #account-login .login-form #devider-login, .account-login .login-form #devider-login {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 28px;
+    position: relative; }
+    #account-login .login-form #devider-login:after, .account-login .login-form #devider-login:after {
+      content: '';
+      width: 100%;
+      border-bottom: solid 1px #8B8B8B;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      z-index: 0; }
+    #account-login .login-form #devider-login .or-devider, .account-login .login-form #devider-login .or-devider {
+      width: auto;
+      display: inline-block;
+      z-index: 3;
+      padding: 0 20px 0 20px;
+      color: #8B8B8B;
+      position: relative;
+      font-weight: lighter;
+      margin: 0;
+      font-size: 15px;
+      background-color: #fff; }
 
 .product-details {
   background-color: #fafafa;

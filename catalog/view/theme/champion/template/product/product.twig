@@ -15,7 +15,7 @@
                                      class="img-fluid"/></a>
                         {% endif %}
 
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mt-5">
                             {% if images %}
                                 {% for image in images %}
                                     <div class="column thumbnails">
@@ -626,7 +626,9 @@
         {{ column_right }}</div>
 </div>
 
-<section class="rating-and-review pt-4 mb-4">
+
+{% if products %}
+<section class="rating-and-review similar-product pt-4 mb-4">
     <div class="container border bg-white p-0">
         <div class="border-bottom">
             <h4 class="m-4 " style="color: #272727; font-size: 1.875rem; font-weight: 600;">
@@ -635,7 +637,7 @@
             </h4>
         </div>
         <div class="review-details m-3">
-            {% if products %}
+
 
                 {#<div class="row"> {% set i = 0 %}#}
                 {#{% for product in products %}#}
@@ -776,14 +778,14 @@
 
                     </div>
                 </section>
-            {% endif %}
+
 
 
         </div>
     </div>
 
 </section>
-
+{% endif %}
 
 <script type="text/javascript"><!--
     $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {

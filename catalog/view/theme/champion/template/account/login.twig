@@ -80,32 +80,48 @@
 
             <div class="form-group">
                 <label class="control-label" for="input-email">{{ entry_email }}</label>
-                <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+                <input type="text" name="email" value="{{ email }}" id="input-email" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="input-password">{{ entry_password }}</label>
-                <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+                <input type="password" name="password" value="{{ password }}" id="input-password" class="form-control" />
             </div>
 
             <div class="checkbox mb-3">
                 <div class="form-group form-group-check mt-4">
                     <input type="checkbox" id="html">
-                    <label for="html"><span>Remember me</span></label>
+                    <label for="html"><span class="text-secondary">Remember me</span></label>
                 </div>
             </div>
 
 
-            <input type="submit" value="{{ button_login }}" class="btn btn-primary w-100 bg-success my-3" />
+            <input type="submit" value="{{ button_login }}" class="btn btn-primary w-100 bg-success my-3 border-0" />
             {% if redirect %}
                 <input type="hidden" name="redirect" value="{{ redirect }}" />
             {% endif %}
+<div class="justify-content-between d-flex">
+            <div class="d-inline-block">
+                <p style="font-size: 0.7rem;" class="text-secondary"> Don't have an account?<a href="{{ register }}" class="text-success" ">Register </a></p>
+            </div>
+            <div class="d-inline-block">
+                <p style="font-size: 0.7rem; text-align: right"><a class="text-secondary" href="{{ forgotten }}">{{ text_forgotten }}</a></p>
+            </div>
+</div>
 
-            <div class="w-60 d-inline-block">
-                <p style="font-size: 0.7rem;"> Don't have an account?<a href="{{ register }}" style="color: #F15A29;">Register </a></p>
+            <div id="devider-login">
+                <p class="or-devider">OR</p>
             </div>
-            <div class="w-30 d-inline-block">
-                <p style="font-size: 0.7rem; text-align: right"><a href="{{ forgotten }}">{{ text_forgotten }}</a></p>
+
+            <div class="row login-with">
+                <div class="col-6">
+                    <a href="" class="btn btn-primary w-100 bg-primary my-3 border-0 text-uppercase f-14">Login With <i class="ml-2 fab fa-facebook-f"></i></i></a>
+                </div>
+                <div class="col-6">
+                    <a href="" class="btn btn-primary w-100 bg-primary my-3 border-0 text-uppercase f-14">Login With <i class="ml-2 fab fa-google-plus-g"></i></a>
+                </div>
+
             </div>
+
         </form>
 </div>
 </div>

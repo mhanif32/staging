@@ -3,6 +3,11 @@
   background-color: #01B0F1 !important;
   border-color: #01B0F1 !important; }
 
+a.btn-primary:hover {
+  color: #fff;
+  background-color: #01B0F1 !important;
+  border-color: #01B0F1 !important; }
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
