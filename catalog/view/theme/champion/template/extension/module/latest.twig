@@ -1,27 +1,116 @@
-<h3>{{ heading_title }}</h3>
-<div class="row"> {% for product in products %}
-  <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    <div class="product-thumb transition">
-      <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
-      <div class="caption">
-        <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-        <p>{{ product.description }}</p>
-        {% if product.rating %}
-        <div class="rating">{% for i in 1..5 %}
-          {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> {% endif %}
-          {% endfor %}</div>
-        {% endif %}
-        {% if product.price %}
-        <p class="price"> {% if not product.special %}
-          {{ product.price }}
-          {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
-          {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>
-        {% endif %} </div>
-      <div class="button-group">
-        <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
-        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+{#<h3>{{ heading_title }}</h3>#}
+{#<div class="row"> {% for product in products %}#}
+  {#<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">#}
+    {#<div class="product-thumb transition">#}
+      {#<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>#}
+      {#<div class="caption">#}
+        {#<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>#}
+        {#<p>{{ product.description }}</p>#}
+        {#{% if product.rating %}#}
+        {#<div class="rating">{% for i in 1..5 %}#}
+          {#{% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> {% endif %}#}
+          {#{% endfor %}</div>#}
+        {#{% endif %}#}
+        {#{% if product.price %}#}
+        {#<p class="price"> {% if not product.special %}#}
+          {#{{ product.price }}#}
+          {#{% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}#}
+          {#{% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>#}
+        {#{% endif %} </div>#}
+      {#<div class="button-group">#}
+        {#<button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>#}
+        {#<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>#}
+        {#<button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>#}
+      {#</div>#}
+    {#</div>#}
+  {#</div>#}
+  {#{% endfor %} </div>#}
+
+<section class="new-arrival">
+  <h3 class="text-center font-weight-bolder text-primary my-5">NEW ARRIVAL</h3>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-xl-5 col-md-5 d-flex flex-column pl-lg-0">
+        <!-- Card -->
+        <div class="card mb-7 justify-content-center bg-cover h-lg-600" href="#">
+          <!-- Background -->
+          <div class="card-bg">
+            <div class="card-bg-img bg-cover position-relative">
+              <img src="image/products/z2f6jdkx.png" alt="" class="img-fluid h-lg-600">
+            </div>
+            <div class="position-absolute d-inline-block category-btn">
+              <a href="#" class="btn btn-white text-black">Clothings</a>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="col-12 col-xl-3 col-md-3 px-lg-0 px-md-0">
+        <div class="col-12 col-md-12 mb-3 p-0">
+          <!-- Card -->
+          <div class="card mb-7 bg-cover position-relative">
+            <img src="image/products/6z7l1ncl.png" alt="" class="img-fluid h-lg-376">
+          </div>
+          <div class="position-absolute d-inline-block category-btn">
+            <a href="#" class="btn btn-white text-black">Handbag</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-12 p-0">
+          <!-- Card -->
+          <div class="card mb-7 bg-cover position-relative">
+            <img src="image/products/0pycqfzt.png" alt="" class="img-fluid h-lg-200">
+          </div>
+          <div class="position-absolute d-inline-block category-btn">
+            <a href="#" class="btn btn-white text-black">Sunglasses</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4 col-md-4">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <!-- Card -->
+            <div class="card mb-7 bg-cover position-relative">
+              <img src="image/products/odjei9xs.png" alt="" class="img-fluid h-lg-240">
+            </div>
+            <div class="position-absolute d-inline-block category-btn">
+              <a href="#" class="btn btn-white text-black">Scarf Scarves</a>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mb-3 px-lg-0 px-md-0">
+            <!-- Card -->
+            <div class="card mb-7 bg-cover position-relative">
+              <img src="image/products/vra712r3.png" alt="" class="img-fluid h-lg-240">
+            </div>
+            <div class="position-absolute d-inline-block category-btn">
+              <a href="#" class="btn btn-white text-black">Shoes</a>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 pr-lg-0 pr-md-0">
+            <!-- Card -->
+            <div class="card mb-7 bg-cover position-relative">
+              <img src="image/products/x2ufo1kq.png" alt="" class="img-fluid h-lg-336">
+            </div>
+            <div class="position-absolute d-inline-block category-btn">
+              <a href="#" class="btn btn-white text-black">Clothings</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
-  {% endfor %} </div>
+</section>
+
+<section class="subcribe-us">
+  <div class="m-auto">
+    <div class="inner-text text-center py-5">
+      <h3 class="font-weight-bolder text-primary ">KNOW IT ALL FIRST!</h3>
+      <p class="text-secondary f-15">Subscribe to our newsletters now and stay up to date with new collections, the latest lookbooks and exclusive offers.</p>
+      <form class="form-inline justify-content-center" action="/action_page.php">
+        <input type="email" id="email" placeholder="Enter Your Email Address" name="email">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>

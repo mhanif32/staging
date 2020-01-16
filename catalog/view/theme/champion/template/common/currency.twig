@@ -2,7 +2,7 @@
     <div class="pull-left">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency">
             <div class="btn-group">
-                <button class="btn btn-link form-control"
+                <button class="btn btn-link form-control rounded"
                         data-toggle="dropdown">{% for currency in currencies %}
                         {% if currency.symbol_left and currency.code == code %}
                             {#<strong>{{ currency.symbol_left }}</strong>#}

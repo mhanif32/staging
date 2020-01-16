@@ -250,9 +250,8 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
   // our-partner
   .our-partner{
     .table.our-partner-table{
-      tr.tr-top{
-        td{
-          border: none; position: relative;
+      tr.tr-top{ text-align: center;
+        td{vertical-align: middle; border: none; position: relative;
           &:after, &:first-child:after, &:last-child:after{content:"";position: absolute;bottom: -8px;left: 20px;right: 20px;height: 0.5em;border-top: 1px solid $gray-300;z-index: -1;}
           &:first-child:after{left: 0;right: 30px;}
           &:last-child:after{left: 30px;right: 0;}
@@ -327,7 +326,11 @@ footer {
       }
 
 // login-form
+
+#account-login{
+  background-image: url("../image/footwear_banner_v01.png");
 .login-form {
+
   label {
     font-size: 0.9375rem;
     font-weight: 400;
@@ -341,11 +344,14 @@ footer {
       border: 1px solid #d1cdcd;
       border-radius: 0;
     }
-    .form-group {
-      input {
-        display: none;
-        cursor: pointer;
-      }
+
+  }
+
+  .checkbox{
+  .form-group {
+    input {
+      display: none;
+      cursor: pointer;
     }
   }
   .form-group label {
@@ -382,29 +388,20 @@ footer {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  .custom-btn {
-    &:after {
-      padding: 1.4rem 49%;
-    }
   }
   @media only screen and (min-width: 600px) {
     form.form-signin {
       max-width: 500px;
-      padding: 0px 83px 50px;
+      padding: 0px 70px 50px;
 
       border: 1px solid #00000029;
       background: #ffffff 0% 0% no-repeat padding-box;
       box-shadow: 0px 0px 6px #00000029;
       opacity: 1;
     }
-    .custom-btn {
-      &:after {
-        padding: 1.4rem 49%;
-      }
-    }
   }
 }
-
+}
 // .product-details
 
 .product-details {
@@ -479,12 +476,11 @@ footer {
 
     /* Six columns side by side */
     .column {
-      float: left;
-      width: 25%;
+      width: 23%;
       text-align: center;
-      border-top: 1px solid #dcdcdc;
-      border-right: 1px solid #dcdcdc;
-      padding: 16px;
+      border: 1px solid #dcdcdc;
+      padding: 0;
+      margin: 0 4px 4px;
     }
 
     /* Add a transparency effect for thumnbail images */
@@ -1049,4 +1045,22 @@ footer {
       max-width: 600px;
     }
   }
+}
+
+
+
+.panel-title > a:before {
+  float: right !important;
+  font-family: FontAwesome;
+  content:"\f068";
+  padding-right: 5px;
+}
+.panel-title > a.collapsed:before {
+  float: right !important;
+  content:"\f067";
+}
+.panel-title > a:hover,
+.panel-title > a:active,
+.panel-title > a:focus  {
+  text-decoration:none;
 }
