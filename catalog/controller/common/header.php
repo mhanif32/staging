@@ -76,7 +76,7 @@ class ControllerCommonHeader extends Controller {
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
-
+        $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
 		return $this->load->view('common/header', $data);
 	}
 }
