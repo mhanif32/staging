@@ -55,7 +55,7 @@
 {#</div>#}
 
 
-<div id="account-login" class="container-fluid">
+<div id="account-login" class="">
     {% if success %}
         <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
     {% endif %}
@@ -73,7 +73,7 @@
     {#<a href="{{ register }}" class="btn btn-primary">{{ button_continue }}</a></div>#}
     {#</div>#}
     <div class="login-form py-5">
-        <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin my-5">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin">
             <h3 class="mt-5 mb-4 font-weight-600 text-center ">{{ text_returning_customer }}</h3>
 
             <div class="form-group">

@@ -426,17 +426,9 @@ header {
     height: 86%;
     z-index: -1; }
 
-@media only screen and (min-width: 600px) {
-  .new-arrival .h-lg-600 {
-    min-height: 600px; }
-  .new-arrival .h-lg-376 {
-    min-height: 376px; }
-  .new-arrival .h-lg-200 {
-    min-height: 200px; }
-  .new-arrival .h-lg-240 {
-    min-height: 240px; }
-  .new-arrival .h-lg-336 {
-    min-height: 336px; } }
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .new-arrival .h-lg-135 {
+    min-height: 135px; } }
 .new-arrival .category-btn {
   bottom: 10%;
   left: 15%; }
@@ -469,7 +461,8 @@ footer h4 {
   font-size: 1.125rem;
   font-weight: 600; }
 footer .footer-social-icons a {
-  display: block; }
+  display: block;
+  margin-bottom: 10px; }
 footer a {
   font-size: 0.8125rem;
   color: #8B8B8B;
@@ -487,13 +480,19 @@ footer ul {
   footer ul li {
     font-size: 0.8125rem;
     color: #8B8B8B;
-    font-weight: 400; }
+    font-weight: 400;
+    margin-bottom: 10px; }
     footer ul li::before {
       content: "\f101";
       font-family: FontAwesome;
       font-size: 12px;
       margin-right: 5px;
       color: #8B8B8B; }
+
+#account-register .login-form {
+  background-image: url("../../image/register-background.png");
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 #account-login .login-form, .account-login .login-form {
   background-image: url("../../image/footwear-banner.png");
@@ -510,14 +509,14 @@ footer ul {
     #account-login .login-form form.form-signin .form-control, .account-login .login-form form.form-signin .form-control {
       border: 1px solid #d1cdcd;
       border-radius: 0; }
-  #account-login .login-form .checkbox .form-group input, .account-login .login-form .checkbox .form-group input {
+  #account-login .login-form .checkbox .form-group-check input, .account-login .login-form .checkbox .form-group-check input {
     display: none;
     cursor: pointer; }
-  #account-login .login-form .checkbox .form-group label, .account-login .login-form .checkbox .form-group label {
+  #account-login .login-form .checkbox .form-group-check label, .account-login .login-form .checkbox .form-group-check label {
     position: relative;
     cursor: pointer;
     font-size: 0.8125rem; }
-  #account-login .login-form .checkbox .form-group label:before, .account-login .login-form .checkbox .form-group label:before {
+  #account-login .login-form .checkbox .form-group-check label:before, .account-login .login-form .checkbox .form-group-check label:before {
     content: "";
     -webkit-appearance: none;
     background-color: transparent;
@@ -530,8 +529,9 @@ footer ul {
     vertical-align: middle;
     cursor: pointer;
     margin-right: 5px;
-    border-radius: 4px; }
-  #account-login .login-form .checkbox .form-group input:checked + label:after, .account-login .login-form .checkbox .form-group input:checked + label:after {
+    border-radius: 4px;
+    top: -2px; }
+  #account-login .login-form .checkbox .form-group-check input:checked + label:after, .account-login .login-form .checkbox .form-group-check input:checked + label:after {
     content: "";
     display: block;
     position: absolute;

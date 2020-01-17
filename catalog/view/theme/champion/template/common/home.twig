@@ -19,7 +19,7 @@
       {% elseif column_left or column_right %}
           {% set class = 'col-sm-9' %}
       {% else %}
-          {% set class = 'col-sm-12' %}
+          {% set class = 'col-sm-12 p-0' %}
       {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}</div>
       {{ column_right }}</div>

@@ -103,7 +103,7 @@ p {font-size: 0.9375rem;}
               box-shadow: none;
               flex: 1;
               padding: 0 0.5em;
-              cursor: pointer;          
+              cursor: pointer;
               background: #fff;
               background-image: none;
             }
@@ -132,18 +132,18 @@ p {font-size: 0.9375rem;}
               &:hover::after {
                 color: $success;
               }
-            }                    
+            }
             /* Arrow */
-           
+
             /* Transition */
-          
-          
+
+
           }
 
 // header style starts from here
 header {position: sticky;top: 0;background: white;z-index: 9999;
   .container-fluid{max-width: 1500px}
- 
+
  box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.75);
   .navbar-light {
     .navbar-nav {
@@ -158,7 +158,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       &:after{display: none}
     }
   }
-  
+
 
   a {font-family: "Poppins", sans-serif;font-weight: 400;}
   .navbar-tool-label {position: absolute;right: 0;width: 1.8rem;height: 1.8rem;border-radius: 50%;background-color: $success;color: $white; font-size: 0.75rem;font-weight: 500;text-align: center;border: 3px solid $white;line-height: 1.5rem;}
@@ -179,7 +179,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
     box-shadow: none;
     flex: 1;
     padding: 0 0.5em;
-    cursor: pointer;          
+    cursor: pointer;
     background: #fff;
     background-image: none;
   }
@@ -209,9 +209,9 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
     &:hover::after {
       color: $success;
     }
-  }  
+  }
   .sub-nav-menu{.nav-item{.nav-link{padding-left: 0; color: $black;font-weight: 600;font-size: 0.9375rem;}}}
-  
+
 }
 // .home-banner
 .home-banner {
@@ -245,7 +245,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
 .winter-collection{
   @media only screen and (min-width: 921px) {.winter-text{ position: absolute;top: 25%;left: 15%;right: 15%;}}
   @media only screen and (min-width: 1400px) { .lead-text{width: 35%;}}
-  @media only screen and (max-width: 920px) {.winter-text{padding: 2rem 0;background-color: $primary;}}  
+  @media only screen and (max-width: 920px) {.winter-text{padding: 2rem 0;background-color: $primary;}}
 }
 
 // container-marketing
@@ -267,21 +267,21 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       }
       tr.tr-bottom{
         td{
-          border: none; position: relative;          
+          border: none; position: relative;
           &:before{content:"";position: absolute;bottom: 0;left: -1px;width: 1px;background-color: $gray-300;height: 86%;z-index: -1;}
         }
-      }      
+      }
     }
   }
 
   // new-arrival
   .new-arrival{
-    @media only screen and (min-width: 600px) {
-      .h-lg-600{min-height: 600px;}
-      .h-lg-376{min-height: 376px;}
-      .h-lg-200{min-height: 200px;}
-      .h-lg-240{min-height: 240px;}
-      .h-lg-336{min-height: 336px;}
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      //.h-lg-600{min-height: 600px;}
+      //.h-lg-376{min-height: 376px;}
+      //.h-lg-200{min-height: 200px;}
+      .h-lg-135{min-height: 135px;}
+      //.h-lg-336{min-height: 336px;}
     }
     .category-btn{
       bottom: 10%;
@@ -298,7 +298,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
     button {padding: 10px 15px; background-color: $white;border: 1px solid $gray-300;color:$primary;cursor: pointer;margin-left: -10px;
           &:hover {background-color: $button-background-hover;}
         }
-      } 
+      }
     }
 
 // @media (max-width: 800px) {
@@ -321,7 +321,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
 footer {
     h4{color: $white;font-size: 1.125rem;font-weight: 600;}
     .footer-social-icons a{display: block; margin-bottom: 10px;}
-    a {font-size: 0.8125rem;color: $secondary;font-weight: 400; 
+    a {font-size: 0.8125rem;color: $secondary;font-weight: 400;
       &:hover {color: #b8b8b8;text-decoration: none;}
       }
     ul {list-style: none;padding-left: 0;
@@ -332,68 +332,27 @@ footer {
         }
       }
 
-// login-form
+// register-form
+#account-register{
+  .login-form{background-image: url("../../image/register-background.png");background-repeat: no-repeat;background-size: cover;}
+}
 
+
+// login-form
 #account-login, .account-login{
 
-.login-form {
-  background-image: url("../../image/footwear-banner.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+.login-form {background-image: url("../../image/footwear-banner.png");background-repeat: no-repeat;background-size: cover;
   label {font-size: 0.9375rem;font-weight: 400;}
-  form.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-    .form-control {
-      border: 1px solid #d1cdcd;
-      border-radius: 0;
-    }
-
-  }
-
+  form.form-signin {width: 100%;max-width: 330px;padding: 15px;margin: auto;
+    .form-control {border: 1px solid #d1cdcd;border-radius: 0;}}
   .checkbox{
-  .form-group {
-    input {
-      display: none;
-      cursor: pointer;
-    }
-  }
-  .form-group label {
-    position: relative;
-    cursor: pointer;
-    font-size: 0.8125rem;
+  .form-group-check {
+    input { display: none;cursor: pointer;}
+    label {position: relative;cursor: pointer;font-size: 0.8125rem;}
+    label:before {content: "";-webkit-appearance: none;background-color: transparent;border: 2px solid #272727;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);padding: 6px;display: inline-block;position: relative;vertical-align: middle;cursor: pointer;margin-right: 5px;border-radius: 4px;top: -2px;}
+    input:checked + label:after {content: "";display: block;position: absolute;top: -1px;left: 7px;width: 8px;height: 15px;border: solid #272727;border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg);transform: rotate(45deg);}
   }
 
-  .form-group label:before {
-    content: "";
-    -webkit-appearance: none;
-    background-color: transparent;
-    border: 2px solid #272727;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-    padding: 6px;
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    cursor: pointer;
-    margin-right: 5px;
-    border-radius: 4px;
-  }
-
-  .form-group input:checked + label:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: -1px;
-    left: 7px;
-    width: 8px;
-    height: 15px;
-    border: solid #272727;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
   }
   @media only screen and (min-width: 600px) {
     form.form-signin {
@@ -413,8 +372,9 @@ footer {
      font-weight: lighter;margin: 0;font-size: 15px;background-color: $white;}
   }
 }
-
 }
+#account-register{}
+
 // .product-details
 
 .product-details {
@@ -832,13 +792,13 @@ footer {
     }
   }
   .accordion .card-header:after {
-    font-family: 'FontAwesome';  
+    font-family: 'FontAwesome';
     content: "\f068";
-    float: right; 
+    float: right;
 }
 .accordion .card-header.collapsed:after {
     /* symbol for "collapsed" panels */
-    content: "\f067"; 
+    content: "\f067";
 }
 }
 

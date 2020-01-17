@@ -9,7 +9,7 @@ $_['text_account_already'] = 'If you already have an account with us, please log
 $_['text_your_details']    = 'Your Personal Details';
 $_['text_newsletter']      = 'Newsletter';
 $_['text_your_password']   = 'Your Password';
-$_['text_agree']           = 'I have read and agree to the <a href="%s" class="agree"><b>%s</b></a>';
+$_['text_agree']           = 'Accept the <a href="%s" class="agree"><b>%s</b></a> of the website';
 
 // Entry
 $_['entry_customer_group'] = 'Customer Group';
@@ -19,7 +19,7 @@ $_['entry_email']          = 'E-Mail';
 $_['entry_telephone']      = 'Telephone';
 $_['entry_newsletter']     = 'Subscribe';
 $_['entry_password']       = 'Password';
-$_['entry_confirm']        = 'Password Confirm';
+$_['entry_confirm']        = 'Confirm Password';
 
 // Error
 $_['error_exists']         = 'Warning: E-Mail Address is already registered!';
