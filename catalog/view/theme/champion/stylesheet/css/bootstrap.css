@@ -3117,7 +3117,7 @@ input[type="button"].btn-block {
   .dropdown-item:hover, .dropdown-item:focus {
     color: #16181b;
     text-decoration: none;
-    background-color: #f8f9fa; }
+    background-color: #f3f3f3; }
   .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
@@ -4858,7 +4858,7 @@ input[type="button"].btn-block {
     z-index: 1;
     color: #495057;
     text-decoration: none;
-    background-color: #f8f9fa; }
+    background-color: #f3f3f3; }
   .list-group-item-action:active {
     color: #212529;
     background-color: #e9ecef; }
