@@ -149,6 +149,11 @@ class ControllerAccountEdit extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		//added links
+        $data['edit'] = $this->url->link('account/edit', '', true);
+        $data['password'] = $this->url->link('account/password', '', true);
+        $data['address'] = $this->url->link('account/address', '', true);
+
 		$this->response->setOutput($this->load->view('account/edit', $data));
 	}
 

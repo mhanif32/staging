@@ -1,21 +1,77 @@
 {{ header }}
-<div id="account-account" class="container">
+{#<div id="account-account" class="container">#}
 {#  <ul class="breadcrumb">#}
 {#    {% for breadcrumb in breadcrumbs %}#}
 {#    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
 {#    {% endfor %}#}
 {#  </ul>#}
-  {% if success %}
-  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
-  {% endif %}
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
+  {#{% if success %}#}
+  {#<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>#}
+  {#{% endif %}#}
+  {#<div class="row">{{ column_left }}#}
+    {#{% if column_left and column_right %}#}
+    {#{% set class = 'col-sm-6' %}#}
+    {#{% elseif column_left or column_right %}#}
+    {#{% set class = 'col-sm-9' %}#}
+    {#{% else %}#}
+    {#{% set class = 'col-sm-12' %}#}
+    {#{% endif %}#}
+    {#<div id="content" class="{{ class }}">{{ content_top }}#}
+      {#<h2>{{ text_my_account }}</h2>#}
+      {#<ul class="list-unstyled">#}
+        {#<li><a href="{{ edit }}">{{ text_edit }}</a></li>#}
+        {#<li><a href="{{ password }}">{{ text_password }}</a></li>#}
+        {#<li><a href="{{ address }}">{{ text_address }}</a></li>#}
+        {#<li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>#}
+      {#</ul>#}
+      {#{% if credit_cards %}#}
+      {#<h2>{{ text_credit_card }}</h2>#}
+      {#<ul class="list-unstyled">#}
+        {#{% for credit_card in credit_cards %}#}
+        {#<li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>#}
+        {#{% endfor %}#}
+      {#</ul>#}
+      {#{% endif %}#}
+      {#<h2>{{ text_my_orders }}</h2>#}
+      {#<ul class="list-unstyled">#}
+        {#<li><a href="{{ order }}">{{ text_order }}</a></li>#}
+        {#<li><a href="{{ download }}">{{ text_download }}</a></li>#}
+        {#{% if reward %}#}
+        {#<li><a href="{{ reward }}">{{ text_reward }}</a></li>#}
+        {#{% endif %}#}
+        {#<li><a href="{{ return }}">{{ text_return }}</a></li>#}
+        {#<li><a href="{{ transaction }}">{{ text_transaction }}</a></li>#}
+        {#<li><a href="{{ recurring }}">{{ text_recurring }}</a></li>#}
+      {#</ul>#}
+      {#<h2>{{ text_my_affiliate }}</h2>#}
+      {#<ul class="list-unstyled">#}
+        {#{% if not tracking %}#}
+        {#<li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>#}
+        {#{% else %}#}
+        {#<li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>#}
+        {#<li><a href="{{ tracking }}">{{ text_tracking }}</a></li>#}
+        {#{% endif %}#}
+      {#</ul>#}
+      {#<h2>{{ text_my_newsletter }}</h2>#}
+      {#<ul class="list-unstyled">#}
+        {#<li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>#}
+      {#</ul>#}
+      {#{{ content_bottom }}</div>#}
+    {#{{ column_right }}</div>#}
+{#</div>#}
+
+<div id="account-account" class="container">
+    {% if success %}
+      <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
     {% endif %}
+  <div class="row">{{ column_left }}
+      {% if column_left and column_right %}
+          {% set class = 'col-sm-6' %}
+      {% elseif column_left or column_right %}
+          {% set class = 'col-sm-9' %}
+      {% else %}
+          {% set class = 'col-sm-12' %}
+      {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
       <h2>{{ text_my_account }}</h2>
       <ul class="list-unstyled">
@@ -24,39 +80,167 @@
         <li><a href="{{ address }}">{{ text_address }}</a></li>
         <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
       </ul>
-      {% if credit_cards %}
-      <h2>{{ text_credit_card }}</h2>
-      <ul class="list-unstyled">
-        {% for credit_card in credit_cards %}
-        <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
+        {% if credit_cards %}
+          <h2>{{ text_credit_card }}</h2>
+          <ul class="list-unstyled">
+              {% for credit_card in credit_cards %}
+                <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
+              {% endfor %}
+          </ul>
+        {% endif %}
       <h2>{{ text_my_orders }}</h2>
       <ul class="list-unstyled">
         <li><a href="{{ order }}">{{ text_order }}</a></li>
         <li><a href="{{ download }}">{{ text_download }}</a></li>
-        {% if reward %}
-        <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-        {% endif %}
+          {% if reward %}
+            <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+          {% endif %}
         <li><a href="{{ return }}">{{ text_return }}</a></li>
         <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
         <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
       </ul>
       <h2>{{ text_my_affiliate }}</h2>
       <ul class="list-unstyled">
-        {% if not tracking %}
-        <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
-        {% else %}
-        <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
-        <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
-        {% endif %}
+          {% if not tracking %}
+            <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
+          {% else %}
+            <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
+            <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+          {% endif %}
       </ul>
       <h2>{{ text_my_newsletter }}</h2>
       <ul class="list-unstyled">
         <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
       </ul>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+        {{ content_bottom }}</div>
+      {{ column_right }}</div>
 </div>
+
+
+
+
+<section id="account-account" class="register update-profile" style="background: #F3F3F3;">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-4">
+        <div class="card mt-5 mb-4" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-3 m-auto text-center">
+              <img src="images/profile-image.png" class="card-img w-75" alt="...">
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <p class="card-text mb-0">Hello</p>
+                <h5 class="card-title f-15">Peter Parker</h5></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div id="accordion" class="accordion">
+            <div class="card mb-0">
+              <div class="card-header collapsed bg-white" data-toggle="collapse" href="#collapseOne">
+                <img src="images/Dashboard.svg" alt="" class="mr-2">
+                <a class="card-title">
+                  Dashboard
+                </a>
+              </div>
+
+              <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
+                <p>Profile Information</p>
+              </div>
+              <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <img src="images/Order Box (2).svg" alt="" class="mr-2">
+                <a class="card-title">
+                  My Order
+                </a>
+              </div>
+              <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
+                <ul class="list-unstyled">
+                  <li><a href="{{ order }}">{{ text_order }}</a></li>
+                  <li><a href="{{ download }}">{{ text_download }}</a></li>
+                    {% if reward %}
+                      <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+                    {% endif %}
+                  <li><a href="{{ return }}">{{ text_return }}</a></li>
+                  <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                  <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+                </ul>
+              </div>
+              <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                <img src="images/Profile.svg" alt="" class="mr-2">
+                <a class="card-title">
+                  ACCOUNT SETTINGS
+                </a>
+              </div>
+              <div id="collapseThree" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <ul class="list-unstyled">
+                    <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+                    <li><a href="{{ password }}">{{ text_password }}</a></li>
+                    <li><a href="{{ address }}">{{ text_address }}</a></li>
+                    <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-3 bg-white" href="">
+                <img src="images/Dashboard.svg" alt="" class="mr-2">
+                  <a href="{{ wishlist }}" class="card-title">{{ text_wishlist }}</a>
+              </div>
+              <div class="p-3 bg-white" href="">
+                <img src="images/Logout.svg" alt="" class="mr-2">
+                <a class="card-title">
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-8 col-lg-8">
+        <div class="py-5">
+          <form class="form-signin card p-4">
+
+            <h3 class="mt-5 mb-4 font-weight-600 f-20 text-uppercase">Profile Details</h3>
+
+
+            <label for="inputName" class="">Name</label>
+            <input type="text" id="inputName" class="form-control" placeholder="Emma Rose" required="" autofocus="">
+
+            <label for="inputGender" class="mt-4 d-block">Your Gender</label>
+
+            <input type="radio" id="test1" name="radio-group" checked="">
+            <label for="test1" class="mr-5">Male</label>
+
+            <input type="radio" id="test2" name="radio-group">
+            <label for="test2">Female</label>
+
+
+            <label for="inputEmail" class="mt-4">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="emmarose@gmail.com" required="" autofocus="">
+
+            <label for="inputContact" class="mt-4">Phone Number</label>
+            <input type="tel" id="inputContact" class="form-control" placeholder="1234567890" required="" autofocus="">
+
+
+            <div class="mt-4">
+              Profile Photo
+            </div>
+            <div class="text-left my-5">
+              <img src="images/istockphoto-655015648-612x612 (2).png" alt="">
+            </div>
+            <div class="text-left position-relative btn-border-div mt-3 mb-3">
+              <a class="btn btn-success w-50" href="#" role="button">Update</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
 {{ footer }}
