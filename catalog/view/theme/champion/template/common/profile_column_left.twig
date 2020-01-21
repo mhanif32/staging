@@ -21,10 +21,11 @@
                         Dashboard
                     </a>
                 </div>
-
+                <hr class="m-0">
                 <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
                     <p>Profile Information</p>
                 </div>
+                <hr class="m-0">
                 <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion"
                      href="#collapseTwo">
                     <img src="catalog/view/theme/champion/image/Order Box (2).svg" alt="" class="mr-2">
@@ -32,18 +33,20 @@
                         My Order
                     </a>
                 </div>
+                <hr class="m-0">
                 <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
                     <ul class="list-unstyled ml-4">
-                        <li><a href="{{ order }}">{{ text_order }}</a></li>
-                        <li><a href="{{ download }}">{{ text_download }}</a></li>
+                        <li class="my-3"><a href="{{ order }}">{{ text_order }}</a></li>
+                        <li class="my-3"><a href="{{ download }}">{{ text_download }}</a></li>
                         {% if reward %}
-                            <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+                            <li class="my-3"><a href="{{ reward }}">{{ text_reward }}</a></li>
                         {% endif %}
-                        <li><a href="{{ return }}">{{ text_return }}</a></li>
-                        <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                        <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+                        <li class="my-3"><a href="{{ return }}">{{ text_return }}</a></li>
+                        <li class="my-3"><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                        <li class="my-3"><a href="{{ recurring }}">{{ text_recurring }}</a></li>
                     </ul>
                 </div>
+                <hr class="m-0">
                 <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion"
                      href="#collapseThree">
                     <img src="catalog/view/theme/champion/image/Profile.svg" alt="" class="mr-2">
@@ -51,25 +54,29 @@
                         ACCOUNT SETTINGS
                     </a>
                 </div>
+                <hr class="m-0">
                 <div id="collapseThree" class="collapse show" data-parent="#accordion">
                     <div class="card-body">
                         <ul class="list-unstyled ml-4">
-                            <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-                            <li><a href="{{ address }}">{{ text_address }}</a></li>
-                            <li><a href="{{ password }}">{{ text_password }}</a></li>
+                            <li class="my-3"><a href="{{ edit }}">{{ text_edit }}</a></li>
+                            <li class="my-3"><a href="{{ address }}">{{ text_address }}</a></li>
+                            <li class="my-3"><a href="{{ password }}">{{ text_password }}</a></li>
                         </ul>
                     </div>
                 </div>
+                <hr class="m-0">
                 <div class="p-3 bg-white" href="">
                     <img src="catalog/view/theme/champion/image/Dashboard.svg" alt="" class="mr-2">
                     <a href="{{ wishlist }}" class="card-title">{{ text_wishlist }}</a>
                 </div>
+                <hr class="m-0">
                 <div class="p-3 bg-white" href="">
                     <img src="catalog/view/theme/champion/image/Logout.svg" alt="" class="mr-2">
                     <a class="card-title">
                         Logout
                     </a>
                 </div>
+                <hr class="m-0">
             </div>
         </div>
     </div>
