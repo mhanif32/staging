@@ -14,7 +14,6 @@ class ControllerAccountAddress extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/address');
-
 		$this->getList();
 	}
 
@@ -216,10 +215,8 @@ class ControllerAccountAddress extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-//		account links
-        $data['edit'] = $this->url->link('account/edit', '', true);
-        $data['password'] = $this->url->link('account/password', '', true);
-        $data['address'] = $this->url->link('account/address', '', true);
+        //account links : left
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 

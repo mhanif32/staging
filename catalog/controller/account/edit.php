@@ -143,16 +143,12 @@ class ControllerAccountEdit extends Controller {
 		$data['back'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
-		//added links
-        $data['edit'] = $this->url->link('account/edit', '', true);
-        $data['password'] = $this->url->link('account/password', '', true);
-        $data['address'] = $this->url->link('account/address', '', true);
 
 		$this->response->setOutput($this->load->view('account/edit', $data));
 	}
