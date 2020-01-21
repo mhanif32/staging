@@ -168,7 +168,8 @@ class ControllerAccountAddress extends Controller {
 			if ($result['address_format']) {
 				$format = $result['address_format'];
 			} else {
-				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+//				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+                $format = '{firstname} {lastname}' . "\n" . '{company}' . ",&nbsp" . '{address_1}' . ",&nbsp" . '{address_2}' . ",&nbsp" . '{city} {postcode}' . ",&nbsp" . '{zone}' . ",&nbsp" . '{country}';
 			}
 
 			$find = array(
@@ -215,6 +216,10 @@ class ControllerAccountAddress extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+//		account links
+        $data['edit'] = $this->url->link('account/edit', '', true);
+        $data['password'] = $this->url->link('account/password', '', true);
+        $data['address'] = $this->url->link('account/address', '', true);
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 

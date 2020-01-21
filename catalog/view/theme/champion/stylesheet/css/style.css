@@ -992,7 +992,7 @@ footer ul {
   top: 2px;
   width: 16px;
   height: 16px;
-  border: 1px solid #f15a29;
+  border: 1px solid #01B0F1;
   border-radius: 100%;
   background: #fff; }
 .update-profile [type="radio"]:checked + label:after,
@@ -1000,7 +1000,7 @@ footer ul {
   content: "";
   width: 10px;
   height: 10px;
-  background: #f15a29;
+  background: #01B0F1;
   position: absolute;
   top: 5px;
   left: 3px;
@@ -1019,3 +1019,11 @@ footer ul {
 @media only screen and (min-width: 600px) {
   .change-password .login-form form.form-signin {
     max-width: 600px; } }
+
+#account-account .accordion .card-header:after {
+  font-family: 'FontAwesome';
+  content: "\f078";
+  float: right; }
+#account-account .accordion .card-header.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\f054"; }
