@@ -45,11 +45,9 @@
                             </div>
                         {% endif %}
 
-                        <div class="rating-details d-inline-block"><span
-                                    style="color: #BBB7B7; font-size: 0.8125rem;"
-                                    class="mr-2">( 4.8 )</span>
-                            <a href=""
-                               onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><span
+                        <div class="rating-details d-inline-block">
+                            {#                            <span style="color: #BBB7B7; font-size: 0.8125rem;" class="mr-2">( 4.8 )</span>#}
+                            <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><span
                                         style="font-size: 0.8125rem;" class="text-secondary">{{ reviews }}</span></a>
                         </div>
                     </div>
@@ -166,7 +164,6 @@
                             {% endfor %}
                         {% endif %}
 
-
                         <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0">
                             {% if recurrings %}
                                 <hr>
@@ -191,10 +188,6 @@
                         </div>
                     </div>
 
-
-                    {#                        <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"#}
-                    {#                                class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>#}
-
                     <div class="row px-3">
                         <div class="col-xs-12 col-md-3 col-sm-3 col-lg-3 pl-lg-0">
                             <div class="text-left position-relative btn-border-div mt-4 add-to-cart">
@@ -214,69 +207,9 @@
                     {% endif %}
                 </div>
 
-                <!--<div class="row p-3 mt-4">
-                    <div class="col-12">
-                        <p style="color: #272727; font-size: 0.9375rem; font-weight: 600;">
-                            Color
-                        </p>
-                        <div class="custom-radios">
-                            <div>
-                                <input type="radio" id="color-1" name="color" value="color-1" checked="">
-                                <label for="color-1">
-                                <span>
-                                  <img src="image/check-solid.svg" alt="Checked Icon">
-                                </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <input type="radio" id="color-2" name="color" value="color-2">
-                                <label for="color-2">
-                                <span>
-                                  <img src="image/check-solid.svg" alt="Checked Icon">
-                                </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <input type="radio" id="color-3" name="color" value="color-3">
-                                <label for="color-3">
-                                <span>
-                                  <img src="image/check-solid.svg" alt="Checked Icon">
-                                </span>
-                                </label>
-                            </div>
-
-                            <div>
-                                <input type="radio" id="color-4" name="color" value="color-4">
-                                <label for="color-4">
-                                <span>
-                                  <img src="image/check-solid.svg" alt="Checked Icon">
-                                </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row px-3">
-                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
-                        <div class="text-left position-relative btn-border-div mt-4 add-to-cart">
-                            <a class="btn btn-primary w-100" href="#" role="button">Add To Cart</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
-                        <div class="text-left position-relative btn-border-div mt-4 buy-now">
-                            <a class="btn btn-primary w-100" href="#" role="button">Buy Now</a>
-                        </div>
-                    </div>
-                </div>-->
-
-
                 <div class="row px-2 pt-4 mb-5">
                     <div class="col-12">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
                             <div class="panel panel-default">
                                 <div class="panel-heading border-top border-bottom pt-3 pb-1" role="tab"
                                      id="headingTwo">
@@ -286,14 +219,12 @@
                                             Product Details
                                         </a>
                                     </h4>
-
                                 </div>
                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
                                      aria-labelledby="headingTwo">
                                     <div class="panel-body mt-2"> {{ description }}</div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -309,114 +240,144 @@
                 Rating &amp; Review
             </h4>
         </div>
-        <div class="review-details m-5">
-            <div class="row justify-content-between border-bottom mt-1">
-                <div class="rating-details">
-                    <div class="review-user-pic d-inline-block align-top">
-                        <img src="image/datingprofile2-900x600.jpg" alt="" class="rounded-circle"
-                             style="width: 50px; height: 50px;">
-                    </div>
-                    <div class="d-inline-block">
-                        <h6 class="user-rating-name" style="font-weight: 600;">
-                            Joh Paul
-                        </h6>
-                        <p style="color: #BBB7B7; font-size: 0.8125rem; font-weight: 400;">
-                            2 May 2019
-                        </p>
-                        <p style="color: #272727; font-size: 0.9375rem; font-weight: 400;">
-                            <em> “I love this top, It is very comfortable and fit as expected!”</em>
-                        </p>
-                    </div>
-
+        <div class="review-details m-4">
+            {% if review_status %}
+                <div class="tab-pane" id="tab-review">
+                    <form class="form-horizontal" id="form-review">
+                        <div id="review"></div>
+                        <h2>{{ text_write }}</h2>
+                        {% if review_guest %}
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="input-name">{{ entry_name }}</label>
+                                    <input type="text" name="name" value="{{ customer_name }}"
+                                           id="input-name" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label"
+                                           for="input-review">{{ entry_review }}</label>
+                                    <textarea name="text" rows="5" id="input-review"
+                                              class="form-control"></textarea>
+                                    <div class="help-block">{{ text_note }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label">{{ entry_rating }}</label>
+                                    &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+                                    <input type="radio" name="rating" value="1"/>
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="2"/>
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="3"/>
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="4"/>
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="5"/>
+                                    &nbsp;{{ entry_good }}</div>
+                            </div>
+                            {{ captcha }}
+                            <div class="buttons clearfix">
+                                <div class="pull-right">
+                                    <button type="button" id="button-review"
+                                            data-loading-text="{{ text_loading }}"
+                                            class="btn btn-primary">Submit
+                                    </button>
+                                </div>
+                            </div>
+                        {% else %}
+                            {{ text_login }}
+                        {% endif %}
+                    </form>
                 </div>
-                <div class="star-rating d-inline-block mr-2">
-                    <img src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt="">
-                </div>
-            </div>
-
-            <div class="row justify-content-between border-bottom mt-4">
-                <div class="rating-details">
-                    <div class="review-user-pic d-inline-block align-top">
-                        <img src="image/datingprofile2-900x600.jpg" alt="" class="rounded-circle"
-                             style="width: 50px; height: 50px;">
-                    </div>
-                    <div class="d-inline-block">
-                        <h6 class="user-rating-name" style="font-weight: 600;">
-                            Joh Paul
-                        </h6>
-                        <p style="color: #BBB7B7; font-size: 0.8125rem; font-weight: 400;">
-                            2 May 2019
-                        </p>
-                        <p style="color: #272727; font-size: 0.9375rem; font-weight: 400;">
-                            <em> “I love this top, It is very comfortable and fit as expected!”</em>
-                        </p>
-                    </div>
-
-                </div>
-                <div class="star-rating d-inline-block mr-2">
-                    <img src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt="">
-                </div>
-            </div>
-
-            <div class="row justify-content-between border-bottom mt-4">
-                <div class="rating-details">
-                    <div class="review-user-pic d-inline-block align-top">
-                        <img src="image/datingprofile2-900x600.jpg" alt="" class="rounded-circle"
-                             style="width: 50px; height: 50px;">
-                    </div>
-                    <div class="d-inline-block">
-                        <h6 class="user-rating-name" style="font-weight: 600;">
-                            Joh Paul
-                        </h6>
-                        <p style="color: #BBB7B7; font-size: 0.8125rem; font-weight: 400;">
-                            2 May 2019
-                        </p>
-                        <p style="color: #272727; font-size: 0.9375rem; font-weight: 400;">
-                            <em> “I love this top, It is very comfortable and fit as expected!”</em>
-                        </p>
-                    </div>
-
-                </div>
-                <div class="star-rating d-inline-block mr-2">
-                    <img src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt="">
-                </div>
-            </div>
-
-            <div class="row justify-content-between mt-4">
-                <div class="rating-details">
-                    <div class="review-user-pic d-inline-block align-top">
-                        <img src="image/datingprofile2-900x600.jpg" alt="" class="rounded-circle"
-                             style="width: 50px; height: 50px;">
-                    </div>
-                    <div class="d-inline-block">
-                        <h6 class="user-rating-name" style="font-weight: 600;">
-                            Joh Paul
-                        </h6>
-                        <p style="color: #BBB7B7; font-size: 0.8125rem; font-weight: 400;">
-                            2 May 2019
-                        </p>
-                        <p style="color: #272727; font-size: 0.9375rem; font-weight: 400;">
-                            <em> “I love this top, It is very comfortable and fit as expected!”</em>
-                        </p>
-                    </div>
-
-                </div>
-                <div class="star-rating d-inline-block mr-2">
-                    <img src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img
-                            src="image/icons/Star.svg" alt="">
-                </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>
 
+<!-- Related / Similar Products ---------------------------------------------------------------------------------------------- -->
+{% if products %}
+<section class="rating-and-review pt-4 pb-4">
+    <div class="container border bg-white p-0">
+        <h3>{{ text_related }}</h3>
+        <div class="row pt-4"> {% set i = 0 %}
+            {% for product in products %}
+                <div class="col-lg-3 col-md-3 col-sm-6 px-2 mb-4 product-layout">
+                    <div class="card product-card h-100">
+                            <a class="card-img-top d-block overflow-hidden p-3 text-center h-100" href="{{ product.href }}">
+                                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}"
+                                 class="img-fluid"/>
+                            </a>
+                        <div class="card-body p-3">
+                            <h4 class="product-title"><a href="{{ product.href }}" class="f-15 font-weight-medium text-primary">{{ product.name }}</a></h4>
+{#                            <p>{{ product.description }}</p>#}
+                            {% if product.rating %}
+                                <div class="d-flex justify-content-between mb-2">
+                                <div class="star-rating">
+                                 {% for j in 1..5 %}
+                                        {% if product.rating < j %} <span class="fa fa-stack"><i
+                                                    class="fa fa-star-o fa-stack-1x"></i></span> {% else %}
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
+                                                        class="fa fa-star-o fa-stack-1x"></i></span> {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                            {% endif %}
+                            {% if product.price %}
+                                <div class="product-price text-primary font-weight-bold f-20"> {% if not product.special %}
+                                        {{ product.price }}
+                                    {% else %} <span class="price-new">{{ product.special }}</span> <span
+                                            class="price-old">{{ product.price }}</span> {% endif %}
+                                    {% if product.tax %} <span
+                                            class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %}
+                                </div>
+                            {% endif %} </div>
+                        <!--<div class="button-group">
+                            <button type="button"
+                                    onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">
+                                <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> <i
+                                        class="fa fa-shopping-cart"></i></button>
+                            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}"
+                                    onclick="wishlist.add('{{ product.product_id }}');"><i
+                                        class="fa fa-heart"></i></button>
+                            <button type="button" data-toggle="tooltip" title="{{ button_compare }}"
+                                    onclick="compare.add('{{ product.product_id }}');"><i
+                                        class="fa fa-exchange"></i></button>
+                        </div>-->
+
+                        <div class="text-center">
+                            <a href="{{ product.href }}">
+                                <div class="view-details bg-primary text-white py-2 f-15 font-weight-normal">
+                                    View Details
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% if column_left and column_right and (i + 1) % 2 == 0 %}
+                    <div class="clearfix visible-md visible-sm"></div>
+                {% elseif column_left or column_right and (i + 1) % 3 == 0 %}
+                    <div class="clearfix visible-md"></div>
+                {% elseif (i + 1) % 4 == 0 %}
+                    <div class="clearfix visible-md"></div>
+                {% endif %}
+                {% set i = i + 1 %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if tags %}
+        <p>{{ text_tags }}
+            {% for i in 0..tags|length %}
+                {% if i < (tags|length - 1) %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>,
+                {% else %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a> {% endif %}
+            {% endfor %} </p>
+    </div>
+</section>
+{% endif %}
+
+<!-- Script Section ------------------------------------------------------------------------------------------------ -->
 <script type="text/javascript"><!--
     $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
         $.ajax({
