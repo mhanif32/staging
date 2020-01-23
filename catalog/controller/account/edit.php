@@ -76,8 +76,8 @@ class ControllerAccountEdit extends Controller
                 $this->model_account_customer->editAvatar($this->customer->getId(), $file, $json['code']);
             }
 
-            //$this->model_account_customer->editCustomer($this->customer->getId(), $this->request->post);
-            //$this->session->data['success'] = $this->language->get('text_success');
+            $this->model_account_customer->editCustomer($this->customer->getId(), $this->request->post);
+            $this->session->data['success'] = $this->language->get('text_success');
             $this->response->redirect($this->url->link('account/account', '', true));
         }
 
