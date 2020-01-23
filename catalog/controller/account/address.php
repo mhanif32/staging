@@ -130,20 +130,6 @@ class ControllerAccountAddress extends Controller {
 	}
 
 	protected function getList() {
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', '', true)
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('account/address', '', true)
-		);
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -217,6 +203,7 @@ class ControllerAccountAddress extends Controller {
 
         //account links : left
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 
@@ -423,7 +410,7 @@ class ControllerAccountAddress extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		$this->response->setOutput($this->load->view('account/address_form', $data));
 	}
 

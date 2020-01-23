@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']      = 'Address Book';
+$_['heading_title']      = 'Manage Address';
 
 // Text
 $_['text_account']       = 'Account';
-$_['text_address_book']  = 'Address Book Entries';
+$_['text_address_book']  = 'Manage Address';
 $_['text_address_add']   = 'Add Address';
 $_['text_address_edit']  = 'Edit Address';
 $_['text_add']           = 'Your address has been successfully added';
