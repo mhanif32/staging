@@ -243,6 +243,9 @@ header {
   /* Custom Select */ }
   header .container-fluid {
     max-width: 1550px; }
+  header .dropdown-left {
+    right: 0;
+    left: auto; }
   header .navbar-light .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
