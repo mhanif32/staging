@@ -17,7 +17,7 @@ $gray-700:      #495057 !default;
 $gray-800:      #343a40 !default;
 $gray-900:      #212529 !default;
 $black:         #000 !default;
-
+$gold:          #FAC917 !default;
 $blue:          #182151 !default;
 $purpul:        #834cb1 !default;
 //
@@ -48,7 +48,8 @@ $theme-colors: (
     "pink":       $pink,
     "purpul":     $purpul,
     "gray-400":   $gray-400,
-    "gray-100" :  $gray-100
+    "gray-100" :  $gray-100,
+    "gold":       $gold
 );
 
 

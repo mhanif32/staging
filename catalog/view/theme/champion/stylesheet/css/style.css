@@ -1011,3 +1011,15 @@ footer ul {
 #account-account .accordion .card-header.collapsed:after {
   /* symbol for "collapsed" panels */
   content: "\f054"; }
+
+#account-edit .file-upload label {
+  width: 50%;
+  height: 128px;
+  border: 1px solid #ddd; }
+#account-edit .file-upload input {
+  position: absolute;
+  opacity: 0;
+  width: 1px; }
+#account-edit .file-upload .fa {
+  background-color: #ddd;
+  padding: 10px; }
