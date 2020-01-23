@@ -2,13 +2,12 @@
     <div class="card mt-5 mb-4" style="max-width: 540px;">
         <div class="row no-gutters">
             <div class="col-md-3 m-auto text-center">
-                <img src="catalog/view/theme/champion/image/profile-image.png" class="card-img w-75"
-                     alt="...">
+                <img src="{{ image_url }}" class="card-img w-75" alt="avatar">
             </div>
             <div class="col-md-9">
                 <div class="card-body">
                     <p class="card-text mb-0">Hello</p>
-                    <h5 class="card-title f-15">Peter Parker</h5></div>
+                    <h5 class="card-title f-15">{{ firstname }} {{ lastname }}</h5></div>
             </div>
         </div>
     </div>
@@ -17,17 +16,11 @@
             <div class="card mb-0">
                 <div class="card-header collapsed bg-white" data-toggle="collapse" href="#collapseOne">
                     <img src="catalog/view/theme/champion/image/Dashboard.svg" alt="" class="mr-2">
-                    <a class="card-title">
-                        Dashboard
-                    </a>
+                    <a class="card-title" href="{{ account }}">Dashboard</a>
                 </div>
                 <hr class="m-0">
-                <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
-                    <p>Profile Information</p>
-                </div>
-                <hr class="m-0">
-                <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion"
-                     href="#collapseTwo">
+
+                <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                     <img src="catalog/view/theme/champion/image/Order Box (2).svg" alt="" class="mr-2">
                     <a class="card-title">
                         My Order
