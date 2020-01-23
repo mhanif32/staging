@@ -2,11 +2,11 @@
     <div class="card mt-5 mb-4" style="max-width: 540px;">
         <div class="row no-gutters">
             <div class="col-md-3 m-auto text-center">
-                <img src="{{ image_url }}" class="card-img w-75" alt="avatar">
+                <img src="{{ image_url }}" class="rounded-circle" width="58" height="58" alt="avatar">
             </div>
             <div class="col-md-9">
                 <div class="card-body">
-                    <p class="card-text mb-0">Hello</p>
+                    <p class="card-text mb-3">Hello</p>
                     <h5 class="card-title f-15">{{ firstname }} {{ lastname }}</h5></div>
             </div>
         </div>
@@ -14,15 +14,15 @@
     <div class="card">
         <div id="accordion" class="accordion">
             <div class="card mb-0">
-                <div class="card-header collapsed bg-white" data-toggle="collapse" href="#collapseOne">
+                <div class="p-3 bg-white" data-toggle="collapse" href="#collapseOne">
                     <img src="catalog/view/theme/champion/image/Dashboard.svg" alt="" class="mr-2">
-                    <a class="card-title" href="{{ account }}">Dashboard</a>
+                    <a class="card-title text-uppercase" href="{{ account }}">Dashboard</a>
                 </div>
                 <hr class="m-0">
 
-                <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <div class="p-3 card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                     <img src="catalog/view/theme/champion/image/Order Box (2).svg" alt="" class="mr-2">
-                    <a class="card-title">
+                    <a class="card-title text-uppercase">
                         My Order
                     </a>
                 </div>
@@ -40,10 +40,10 @@
                     </ul>
                 </div>
                 <hr class="m-0">
-                <div class="card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion"
+                <div class="p-3 card-header collapsed bg-white" data-toggle="collapse" data-parent="#accordion"
                      href="#collapseThree">
                     <img src="catalog/view/theme/champion/image/Profile.svg" alt="" class="mr-2">
-                    <a class="card-title">
+                    <a class="card-title text-uppercase">
                         ACCOUNT SETTINGS
                     </a>
                 </div>
@@ -60,12 +60,12 @@
                 <hr class="m-0">
                 <div class="p-3 bg-white" href="">
                     <img src="catalog/view/theme/champion/image/Dashboard.svg" alt="" class="mr-2">
-                    <a href="{{ wishlist }}" class="card-title">{{ text_wishlist }}</a>
+                    <a href="{{ wishlist }}" class="card-title text-uppercase">{{ text_wishlist }}</a>
                 </div>
                 <hr class="m-0">
                 <div class="p-3 bg-white" href="">
                     <img src="catalog/view/theme/champion/image/Logout.svg" alt="" class="mr-2">
-                    <a class="card-title">
+                    <a class="card-title text-uppercase">
                         Logout
                     </a>
                 </div>
