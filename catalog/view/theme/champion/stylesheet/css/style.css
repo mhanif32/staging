@@ -746,7 +746,7 @@ footer ul {
     display: list-item;
     list-style-type: none; }
   .my-order .table-bordered tbody td i {
-    color: #000;
+    color: #fff;
     font-size: 18px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
@@ -1004,11 +1004,11 @@ footer ul {
   .change-password .login-form form.form-signin {
     max-width: 600px; } }
 
-#account-account .accordion .card-header:after {
+#account-account .accordion .card-header:after, .account-account .accordion .card-header:after {
   font-family: 'FontAwesome';
   content: "\f078";
   float: right; }
-#account-account .accordion .card-header.collapsed:after {
+#account-account .accordion .card-header.collapsed:after, .account-account .accordion .card-header.collapsed:after {
   /* symbol for "collapsed" panels */
   content: "\f054"; }
 
