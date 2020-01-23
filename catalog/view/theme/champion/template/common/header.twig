@@ -133,11 +133,21 @@
                         {{ currency }}
                     </li>
                     {% if logged %}
-                        <li class="nav-item"><a class="nav-link mt-3" href="{{ account }}">{{ text_account }}</a></li>
+                        <li>
+                        <div class="dropdown show mt-3">
+                            <a class="btn btn-white bg-white border-0 dropdown-toggle f-15 text-primary pt-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {{ firstname }} {{ lastname }}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
+                                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
+                            </div>
+                        </div>
 {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
 {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
 {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
-                        <li class="nav-item"><a class="nav-link mt-3" href="{{ logout }}">{{ text_logout }}</a></li>
+                        </li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link mt-3" href="{{ login }}">{{ text_login }}</a></li>
                         <li class="nav-item before-verticle-line"><a class="nav-link mt-3" href="{{ register }}">{{ text_register }}</a></li>
