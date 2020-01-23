@@ -244,7 +244,7 @@
                                     {% set class = 'col-sm-12' %}
                                 {% endif %}
                                 <div id="content" class="{{ class }}">{{ content_top }}
-                                    <h1>{{ heading_title }}</h1>
+                                    <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title }}</h4>
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
                                           class="form-horizontal">
                                         <fieldset>
@@ -254,7 +254,7 @@
                                                 <div class="">
                                                     <input type="text" name="firstname" value="{{ firstname }}"
                                                            placeholder="{{ entry_firstname }}" id="input-firstname"
-                                                           class="form-control"/>
+                                                           class="form-control rounded-0"/>
                                                     {% if error_firstname %}
                                                         <div class="text-danger">{{ error_firstname }}</div>
                                                     {% endif %}
@@ -266,7 +266,7 @@
                                                 <div class="">
                                                     <input type="text" name="lastname" value="{{ lastname }}"
                                                            placeholder="{{ entry_lastname }}" id="input-lastname"
-                                                           class="form-control"/>
+                                                           class="form-control rounded-0"/>
                                                     {% if error_lastname %}
                                                         <div class="text-danger">{{ error_lastname }}</div>
                                                     {% endif %}
@@ -288,7 +288,7 @@
                                                 <div class="">
                                                     <input type="email" name="email" value="{{ email }}"
                                                            placeholder="{{ entry_email }}" id="input-email"
-                                                           class="form-control"/>
+                                                           class="form-control rounded-0"/>
                                                     {% if error_email %}
                                                         <div class="text-danger">{{ error_email }}</div>
                                                     {% endif %}
@@ -301,7 +301,7 @@
                                                 <div class="">
                                                     <input type="tel" name="telephone" value="{{ telephone }}"
                                                            placeholder="{{ entry_telephone }}" id="input-telephone"
-                                                           class="form-control"/>
+                                                           class="form-control rounded-0"/>
                                                     {% if error_telephone %}
                                                         <div class="text-danger">{{ error_telephone }}</div>
                                                     {% endif %}
@@ -313,7 +313,7 @@
                                                 <div class="">
                                                     <input type="file" name="avatar"
                                                            id="input-avatar"
-                                                           class="form-control"/>
+                                                           class="form-control rounded-0"/>
                                                     {% if error_avatar %}
                                                         <div class="text-danger">{{ error_avatar }}</div>
                                                     {% endif %}
@@ -321,7 +321,7 @@
                                             </div>
                                         </fieldset>
                                         <div class="buttons clearfix">
-                                            <input type="submit" value="Submit" class="btn btn-success w-50"/>
+                                            <input type="submit" value="UPDATE" class="btn btn-success w-50 custom-btn"/>
                                         </div>
                                     </form>
                                     {{ content_bottom }}
