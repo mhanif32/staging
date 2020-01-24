@@ -212,6 +212,14 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
   }
   .sub-nav-menu{.nav-item{.nav-link{padding-left: 0; color: $black;font-weight: 600;font-size: 0.9375rem;}}}
 
+  .sub-nav-menu{
+    .nav-item {
+      background-color: #e2e2e2;
+      padding: 5px;
+      margin-right: 2px;
+    &:hover{background-color: $success; text-decoration: none; transition: all .7s ease-in-out;}}
+  }
+
 }
 // .home-banner
 .home-banner {
