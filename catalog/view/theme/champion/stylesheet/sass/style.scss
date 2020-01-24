@@ -472,7 +472,7 @@ footer {
           list-style-type: none;
         }
         i {
-          color: #000;
+          color: #fff;
           font-size: 18px;
           transition: all 0.5s ease;
           &:hover {
@@ -856,7 +856,15 @@ footer {
 }
 
 //account-account
-#account-account{
+#account-account, .account-account{
   .accordion .card-header:after {font-family: 'FontAwesome';content: "\f078";float: right;}
   .accordion .card-header.collapsed:after { /* symbol for "collapsed" panels */ content: "\f054"; }
+}
+
+#account-edit{
+  .file-upload {
+    label {width: 50%; height: 128px; border: 1px solid #ddd;}
+    input {position: absolute; opacity: 0; width: 1px;}
+    .fa {background-color: #ddd;padding: 10px;}
+  }
 }

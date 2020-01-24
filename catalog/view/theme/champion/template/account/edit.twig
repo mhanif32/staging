@@ -1,5 +1,5 @@
 {{ header }}
-<section id="account-account" class="register update-profile" style="background: #F3F3F3;">
+<section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
             {{ profile_column_left }}
@@ -85,11 +85,14 @@
                                             </div>
 
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-image">Upload Avatar</label>
-                                                <div class="">
-                                                    <input type="file" name="avatar"
-                                                           id="input-avatar"
-                                                           class="form-control rounded-0"/>
+                                                <label class="control-label" for="input-image">Profile Photo</label>
+                                                <div class="file-upload">
+                                                    <label class="d-flex align-items-center justify-content-center">
+                                                        <input type="file" name="avatar"
+                                                               id="input-avatar"
+                                                               class="w-50 border"/>
+                                                        <i class="fa fa-plus rounded"></i>
+                                                    </label>
                                                     {% if error_avatar %}
                                                         <div class="text-danger">{{ error_avatar }}</div>
                                                     {% endif %}
