@@ -23,7 +23,7 @@ class ControllerCommonProfileColumnLeft extends Controller {
         $data['transaction'] = $this->url->link('account/transaction', '', true);
         $data['recurring'] = $this->url->link('account/recurring', '', true);
 
-        $data['wishlist'] = $this->url->link('account/wishlist', '', true);
+        $data['my_wishlist'] = $this->url->link('account/wishlist', '', true);
         $data['logout'] = $this->url->link('account/logout', '', true);
 
         $data = array_merge($data, $customer_info);

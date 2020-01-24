@@ -333,25 +333,17 @@
                                     </div>
                                 </div>
                                 {{ captcha }} &nbsp;
-                                <input type="submit" value="{{ button_continue }}"
-                                       class="btn btn-primary bg-success border-0 w-100"/>
+                                <input type="submit" value="Register"
+                                       class="btn btn-primary bg-success border-0 w-100 custom-btn"/>
                             </div>
                         {% else %}
 
                             <div class="buttons">
                                 {{ captcha }}
-                                <input type="submit" value="{{ button_continue }}"
-                                       class="btn btn-primary bg-success border-0 w-100"/>
+                                <input type="submit" value="Register"
+                                       class="btn btn-primary bg-success border-0 w-100 custom-btn"/>
                             </div>
                         {% endif %}
-                        {#<div class="buttons">#}
-
-                        {#{{ captcha }}#}
-
-                        {#<input type="submit" value="Register" class="btn btn-primary bg-success border-0 w-100"/>#}
-
-                        {#</div>#}
-
                         <div class="w-100 d-inline-block my-3">
                             <p style="font-size: 0.7rem;" class="text-secondary">Already have an Account?<a
                                         href="{{ login }}"
