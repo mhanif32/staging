@@ -51,7 +51,15 @@ class ControllerAccountAccount extends Controller {
 				);
 			}
 		}
-		
+
+		//if seller
+        $this->load->model('account/customer');
+        $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+        if($customer_info['role'] == 'seller') {
+            $data['is_seller'] = true;
+            $data['seller_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
+        }
+
 		$data['wishlist'] = $this->url->link('account/wishlist');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
@@ -66,7 +74,7 @@ class ControllerAccountAccount extends Controller {
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 		$data['recurring'] = $this->url->link('account/recurring', '', true);
-		
+
 		$this->load->model('account/customer');
 		
 		$affiliate_info = $this->model_account_customer->getAffiliate($this->customer->getId());

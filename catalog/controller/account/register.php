@@ -19,6 +19,7 @@ class ControllerAccountRegister extends Controller {
 		$this->load->model('account/customer');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
 
 			// Clear any previous login attempts for unregistered accounts.
@@ -33,20 +34,6 @@ class ControllerAccountRegister extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', '', true)
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_register'),
-			'href' => $this->url->link('account/register', '', true)
-		);
 		$data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', true));
 
 		if (isset($this->error['warning'])) {
@@ -54,6 +41,12 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$data['error_warning'] = '';
 		}
+
+        if (isset($this->error['role'])) {
+            $data['error_role'] = $this->error['role'];
+        } else {
+            $data['error_role'] = '';
+        }
 
 		if (isset($this->error['firstname'])) {
 			$data['error_firstname'] = $this->error['firstname'];
@@ -119,6 +112,12 @@ class ControllerAccountRegister extends Controller {
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
 
+        if (isset($this->request->post['role'])) {
+            $data['role'] = $this->request->post['role'];
+        } else {
+            $data['role'] = '';
+        }
+
 		if (isset($this->request->post['firstname'])) {
 			$data['firstname'] = $this->request->post['firstname'];
 		} else {
@@ -149,7 +148,7 @@ class ControllerAccountRegister extends Controller {
 		$this->load->model('account/custom_field');
 		
 		$custom_fields = $this->model_account_custom_field->getCustomFields();
-		
+
 		foreach ($custom_fields as $custom_field) {
 			if ($custom_field['location'] == 'account') {
 				$data['custom_fields'][] = $custom_field;
@@ -218,6 +217,11 @@ class ControllerAccountRegister extends Controller {
 	}
 
 	private function validate() {
+
+        if ((utf8_strlen(trim($this->request->post['role'])) < 1) || (utf8_strlen(trim($this->request->post['role'])) > 40)) {
+            $this->error['role'] = $this->language->get('error_role');
+        }
+
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -287,7 +291,6 @@ class ControllerAccountRegister extends Controller {
 				$this->error['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
 		}
-		
 		return !$this->error;
 	}
 

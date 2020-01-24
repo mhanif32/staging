@@ -1,44 +1,14 @@
 {{ header }}
 <div id="account-register" class="account-login">
-    {% if error_warning %}
-        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
-        </div>
-    {% endif %}
-
     <div id="content" class="register">{{ content_top }}
         <section class="register">
             <div class="login-form py-5">
-                <!--<form class="form-signin">
-
-                    <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
-
-                    <label for="inputName" class="">Name</label>
-                    <input type="text" id="inputName" class="form-control" placeholder="" required="" autofocus="">
-
-                    <label for="inputEmail" class="mt-4">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="" required="" autofocus="">
-
-                    <label for="inputContact" class="mt-4">Contact Number</label>
-                    <input type="tel" id="inputContact" class="form-control" placeholder="" required="" autofocus="">
-
-                    <label for="inputPassword" class="mt-4">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="" required="">
-                    <div class="checkbox mb-3">
-                        <div class="form-group mt-4">
-                            <input type="checkbox" id="html">
-                            <label for="html"><span>Accept the terms and condition of the website.</span></label>
-                        </div>
-                    </div>
-                    <img src="images/1.png" alt="">
-                    <div class="text-center position-relative btn-border-div mt-3 mb-3">
-                        <a class="btn btn-primary custom-btn" href="#" role="button">REGISTER</a>
-                    </div>
-                    <div class="w-100 d-inline-block">
-                        <p style="font-size: 0.7rem;">Already have an Account?<a href="#" style="color: #F15A29;">  Register </a></p>
-                    </div>
-                </form>-->
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin">
                     <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
+                    {% if error_warning %}
+                        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                        </div>
+                    {% endif %}
                     <fieldset id="account">
                         <div class="form-group required"
                              style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
@@ -60,8 +30,26 @@
                                                 {{ customer_group.name }}</label>
                                         </div>
                                     {% endif %}
-                                {% endfor %}</div>
+                                {% endfor %}
+                            </div>
                         </div>
+                        <div class="form-group required">
+                            <label class="control-label" for="select-role">Register as</label>
+                            <div class="w-100">
+                                <select name="role" id="select-role" class="form-control">
+                                    <option value=""> --- Please Select --- </option>
+                                    <option value="buyer">Buyer</option>
+                                    <option value="seller">Seller</option>
+                                    <option value="affiliate">Affiliate</option>
+                                    <option value="delivery-partner">Delivery Partner</option>
+                                    <option value="executive-partner">Executive Partner</option>
+                                    <option value="partner">Partner</option>
+                                    <option value="professional-service-provider">Professional Service Provider</option>
+                                </select>
+                                <div class="text-danger">{{ error_role }}</div>
+                            </div>
+                        </div>
+
                         <div class="form-group required">
                             <label class="control-label" for="input-firstname">{{ entry_firstname }}</label>
                             <div class="w-100">
@@ -99,202 +87,202 @@
                                     <div class="text-danger">{{ error_telephone }}</div>
                                 {% endif %} </div>
                         </div>
-                        {% for custom_field in custom_fields %}
-                            {% if custom_field.type == 'select' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <select name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                id="input-custom-field{{ custom_field.custom_field_id }}"
-                                                class="form-control">
-                                            <option value="">{{ text_select }}</option>
+{#                        {% for custom_field in custom_fields %}#}
+{#                            {% if custom_field.type == 'select' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <select name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                                class="form-control">#}
+{#                                            <option value="">{{ text_select }}</option>#}
 
-                                            {% for custom_field_value in custom_field.custom_field_value %}
-                                                {% if register_custom_field[custom_field.location][custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}
+{#                                            {% for custom_field_value in custom_field.custom_field_value %}#}
+{#                                                {% if register_custom_field[custom_field.location][custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}#}
 
-                                                    <option value="{{ custom_field_value.custom_field_value_id }}"
-                                                            selected="selected">{{ custom_field_value.name }}</option>
+{#                                                    <option value="{{ custom_field_value.custom_field_value_id }}"#}
+{#                                                            selected="selected">{{ custom_field_value.name }}</option>#}
 
-                                                {% else %}
+{#                                                {% else %}#}
 
-                                                    <option value="{{ custom_field_value.custom_field_value_id }}">{{ custom_field_value.name }}</option>
+{#                                                    <option value="{{ custom_field_value.custom_field_value_id }}">{{ custom_field_value.name }}</option>#}
 
-                                                {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %}</div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'radio' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <div> {% for custom_field_value in custom_field.custom_field_value %}
-                                                <div class="radio">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}
-                                                        <label>
-                                                            <input type="radio"
-                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                   value="{{ custom_field_value.custom_field_value_id }}"
-                                                                   checked="checked"/>
-                                                            {{ custom_field_value.name }}</label>
-                                                    {% else %}
-                                                        <label>
-                                                            <input type="radio"
-                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                   value="{{ custom_field_value.custom_field_value_id }}"/>
-                                                            {{ custom_field_value.name }}</label>
-                                                    {% endif %} </div>
-                                            {% endfor %}</div>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %}</div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'checkbox' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <div> {% for custom_field_value in custom_field.custom_field_value %}
-                                                <div class="checkbox">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id in register_custom_field[custom_field.custom_field_id] %}
-                                                        <label>
-                                                            <input type="checkbox"
-                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}][]"
-                                                                   value="{{ custom_field_value.custom_field_value_id }}"
-                                                                   checked="checked"/>
-                                                            {{ custom_field_value.name }}</label>
-                                                    {% else %}
-                                                        <label>
-                                                            <input type="checkbox"
-                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}][]"
-                                                                   value="{{ custom_field_value.custom_field_value_id }}"/>
-                                                            {{ custom_field_value.name }}</label>
-                                                    {% endif %} </div>
-                                            {% endfor %} </div>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'text' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <input type="text"
-                                               name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                               value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"
+{#                                                {% endif %}#}
+{#                                            {% endfor %}#}
+{#                                        </select>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %}</div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'radio' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <div> {% for custom_field_value in custom_field.custom_field_value %}#}
+{#                                                <div class="radio">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}#}
+{#                                                        <label>#}
+{#                                                            <input type="radio"#}
+{#                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                                   value="{{ custom_field_value.custom_field_value_id }}"#}
+{#                                                                   checked="checked"/>#}
+{#                                                            {{ custom_field_value.name }}</label>#}
+{#                                                    {% else %}#}
+{#                                                        <label>#}
+{#                                                            <input type="radio"#}
+{#                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                                   value="{{ custom_field_value.custom_field_value_id }}"/>#}
+{#                                                            {{ custom_field_value.name }}</label>#}
+{#                                                    {% endif %} </div>#}
+{#                                            {% endfor %}</div>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %}</div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'checkbox' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <div> {% for custom_field_value in custom_field.custom_field_value %}#}
+{#                                                <div class="checkbox">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id in register_custom_field[custom_field.custom_field_id] %}#}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox"#}
+{#                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}][]"#}
+{#                                                                   value="{{ custom_field_value.custom_field_value_id }}"#}
+{#                                                                   checked="checked"/>#}
+{#                                                            {{ custom_field_value.name }}</label>#}
+{#                                                    {% else %}#}
+{#                                                        <label>#}
+{#                                                            <input type="checkbox"#}
+{#                                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}][]"#}
+{#                                                                   value="{{ custom_field_value.custom_field_value_id }}"/>#}
+{#                                                            {{ custom_field_value.name }}</label>#}
+{#                                                    {% endif %} </div>#}
+{#                                            {% endfor %} </div>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'text' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <input type="text"#}
+{#                                               name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                               value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"#}
 
-                                               id="input-custom-field{{ custom_field.custom_field_id }}"
-                                               class="form-control"/>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'textarea' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                    <textarea
-                                            name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                            rows="5"
-                                            id="input-custom-field{{ custom_field.custom_field_id }}"
-                                            class="form-control">{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}</textarea>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'file' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}"
-                                                data-loading-text="{{ text_loading }}" class="btn btn-default"><i
-                                                    class="fa fa-upload"></i> {{ button_upload }}</button>
-                                        <input type="hidden"
-                                               name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                               value="{% if register_custom_field[custom_field.custom_field_id] %}  {{ register_custom_field[custom_field.custom_field_id] }} {% endif %}"/>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %}</div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'date' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <div class="input-group date">
-                                            <input type="text"
-                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"
-                                                   data-date-format="YYYY-MM-DD"
-                                                   id="input-custom-field{{ custom_field.custom_field_id }}"
-                                                   class="form-control"/>
-                                            <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'time' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <div class="input-group time">
-                                            <input type="text"
-                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"
-                                                   data-date-format="HH:mm"
-                                                   id="input-custom-field{{ custom_field.custom_field_id }}"
-                                                   class="form-control"/>
-                                            <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                            {% if custom_field.type == 'time' %}
-                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"
-                                     data-sort="{{ custom_field.sort_order }}">
-                                    <label class="control-label"
-                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
-                                    <div class="w-100">
-                                        <div class="input-group datetime">
-                                            <input type="text"
-                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"
+{#                                               id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                               class="form-control"/>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'textarea' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                    <textarea#}
+{#                                            name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                            rows="5"#}
+{#                                            id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                            class="form-control">{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}</textarea>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'file' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                                data-loading-text="{{ text_loading }}" class="btn btn-default"><i#}
+{#                                                    class="fa fa-upload"></i> {{ button_upload }}</button>#}
+{#                                        <input type="hidden"#}
+{#                                               name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                               value="{% if register_custom_field[custom_field.custom_field_id] %}  {{ register_custom_field[custom_field.custom_field_id] }} {% endif %}"/>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %}</div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'date' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <div class="input-group date">#}
+{#                                            <input type="text"#}
+{#                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"#}
+{#                                                   data-date-format="YYYY-MM-DD"#}
+{#                                                   id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                                   class="form-control"/>#}
+{#                                            <span class="input-group-btn">#}
+{#                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>#}
+{#                </span></div>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'time' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <div class="input-group time">#}
+{#                                            <input type="text"#}
+{#                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"#}
+{#                                                   data-date-format="HH:mm"#}
+{#                                                   id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                                   class="form-control"/>#}
+{#                                            <span class="input-group-btn">#}
+{#                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>#}
+{#                </span></div>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% if custom_field.type == 'time' %}#}
+{#                                <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field"#}
+{#                                     data-sort="{{ custom_field.sort_order }}">#}
+{#                                    <label class="control-label"#}
+{#                                           for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>#}
+{#                                    <div class="w-100">#}
+{#                                        <div class="input-group datetime">#}
+{#                                            <input type="text"#}
+{#                                                   name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"#}
+{#                                                   value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}"#}
 
-                                                   data-date-format="YYYY-MM-DD HH:mm"
-                                                   id="input-custom-field{{ custom_field.custom_field_id }}"
-                                                   class="form-control"/>
-                                            <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                </span></div>
-                                        {% if error_custom_field[custom_field.custom_field_id] %}
-                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>
-                                        {% endif %} </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+{#                                                   data-date-format="YYYY-MM-DD HH:mm"#}
+{#                                                   id="input-custom-field{{ custom_field.custom_field_id }}"#}
+{#                                                   class="form-control"/>#}
+{#                                            <span class="input-group-btn">#}
+{#                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>#}
+{#                </span></div>#}
+{#                                        {% if error_custom_field[custom_field.custom_field_id] %}#}
+{#                                            <div class="text-danger">{{ error_custom_field[custom_field.custom_field_id] }}</div>#}
+{#                                        {% endif %} </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
 
                         <div class="form-group required">
                             <label class="control-label" for="input-password">{{ entry_password }}</label>
@@ -333,25 +321,17 @@
                                     </div>
                                 </div>
                                 {{ captcha }} &nbsp;
-                                <input type="submit" value="{{ button_continue }}"
-                                       class="btn btn-primary bg-success border-0 w-100"/>
+                                <input type="submit" value="Register"
+                                       class="btn btn-primary bg-success border-0 w-100 custom-btn"/>
                             </div>
                         {% else %}
 
                             <div class="buttons">
                                 {{ captcha }}
-                                <input type="submit" value="{{ button_continue }}"
-                                       class="btn btn-primary bg-success border-0 w-100"/>
+                                <input type="submit" value="Register"
+                                       class="btn btn-primary bg-success border-0 w-100 custom-btn"/>
                             </div>
                         {% endif %}
-                        {#<div class="buttons">#}
-
-                        {#{{ captcha }}#}
-
-                        {#<input type="submit" value="Register" class="btn btn-primary bg-success border-0 w-100"/>#}
-
-                        {#</div>#}
-
                         <div class="w-100 d-inline-block my-3">
                             <p style="font-size: 0.7rem;" class="text-secondary">Already have an Account?<a
                                         href="{{ login }}"
