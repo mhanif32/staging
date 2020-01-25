@@ -3,6 +3,7 @@ class ControllerAccountRegister extends Controller {
 	private $error = array();
 
 	public function index() {
+
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -41,12 +42,6 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$data['error_warning'] = '';
 		}
-
-        if (isset($this->error['role'])) {
-            $data['error_role'] = $this->error['role'];
-        } else {
-            $data['error_role'] = '';
-        }
 
 		if (isset($this->error['firstname'])) {
 			$data['error_firstname'] = $this->error['firstname'];
@@ -90,7 +85,11 @@ class ControllerAccountRegister extends Controller {
 			$data['error_confirm'] = '';
 		}
 
-		$data['action'] = $this->url->link('account/register', '', true);
+        if (isset($this->request->get['role'])) {
+            $data['action'] = $this->url->link('account/register', '&role='.$this->request->get['role'], true);
+        } else {
+            $data['action'] = $this->url->link('account/register', '', true);
+        }
 
 		$data['customer_groups'] = array();
 
@@ -111,12 +110,6 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
-
-        if (isset($this->request->post['role'])) {
-            $data['role'] = $this->request->post['role'];
-        } else {
-            $data['role'] = '';
-        }
 
 		if (isset($this->request->post['firstname'])) {
 			$data['firstname'] = $this->request->post['firstname'];
@@ -212,15 +205,12 @@ class ControllerAccountRegister extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+		$data['role'] = !empty($this->request->get['role']) ? $this->request->get['role'] : '';
 
 		$this->response->setOutput($this->load->view('account/register', $data));
 	}
 
 	private function validate() {
-
-        if ((utf8_strlen(trim($this->request->post['role'])) < 1) || (utf8_strlen(trim($this->request->post['role'])) > 40)) {
-            $this->error['role'] = $this->language->get('error_role');
-        }
 
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');

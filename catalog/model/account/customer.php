@@ -7,6 +7,12 @@ class ModelAccountCustomer extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}
 
+        if (isset($this->request->get['role'])) {
+            $data['role'] = $this->request->get['role'];
+        } else {
+            $data['role'] = '';
+        }
+
 		$this->load->model('account/customer_group');
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 

@@ -5,6 +5,9 @@
             <div class="login-form py-5">
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin">
                     <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
+                    {% if role %}
+                        <small>Register as {{ role }}</small>
+                    {% endif %}
                     {% if error_warning %}
                         <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
                         </div>
@@ -33,7 +36,7 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="form-group required">
+                        <!--<div class="form-group required">
                             <label class="control-label" for="select-role">Register as</label>
                             <div class="w-100">
                                 <select name="role" id="select-role" class="form-control">
@@ -48,7 +51,7 @@
                                 </select>
                                 <div class="text-danger">{{ error_role }}</div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="form-group required">
                             <label class="control-label" for="input-firstname">{{ entry_firstname }}</label>
