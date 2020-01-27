@@ -1,12 +1,15 @@
 <div id="cart" class="btn-group btn-block">
     <button type="button" data-toggle="dropdown" data-loading-text="{{ text_loading }}"
-            class="btn btn-inverse btn-block btn-lg dropdown-toggle">
+            class="btn btn-inverse btn-block btn-lg dropdown-toggle px-2">
 {#        <i class="fa fa-shopping-cart"></i>#}
 {#        <span id="cart-total">{{ text_items }}</span>#}
 
         <a class="nav-link position-relative" href="">
-            <img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:2.2rem;">
+            <img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:1.8rem;margin-bottom: 2px;">
             <span class="navbar-tool-label cart-balloon">{{ text_items }}</span>
+            <span class="d-block f-15">
+Cart
+</span>
         </a>
 
     </button>

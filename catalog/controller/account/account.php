@@ -55,7 +55,7 @@ class ControllerAccountAccount extends Controller {
 		//if seller
         $this->load->model('account/customer');
         $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
-        if($customer_info['role'] == 'seller') {
+        if(!empty($customer_info['role']) && $customer_info['role'] == 'seller') {
             $data['is_seller'] = true;
             $data['seller_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
         }

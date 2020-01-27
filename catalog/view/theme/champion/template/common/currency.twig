@@ -1,17 +1,22 @@
 {% if currencies|length > 1 %}
-    <div class="pull-left mt-3 mr-3">
-        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency">
+    <div class="">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency" class="text-center">
             <div class="btn-group">
-                <button class="btn btn-link form-control rounded"
-                        data-toggle="dropdown">{% for currency in currencies %}
-                        {% if currency.symbol_left and currency.code == code %}
-                            <strong>{{ currency.symbol_left }}</strong>
-                        {% elseif currency.symbol_right and currency.code == code %}
-                            <strong>{{ currency.symbol_right }}</strong>
-                        {% endif %}
-                    {% endfor %}
-                    <span class="hidden-xs hidden-sm hidden-md">{{ text_currency }}</span><i
-                            class="fa fa-caret-down ml-4"></i></button>
+                <button class="btn btn-link form-control rounded-0 justify-content-between"
+                        data-toggle="dropdown" style="height: 49px">
+                    <div class="d-inline-block"> {% for currency in currencies %}
+                            {% if currency.symbol_left and currency.code == code %}
+                                <strong>{{ currency.symbol_left }}</strong>
+                            {% elseif currency.symbol_right and currency.code == code %}
+                                <strong>{{ currency.symbol_right }}</strong>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="hidden-xs hidden-sm hidden-md">{{ text_currency }}</span>
+                    </div>
+
+
+                    <div class="d-inline-block"><i class="fa fa-caret-down ml-4"></i></div>
+                    </button>
                 <ul class="dropdown-menu">
                     {% for currency in currencies %}
                         {% if currency.symbol_left %}
@@ -33,3 +38,6 @@
         </form>
     </div>
 {% endif %}
+
+
+

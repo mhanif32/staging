@@ -49,63 +49,66 @@
 
 
 {#<header>#}
-    {#<div class="container">#}
-        {#<div class="row">#}
-            {#<div class="col-sm-2">#}
-                {#<div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"#}
-                                                                      {#alt="{{ name }}" class="img-responsive"/>#}
-                        {#</a>{% else %}#}
-                        {#<h1><a href="{{ home }}">{{ name }}</a></h1>#}
-                    {#{% endif %}</div>#}
-            {#</div>#}
-            {#<div class="col-sm-7">#}
-                {#<div class="row">#}
-                    {#<div class="col-12">#}
-                        {#{{ search }}#}
-                    {#</div>#}
-                    {#<div class="col-12">#}
-                        {#{{ menu }}#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="col-sm-3">{{ cart }}</div>#}
-        {#</div>#}
-    {#</div>#}
+{#<div class="container">#}
+{#<div class="row">#}
+{#<div class="col-sm-2">#}
+{#<div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"#}
+{#alt="{{ name }}" class="img-responsive"/>#}
+{#</a>{% else %}#}
+{#<h1><a href="{{ home }}">{{ name }}</a></h1>#}
+{#{% endif %}</div>#}
+{#</div>#}
+{#<div class="col-sm-7">#}
+{#<div class="row">#}
+{#<div class="col-12">#}
+{#{{ search }}#}
+{#</div>#}
+{#<div class="col-12">#}
+{#{{ menu }}#}
+{#</div>#}
+{#</div>#}
+{#</div>#}
+{#<div class="col-sm-3">{{ cart }}</div>#}
+{#</div>#}
+{#</div>#}
 {#</header>#}
 
 {% if show_top_bar %}
-<section class="top-headerbar bg-success pb-1">
-    <div class="container">
-        <div class="row pt-4">
-            <div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">
-                Choose your country & delivery location
-            </div>
-            <div class="col-lg-3">
-                <div class="select">
-                    <select class="pl-3 form-control rounded border-0 select">
-                        <option>United States</option>
-                    </select>
+    <section class="top-headerbar bg-success pb-1">
+        <div class="container">
+            <div class="row pt-1">
+                <div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">
+                    Choose your country & delivery location
                 </div>
-            </div>
+                <div class="col-lg-3">
+                    <div class="select">
+                        <select class="pl-3 form-control rounded border-0 select">
+                            <option>United States</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="col-lg-3">
-                <div class="select">
-                    <select class="pl-3 form-control rounded border-0 select">
-                        <option>Las Vegas</option>
-                    </select>
+                <div class="col-lg-3">
+                    <div class="select">
+                        <select class="pl-3 form-control rounded border-0 select">
+                            <option>Las Vegas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="text-left position-relative btn-border-div">
+                        <a class="btn bg-primary w-70 text-white" href="#" role="button"
+                           style="font-size: 0.9375rem; height: 35px;">CONFIRM</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="text-left position-relative btn-border-div">
-                    <a class="btn bg-primary w-70 text-white" href="#" role="button" style="font-size: 0.9375rem; height: 40px; line-height: 2">CONFIRM</a>
-                </div>
-            </div>
+            <p class="text-white text-center m-0" style="font-size: 12px;">Note : The product has been listed as per the
+                chosen location.</p>
         </div>
-        <p class="text-white text-center" style="font-size: 10px;">Note : The product has been listed as per the chosen location.</p>
-    </div>
-</section>
+    </section>
 {% endif %}
 
+<!--
 <header>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-xl navbar-light px-lg-5 py-lg-0">
@@ -116,7 +119,6 @@
                         <h1><a href="{{ home }}">{{ name }}</a></h1>
                     {% endif %}</div>
             </a>
-
             <button class="navbar-toggler order-2" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -165,6 +167,117 @@
             </div>
             <div class="d-lg-none d-flex justify-content-end align-items-center order-1 order-xl-3 cart-icons">
                 {{ cart }}
+            </div>
+        </nav>
+    </div>
+</header>-->
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 m-auto d-lg-none d-flex justify-content-between">
+                <div class="login-section my-auto">
+                    {% if logged %}
+                        <div class="dropdown show mt-3">
+                            <a class="btn btn-white bg-white border-0 dropdown-toggle f-15 text-primary pt-2" href="#"
+                               role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                {{ firstname }} {{ lastname }}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
+                                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
+                            </div>
+                        </div>
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
+
+                    {% else %}
+                        <a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>
+                        <a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
+                    {{ cart }}
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+
+                <div id="logo" class="mt-2">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"
+                                                                      alt="{{ name }}" class="img-responsive"
+                                                                      style="max-width: 125px"/>
+                        </a>{% else %}
+                        <h1><a href="{{ home }}">{{ name }}</a></h1>
+                    {% endif %}</div>
+
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 m-auto">
+                {{ search }}
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-3 m-md-auto my-2 p-0">
+                {{ currency }}
+            </div>
+            <div class="col-2 m-auto d-lg-inline-block d-none text-right px-0">
+
+                {% if logged %}
+
+                    <div class="dropdown show d-inline-block">
+                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
+                           role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user-circle f-35"></i>
+                            <span class="d-block f-15 text-wrap">{{ firstname }} {{ lastname }}</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
+                            <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
+                        </div>
+                    </div>
+                    {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
+                    {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
+                    {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
+
+                {% else %}
+
+                    <div class="dropdown show d-inline-block">
+                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
+                           role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user-circle f-35"></i>
+                            <span class="d-block f-15">Account</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>
+                            <a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>
+                        </div>
+                    </div>
+                    {#<a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>#}
+                    {#<a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>#}
+                {% endif %}
+                <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
+                    {{ cart }}
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark px-0 py-0">
+            <button class="navbar-toggler bg-success" type="button" data-toggle="collapse"
+                    data-target="#navbarsExample08"
+                    aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample08">
+                <ul class="navbar-nav navbar-nav-menu">
+                    {{ menu }}
+                </ul>
             </div>
         </nav>
     </div>

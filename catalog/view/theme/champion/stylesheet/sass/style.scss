@@ -16,9 +16,11 @@ h5 {font-size: 2.5rem;font-weight: 700;}
 .f-14{font-size: 0.875rem;}
 .f-18{font-size: 1.125rem;}
 .f-35{font-size: 2.1875rem;}
+.f-12{font-size: 12px;}
 .font-weight-medium{font-weight:500;}
 .font-family-opensans{font-family: 'Open Sans', sans-serif;}
 .f-25{font-size: 1.5625rem;}
+.text-wrap {width: 86px;overflow: hidden;white-space: nowrap!important;text-overflow: ellipsis;}
 .justify-content-flex-end {justify-content: flex-end;}
 a{text-decoration: none}
 p {font-size: 0.9375rem;}
@@ -41,7 +43,7 @@ p {font-size: 0.9375rem;}
   color: $primary;
   border-color: #d1cdcd;
   font-size: 13px;
-  height: 40px;
+  //height: 40px;
   &:focus {
     color: $primary;
     border-color: #d1cdcd;
@@ -94,10 +96,7 @@ p {font-size: 0.9375rem;}
                       }
             }}}}
             select {
-              -webkit-appearance: none;
-              -moz-appearance: none;
-              -ms-appearance: none;
-              appearance: none;
+             appearance: none;
               outline: 0;
               box-shadow: none;
               flex: 1;
@@ -113,7 +112,7 @@ p {font-size: 0.9375rem;}
             /* Custom Select */
             .select {
               position: relative;
-              line-height: 40px;
+              line-height: 35px;
               overflow: hidden;
               &:after {
                 content: "\25BC";
@@ -124,8 +123,6 @@ p {font-size: 0.9375rem;}
                 color: #b4b4b4;
                 cursor: pointer;
                 pointer-events: none;
-                -webkit-transition: 0.25s all ease;
-                -o-transition: 0.25s all ease;
                 transition: 0.25s all ease;
               }
               &:hover::after {
@@ -140,7 +137,7 @@ p {font-size: 0.9375rem;}
           }
 
 // header style starts from here
-header {position: sticky;top: 0;background: white;z-index: 9999;
+header {background: white;z-index: 9999;
   .container-fluid{max-width: 1550px}
   .dropdown-left {right: 0;left: auto;}
 
@@ -158,8 +155,6 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       &:after{display: none}
     }
   }
-
-
   a {font-family: "Poppins", sans-serif;font-weight: 400;}
   .navbar-tool-label {position: absolute;right: 0;width: 1.8rem;height: 1.8rem;border-radius: 50%;background-color: $success;color: $white; font-size: 0.75rem;font-weight: 500;text-align: center;border: 3px solid $white;line-height: 1.5rem;}
   // @media only screen and (max-width: 600px) {
@@ -171,9 +166,6 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
   //   }
   // }
   select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
     appearance: none;
     outline: 0;
     box-shadow: none;
@@ -202,8 +194,6 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
-      -webkit-transition: 0.25s all ease;
-      -o-transition: 0.25s all ease;
       transition: 0.25s all ease;
     }
     &:hover::after {
@@ -218,6 +208,15 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
       padding: 5px;
       margin-right: 2px;
     &:hover{background-color: $success; text-decoration: none; transition: all .7s ease-in-out;}}
+  }
+  @media only screen and (min-width: 992px) {
+  .navbar-nav-menu{background-color: $gray-100;
+    li{width: 100px;text-align: center; transition: all .6s ease;
+      border-right: 3px solid #fff;
+      a{text-decoration: none}
+      &:hover{background-color: $success; transition: all .6s ease;}
+    }}
+
   }
 
 }
@@ -327,7 +326,7 @@ header {position: sticky;top: 0;background: white;z-index: 9999;
 
 //   footer
 footer {
-    h4{color: $white;font-size: 1.125rem;font-weight: 600;}
+    h4{font-size: 1rem;font-weight: 600;}
     .footer-social-icons a{display: block; margin-bottom: 10px;}
     a {font-size: 0.8125rem;color: $secondary;font-weight: 400;
       &:hover {color: #b8b8b8;text-decoration: none;}
