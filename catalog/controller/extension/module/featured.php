@@ -58,12 +58,14 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'price'       => $price,
 						'special'     => $special,
 						'tax'         => $tax,
-						'rating'      => $rating,
+						'rating'      => (int) $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
 					);
 				}
 			}
 		}
+
+        //echo '<pre>';print_r($data);exit('aaaa');
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);
