@@ -1,11 +1,6 @@
 <?php
 class ControllerAccountAccount extends Controller {
 	public function index() {
-
-//        $ip = $_SERVER['REMOTE_ADDR'];
-//        $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
-//        print_r($dataArray->geoplugin_countryName);
-
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
