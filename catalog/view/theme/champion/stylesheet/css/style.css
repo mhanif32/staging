@@ -358,9 +358,6 @@ header {
   .home-banner .carousel-caption {
     top: 48%; } }
 
-.home-categories p {
-  font-size: 1.25rem; }
-
 .top-collection .product-layout:hover {
   -webkit-box-shadow: aliceblue;
           box-shadow: aliceblue;
@@ -1056,3 +1053,22 @@ footer ul {
 #account-edit .file-upload .fa {
   background-color: #ddd;
   padding: 10px; }
+
+#carousel-categories .swiper-wrapper .swiper-slide {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  #carousel-categories .swiper-wrapper .swiper-slide img {
+    width: 100px;
+    height: 100px; }
+
+#product-search #input-search {
+  position: relative;
+  height: 40px; }
+#product-search #button-search {
+  position: absolute;
+  right: 18px;
+  top: 4px;
+  height: 32px;
+  width: 115px;
+  line-height: 1; }

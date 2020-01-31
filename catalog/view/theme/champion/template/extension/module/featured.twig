@@ -1,34 +1,44 @@
-<section class="home-categories my-5">
+<section class="home-categories mt-5">
     <div class="container">
-
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-md-3">
-                <div class="card mb-4 shadow-sm">
-                    <img src="catalog/view/theme/champion/image/16qgeg2f.png" alt="" class="img-fluid m-2">
-                    <div class="card-body">
-                        <p class="card-text text-center font-weight-bold text-primary">MEN</p>
+                <div class="">
+                    <img src="catalog/view/theme/champion/image/efp9bljm.png" alt="" class="img-fluid">
+                    <div class="">
+                        <h6 class="f-20 card-text font-weight-bold text-primary">Trending</h6>
+                        <p>
 
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card mb-4 shadow-sm">
-                    <img src="catalog/view/theme/champion/image/7bnd6ru2.png" alt="" class="img-fluid m-2">
-                    <div class="card-body">
-                        <p class="card-text text-center font-weight-bold text-primary">WOMEN</p>
-
+                <div class="">
+                    <img src="catalog/view/theme/champion/image/yct4iqkm.png" alt="" class="img-fluid">
+                    <div class="">
+                        <h6 class="f-20 card-text font-weight-bold text-primary">Designer Brands</h6>
+                        <p>215 Items</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card mb-4 shadow-sm">
-                    <img src="catalog/view/theme/champion/image/49t5tz2w.png" alt="" class="img-fluid m-2">
-                    <div class="card-body">
-                        <p class="card-text text-center font-weight-bold text-primary">KIDS</p>
+                <div class="">
+                    <img src="catalog/view/theme/champion/image/1khc6ioh.png" alt="" class="img-fluid">
+                    <div class="">
+                        <h6 class="f-20 card-text font-weight-bold text-primary">Men</h6>
+                        <p class="f-14">215 Items</p>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-3">
+                <div class="">
+                    <img src="catalog/view/theme/champion/image/k8smgyzc.png" alt="" class="img-fluid">
+                    <div class="">
+                        <h6 class="f-20 card-text font-weight-bold text-primary">Women</h6>
+                        <p>215 Items</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -62,9 +72,9 @@
                         </a>
                         <div class="card-body">
                             <h4 class="product-title"><a href="{{ product.href }}"
-                                                         class="f-15 font-weight-medium text-primary">{{ product.name }}</a>
+                                                         class="f-15 font-weight-bold text-primary ">{{ product.name }}</a>
                             </h4>
-
+                            <p class="mb-0">{{ product.description }}</p>
                             <div class="d-flex justify-content-between mb-2">
                                 <div class="star-rating d-inline-block mr-2 rating">
                                     {% for i in 5 %}
