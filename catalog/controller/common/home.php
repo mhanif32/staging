@@ -1,6 +1,10 @@
 <?php
 class ControllerCommonHome extends Controller {
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->document->setTitle($this->config->get('config_meta_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		$this->document->setKeywords($this->config->get('config_meta_keyword'));
@@ -16,6 +20,8 @@ class ControllerCommonHome extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		//load categories widget
+        $data['category'] = $this->load->controller('common/category');
 		$this->response->setOutput($this->load->view('common/home', $data));
 	}
 }

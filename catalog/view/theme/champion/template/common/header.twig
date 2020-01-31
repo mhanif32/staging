@@ -51,7 +51,7 @@
     <section class="top-headerbar bg-success pb-1">
         <div class="container address_container">
             {% if loggedInCountry %}
-            <p>{{ loggedInCountry }}</p>
+                <p><span class="fa fa-map-marker"></span> Deliver To {{ loggedInCountry }}</p>
             {% else %}
             <div class="row pt-1">
                 <div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">
