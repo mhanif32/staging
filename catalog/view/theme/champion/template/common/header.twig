@@ -47,52 +47,45 @@
 </head>
 <body>
 
-
-{#<header>#}
-{#<div class="container">#}
-{#<div class="row">#}
-{#<div class="col-sm-2">#}
-{#<div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"#}
-{#alt="{{ name }}" class="img-responsive"/>#}
-{#</a>{% else %}#}
-{#<h1><a href="{{ home }}">{{ name }}</a></h1>#}
-{#{% endif %}</div>#}
-{#</div>#}
-{#<div class="col-sm-7">#}
-{#<div class="row">#}
-{#<div class="col-12">#}
-{#{{ search }}#}
-{#</div>#}
-{#<div class="col-12">#}
-{#{{ menu }}#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#<div class="col-sm-3">{{ cart }}</div>#}
-{#</div>#}
-{#</div>#}
-{#</header>#}
-
 {% if show_top_bar %}
     <section class="top-headerbar bg-success pb-1">
-        <div class="container">
+        <div class="container address_container">
+            {% if loggedInCountry %}
+                <p><span class="fa fa-map-marker"></span> Deliver To {{ loggedInCountry }}</p>
+            {% else %}
             <div class="row pt-1">
                 <div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">
                     Choose your country & delivery location
                 </div>
                 <div class="col-lg-3">
                     <div class="select">
-                        <select class="pl-3 form-control rounded border-0 select">
-                            <option>United States</option>
-                        </select>
+                        <div class="">
+                            <select name="country_id" id="input-country" class="form-control rounded-0">
+                                <option value="">{{ text_select }}</option>
+                                {% for country in countries %}
+                                    {% if country.country_id == country_id %}
+                                        <option value="{{ country.country_id }}"
+                                                selected="selected">{{ country.name }}</option>
+                                    {% else %}
+                                        <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            {% if error_country %}
+                                <div class="text-danger">{{ error_country }}</div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
                     <div class="select">
-                        <select class="pl-3 form-control rounded border-0 select">
-                            <option>Las Vegas</option>
-                        </select>
+                        <div class="">
+                            <select name="zone_id" id="input-zone" class="form-control rounded-0">
+                            </select>
+                            {% if error_zone %}
+                                <div class="text-danger">{{ error_zone }}</div>
+                            {% endif %} </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -102,75 +95,12 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             <p class="text-white text-center m-0" style="font-size: 12px;">Note : The product has been listed as per the
                 chosen location.</p>
         </div>
     </section>
 {% endif %}
-
-<!--
-<header>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-xl navbar-light px-lg-5 py-lg-0">
-            <a class="navbar-brand" href="index.html">
-                <div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"
-                                                                      alt="{{ name }}" class="img-responsive" style="max-width: 150px"/>
-                        </a>{% else %}
-                        <h1><a href="{{ home }}">{{ name }}</a></h1>
-                    {% endif %}</div>
-            </a>
-            <button class="navbar-toggler order-2" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center order-3" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active mr-lg-5">
-                        {{ search }}
-                        <ul class="navbar-nav sub-nav-menu my-2">
-                            {{ menu }}
-                            <li class="nav-item mr-3"><a class="font-weight-bold" href="">More</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        {{ currency }}
-                    </li>
-                    {% if logged %}
-                        <li>
-                        <div class="dropdown show mt-3">
-                            <a class="btn btn-white bg-white border-0 dropdown-toggle f-15 text-primary pt-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               {{ firstname }} {{ lastname }}
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
-                                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
-                            </div>
-                        </div>
-{#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
-{#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
-{#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
-                        </li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link mt-3" href="{{ login }}">{{ text_login }}</a></li>
-                        <li class="nav-item before-verticle-line"><a class="nav-link mt-3" href="{{ register }}">{{ text_register }}</a></li>
-
-                    {% endif %}
-
-                    <li>
-                        <div class="d-lg-flex d-none justify-content-end align-items-center order-1 order-xl-3 cart-icons">
-                            {{ cart }}
-                        </div>
-
-                    </li>
-                </ul>
-            </div>
-            <div class="d-lg-none d-flex justify-content-end align-items-center order-1 order-xl-3 cart-icons">
-                {{ cart }}
-            </div>
-        </nav>
-    </div>
-</header>-->
 
 <header>
     <div class="container">
@@ -208,9 +138,10 @@
             </div>
             <div class="col-12 col-md-3 col-lg-3">
 
-                <div id="logo" class="mt-2">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}"
-                                                                      alt="{{ name }}" class="img-responsive"
-                                                                      style="max-width: 125px"/>
+                <div id="logo" class="mt-2">{% if logo %}<a href="{{ home }}">
+                        <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}"
+                             class="img-responsive"
+                             style="max-width: 125px"/>
                         </a>{% else %}
                         <h1><a href="{{ home }}">{{ name }}</a></h1>
                     {% endif %}</div>
@@ -282,3 +213,48 @@
         </nav>
     </div>
 </header>
+
+<script type="text/javascript"><!--
+    $('select[name=\'country_id\']').on('change', function () {
+        $.ajax({
+            url: 'index.php?route=account/account/country&country_id=' + this.value,
+            dataType: 'json',
+            beforeSend: function () {
+                $('select[name=\'country_id\']').prop('disabled', true);
+            },
+            complete: function () {
+                $('select[name=\'country_id\']').prop('disabled', false);
+            },
+            success: function (json) {
+                if (json['postcode_required'] == '1') {
+                    $('input[name=\'postcode\']').parent().parent().addClass('required');
+                } else {
+                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
+                }
+
+                html = '<option value="">{{ text_select }}</option>';
+
+                if (json['zone'] && json['zone'] != '') {
+                    for (i = 0; i < json['zone'].length; i++) {
+                        html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+                            html += ' selected="selected"';
+                        }
+
+                        html += '>' + json['zone'][i]['name'] + '</option>';
+                    }
+                } else {
+                    html += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+
+                $('select[name=\'zone_id\']').html(html);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('select[name=\'country_id\']').trigger('change');
+    //--></script>

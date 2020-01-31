@@ -80,6 +80,15 @@ class ControllerCommonHeader extends Controller {
 
         $data['firstname'] = $this->customer->getFirstName();
         $data['lastname'] = $this->customer->getLastName();
+
+        $this->load->model('localisation/country');
+        $data['countries'] = $this->model_localisation_country->getCountries();
+
+        //check logged in user country
+        if(!empty($this->session->data['loggedInCountry'])) {
+            $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
+        }
+
 		return $this->load->view('common/header', $data);
 	}
 }
