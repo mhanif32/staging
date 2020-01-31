@@ -248,8 +248,8 @@ header {
   header .container-fluid {
     max-width: 1550px; }
   header .dropdown-left {
-    right: 0;
-    left: auto; }
+    right: 0 !important;
+    left: auto !important; }
   header .navbar-light .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -361,6 +361,13 @@ header {
 .home-categories p {
   font-size: 1.25rem; }
 
+.top-collection .product-layout:hover {
+  -webkit-box-shadow: aliceblue;
+          box-shadow: aliceblue;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
 .top-collection a {
   text-decoration: none; }
 .top-collection .card-body {
