@@ -325,15 +325,15 @@ header {
   @media only screen and (min-width: 992px) {
     header .navbar-nav-menu {
       background-color: #f3f3f3; }
-      header .navbar-nav-menu li {
+      header .navbar-nav-menu > li {
         width: 100px;
         text-align: center;
         -webkit-transition: all .6s ease;
         transition: all .6s ease;
         border-right: 3px solid #fff; }
-        header .navbar-nav-menu li a {
+        header .navbar-nav-menu > li a {
           text-decoration: none; }
-        header .navbar-nav-menu li:hover {
+        header .navbar-nav-menu > li:hover {
           background-color: #01B0F1;
           -webkit-transition: all .6s ease;
           transition: all .6s ease; } }

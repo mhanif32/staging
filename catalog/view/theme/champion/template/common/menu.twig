@@ -32,17 +32,17 @@
 
     {% for category in categories %}
         {% if category.children %}
-            <li class="dropdown nav-item"><a href="{{ category.href }}" class="dropdown-toggle"
+            <li class="dropdown nav-item py-2" style="line-height: 12px;"><a href="{{ category.href }}" class="f-12"
                                              data-toggle="dropdown">{{ category.name }}</a>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu px-2">
                     <div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
                             <ul class="list-unstyled">
                                 {% for child in children %}
-                                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                    <li class="py-2" style="line-height: 12px;"><a href="{{ child.href }}" class="f-12">{{ child.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         {% endfor %}</div>
-                    <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a></div>
+                    <a href="{{ category.href }}" class="see-all f-12">{{ text_all }} {{ category.name }}</a></div>
             </li>
         {% else %}
             <li class="nav-item py-2" style="line-height: 12px;"><a class="f-12" href="{{ category.href }}">{{ category.name }}</a>

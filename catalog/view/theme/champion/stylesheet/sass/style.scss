@@ -211,7 +211,7 @@ header {background: white;z-index: 9999;
   }
   @media only screen and (min-width: 992px) {
   .navbar-nav-menu{background-color: $gray-100;
-    li{width: 100px;text-align: center; transition: all .6s ease;
+    > li{width: 100px;text-align: center; transition: all .6s ease;
       border-right: 3px solid #fff;
       a{text-decoration: none}
       &:hover{background-color: $success; transition: all .6s ease;}
