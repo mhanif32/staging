@@ -89,6 +89,7 @@ class ControllerCommonHeader extends Controller {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
         }
 
+		$data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
 		return $this->load->view('common/header', $data);
 	}
 }

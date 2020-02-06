@@ -85,12 +85,6 @@ class ControllerAccountRegister extends Controller {
 			$data['error_confirm'] = '';
 		}
 
-        if (isset($this->request->get['role'])) {
-            $data['action'] = $this->url->link('account/register', '&role='.$this->request->get['role'], true);
-        } else {
-            $data['action'] = $this->url->link('account/register', '', true);
-        }
-
 		$data['customer_groups'] = array();
 
 		if (is_array($this->config->get('config_customer_group_display'))) {
@@ -205,6 +199,12 @@ class ControllerAccountRegister extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+
+		if (isset($this->request->get['role'])) {
+            $data['action'] = $this->url->link('account/register', '&role='.$this->request->get['role'], true);
+        } else {
+            $data['action'] = $this->url->link('account/register', '', true);
+        }
 		$data['role'] = !empty($this->request->get['role']) ? $this->request->get['role'] : '';
 
 		$this->response->setOutput($this->load->view('account/register', $data));
