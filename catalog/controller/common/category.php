@@ -3,6 +3,10 @@ class ControllerCommonCategory extends Controller
 {
     public function index()
     {
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+        $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+
         $this->load->language('product/category');
 
         $this->load->model('catalog/category');

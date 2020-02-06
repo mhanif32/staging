@@ -248,8 +248,8 @@ header {
   header .container-fluid {
     max-width: 1550px; }
   header .dropdown-left {
-    right: 0;
-    left: auto; }
+    right: 0 !important;
+    left: auto !important; }
   header .navbar-light .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -325,15 +325,15 @@ header {
   @media only screen and (min-width: 992px) {
     header .navbar-nav-menu {
       background-color: #f3f3f3; }
-      header .navbar-nav-menu li {
+      header .navbar-nav-menu > li {
         width: 100px;
         text-align: center;
         -webkit-transition: all .6s ease;
         transition: all .6s ease;
         border-right: 3px solid #fff; }
-        header .navbar-nav-menu li a {
+        header .navbar-nav-menu > li a {
           text-decoration: none; }
-        header .navbar-nav-menu li:hover {
+        header .navbar-nav-menu > li:hover {
           background-color: #01B0F1;
           -webkit-transition: all .6s ease;
           transition: all .6s ease; } }
@@ -358,9 +358,13 @@ header {
   .home-banner .carousel-caption {
     top: 48%; } }
 
-.home-categories p {
-  font-size: 1.25rem; }
-
+.top-collection .product-layout:hover {
+  -webkit-box-shadow: aliceblue;
+          box-shadow: aliceblue;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
 .top-collection a {
   text-decoration: none; }
 .top-collection .card-body {
@@ -1049,3 +1053,22 @@ footer ul {
 #account-edit .file-upload .fa {
   background-color: #ddd;
   padding: 10px; }
+
+#carousel-categories .swiper-wrapper .swiper-slide {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  #carousel-categories .swiper-wrapper .swiper-slide img {
+    width: 100px;
+    height: 100px; }
+
+#product-search #input-search {
+  position: relative;
+  height: 40px; }
+#product-search #button-search {
+  position: absolute;
+  right: 18px;
+  top: 4px;
+  height: 32px;
+  width: 115px;
+  line-height: 1; }
