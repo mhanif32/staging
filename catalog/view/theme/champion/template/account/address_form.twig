@@ -41,17 +41,17 @@
                                                     {% endif %} </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label"
-                                                       for="input-company">{{ entry_company }}</label>
-                                                <div class="">
-                                                    <input type="text" name="company" value="{{ company }}"
-                                                           placeholder="{{ entry_company }}" id="input-company"
-                                                           class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {#<div class="col-lg-6">#}
+                                            {#<div class="form-group">#}
+                                                {#<label class="control-label"#}
+                                                       {#for="input-company">{{ entry_company }}</label>#}
+                                                {#<div class="">#}
+                                                    {#<input type="text" name="company" value="{{ company }}"#}
+                                                           {#placeholder="{{ entry_company }}" id="input-company"#}
+                                                           {#class="form-control"/>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
@@ -389,15 +389,17 @@
                                                     {% endif %} </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <input type="submit" value="SUBMIT"
-                                                   class="btn btn-success w-100 custom-btn"/>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <a href="{{ back }}"
-                                               class="btn btn-default f-14 font-weight-bold">{{ button_back }}</a>
-                                        </div>
                                 </fieldset>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="submit" value="SUBMIT"
+                                               class="btn btn-success w-100 custom-btn"/>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="{{ back }}"
+                                           class="btn btn-default f-14 font-weight-bold">{{ button_back }}</a>
+                                    </div>
+                                </div>
                             </form>
 
                         </div>
