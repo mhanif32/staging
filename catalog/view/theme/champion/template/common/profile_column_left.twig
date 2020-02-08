@@ -1,70 +1,97 @@
-<div class="col-12 col-md-4 col-lg-4">
-    <div class="card mt-5 mb-4" style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-3 m-auto text-center">
-                <img src="{{ image_url }}" class="rounded-circle" width="58" height="58" alt="avatar">
-            </div>
-            <div class="col-md-9">
-                <div class="card-body">
-                    <p class="card-text mb-3">Hello</p>
-                    <h5 class="card-title f-15">{{ firstname }} {{ lastname }}</h5></div>
-            </div>
-        </div>
-    </div>
-    <div class="card account-account" >
+<div id="profile-column-left" class="col-12 col-lg-3 mt-5 mb-md-5">
+    {#    <div class="card mt-5 mb-4" style="max-width: 540px;">#}
+    {#        <div class="row no-gutters">#}
+    {#            <div class="col-md-3 m-auto text-center">#}
+    {#                <img src="{{ image_url }}" class="rounded-circle" width="58" height="58" alt="avatar">#}
+    {#            </div>#}
+    {#            <div class="col-md-9">#}
+    {#                <div class="card-body">#}
+    {#                    <p class="card-text mb-3">Hello</p>#}
+    {#                    <h5 class="card-title f-15">{{ firstname }} {{ lastname }}</h5></div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    <div class="account-account box-shadow" >
         <div id="accordion" class="accordion">
             <div class="card mb-0">
                 <div class="p-3 bg-white" data-toggle="collapse" href="#collapseOne">
-                    <img src="catalog/view/theme/champion/image/Dashboard.svg" alt="" class="mr-2">
+                    <i class="fas fa-tachometer-alt text-success mr-2 f-22"></i>
                     <a class="card-title text-uppercase" href="{{ account }}">Dashboard</a>
                 </div>
                 <hr class="m-0">
 
                 <div class="card-header collapsed bg-white p-3" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    <img src="catalog/view/theme/champion/image/Order Box (2).svg" alt="" class="mr-2">
+                    <i class="fas fa-shopping-bag text-success mr-2 f-22"></i>
                     <a class="card-title text-uppercase">
                         My Order
                     </a>
                 </div>
                 <hr class="m-0">
-                <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
-                    <ul class="list-unstyled ml-4">
-                        <li class="my-3"><a href="{{ order }}">{{ text_order }}</a></li>
-                        <li class="my-3"><a href="{{ download }}">{{ text_download }}</a></li>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <ul class="list-unstyled m-0">
+                        <li class="pl-5 py-2"><a href="{{ order }}">{{ text_order }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ download }}">{{ text_download }}</a></li>
                         {% if reward %}
-                            <li class="my-3"><a href="{{ reward }}">{{ text_reward }}</a></li>
+                            <li class="pl-5 py-2"><a href="{{ reward }}">{{ text_reward }}</a></li>
                         {% endif %}
-                        <li class="my-3"><a href="{{ return }}">{{ text_return }}</a></li>
-                        <li class="my-3"><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                        <li class="my-3"><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ return }}">{{ text_return }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ recurring }}">{{ text_recurring }}</a></li>
                     </ul>
                 </div>
                 <hr class="m-0">
                 <div class="card-header collapsed bg-white p-3" data-toggle="collapse" data-parent="#accordion"
                      href="#collapseThree">
-                    <img src="catalog/view/theme/champion/image/Profile.svg" alt="" class="mr-2">
+                    <i class="fas fa-cogs text-success mr-2 f-22"></i>
                     <a class="card-title text-uppercase">
                         ACCOUNT SETTINGS
                     </a>
                 </div>
                 <hr class="m-0">
-                <div id="collapseThree" class="collapse show" data-parent="#accordion">
-                    <div class="card-body">
-                        <ul class="list-unstyled ml-4">
-                            <li class="my-3"><a href="{{ edit }}">Profile Information</a></li>
-                            <li class="my-3"><a href="{{ address }}">{{ text_address }}</a></li>
-                            <li class="my-3"><a href="{{ change_password }}">Change Password</a></li>
-                        </ul>
-                    </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <ul class="list-unstyled m-0">
+                        <li class="pl-5 py-2"><a href="{{ edit }}"><i class="far fa-address-card"></i> Profile Information</a></li>
+                        <li class="pl-5 py-2"><a href="{{ address }}"><i class="far fa-address-book"></i> {{ text_address }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ change_password }}"><i class="fas fa-unlock-alt"></i> Change Password</a></li>
+                    </ul>
+                </div>
+                <hr class="m-0">
+                <div class="card-header collapsed bg-white p-3" data-toggle="collapse" data-parent="#accordion"
+                     href="#collapseFour">
+                    <i class="fa fa-user-circle text-success mr-2 f-22"></i>
+                    <a class="card-title text-uppercase">
+                        Business Owner
+                    </a>
+                </div>
+                <hr class="m-0">
+                <div id="collapseFour" class="collapse" data-parent="#accordion">
+
+                    <ul class="list-unstyled m-0">
+                        <li class="pl-5 py-2"><a href="{{ seller_dashboard }}"><i class="fa fa-tachometer"></i> {{ text_dashboard }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_profile }}"><i class="fa fa-user"></i> {{ text_profile }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_product }}"><i class="fa fa-briefcase"></i> {{ text_product }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_service }}"><i class="fa fa-briefcase"></i> {{ text_service }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_orders }}"><i class="fa fa-shopping-cart"></i> {{ text_orders }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_reviews }}"><i class="fa fa-comments"></i> {{ text_reviews }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_commission }}"><i class="fa fa-money"></i> {{ text_commission }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_payment }}"><i class="fa fa-dollar"></i> {{ text_payment }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_information_section }}"><i class="fa fa-tag"></i> {{ text_information_section }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_store_info }}"><i class="fa fa-info-circle"></i> {{ text_store_information }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_store_setting }}"><i class="fa fa-cog"></i> {{ text_store_setting }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_visit_store }}"><i class="fa fa-external-link"></i> {{ text_visit_store }}</a></li>
+                        <li class="pl-5 py-2"><a href="{{ seller_enquiries }}"><i class="fas fa-question-circle"></i> {{ text_enquiries }}</a></li>
+                    </ul>
+
                 </div>
                 <hr class="m-0">
                 <div class="p-3 bg-white" href="">
-                    <img src="catalog/view/theme/champion/image/Heart.svg" alt="" class="mr-2">
-                    <a href="{{ my_wishlist }}" class="card-title text-uppercase">{{ text_wishlist }}</a>
+
+                    <i class="fas fa-heart text-success mr-2 f-20"></i>
+                    <a href="{{ my_wishlist }}" class="card-title text-uppercase">Wish List</a>
                 </div>
                 <hr class="m-0">
                 <div class="p-3 bg-white" href="">
-                    <img src="catalog/view/theme/champion/image/Logout.svg" alt="" class="mr-2">
+                    <i class="fas fa-sign-out-alt text-success mr-2 f-20"></i>
                     <a href="{{ logout }}" class="card-title text-uppercase">
                         Logout
                     </a>

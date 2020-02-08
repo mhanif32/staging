@@ -4,16 +4,16 @@
     <div class="container border">
         <div class="row">
             <div class="col-xs-12 col-md-12 col-sm-12 col-lg-5">
-                <div class="product-images mt-5 pt-5">
+                <div class="product-images">
                     {% if thumb or images %}
-                    <div class="mySlides text-center mb-5 thumbnails" style="display: block;">
+                    <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
                             <a class="thumbnail" href="{{ image.popup }}"
                                title="{{ heading_title }}">
                                 <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"
                                      class="img-fluid"/></a>
                         {% endif %}
-                        <div class="row justify-content-center mt-5">
+                        <div class="row justify-content-center">
                             {% if images %}
                                 {% for image in images %}
                                     <div class="column thumbnails">

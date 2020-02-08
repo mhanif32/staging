@@ -19,7 +19,7 @@ class ControllerAccountMpmultivendorProduct extends Controller {
 
 		$this->load->model('account/mpmultivendor/product');
 
-		$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor.css');
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor.css');
 
 		if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')){
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor-journal.css');
@@ -634,6 +634,9 @@ class ControllerAccountMpmultivendorProduct extends Controller {
 		}
 
 		$data['custom_themename'] = $custom_themename;
+
+        //for profile right column
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 
 		if(VERSION < '2.2.0.0') {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/product_list.tpl')) {
@@ -1412,6 +1415,8 @@ class ControllerAccountMpmultivendorProduct extends Controller {
 
 		$data['custom_themename'] = $custom_themename;
 
+        //for profile right column
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		if(VERSION < '2.2.0.0') {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/product_form.tpl')) {
 		    	$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/mpmultivendor/product_form.tpl', $data));

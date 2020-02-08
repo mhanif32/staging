@@ -1,93 +1,95 @@
 $(document).ready(function() {
-	// Tooltip remove fixed
-	$(document).on('click', '[data-toggle=\'tooltip\']', function(e) {
-		$('body > .tooltip').remove();
-	});
-	
-	// Image Manager
-	$(document).on('click', 'a[data-toggle=\'image\']', function(e) {
-		var $element = $(this);
-		var $popover = $element.data('bs.popover'); // element has bs popover?
-		
-		e.preventDefault();
+    // Tooltip remove fixed
+    $(document).on('click', '[data-toggle=\'tooltip\']', function(e) {
+        $('body > .tooltip').remove();
+    });
 
-		// destroy all image popovers
-		$('a[data-toggle="image"]').popover('destroy');
+    // Image Manager
+    $(document).on('click', 'a[data-toggle=\'image\']', function(e) {
+        var $element = $(this);
+        var $popover = $element.data('bs.popover'); // element has bs popover?
 
-		// remove flickering (do not re-add popover when clicking for removal)
-		if ($popover) {
-			return;
-		}
+        e.preventDefault();
 
-		$element.popover({
-			html: true,
-			placement: 'right',
-			trigger: 'manual',
-			content: function() {
-				return '<button type="button" id="button-image" class="btn btn-primary"><i class="fa fa-pencil"></i></button> <button type="button" id="button-clear" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>';
-			}
-		});
+        // destroy all image popovers
+        $('a[data-toggle="image"]').popover('hide');
 
-		$element.popover('show');
+        // remove flickering (do not re-add popover when clicking for removal)
+        if ($popover) {
+            return;
+        }
 
-		$('#button-image').on('click', function() {
-			var $button = $(this);
-			var $icon   = $button.find('> i');
-			
-			$('#modal-image').remove();
+        $element.popover({
+            placement: 'right',
+            trigger: 'manual',
+            sanitize: false,
+            content: function() {
+                return '<button type="button" id="button-image" class="btn btn-primary"><i class="fa fa-pencil"></i></button> <button type="button" id="button-clear" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>';
+            },
+            //title: '<h3 class="custom-title"><i class="fa fa-info-circle"></i> Popover Info</h3>',
+            html: true,
+        });
 
-			$.ajax({
-				url: 'index.php?route=account/mpmultivendor/filemanager&target=' + $element.parent().find('input').attr('id') + '&thumb=' + $element.attr('id'),
-				dataType: 'html',
-				beforeSend: function() {
-					$button.prop('disabled', true);
-					if ($icon.length) {
-						$icon.attr('class', 'fa fa-circle-o-notch fa-spin');
-					}
-				},
-				complete: function() {
-					$button.prop('disabled', false);
-					if ($icon.length) {
-						$icon.attr('class', 'fa fa-pencil');
-					}
-				},
-				success: function(html) {
-					$('body').append('<div id="modal-image" class="modal">' + html + '</div>');
+        $element.popover('show');
 
-					$('#modal-image').modal('show');
-				}
-			});
+        $('#button-image').on('click', function() {
+            var $button = $(this);
+            var $icon   = $button.find('> i');
 
-			$element.popover('destroy');
-		});
+            $('#modal-image').remove();
 
-		$('#button-clear').on('click', function() {
-			$element.find('img').attr('src', $element.find('img').attr('data-placeholder'));
+            $.ajax({
+                url: 'index.php?route=account/mpmultivendor/filemanager&target=' + $element.parent().find('input').attr('id') + '&thumb=' + $element.attr('id'),
+                dataType: 'html',
+                beforeSend: function() {
+                    $button.prop('disabled', true);
+                    if ($icon.length) {
+                        $icon.attr('class', 'fa fa-circle-o-notch fa-spin');
+                    }
+                },
+                complete: function() {
+                    $button.prop('disabled', false);
+                    if ($icon.length) {
+                        $icon.attr('class', 'fa fa-pencil');
+                    }
+                },
+                success: function(html) {
+                    $('body').append('<div id="modal-image" class="modal">' + html + '</div>');
 
-			$element.parent().find('input').val('');
+                    $('#modal-image').modal('show');
+                }
+            });
 
-			$element.popover('destroy');
-		});
-	});
+            $element.popover('hide');
+        });
 
-	// tooltips on hover
-	$('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
+        $('#button-clear').on('click', function() {
+            $element.find('img').attr('src', $element.find('img').attr('data-placeholder'));
 
-	// Makes tooltips work on ajax generated content
-	$(document).ajaxStop(function() {
-		$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
-	});
+            $element.parent().find('input').val('');
 
-	// https://github.com/opencart/opencart/issues/2595
-	$.event.special.remove = {
-		remove: function(o) {
-			if (o.handler) {
-				o.handler.apply(this, arguments);
-			}
-		}
-	}
+            $element.popover('hide');
+        });
+    });
 
-	$('[data-toggle=\'tooltip\']').on('remove', function() {
-		$(this).tooltip('destroy');
-	});
+    // tooltips on hover
+    $('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
+
+    // Makes tooltips work on ajax generated content
+    $(document).ajaxStop(function() {
+        $('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
+    });
+
+    // https://github.com/opencart/opencart/issues/2595
+    $.event.special.remove = {
+        remove: function(o) {
+            if (o.handler) {
+                o.handler.apply(this, arguments);
+            }
+        }
+    }
+
+    $('[data-toggle=\'tooltip\']').on('remove', function() {
+        $(this).tooltip('hide');
+    });
 });

@@ -1,6 +1,6 @@
 {{ header }}
 <section class="my-order py-5 p-3 bg-gray-100">
-    <div id="checkout-cart" class="container bg-white">
+    <div id="checkout-cart" class="container bg-white card box-shadow">
         {% if attention %}
             <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -26,7 +26,7 @@
                 {% set class = 'col-sm-12' %}
             {% endif %}
             <div id="content" class="{{ class }}">{{ content_top }}
-                <h3 class="my-5 text-center">
+                <h3 class="my-4 text-center">
                     {{ heading_title }}
                     {#{% if weight %}#}
                     {#&nbsp;({{ weight }})#}
@@ -130,7 +130,7 @@
                 {% endif %} <br/>
 
                 <div class="buttons clearfix mb-5">
-                    <div class="pull-left"><a href="{{ continue }}" class="btn btn-default">{{ button_shopping }}</a>
+                    <div class="pull-left"><a href="{{ continue }}" class="btn btn-default on-hover">{{ button_shopping }}</a>
                     </div>
                     <div class="pull-right"><a href="{{ checkout }}" class="btn btn-success px-4">Proceed to Buy</a>
                     </div>
