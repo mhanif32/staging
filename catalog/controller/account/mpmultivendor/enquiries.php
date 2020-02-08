@@ -205,6 +205,8 @@ class ControllerAccountMpmultivendorEnquiries extends Controller {
 
 		$data['custom_themename'] = $this->model_account_mpmultivendor_seller->getactiveTheme();
 
+        //for profile right column
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		if(VERSION < '2.2.0.0') {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/enquiries.tpl')) {
 		    	$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/mpmultivendor/enquiries.tpl', $data));

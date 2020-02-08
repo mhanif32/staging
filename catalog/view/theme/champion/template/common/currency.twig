@@ -1,7 +1,7 @@
 {% if currencies|length > 1 %}
     <div class="">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency" class="text-center">
-            <div class="btn-group">
+            <div class="btn-group w-100">
                 <button class="btn btn-link form-control rounded-0 justify-content-between"
                         data-toggle="dropdown" style="height: 49px">
                     <div class="d-inline-block"> {% for currency in currencies %}

@@ -139,7 +139,7 @@ class ControllerAccountMpmultivendorDashboard extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
-
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
         /* Theme Work Starts */
         if ($this->config->get('config_theme')) {
             $custom_themename = $this->config->get('config_theme');

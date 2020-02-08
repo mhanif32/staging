@@ -156,6 +156,8 @@ class ControllerAccountMpmultivendorExportProduct extends Controller {
 		$data['custom_themename'] = $custom_themename;
 		/* Theme Work Ends */
 
+        //for profile right column
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 		$this->response->setOutput($this->load->view('account/mpmultivendor/export_product', $data));
 	}
 

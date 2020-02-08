@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="">
-                    <img src="catalog/view/theme/champion/image/efp9bljm.png" alt="" class="img-fluid">
+                    <img src="catalog/view/theme/champion/image/retailer-image.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary">Trending</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Reatailers</h6>
                         <p>
 
                         </p>
@@ -16,7 +16,7 @@
                 <div class="">
                     <img src="catalog/view/theme/champion/image/yct4iqkm.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary">Designer Brands</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Designer Brands</h6>
                         <p>215 Items</p>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="">
                     <img src="catalog/view/theme/champion/image/1khc6ioh.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary">Men</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Men</h6>
                         <p class="f-14">215 Items</p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="">
                     <img src="catalog/view/theme/champion/image/k8smgyzc.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary">Women</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Women</h6>
                         <p>215 Items</p>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
 
 
 <section class="top-collection pb-3">
-    <div class="container pt-md-3 pb-5">
-        <h3 class="text-center mb-4 text-primary">{{ heading_title }}</h3>
+    <div class="container pt-md-3 pb-4">
+        <h3 class="text-center mb-4 text-primary text-uppercase">{{ heading_title }}</h3>
         <p style="font-size: 0.9375rem;" class="text-center text-secondary">Aenean sed nibh a magna posuere tempor. Nunc
             faucibus pellentesque
             nunc in aliquet. Donec congue, nunc vel tempor congue, enim sapien lobortis ipsum, in volutpat sem ex in
@@ -55,12 +55,12 @@
         <div class="row pt-4">
             {% for product in products %}
                 <div class="col-lg-3 col-md-3 col-sm-6 px-3 mb-4 product-layout">
-                    <div class="product-card-home position-relative">
-                        <div class="wish-list text-right position-absolute" style="right:0">
+                    <div class="product-card position-relative p-3">
+                        <div class="wish-list text-right position-absolute" style="right:-5px;top: -5px;font-size: 22px;">
                             {#<i class="fas fa-heart" aria-hidden="true"></i>#}
-                            <button class="border-0 bg-white" type="button" data-toggle="tooltip"
+                            <button class="border-0" type="button" data-toggle="tooltip"
                                     title="{{ button_wishlist }}"
-                                    onclick="wishlist.add('{{ product.product_id }}');"><i
+                                    onclick="wishlist.add('{{ product.product_id }}');" style="background-color: transparent;"><i
                                         class="fa fa-heart"></i>
                             </button>
                         </div>
@@ -75,17 +75,23 @@
                                                          class="f-15 font-weight-bold text-primary ">{{ product.name }}</a>
                             </h4>
                             <p class="mb-0">{{ product.description }}</p>
-                            <div class="d-flex justify-content-between mb-2">
-                                <div class="star-rating d-inline-block mr-2 rating">
-                                    {% for i in 5 %}
-                                        {% if product.rating < i %}
-                                            <span class="fa fa-stack" style="width: 1em;"><i
-                                                        class="fa fa-star-o fa-stack-1x"></i></span>
-                                        {% else %}
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
-                                                        class="fa fa-star-o fa-stack-1x"></i></span>
-                                        {% endif %}
-                                    {% endfor %}
+                            <div class="d-flex justify-content-between">
+                                <div class="star-rating d-inline-block rating">
+                                    {% if product.rating %}
+                                        <div class="rating">
+                                            {% for i in 1..5 %}
+                                                {% if product.rating < i %}
+                                                    <span class="fa fa-stack">
+                                                            <i
+                                                                    class="fa fa-star-o fa-stack-2x text-gold f-15" ></i>
+                                                        </span>
+                                                {% else %}
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x text-gold f-15"></i><i
+                                                                class="fa fa-star-o fa-stack-2x text-gold f-15"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
 

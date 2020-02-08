@@ -22,7 +22,6 @@ class ControllerCommonCategory extends Controller
                 'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
             );
         }
-
         return $this->load->view('common/category', $data);
     }
 }

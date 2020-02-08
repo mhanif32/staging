@@ -4,9 +4,11 @@
         <section class="register">
             <div class="login-form py-5">
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-signin">
-                    <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
+
                     {% if role %}
-                        <small>Become a {{ role }}</small>
+                        <h3 class="mt-5 mb-4 font-weight-600 text-center ">Become a {{ role }}</h3>
+                    {% else %}
+                            <h3 class="mt-5 mb-4 font-weight-600 text-center ">Register</h3>
                     {% endif %}
                     {% if error_warning %}
                         <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}

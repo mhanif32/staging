@@ -4,16 +4,16 @@
     <div class="container border">
         <div class="row">
             <div class="col-xs-12 col-md-12 col-sm-12 col-lg-5">
-                <div class="product-images mt-5 pt-5">
+                <div class="product-images">
                     {% if thumb or images %}
-                    <div class="mySlides text-center mb-5 thumbnails" style="display: block;">
+                    <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
                             <a class="thumbnail" href="{{ image.popup }}"
                                title="{{ heading_title }}">
                                 <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"
                                      class="img-fluid"/></a>
                         {% endif %}
-                        <div class="row justify-content-center mt-5">
+                        <div class="row justify-content-center">
                             {% if images %}
                                 {% for image in images %}
                                     <div class="column thumbnails">
@@ -122,19 +122,19 @@
 
                                         {##}
                                         {#<div class="form-group{% if option.required %} required {% endif %}">#}
-                                            {#<label class="control-label"#}
-                                                   {#for="input-option{{ option.product_option_id }}">{{ option.name }}</label>#}
-                                            {#<select name="option[{{ option.product_option_id }}]"#}
-                                                    {#id="input-option{{ option.product_option_id }}"#}
-                                                    {#class="form-control">#}
-                                                {#<option value="">{{ text_select }}</option>#}
-                                                {#{% for option_value in option.product_option_value %}#}
-                                                    {#<option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}#}
-                                                        {#{% if option_value.price %}#}
-                                                            {#({{ option_value.price_prefix }}{{ option_value.price }})#}
-                                                        {#{% endif %} </option>#}
-                                                {#{% endfor %}#}
-                                            {#</select>#}
+                                        {#<label class="control-label"#}
+                                        {#for="input-option{{ option.product_option_id }}">{{ option.name }}</label>#}
+                                        {#<select name="option[{{ option.product_option_id }}]"#}
+                                        {#id="input-option{{ option.product_option_id }}"#}
+                                        {#class="form-control">#}
+                                        {#<option value="">{{ text_select }}</option>#}
+                                        {#{% for option_value in option.product_option_value %}#}
+                                        {#<option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}#}
+                                        {#{% if option_value.price %}#}
+                                        {#({{ option_value.price_prefix }}{{ option_value.price }})#}
+                                        {#{% endif %} </option>#}
+                                        {#{% endfor %}#}
+                                        {#</select>#}
                                         {#</div>#}
                                     </div>
                                 {% endif %}
@@ -208,20 +208,20 @@
                                     <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
                                 </div>
                                 <div class="select">
-                                    <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"
+                                    <input type="text" name="quantity" value="{{ minimum }}" size="2"
+                                           id="input-quantity"
                                            class="form-control"/>
                                     <input type="hidden" name="product_id" value="{{ product_id }}"/>
                                 </div>
                             </div>
 
 
-
                             {##}
                             {#<div class="form-group">#}
-                                {#<label class="control-label" for="input-quantity">{{ entry_qty }}</label>#}
-                                {#<input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"#}
-                                       {#class="form-control"/>#}
-                                {#<input type="hidden" name="product_id" value="{{ product_id }}"/>#}
+                            {#<label class="control-label" for="input-quantity">{{ entry_qty }}</label>#}
+                            {#<input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"#}
+                            {#class="form-control"/>#}
+                            {#<input type="hidden" name="product_id" value="{{ product_id }}"/>#}
                             {#</div>#}
                         </div>
                     </div>
@@ -487,7 +487,6 @@
 
                     </div>
                 </section>
-
 
 
             </div>
