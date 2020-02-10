@@ -889,10 +889,27 @@ footer {
 }
 
 #account-edit{
-  .file-upload {
-    label {width: 50%; height: 128px; border: 1px solid #ddd;}
-    input {position: absolute; opacity: 0; width: 1px;}
-    .fa {background-color: #ddd;padding: 10px;}
+  //.file-upload {
+  //  label {width: 50%; height: 128px; border: 1px solid #ddd;}
+  //  input {position: absolute; opacity: 0; width: 1px;}
+  //  .fa {background-color: #ddd;padding: 10px;}
+  //}
+  .file-upload{
+    position: relative;
+    width: 160px;
+    input {
+      top: 0;
+      position: absolute;
+      left: 0;
+      width: 160px;
+      height: 160px;
+      opacity: 0;
+      cursor: pointer;}
+  }
+  .img-view {
+    margin-left: 15px;
+    width: 160px;
+    height: 160px;
   }
 }
 

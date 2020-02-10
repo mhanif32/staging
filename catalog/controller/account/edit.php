@@ -183,6 +183,9 @@ class ControllerAccountEdit extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+
+        $file = !empty($customer_info['image']) ? $customer_info['image'] : 'no-avatar.png';
+        $data['image_url'] = '/storage/upload/' . $file;
         $this->response->setOutput($this->load->view('account/edit', $data));
     }
 
