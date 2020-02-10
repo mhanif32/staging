@@ -177,20 +177,39 @@
 
                 {% else %}
 
-                    <div class="dropdown show d-inline-block">
-                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
-                           role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
+                    {#<div class="dropdown show d-inline-block">#}
+                        {#<a class="btn btn-white bg-white border-0 text-primary px-2" href="#"#}
+                           {#role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"#}
+                           {#aria-expanded="false">#}
+                            {#<i class="fas fa-user-circle f-35"></i>#}
+                            {#<span class="d-block f-15">Account</span>#}
+                        {#</a>#}
+
+                        {#<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">#}
+                            {#<a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>#}
+                            {#<a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>#}
+                            {#<a class="dropdown-item" href="{{ seller_register_link }}">Become a seller</a>#}
+                        {#</div>#}
+                    {#</div>#}
+
+
+
+                    <div class="d-inline-block dropdown">
+                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#" id="navbar-mainMenu-dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle f-35"></i>
                             <span class="d-block f-15">Account</span>
                         </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="navbar-mainMenu-dropdown-2">
                             <a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>
-                            <a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>
-                            <a class="dropdown-item" href="{{ seller_register_link }}">Become a seller</a>
+                            <a class="dropdown-item" href="#" id="navbar-mainMenu-dropdown-2-submenu-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ text_register }}</a>
+                            <div class="dropdown-menu dropright" aria-labelledby="navbar-mainMenu-dropdown-2-submenu-1">
+                                <a class="dropdown-item " href="{{ register }}" >Become Customer</a>
+                                <a class="dropdown-item " href="{{ seller_register_link }}" >Become seller</a>
+                            </div>
                         </div>
                     </div>
+
+
                     {#<a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>#}
                     {#<a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>#}
                 {% endif %}
@@ -256,6 +275,7 @@
             }
         });
     });
+
 
     $('select[name=\'country_id\']').trigger('change');
     //--></script>
