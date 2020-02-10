@@ -5,9 +5,9 @@
                 <div class="">
                     <img src="catalog/view/theme/champion/image/retailer-image.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Reatailers</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Retailers</h6>
                         <p>
-
+                            {{ count_retailers }}
                         </p>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     <img src="catalog/view/theme/champion/image/yct4iqkm.png" alt="" class="img-fluid">
                     <div class="">
                         <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Designer Brands</h6>
-                        <p>215 Items</p>
+                        <p class="f-14"><a href="{{ path_brands }}"> {{ count_brands }} Items</a></p>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <img src="catalog/view/theme/champion/image/1khc6ioh.png" alt="" class="img-fluid">
                     <div class="">
                         <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Men</h6>
-                        <p class="f-14">215 Items</p>
+                        <p class="f-14"><a href="{{ path_men }}"> {{ count_men }} Items</a></p>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <img src="catalog/view/theme/champion/image/k8smgyzc.png" alt="" class="img-fluid">
                     <div class="">
                         <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Women</h6>
-                        <p>215 Items</p>
+                        <p class="f-14"><a href="{{ path_women }}"> {{ count_women }} Items</a></p>
                     </div>
                 </div>
             </div>

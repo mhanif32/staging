@@ -38,6 +38,7 @@ class ControllerCommonMenu extends Controller {
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
+				$data['sale_offer_link'] = $this->url->link('product/special');
 			}
 		}
 

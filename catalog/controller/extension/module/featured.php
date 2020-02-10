@@ -65,7 +65,22 @@ class ControllerExtensionModuleFeatured extends Controller {
 			}
 		}
 
-        //echo '<pre>';print_r($data);exit('aaaa');
+        $data['count_retailers'] = $this->model_catalog_product->getRetailersCount();
+
+		//men count and path
+        $categoryMen = $this->model_catalog_product->getCountMen();
+        $data['count_men'] = $categoryMen['total'];
+        $data['path_men'] = !empty($categoryMen['total']) ? $this->url->link('product/category', 'path=' . $categoryMen['path']) : '#';
+
+        //women count and path
+        $categoryWomen = $this->model_catalog_product->getCountWomen();
+        $data['count_women'] = $categoryWomen['total'];
+        $data['path_women'] = !empty($categoryWomen['total']) ? $this->url->link('product/category', 'path=' . $categoryWomen['path']) : '#';
+
+        //brand category and path
+        $categoryDesignerBrands = $this->model_catalog_product->getCountDesignerBrands();
+        $data['count_brands'] = $categoryDesignerBrands['total'];
+        $data['path_brands'] = !empty($categoryDesignerBrands['total']) ? $this->url->link('product/category', 'path=' . $categoryDesignerBrands['path']) : '#';
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);

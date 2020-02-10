@@ -536,4 +536,57 @@ class ModelCatalogProduct extends Model {
 			return 0;
 		}
 	}
+
+	//get retailers count for home page
+	public function getRetailersCount() {
+        $query = $this->db->query("SELECT COUNT(DISTINCT ps.customer_id) AS total FROM " . DB_PREFIX . "customer ps WHERE ps.status = '1' and ps.role = 'seller'");
+
+        if (isset($query->row['total'])) {
+            return $query->row['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    //get men count for home page
+    public function getCountMen() {
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Men'");
+
+        if (isset($query->row['total'])) {
+            return [
+                    'total' => $query->row['total'],
+                    'path' => $query->row['category_id']
+                ];
+        } else {
+            return 0;
+        }
+    }
+
+    //get men count for home page
+    public function getCountWomen() {
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Women'");
+
+        if (isset($query->row['total'])) {
+            return [
+                'total' => $query->row['total'],
+                'path' => $query->row['category_id']
+            ];
+        } else {
+            return 0;
+        }
+    }
+
+    //get men count for home page
+    public function getCountDesignerBrands() {
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Designer Brands'");
+
+        if (isset($query->row['total'])) {
+            return [
+                'total' => $query->row['total'],
+                'path' => $query->row['category_id']
+            ];
+        } else {
+            return 0;
+        }
+    }
 }

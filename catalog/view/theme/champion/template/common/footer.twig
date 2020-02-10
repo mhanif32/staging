@@ -1,83 +1,83 @@
-
 <footer class="pt-5 bg-gray-400">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
-        <h4 class="text-white">
-          Policy Info
-        </h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Sale</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
-        <h4 class="text-white">
-          Company
-        </h4>
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Delivery Information</a></li>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+                <h4 class="text-white">
+                    Policy Info
+                </h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Sale</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+                <h4 class="text-white">
+                    Company
+                </h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Delivery Information</a></li>
 
-        </ul>
-      </div>
-      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
-        <h4 class="text-white">
-          Need Help ?
-        </h4>
-        <ul>
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-sm-4 col-md-4 col-lg-2">
-        <h4 class="text-white">
-          Social Media
-        </h4>
-        <ul class="footer-social-icons">
-          <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
-          <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
-          <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
-          <a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
-        </ul>
-      </div>
-      <div class="col-12 col-sm-4 col-md-4 col-lg-2 p-lg-0">
-        <h4 class="text-white">
-          TheChampionMall
-        </h4>
-        <ul>
-            {% if logged %}
-              <li><ahref="{{ account }}">My Account</a></li>
-                {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
-                {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
-                {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
-              <li><a href="{{ logout }}">Logout</a></li>
-            {% else %}
-              <li><a href="{{ login }}">Login</a></li>
-              <li><a href="{{ register }}">Register</a></li>
-            {% endif %}
-          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
-        </ul>
-      </div>
+                </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+                <h4 class="text-white">
+                    Need Help ?
+                </h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2">
+                <h4 class="text-white">
+                    Social Media
+                </h4>
+                <ul class="footer-social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                    <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-4 col-md-4 col-lg-2 p-lg-0">
+                <h4 class="text-white">
+                    TheChampionMall
+                </h4>
+                <ul>
+                    {% if logged %}
+                        <li>
+                            <ahref
+                            ="{{ account }}">My Account</a></li>
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
+                        {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
+                        <li><a href="{{ logout }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ login }}">Login</a></li>
+                        <li><a href="{{ register }}">Register</a></li>
+                    {% endif %}
+                    <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="d-flex justify-content-between mx-lg-5 px-lg-4">
+            <div class="col-lg-6">
+                <p style="font-size: 0.75rem; font-weight: 400; color: #BFBFBF;"><a href="index.html">Copyright © 2020
+                        TheChampionMall</a></p>
+            </div>
+            <div class="col-lg-6 text-right">
+                <img src="image/icons/Layer 107.png" alt="" class="img-fluid"></div>
+        </div>
     </div>
-    <hr class="bg-white">
-    <div class="d-flex justify-content-between mx-lg-5 px-lg-4">
-      <div class="col-lg-6">
-        <p style="font-size: 0.75rem; font-weight: 400; color: #BFBFBF;"><a href="index.html">Copyright © 2020 TheChampionMall</a></p>
-      </div>
-      <div class="col-lg-6 text-right">
-        <img src="image/icons/Layer 107.png" alt="" class="img-fluid"> </div>
-    </div>
-  </div>
 
 </footer>
 
 
-
-
 {% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
+    <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}
 <!--
 OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
@@ -85,31 +85,32 @@ Please donate via PayPal to donate@opencart.com
 //-->
 
 <script type="text/javascript">
-  (function () {
-    var head = document.getElementsByTagName("head").item(0);
-    var script = document.createElement("script");
+    (function () {
+        var head = document.getElementsByTagName("head").item(0);
+        var script = document.createElement("script");
 
-    var src = (document.location.protocol == 'https:'
+        var src = (document.location.protocol == 'https:'
             ? 'https://www.formilla.com/scripts/feedback.js'
             : 'http://www.formilla.com/scripts/feedback.js');
 
-    script.setAttribute("type", "text/javascript");
-    script.setAttribute("src", src); script.setAttribute("async", true);
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("src", src);
+        script.setAttribute("async", true);
 
-    var complete = false;
+        var complete = false;
 
-    script.onload = script.onreadystatechange = function () {
-      if (!complete && (!this.readyState
-              || this.readyState == 'loaded'
-              || this.readyState == 'complete')) {
-        complete = true;
-        Formilla.guid = 'cs98489a-39c7-4e4f-863b-30d284f10afb';
-        Formilla.loadWidgets();
-      }
-    };
+        script.onload = script.onreadystatechange = function () {
+            if (!complete && (!this.readyState
+                || this.readyState == 'loaded'
+                || this.readyState == 'complete')) {
+                complete = true;
+                Formilla.guid = 'cs98489a-39c7-4e4f-863b-30d284f10afb';
+                Formilla.loadWidgets();
+            }
+        };
 
-    head.appendChild(script);
-  })();
+        head.appendChild(script);
+    })();
 </script>
 
 </body>
