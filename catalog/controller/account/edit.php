@@ -183,6 +183,7 @@ class ControllerAccountEdit extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+        $data['deactivate_link'] = $this->url->link('account/account/deactivate', '', true);
 
         $file = !empty($customer_info['image']) ? $customer_info['image'] : 'no-avatar.png';
         $data['image_url'] = '/storage/upload/' . $file;
