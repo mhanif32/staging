@@ -1,16 +1,16 @@
-<div id="profile-column-left" class="col-12 col-lg-3 mt-5 mb-md-5">
-    {#    <div class="card mt-5 mb-4" style="max-width: 540px;">#}
-    {#        <div class="row no-gutters">#}
-    {#            <div class="col-md-3 m-auto text-center">#}
-    {#                <img src="{{ image_url }}" class="rounded-circle" width="58" height="58" alt="avatar">#}
-    {#            </div>#}
-    {#            <div class="col-md-9">#}
-    {#                <div class="card-body">#}
-    {#                    <p class="card-text mb-3">Hello</p>#}
-    {#                    <h5 class="card-title f-15">{{ firstname }} {{ lastname }}</h5></div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
+<div id="profile-column-left" class="col-12 col-lg-3 mb-md-5">
+        <div class="card mt-5 mb-4" style="max-width: 540px;">
+            <div class="row no-gutters box-shadow">
+                <div class="col-md-3 m-auto text-center">
+                    <img src="{{ image_url }}" class="rounded-circle" width="58" height="58" alt="avatar">
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body py-2 px-1">
+                        <p class="card-text mb-1">Hello</p>
+                        <h5 class="card-title f-15 mb-1">{{ firstname }} {{ lastname }}</h5></div>
+                </div>
+            </div>
+        </div>
     <div class="account-account box-shadow" >
         <div id="accordion" class="accordion">
             <div class="card mb-0">
@@ -26,7 +26,7 @@
                         My Order
                     </a>
                 </div>
-                <hr class="m-0">
+
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
                         <li class="pl-5 py-2"><a href="{{ order }}">{{ text_order }}</a></li>
@@ -47,7 +47,7 @@
                         ACCOUNT SETTINGS
                     </a>
                 </div>
-                <hr class="m-0">
+
                 <div id="collapseThree" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
                         <li class="pl-5 py-2"><a href="{{ edit }}"><i class="far fa-address-card"></i> Profile Information</a></li>
@@ -63,7 +63,7 @@
                         Business Owner
                     </a>
                 </div>
-                <hr class="m-0">
+
                 <div id="collapseFour" class="collapse" data-parent="#accordion">
 
                     <ul class="list-unstyled m-0">
