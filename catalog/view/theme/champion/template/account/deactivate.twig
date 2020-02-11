@@ -1,0 +1,55 @@
+{{ header }}
+<section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
+    <div class="container">
+        <div class="row">
+            {{ profile_column_left }}
+            <div class="col-12 col-md-9 col-lg-9">
+                <div class="py-5">
+                    <div class="form-signin card p-4">
+                        <div id="account-edit" class="container">
+                            {% if error_warning %}
+                                <div class="alert alert-danger alert-dismissible"><i
+                                            class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+                            {% endif %}
+                            <div class="row">{{ column_left }}
+                                {% if column_left and column_right %}
+                                    {% set class = 'col-sm-6' %}
+                                {% elseif column_left or column_right %}
+                                    {% set class = 'col-sm-9' %}
+                                {% else %}
+                                    {% set class = 'col-sm-12' %}
+                                {% endif %}
+                                <div id="content" class="{{ class }}">{{ content_top }}
+                                    <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title }}</h4>
+                                    <form action="{{ action }}" method="post" enctype="multipart/form-data"
+                                          class="form-horizontal">
+                                        <fieldset>
+
+                                            <div class="form-group required">
+                                                <label class="control-label"
+                                                       for="input-firstname">{{ entry_reason }} </label>
+                                                <div class="">
+                                                    <textarea name="reason" placeholder="{{ entry_firstname }}" id="input-reason"
+                                                              class="form-control rounded-0" rows="8"></textarea>
+                                                    {% if error_reason %}
+                                                        <div class="text-danger">{{ error_reason }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                        <div class="buttons clearfix">
+                                            <input type="submit" value="SUBMIT" class="btn btn-success w-50 custom-btn"/>
+                                        </div>
+                                    </form>
+                                    {{ content_bottom }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ footer }}

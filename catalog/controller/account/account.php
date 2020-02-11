@@ -1,6 +1,9 @@
 <?php
 class ControllerAccountAccount extends Controller {
-	public function index() {
+
+    private $error = array();
+
+    public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -126,4 +129,57 @@ class ControllerAccountAccount extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function deactivate() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/account/deactivate', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->language('account/deactivate');
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('account/customer');
+
+        $data['action'] = $this->url->link('account/account/deactivate', '', true);
+        //todo: post submit data
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+            $this->session->data['success'] = $this->language->get('text_success');
+            $this->model_account_customer->deactivateAccount($this->customer->getId());
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        if (isset($this->error['warning'])) {
+            $data['error_warning'] = $this->error['warning'];
+        } else {
+            $data['error_warning'] = '';
+        }
+
+        if (isset($this->error['reason'])) {
+            $data['error_reason'] = $this->error['reason'];
+        } else {
+            $data['error_reason'] = '';
+        }
+
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+
+        $this->response->setOutput($this->load->view('account/deactivate', $data));
+    }
+
+    protected function validate()
+    {
+        if ((utf8_strlen(trim($this->request->post['reason'])) < 1)) {
+            $this->error['reason'] = $this->language->get('error_reason');
+        }
+
+        return !$this->error;
+    }
 }
