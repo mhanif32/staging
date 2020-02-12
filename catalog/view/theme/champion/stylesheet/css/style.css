@@ -174,7 +174,7 @@ p {
 .wish-list {
   color: #8d8d8d; }
   .wish-list i:hover {
-    color: #f15a29;
+    color: #01B0F1;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
 
@@ -201,7 +201,7 @@ p {
     text-align: center; }
     .pagination .page-item .page-numbers:hover,
     .pagination .page-item .page-numbers :focus {
-      background: #f15a29;
+      background: #01B0F1;
       -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease;
       -webkit-box-shadow: none;
@@ -211,7 +211,7 @@ p {
   .pagination .page-item .page-link :active {
     -webkit-box-shadow: none;
             box-shadow: none;
-    background: #f15a29;
+    background: #01B0F1;
     color: #fff; }
 
 .top-headerbar {
@@ -771,7 +771,7 @@ footer ul {
     .product-details .add-to-cart .custom-btn:after, .product-details .buy-now .custom-btn:after {
       padding: 1.4rem 49%; }
   .product-details .buy-now .custom-btn {
-    background-color: #f15a29; }
+    background-color: #01B0F1; }
   .product-details .panel-title > a:before {
     float: right !important;
     font-family: FontAwesome;
@@ -809,7 +809,7 @@ footer ul {
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
     .my-order .table-bordered tbody td i:hover {
-      color: #f15a29; }
+      color: #01B0F1; }
   .my-order .table-bordered tbody td .form-control {
     border-color: #b4b4b4;
     color: #b4b4b4;
@@ -841,7 +841,7 @@ footer ul {
   top: 0;
   width: 22px;
   height: 22px;
-  border: 1px solid #f15a29;
+  border: 1px solid #01B0F1;
   border-radius: 100%;
   background: #fff; }
 .shipping-address [type="radio"]:checked + label:after,
@@ -849,7 +849,7 @@ footer ul {
   content: "";
   width: 16px;
   height: 16px;
-  background: #f15a29;
+  background: #01B0F1;
   position: absolute;
   top: 3px;
   left: 3px;
@@ -901,23 +901,13 @@ footer ul {
   color: #01B0F1;
   font-weight: 600; }
 
-.contact-us .hero-image {
-  position: relative; }
-.contact-us .hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  color: white; }
-.contact-us p {
+.faq-page p {
   font-size: 0.9375rem; }
-.contact-us .needs-validation {
+.faq-page .needs-validation {
   margin: 0 15%; }
-.contact-us .custom-btn {
+.faq-page .custom-btn {
   width: 98%; }
-.contact-us .panel-default > .panel-heading {
+.faq-page .panel-default > .panel-heading {
   color: #333;
   background-color: #f9f9f9;
   border-color: #e4e5e7;
@@ -926,14 +916,14 @@ footer ul {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
-.contact-us .panel-default > .panel-heading a {
+.faq-page .panel-default > .panel-heading a {
   display: block;
   padding: 20px 15px 20px;
   font-weight: 500;
   text-decoration: none; }
-.contact-us .panel p {
+.faq-page .panel p {
   padding: 0 4rem 0 15px; }
-.contact-us .panel-default > .panel-heading a:after {
+.faq-page .panel-default > .panel-heading a:after {
   content: "";
   position: relative;
   top: 1px;
@@ -949,18 +939,18 @@ footer ul {
   transition: transform 0.25s linear;
   transition: transform 0.25s linear, -webkit-transform 0.25s linear;
   -webkit-transition: -webkit-transform 0.25s linear; }
-.contact-us .panel-default > .panel-heading a[aria-expanded="true"] {
+.faq-page .panel-default > .panel-heading a[aria-expanded="true"] {
   background-color: #fff;
-  color: #f15a29; }
-.contact-us .panel-default > .panel-heading a[aria-expanded="true"]:after {
+  color: #01B0F1; }
+.faq-page .panel-default > .panel-heading a[aria-expanded="true"]:after {
   content: "\2212";
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
-.contact-us .panel-default > .panel-heading a[aria-expanded="false"]:after {
+.faq-page .panel-default > .panel-heading a[aria-expanded="false"]:after {
   content: "\002b";
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg); }
-.contact-us h4 {
+.faq-page h4 {
   font-size: 1rem; }
 
 .faq-collapse .custom-btn {
@@ -990,7 +980,7 @@ footer ul {
   font-weight: 600; }
 .blog-listing .date-block .month {
   display: block;
-  background: #f15a29;
+  background: #01B0F1;
   font-size: 0.8125rem;
   color: #fff; }
 
@@ -1229,3 +1219,29 @@ footer ul {
 @media screen and (max-width: 992px) {
   #account-account .icon-content {
     width: 50%; } }
+
+#information-contact .hero-image {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  background: url("../../image/information-contact.png") no-repeat center;
+  background-size: cover; }
+#information-contact .container .inner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+#information-contact .get-in-touch {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%); }
+#information-contact .information .information-icons {
+  width: 100px;
+  text-align: center;
+  border: 1px solid #C7C7C7;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 5px; }

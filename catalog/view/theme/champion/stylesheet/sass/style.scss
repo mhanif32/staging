@@ -50,7 +50,7 @@ p {font-size: 0.9375rem;}
   color: #8d8d8d;
   i {
     &:hover {
-      color: #f15a29;
+      color: $success;
       transition: all 0.5s ease;
     }
   }
@@ -83,7 +83,7 @@ p {font-size: 0.9375rem;}
       text-align: center;
       &:hover,
       :focus {
-        background: #f15a29;
+        background: $success;
         transition: all 0.5s ease;
         box-shadow: none;
         color: #fff;
@@ -93,7 +93,7 @@ p {font-size: 0.9375rem;}
       &:focus,
       :active {
         box-shadow: none;
-        background: #f15a29;
+        background: $success;
         color: #fff;
       }
     }
@@ -149,9 +149,92 @@ p {font-size: 0.9375rem;}
             /* Arrow */
 
             /* Transition */
+//for search menu
+
+  //input {
+  //  border: 1px solid #ccc;
+  //  font-size: 12px;
+  //  height: 30px;
+  //  padding: 4px 8px;
+  //  position: absolute;
+  //  width: 50%;
+  //  &:focus {
+  //    outline: none;
+  //  }
+  //}
+  //button {
+  //  text-align: center;
+  //  &:focus {
+  //    outline: none;
+  //  }
+  //  &.btn-search,
+  //  &.btn-reset {
+  //    background: hotpink;
+  //    border: none;
+  //    height: 30px;
+  //    font-size: 12px;
+  //    padding: 4px;
+  //    position: absolute;
+  //    width: 30px;
+  //  }
+  //}
+  //
+  //.sample {
+  //  float: left;
+  //  height: 50px;
+  //  margin: 0 8%;
+  //  position: relative;
+  //  width: 34%;
+  //  &.two {
+  //    input {
+  //      border-radius: 15px;
+  //      right: 0;
+  //      transition: all .3s ease-in-out;
+  //      width: 50%;
+  //      &:focus {
+  //        width: 100%;
+  //        ~ button {
+  //          &.btn-search {
+  //            background: hotpink;
+  //            color: #fff;
+  //          }
+  //          &.btn-reset {
+  //            right: -22px;
+  //          }
+  //        }
+  //      }
+  //    }
+  //    button {
+  //      transition: all .3s ease-in-out;
+  //      &.btn-search {
+  //        background: #ccc;
+  //        border-radius: 50%;
+  //        height: 26px;
+  //        right: 2px;
+  //        top: 2px;
+  //        transition: all .3s ease-in-out;
+  //        width: 26px;
+  //      }
+  //      &.btn-reset {
+  //        background: #fff;
+  //        border: 1px solid #ccc;
+  //        border-radius: 50%;
+  //        font-size: 10px;
+  //        height: 20px;
+  //        line-height: 20px;
+  //        padding: 0;
+  //        right: 5px;
+  //        top: 5px;
+  //        width: 20px;
+  //        z-index: -1;
+  //      }
+  //    }
+  //  }
+  //}
 
 
-          }
+
+}
 
 // header style starts from here
 header {background: white;z-index: 9999;
@@ -461,7 +544,7 @@ footer {
   .add-to-cart,.buy-now {.custom-btn { width: 90%;background-color: #272727;
     &:after { padding: 1.4rem 49%;}}
   }
-  .buy-now {.custom-btn {background-color: #f15a29;}}
+  .buy-now {.custom-btn {background-color: $success;}}
   .panel-title > a:before {float: right !important;font-family: FontAwesome;content:"\f068";padding-right: 5px;}
   .panel-title > a.collapsed:before {float: right !important;content:"\f067";}
   .panel-title > a:hover,.panel-title > a:active,.panel-title > a:focus  {text-decoration:none;}
@@ -503,7 +586,7 @@ footer {
           font-size: 18px;
           transition: all 0.5s ease;
           &:hover {
-            color: #f15a29;
+            color: $success;
           }
         }
         .form-control {
@@ -560,7 +643,7 @@ footer {
     top: 0;
     width: 22px;
     height: 22px;
-    border: 1px solid #f15a29;
+    border: 1px solid $success;
     border-radius: 100%;
     background: #fff;
   }
@@ -569,7 +652,7 @@ footer {
     content: "";
     width: 16px;
     height: 16px;
-    background: #f15a29;
+    background: $success;
     position: absolute;
     top: 3px;
     left: 3px;
@@ -645,19 +728,19 @@ footer {
 }
 
 // contact page
-.contact-us {
-  .hero-image {
-    position: relative;
-  }
-
-  .hero-text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
+.faq-page {
+  //.hero-image {
+  //  position: relative;
+  //}
+  //
+  //.hero-text {
+  //  text-align: center;
+  //  position: absolute;
+  //  top: 50%;
+  //  left: 50%;
+  //  transform: translate(-50%, -50%);
+  //  color: white;
+  //}
   p {
     font-size: 0.9375rem;
   }
@@ -708,7 +791,7 @@ footer {
 
   .panel-default > .panel-heading a[aria-expanded="true"] {
     background-color: #fff;
-    color: #f15a29;
+    color: $success;
   }
 
   .panel-default > .panel-heading a[aria-expanded="true"]:after {
@@ -766,7 +849,7 @@ footer {
     }
     .month {
       display: block;
-      background: #f15a29;
+      background: $success;
       font-size: 0.8125rem;
       color: #fff;
     }
@@ -1145,7 +1228,20 @@ footer {
     }
   }
 }
+//------------------------
+#information-contact{
+  .hero-image{
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background: url("../../image/information-contact.png") no-repeat center;
+    background-size: cover;
+  }
+  .container{
+    .inner-text{position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);}
 
-.home-categories{
+  }
+  .get-in-touch{position: absolute;top: 100%;left: 50%;transform: translate(-50%,-100%);}
 
+  .information{.information-icons{width: 100px;text-align: center;border: 1px solid #C7C7C7; border-radius: 4px;padding: 20px;margin: 5px; }}
 }
