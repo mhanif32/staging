@@ -132,9 +132,6 @@ class ControllerAccountAccount extends Controller {
 
 	public function deactivate() {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account/deactivate', '', true);
 
