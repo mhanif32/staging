@@ -126,7 +126,7 @@ h5 {
   color: #01B0F1; }
 
 .text-wrap {
-  width: 86px;
+  width: 140px;
   overflow: hidden;
   white-space: nowrap !important;
   text-overflow: ellipsis; }
@@ -181,8 +181,7 @@ p {
 .form-control {
   color: #262525;
   border-color: #d1cdcd;
-  font-size: 13px;
-  height: 40px; }
+  font-size: 13px; }
   .form-control:focus {
     color: #262525;
     border-color: #d1cdcd;
@@ -219,15 +218,26 @@ p {
   /* Custom Select */
   /* Arrow */
   /* Transition */ }
+  .top-headerbar nav.nav {
+    padding-top: 5px;
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    /* Medium devices (landscape tablets, 768px and up) */
+    /* Large devices (laptops/desktops, 992px and up) */
+    /* Extra large devices (large laptops and desktops, 1200px and up) */ }
+    @media only screen and (min-width: 600px) {
+      .top-headerbar nav.nav > div {
+        width: 165px; } }
+    @media only screen and (min-width: 768px) {
+      .top-headerbar nav.nav > div {
+        width: 165px; } }
+    @media only screen and (min-width: 992px) {
+      .top-headerbar nav.nav > div {
+        width: 225px; } }
+    @media only screen and (min-width: 1200px) {
+      .top-headerbar nav.nav > div {
+        width: 270px; } }
   .top-headerbar .no-border {
     border-top: 2px solid transparent; }
-  .top-headerbar table tbody tr td .form-control {
-    width: 16rem; }
-  .top-headerbar table tbody tr td .custom-btn {
-    padding: 0 2rem;
-    line-height: 2.5em; }
-    .top-headerbar table tbody tr td .custom-btn:after {
-      padding: 1.2rem 49%; }
   .top-headerbar select {
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -358,6 +368,22 @@ header {
         header .navbar-nav-menu > li a {
           text-decoration: none; }
         header .navbar-nav-menu > li:hover {
+          background-color: #01B0F1;
+          -webkit-transition: all .6s ease;
+          transition: all .6s ease; }
+          header .navbar-nav-menu > li:hover a {
+            color: #fff; }
+    header .navbar-nav-menu {
+      background-color: #f3f3f3; }
+      header .navbar-nav-menu > a {
+        width: 100px;
+        text-align: center;
+        -webkit-transition: all .6s ease;
+        transition: all .6s ease;
+        border-right: 3px solid #fff; }
+        header .navbar-nav-menu > a a {
+          text-decoration: none; }
+        header .navbar-nav-menu > a:hover {
           background-color: #01B0F1;
           -webkit-transition: all .6s ease;
           transition: all .6s ease;
@@ -802,7 +828,9 @@ footer ul {
   vertical-align: middle; }
   .my-order .table-bordered tbody td span {
     display: list-item;
-    list-style-type: none; }
+    list-style-type: none;
+    text-align: right;
+    cursor: pointer; }
   .my-order .table-bordered tbody td i {
     color: #fff;
     font-size: 18px;

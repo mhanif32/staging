@@ -50,65 +50,107 @@
 <body>
 
 {% if show_top_bar %}
+    {#<section class="top-headerbar bg-success pb-1">#}
+        {#<div class="container address_container">#}
+            {#{% if loggedInCountry %}#}
+                {#<p><span class="fa fa-map-marker"></span> Deliver To {{ loggedInCountry }}</p>#}
+            {#{% else %}#}
+            {#<div class="row pt-1">#}
+                {#<div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">#}
+                    {#Choose your country & delivery location#}
+                {#</div>#}
+                {#<div class="col-lg-3">#}
+                    {#<div class="select">#}
+                        {#<div class="">#}
+                            {#<select name="country_id" id="input-country" class="form-control rounded-0">#}
+                                {#<option value="">{{ text_select }}</option>#}
+                                {#{% for country in countries %}#}
+                                    {#{% if country.country_id == country_id %}#}
+                                        {#<option value="{{ country.country_id }}"#}
+                                                {#selected="selected">{{ country.name }}</option>#}
+                                    {#{% else %}#}
+                                        {#<option value="{{ country.country_id }}">{{ country.name }}</option>#}
+                                    {#{% endif %}#}
+                                {#{% endfor %}#}
+                            {#</select>#}
+                            {#{% if error_country %}#}
+                                {#<div class="text-danger">{{ error_country }}</div>#}
+                            {#{% endif %}#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+                {#<div class="col-lg-3">#}
+                    {#<div class="select">#}
+                        {#<div class="">#}
+                            {#<select name="zone_id" id="input-zone" class="form-control rounded-0">#}
+                            {#</select>#}
+                            {#{% if error_zone %}#}
+                                {#<div class="text-danger">{{ error_zone }}</div>#}
+                            {#{% endif %} </div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="col-lg-3">#}
+                    {#<div class="text-left position-relative btn-border-div">#}
+                        {#<a class="btn bg-primary w-70 text-white" href="#" role="button"#}
+                           {#style="font-size: 0.9375rem; height: 35px;">CONFIRM</a>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+            {#{% endif %}#}
+            {#<p class="text-white text-center m-0" style="font-size: 12px;">Note : The product has been listed as per the#}
+                {#chosen location.</p>#}
+        {#</div>#}
+    {#</section>#}
+
+
+
+
+
     <section class="top-headerbar bg-success pb-1">
         <div class="container address_container">
-            {% if loggedInCountry %}
-                <p><span class="fa fa-map-marker"></span> Deliver To {{ loggedInCountry }}</p>
-            {% else %}
-            <div class="row pt-1">
-                <div class="col-lg-3 f-15 text-white m-0 p-lg-0" style="line-height: 2.5">
-                    Choose your country & delivery location
-                </div>
-                <div class="col-lg-3">
-                    <div class="select">
-                        <div class="">
-                            <select name="country_id" id="input-country" class="form-control rounded-0">
-                                <option value="">{{ text_select }}</option>
-                                {% for country in countries %}
-                                    {% if country.country_id == country_id %}
-                                        <option value="{{ country.country_id }}"
-                                                selected="selected">{{ country.name }}</option>
-                                    {% else %}
-                                        <option value="{{ country.country_id }}">{{ country.name }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            {% if error_country %}
-                                <div class="text-danger">{{ error_country }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3">
-                    <div class="select">
-                        <div class="">
-                            <select name="zone_id" id="input-zone" class="form-control rounded-0">
-                            </select>
-                            {% if error_zone %}
-                                <div class="text-danger">{{ error_zone }}</div>
-                            {% endif %} </div>
-                    </div>
+            <nav class="nav d-flex justify-content-between">
+                <div class="">
+                    <h3 class="f-15 text-white font-weight-medium">
+                        Choose your country & delivery location
+                    </h3>
+                    {% if loggedInCountry %}
+                    <h3 class="f-15 text-white font-weight-medium"><i class="fa fa-map-marker"></i> Deliver To {{ loggedInCountry }}</h3>
+                    {% else %}
                 </div>
-                <div class="col-lg-3">
-                    <div class="text-left position-relative btn-border-div">
-                        <a class="btn bg-primary w-70 text-white" href="#" role="button"
-                           style="font-size: 0.9375rem; height: 35px;">CONFIRM</a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
+                <div class="select">
+                                <select name="country_id" id="input-country" class="form-control rounded-0">
+                                    <option value="">{{ text_select }}</option>
+                                    {% for country in countries %}
+                                        {% if country.country_id == country_id %}
+                                            <option value="{{ country.country_id }}"
+                                                    selected="selected">{{ country.name }}</option>
+                                        {% else %}
+                                            <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% if error_country %}
+                                    <div class="text-danger">{{ error_country }}</div>
+                                {% endif %}
+                        </div>
+                        <div class="select">
+                                <select name="zone_id" id="input-zone" class="form-control rounded-0">
+                                </select>
+                                {% if error_zone %}
+                                    <div class="text-danger">{{ error_zone }}</div>
+                                {% endif %}
+                        </div>
+                        <div class="text-left position-relative btn-border-div">
+                            <a class="btn bg-primary text-white w-100" href="#" role="button"
+                               style="font-size: 0.9375rem; height: 35px;">CONFIRM</a>
+                        </div>
+
+                {% endif %}
+            </nav>
             <p class="text-white text-center m-0" style="font-size: 12px;">Note : The product has been listed as per the
                 chosen location.</p>
-
-            {#for only seacrh menu#}
-            <!--<div class="sample two">
-                <input type="text" name="search" placeholder="search">
-                <button type="submit" class="btn btn-search fa fa-search"></button>
-                <button type="reset" class="btn btn-reset fa fa-times"></button>
-            </div>-->
-
-
         </div>
     </section>
 {% endif %}
@@ -174,7 +216,7 @@
                            role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
                             <i class="fas fa-user-circle f-35"></i>
-                            <span class="d-block f-15 text-wrap">{{ firstname }}</span>
+                            <span class="d-block f-13 text-wrap">Welcome, {{ firstname }}</span>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -187,23 +229,6 @@
                     {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
 
                 {% else %}
-
-                    {#<div class="dropdown show d-inline-block">#}
-                        {#<a class="btn btn-white bg-white border-0 text-primary px-2" href="#"#}
-                           {#role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"#}
-                           {#aria-expanded="false">#}
-                            {#<i class="fas fa-user-circle f-35"></i>#}
-                            {#<span class="d-block f-15">Account</span>#}
-                        {#</a>#}
-
-                        {#<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">#}
-                            {#<a class="dropdown-item" href="{{ login }}">{{ text_login }}</a>#}
-                            {#<a class="dropdown-item" href="{{ register }}">{{ text_register }}</a>#}
-                            {#<a class="dropdown-item" href="{{ seller_register_link }}">Become a seller</a>#}
-                        {#</div>#}
-                    {#</div>#}
-
-
 
                     <div class="d-inline-block dropdown">
                         <a class="btn btn-white bg-white border-0 text-primary px-2" href="#" id="navbar-mainMenu-dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -225,10 +250,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    {#<a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>#}
-                    {#<a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>#}
                 {% endif %}
                 <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
                     {{ cart }}

@@ -55,6 +55,7 @@
                         <li class="pl-5 py-2"><a href="{{ change_password }}"><i class="fas fa-unlock-alt"></i> Change Password</a></li>
                     </ul>
                 </div>
+                {% if role == 'seller' %}
                 <hr class="m-0">
                 <div class="card-header collapsed bg-white p-3" data-toggle="collapse" data-parent="#accordion"
                      href="#collapseFour">
@@ -83,6 +84,7 @@
                     </ul>
 
                 </div>
+                {% endif %}
                 <hr class="m-0">
                 <div class="p-3 bg-white" href="">
 

@@ -72,7 +72,9 @@
                                         {% if product.recurring %} <br/>
                                             <span class="label label-info">{{ text_recurring_item }}</span>
                                             <small>{{ product.recurring }}</small> {% endif %}
-                                        <span class="text-right float-right" onclick="cart.remove('{{ product.cart_id }}');">
+
+                                        <span
+                                              onclick="cart.remove('{{ product.cart_id }}');">
                                     Delete
                             </span>
                                     </td>
@@ -82,7 +84,8 @@
                                             <input type="text" name="quantity[{{ product.cart_id }}]"
                                                    value="{{ product.quantity }}" size="1" class="form-control"/>
                                             <span class="input-group-btn">
-                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary rounded-0" style="margin: 1px 0"><i
+                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}"
+                          class="btn btn-primary rounded-0" style="margin: 1px 0"><i
                               class="fa fa-refresh"></i></button>
 
                   </span></div>
@@ -130,7 +133,8 @@
                 {% endif %} <br/>
 
                 <div class="buttons clearfix mb-5">
-                    <div class="pull-left"><a href="{{ continue }}" class="btn btn-default on-hover">{{ button_shopping }}</a>
+                    <div class="pull-left"><a href="{{ continue }}"
+                                              class="btn btn-default on-hover">{{ button_shopping }}</a>
                     </div>
                     <div class="pull-right"><a href="{{ checkout }}" class="btn btn-success px-4">Proceed to Buy</a>
                     </div>

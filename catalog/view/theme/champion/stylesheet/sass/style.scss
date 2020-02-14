@@ -25,7 +25,7 @@ h5 {font-size: 2.5rem;font-weight: 700;}
 .on-hover{
   &:hover{color: $success;}
 }
-.text-wrap {width: 86px;overflow: hidden;white-space: nowrap!important;text-overflow: ellipsis;}
+.text-wrap {width: 140px;overflow: hidden;white-space: nowrap!important;text-overflow: ellipsis;}
 .justify-content-flex-end {justify-content: flex-end;}
 a{text-decoration: none;&:hover{text-decoration: none;}}
 p {font-size: 0.9375rem;}
@@ -59,7 +59,7 @@ p {font-size: 0.9375rem;}
   color: $primary;
   border-color: #d1cdcd;
   font-size: 13px;
-  height: 40px;
+
   //height: 40px;
   &:focus {
     color: $primary;
@@ -102,16 +102,35 @@ p {font-size: 0.9375rem;}
 
 // topheader style starts from here
 .top-headerbar{
+  nav.nav{    padding-top: 5px;
+    @media only screen and (max-width: 600px) {
+
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+      > div{width: 165px}
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+      > div{width: 165px}
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+      > div{width: 225px}
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {
+      > div{width: 270px}
+    }
+  }
+
   .no-border {border-top: 2px solid transparent;}
-  table {
-    tbody {
-      tr {
-        td {
-          .form-control {width: 16rem;}
-          .custom-btn {padding: 0 2rem;line-height: 2.5em;
-                        &:after {padding: 1.2rem 49%;}
-                      }
-            }}}}
+
+
             select {
              appearance: none;
               outline: 0;
@@ -312,9 +331,18 @@ header {background: white;z-index: 9999;
   @media only screen and (min-width: 992px) {
   .navbar-nav-menu{background-color: $gray-100;
     > li{width: 100px;text-align: center; transition: all .6s ease;border-right: 3px solid #fff;
-      a{text-decoration: none}
-      &:hover{background-color: $success; transition: all .6s ease; color: $white}
+      a{text-decoration: none;
+
+      }
+      &:hover{background-color: $success; transition: all .6s ease;
+        a{color: $white}}
     }}
+
+    .navbar-nav-menu{background-color: $gray-100;
+      > a{width: 100px;text-align: center; transition: all .6s ease;border-right: 3px solid #fff;
+        a{text-decoration: none}
+        &:hover{background-color: $success; transition: all .6s ease; color: $white}
+      }}
 
   }
 
@@ -580,6 +608,8 @@ footer {
         span {
           display: list-item;
           list-style-type: none;
+          text-align: right;
+          cursor: pointer;
         }
         i {
           color: #fff;
