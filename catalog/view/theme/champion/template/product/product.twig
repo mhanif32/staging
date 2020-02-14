@@ -262,12 +262,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-
-                                            <form>
+                                            <form action="" class="request-form">
                                                 <div class="form-group">
                                                     <div class="">
-                                                        <label class="control-label"
-                                                               for="input-quantity">{{ product_name }}</label>
+                                                        <label class="control-label" for="input-quantity">{{ product_name }}</label>
                                                     </div>
                                                     <div class="p-2 border rounded bg-light">
                                                         {{ heading_title }}
@@ -276,12 +274,12 @@
                                                 <div class="product-size form-group">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-quantity">{{ entry_qty }}</label>
+                                                               for="input-request-quantity">{{ entry_qty }}</label>
                                                     </div>
                                                     <div class="select w-100">
-                                                        <input type="text" name="quantity" value="{{ minimum }}" placeholder="Select"
+                                                        <input type="text" name="request_quantity" value="{{ minimum }}"
                                                                size="2"
-                                                               id="input-quantity"
+                                                               id="input-request_quantity"
                                                                class="form-control"/>
                                                         <input type="hidden" name="product_id"
                                                                value="{{ product_id }}"/>
@@ -290,57 +288,47 @@
                                                 <div class="form-group">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-quantity">Email</label>
+                                                               for="input-email">Email</label>
                                                     </div>
                                                     <div class="">
-                                                        <input type="email" name="email" value="" placeholder=""
-                                                               id="email"
-                                                               class="form-control"/>
-
+                                                        <input type="email" name="email" value="" id="email" class="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-quantity">Contact Number</label>
+                                                               for="input-contact">Contact Number</label>
                                                     </div>
                                                     <div class="">
-                                                        <input type="contactNumber" name="email" value="" placeholder=""
-                                                               id="contact-number"
-                                                               class="form-control"/>
-
+                                                        <input type="text" name="contact" value=""
+                                                               id="contact-number" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="">
+                                                        <label class="control-label" for="input-address">Address</label>
+                                                    </div>
+                                                    <div class="">
+                                                        <input type="text" name="address" value="" placeholder=""
+                                                               id="address" class="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-quantity">Address</label>
+                                                               for="input-comment">Comment</label>
                                                     </div>
                                                     <div class="">
-                                                        <input type="address" name="email" value="" placeholder=""
-                                                               id="address"
-                                                               class="form-control"/>
-
+                                                        <textarea id="Comment" name="comment" rows="4" class="w-100"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="">
-                                                        <label class="control-label"
-                                                               for="input-quantity">Comment</label>
-                                                    </div>
-                                                    <div class="">
-                                                        <textarea id="Comment" rows="4" class="w-100"></textarea>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-success px-5">Submit</button>
+                                                <input type="submit" class="btn btn-success px-5" value="Submit">
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     {% if minimum > 1 %}
@@ -795,6 +783,12 @@
                 enabled: true
             }
         });
+    });
+
+    //modal: form submit
+    $("#id_form").on("submit", function(){
+        //Code: Action (like ajax...)
+        return false;
     });
     //--></script>
 

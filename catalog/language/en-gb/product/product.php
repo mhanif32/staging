@@ -54,5 +54,5 @@ $_['error_rating']             = 'Warning: Please select a review rating!';
 //modal
 
 $_['text_request_product']             = 'Request';
-$_['text_purchase_product']             = 'Purchase Product';
+$_['text_purchase_product']             = 'Request To Purchase Product';
 $_['product_name']             = 'Product Name';
