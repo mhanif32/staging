@@ -112,11 +112,11 @@
 
             <nav class="nav d-flex justify-content-between">
                 <div class="">
-                    <h3 class="f-15 text-white font-weight-medium">
+                    <h3 class="f-13 text-white font-weight-medium">
                         Choose your country & delivery location
                     </h3>
                     {% if loggedInCountry %}
-                    <h3 class="f-15 text-white font-weight-medium"><i class="fa fa-map-marker"></i> Deliver To {{ loggedInCountry }}</h3>
+                    <h3 class="f-13 text-white font-weight-medium"><i class="fa fa-map-marker"></i> Deliver To {{ loggedInCountry }}</h3>
                     {% else %}
                 </div>
                 <div class="select">
@@ -143,8 +143,8 @@
                                 {% endif %}
                         </div>
                         <div class="text-left position-relative btn-border-div">
-                            <a class="btn bg-primary text-white w-100" href="#" role="button"
-                               style="font-size: 0.9375rem; height: 35px;">CONFIRM</a>
+                            <a class="btn bg-primary text-white w-100 f-13 rounded-0" href="#" role="button"
+                               style="height: 34px;">CONFIRM</a>
                         </div>
 
                 {% endif %}
@@ -189,12 +189,12 @@
                     {{ cart }}
                 </div>
             </div>
-            <div class="col-12 col-md-3 col-lg-2">
+            <div class="col-12 col-md-3 col-lg-2 m-auto">
 
-                <div id="logo" class="mt-2">{% if logo %}<a href="{{ home }}">
+                <div id="logo" class="">{% if logo %}<a href="{{ home }}">
                         <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}"
-                             class="img-responsive"
-                             style="max-width: 125px"/>
+                             class="img-fluid"
+                             style="max-width: 170px"/>
                         </a>{% else %}
                         <h1><a href="{{ home }}">{{ name }}</a></h1>
                     {% endif %}</div>

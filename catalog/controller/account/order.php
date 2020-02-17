@@ -65,6 +65,8 @@ class ControllerAccountOrder extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+		$data['back_url'] = $this->url->link('account/account', '', true);
+
 
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
@@ -295,7 +297,7 @@ class ControllerAccountOrder extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
-
+            $data['back_url'] = $this->url->link('account/order ', '', true);
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');

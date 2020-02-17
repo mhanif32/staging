@@ -70,7 +70,8 @@ a.btn-primary:hover {
   width: 100% !important; }
 
 body {
-  font-family: "Poppins", sans-serif; }
+  font-family: "Poppins", sans-serif;
+  overflow: hidden; }
 
 h2 {
   font-size: calc(1.733rem + 0.9vw);
@@ -332,7 +333,7 @@ header {
     header .select:after {
       content: "\25BC";
       position: absolute;
-      top: 7px;
+      top: 5px;
       right: 0;
       padding: 0 1em;
       color: #b4b4b4;
@@ -392,7 +393,7 @@ header {
 .home-banner .carousel-item {
   min-height: 320px; }
 .home-banner .carousel-caption {
-  top: 20%;
+  top: 8%;
   z-index: 0; }
 .home-banner .carousel-indicators {
   bottom: 2rem; }
@@ -407,7 +408,7 @@ header {
     display: none; } }
 @media only screen and (max-width: 475px) {
   .home-banner .carousel-caption {
-    top: 48%; } }
+    top: 25%; } }
 
 .top-collection .product-layout .product-card:hover {
   -webkit-box-shadow: aliceblue;

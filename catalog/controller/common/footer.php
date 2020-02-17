@@ -36,6 +36,8 @@ class ControllerCommonFooter extends Controller {
         $data['register'] = $this->url->link('account/register', '', true);
         $data['login'] = $this->url->link('account/login', '', true);
         $data['logout'] = $this->url->link('account/logout', '', true);
+        $data['logged'] = $this->customer->isLogged();
+        $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 

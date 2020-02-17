@@ -6,7 +6,7 @@
 
 // body style starts
 
-body {font-family: "Poppins", sans-serif;}
+body {font-family: "Poppins", sans-serif; overflow: hidden}
 h2 {font-size: calc(1.733rem + 0.9vw);font-weight: 700;}
 h3 {font-size: 2.8125rem;font-weight: 600;}
 h4 {font-size: 1.25rem;font-weight: 600;}
@@ -307,7 +307,7 @@ header {background: white;z-index: 9999;
     &:after {
       content: "\25BC";
       position: absolute;
-      top: 7px;
+      top: 5px;
       right: 0;
       padding: 0 1em;
       color: #b4b4b4;
@@ -350,13 +350,13 @@ header {background: white;z-index: 9999;
 // .home-banner
 .home-banner {
   .carousel-item {min-height: 320px;}
-  .carousel-caption {top: 20%;z-index: 0;}
+  .carousel-caption {top: 8%;z-index: 0;}
   .carousel-indicators {bottom: 2rem;
     li {height: 8px;background-color: $gray-300;}
     .active {opacity: 1;background-color: $success;}
   }
   @media only screen and (max-width: 612px) {.carousel-indicators {display: none;}}
-  @media only screen and (max-width: 475px) {.carousel-caption {top: 48%;}}
+  @media only screen and (max-width: 475px) {.carousel-caption {top: 25%;}}
 }
 
 // top-collection

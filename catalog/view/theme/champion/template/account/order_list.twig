@@ -5,9 +5,13 @@
             <div id="content" class="col-sm-12 py-5">{{ content_top }}
 
                 <div class="form-signin card px-4 box-shadow">
+                    <div>
+                    <a href="{{ back_url }}" class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover"></i></a>
+
                     <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">
                         {{ heading_title }}
                     </h3>
+                    </div>
                     <hr style="margin: 15px -25px">
 
                     {% if orders %}
