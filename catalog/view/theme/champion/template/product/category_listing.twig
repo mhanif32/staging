@@ -1,0 +1,36 @@
+{{ header }}
+<div class="container">
+    <div class="swiper-viewport">
+        <div id="carousel-categories" class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for category in categories %}
+                    <div class="swiper-slide text-center">
+                        <img src="{{ category.image }}" class="">
+                        <div class="card-body">
+                            <a href="{{ category.href }}">{{ category.name }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="swiper-pager">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"><!--
+    $('#carousel-categories').swiper({
+        mode: 'horizontal',
+        slidesPerView: 6,
+        pagination: '.carouselcategories',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        autoplay: 2500,
+        loop: true
+    });
+    --></script>
+
+{{ footer }}
