@@ -589,6 +589,7 @@
                                   <td class="text-right">{{ entry_price }}</td>
                                   <td class="text-right">{{ entry_option_points }}</td>
                                   <td class="text-right">{{ entry_weight }}</td>
+                                  <td class="text-right">Image</td>
                                   <td></td>
                                 </tr>
                               </thead>
@@ -739,6 +740,12 @@
 
 
                                       </select> <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][weight]" value="{{ product_option_value.weight }}" placeholder="{{ entry_weight }}" class="form-control"/></td>
+
+                                    <td class="text-right">
+                                      <a href="" id="thumb-image{{ image_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ product_image.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}"/></a>
+                                      <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][color_image]" value="{{ product_image.image }}" id="input-image{{ image_row }}"/>
+                                    </td>
+
                                     <td class="text-right"><button type="button" onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                                   </tr>
                                   {% set option_value_row = option_value_row + 1 %}
@@ -1411,6 +1418,7 @@
 			  html += '        <td class="text-right">{{ entry_price }}</td>';
 			  html += '        <td class="text-right">{{ entry_option_points }}</td>';
 			  html += '        <td class="text-right">{{ entry_weight }}</td>';
+			  html += '        <td class="text-right">{{ entry_color_image}}</td>';
 			  html += '        <td></td>';
 			  html += '      </tr>';
 			  html += '  	 </thead>';
@@ -1494,6 +1502,7 @@
 	  html += '    <option value="-">-</option>';
 	  html += '  </select>';
 	  html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" /></td>';
+	  html += '<td class="text-right"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="" alt="" title="" data-placeholder=""></a><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][color_image]" value="" id="input-image"></td>';
 	  html += '  <td class="text-left"><button type="button" onclick="$(this).tooltip(\'destroy\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" rel="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	  html += '</tr>';
 

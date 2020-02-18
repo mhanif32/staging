@@ -39,6 +39,7 @@ class ControllerCommonMenu extends Controller {
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 				$data['sale_offer_link'] = $this->url->link('product/special');
+				$data['more_category'] = $this->url->link('product/category/listing');
 			}
 		}
 
