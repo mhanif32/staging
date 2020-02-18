@@ -180,25 +180,23 @@
                     {% else %}
                         <a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>
                         <a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>
-
                     {% endif %}
-
                 </div>
 
                 <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
                     {{ cart }}
                 </div>
             </div>
-            <div class="col-12 col-md-3 col-lg-2">
 
+            <div class="col-12 col-md-3 col-lg-2">
                 <div id="logo" class="mt-2">{% if logo %}<a href="{{ home }}">
                         <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}"
                              class="img-responsive"
                              style="max-width: 125px"/>
                         </a>{% else %}
                         <h1><a href="{{ home }}">{{ name }}</a></h1>
-                    {% endif %}</div>
-
+                    {% endif %}
+                </div>
             </div>
             <div class="col-12 col-md-4 col-lg-4 m-auto">
                 {{ search }}
