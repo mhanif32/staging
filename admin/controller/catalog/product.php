@@ -949,12 +949,26 @@ class ControllerCatalogProduct extends Controller {
 
 		$data['product_options'] = array();
 
+        $this->load->model('tool/image');
 		foreach ($product_options as $product_option) {
 			$product_option_value_data = array();
 
 			if (isset($product_option['product_option_value'])) {
 				foreach ($product_option['product_option_value'] as $product_option_value) {
-					$product_option_value_data[] = array(
+
+                    //option color images
+                    error_reporting(E_ALL);
+                    ini_set("display_errors", 1);
+                    //echo '<pre>';print_r(DIR_IMAGE . $product_option_value['color_image']);exit('asd');
+
+                    if (!empty($product_option_value['color_image']) && isset($product_option_value['color_image']) && is_file(DIR_IMAGE . $product_option_value['color_image'])) {
+                        $product_option_value_image = $this->model_tool_image->resize($product_option_value['color_image'], 100, 100);
+                        //$product_option_value_image = $product_option_value['color_image'];
+                    } else {
+                        $product_option_value_image = $this->model_tool_image->resize('no_image.png', 100, 100);;
+                    }
+
+				    $product_option_value_data[] = array(
 						'product_option_value_id' => $product_option_value['product_option_value_id'],
 						'option_value_id'         => $product_option_value['option_value_id'],
 						'quantity'                => $product_option_value['quantity'],
@@ -964,6 +978,7 @@ class ControllerCatalogProduct extends Controller {
 						'points'                  => $product_option_value['points'],
 						'points_prefix'           => $product_option_value['points_prefix'],
 						'weight'                  => $product_option_value['weight'],
+						'color_image'             => $product_option_value_image,
 						'weight_prefix'           => $product_option_value['weight_prefix']
 					);
 				}
