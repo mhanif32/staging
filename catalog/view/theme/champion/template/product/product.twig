@@ -8,10 +8,7 @@
                     {% if thumb or images %}
                     <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
-                            <a class="thumbnail" href="{{ image.popup }}"
-                               title="{{ heading_title }}">
-                                <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"
-                                     class="img-fluid"/></a>
+                            <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="img-fluid"/></a>
                         {% endif %}
                         <div class="row justify-content-center">
                             {% if images %}
@@ -97,17 +94,15 @@
                             {#                    <h3>{{ text_option }}</h3>#}
                             {% for option in options %}
                                 {% if option.type == 'select' %}
-                                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0">
+                                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0 ">
 
                                         <div class="product-size form-group{% if option.required %} required {% endif %}">
-                                            <div class="d-inline-block mr-2">
-                                                <label class="control-label"
+
+                                                <label class="control-label d-inline-block mr-2"
                                                        for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
-                                            </div>
-                                            <div class="select">
-                                                <select name="option[{{ option.product_option_id }}]"
+                                           <select name="option[{{ option.product_option_id }}]"
                                                         id="input-option{{ option.product_option_id }}"
-                                                        class="form-control">
+                                                        class="form-control d-inline-block w-60">
                                                     <option value="">{{ text_select }}</option>
                                                     {% for option_value in option.product_option_value %}
                                                         <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
@@ -116,11 +111,11 @@
                                                             {% endif %} </option>
                                                     {% endfor %}
                                                 </select>
-                                            </div>
+
                                         </div>
 
 
-                                        {##}
+
                                         {#<div class="form-group{% if option.required %} required {% endif %}">#}
                                         {#<label class="control-label"#}
                                         {#for="input-option{{ option.product_option_id }}">{{ option.name }}</label>#}
@@ -204,15 +199,15 @@
 
 
                             <div class="product-size form-group">
-                                <div class="d-inline-block mr-2">
-                                    <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
-                                </div>
-                                <div class="select">
+
+                                    <label class="control-label d-inline-block mr-2" for="input-quantity">{{ entry_qty }}</label>
+
+
                                     <input type="text" name="quantity" value="{{ minimum }}" size="2"
                                            id="input-quantity"
-                                           class="form-control"/>
+                                           class="form-control  d-inline-block w-60"/>
                                     <input type="hidden" name="product_id" value="{{ product_id }}"/>
-                                </div>
+
                             </div>
 
 

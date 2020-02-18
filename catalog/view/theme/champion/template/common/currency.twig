@@ -3,7 +3,7 @@
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency" class="text-center">
             <div class="btn-group w-100">
                 <button class="btn btn-link select text-left form-control rounded-0 justify-content-between"
-                        data-toggle="dropdown" style="height: 40px">
+                        data-toggle="dropdown" style="height: 38px">
                     <div class="d-inline-block"> {% for currency in currencies %}
                             {% if currency.symbol_left and currency.code == code %}
                                 <strong>{{ currency.symbol_left }}</strong>
