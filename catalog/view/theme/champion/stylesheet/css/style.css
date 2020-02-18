@@ -70,8 +70,7 @@ a.btn-primary:hover {
   width: 100% !important; }
 
 body {
-  font-family: "Poppins", sans-serif;
-  overflow: hidden; }
+  font-family: "Poppins", sans-serif; }
 
 h2 {
   font-size: calc(1.733rem + 0.9vw);
