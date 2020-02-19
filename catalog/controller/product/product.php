@@ -317,19 +317,26 @@ class ControllerProductProduct extends Controller {
 							$price = false;
 						}
 
-                        if ($option_value['color_image']) {
-                            $color_image = $this->model_tool_image->resize($option_value['color_image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
-                        } else {
-                            $color_image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                        $thumb_image = isset($option_value['color_image']) ? $option_value['color_image'] : $option_value['image'];
+                        $thumb = (!empty($thumb_image)) ?
+                            $this->model_tool_image->resize($thumb_image, 50, 50) : null;
+
+                        $large_image = isset($option_value['color_image']) ? $option_value['color_image'] : $option_value['image'];
+
+                        if ($large_image) {
+                            $large_image = $this->model_tool_image->resize($option_value['color_image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
                         }
+
+                        $large = (!empty($thumb)) ? $large_image : null;
+
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
-							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
+							'image'                   => $thumb,
 							'price'                   => $price,
 							'price_prefix'            => $option_value['price_prefix'],
-							'color_image'             => $color_image,
+							'color_image'             => $large,
 						);
 					}
 				}
