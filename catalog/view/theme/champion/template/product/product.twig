@@ -137,20 +137,28 @@
                                             <label class="control-label">{{ option.name }}</label>
                                             <div id="input-option{{ option.product_option_id }}">
                                                 {% for option_value in option.product_option_value %}
-                                                    <div class="radio">
+                                                    <div class="radio radio-image d-inline-block mr-1">
+                                                        {#<label>#}
+                                                            {#<input type="radio"#}
+                                                                   {#name="option[{{ option.product_option_id }}]"#}
+                                                                   {#value="{{ option_value.product_option_value_id }}"/>#}
+                                                            {#{% if option_value.image %} <img#}
+                                                                    {#src="{{ option_value.image }}"#}
+                                                                    {#alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"#}
+                                                                    {#class="img-thumbnail"/> {% endif %}#}
+                                                            {#{{ option_value.name }}#}
+                                                            {#{% if option_value.price %}#}
+                                                                {#({{ option_value.price_prefix }}{{ option_value.price }})#}
+                                                            {#{% endif %} </label>#}
                                                         <label>
                                                             <input type="radio"
                                                                    name="option[{{ option.product_option_id }}]"
                                                                    value="{{ option_value.product_option_value_id }}"/>
-                                                            {% if option_value.image %} <img
-                                                                    src="{{ option_value.image }}"
-                                                                    alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"
-                                                                    class="img-thumbnail"/> {% endif %}
-                                                            {{ option_value.name }}
-                                                            {% if option_value.price %}
-                                                                ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                            {% endif %} </label>
-                                                        <img src="{{ option_value.color_image }}" alt ="" />
+
+                                                            <img src="{{ option_value.color_image }}" width="50" height="50" class="img-thumbnail rounded-0" data-toggle="tooltip" data-html="true" title="{{ option_value.name }} {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}) {% endif %}"/>
+                                                        </label>
+
+                                                        {#<img src="{{ option_value.color_image }}" alt ="" />#}
                                                     </div>
                                                 {% endfor %} </div>
                                         </div>

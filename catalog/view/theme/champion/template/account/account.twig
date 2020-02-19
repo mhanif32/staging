@@ -222,15 +222,20 @@
                                         <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
                                     </div>
                                 </div> <!-- Add class 'active' to progress -->
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-12">
-                                        <ul id="progressbar" class="text-center">
-                                            <li class="active step0"></li>
-                                            <li class="active step0"></li>
-                                            <li class="active step0"></li>
-                                            <li class="step0"></li>
-                                        </ul>
-                                    </div>
+                                {#<div class="row d-flex justify-content-center">#}
+                                    {#<div class="col-12">#}
+                                        {#<ul id="progressbar" class="text-center">#}
+                                            {#<li class="active step0"></li>#}
+                                            {#<li class="active step0"></li>#}
+                                            {#<li class="active step0"></li>#}
+                                            {#<li class="step0"></li>#}
+                                        {#</ul>#}
+                                    {#</div>#}
+                                {#</div>#}
+                                <div class="progress mt-4 mx-5">
+                                    <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="row justify-content-between top">
                                     <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/9nnc9Et.png">

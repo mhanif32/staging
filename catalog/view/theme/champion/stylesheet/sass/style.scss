@@ -1284,3 +1284,12 @@ footer {
 //top: 0;
 //left: 50%;
 //}
+//---------------------------------
+//radio image
+.radio-image{
+  [type=radio] {position: absolute;opacity: 0;width: 0;height: 0;
+    /* CHECKED STYLES */
+    &:checked + img {outline: 1px solid $success;box-shadow: 0px 0px 10px 0px #01B0F1;}
+    /* IMAGE STYLES */
+    + img {cursor: pointer;}
+  }}
