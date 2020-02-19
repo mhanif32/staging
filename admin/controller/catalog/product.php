@@ -72,6 +72,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -950,10 +951,12 @@ class ControllerCatalogProduct extends Controller {
 		$data['product_options'] = array();
 
         $this->load->model('tool/image');
+        //echo '<pre>';print_r($product_options);exit('asd');
 		foreach ($product_options as $product_option) {
 			$product_option_value_data = array();
 
 			if (isset($product_option['product_option_value'])) {
+
 				foreach ($product_option['product_option_value'] as $product_option_value) {
 
                     //option color images
@@ -967,6 +970,14 @@ class ControllerCatalogProduct extends Controller {
                     } else {
                         $product_option_value_image = $this->model_tool_image->resize('no_image.png', 100, 100);;
                     }
+
+//                    if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
+//                        $data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
+//                    } elseif (!empty($product_info) && is_file(DIR_IMAGE . $product_info['image'])) {
+//                        $data['thumb'] = $this->model_tool_image->resize($product_info['image'], 100, 100);
+//                    } else {
+//                        $data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+//                    }
 
 				    $product_option_value_data[] = array(
 						'product_option_value_id' => $product_option_value['product_option_value_id'],
