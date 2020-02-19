@@ -8,7 +8,10 @@
                     {% if thumb or images %}
                     <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
-                            <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="img-fluid"/></a>
+                            <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}"
+                                                                                                     title="{{ heading_title }}"
+                                                                                                     alt="{{ heading_title }}"
+                                                                                                     class="img-fluid"/></a>
                         {% endif %}
                         <div class="row justify-content-center">
                             {% if images %}
@@ -95,26 +98,21 @@
                             {% for option in options %}
                                 {% if option.type == 'select' %}
                                     <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0 ">
-
                                         <div class="product-size form-group{% if option.required %} required {% endif %}">
-
-                                                <label class="control-label d-inline-block mr-2"
-                                                       for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
-                                           <select name="option[{{ option.product_option_id }}]"
-                                                        id="input-option{{ option.product_option_id }}"
-                                                        class="form-control d-inline-block w-60">
-                                                    <option value="">{{ text_select }}</option>
-                                                    {% for option_value in option.product_option_value %}
-                                                        <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
-                                                            {% if option_value.price %}
-                                                                ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                            {% endif %} </option>
-                                                    {% endfor %}
-                                                </select>
-
+                                            <label class="control-label d-inline-block mr-2"
+                                                   for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                                            <select name="option[{{ option.product_option_id }}]"
+                                                    id="input-option{{ option.product_option_id }}"
+                                                    class="form-control d-inline-block w-60">
+                                                <option value="">{{ text_select }}</option>
+                                                {% for option_value in option.product_option_value %}
+                                                    <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                                                        {% if option_value.price %}
+                                                            ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                        {% endif %} </option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
-
-
 
                                         {#<div class="form-group{% if option.required %} required {% endif %}">#}
                                         {#<label class="control-label"#}
@@ -137,7 +135,8 @@
                                     <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0">
                                         <div class="form-group{% if option.required %} required {% endif %}">
                                             <label class="control-label">{{ option.name }}</label>
-                                            <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                                            <div id="input-option{{ option.product_option_id }}">
+                                                {% for option_value in option.product_option_value %}
                                                     <div class="radio">
                                                         <label>
                                                             <input type="radio"
@@ -151,6 +150,7 @@
                                                             {% if option_value.price %}
                                                                 ({{ option_value.price_prefix }}{{ option_value.price }})
                                                             {% endif %} </label>
+                                                        <img src="{{ option_value.color_image }}" alt ="" />
                                                     </div>
                                                 {% endfor %} </div>
                                         </div>
@@ -200,13 +200,14 @@
 
                             <div class="product-size form-group">
 
-                                    <label class="control-label d-inline-block mr-2" for="input-quantity">{{ entry_qty }}</label>
+                                <label class="control-label d-inline-block mr-2"
+                                       for="input-quantity">{{ entry_qty }}</label>
 
 
-                                    <input type="text" name="quantity" value="{{ minimum }}" size="2"
-                                           id="input-quantity"
-                                           class="form-control  d-inline-block w-60"/>
-                                    <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                                <input type="text" name="quantity" value="{{ minimum }}" size="2"
+                                       id="input-quantity"
+                                       class="form-control  d-inline-block w-60"/>
+                                <input type="hidden" name="product_id" value="{{ product_id }}"/>
 
                             </div>
 
@@ -260,7 +261,8 @@
                                             <form action="" class="request-form">
                                                 <div class="form-group">
                                                     <div class="">
-                                                        <label class="control-label" for="input-quantity">{{ product_name }}</label>
+                                                        <label class="control-label"
+                                                               for="input-quantity">{{ product_name }}</label>
                                                     </div>
                                                     <div class="p-2 border rounded bg-light">
                                                         {{ heading_title }}
@@ -286,7 +288,8 @@
                                                                for="input-email">Email</label>
                                                     </div>
                                                     <div class="">
-                                                        <input type="email" name="email" value="" id="email" class="form-control"/>
+                                                        <input type="email" name="email" value="" id="email"
+                                                               class="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -314,7 +317,8 @@
                                                                for="input-comment">Comment</label>
                                                     </div>
                                                     <div class="">
-                                                        <textarea id="Comment" name="comment" rows="4" class="w-100"></textarea>
+                                                        <textarea id="Comment" name="comment" rows="4"
+                                                                  class="w-100"></textarea>
                                                     </div>
                                                 </div>
                                                 <input type="submit" class="btn btn-success px-5" value="Submit">
@@ -781,7 +785,7 @@
     });
 
     //modal: form submit
-    $("#id_form").on("submit", function(){
+    $("#id_form").on("submit", function () {
         //Code: Action (like ajax...)
         return false;
     });

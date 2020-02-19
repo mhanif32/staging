@@ -308,7 +308,7 @@ class ControllerProductProduct extends Controller {
 
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
 				$product_option_value_data = array();
-
+//echo '<pre>';print_r($option['product_option_value']);exit('aaaaaa');
 				foreach ($option['product_option_value'] as $option_value) {
 					if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 						if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
@@ -317,13 +317,19 @@ class ControllerProductProduct extends Controller {
 							$price = false;
 						}
 
+                        if ($option_value['color_image']) {
+                            $color_image = $this->model_tool_image->resize($option_value['color_image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                        } else {
+                            $color_image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                        }
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
 							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 							'price'                   => $price,
-							'price_prefix'            => $option_value['price_prefix']
+							'price_prefix'            => $option_value['price_prefix'],
+							'color_image'             => $color_image,
 						);
 					}
 				}
@@ -448,7 +454,7 @@ class ControllerProductProduct extends Controller {
 
 			//if loggin user is purchased this product before this time
             $data['isRatingForProduct'] = $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId());
-
+//echo '<pre>';print_r($data);exit('aaaa');
 			$this->response->setOutput($this->load->view('product/product', $data));
 		} else {
 			$url = '';
