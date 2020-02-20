@@ -1,6 +1,6 @@
 <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2">
-    <li class="active"><a href="#tab-returning-customer" data-toggle="tab" class="active">Returning Customer</a></li>
-    <li><a href="#tab-new-customer" data-toggle="tab">New Customer</a></li>
+    <li class="active" id="oldCust"><a href="#tab-returning-customer" data-toggle="tab" class="active">Returning Customer</a></li>
+    <li id="newCust"><a href="#tab-new-customer" data-toggle="tab">New Customer</a></li>
 </ul>
 <div class="row">
     <div class="tab-content">
@@ -26,8 +26,8 @@
             </div>
 
         </div>
-        <div class="tab-pane mt-3" id="tab-new-customer">
 
+        <div class="tab-pane mt-3" id="tab-new-customer">
             <div class="col-md-12">
                 <h2>{{ text_new_customer }}</h2>
                 <p>{{ text_checkout }}</p>
@@ -58,3 +58,11 @@
     </div>
 </div>
 
+<script>
+    $('#oldCust').click(function () {
+       $('.steps-data').hide();
+    });
+    $('#newCust').click(function () {
+        $('.steps-data').show();
+    });
+</script>

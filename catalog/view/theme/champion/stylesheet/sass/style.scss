@@ -381,8 +381,8 @@ header {background: white;z-index: 9999;
 
 // winter-collection
 .winter-collection{
-  @media only screen and (min-width: 921px) {.winter-text{ position: absolute;top: 25%;left: 15%;right: 15%;}}
-  @media only screen and (min-width: 1400px) { .lead-text{width: 35%;}}
+  @media only screen and (min-width: 921px) {.winter-text{ position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 10px 0;background-color: #17130fb8}}
+
   @media only screen and (max-width: 920px) {.winter-text{padding: 2rem 0;background-color: $primary;}}
 }
 

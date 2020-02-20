@@ -432,12 +432,12 @@ header {
 @media only screen and (min-width: 921px) {
   .winter-collection .winter-text {
     position: absolute;
-    top: 25%;
-    left: 15%;
-    right: 15%; } }
-@media only screen and (min-width: 1400px) {
-  .winter-collection .lead-text {
-    width: 35%; } }
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    padding: 10px 0;
+    background-color: #17130fb8; } }
 @media only screen and (max-width: 920px) {
   .winter-collection .winter-text {
     padding: 2rem 0;

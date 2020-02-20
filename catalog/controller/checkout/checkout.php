@@ -76,6 +76,7 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 
 		$data['logged'] = $this->customer->isLogged();
+		$data['style_data'] = $this->customer->isLogged() ? 'block' : 'none';
 
 		if (isset($this->session->data['account'])) {
 			$data['account'] = $this->session->data['account'];
