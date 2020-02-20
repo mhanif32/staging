@@ -93,7 +93,13 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$data['tracking'] = '';
 		}
-		
+
+		//order tracking system
+        $data['orders'] = array();
+        $this->load->model('account/order');
+        $data['order_status'] = $this->model_account_order->getTrackTotalOrders();
+		//echo '<pre>';print_r($data['order_status']);exit('okok');
+
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
