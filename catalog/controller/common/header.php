@@ -50,6 +50,13 @@ class ControllerCommonHeader extends Controller {
 			$this->load->model('account/wishlist');
 
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+            $data['firstname'] = $this->customer->getFirstName();
+            $data['lastname'] = $this->customer->getLastName();
+
+            $this->load->model('account/customer');
+            $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+            $data['loggedInRole'] = !empty($customer_info['role']) ? 'You are <b>'. ucfirst(str_replace("-"," ",$customer_info['role'])).'</b>' : '';
+
 		} else {
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
 		}
@@ -62,6 +69,8 @@ class ControllerCommonHeader extends Controller {
 		$data['account'] = $this->url->link('account/account', '', true);
 		$data['register'] = $this->url->link('account/register', '', true);
         $data['affiliate_register'] = $this->url->link('affiliate/register', '', true);
+        $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
+        $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
 
 		$data['login'] = $this->url->link('account/login', '', true);
 		$data['order'] = $this->url->link('account/order', '', true);
@@ -80,9 +89,6 @@ class ControllerCommonHeader extends Controller {
 		$data['menu'] = $this->load->controller('common/menu');
         $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
 
-        $data['firstname'] = $this->customer->getFirstName();
-        $data['lastname'] = $this->customer->getLastName();
-
         $this->load->model('localisation/country');
         $data['countries'] = $this->model_localisation_country->getCountries();
 
@@ -91,7 +97,6 @@ class ControllerCommonHeader extends Controller {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
         }
 
-		$data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
 		return $this->load->view('common/header', $data);
 	}
 }

@@ -131,6 +131,9 @@ $_['help_category']          = '(Autocomplete)';
 $_['help_filter']            = '(Autocomplete)';
 $_['help_download']          = '(Autocomplete)';
 $_['help_related']           = '(Autocomplete)';
+$_['help_meta_title']        = 'A meta title is an important part of website optimization, and it\'s distinct from the headline on the page itself. It acts as a name tag for the web page. The title is displayed on your browser tab and tells you what page you\'re on. Meta titles are also read by search engine robots and seen by users searching the web.';
+$_['help_meta_desc']          = 'The meta description is a snippet of up to about 155 characters – a tag in HTML – which summarizes a page\'s content. Search engines show the meta description in search results mostly when the searched-for phrase is within the description, so optimizing the meta description is crucial for on-page SEO.';
+$_['help_meta_keyword']     = 'Meta keywords are types of meta tags in the HTML source code of a webpage. They describe the content of a website shortly and concisely, and are therefore important indicators of a website\'s content to search engines. The keywords are generally written in lower case, and separated with a comma.';
 $_['help_tag']               = 'Comma separated';
 
 // Action
