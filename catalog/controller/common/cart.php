@@ -134,6 +134,7 @@ class ControllerCommonCart extends Controller {
 
 		$data['cart'] = $this->url->link('checkout/cart');
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
+        $data['loggedInRole'] = !empty($customer_info['role']) ? 'You are <b>'. ucfirst(str_replace("-"," ",$customer_info['role'])).'</b>' : '';
 
 		return $this->load->view('common/cart', $data);
 	}
