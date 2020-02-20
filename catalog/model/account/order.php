@@ -156,6 +156,13 @@ class ModelAccountOrder extends Model {
 		return $query->row['total'];
 	}
 
+    public function getTrackTotalOrders() {
+        $query = $this->db->query("SELECT os.name as status, o.invoice_prefix, o.order_id FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' LIMIT 1");
+
+        //return $query->rows;
+        return $query->row;
+    }
+
 	public function getTotalOrderProductsByOrderId($order_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 
