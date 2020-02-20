@@ -561,12 +561,14 @@ footer ul {
 #account-register .login-form {
   background-image: url("../../image/register-background.png");
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  background-attachment: fixed; }
 
 #account-login .login-form, .account-login .login-form, #account-forgotten .login-form {
   background-image: url("../../image/footwear-banner.png");
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  background-attachment: fixed; }
   #account-login .login-form label, .account-login .login-form label, #account-forgotten .login-form label {
     font-size: 0.9375rem;
     font-weight: 400; }
