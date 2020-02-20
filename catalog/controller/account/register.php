@@ -205,7 +205,7 @@ class ControllerAccountRegister extends Controller {
         } else {
             $data['action'] = $this->url->link('account/register', '', true);
         }
-		$data['role'] = !empty($this->request->get['role']) ? ucfirst($this->request->get['role']) : '';
+		$data['role'] = !empty($this->request->get['role']) ? ucfirst(str_replace('-', ' ', $this->request->get['role'])) : '';
 
 		$this->response->setOutput($this->load->view('account/register', $data));
 	}
