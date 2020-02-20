@@ -20,13 +20,15 @@
                 {% set class = 'col-sm-12' %}
             {% endif %}
             <div id="content" class="{{ class }} px-4">{{ content_top }}
-                <h3 class="my-5 text-center text-uppercase">
+                <h3 class="my-4 text-center text-uppercase">
                     {{ heading_title }}
                 </h3>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title">{{ text_checkout_option }}</h4>
+                            <h4 class="panel-title">
+                                {#{{ text_checkout_option }}#}
+                            </h4>
                         </div>
                         <div class="panel-collapse collapse" id="collapse-checkout-option">
                             <div class="panel-body"></div>
@@ -122,7 +124,7 @@ $(document).ready(function() {
         success: function(html) {
            $('#collapse-checkout-option .panel-body').html(html);
 
-			$('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_option }} <i class="fa fa-caret-down"></i></a>');
+			$('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"></a>');
 
 			$('a[href=\'#collapse-checkout-option\']').trigger('click');
         },

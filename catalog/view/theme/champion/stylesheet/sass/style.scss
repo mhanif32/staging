@@ -472,14 +472,14 @@ footer {
 
 // register-form
 #account-register{
-  .login-form{background-image: url("../../image/register-background.png");background-repeat: no-repeat;background-size: cover;}
+  .login-form{background-image: url("../../image/register-background.png");background-repeat: no-repeat;background-size: cover; background-attachment: fixed;}
 }
 
 
 // login-form
 #account-login, .account-login, #account-forgotten{
 
-.login-form {background-image: url("../../image/footwear-banner.png");background-repeat: no-repeat;background-size: cover;
+.login-form {background-image: url("../../image/footwear-banner.png");background-repeat: no-repeat;background-size: cover;background-attachment: fixed;
   label {font-size: 0.9375rem;font-weight: 400;}
   form.form-signin {width: 100%;max-width: 330px;padding: 15px;margin: auto;
     .form-control {border: 1px solid #d1cdcd;border-radius: 0;}}
