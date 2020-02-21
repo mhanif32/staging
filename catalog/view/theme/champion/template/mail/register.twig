@@ -105,16 +105,15 @@
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
                                         <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hi {{ text_firstname }}, {{ text_welcome }}</h3>
 
-
                                         {% if not approval %}
                                         <p style="margin-bottom: 0px; text-align: center;">{{ text_login }}</p>
-                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">Conform your email</a></p>
+                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
                                         <p align="center" style="margin-bottom: 0px; padding: 10px 0px;"> {{ text_service }} </p>
                                         <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>
 
                                         {% else %}
                                             <p style="margin-bottom: 0px; text-align: center;"> {{ text_approval }}</p>
-                                            <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ login }}</a></p>
+                                            <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
                                             <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>
                                         {% endif %}
                                     </div>
