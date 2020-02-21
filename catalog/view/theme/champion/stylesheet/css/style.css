@@ -125,6 +125,10 @@ h5 {
 .on-hover:hover {
   color: #01B0F1; }
 
+.on-hover-shadow:hover {
+  -webkit-box-shadow: 0px 0px 6px #00000029;
+          box-shadow: 0px 0px 6px #00000029; }
+
 .text-wrap {
   width: 140px;
   overflow: hidden;
@@ -215,9 +219,7 @@ p {
 
 .top-headerbar {
   /* Remove IE arrow */
-  /* Custom Select */
-  /* Arrow */
-  /* Transition */ }
+  /* Custom Select */ }
   .top-headerbar nav.nav {
     padding-top: 5px;
     /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -357,37 +359,48 @@ header {
       -webkit-transition: all .7s ease-in-out;
       transition: all .7s ease-in-out; }
   @media only screen and (min-width: 992px) {
-    header .navbar-nav-menu {
-      background-color: #f3f3f3; }
-      header .navbar-nav-menu > li {
-        width: 100px;
-        text-align: center;
-        -webkit-transition: all .6s ease;
-        transition: all .6s ease;
-        border-right: 3px solid #fff; }
-        header .navbar-nav-menu > li a {
-          text-decoration: none; }
-        header .navbar-nav-menu > li:hover {
-          background-color: #01B0F1;
-          -webkit-transition: all .6s ease;
-          transition: all .6s ease; }
-          header .navbar-nav-menu > li:hover > a {
-            color: #fff; }
-    header .navbar-nav-menu {
-      background-color: #f3f3f3; }
-      header .navbar-nav-menu > a {
-        width: 100px;
-        text-align: center;
-        -webkit-transition: all .6s ease;
-        transition: all .6s ease;
-        border-right: 3px solid #fff; }
-        header .navbar-nav-menu > a a {
-          text-decoration: none; }
-        header .navbar-nav-menu > a:hover {
-          background-color: #01B0F1;
-          -webkit-transition: all .6s ease;
-          transition: all .6s ease;
+    header .navbar-nav-menu > li {
+      width: 100px;
+      text-align: center;
+      border-right: 3px solid #fff;
+      background: -webkit-gradient(linear, left top, right top, color-stop(50%, #01B0F1), color-stop(50%, #f3f3f3));
+      background: linear-gradient(to right, #01B0F1 50%, #f3f3f3 50%);
+      background-size: 200% 100%;
+      background-position: right bottom;
+      -webkit-transition: all .5s ease-out;
+      transition: all .5s ease-out; }
+      header .navbar-nav-menu > li a {
+        text-decoration: none;
+        -webkit-transition: all .6s ease-out;
+        transition: all .6s ease-out; }
+      header .navbar-nav-menu > li:hover {
+        background-position: left bottom; }
+        header .navbar-nav-menu > li:hover > a {
+          color: #fff; }
+    header .navbar-nav-menu > a {
+      width: 100px;
+      text-align: center;
+      border-right: 3px solid #fff;
+      background: -webkit-gradient(linear, left top, right top, color-stop(50%, #01B0F1), color-stop(50%, #f3f3f3));
+      background: linear-gradient(to right, #01B0F1 50%, #f3f3f3 50%);
+      background-size: 200% 100%;
+      background-position: right bottom;
+      -webkit-transition: all .5s ease-out;
+      transition: all .5s ease-out; }
+      header .navbar-nav-menu > a a {
+        text-decoration: none; }
+      header .navbar-nav-menu > a li {
+        -webkit-transition: all .6s ease-out;
+        transition: all .6s ease-out; }
+      header .navbar-nav-menu > a:hover {
+        background-position: left bottom; }
+        header .navbar-nav-menu > a:hover > li {
           color: #fff; } }
+  header a.bg-white:hover, header a.bg-white:focus, header button.bg-white:hover, header button.bg-white:focus {
+    background-color: transparent !important;
+    outline: none;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important; }
 
 .home-banner .carousel-item {
   min-height: 320px; }

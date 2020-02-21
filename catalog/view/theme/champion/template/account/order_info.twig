@@ -20,7 +20,7 @@
                 </h3>
                 </div>
 
-                <table class="table table-bordered table-hover bg-white box-shadow">
+                <table class="table table-hover bg-white box-shadow">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" colspan="2">
@@ -38,7 +38,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <table class="table table-bordered table-hover bg-white box-shadow">
+                <table class="table table-hover bg-white box-shadow">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" style="width: 50%; vertical-align: top;">
@@ -59,7 +59,7 @@
                 <div class="form-signin card px-3 box-shadow mb-4">
                     <h3 class="f-20 font-weight-bold text-uppercase my-3">Order Price Details</h3>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr class="f-15 font-weight-bold bg-light">
                                 <td class="text-left">{{ column_name }}</td>
@@ -103,10 +103,10 @@
                             {% for total in totals %}
                                 <tr>
                                     <td colspan="3" class="border-0"></td>
-                                    <td class="text-right"><b>{{ total.title }}</b></td>
-                                    <td class="text-right">{{ total.text }}</td>
+                                    <td class="text-right border-0"><b>{{ total.title }}</b></td>
+                                    <td class="text-right border-0">{{ total.text }}</td>
                                     {% if products %}
-                                        <td></td>
+                                        <td class="text-right border-0"></td>
                                     {% endif %} </tr>
                             {% endfor %}
                             </tfoot>
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 {% if comment %}
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <td class="text-left">{{ text_comment }}</td>
@@ -131,7 +131,7 @@
                 {% if histories %}
                     <div class="form-signin card px-3 box-shadow mb-4">
                         <h3 class="f-20 font-weight-bold text-uppercase my-3">{{ text_history }}</h3>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr class="f-15 font-weight-bold bg-light">
                                 <td class="text-left">{{ column_date_added }}</td>
