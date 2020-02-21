@@ -371,7 +371,7 @@ header {
           background-color: #01B0F1;
           -webkit-transition: all .6s ease;
           transition: all .6s ease; }
-          header .navbar-nav-menu > li:hover a {
+          header .navbar-nav-menu > li:hover > a {
             color: #fff; }
     header .navbar-nav-menu {
       background-color: #f3f3f3; }
@@ -828,7 +828,7 @@ footer ul {
   font-size: 0.8125rem;
   font-weight: 400;
   vertical-align: middle; }
-  .my-order .table-bordered tbody td span {
+  .my-order .table-bordered tbody td span.onclick-remove {
     display: list-item;
     list-style-type: none;
     text-align: right;
@@ -840,10 +840,6 @@ footer ul {
     transition: all 0.5s ease; }
     .my-order .table-bordered tbody td i:hover {
       color: #01B0F1; }
-  .my-order .table-bordered tbody td .form-control {
-    border-color: #b4b4b4;
-    color: #b4b4b4;
-    font-size: 0.8125rem; }
 .my-order .table-bordered tbody .total td {
   color: #272727;
   font-size: 0.9375rem;
@@ -1289,3 +1285,17 @@ footer ul {
             box-shadow: 0px 0px 10px 0px #01B0F1; }
   .radio-image [type=radio] + img {
     cursor: pointer; }
+
+#product .number span, .my-order .number span {
+  cursor: pointer; }
+#product .number .minus, #product .number .plus, .my-order .number .minus, .my-order .number .plus {
+  width: 25px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  display: inline-block;
+  text-align: center;
+  height: 31px;
+  line-height: 30px; }
+#product .number input, .my-order .number input {
+  width: 100px;
+  text-align: center; }
