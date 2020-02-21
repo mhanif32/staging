@@ -146,7 +146,7 @@
                                     </div>
                                 {% endif %}
                                 {% if option.type == 'radio' %}
-                                    <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0">
+                                    <div class="col-12 pl-lg-0">
                                         <div class="form-group{% if option.required %} required {% endif %}">
                                             <label class="control-label">{{ option.name }}</label>
                                             <div id="input-option{{ option.product_option_id }}">
@@ -212,7 +212,7 @@
                             {% endfor %}
                         {% endif %}
 
-                        <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 pl-lg-0">
+                        <div class="col-12 pl-lg-0">
                             {% if recurrings %}
                                 <hr>
                                 <h3>{{ text_payment_recurring }}</h3>
@@ -232,11 +232,13 @@
 
                                 <label class="control-label d-inline-block mr-2"
                                        for="input-quantity">{{ entry_qty }}</label>
-
-
-                                <input type="text" name="quantity" value="{{ minimum }}" size="2"
-                                       id="input-quantity"
-                                       class="form-control  d-inline-block w-60"/>
+                                <div class="number d-inline-block">
+                                    <span class="minus">-</span>
+                                    <input type="text" name="quantity" value="{{ minimum }}" size="2"
+                                           id="input-quantity"
+                                           class="form-control  d-inline-block"/>
+                                    <span class="plus">+</span>
+                                </div>
                                 <input type="hidden" name="product_id" value="{{ product_id }}"/>
 
                             </div>
@@ -265,11 +267,11 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-md-6 col-sm-6">
+
 
                             <!-- Button trigger modal -->
-                            <div class="text-right position-relative btn-border-div buy-now">
-                                <a type="button" class="on-hover text-right" data-toggle="modal"
+                            <div class="mt-auto ml-auto">
+                                <a type="button" class="on-hover text-right f-13" data-toggle="modal"
                                         data-target="#exampleModalCenter">
                                     <i class="fas fa-ribbon"></i> {{ text_request_product }}
                                 </a>
@@ -357,7 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
 
                     {% if minimum > 1 %}
@@ -819,5 +821,25 @@
         //Code: Action (like ajax...)
         return false;
     });
+    //-------------quanity counter
+    $(document).ready(function() {
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+    });
+
+
+
     //--></script>
 
