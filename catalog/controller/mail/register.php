@@ -40,6 +40,13 @@ class ControllerMailRegister extends Controller {
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 		$mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
+
+        if ($this->request->server['HTTPS']) {
+            $server = $this->config->get('config_ssl');
+        } else {
+            $server = $this->config->get('config_url');
+        }
+        $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 		$mail->setText($this->load->view('mail/register', $data));
 		$mail->send(); 
 	}
