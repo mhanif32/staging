@@ -1,24 +1,21 @@
 {{ header }}
-<div id="account-reward" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+<div id="account-reward" class="bg-light">
+  {#<ul class="breadcrumb">#}
+    {#{% for breadcrumb in breadcrumbs %}#}
+    {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+    {#{% endfor %}#}
+  {#</ul>#}
+  <div class="container">
   <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+
+    <div id="content" class="col-12 my-5">{{ content_top }}
+
+      <div class="form-signin card px-4 box-shadow">
+      <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
       <p>{{ text_total }} <b>{{ total }}</b>.</p>
       <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <thead>
+        <table class="table table-hover">
+          <thead class="bg-light">
             <tr>
               <td class="text-left">{{ column_date_added }}</td>
               <td class="text-left">{{ column_description }}</td>
@@ -50,10 +47,11 @@
         <div class="col-sm-6 text-left">{{ pagination }}</div>
         <div class="col-sm-6 text-right">{{ results }}</div>
       </div>
-      <div class="buttons clearfix">
+      <div class="buttons clearfix mb-3">
         <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
       </div>
-      {{ content_bottom }}</div>
+          {{ content_bottom }}</div>
+    </div>
     {{ column_right }}</div>
-</div>
+  </div></div>
 {{ footer }}

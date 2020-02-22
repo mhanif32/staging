@@ -1,19 +1,14 @@
 <div id="cart" class="btn-group btn-block">
     <button type="button" data-toggle="dropdown" data-loading-text="{{ text_loading }}"
-            class="btn btn-inverse btn-block btn-lg dropdown-toggle px-2">
+            class="btn btn-inverse btn-block btn-lg dropdown-toggle">
 {#        <i class="fa fa-shopping-cart"></i>#}
 {#        <span id="cart-total">{{ text_items }}</span>#}
-        <a class="nav-link position-relative pb-1" href="">
-            <img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:1.8rem;">
+        {#<a class="nav-link position-relative pb-1" href="">#}
+            {#<img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:1.8rem;">#}
+        <i class="fas fa-shopping-bag f-35"></i>
             <span class="navbar-tool-label cart-balloon">{{ text_items }}</span>
-        </a>
+        {#</a>#}
         <span class="d-block f-13">Cart</span>
-        {% if loggedInRole %}
-            <small class="text-white f-12">{{ loggedInRole }}</small>
-        {% endif %}
-
-
-
     </button>
 
     <ul class="dropdown-menu dropdown-menu-right" style="width: max-content;">
