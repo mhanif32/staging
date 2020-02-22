@@ -30,6 +30,7 @@ a{text-decoration: none;&:hover{text-decoration: none;}}
 p {font-size: 0.9375rem;}
 .btn-border-div {z-index: 1;}
 .custom-btn {color: #FFFFFF;text-transform: uppercase;font-size: 0.875rem;font-weight: bold;}
+.btn{border-radius: 0;}
 .before-verticle-line{position: relative;
   &::before{content: "|";left: 0; position: absolute;
     top: 23px;}
@@ -1070,7 +1071,7 @@ footer {
   #progressbar li {
     list-style-type: none;
     font-size: 13px;
-    width: 25%;
+    width: 20%;
     float: left;
     position: relative;
     font-weight: 400
@@ -1085,7 +1086,7 @@ footer {
   #progressbar li:before {
     width: 40px;
     height: 40px;
-    line-height: 45px;
+    line-height: 42px;
     display: block;
     font-size: 20px;
     background: #C5CAE9;
@@ -1114,7 +1115,6 @@ footer {
 
   #progressbar li:nth-child(2):after,
   #progressbar li:nth-child(3):after {
-    left: -50%
   }
 
   #progressbar li:first-child:after {
