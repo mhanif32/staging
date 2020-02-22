@@ -35,6 +35,12 @@ class ControllerProductSearch extends Controller {
 			$category_id = 0;
 		}
 
+        if (isset($this->request->get['location'])) {
+            $location = $this->request->get['location'];
+        } else {
+            $location = '';
+        }
+
 		if (isset($this->request->get['sub_category'])) {
 			$sub_category = $this->request->get['sub_category'];
 		} else {
@@ -97,6 +103,10 @@ class ControllerProductSearch extends Controller {
 		if (isset($this->request->get['category_id'])) {
 			$url .= '&category_id=' . $this->request->get['category_id'];
 		}
+
+        if (isset($this->request->get['location'])) {
+            $url .= '&location=' . $this->request->get['location'];
+        }
 
 		if (isset($this->request->get['sub_category'])) {
 			$url .= '&sub_category=' . $this->request->get['sub_category'];
@@ -173,12 +183,13 @@ class ControllerProductSearch extends Controller {
 
 		$data['products'] = array();
 
-		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
+		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['location'])) {
 			$filter_data = array(
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
 				'filter_category_id'  => $category_id,
+				'filter_location'  => $location,
 				'filter_sub_category' => $sub_category,
 				'sort'                => $sort,
 				'order'               => $order,
