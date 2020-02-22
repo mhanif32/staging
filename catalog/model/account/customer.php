@@ -10,7 +10,7 @@ class ModelAccountCustomer extends Model {
         if (isset($this->request->get['role'])) {
             $data['role'] = $this->request->get['role'];
         } else {
-            $data['role'] = '';
+            $data['role'] = 'buyer';
         }
 
 		$this->load->model('account/customer_group');
