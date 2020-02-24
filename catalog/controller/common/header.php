@@ -96,31 +96,6 @@ class ControllerCommonHeader extends Controller {
         if(!empty($this->session->data['loggedInCountry'])) {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
         }
-
-        //more categories
-        $this->load->model('catalog/category');
-        $data['categories'] = array();
-        $categories = $this->model_catalog_category->getMoreCategories(0);
-        foreach($categories as $category) {
-
-            $data['subCategories'] = array();
-            $subCategories = $this->model_catalog_category->getMoreCategories($category['category_id']);
-            foreach($subCategories as $subCategory) {
-                $data['subCategories'][] = array(
-                    'category_id' => $subCategory['category_id'],
-                    'name'        => $subCategory['name'],
-                    'href'        => $this->url->link('product/category', 'path=' . $subCategory['category_id'])
-                );
-            }
-
-            $data['categories'][] = array(
-                'category_id' => $category['category_id'],
-                'name'        => $category['name'],
-                'href'        => $this->url->link('product/category', 'path=' . $category['category_id']),
-                'subCategories' =>  $data['subCategories']
-            );
-        }
-        //echo '<pre>';print_r($data);exit('adf');
 		return $this->load->view('common/header', $data);
 	}
 }

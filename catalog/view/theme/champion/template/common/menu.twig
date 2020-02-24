@@ -60,103 +60,26 @@
         <ul class="dropdown-menu mega-menu">
             <li>
                 <div class="row justify-content-end mx-3">
+                    {% if moreCategories %}
                     <ul class="col-md-3 media-list span4">
                         <li class="media">
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
+                                {% for moreCategory in moreCategories %}
+                                <h5 class="media-heading"><a href="#">{{ moreCategory.name }}</a></h5>
                                 <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
+                                    {% for subCategory in moreCategory.subCategories %}
+                                    <li><a href="#">{{ subCategory.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
+                                {% endfor %}
                             </div>
                         </li>
                     </ul>
-                    <ul class="col-md-3 media-list span4">
-                        <li class="media">
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
-                                <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="col-md-3 media-list span4">
-                        <li class="media">
-
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
-                                <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <hr>
-                <div class="row justify-content-end mx-3">
-                    <ul class="col-md-3 media-list span4">
-                        <li class="media">
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
-                                <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="col-md-3 media-list span4">
-                        <li class="media">
-
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
-                                <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="col-md-3 media-list span4">
-                        <li class="media">
-
-                            <div class="media-body">
-                                <h5 class="media-heading"><a href="#">Shiny Gadgets</a></h5>
-                                <ul class="unstyled">
-                                    <li><a href="#">Subcategory One</a></li>
-                                    <li><a href="#">Subcategory Two</a></li>
-                                    <li><a href="#">Subcategory Three</a></li>
-                                    <li><a href="#">Subcategory Four</a></li>
-                                    <li><a href="#">Subcategory Five</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                    {% endif %}
                 </div>
             </li>
         </ul>
     </li>
-
-
-    {#</div>#}
 {% endif %}
 
 
