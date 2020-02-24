@@ -109,6 +109,9 @@ h5 {
 .f-13 {
   font-size: 0.8125rem; }
 
+.f-120 {
+  font-size: 7.5rem; }
+
 .box-shadow {
   -webkit-box-shadow: 0px 0px 6px #00000029;
           box-shadow: 0px 0px 6px #00000029; }
@@ -167,6 +170,9 @@ p {
     left: 0;
     position: absolute;
     top: 23px; }
+
+.btn-link:hover, .btn-link:focus {
+  text-decoration: none; }
 
 #common-maintenance {
   width: 100%;
@@ -399,11 +405,32 @@ header {
         background-position: left bottom; }
         header .navbar-nav-menu > a:hover > li {
           color: #fff; } }
-  header a.bg-white:hover, header a.bg-white:focus, header button.bg-white:hover, header button.bg-white:focus {
+  header a.bg-white:hover, header a.bg-white:focus, header button.bg-white:hover, header button.bg-white:focus, header .btn:focus, header .btn.focus {
     background-color: transparent !important;
     outline: none;
     -webkit-box-shadow: none !important;
             box-shadow: none !important; }
+  header .nav-mega {
+    width: 100%; }
+  header .nav-mega.dropdown {
+    position: static; }
+  header .nav-mega.dropdown-menu.mega-menu {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    min-width: auto;
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+    border-color: #ccc; }
+  header .nav-mega.dropdown-menu.mega-menu > li {
+    padding: 20px; }
+  header .nav-mega.dropdown-menu.mega-menu .media-list .media {
+    padding: 10px;
+    font-size: 13px; }
+  header .nav-mega.dropdown-menu.mega-menu .media-list .media-heading {
+    font-size: 16px; }
 
 .home-banner .carousel-item {
   min-height: 320px; }
@@ -1163,7 +1190,7 @@ footer ul {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
   border: 1px solid #d1cdcd;
-  padding: 7px;
+  padding: 3px;
   border-right: none;
   background-color: #eeeeee; }
 
@@ -1312,3 +1339,38 @@ footer ul {
 #product .number input, .my-order .number input {
   width: 100px;
   text-align: center; }
+
+#information-about .header-top-text {
+  top: 65px;
+  left: 24px; }
+
+#contact-us .hero-image {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  background: url("../images/contact-hero-girl.png") no-repeat center;
+  background-size: cover; }
+#contact-us .container .inner-text {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  -webkit-transform: translate(-5%, -50%);
+          transform: translate(-5%, -50%); }
+@media only screen and (max-width: 991px) {
+  #contact-us .container .inner-text {
+    left: 0;
+    -webkit-transform: translate(0%, -50%);
+            transform: translate(0%, -50%); } }
+#contact-us .get-in-touch {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%); }
+#contact-us .information .information-icons {
+  width: 100px;
+  text-align: center;
+  border: 1px solid #C7C7C7;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 5px; }

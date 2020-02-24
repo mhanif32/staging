@@ -18,14 +18,14 @@ $_['button_save']    	= 'Save';
 $_['button_cancel']    	= 'Cancel';
 
 $_['tab_general'] 		= 'General';
-$_['tab_store'] 		= 'Store';
+$_['tab_store'] 		= 'Store Info';
 $_['tab_local'] 		= 'Local';
 $_['tab_image'] 		= 'Image';
 $_['tab_social_profiles'] = 'Social Profiles';
 $_['tab_seo'] 			= 'SEO';
 
 // Entry
-$_['entry_description'] 			= 'Description';
+$_['entry_description'] 			= 'About Store';
 $_['entry_meta_description'] 		= 'Meta Description';
 $_['entry_meta_keyword'] 			= 'Meta Keyword';
 $_['entry_store_owner'] 			= 'Seller Name';
