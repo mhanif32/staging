@@ -144,7 +144,9 @@
                                             <li><a href="{{ edit }}">{{ text_edit }}</a></li>
                                             <li><a href="{{ password }}">{{ text_password }}</a></li>
                                             <li><a href="{{ address }}">{{ text_address }}</a></li>
+                                            {% if role == 'buyer' %}
                                             <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -172,21 +174,17 @@
                                     </div>
                                 {% endif %}
 
+                                {% if role == 'buyer' %}
                                 <div id="content" class="col-12 col-sm-4 col-md-4 col-lg-4">
                                     <div class="card p-lg-5 p-3 h-100">
                                         <h4>{{ text_my_orders }}</h4>
                                         <ul class="list-unstyled">
                                             <li><a href="{{ order }}">{{ text_order }}</a></li>
-                                            {#                                            <li><a href="{{ download }}">{{ text_download }}</a></li>#}
-                                            {#                                            {% if reward %}#}
-                                            {#                                                <li><a href="{{ reward }}">{{ text_reward }}</a></li>#}
-                                            {#                                            {% endif %}#}
-                                            {#                                            <li><a href="{{ return }}">{{ text_return }}</a></li>#}
-                                            {#                                            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>#}
-                                            {#                                            <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>#}
                                         </ul>
                                     </div>
                                 </div>
+                                {% endif %}
+
                                 {#                                <div id="content" class="col-12 col-sm-4 col-md-4 col-lg-4">#}
                                 {#                                    <div class="card p-lg-5 p-3 h-100">#}
                                 {#                                        <h4>{{ text_my_affiliate }}</h4>#}
@@ -214,6 +212,7 @@
                         {% if order_status %}
 
                             <div class="container my-4">
+
                                 <div class="card">
                                     <div class="row d-flex">
                                         <div class="col-sm-12 justify-content-between">
@@ -272,14 +271,6 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    {#                                    Pending 20#}
-                                    {#                                    Processing 40#}
-                                    {#                                    Processed 60#}
-                                    {#                                    Shipped 80#}
-
-                                    {#                                    Complete 100#}
-                                    {#                                    Canceled 100#}
-                                    {#                                    Refunded 100#}
 
                                     <div class="row justify-content-between top">
                                         <div class="row d-flex icon-content"><img class="icon"

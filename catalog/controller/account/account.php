@@ -106,7 +106,8 @@ class ControllerAccountAccount extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-		
+		$data['role'] = $customer_info['role'];
+
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 
