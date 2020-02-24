@@ -166,7 +166,7 @@
                                         <div class="card p-lg-5 p-3 h-100">
                                             <h4>Seller Panel</h4>
                                             <ul class="list-unstyled">
-                                                <li><a href="{{ seller_link }}">Become a seller</a></li>
+                                                <li><a href="{{ seller_link }}">Complete Your Sellers Registration</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -213,9 +213,10 @@
 
                         {% if order_status %}
 
-                            <div class="container px-1 px-md-4 py-5 mx-auto">
+                            <div class="container my-4">
                                 <div class="card">
-                                    <div class="row d-flex justify-content-between px-3 top">
+                                    <div class="row d-flex">
+                                        <div class="col-sm-12 justify-content-between">
                                         <div class="d-flex">
                                             <h5>ORDER <span
                                                         class="text-primary font-weight-bold">#{{ order_status.invoice_prefix }}{{ order_status.order_id }}</span>
@@ -225,6 +226,7 @@
                                             <!--<p class="mb-0">Expected Arrival <span>01/12/19</span></p>
                                             <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>-->
                                         </div>
+                                    </div>
                                     </div> <!-- Add class 'active' to progress -->
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-12">

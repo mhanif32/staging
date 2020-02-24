@@ -18,6 +18,7 @@ h5 {font-size: 2.5rem;font-weight: 700;}
 .f-35{font-size: 2.1875rem;}
 .f-12{font-size: 12px;}
 .f-13{font-size: 0.8125rem;}
+.f-120 {font-size: 7.5rem;}
 .box-shadow{box-shadow: 0px 0px 6px #00000029;}
 .font-weight-medium{font-weight:500;}
 .font-family-opensans{font-family: 'Open Sans', sans-serif;}
@@ -1011,49 +1012,7 @@ footer {
 
 
 #account-account{
-
-  //.info-box {
-  //  display: block;
-  //  min-height: 90px;
-  //  background: #fff;
-  //  width: 100%;
-  //  border-radius: 2px;
-  //  margin-bottom: 15px;
-  //  .info-box-icon {
-  //    border-top-left-radius: 2px;
-  //    border-top-right-radius: 0;
-  //    border-bottom-right-radius: 0;
-  //    border-bottom-left-radius: 2px;
-  //    display: block;
-  //    float: left;
-  //    height: 90px;
-  //    width: 90px;
-  //    text-align: center;
-  //    font-size: 45px;
-  //    line-height: 90px;
-  //    background: rgba(0,0,0,0.2);
-  //  }
-  //  .info-box-content {
-  //    padding: 5px 10px;
-  //    margin-left: 90px;
-  //    .info-box-text {
-  //      text-transform: uppercase;
-  //      display: block;
-  //      font-size: 16px;font-weight: bold;
-  //
-  //      white-space: nowrap;
-  //      overflow: hidden;
-  //      text-overflow: ellipsis;
-  //    }
-  //
-  //  }
-  //
-  //}
-
-
-
   .card {z-index: 0;}
-
   .top {
     padding-top: 40px;
     padding-left: 6% !important;
@@ -1202,3 +1161,27 @@ footer {
     line-height: 30px;}
   input {width: 100px;text-align: center;}
   }}
+
+// about-us
+#information-about{
+  .header-bg-text{}
+  .header-top-text{top: 65px; left: 24px;}
+}
+
+// contact-us
+#contact-us{
+  .hero-image{
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background: url("../images/contact-hero-girl.png") no-repeat center;
+    background-size: cover;
+  }
+  .container{
+    .inner-text{position: absolute;top: 50%;left: 8%;transform: translate(-5%,-50%);}
+    @media only screen and (max-width: 991px) {.inner-text{left: 0;transform: translate(0%,-50%);} }
+  }
+  .get-in-touch{position: absolute;top: 100%;left: 50%;transform: translate(-50%,-100%);}
+
+  .information{.information-icons{width: 100px;text-align: center;border: 1px solid #C7C7C7; border-radius: 4px;padding: 20px;margin: 5px; }}
+}

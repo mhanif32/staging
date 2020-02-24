@@ -109,6 +109,9 @@ h5 {
 .f-13 {
   font-size: 0.8125rem; }
 
+.f-120 {
+  font-size: 7.5rem; }
+
 .box-shadow {
   -webkit-box-shadow: 0px 0px 6px #00000029;
           box-shadow: 0px 0px 6px #00000029; }
@@ -1312,3 +1315,38 @@ footer ul {
 #product .number input, .my-order .number input {
   width: 100px;
   text-align: center; }
+
+#information-about .header-top-text {
+  top: 65px;
+  left: 24px; }
+
+#contact-us .hero-image {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  background: url("../images/contact-hero-girl.png") no-repeat center;
+  background-size: cover; }
+#contact-us .container .inner-text {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  -webkit-transform: translate(-5%, -50%);
+          transform: translate(-5%, -50%); }
+@media only screen and (max-width: 991px) {
+  #contact-us .container .inner-text {
+    left: 0;
+    -webkit-transform: translate(0%, -50%);
+            transform: translate(0%, -50%); } }
+#contact-us .get-in-touch {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%); }
+#contact-us .information .information-icons {
+  width: 100px;
+  text-align: center;
+  border: 1px solid #C7C7C7;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 5px; }
