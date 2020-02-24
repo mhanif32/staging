@@ -36,6 +36,7 @@ p {font-size: 0.9375rem;}
   &::before{content: "|";left: 0; position: absolute;
     top: 23px;}
 }
+.btn-link:hover, .btn-link:focus {text-decoration: none;}
 #common-maintenance{
   width: 100%;
   position: relative;
@@ -252,9 +253,54 @@ header {background: white;z-index: 9999;
           > li{color: $white;}}
       }}
   }
-  a.bg-white:hover, a.bg-white:focus, button.bg-white:hover, button.bg-white:focus{
+  a.bg-white:hover, a.bg-white:focus, button.bg-white:hover, button.bg-white:focus, .btn:focus, .btn.focus{
     background-color: transparent!important;outline: none;box-shadow: none!important;
   }
+
+  //mega menu
+  .nav-mega {
+    width: 100%;
+  }
+  .nav-mega.dropdown {
+    position: static;
+  }
+  .nav-mega.dropdown-menu.mega-menu {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-border-radius-topleft: 0;
+    -webkit-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-right-radius: 0;
+    min-width: auto;
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+    border-color: #ccc;
+  }
+  .nav-mega.dropdown-menu.mega-menu > li {
+    padding: 20px;
+  }
+  .nav-mega.dropdown-menu.mega-menu .media-list .media {
+    padding: 10px;
+    font-size: 13px;
+  }
+  .nav-mega.dropdown-menu.mega-menu .media-list .media-heading {
+    font-size: 16px;
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
 // .home-banner
 .home-banner {
@@ -971,7 +1017,7 @@ footer {
       border-bottom-left-radius: 3px;
       border-top-left-radius: 3px;
       border: 1px solid #d1cdcd;
-      padding: 7px;
+      padding: 3px;
       border-right: none;
       background-color: #eeeeee;
     }
