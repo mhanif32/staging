@@ -94,8 +94,8 @@
                             </div>
                             <form action="{{ delete }}" method="post" id="form-product">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover list">
-                                        <thead>
+                                    <table class="table table-hover list">
+                                        <thead class="bg-light">
                                         <tr>
                                             <td style="width: 1px;" class="text-center"><input type="checkbox"
                                                                                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
@@ -169,7 +169,7 @@
                                                     <td class="text-right"><a href="{{ product.edit }}"
                                                                               data-toggle="tooltip"
                                                                               title="{{ button_edit }}"
-                                                                              class="btn btn-primary"><i
+                                                                              class="btn box-shadow on-hover"><i
                                                                     class="fa fa-pencil"></i></a></td>
                                                 </tr>
                                             {% endfor %}

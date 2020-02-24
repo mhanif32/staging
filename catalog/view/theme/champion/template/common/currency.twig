@@ -23,12 +23,12 @@
                     {% for currency in currencies %}
                         {% if currency.symbol_left %}
                             <li>
-                                <button class="currency-select btn btn-link btn-block" type="button"
+                                <button class="currency-select btn btn-link btn-block text-left f-12" type="button"
                                         name="{{ currency.code }}">{{ currency.symbol_left }} {{ currency.title }}</button>
                             </li>
                         {% else %}
                             <li>
-                                <button class="currency-select btn btn-link btn-block" type="button"
+                                <button class="currency-select btn btn-link btn-block text-left f-12" type="button"
                                         name="{{ currency.code }}">{{ currency.symbol_right }} {{ currency.title }}</button>
                             </li>
                         {% endif %}

@@ -48,38 +48,45 @@
             <a class="f-12" href="{{ category.href }}"> <li class="nav-item py-2" style="line-height: 12px;">{{ category.name }}
             </li>    </a>            {% endif %}
     {% endfor %}
-    <a class="f-12 text-white" href="{{ sale_offer_link }}"><li class="nav-item py-2" style="line-height: 12px; background-color: red;">SALE
-    </li></a>
+
 
     {#<a class="f-12" href="{{ more_category }}"><li class="nav-item py-2 bg-primary text-white" style="line-height: 12px;">MORE</li></a>#}
 
     <li class="dropdown nav-item bg-primary text-white nav-mega">
         <a href="#" class="f-12" data-toggle="dropdown" style="line-height: 12px;">
-            MORE <b class="caret"></b>
+            MORE
         </a>
         <ul class="dropdown-menu mega-menu">
             <li>
                 <div class="row justify-content-end mx-3">
                     {% if moreCategories %}
-                    <ul class="col-md-3 media-list span4">
+                        {% for moreCategory in moreCategories %}
+                    <ul class="col-12 media-list span4">
                         <li class="media">
                             <div class="media-body">
-                                {% for moreCategory in moreCategories %}
-                                <h5 class="media-heading"><a href="#">{{ moreCategory.name }}</a></h5>
-                                <ul class="unstyled">
+
+                                <h3 class="media-heading f-15"><a href="{{ moreCategory.href }}" class="f-15 font-weight-bold">{{ moreCategory.name }}</a></h3>
+                                <hr>
+                                <div class="list-unstyled row">
+
                                     {% for subCategory in moreCategory.subCategories %}
-                                    <li><a href="#">{{ subCategory.name }}</a></li>
+
+                                    <div class="col-md-3"><a href="{{ subCategory.href }}" class="f-12 text-success">{{ subCategory.name }}</a></div>
                                     {% endfor %}
-                                </ul>
-                                {% endfor %}
+
+                                </div>
+
                             </div>
                         </li>
                     </ul>
+                        {% endfor %}
                     {% endif %}
                 </div>
             </li>
         </ul>
     </li>
+    <a class="f-12 text-white" href="{{ sale_offer_link }}"><li class="nav-item py-2" style="line-height: 12px; background-color: red;">SALE
+        </li></a>
 {% endif %}
 
 

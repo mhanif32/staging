@@ -309,16 +309,17 @@ header {
   header .navbar-tool-label {
     position: absolute;
     right: 0;
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.9rem;
+    height: 1.9rem;
     border-radius: 50%;
     background-color: #01B0F1;
     color: #fff;
     font-size: 0.75rem;
     font-weight: 500;
     text-align: center;
-    border: 3px solid #fff;
-    line-height: 1.5rem; }
+    border: 2px solid #fff;
+    line-height: 1.7rem;
+    top: 0; }
   header select {
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -410,27 +411,24 @@ header {
     outline: none;
     -webkit-box-shadow: none !important;
             box-shadow: none !important; }
-  header .nav-mega {
-    width: 100%; }
   header .nav-mega.dropdown {
     position: static; }
-  header .nav-mega.dropdown-menu.mega-menu {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    min-width: auto;
-    width: 100%;
-    margin-top: 0;
-    padding: 0;
-    border-color: #ccc; }
-  header .nav-mega.dropdown-menu.mega-menu > li {
-    padding: 20px; }
-  header .nav-mega.dropdown-menu.mega-menu .media-list .media {
-    padding: 10px;
-    font-size: 13px; }
-  header .nav-mega.dropdown-menu.mega-menu .media-list .media-heading {
-    font-size: 16px; }
+  header .nav-mega {
+    width: 100%; }
+    header .nav-mega .dropdown-menu.mega-menu {
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      min-width: auto;
+      width: 100%;
+      margin-top: 0;
+      padding: 0;
+      border-color: #ccc; }
+      header .nav-mega .dropdown-menu.mega-menu > li {
+        padding: 20px; }
+      header .nav-mega .dropdown-menu.mega-menu .media-list .media {
+        padding: 10px; }
 
 .home-banner .carousel-item {
   min-height: 320px; }
@@ -744,7 +742,7 @@ footer ul {
     .product-details .product-images .column {
       width: 23%;
       text-align: center;
-      border: 1px solid #dcdcdc;
+      border-right: 1px solid #dcdcdc;
       padding: 0;
       margin: 0 4px 4px; }
     .product-details .product-images .demo {
