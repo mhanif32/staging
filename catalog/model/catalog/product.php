@@ -154,7 +154,7 @@ class ModelCatalogProduct extends Model {
 		}
 
         if (!empty($data['filter_location'])) {
-            $sql .= " AND p.location = '" . (int)$data['filter_location'] . "'";
+            $sql .= " AND p.location = '" . $data['filter_location'] . "'";
         }
 
 		$sql .= " GROUP BY p.product_id";
@@ -512,7 +512,7 @@ class ModelCatalogProduct extends Model {
 		}
 
         if (!empty($data['filter_location'])) {
-            $sql .= " AND p.location = '" . (int)$data['filter_location'] . "'";
+            $sql .= " AND p.location = '" . $data['filter_location'] . "'";
         }
 
 		if (!empty($data['filter_manufacturer_id'])) {
@@ -520,7 +520,7 @@ class ModelCatalogProduct extends Model {
 		}
 
 		$query = $this->db->query($sql);
-
+        //echo '<pre>';print_r($query->row['total']);exit('okoko');
 		return $query->row['total'];
 	}
 
