@@ -24,7 +24,7 @@
                                                            placeholder="{{ entry_date_start }}"
                                                            data-date-format="YYYY-MM-DD" id="input-date-start"
                                                            class="form-control"/>
-                                                    <span class="input-group-btn">
+                                                    <span class="input-group-btn position-absolute" style="right:0;">
                       <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                       </span></div>
                                             </div>
@@ -39,17 +39,20 @@
                                                            placeholder="{{ entry_date_end }}"
                                                            data-date-format="YYYY-MM-DD" id="input-date-end"
                                                            class="form-control"/>
-                                                    <span class="input-group-btn">
+                                                    <span class="input-group-btn position-absolute" style="right:0;">
                       <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                       </span></div>
                                             </div>
-                                            <button type="button" id="button-filter" class="btn btn-primary pull-right">
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="control-label invisible d-block">abcd</label>
+                                            <button type="button" id="button-filter" class="btn btn-primary w-100">
                                                 <i class="fa fa-filter"></i> {{ button_filter }}</button>
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="text-right">{{ text_final_commission }}: <b>{{ final_commission }}</b></h3>
-                                <br>
+                                <h3 class="text-left f-20">{{ text_final_commission }}: <b>{{ final_commission }}</b></h3>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover list">
                                         <thead>

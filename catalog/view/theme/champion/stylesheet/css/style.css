@@ -309,16 +309,17 @@ header {
   header .navbar-tool-label {
     position: absolute;
     right: 0;
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.9rem;
+    height: 1.9rem;
     border-radius: 50%;
     background-color: #01B0F1;
     color: #fff;
     font-size: 0.75rem;
     font-weight: 500;
     text-align: center;
-    border: 3px solid #fff;
-    line-height: 1.5rem; }
+    border: 2px solid #fff;
+    line-height: 1.7rem;
+    top: 0; }
   header select {
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -410,27 +411,24 @@ header {
     outline: none;
     -webkit-box-shadow: none !important;
             box-shadow: none !important; }
-  header .nav-mega {
-    width: 100%; }
   header .nav-mega.dropdown {
     position: static; }
-  header .nav-mega.dropdown-menu.mega-menu {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    min-width: auto;
-    width: 100%;
-    margin-top: 0;
-    padding: 0;
-    border-color: #ccc; }
-  header .nav-mega.dropdown-menu.mega-menu > li {
-    padding: 20px; }
-  header .nav-mega.dropdown-menu.mega-menu .media-list .media {
-    padding: 10px;
-    font-size: 13px; }
-  header .nav-mega.dropdown-menu.mega-menu .media-list .media-heading {
-    font-size: 16px; }
+  header .nav-mega {
+    width: 100%; }
+    header .nav-mega .dropdown-menu.mega-menu {
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      min-width: auto;
+      width: 100%;
+      margin-top: 0;
+      padding: 0;
+      border-color: #ccc; }
+      header .nav-mega .dropdown-menu.mega-menu > li {
+        padding: 20px; }
+      header .nav-mega .dropdown-menu.mega-menu .media-list .media {
+        padding: 10px; }
 
 .home-banner .carousel-item {
   min-height: 320px; }
@@ -538,13 +536,6 @@ header {
     background-color: #DCDCDC;
     height: 86%;
     z-index: -1; }
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .new-arrival .h-lg-135 {
-    min-height: 135px; } }
-.new-arrival .category-btn {
-  bottom: 10%;
-  left: 15%; }
 
 .subcribe-us .form-inline label {
   margin: 5px 10px 5px 0; }
@@ -744,7 +735,7 @@ footer ul {
     .product-details .product-images .column {
       width: 23%;
       text-align: center;
-      border: 1px solid #dcdcdc;
+      border-right: 1px solid #dcdcdc;
       padding: 0;
       margin: 0 4px 4px; }
     .product-details .product-images .demo {
@@ -1374,3 +1365,59 @@ footer ul {
   border-radius: 4px;
   padding: 20px;
   margin: 5px; }
+
+.new-arrival .category-btn {
+  bottom: 8px;
+  left: 20px; }
+  .new-arrival .category-btn a {
+    font-size: 13px; }
+.new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+  min-height: 200px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  @media (min-width: 768px) {
+    .new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+      min-height: 36vw; } }
+  @media (min-width: 1200px) {
+    .new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+      min-height: 512px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-2 {
+    min-height: 20vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-2 {
+    min-height: 300px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-3 {
+    min-height: 14vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-3 {
+    min-height: 197px; } }
+.new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+  min-height: 200px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  @media (min-width: 768px) {
+    .new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+      min-height: 14vw; } }
+  @media (min-width: 1200px) {
+    .new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+      min-height: 197px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-6 {
+    min-height: 20vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-6 {
+    min-height: 300px; } }
+
+#profile-column-left .accordion ul li {
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
+  #profile-column-left .accordion ul li:hover {
+    background-color: #F2F9FF;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease; }
+#profile-column-left .accordion > .card .card-header {
+  margin-bottom: -2px; }

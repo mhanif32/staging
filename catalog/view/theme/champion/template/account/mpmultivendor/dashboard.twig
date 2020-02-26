@@ -14,77 +14,138 @@
               <hr style="margin: 15px -25px">
             <div class="mv-dashboard-right">
               <div class="row">
-                <div class="col-sm-6">
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_sales }}</div>
-                        <div class="count highlight">{{ total_sales }}</div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_orders }} <a  href="{{ all_orders }}">{{ button_viewmore }}</a></div>
-                        <div class="count highlight">
-                        	<span class="cnt"><b>{{ total_orders }}</b></span>
-                        	{% for order_status in order_statuses %}
-                        		<div class="list">
-                              	<a href="{{ order_status.href }}">
-                               {{ order_status.name }}:
-                                <b>{{ order_status.total_orders }}</b>
-                            	</a>
-                          	</div>
-                          {% endfor %}
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_reviews }} <a href="{{ all_reviews }}">{{ text_viewmore }}</a></div>
-                        <div class="count highlight">
-                            {{ total_reviews }}
-                        </div>
-                      </li>
-                    </ul>
+                {#<div class="col-md-4">#}
+                  {#<div class="mv-ovrvw">#}
+                    {#<ul class="list-unstyled">#}
+                      {#<li>#}
+                        {#<div class="title"><i class="fas fa-chart-line"></i>{{ text_sales }}</div>#}
+                        {#<div class="count highlight">{{ total_sales }}</div>#}
+                      {#</li>#}
+                    {#</ul>#}
+                  {#</div>#}
+                {#</div>#}
+
+                <div class="col-md-4">
+                  <div class="card border-0 flex-row mb-4 box-shadow">
+                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/sale.svg" >
+                    <div class="card-body bg-white d-flex flex-column align-items-center">
+                        <a class="f-15">{{ text_sales }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ total_sales }}</p>
+                    </div>
                   </div>
                 </div>
-                <div class="col-sm-6">                  
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_commission }}</div>
-                        <div class="highlight">
-                        	<span>{{ total_commission }}</span>
-                        	<div class="list">
-                        		{{ text_recevied_payment }}: <b>{{ recevied_payment }}</b>
-                        	</div>	
-                        	<div class="list">
-                        		{{ text_available_balance }}: <b>{{ available_balance }}</b>
-                        	</div> 
-                        </div>
-                      </li>
-                    </ul>
-                  </div>  
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_products }} <a href="{{ new_product }}">{{ button_new_product }}</a></div>
-                        <div class="count highlight">{{ total_products }}</div>
-                      </li>
-                    </ul>
+                <div class="col-md-4">
+                {#<div class="mv-ovrvw">#}
+                    {#<ul class="list-unstyled">#}
+                      {#<li>#}
+                        {#<div class="title">{{ text_orders }} <a  href="{{ all_orders }}">{{ button_viewmore }}</a></div>#}
+                        {#<div class="count highlight">#}
+                        	{#<span class="cnt"><b>{{ total_orders }}</b></span>#}
+                        	{#{% for order_status in order_statuses %}#}
+                        		{#<div class="list">#}
+                              	{#<a href="{{ order_status.href }}">#}
+                               {#{{ order_status.name }}:#}
+                                {#<b>{{ order_status.total_orders }}</b>#}
+                            	{#</a>#}
+                          	{#</div>#}
+                          {#{% endfor %}#}
+                        {#</div>#}
+                      {#</li>#}
+                    {#</ul>#}
+                  {#</div>#}
+
+                  <div class="card border-0 flex-row mb-4 box-shadow">
+                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/truck.svg" >
+                    <div class="card-body bg-white d-flex flex-column align-items-center">
+                      <a class="f-15" href="{{ all_orders }}">{{ text_orders }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ total_orders }}</p>
+                          {% for order_status in order_statuses %}
+                      <div class="list">
+                        <a href="{{ order_status.href }}">
+                            {{ order_status.name }}:
+                          <p class="text-uppercase f-20 font-weight-bold">{{ order_status.total_orders }}</p>
+                        </a>
+                      </div>
+                        {% endfor %}
+                    </div>
                   </div>
-                  <div class="mv-ovrvw">
-                    <ul class="list-unstyled">
-                      <li>
-                        <div class="title">{{ text_services }} <a href="{{ new_service }}">{{ button_new_service }}</a></div>
-                        <div class="count highlight">{{ total_services }}</div>
-                      </li>
-                    </ul>
+                </div>
+                <div class="col-md-4">
+                  {#<div class="mv-ovrvw">#}
+                    {#<ul class="list-unstyled">#}
+                      {#<li>#}
+                        {#<div class="title">{{ text_reviews }} <a href="{{ all_reviews }}">{{ text_viewmore }}</a></div>#}
+                        {#<div class="count highlight">#}
+                            {#{{ total_reviews }}#}
+                        {#</div>#}
+                      {#</li>#}
+                    {#</ul>#}
+                  {#</div> #}
+                  <div class="card border-0 flex-row mb-4 box-shadow">
+                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/review.svg" >
+                    <div class="card-body bg-white d-flex flex-column align-items-center">
+                      <a class="f-15" href="{{ all_reviews }}">{{ text_reviews }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ total_reviews }}</p>
+                    </div>
                   </div>
+                </div>
+             
+                <div class="col-md-8">
+                  {#<div class="mv-ovrvw">#}
+                    {#<ul class="list-unstyled">#}
+                      {#<li>#}
+                        {#<div class="title">{{ text_commission }}</div>#}
+                        {#<div class="highlight">#}
+                        	{#<span>{{ total_commission }}</span>#}
+                        	{#<div class="list">#}
+                        		{#{{ text_recevied_payment }}: <b>{{ recevied_payment }}</b>#}
+                        	{#</div>	#}
+                        	{#<div class="list">#}
+                        		{#{{ text_available_balance }}: <b>{{ available_balance }}</b>#}
+                        	{#</div> #}
+                        {#</div>#}
+                      {#</li>#}
+                    {#</ul>#}
+                  {#</div>#}
+                  <div class="card border-0 flex-row mb-4 box-shadow">
+                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/money-bill-alt-regular.svg" style="width: 83px;">
+                    <div class="card-body pr-0 pl-2 bg-white d-flex flex-row align-items-start">
+                    <div class="d-inline-block">
+                      <a class="f-15">{{ text_commission }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ total_commission }}</p>
+                    </div>
+                      <div class="d-inline-block mx-3">
+                        <a class="f-15">{{ text_recevied_payment }}</a>
+                        <p class="text-uppercase f-20 font-weight-bold">{{ recevied_payment }}</p>
+                      </div>
+                      <div class="d-inline-block">
+                        <a class="f-15">{{ text_available_balance }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ available_balance }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  {#<div class="mv-ovrvw">#}
+                    {#<ul class="list-unstyled">#}
+                      {#<li>#}
+                        {#<div class="title">{{ text_products }} <a href="{{ new_product }}">{{ button_new_product }}</a></div>#}
+                        {#<div class="count highlight">{{ total_products }}</div>#}
+                      {#</li>#}
+                    {#</ul>#}
+                  {#</div>#}
+
+
+                  <div class="card border-0 flex-row mb-4 box-shadow">
+                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/product.svg">
+                    <div class="card-body bg-white d-flex flex-column align-items-center">
+                      <a class="f-15" href="{{ new_product }}">{{ text_products }}</a>
+                      <p class="text-uppercase f-20 font-weight-bold">{{ total_products }}</p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
                 </div>
               </div>
             </div>

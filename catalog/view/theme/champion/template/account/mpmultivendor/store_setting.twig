@@ -1,136 +1,138 @@
 {{ header }}
 <div id="mv-store-setting" class="bg-light">
-<div id="container" class="container">
-    {% if success %}
-        <div class="alert alert-success success"><i class="fa fa-check-circle"></i> {{ success }}</div>
-    {% endif %}
-    {% if error_warning %}
-        <div class="alert alert-danger warning alert-dismissible"><i
-                    class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
-    {% endif %}
-    <div class="row">
-        {{ profile_column_left }}
-        <div id="content" class="col-12 col-md-9 col-lg-9 py-5">
-            <div class="mv-dashboard-wrap">
-                <div class="row">
-                    <div class="col-sm-12 mv-reviews">
-                        <div class="form-signin card px-4 box-shadow">
-                            <div class="row justify-content-between mx-2">
-                                <div>
-                                    <h3 class="f-20 font-weight-bold text-uppercase mt-3">
-                                        {{ heading_title }}
-                                    </h3></div>
-                                <div class="my-auto">
-                                    <button type="submit" form="form-storeinfo" data-toggle="tooltip" title=""
-                                            class="btn btn-primary" data-original-title="{{ button_save }}"><i
-                                                class="fa fa-save"></i></button>
-                                    <a href="" data-toggle="tooltip" title="" class="btn btn-default"
-                                       data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i></a>
+    <div id="container" class="container">
+        {% if success %}
+            <div class="alert alert-success success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+        {% endif %}
+        {% if error_warning %}
+            <div class="alert alert-danger warning alert-dismissible"><i
+                        class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+        {% endif %}
+        <div class="row">
+            {{ profile_column_left }}
+            <div id="content" class="col-12 col-md-9 col-lg-9 py-5">
+                <div class="mv-dashboard-wrap">
+                    <div class="row">
+                        <div class="col-sm-12 mv-reviews">
+                            <div class="form-signin card px-4 box-shadow">
+                                <div class="row justify-content-between mt-3 px-3">
+                                    <div>
+                                        <h3 class="f-20 font-weight-bold text-uppercase">
+                                            {{ heading_title }}
+                                        </h3></div>
+                                    <div class="my-auto">
+                                        <button type="submit" form="form-storeinfo" data-toggle="tooltip" title=""
+                                                class="btn btn-primary" data-original-title="{{ button_save }}"><i
+                                                    class="fa fa-save"></i></button>
+                                        <a href="" data-toggle="tooltip" title="" class="btn btn-default"
+                                           data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr style="margin: 15px -25px">
+                                <hr style="margin: 15px -25px">
 
-                        <form method="post" enctype="multipart/form-data" class="form-horizontal"
-                              id="form-storeinfo">
-                            <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2 mb-2">
-                                <li class="active"><a href="#tab-shipping" data-toggle="tab">{{ tab_shipping }}</a>
-                                </li>
-                                <li><a href="#tab-payment" data-toggle="tab">{{ tab_payment }}</a></li>
-                            </ul>
-                            <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
-                                <div class="tab-pane active" id="tab-shipping">
-                                    <div class="form-group mp-buttons required">
-                                        <label class="col-sm-12 control-label">{{ entry_shipping_type }}</label>
-                                        <div class="col-sm-12 pay-btns">
-                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                                <label class="shipping_type btn btn-primary {{ shipping_type == 'order_wise' ? 'active' : '' }}">
-                                                    <input type="radio" name="shipping_type"
-                                                           value="order_wise" {{ shipping_type == 'order_wise' ? 'checked="checked"' : '' }} />{{ text_order_wise }}
-                                                </label>
-                                                <label class="shipping_type btn btn-primary {{ shipping_type == 'product_wise' ? 'active' : '' }}">
-                                                    <input type="radio" name="shipping_type"
-                                                           value="product_wise" {{ shipping_type == 'product_wise' ? 'checked="checked"' : '' }} />{{ text_product_wise }}
-                                                </label>
+                                <form method="post" enctype="multipart/form-data" class="form-horizontal"
+                                      id="form-storeinfo">
+                                    <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2 mb-2">
+                                        <li class="active"><a href="#tab-shipping" data-toggle="tab" class="active">{{ tab_shipping }}</a>
+                                        </li>
+                                        <li><a href="#tab-payment" data-toggle="tab">{{ tab_payment }}</a></li>
+                                    </ul>
+                                    <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
+                                        <div class="tab-pane active" id="tab-shipping">
+                                            <div class="form-group required">
+                                                {#mp-buttons#}
+                                                <label class="col-sm-12 control-label">{{ entry_shipping_type }}</label>
+                                                <div class="col-sm-12 pay-btns">
+                                                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                        <label class="shipping_type btn {{ shipping_type == 'order_wise' ? 'active' : '' }}">
+                                                            <input type="radio" name="shipping_type"
+                                                                   value="order_wise" {{ shipping_type == 'order_wise' ? 'checked="checked"' : '' }} />{{ text_order_wise }}
+                                                        </label>
+                                                        <label class="shipping_type btn {{ shipping_type == 'product_wise' ? 'active' : '' }}">
+                                                            <input type="radio" name="shipping_type"
+                                                                   value="product_wise" {{ shipping_type == 'product_wise' ? 'checked="checked"' : '' }} />{{ text_product_wise }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group required">
+                                                <label class="control-label col-sm-12">{{ entry_shipping_amount }}</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" name="shipping_amount"
+                                                           value="{{ shipping_amount }}"
+                                                           placeholder="{{ entry_shipping_amount }}"/>
+                                                    {% if error_shipping_amount %}
+                                                        <div class="text-danger">{{ error_shipping_amount }}</div>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group required">
-                                        <label class="control-label col-sm-12">{{ entry_shipping_amount }}</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" name="shipping_amount"
-                                                   value="{{ shipping_amount }}"
-                                                   placeholder="{{ entry_shipping_amount }}"/>
-                                            {% if error_shipping_amount %}
-                                                <div class="text-danger">{{ error_shipping_amount }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tab-payment">
-                                    <div class="form-group mp-buttons required">
-                                        <label class="col-sm-12 control-label">{{ entry_payment_type }}</label>
-                                        <div class="col-sm-12">
-                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                                <label class="payment_type btn btn-primary {{ payment_type == 'paypal' ? 'active' : '' }}">
-                                                    <input type="radio" name="payment_type"
-                                                           value="paypal" {{ payment_type == 'paypal' ? 'checked="checked"' : '' }} />{{ text_paypal }}
-                                                </label>
-                                                <label class="payment_type btn btn-primary {{ payment_type == 'bank' ? 'active' : '' }}">
-                                                    <input type="radio" name="payment_type"
-                                                           value="bank" {{ payment_type == 'bank' ? 'checked="checked"' : '' }} />{{ text_bank_transfer }}
-                                                </label>
-                                                <label class="payment_type btn btn-primary {{ payment_type == 'cheque' ? 'active' : '' }}">
-                                                    <input type="radio" name="payment_type"
-                                                           value="cheque" {{ payment_type == 'cheque' ? 'checked="checked"' : '' }} />{{ text_cheque }}
-                                                </label>
+                                        <div class="tab-pane" id="tab-payment">
+                                            <div class="form-group required">
+                                                {#mp-buttons#}
+                                                <label class="col-sm-12 control-label">{{ entry_payment_type }}</label>
+                                                <div class="col-sm-12">
+                                                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                        <label class="payment_type btn {{ payment_type == 'paypal' ? 'active' : '' }}">
+                                                            <input type="radio" name="payment_type"
+                                                                   value="paypal" {{ payment_type == 'paypal' ? 'checked="checked"' : '' }} />{{ text_paypal }}
+                                                        </label>
+                                                        <label class="payment_type btn {{ payment_type == 'bank' ? 'active' : '' }}">
+                                                            <input type="radio" name="payment_type"
+                                                                   value="bank" {{ payment_type == 'bank' ? 'checked="checked"' : '' }} />{{ text_bank_transfer }}
+                                                        </label>
+                                                        <label class="payment_type btn {{ payment_type == 'cheque' ? 'active' : '' }}">
+                                                            <input type="radio" name="payment_type"
+                                                                   value="cheque" {{ payment_type == 'cheque' ? 'checked="checked"' : '' }} />{{ text_cheque }}
+                                                        </label>
+                                                    </div>
+                                                    {% if error_payment_type %}
+                                                        <div class="text-danger">{{ error_payment_type }}</div>
+                                                    {% endif %}
+                                                </div>
                                             </div>
-                                            {% if error_payment_type %}
-                                                <div class="text-danger">{{ error_payment_type }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="form-group required payment_paypal {{ payment_type == 'paypal' ? '' : 'hide' }}">
-                                        <label class="control-label col-sm-12">{{ entry_paypal_email }}</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" name="paypal_email"
-                                                   value="{{ paypal_email }}"
-                                                   placeholder="{{ entry_paypal_email }}"/>
-                                            {% if error_paypal_email %}
-                                                <div class="text-danger">{{ error_paypal_email }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="form-group required payment_bank {{ payment_type == 'bank' ? '' : 'hide' }}">
-                                        <label class="control-label col-sm-12">{{ entry_bank_details }}</label>
-                                        <div class="col-sm-12">
+                                            <div class="form-group required payment_paypal {{ payment_type == 'paypal' ? '' : 'hide' }}">
+                                                <label class="control-label col-sm-12">{{ entry_paypal_email }}</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" name="paypal_email"
+                                                           value="{{ paypal_email }}"
+                                                           placeholder="{{ entry_paypal_email }}"/>
+                                                    {% if error_paypal_email %}
+                                                        <div class="text-danger">{{ error_paypal_email }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="form-group required payment_bank {{ payment_type == 'bank' ? '' : 'hide' }}">
+                                                <label class="control-label col-sm-12">{{ entry_bank_details }}</label>
+                                                <div class="col-sm-12">
                                                 <textarea name="bank_details" rows="8" class="form-control"
                                                           placeholder="{{ entry_bank_details }}">{{ bank_details }}</textarea>
-                                            {% if error_bank_details %}
-                                                <div class="text-danger">{{ error_bank_details }}</div>
-                                            {% endif %}
+                                                    {% if error_bank_details %}
+                                                        <div class="text-danger">{{ error_bank_details }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="form-group required payment_cheque {{ payment_type == 'cheque' ? '' : 'hide' }}">
+                                                <label class="control-label col-sm-12">{{ entry_cheque_payee }}</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" name="cheque_payee_name"
+                                                           value="{{ cheque_payee_name }}"
+                                                           placeholder="{{ entry_cheque_payee }}"/>
+                                                    {% if error_cheque_payee_name %}
+                                                        <div class="text-danger">{{ error_cheque_payee_name }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group required payment_cheque {{ payment_type == 'cheque' ? '' : 'hide' }}">
-                                        <label class="control-label col-sm-12">{{ entry_cheque_payee }}</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" name="cheque_payee_name"
-                                                   value="{{ cheque_payee_name }}"
-                                                   placeholder="{{ entry_cheque_payee }}"/>
-                                            {% if error_cheque_payee_name %}
-                                                <div class="text-danger">{{ error_cheque_payee_name }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {{ content_bottom }}</div>
-        {% if custom_themename != 'journal2' %}</div>{% endif %}
-</div>
+                {{ content_bottom }}</div>
+            {% if custom_themename != 'journal2' %}</div>{% endif %}
+    </div>
 </div>
 <script type="text/javascript">
     $('.payment_type').click(function () {
