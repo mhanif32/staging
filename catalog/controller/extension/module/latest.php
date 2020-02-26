@@ -63,6 +63,29 @@ class ControllerExtensionModuleLatest extends Controller {
 				);
 			}
 
+			//new arrival data
+            //more categories
+            $this->load->model('catalog/category');
+            $data['newCategories'] = array();
+            $categories = $this->model_catalog_category->getNewCategories(0);
+            foreach($categories as $category) {
+
+                if ($category['image']) {
+                    $image = $this->model_tool_image->resize($category['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
+                } else {
+                    $image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
+                }
+
+                $data['newCategories'][] = array(
+                    'category_id' => $category['category_id'],
+                    'name'        => $category['name'],
+                    'href'        => $this->url->link('product/category', 'path=' . $category['category_id']),
+                    'image'       => $image
+                );
+            }
+
+            //echo '<pre>';print_r($categories); exit('aaa');
+
 			return $this->load->view('extension/module/latest', $data);
 		}
 	}

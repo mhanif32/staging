@@ -27,91 +27,87 @@
   {#{% endfor %} </div>#}
 
 <section class="new-arrival">
-  <h3 class="text-center font-weight-bolder text-primary my-5">NEW ARRIVAL</h3>
-  <div class="container-fluid" style="max-width: 1500px">
-    <div class="row">
-      <div class="col-12 col-md-5 d-flex flex-column pl-md-0">
-        <!-- Background -->
-
-            <div class="card-bg-img-1 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/z2f6jdkx.png);">
-              {#<img src="catalog/view/theme/champion/image/products/z2f6jdkx.png" alt="" class="img-fluid h-lg-600">#}
-            </div>
-            <div class="position-absolute d-inline-block category-btn">
-              <a href="#" class="btn btn-white text-black">Clothings</a>
-            </div>
-
-      </div>
-      <div class="col-12 col-md-3 px-md-0">
-        <div class="col-12 col-md-12 mb-3 p-0">
-          <!-- Card -->
-          <div class="card-bg-img-2 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/6z7l1ncl.png);">
-            {#<img src="catalog/view/theme/champion/image/products/6z7l1ncl.png" alt="" class="img-fluid h-lg-376">#}
-          </div>
-          <div class="position-absolute d-inline-block category-btn">
-            <a href="#" class="btn btn-white text-black">Handbag</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-12 p-0">
-          <!-- Card -->
-          <div class="card-bg-img-3 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/0pycqfzt.png);">
-            {#<img src="catalog/view/theme/champion/image/products/0pycqfzt.png" alt="" class="img-fluid h-lg-200">#}
-          </div>
-          <div class="position-absolute d-inline-block category-btn">
-            <a href="#" class="btn btn-white text-black">Sunglasses</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
+    <h3 class="text-center font-weight-bolder text-primary my-5">NEW ARRIVAL</h3>
+    <div class="container-fluid" style="max-width: 1500px">
         <div class="row">
-          <div class="col-12 col-md-6 mb-3">
-            <!-- Card -->
-            <div class="card-bg-img-4 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/odjei9xs.png);">
-              {#<img src="catalog/view/theme/champion/image/products/odjei9xs.png" alt="" class="img-fluid h-lg-135">#}
+            <div class="col-12 col-md-5 d-flex flex-column pl-md-0">
+                <!-- Background -->
+
+                <div class="card-bg-img-1 position-relative"
+                     style="background-image: url({{ newCategories[0].image }});">
+                </div>
+                <div class="position-absolute d-inline-block category-btn">
+                    <a href="{{ newCategories[0].href }}" class="btn btn-white text-black">{{ newCategories[0].name }}</a>
+                </div>
+
             </div>
-            <div class="position-absolute d-inline-block category-btn">
-              <a href="#" class="btn btn-white text-black">Scarf Scarves</a>
+            <div class="col-12 col-md-3 px-md-0">
+                <div class="col-12 col-md-12 mb-3 p-0">
+                    <!-- Card -->
+                    <div class="card-bg-img-2 position-relative" style="background-image: url({{ newCategories[1].image }});">
+                    </div>
+                    <div class="position-absolute d-inline-block category-btn">
+                        <a href="{{ newCategories[1].href }}" class="btn btn-white text-black">{{ newCategories[1].name }}</a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 p-0">
+                    <!-- Card -->
+                    <div class="card-bg-img-3 position-relative" style="background-image: url({{ newCategories[2].image }});">
+                    </div>
+                    <div class="position-absolute d-inline-block category-btn">
+                        <a href="{{ newCategories[2].href }}" class="btn btn-white text-black">{{ newCategories[2].name }}</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-12 col-md-6 mb-3 px-md-0">
-            <!-- Card -->
-            <div class="card-bg-img-5 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/vra712r3.png);">
-              {#<img src="catalog/view/theme/champion/image/products/vra712r3.png" alt="" class="img-fluid h-lg-135">#}
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <!-- Card -->
+                        <div class="card-bg-img-4 position-relative"
+                             style="background-image: url({{ newCategories[3].image }});">
+                            {#<img src="catalog/view/theme/champion/image/products/odjei9xs.png" alt="" class="img-fluid h-lg-135">#}
+                        </div>
+                        <div class="position-absolute d-inline-block category-btn">
+                            <a href="{{ newCategories[3].href }}" class="btn btn-white text-black">{{ newCategories[3].name }}</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3 px-md-0">
+                        <!-- Card -->
+                        <div class="card-bg-img-5 position-relative"
+                             style="background-image: url({{ newCategories[4].image }});">
+                            {#<img src="catalog/view/theme/champion/image/products/vra712r3.png" alt="" class="img-fluid h-lg-135">#}
+                        </div>
+                        <div class="position-absolute d-inline-block category-btn">
+                            <a href="{{ newCategories[4].href }}" class="btn btn-white text-black">{{ newCategories[4].name }}</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 pr-md-0">
+                        <!-- Card -->
+                        <div class="card-bg-img-6 position-relative"
+                             style="background-image: url({{ newCategories[5].image }});">
+                            {#<img src="catalog/view/theme/champion/image/products/x2ufo1kq.png" alt="" class="img-fluid h-lg-336">#}
+                        </div>
+                        <div class="position-absolute d-inline-block category-btn">
+                            <a href="{{ newCategories[5].href }}" class="btn btn-white text-black">{{ newCategories[5].name }}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="position-absolute d-inline-block category-btn">
-              <a href="#" class="btn btn-white text-black">Shoes</a>
-            </div>
-          </div>
-          <div class="col-12 col-md-12 pr-md-0">
-            <!-- Card -->
-            <div class="card-bg-img-6 position-relative" style="background-image: url(catalog/view/theme/champion/image/products/x2ufo1kq.png);">
-              {#<img src="catalog/view/theme/champion/image/products/x2ufo1kq.png" alt="" class="img-fluid h-lg-336">#}
-            </div>
-            <div class="position-absolute d-inline-block category-btn">
-              <a href="#" class="btn btn-white text-black">Clothings</a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 
-
-
-
-
-
-
 <section class="subcribe-us">
-  <div class="m-auto">
-    <div class="inner-text text-center py-5">
-      <h3 class="font-weight-bolder text-primary ">KNOW IT ALL FIRST!</h3>
-      <p class="text-secondary f-15">Subscribe to our newsletters now and stay up to date with new collections, the latest lookbooks and exclusive offers.</p>
-      <form class="form-inline justify-content-center" action="/action_page.php">
-        <input type="email" id="email" placeholder="Enter Your Email Address" name="email">
-        <button type="submit">Submit</button>
-      </form>
+    <div class="m-auto">
+        <div class="inner-text text-center py-5">
+            <h3 class="font-weight-bolder text-primary ">KNOW IT ALL FIRST!</h3>
+            <p class="text-secondary f-15">Subscribe to our newsletters now and stay up to date with new collections,
+                the latest lookbooks and exclusive offers.</p>
+            <form class="form-inline justify-content-center" action="/action_page.php">
+                <input type="email" id="email" placeholder="Enter Your Email Address" name="email">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-  </div>
 </section>
