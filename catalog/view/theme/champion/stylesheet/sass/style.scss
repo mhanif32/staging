@@ -271,7 +271,7 @@ header {background: white;z-index: 9999;
 .home-banner {
   .carousel-item {min-height: 320px;}
   .carousel-caption {top: 8%;z-index: 0;}
-  .carousel-indicators {bottom: 2rem;
+  .carousel-indicators {
     li {height: 8px;background-color: $gray-300;}
     .active {opacity: 1;background-color: $success;}
   }

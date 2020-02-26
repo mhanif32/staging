@@ -1,8 +1,10 @@
 <?php
 class ControllerAccountMpmultivendorMpsellerLinks extends Controller {
 	public function index() {
-		if($this->config->get('mpmultivendor_status') && $this->customer->isLogged()) {			
-			$this->load->language('account/mpmultivendor/mpseller_links');
+		if($this->config->get('mpmultivendor_status') && $this->customer->isLogged()) {
+            $this->load->language('account/edit');
+
+            $this->load->language('account/mpmultivendor/mpseller_links');
 			
 			$this->load->model('account/customer');
 

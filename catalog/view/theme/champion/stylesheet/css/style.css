@@ -435,14 +435,12 @@ header {
 .home-banner .carousel-caption {
   top: 8%;
   z-index: 0; }
-.home-banner .carousel-indicators {
-  bottom: 2rem; }
-  .home-banner .carousel-indicators li {
-    height: 8px;
-    background-color: #DCDCDC; }
-  .home-banner .carousel-indicators .active {
-    opacity: 1;
-    background-color: #01B0F1; }
+.home-banner .carousel-indicators li {
+  height: 8px;
+  background-color: #DCDCDC; }
+.home-banner .carousel-indicators .active {
+  opacity: 1;
+  background-color: #01B0F1; }
 @media only screen and (max-width: 612px) {
   .home-banner .carousel-indicators {
     display: none; } }

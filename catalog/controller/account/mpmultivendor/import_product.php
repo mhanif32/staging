@@ -13,8 +13,9 @@ class ControllerAccountMpmultivendorImportProduct extends Controller {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
 
-		
-		$this->load->language('account/mpmultivendor/import_product');
+        $this->load->language('account/edit');
+
+        $this->load->language('account/mpmultivendor/import_product');
 
 		$this->load->model('account/mpmultivendor/seller');
 

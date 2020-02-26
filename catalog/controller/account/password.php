@@ -10,6 +10,7 @@ class ControllerAccountPassword extends Controller {
 		}
 
 		$this->load->language('account/password');
+        $this->load->language('account/edit');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
