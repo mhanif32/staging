@@ -461,8 +461,7 @@ class ControllerProductProduct extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
 			//if loggin user is purchased this product before this time
-            $data['isRatingForProduct'] = $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId());
-//echo '<pre>';print_r($data);exit('aaaa');
+            $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
 			$this->response->setOutput($this->load->view('product/product', $data));
 		} else {
 			$url = '';
