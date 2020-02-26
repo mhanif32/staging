@@ -537,13 +537,6 @@ header {
     height: 86%;
     z-index: -1; }
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .new-arrival .h-lg-135 {
-    min-height: 135px; } }
-.new-arrival .category-btn {
-  bottom: 10%;
-  left: 15%; }
-
 .subcribe-us .form-inline label {
   margin: 5px 10px 5px 0; }
 .subcribe-us .form-inline input {
@@ -1372,3 +1365,59 @@ footer ul {
   border-radius: 4px;
   padding: 20px;
   margin: 5px; }
+
+.new-arrival .category-btn {
+  bottom: 8px;
+  left: 20px; }
+  .new-arrival .category-btn a {
+    font-size: 13px; }
+.new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+  min-height: 200px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  @media (min-width: 768px) {
+    .new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+      min-height: 36vw; } }
+  @media (min-width: 1200px) {
+    .new-arrival .card-bg-img-1, .new-arrival .card-bg-img-2, .new-arrival .card-bg-img-3 {
+      min-height: 512px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-2 {
+    min-height: 20vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-2 {
+    min-height: 300px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-3 {
+    min-height: 14vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-3 {
+    min-height: 197px; } }
+.new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+  min-height: 200px;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
+  @media (min-width: 768px) {
+    .new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+      min-height: 14vw; } }
+  @media (min-width: 1200px) {
+    .new-arrival .card-bg-img-4, .new-arrival .card-bg-img-5, .new-arrival .card-bg-img-6 {
+      min-height: 197px; } }
+@media (min-width: 768px) {
+  .new-arrival .card-bg-img-6 {
+    min-height: 20vw; } }
+@media (min-width: 1200px) {
+  .new-arrival .card-bg-img-6 {
+    min-height: 300px; } }
+
+#profile-column-left .accordion ul li {
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
+  #profile-column-left .accordion ul li:hover {
+    background-color: #F2F9FF;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease; }
+#profile-column-left .accordion > .card .card-header {
+  margin-bottom: -2px; }

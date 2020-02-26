@@ -332,22 +332,6 @@ header {background: white;z-index: 9999;
     }
   }
 
-  // new-arrival
-  .new-arrival{
-    @media (min-width: 1025px) and (max-width: 1280px) {
-      //.h-lg-600{min-height: 600px;}
-      //.h-lg-376{min-height: 376px;}
-      //.h-lg-200{min-height: 200px;}
-      .h-lg-135{min-height: 135px;}
-      //.h-lg-336{min-height: 336px;}
-    }
-    .category-btn{
-      bottom: 10%;
-      left: 15%;
-    }
-    }
-
-
 // subcribe-us
 .subcribe-us {
   .form-inline{
@@ -1195,4 +1179,86 @@ footer {
   .get-in-touch{position: absolute;top: 100%;left: 50%;transform: translate(-50%,-100%);}
 
   .information{.information-icons{width: 100px;text-align: center;border: 1px solid #C7C7C7; border-radius: 4px;padding: 20px;margin: 5px; }}
+}
+
+
+// new-arrival
+.new-arrival{
+
+  .category-btn{
+    bottom: 8px;
+    left: 20px;
+    a{font-size: 13px;}
+  }
+
+
+  .card-bg-img-1, .card-bg-img-2, .card-bg-img-3 {
+    //background-image: url(../../image/z2f6jdkx.png);
+    min-height: 200px;
+    @media (min-width: 768px) {
+      min-height: 36vw;
+    }
+    @media (min-width: 1200px) {
+      min-height: 512px;
+    }
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .card-bg-img-2 {
+    //background-image: url(../../image/6z7l1ncl.png);
+    @media (min-width: 768px) {
+      min-height: 20vw;
+    }
+    @media (min-width: 1200px) {
+      min-height: 300px;
+    }
+  }
+  .card-bg-img-3 {
+    //background-image: url(../../image/0pycqfzt.png);
+    @media (min-width: 768px) {
+      min-height: 14vw;
+    }
+    @media (min-width: 1200px) {
+      min-height: 197px;
+    }
+  }
+
+  .card-bg-img-4, .card-bg-img-5, .card-bg-img-6 {
+    //background-image: url(../../image/odjei9xs.png);
+    min-height: 200px;
+    @media (min-width: 768px) {
+      min-height: 14vw;
+    }
+    @media (min-width: 1200px) {
+      min-height: 197px;
+    }
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+  .card-bg-img-5 {
+    //background-image: url(../../image/vra712r3.png);
+  }
+  .card-bg-img-6 {
+    //background-image: url(../../image/x2ufo1kq.png);
+    @media (min-width: 768px) {
+      min-height: 20vw;
+    }
+    @media (min-width: 1200px) {
+      min-height: 300px;
+    }
+  }
+}
+
+#profile-column-left{
+  .accordion{
+    ul{
+      li{transition: all .5s ease;
+        &:hover{ background-color: #F2F9FF; transition: all .5s ease;}
+      }
+    }
+  }
+  .accordion > .card .card-header{margin-bottom: -2px;}
 }
