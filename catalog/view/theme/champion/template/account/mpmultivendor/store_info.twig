@@ -27,9 +27,12 @@
                     <div class="text-right">
                         <button type="submit" form="form-storeinfo" data-toggle="tooltip" title=""
                                 class="btn btn-primary" data-original-title="{{ button_save }}"><i
-                                    class="fa fa-save"></i></button>
-                        <a href="" data-toggle="tooltip" title="" class="btn btn-default"
-                           data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i></a>
+                                    class="fa fa-save"></i> Save</button>
+                        {#<a href="" data-toggle="tooltip" title="" class="btn btn-default"#}
+                           {#data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i> Cancel</a>#}
+
+                        <a href='javascript:history.back(1);' data-toggle="tooltip" title="" class="btn btn-default"
+                           data-original-title="cancel"><i class="fa fa-reply"></i> Cancel</a>
                     </div>
 
                     <div class="row ">
