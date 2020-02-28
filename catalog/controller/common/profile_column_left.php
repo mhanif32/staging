@@ -61,6 +61,16 @@ class ControllerCommonProfileColumnLeft extends Controller {
 
         //end
         $data = array_merge($data, $customer_info);
+
+        $this->load->model('tool/image');
+//        if ($customer_info['image']) {
+//            $image = $this->model_tool_image->resize($customer_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
+//        } else {
+//            $image = $this->model_tool_image->resize('no-avatar.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
+//        }
+//        echo $customer_info['image'];exit('aaaaaaa');
+//        $data['image_url'] = $image;
+
         $file = !empty($customer_info['image']) ? $customer_info['image'] : 'no-avatar.png';
         $data['image_url'] = '/storage/upload/' . $file;
         return $this->load->view('common/profile_column_left', $data);
