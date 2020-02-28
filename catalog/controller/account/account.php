@@ -61,6 +61,13 @@ class ControllerAccountAccount extends Controller {
         if(!empty($customer_info['role']) && $customer_info['role'] == 'seller') {
             $data['is_seller'] = true;
             $data['seller_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
+            $checkIsSellerApproved = $this->model_account_customer->checkIsSellerApproved($this->customer->getId());
+            $data['checkIsSellerApproved'] = empty($checkIsSellerApproved) ? false : true;
+            $data['checkIsSellerApprovedtext'] = empty($checkIsSellerApproved) ? 'Complete Your Sellers Registration' : 'Update Seller Info';
+            $data['dashboard_link'] = $this->url->link('account/mpmultivendor/dashboard', '', true);
+            $data['product_link'] = $this->url->link('account/mpmultivendor/product/add', '', true);
+
+            //print_r($data['checkIsSellerApprovedtext'] );exit('addd');
         }
 
 		$data['wishlist'] = $this->url->link('account/wishlist');
