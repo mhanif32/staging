@@ -1,6 +1,10 @@
 <?php
 class ControllerMailRegister extends Controller {
 	public function index(&$route, &$args, &$output) {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('mail/register');
 
 		$data['text_welcome'] = sprintf($this->language->get('text_welcome'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
