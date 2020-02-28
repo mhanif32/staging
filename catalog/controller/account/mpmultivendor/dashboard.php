@@ -204,7 +204,30 @@ class ControllerAccountMpmultivendorDashboard extends Controller
         }
         //end my orders
 
+        //my products
+        $this->load->model('account/mpmultivendor/product');
+        $data['products'] = array();
+        $filter_data = array(
+            'filter_mpseller_id' => $mpseller_id,
+            'start' => ($page - 1) * $this->config->get('mpmultivendor_seller_list'),
+            'limit' => 5
+        );
+        $resultsProducts = $this->model_account_mpmultivendor_product->getProducts($filter_data);
+        foreach ($resultsProducts as $result) {
+
+            $data['products'][] = array(
+                'product_id' => $result['product_id'],
+                'name' => $result['name'],
+                'model' => $result['model'],
+                'price' => $result['price'],
+                'quantity' => $result['quantity'],
+                'status' => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+                'edit' => $this->url->link('account/mpmultivendor/product/edit', 'product_id=' . $result['product_id'], true)
+            );
+        }
         $data['view_all_orders_link'] = $this->url->link('account/mpmultivendor/orders', '', true);
+        $data['view_all_products_link'] = $this->url->link('account/mpmultivendor/product', '', true);
+        $data['addnew_product_link'] = $this->url->link('account/mpmultivendor/product/add', '', true);
 
 
         if (VERSION < '2.2.0.0') {
