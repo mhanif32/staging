@@ -162,4 +162,10 @@ class ModelAccountCustomer extends Model {
 	public function deactivateAccount($customer_id) {
         $this->db->query("UPDATE " . DB_PREFIX . "customer SET `status` = '2' WHERE `customer_id` = '" . (int)$customer_id . "'");
     }
+
+    public function checkIsSellerApproved($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mpseller` WHERE customer_id = '" . (int)$customer_id . "' and  status = '1' and approved  = '1'");
+        return $query->row;
+    }
 }
