@@ -1,188 +1,177 @@
 {{ header }}
 <div id="mv-dashboard" class="bg-light">
-<div id="container" class="container">
- <div class="row">
-     {{ profile_column_left }}
-   <div id="content" class="col-12 col-lg-9 py-5">
-      <div class="mv-dashboard-wrap">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-signin card px-4 pb-4 box-shadow">
-              <h3 class="f-20 font-weight-bold text-uppercase mt-3">
-                DASHBOARD
-              </h3>
-              <hr style="margin: 15px -25px">
-            <div class="mv-dashboard-right">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card border-0 flex-row mb-4 box-shadow">
-                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/sale.svg" >
-                    <div class="card-body bg-white d-flex flex-column align-items-center">
-                        <a class="f-15">{{ text_sales }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ total_sales }}</p>
+  <div id="container" class="container">
+    <div class="row">
+      {{ profile_column_left }}
+      <div id="content" class="col-12 col-lg-9 py-5">
+        <div class="mv-dashboard-wrap">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-signin card px-4 pb-4 box-shadow">
+                <h3 class="f-20 font-weight-bold text-uppercase mt-3">
+                  DASHBOARD
+                </h3>
+                <hr style="margin: 15px -25px">
+                <div class="mv-dashboard-right">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="card border-0 flex-row mb-4 box-shadow">
+                        <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/sale.svg">
+                        <div class="card-body bg-white d-flex flex-column align-items-center">
+                          <a class="f-15">{{ text_sales }}</a>
+                          <p class="text-uppercase f-20 font-weight-bold">{{ total_sales }}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 flex-row mb-4 box-shadow">
-                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/truck.svg" >
-                    <div class="card-body bg-white d-flex flex-column align-items-center">
-                      <a class="f-15" href="{{ all_orders }}">{{ text_orders }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ total_orders }}</p>
+                    <div class="col-md-4">
+                      <div class="card border-0 flex-row mb-4 box-shadow">
+                        <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/truck.svg">
+                        <div class="card-body bg-white d-flex flex-column align-items-center">
+                          <a class="f-15" href="{{ all_orders }}">{{ text_orders }}</a>
+                          <p class="text-uppercase f-20 font-weight-bold">{{ total_orders }}</p>
                           {% for order_status in order_statuses %}
-                      <div class="list">
-                        <a href="{{ order_status.href }}">
-                            {{ order_status.name }}:
-                          <p class="text-uppercase f-20 font-weight-bold">{{ order_status.total_orders }}</p>
-                        </a>
+                            <div class="list">
+                              <a href="{{ order_status.href }}">
+                                {{ order_status.name }}:
+                                <p class="text-uppercase f-20 font-weight-bold">{{ order_status.total_orders }}</p>
+                              </a>
+                            </div>
+                          {% endfor %}
+                        </div>
                       </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card border-0 flex-row mb-4 box-shadow">
+                        <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/review.svg">
+                        <div class="card-body bg-white d-flex flex-column align-items-center">
+                          <a class="f-15" href="{{ all_reviews }}">{{ text_reviews }}</a>
+                          <p class="text-uppercase f-20 font-weight-bold">{{ total_reviews }}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8">
+                      <div class="card border-0 flex-row mb-4 box-shadow">
+                        <img class="img-fluid bg-success px-3"
+                             src="catalog/view/theme/champion/image/money-bill-alt-regular.svg" style="width: 83px;">
+                        <div class="card-body pr-0 pl-2 bg-white d-flex flex-row align-items-start">
+                          <div class="d-inline-block">
+                            <a class="f-15">{{ text_commission }}</a>
+                            <p class="text-uppercase f-20 font-weight-bold">{{ total_commission }}</p>
+                          </div>
+                          <div class="d-inline-block mx-3">
+                            <a class="f-15">{{ text_recevied_payment }}</a>
+                            <p class="text-uppercase f-20 font-weight-bold">{{ recevied_payment }}</p>
+                          </div>
+                          <div class="d-inline-block">
+                            <a class="f-15">{{ text_available_balance }}</a>
+                            <p class="text-uppercase f-20 font-weight-bold">{{ available_balance }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card border-0 flex-row mb-4 box-shadow">
+                        <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/product.svg">
+                        <div class="card-body bg-white d-flex flex-column align-items-center">
+                          <a class="f-15" href="{{ new_product }}">{{ text_products }}</a>
+                          <p class="text-uppercase f-20 font-weight-bold">{{ total_products }}</p>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h3 class="f-15 font-weight-bold text-uppercase mt-3">
+                      Latest Orders
+                    </h3>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="text-center">
+                        <tr class="f-12">
+                          <th scope="col">Order ID</th>
+                          <th class="text-left" scope="col">Customer</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Seller Order Status</th>
+                          <th scope="col">Admin Order Status</th>
+                          <th scope="col">Date Added</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        {% for order in orders %}
+                        <tr class="f-12">
+                          <td scope="row">#{{ order.order_id }}</td>
+                          <td class="text-left">{{ order.name }}</td>
+                          <td>{{ order.total }}</td>
+                          <td>{{ order.status }}</td>
+                          <td><a href="" class="btn btn-primary f-12">{{ order.by_admin_status }}</a></td>
+                          <td>{{ order.date_added }}</td>
+                          <td><a href="{{ order.view }}"><i class="fas fa-eye" aria-hidden="true"></i></a></td>
+                        </tr>
                         {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="text-right">
+                      <a href="{{ view_all_orders_link }}" class="f-12 on-hover text-uppercase">View All Orders</a>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h3 class="f-15 font-weight-bold text-uppercase mt-3">
+                      Recently Added Products
+                    </h3>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="text-center">
+                        <tr class="f-12">
+                          <th class="text-left" scope="col">Product Name</th>
+                          <th class="text-left" scope="col">Price</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        <tr class="f-12">
+                          <td class="text-left">
+                            Nike Impact shoes Running Shoes
+
+                          </td>
+                          <td class="text-left">$49.00</td>
+
+                          <td><i class="fas fa-eye" aria-hidden="true"></i></td>
+                        </tr>
+                        <tr class="f-12">
+                          <td class="text-left">
+                            Nike Impact shoes Running Shoes
+
+
+                          </td>
+                          <td class="text-left">$49.00</td>
+
+                          <td><i class="fas fa-eye" aria-hidden="true"></i></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <a href="#" class="btn btn-success">Add New Product</a>
+                      <a href="#" class="f-12 on-hover text-uppercase">View All Orders</a>
+
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card border-0 flex-row mb-4 box-shadow">
-                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/review.svg" >
-                    <div class="card-body bg-white d-flex flex-column align-items-center">
-                      <a class="f-15" href="{{ all_reviews }}">{{ text_reviews }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ total_reviews }}</p>
-                    </div>
-                  </div>
-                </div>
-             
-                <div class="col-md-8">
-                  <div class="card border-0 flex-row mb-4 box-shadow">
-                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/money-bill-alt-regular.svg" style="width: 83px;">
-                    <div class="card-body pr-0 pl-2 bg-white d-flex flex-row align-items-start">
-                    <div class="d-inline-block">
-                      <a class="f-15">{{ text_commission }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ total_commission }}</p>
-                    </div>
-                      <div class="d-inline-block mx-3">
-                        <a class="f-15">{{ text_recevied_payment }}</a>
-                        <p class="text-uppercase f-20 font-weight-bold">{{ recevied_payment }}</p>
-                      </div>
-                      <div class="d-inline-block">
-                        <a class="f-15">{{ text_available_balance }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ available_balance }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card border-0 flex-row mb-4 box-shadow">
-                    <img class="img-fluid bg-success px-3" src="catalog/view/theme/champion/image/product.svg">
-                    <div class="card-body bg-white d-flex flex-column align-items-center">
-                      <a class="f-15" href="{{ new_product }}">{{ text_products }}</a>
-                      <p class="text-uppercase f-20 font-weight-bold">{{ total_products }}</p>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-                </div>
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="f-15 font-weight-bold text-uppercase mt-3">
-                    Latest Orders
-                  </h3>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class="text-center">
-                      <tr class="f-12">
-                        <th scope="col">Order ID</th>
-                        <th class="text-left" scope="col">Product Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Buyer Name</th>
-                        <th scope="col">Contact of buyer</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                      </thead>
-                      <tbody class="text-center">
-                      <tr class="f-12">
-                        <td scope="row">#1679</td>
-                        <td class="text-left">Nike Impact shoes Running Shoes</td>
-                        <td>$98.00</td>
-                        <td>Ronald Clark</td>
-                        <td>021345987</td>
-
-                        <td><a href="" class="btn btn-primary f-12">Shipped</a> </td>
-
-                        <td><i class="fas fa-eye" aria-hidden="true"></i></td>
-                      </tr>
-                      <tr class="f-12">
-                        <td scope="row">#1679</td>
-                        <td class="text-left">Nike Impact shoes Running Shoes</td>
-                        <td>$98.00</td>
-                        <td>Ronald Clark</td>
-                        <td>021345987</td>
-
-                        <td><a href="" class="btn btn-primary f-12">Shipped</a> </td>
-                        <td><i class="fas fa-eye" aria-hidden="true"></i></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="text-right">
-                    <a href="#" class="f-12 on-hover text-uppercase">View All Orders</a>
-                  </div>
-
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <h3 class="f-15 font-weight-bold text-uppercase mt-3">
-                    Recently Added Products
-                  </h3>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class="text-center">
-                      <tr class="f-12">
-                        <th class="text-left" scope="col">Product Name</th>
-                        <th class="text-left" scope="col">Price</th>
-                        <th scope="col">Action</th>xz
-                      </tr>
-                      </thead>
-                      <tbody class="text-center">
-                      <tr class="f-12">
-                        <td class="text-left">
-                          Nike Impact shoes Running Shoes
-
-                        </td>
-                        <td class="text-left">$49.00</td>
-
-                        <td><i class="fas fa-eye" aria-hidden="true"></i></td>
-                      </tr>
-                      <tr class="f-12">
-                        <td class="text-left">
-                         Nike Impact shoes Running Shoes
-
-
-                        </td>
-                        <td class="text-left">$49.00</td>
-
-                        <td><i class="fas fa-eye" aria-hidden="true"></i></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-success">Add New Product</a>
-                    <a href="#" class="f-12 on-hover text-uppercase">View All Orders</a>
-
-                  </div>
-                </div>
-              </div>
 
               </div>
             </div>
-        </div>
           </div>
         </div>
       </div>
-      {{ content_bottom }}</div>
-   </div>
-</div>
+    </div>
+    {{ content_bottom }}</div>
 </div>
 {{ footer }}

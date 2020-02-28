@@ -4,6 +4,9 @@ class ControllerAccountMpmultivendorDashboard extends Controller
 {
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -171,6 +174,38 @@ class ControllerAccountMpmultivendorDashboard extends Controller
 
         $data['custom_themename'] = $custom_themename;
         /* Theme Work Ends */
+
+        //my latest 5 orders
+        $this->load->model('account/mpmultivendor/orders');
+        $data['orders'] = array();
+        if (isset($this->request->get['page'])) {
+            $page = $this->request->get['page'];
+        } else {
+            $page = 1;
+        }
+        $filter_data = array(
+            'mpseller_id'		=> $mpseller_id,
+            'start'         	=> ($page - 1) * $this->config->get('mpmultivendor_seller_list'),
+            'limit'         	=> 5,
+        );
+
+        $results = $this->model_account_mpmultivendor_orders->getOrders($filter_data);
+
+        foreach ($results as $result) {
+            $data['orders'][] = array(
+                'order_id'   => $result['order_id'],
+                'name'       => $result['firstname'] . ' ' . $result['lastname'],
+                'status'     => $result['status'],
+                'by_admin_status'     => $result['by_admin_status'],
+                'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+                'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
+                'view'       => $this->url->link('account/mpmultivendor/orders/info', 'order_id=' . $result['order_id'], true),
+            );
+        }
+        //end my orders
+
+        $data['view_all_orders_link'] = $this->url->link('account/mpmultivendor/orders', '', true);
+
 
         if (VERSION < '2.2.0.0') {
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/dashboard.tpl')) {
