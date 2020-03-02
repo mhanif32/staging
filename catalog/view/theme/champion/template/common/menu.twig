@@ -50,13 +50,15 @@
 
     {#<a class="f-12" href="{{ more_category }}"><li class="nav-item py-2 bg-primary text-white" style="line-height: 12px;">MORE</li></a>#}
 
-    <li class="dropdown nav-item bg-primary text-white nav-mega">
-        <a href="#" class="f-12" data-toggle="dropdown" style="line-height: 12px;">
+    <li class="dropdown nav-mega">
+        <a href="#" class="f-12 text-white" data-toggle="dropdown" style="line-height: 12px;">
             MORE
         </a>
         <ul class="dropdown-menu mega-menu">
             <li>
+                <h3 class="text-center f-20 font-weight-bold text-uppercase mt-3">MORE CATEGORIES</h3>
                 <div class="row justify-content-end mx-3">
+
                     {% if moreCategories %}
                         {% for moreCategory in moreCategories %}
                     <ul class="col-12 media-list span4">

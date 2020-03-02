@@ -67,6 +67,8 @@ class ControllerAccountOrder extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['back_url'] = $this->url->link('account/account', '', true);
 
+		$data['track_link'] = $this->url->link('account/order/track', '', true);
+
 
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
@@ -364,4 +366,28 @@ class ControllerAccountOrder extends Controller {
 
 		$this->response->redirect($this->url->link('account/order/info', 'order_id=' . $order_id));
 	}
+
+    public function track(){
+
+	    $data = array();
+
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['column_right'] = $this->load->controller('common/column_right');
+        $data['content_top'] = $this->load->controller('common/content_top');
+        $data['content_bottom'] = $this->load->controller('common/content_bottom');
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+
+
+        //order tracking system
+        $data['orders'] = array();
+        $this->load->model('account/order');
+        $data['order_status'] = $this->model_account_order->getTrackTotalOrders();
+
+
+
+
+        $this->response->setOutput($this->load->view('account/order_track', $data));
+    }
+
 }

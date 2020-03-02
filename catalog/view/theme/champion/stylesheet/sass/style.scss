@@ -258,7 +258,7 @@ header {background: white;z-index: 9999;
   }
 
   //mega menu
-  .nav-mega.dropdown {position: static;}
+  .nav-mega.dropdown {position: static; background: $primary;}
   .nav-mega {
     width: 100%;
     .dropdown-menu.mega-menu {box-sizing: border-box;border-top-left-radius: 0;border-top-right-radius: 0;min-width: auto;width: 100%;margin-top: 0;padding: 0;border-color: #ccc;
@@ -1006,114 +1006,27 @@ footer {
 
 
 
-#account-account{
+#account-account, #track-order{
   .card {z-index: 0;}
-  .top {
-    padding-top: 40px;
-    padding-left: 6% !important;
-    padding-right: 6% !important
-  }
 
-  #progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #455A64;
-    padding-left: 0px;
-    margin-top: 30px
-  }
-
-  #progressbar li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 20%;
-    float: left;
-    position: relative;
-    font-weight: 400
-  }
-
-  #progressbar .step0:before {
-    font-family: FontAwesome;
-    content: "\f10c";
-    color: #fff
-  }
-
-  #progressbar li:before {
-    width: 40px;
-    height: 40px;
-    line-height: 42px;
-    display: block;
-    font-size: 20px;
-    background: #C5CAE9;
-    border-radius: 50%;
-    margin: auto;
-    padding: 0px
-  }
-
-  #progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 12px;
-    background: #C5CAE9;
-    position: absolute;
-    left: 0;
-    top: 16px;
-    z-index: -1
-  }
-
-  #progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: absolute;
-    left: -50%
-  }
-
-  #progressbar li:nth-child(2):after,
-  #progressbar li:nth-child(3):after {
-  }
-
-  #progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute;
-    left: 50%
-  }
-
-  #progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
-  }
-
-  #progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px
-  }
-
-  #progressbar li.active:before,
-  #progressbar li.active:after {
-    background: $success;
-  }
-
-  #progressbar li.active:before {
-    font-family: FontAwesome;
-    content: "\f00c"
-  }
-
-  .icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px
-  }
-
-  .icon-content {
-    padding-bottom: 20px
-  }
-
-  @media screen and (max-width: 992px) {
-    .icon-content {
-      width: 50%
+  #progressbar { margin-bottom: 30px; overflow: hidden; color: #455A64; padding-left: 0px; margin-top: 30px;
+    li { list-style-type: none; font-size: 13px; width: 20%; float: left; position: relative; font-weight: 400;
+      &:before { width: 40px; height: 40px; line-height: 42px; display: block; font-size: 20px; background: #C5CAE9; border-radius: 50%; margin: auto; padding: 0px }
+      &:after { content: ''; width: 100%; height: 12px; background: #C5CAE9; position: absolute; left: 0; top: 16px; z-index: -1 }
+      &:last-child:after { border-top-right-radius: 10px; border-bottom-right-radius: 10px; position: absolute; left: -50% }
+      &:first-child:after { border-top-left-radius: 10px; border-bottom-left-radius: 10px; position: absolute; left: 50% }
+      &.active {
+        &:before,&:after { background: $success; }
+        &:before { font-family: FontAwesome; content: "\f00c" }
+      }
     }
+    .step0:before { font-family: FontAwesome; content: "\f10c"; color: #fff; }
   }
+
+  #progressbar-icons { margin-bottom: 30px; overflow: hidden; color: #455A64; padding-left: 0px; margin-top: 30px;
+    li { list-style-type: none; font-size: 13px; width: 20%; float: left; position: relative; font-weight: 400;}}
 }
+
 //------------------------
 #information-contact{
   .hero-image{
