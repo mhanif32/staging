@@ -168,4 +168,6 @@ class ModelAccountCustomer extends Model {
         $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mpseller` WHERE customer_id = '" . (int)$customer_id . "' and  status = '1' and approved  = '1'");
         return $query->row;
     }
+
+
 }

@@ -1,6 +1,10 @@
 <?php
 class ControllerMailRegister extends Controller {
 	public function index(&$route, &$args, &$output) {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('mail/register');
 
 		$data['text_welcome'] = sprintf($this->language->get('text_welcome'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
@@ -97,7 +101,10 @@ class ControllerMailRegister extends Controller {
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
-			$mail->setText($this->load->view('mail/register_alert', $data));
+
+			//$mail->setText($this->load->view('mail/register_alert', $data));
+            $mail->setHtml($this->load->view('mail/register_alert', $data));
+            $mail->setText(html_entity_decode($this->load->view('mail/register_alert', $data), ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 
 			// Send to additional alert emails if new account email is enabled

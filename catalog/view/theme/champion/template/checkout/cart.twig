@@ -105,9 +105,8 @@
 
                                         <div class="number d-inline-block">
                                             <span class="minus update-qty">-</span>
-
                                             <input type="text" name="quantity[{{ product.cart_id }}]"
-                                                   value="{{ product.quantity }}" size="1" class="form-control d-inline-block"/>
+                                                   value="{{ product.quantity }}" size="1" class="form-control d-inline-block input-qty"/>
                                             <span class="plus update-qty">+</span>
                                         </div>
 
@@ -170,24 +169,30 @@
 <script type="text/javascript"><!--
 
 $(document).ready(function() {
-$('.minus').click(function () {
-var $input = $(this).parent().find('input');
-var count = parseInt($input.val()) - 1;
-count = count < 1 ? 1 : count;
-$input.val(count);
-$input.change();
-return false;
-});
-$('.plus').click(function () {
-var $input = $(this).parent().find('input');
-$input.val(parseInt($input.val()) + 1);
-$input.change();
-return false;
-});
+    $('.minus').click(function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 1 ? 1 : count;
+        $input.val(count);
+        $input.change();
+        return false;
+    });
+    $('.plus').click(function () {
+        var $input = $(this).parent().find('input');
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        return false;
+    });
 
-//update quntity
+    //update quntity
     $('.update-qty').click(function() {
         $("#form-update-cart").submit()
+    });
+
+    $('.input-qty').keyup(function() {
+        if($('.input-qty').val() != '') {
+            $("#form-update-cart").submit();
+        }
     });
 });
 
