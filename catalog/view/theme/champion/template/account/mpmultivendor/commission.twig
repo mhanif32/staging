@@ -54,7 +54,7 @@
                                 </div>
                                 <h3 class="text-left f-20">{{ text_final_commission }}: <b>{{ final_commission }}</b></h3>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover list">
+                                    <table class="table table-hover list">
                                         <thead>
                                         <tr>
                                             <td class="text-right">{% if sort == 'mc.order_id' %}
@@ -93,7 +93,7 @@
                                                 {% else %}
                                                     <a href="{{ sort_amount }}">{{ column_amount }}</a>
                                                 {% endif %}</td>
-                                            <td class="text-right">{% if sort == 'e.date_added' %}
+                                            <td class="text-right border-bottom">{% if sort == 'e.date_added' %}
                                                     <a href="{{ sort_date_added }}"
                                                        class="{{ order|lower }}">{{ column_date_added }}</a>
                                                 {% else %}
