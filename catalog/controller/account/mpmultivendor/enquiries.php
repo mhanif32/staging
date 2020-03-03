@@ -472,7 +472,7 @@ class ControllerAccountMpmultivendorEnquiries extends Controller {
 			$json['warning'] = $this->language->get('error_enquirynot_found');
 		}
 
-		if (utf8_strlen($this->request->post['message']) < 2) {
+		if (utf8_strlen(@$this->request->post['message']) < 2) {
 			$json['warning'] = $this->language->get('error_message');
 		}
 
