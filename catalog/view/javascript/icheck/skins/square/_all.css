@@ -189,6 +189,7 @@
     background: url(blue.png) no-repeat;
     border: none;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .icheckbox_square-blue {

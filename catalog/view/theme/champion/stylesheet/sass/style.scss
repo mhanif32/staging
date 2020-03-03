@@ -9,7 +9,7 @@
 body {font-family: "Poppins", sans-serif;}
 h2 {font-size: calc(1.733rem + 0.9vw);font-weight: 700;}
 h3 {font-size: 2.8125rem;font-weight: 600;}
-h4 {font-size: 1.25rem;font-weight: 600;}
+h4 {font-size: 1.25rem;}
 h5 {font-size: 2.5rem;font-weight: 700;}
 .f-20{font-size: 1.25rem;}
 .f-15{font-size: 0.9375rem;}
@@ -61,6 +61,7 @@ p {font-size: 0.9375rem;}
   color: $primary;
   border-color: #d1cdcd;
   font-size: 13px;
+  border-radius: 0;
 
   //height: 40px;
   &:focus {
