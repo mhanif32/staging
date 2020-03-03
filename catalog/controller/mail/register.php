@@ -51,8 +51,13 @@ class ControllerMailRegister extends Controller {
             $server = $this->config->get('config_url');
         }
         $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
-		$mail->setText($this->load->view('mail/register', $data));
-		$mail->send(); 
+//		$mail->setText($this->load->view('mail/register', $data));
+//		$mail->send();
+
+        $mailText = $this->load->view('mail/register', $data);
+        $mail->setHtml($mailText);
+        $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+        $mail->send();
 	}
 	
 	public function alert(&$route, &$args, &$output) {
