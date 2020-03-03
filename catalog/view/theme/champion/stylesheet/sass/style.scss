@@ -1170,13 +1170,23 @@ footer {
   .accordion{
     ul{
       li{transition: all .5s ease;
-        &:hover{ background-color: #F2F9FF; transition: all .5s ease;}
+        &:hover, &.active{ background-color: #F2F9FF; transition: all .5s ease;}
       }
     }
   }
   .accordion > .card .card-header{margin-bottom: -2px;}
+.account-account{
+.accordion{
+ul{a{li{ font-size: 14px;
+i{width: 20px;}}}}
+}
+}
 }
 
 
 //------------
+
+#find-category .label-category-green{
+  background: $success !important;
+}
 
