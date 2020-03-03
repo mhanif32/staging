@@ -100,6 +100,7 @@ $_['help_filter']            = '(Autocomplete)';
 $_['help_download']          = '(Autocomplete)';
 $_['help_related']           = '(Autocomplete)';
 $_['help_tag']               = 'Comma separated';
+$_['help_price']             = 'Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes.';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';

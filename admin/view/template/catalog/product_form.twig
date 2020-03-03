@@ -195,7 +195,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="input-price">{{ entry_price }}</label>
+                                <label class="col-sm-2 control-label" for="input-price"> <span data-toggle="tooltip"
+                                                                                               title="{{ help_price }}"> {{ entry_price }}</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" name="price" value="{{ price }}" placeholder="{{ entry_price }}"
                                            id="input-price" class="form-control"/>
@@ -208,24 +209,18 @@
                                     <select name="tax_class_id" id="input-tax-class" class="form-control">
                                         <option value="0">{{ text_none }}</option>
 
-
                                         {% for tax_class in tax_classes %}
                                             {% if tax_class.tax_class_id == tax_class_id %}
-
 
                                                 <option value="{{ tax_class.tax_class_id }}"
                                                         selected="selected">{{ tax_class.title }}</option>
 
-
                                             {% else %}
-
 
                                                 <option value="{{ tax_class.tax_class_id }}">{{ tax_class.title }}</option>
 
-
                                             {% endif %}
                                         {% endfor %}
-
 
                                     </select>
                                 </div>
@@ -975,7 +970,8 @@
                                                                                          class="form-control"/></td>
 
                                                                     <td class="text-right">
-                                                                        <a href="" id="thumb-color-image{{ option_value_row }}"
+                                                                        <a href=""
+                                                                           id="thumb-color-image{{ option_value_row }}"
                                                                            data-toggle="image"
                                                                            class="img-thumbnail"><img
                                                                                     src="{{ product_image.thumb }}"
@@ -1879,7 +1875,7 @@
             html += '    <option value="-">-</option>';
             html += '  </select>';
             html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" /></td>';
-            html += '<td class="text-right"><a href="" id="thumb-color-image'+option_value_row+'" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder=""></a><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][color_image]" value="" id="input-color-image'+option_value_row+'"></td>';
+            html += '<td class="text-right"><a href="" id="thumb-color-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder=""></a><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][color_image]" value="" id="input-color-image' + option_value_row + '"></td>';
             html += '  <td class="text-left"><button type="button" onclick="$(this).tooltip(\'destroy\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" rel="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
             html += '</tr>';
 

@@ -51,6 +51,9 @@ class ControllerMailRegister extends Controller {
             $server = $this->config->get('config_url');
         }
         $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+        $data['firstname'] = $args[0]['firstname'];
+        $data['lastname'] = $args[0]['lastname'];
+
 //		$mail->setText($this->load->view('mail/register', $data));
 //		$mail->send();
 
