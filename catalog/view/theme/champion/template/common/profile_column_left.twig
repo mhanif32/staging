@@ -30,14 +30,14 @@
 
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
-                        <a href="{{ order }}"><li class="pl-5 py-2">{{ text_order }}</li></a>
-                        <a href="{{ download }}"><li class="pl-5 py-2">{{ text_download }}</li></a>
+                        <a href="{{ order }}"><li class="pl-4 py-2">{{ text_order }}</li></a>
+                        <a href="{{ download }}"><li class="pl-4 py-2">{{ text_download }}</li></a>
                         {% if reward %}
-                            <a href="{{ reward }}"><li class="pl-5 py-2">{{ text_reward }}</li></a>
+                            <a href="{{ reward }}"><li class="pl-4 py-2">{{ text_reward }}</li></a>
                         {% endif %}
-                        <a href="{{ return }}"><li class="pl-5 py-2">{{ text_return }}</li></a>
-                        <a href="{{ transaction }}"><li class="pl-5 py-2">{{ text_transaction }}</li></a>
-                        <a href="{{ recurring }}"><li class="pl-5 py-2">{{ text_recurring }}</li></a>
+                        <a href="{{ return }}"><li class="pl-4 py-2">{{ text_return }}</li></a>
+                        <a href="{{ transaction }}"><li class="pl-4 py-2">{{ text_transaction }}</li></a>
+                        <a href="{{ recurring }}"><li class="pl-4 py-2">{{ text_recurring }}</li></a>
                     </ul>
                 </div>
                 <hr class="m-0">
@@ -51,9 +51,9 @@
 
                 <div id="collapseThree" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
-                        <a href="{{ edit }}"><li class="pl-5 py-2"><i class="far fa-address-card"></i> Profile Information</li></a>
-                        <a href="{{ address }}"><li class="pl-5 py-2"><i class="far fa-address-book"></i> Manage Address</li></a>
-                        <a href="{{ change_password }}"><li class="pl-5 py-2"><i class="fas fa-unlock-alt"></i> Change Password</li></a>
+                        <a href="{{ edit }}"><li class="pl-4 py-2"><i class="far fa-address-card"></i> Profile Information</li></a>
+                        <a href="{{ address }}"><li class="pl-4 py-2"><i class="far fa-address-book"></i> Manage Address</li></a>
+                        <a href="{{ change_password }}"><li class="pl-4 py-2"><i class="fas fa-unlock-alt"></i> Change Password</li></a>
                     </ul>
                 </div>
                 {% if role == 'seller' %}
