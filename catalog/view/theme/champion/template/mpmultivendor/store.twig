@@ -1,10 +1,10 @@
 {{ header }}
-<div id="container" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+<div id="container" class="container py-5 mv-seller-store">
+  {#<ul class="breadcrumb">#}
+    {#{% for breadcrumb in breadcrumbs %}#}
+    {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+    {#{% endfor %}#}
+  {#</ul>#}
   {% if custom_themename != 'journal2' %}<div class="row">{% endif %}{{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -27,12 +27,12 @@
                 <div class="form-group">
                   <div id="find-category">
                     <h3>{{ entry_category }}</h3>
-                    <a href="{{ no_category_href }}" class="{{ filter_category_id ? 'label-category' : 'label-category-green' }}">{{ text_all_category }}</a>
+                    <a href="{{ no_category_href }}" class="{{ filter_category_id ? 'label-category' : 'label-category-green' }} f-13 p-2">{{ text_all_category }}</a>
                     {% for product_category in product_categories %}
                     {% if product_category.category_id == filter_category_id %}
-                    <a href="{{ product_category.href }}"><label class="label-category-green">{{ product_category.name }}</label></a>
+                    <a href="{{ product_category.href }}"><label class="label-category-green f-13 p-2">{{ product_category.name }}</label></a>
                     {% else %}
-                    <a href="{{ product_category.href }}"><label class="label-category">{{ product_category.name }}</label></a>
+                    <a href="{{ product_category.href }}"><label class="label-category f-13 p-2">{{ product_category.name }}</label></a>
                     {% endif %}
                     {% endfor %}
                   </div>
@@ -95,8 +95,8 @@
                   {#<button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>#}
                 {#</div>#}
                   <div class="form-group input-group input-group-sm">
-                      <label class="input-group-addon" for="input-sort">{{ entry_sort }}</label>
-                      <select id="input-sort" class="form-control" onchange="location = this.value;">
+                      <label class="input-group-addon mr-2" for="input-sort">{{ entry_sort }}:</label>
+                      <select id="input-sort" class="form-control rounded-0" onchange="location = this.value;">
                           {% for sorts in sorts %}
                               {% if sorts.value == '%s-%s'|format(sort, order) %}
                                   <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
@@ -114,8 +114,8 @@
               </div>
               <div class="col-md-3 col-xs-6">
                 <div class="form-group input-group input-group-sm">
-                  <label class="input-group-addon" for="input-limit">{{ entry_limit }}</label>
-                  <select id="input-limit" class="form-control" onchange="location = this.value;">
+                  <label class="input-group-addon mr-2" for="input-limit">{{ entry_limit }}:</label>
+                  <select id="input-limit" class="form-control rounded-0" onchange="location = this.value;">
                   {% for limits in limits %}
                   {% if limits.value == limit %}
                   <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
@@ -249,7 +249,7 @@
                 </div>
 		        {% endfor %}
             </div>
-            <div class="row pagination">
+            <div class="row">
 		        	<div class="col-sm-6 text-left links">{{ pagination }}</div>
 		        	<div class="col-sm-6 text-right results">{{ results }}</div>
 		      	</div>

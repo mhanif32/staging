@@ -37,9 +37,9 @@ class ControllerMpmultivendorStoreBanner extends Controller {
 			$data['address'] = $seller_info['address'];
 
 			if($seller_info['banner']) {
-				$data['banner'] = $this->model_tool_image->resize($seller_info['banner'], $this->config->get('mpmultivendor_main_banner_width'), $this->config->get('mpmultivendor_main_banner_height'));
+				$data['banner'] = $this->model_tool_image->resize($seller_info['banner'], 500, 300);
 			} else {
-				$data['banner'] = $this->model_tool_image->resize('no_image.png', $this->config->get('mpmultivendor_main_banner_width'), $this->config->get('mpmultivendor_main_banner_height'));
+				$data['banner'] = $this->model_tool_image->resize('no_image.png', 500, 300);
 			}
 			
 			if($seller_info['image']) {

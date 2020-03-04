@@ -20,7 +20,6 @@ class Pagination {
 	public $text_last = '&gt;|';
 	public $text_next = '&gt;';
 	public $text_prev = '&lt;';
-
 	/**
      * 
      *

@@ -70,9 +70,9 @@ class ControllerMpmultivendorMvSeller extends Controller {
 			}
 			
 			if($seller['banner']) {
-				$banner = $this->model_tool_image->resize($seller['banner'], $this->config->get('mpmultivendor_main_banner_width_listing'), $this->config->get('mpmultivendor_main_banner_height_listing'));
+				$banner = $this->model_tool_image->resize($seller['banner'], 500, 300);
 			} else {
-				$banner = $this->model_tool_image->resize('no_image.png', $this->config->get('mpmultivendor_main_banner_width_listing'), $this->config->get('mpmultivendor_main_banner_height_listing'));
+				$banner = $this->model_tool_image->resize('no_image.png', 500, 400);
 			}
 
 			$social_icons = array();

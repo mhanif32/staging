@@ -205,30 +205,6 @@ p {
     -webkit-box-shadow: none;
     box-shadow: none; }
 
-.pagination .page-item {
-  margin: auto 0; }
-  .pagination .page-item .page-numbers {
-    width: 25px;
-    height: 25px;
-    padding: 5px;
-    margin: auto 8px;
-    font-size: 0.875rem;
-    text-align: center; }
-    .pagination .page-item .page-numbers:hover,
-    .pagination .page-item .page-numbers :focus {
-      background: #01B0F1;
-      -webkit-transition: all 0.5s ease;
-      transition: all 0.5s ease;
-      -webkit-box-shadow: none;
-              box-shadow: none;
-      color: #fff; }
-  .pagination .page-item .page-link:focus,
-  .pagination .page-item .page-link :active {
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    background: #01B0F1;
-    color: #fff; }
-
 .top-headerbar {
   /* Remove IE arrow */
   /* Custom Select */ }
@@ -1387,5 +1363,51 @@ footer ul {
   #profile-column-left .account-account .accordion ul a li i {
     width: 20px; }
 
-#find-category .label-category-green {
-  background: #01B0F1 !important; }
+.mv-seller-store #find-category .label-category {
+  border-radius: 0; }
+.mv-seller-store #find-category .label-category-green {
+  background: #01B0F1;
+  border-radius: 0; }
+.mv-seller-store .mvndr-dl .follow-us ul li {
+  display: inline-block; }
+
+.multivendor-list .mpseller-wrap a {
+  min-height: 162px; }
+.multivendor-list .mpseller-wrap .seller-img img {
+  border: 4px solid #fff;
+  -webkit-box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.75);
+  margin-top: -60px; }
+.multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .follow-us {
+  width: 150px;
+  float: right;
+  text-align: right;
+  padding-right: 10px; }
+  .multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .follow-us ul {
+    margin: 0; }
+    .multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .follow-us ul li {
+      display: inline-block;
+      padding-left: 3px;
+      padding-right: 3px; }
+.multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .vrating {
+  width: 115px;
+  float: left;
+  margin-left: -10px; }
+  .multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .vrating .fa-stack {
+    width: 1em;
+    height: 2em;
+    color: #FC0; }
+.multivendor-list .mpseller-wrap .mp-seller-info .seller-detail .store-name a {
+  text-shadow: none; }
+
+.pagination li {
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block; }
+  .pagination li.active {
+    background-color: #01B0F1;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center; }

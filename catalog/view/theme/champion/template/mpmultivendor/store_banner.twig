@@ -1,15 +1,17 @@
-<div class="mpseller-wrap">
-  <img src="{{ banner }}" alt="" title="" class="img-fluid"/>
+<div class="mpseller-wrap" >
+  {#<img src="{{ banner }}" alt="" title="" class="img-fluid"/>#}
+  <div style="background: url({{ banner }}) no-repeat center; background-size: cover; min-height: 300px;">
+  </div>
     <div class="mp-seller-info">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           {% if display_seller_image %}
-          <div class="seller-img">
+          <div class="seller-img w-40">
             <img src="{{ image }}" alt="" title="" class="img-fluid rounded-circle"/>
           </div>
           {% endif %}
-          <div class="seller-detail">
-            <ul class="list-unstyled">
+          <div class="seller-detail w-100 text-left">
+            <ul class="list-unstyled pl-2">
               {% if display_seller_name %}
               <li><i class="fa fa-user"></i> {{ store_owner }}</li>
               {% endif %}
@@ -29,7 +31,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-6">
           {% if information_sections %}
           <ul class="list-unstyled text-right mv-policy">
             {% for information_section in information_sections %}

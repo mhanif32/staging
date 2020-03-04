@@ -1,6 +1,7 @@
 <?php
 class ControllerAccountMpmultivendorMpsellerLinks extends Controller {
 	public function index() {
+
 		if($this->config->get('mpmultivendor_status') && $this->customer->isLogged()) {
             $this->load->language('account/edit');
 

@@ -74,35 +74,7 @@ p {font-size: 0.9375rem;}
   }
 }
 
-.pagination {
-  .page-item {
-    margin: auto 0;
-    .page-numbers {
-      width: 25px;
-      height: 25px;
-      padding: 5px;
-      margin: auto 8px;
-      font-size: 0.875rem;
 
-      text-align: center;
-      &:hover,
-      :focus {
-        background: $success;
-        transition: all 0.5s ease;
-        box-shadow: none;
-        color: #fff;
-      }
-    }
-    .page-link {
-      &:focus,
-      :active {
-        box-shadow: none;
-        background: $success;
-        color: #fff;
-      }
-    }
-  }
-}
 
 // topheader style starts from here
 .top-headerbar{
@@ -1187,7 +1159,59 @@ i{width: 20px;}}}}
 
 //------------
 
-#find-category .label-category-green{
-  background: $success !important;
+.mv-seller-store {
+  #find-category{
+    .label-category{border-radius: 0;}
+    .label-category-green {
+    background: $success; border-radius: 0;
+  }}
+  .mvndr-dl{
+    .follow-us ul li{ display: inline-block; }
+  }
 }
+.multivendor-list .mpseller-wrap {
+  a {
+    min-height: 162px;
 
+  }
+  .seller-img img {
+    border: 4px solid #fff;
+    box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.75);
+    margin-top: -60px;
+  }
+  .mp-seller-info{
+  .seller-detail{
+  .follow-us { width: 150px; float: right; text-align: right; padding-right: 10px;
+    ul { margin: 0;
+      li { display: inline-block; padding-left: 3px; padding-right: 3px; }
+    }
+  }
+  .vrating{
+  width: 115px;
+  float: left;
+  margin-left: -10px;
+    .fa-stack{width: 1em;
+      height: 2em;
+      color: #FC0;}
+}
+    .store-name a{
+      text-shadow: none;
+    }
+}}}
+
+//pagination
+.pagination {
+  li {
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    &.active{
+      background-color: $success;
+      color: $white;
+      border-radius: 50%;
+      width: 30px;
+      text-align: center;
+    }
+  }
+}

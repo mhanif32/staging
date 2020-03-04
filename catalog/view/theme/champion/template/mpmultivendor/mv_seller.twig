@@ -1,10 +1,12 @@
 {{ header }}
-<div id="container" class="container multivendor-list">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+
+<div id="container" class="multivendor-list bg-light py-4">
+  {#<ul class="breadcrumb">#}
+    {#{% for breadcrumb in breadcrumbs %}#}
+    {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+    {#{% endfor %}#}
+  {#</ul>#}
+  <div class="container">
   {% if custom_themename != 'journal2' %}<div class="row">{% endif %}
     {{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
     {% if column_left and column_right %}
@@ -16,60 +18,83 @@
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
       <div class="m-multivendor-wrap mv-dashboard-wrap">
-        <h1 class="primary-heading">{{ heading_title }}</h1>
+        <h3 class="my-4 text-center f-35 text-uppercase">{{ heading_title }}</h3>
           {% if sellers %}
           <div class="row">
           {% for seller in sellers %}
           <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="mpseller-wrap">
-              <a href="{{ seller.href }}"><img src="{{ seller.banner }}" alt="" title="" class="img-responsive"></a>
+            <div class="mpseller-wrap card">
+              <a href="{{ seller.href }}" style="background: url({{ seller.banner }}) no-repeat center; background-size: cover;">
+                {#<img src="{{ seller.banner }}" alt="" title="" class="img-fluid">#}
+              </a>
               <div class="mp-seller-info">
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="seller-img clearfix">
                       {% if display_seller_image %}
-                      <div class="img-wrap"><a href="{{ seller.href }}"><img src="{{ seller.image }}" alt="" title="" class="img-responsive img-circle"></a></div>
+                      <div class="img-wrap"><a href="{{ seller.href }}"><img src="{{ seller.image }}" alt="" title="" class="img-fluid rounded-circle"></a></div>
                       {% endif %}
-                      <div class="follow-us">
-                        <ul class="list-inline">
-                          {% set s_count = 1 %}
-                          {% for social_icon in seller.social_icons %}
-                          {% if s_count <= 3 and social_icon.url %}
-                          <li class="{{ social_icon.class }}"><a href="{{ social_icon.url }}"><i class="fa {{ social_icon.icon_class }}"></i></a></li>
-                          {% endif %}
-                          {% set s_count = s_count + 1 %}
-                          {% endfor %}
-                        </ul>
-                      </div>
-                      <div class="vrating text-center">
-                        {% for i in 1..5 %}
-                        {% if seller.rating < i %}
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                        {% else %}
-                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                        {% endif %}
-                        {% endfor %}
-                      </div>
+                      {#<div class="follow-us">#}
+                        {#<ul class="list-inline">#}
+                          {#{% set s_count = 1 %}#}
+                          {#{% for social_icon in seller.social_icons %}#}
+                          {#{% if s_count <= 3 and social_icon.url %}#}
+                          {#<li class="{{ social_icon.class }}"><a href="{{ social_icon.url }}"><i class="fab {{ social_icon.icon_class }}"></i></a></li>#}
+                          {#{% endif %}#}
+                          {#{% set s_count = s_count + 1 %}#}
+                          {#{% endfor %}#}
+                        {#</ul>#}
+                      {#</div>#}
+                      {#<div class="vrating text-center">#}
+                        {#{% for i in 1..5 %}#}
+                        {#{% if seller.rating < i %}#}
+                        {#<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>#}
+                        {#{% else %}#}
+                        {#<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>#}
+                        {#{% endif %}#}
+                        {#{% endfor %}#}
+                      {#</div>#}
                     </div>
-                    <div class="seller-detail">
+                    <div class="seller-detail mt-3">
                       <ul class="list-unstyled">
-                        <li class="store-name"><a href="{{ seller.href }}">{{ seller.store_name }}</a></li>
+                        <li class="store-name"><a href="{{ seller.href }}" class="f-20 font-weight-bold">{{ seller.store_name }}</a></li>
                         {% if display_seller_name %}
-                        <li><i class="fa fa-user"></i> {{ seller.store_owner }}</li>
+                        <li class="f-15"><i class="fa fa-user-o"></i> {{ seller.store_owner }}</li>
                         {% endif %}
 
                         {% if display_seller_email %}
-                        <li><i class="fa fa-envelope"></i> {{ seller.email }}</li>
+                        <li class="f-15"><i class="fa fa-envelope-o"></i> {{ seller.email }}</li>
                         {% endif %}
 
                         {% if display_seller_telephone %}
-                        <li><i class="fa fa-phone"></i> {{ seller.telephone }}</li>
+                        <li class="f-15"><i class="fa fa-phone"></i> {{ seller.telephone }}</li>
                         {% endif %}
 
                         {% if display_seller_address %}
-                        <li><i class="fa fa-map-marker"></i> {{ seller.address }}</li>
+                        <li class="f-15"><i class="fa fa-map-marker"></i> {{ seller.address }}</li>
                         {% endif %}
                       </ul>
+                      <div class="vrating text-center">
+                          {% for i in 1..5 %}
+                              {% if seller.rating < i %}
+                                <span class="fa fa-stack"><i class="f-13 fa fa-star-o fa-stack-1x"></i></span>
+                              {% else %}
+                                <span class="fa fa-stack"><i class="f-13 fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                              {% endif %}
+                          {% endfor %}
+                      </div>
+                      <div class="follow-us">
+                        <ul class="list-inline">
+                            {% set s_count = 1 %}
+                            {% for social_icon in seller.social_icons %}
+                                {% if s_count <= 3 and social_icon.url %}
+                                  <li class="{{ social_icon.class }}"><a href="{{ social_icon.url }}"><i class="fab {{ social_icon.icon_class }}"></i></a></li>
+                                {% endif %}
+                                {% set s_count = s_count + 1 %}
+                            {% endfor %}
+                        </ul>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -78,7 +103,7 @@
           </div>
           {% endfor %}
         </div>
-        <div class="row pagination">
+        <div class="row">
           <div class="col-sm-6 text-left links">{{ pagination }}</div>
           <div class="col-sm-6 text-right results">{{ results }}</div>
         </div>
@@ -89,5 +114,6 @@
       {{ content_bottom }}</div>
     {% if custom_themename != 'journal2' %}{{ column_right }}{% endif %}
   {% if custom_themename != 'journal2' %}</div>{% endif %}
+</div>
 </div>
 {{ footer }}
