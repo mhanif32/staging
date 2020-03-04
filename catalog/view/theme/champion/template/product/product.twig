@@ -41,22 +41,22 @@
                                     {% if product.rating < i %}
                                         <span class="fa fa-stack">
                                                             <i
-                                                                    class="fa fa-star-o fa-stack-2x text-gold f-20"></i>
+                                                                    class="fa fa-star-o fa-stack-2x text-gold f-15"></i>
                                                         </span>
                                     {% else %}
                                         <span class="fa fa-stack"><i
-                                                    class="fa fa-star fa-stack-2x text-gold f-20"></i><i
-                                                    class="fa fa-star-o fa-stack-2x text-gold f-20"></i></span>
+                                                    class="fa fa-star fa-stack-2x text-gold f-15"></i><i
+                                                    class="fa fa-star-o fa-stack-2x text-gold f-15"></i></span>
                                     {% endif %}
                                 {% endfor %}
                             </div>
                         {% else %}
                             <div class="rating d-inline-block">
-                                <i class="fa fa-star-o text-gold f-20"></i>
-                                <i class="fa fa-star-o text-gold f-20"></i>
-                                <i class="fa fa-star-o text-gold f-20"></i>
-                                <i class="fa fa-star-o text-gold f-20"></i>
-                                <i class="fa fa-star-o text-gold f-20"></i>
+                                <i class="fa fa-star-o text-gold f-15"></i>
+                                <i class="fa fa-star-o text-gold f-15"></i>
+                                <i class="fa fa-star-o text-gold f-15"></i>
+                                <i class="fa fa-star-o text-gold f-15"></i>
+                                <i class="fa fa-star-o text-gold f-15"></i>
                             </div>
                         {% endif %}
 
@@ -259,16 +259,21 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6 col-md-4 col-sm-4 col-lg-4">
+                        <div class="col-md-4">
                             <div class="text-left position-relative btn-border-div add-to-cart">
                                 <a type="button" id="button-cart" data-loading-text="{{ text_loading }}"
                                    class="btn btn-primary text-white w-100"><i class="fas fa-cart-plus"></i> {{ button_cart }}</a>
                             </div>
                         </div>
-                        <div class="col-6 col-md-4 col-sm-4 col-lg-4">
+                        <div class="col-md-4">
                             <div class="text-left position-relative btn-border-div buy-now">
                                 <a class="btn btn-primary w-100" href="javascript: void(0)" id="buy-now" role="button"><i class="fas fa-bolt"></i> Buy Now</a>
                             </div>
+                        </div>
+                            <div class="col-md-4 mt-auto">
+                                <div class="text-left position-relative btn-border-div">
+                                    <a href="{{ seller_link }}" class="btn on-hover text-uppercase f-12 font-weight-bold w-100 p-0">View Seller Profile</a>
+                                </div>
                         </div>
 
                             <!-- Button trigger modal -->

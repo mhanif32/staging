@@ -183,7 +183,7 @@
                 </div>
             </div>
             <div class="row justify-content-between my-3">
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <select name="category_id" class="form-control">
                         <option value="0">{{ text_category }}</option>
                         {% for category_1 in categories %}
@@ -211,7 +211,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <label class="checkbox-inline">
                         {% if sub_category %}
                             <input type="checkbox" name="sub_category" value="1" checked="checked"/>
@@ -220,7 +220,7 @@
                         {% endif %}
                         {{ text_sub_category }}</label>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <label class="checkbox-inline">
                         <label class="checkbox-inline">
                             {% if description %}

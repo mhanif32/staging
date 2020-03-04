@@ -532,6 +532,7 @@ class ControllerProductProduct extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+
 			$this->response->setOutput($this->load->view('error/not_found', $data));
 		}
 	}
