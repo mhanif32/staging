@@ -47,12 +47,13 @@ class ControllerCommonColumnLeft extends Controller {
 
 		foreach ($modules as $module) {
 			$part = explode('.', $module['code']);
-
+            //print_r($part);exit('asd');
 			if (isset($part[0]) && $this->config->get('module_' . $part[0] . '_status')) {
 				$module_data = $this->load->controller('extension/module/' . $part[0]);
 
 				if ($module_data) {
 					$data['modules'][] = $module_data;
+
 				}
 			}
 
@@ -60,6 +61,7 @@ class ControllerCommonColumnLeft extends Controller {
 				$setting_info = $this->model_setting_module->getModule($part[1]);
 
 				if ($setting_info && $setting_info['status']) {
+
 					$output = $this->load->controller('extension/module/' . $part[0], $setting_info);
 
 					if ($output) {
@@ -68,6 +70,8 @@ class ControllerCommonColumnLeft extends Controller {
 				}
 			}
 		}
+
+		//print_r($data);exit('asd');
 
 		return $this->load->view('common/column_left', $data);
 	}

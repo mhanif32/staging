@@ -21,6 +21,8 @@ class ControllerExtensionModuleCategory extends Controller {
 			$data['child_id'] = 0;
 		}
 
+        //print_r($data);exit('asd');
+
 		$this->load->model('catalog/category');
 
 		$this->load->model('catalog/product');
@@ -28,6 +30,7 @@ class ControllerExtensionModuleCategory extends Controller {
 		$data['categories'] = array();
 
 		$categories = $this->model_catalog_category->getCategories(0);
+        //$categories = $this->model_catalog_category->getCategories($data['category_id']);
 
 		foreach ($categories as $category) {
 			$children_data = array();
