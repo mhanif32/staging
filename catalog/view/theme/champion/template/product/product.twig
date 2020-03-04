@@ -272,12 +272,12 @@
                         </div>
 
                             <!-- Button trigger modal -->
-                            <div class="mt-auto ml-auto mr-3">
+                            <!--<div class="mt-auto ml-auto mr-3">
                                 <a type="button" class="on-hover text-right f-13" data-toggle="modal"
                                         data-target="#exampleModalCenter">
                                     <i class="fas fa-ribbon"></i> {{ text_request_product }}
                                 </a>
-                            </div>
+                            </div>-->
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -292,7 +292,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="" class="request-form">
+                                            <form action="{{ request_form_action }}" id = "request_for_product_form" class="request-form">
                                                 <div class="form-group">
                                                     <div class="">
                                                         <label class="control-label"
@@ -877,9 +877,40 @@
     });
 
     //modal: form submit
-    $("#id_form").on("submit", function () {
-        //Code: Action (like ajax...)
-        return false;
+    $("#request_for_product_form").on("submit", function () {
+alert('iook');
+        var form = $("#request_for_product_form");
+        var action = form.attr('action');
+
+        $.ajax({
+            url    : action,
+            type   : "post",
+            data   : new FormData(form),
+            cache  :false,
+            contentType: false,
+            processData: false,
+            beforeSend:function()
+            {
+                $("#submit").hide();
+                $("#spinner_request").html('<i class="fa fa-refresh fa-lg fa-spin"></i>');
+            },
+            success: function (response) {
+                if(response.flag) {
+
+                }
+                $("#loader_container_model").hide();
+            },
+
+            complete:function() {
+                $("#submit").show();
+                $("#spinner_workout").hide();
+            },
+            error: function () {
+                $("#submit").show();
+                $("#spinner_request").hide();
+                alert("An error occurred while processing your request.");
+            }
+        });
     });
     //-------------quanity counter
     $(document).ready(function() {
@@ -898,8 +929,5 @@
             return false;
         });
     });
-
-
-
     //--></script>
 

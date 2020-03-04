@@ -58,6 +58,8 @@ class ControllerCommonProfileColumnLeft extends Controller {
         $data['seller_store_info'] = $this->url->link('account/mpmultivendor/store_info', '', true);
         $data['seller_store_setting'] = $this->url->link('account/mpmultivendor/store_setting', '', true);
         $data['seller_enquiries'] = $this->url->link('account/mpmultivendor/enquiries', '', true);
+        $data['seller_messages'] = $this->url->link('account/mpmultivendor/message', '', true);
+        $data['customer_messages'] = $this->url->link('account/message', '', true);
 
         //end
         $data = array_merge($data, $customer_info);
