@@ -15,4 +15,3 @@ $_['text_store_setting']	= 'Setting';
 $_['text_visit_store'] 		= 'Visit Store';
 $_['text_enquiries'] 		= 'Enquiries';
 $_['text_messages'] 		= 'Admin Messages';
-$_['text_customer_messages'] = 'Customer Messages';
