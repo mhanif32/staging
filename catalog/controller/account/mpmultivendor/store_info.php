@@ -32,10 +32,23 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		$this->load->model('account/mpmultivendor/seller');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_account_mpmultivendor_seller->addSellerStoreInfo($this->request->post);
+
+            $dataFile = array();
+            $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/'; // set you upload path here
+            if (is_uploaded_file($this->request->files['id_proof']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['id_proof']['tmp_name'],$uploads_dir.$this->request->files['id_proof']['name']);
+                $dataFile['id_proof'] = $this->request->files['id_proof']['name'];
+            }
+            if (is_uploaded_file($this->request->files['address_proof']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['address_proof']['tmp_name'],$uploads_dir.$this->request->files['address_proof']['name']);
+                $dataFile['address_proof'] = $this->request->files['address_proof']['name'];
+            }
+
+            $this->model_account_mpmultivendor_seller->addSellerStoreInfo($this->request->post, $dataFile);
 
 			$this->session->data['success'] = $this->language->get('text_success');
-
 			$this->response->redirect($this->url->link('account/mpmultivendor/store_info'));
 		}
 
@@ -136,6 +149,41 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		} else {
 			$data['error_zone'] = '';
 		}
+
+		//for idproof file validation
+        if (isset($this->error['filename_id_proof'])) {
+            $data['error_filename_id_proof'] = $this->error['filename_id_proof'];
+        } else {
+            $data['error_filename_id_proof'] = '';
+        }
+        if (isset($this->error['filetype_id_proof'])) {
+            $data['error_filetype_id_proof'] = $this->error['filetype_id_proof'];
+            //print_r($data);exit('aaaaa');
+        } else {
+            $data['error_filetype_id_proof'] = '';
+        }
+        if (isset($this->error['filesize_id_proof'])) {
+            $data['error_filesize_id_proof'] = $this->error['filesize_id_proof'];
+        } else {
+            $data['error_filesize_id_proof'] = '';
+        }
+
+        //for addressproof file validation
+        if (isset($this->error['filename_address_proof'])) {
+            $data['error_filename_address_proof'] = $this->error['filename_address_proof'];
+        } else {
+            $data['error_filename_address_proof'] = '';
+        }
+        if (isset($this->error['filetype_address_proof'])) {
+            $data['error_filetype_address_proof'] = $this->error['filetype_address_proof'];
+        } else {
+            $data['error_filetype_address_proof'] = '';
+        }
+        if (isset($this->error['filesize_address_proof'])) {
+            $data['error_filesize_address_proof'] = $this->error['filesize_address_proof'];
+        } else {
+            $data['error_filesize_address_proof'] = '';
+        }
 
 		$data['breadcrumbs'] = array();
 
@@ -295,18 +343,35 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		if(isset($this->request->post['country_id'])) {
 			$data['country_id'] = $this->request->post['country_id'];
 		} else if($seller_info) {
-			$data['country_id'] = $seller_info['country_id'];
+			$data['country_id'] = ''. $seller_info['country_id'];
 		} else {
 			$data['country_id'] = '';
 		}
 
-		if(isset($this->request->post['zone_id'])) {
-			$data['zone_id'] = $this->request->post['zone_id'];
-		} else if($seller_info) {
-			$data['zone_id'] = $seller_info['zone_id'];
+        $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/';
+		if(isset($this->request->post['id_proof'])) {
+			$data['link_id_proof'] = $this->request->post['id_proof'];
+		} else if($seller_info['id_proof']) {
+			$data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$seller_info['id_proof'];
 		} else {
-			$data['zone_id'] = '';
+			$data['link_id_proof'] = '';
 		}
+
+        if(isset($this->request->post['address_proof'])) {
+            $data['link_address_proof'] = $this->request->post['address_proof'];
+        } else if($seller_info['address_proof']) {
+            $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$seller_info['address_proof'];
+        } else {
+            $data['link_address_proof'] = '';
+        }
+
+        if(isset($this->request->post['zone_id'])) {
+            $data['zone_id'] = $this->request->post['zone_id'];
+        } else if($seller_info) {
+            $data['zone_id'] = $seller_info['zone_id'];
+        } else {
+            $data['zone_id'] = '';
+        }
 
 		if(isset($this->request->post['facebook_url'])) {
 			$data['facebook_url'] = $this->request->post['facebook_url'];
@@ -430,6 +495,14 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 			$data['image'] = '';
 		}
 
+        if (isset($this->request->post['id_proof'])) {
+            $data['id_proof'] = $this->request->post['id_proof'];
+        } elseif (!empty($seller_info)) {
+            $data['id_proof'] = $seller_info['id_proof'];
+        } else {
+            $data['id_proof'] = '';
+        }
+
 		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
 			$data['thumb_image'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
 		} elseif (!empty($seller_info) && is_file(DIR_IMAGE . $seller_info['image'])) {
@@ -549,7 +622,6 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 			$this->error['meta_description'] = $this->language->get('error_meta_description');
 		}
 
-
 		if (!$this->request->post['meta_keyword']) {
 			$this->error['meta_keyword'] = $this->language->get('error_meta_keyword');
 		}
@@ -646,10 +718,42 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 			}
 		}
 
+		//if file found
+        $this->validateFile('id_proof');
+        $this->validateFile('address_proof');
+
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
 		return !$this->error;
 	}
+
+    private function validateFile($inputFileName)
+    {
+        if (!empty($this->request->files[$inputFileName]['name']))
+        {
+            $filename = html_entity_decode($this->request->files[$inputFileName]['name'], ENT_QUOTES, 'UTF-8');
+
+            if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 128))
+            {
+                $this->error['filename_'.$inputFileName]  = $this->language->get('error_filename_'.$inputFileName);
+            }
+
+            $allowed = array("doc","pdf","jpg");
+            if (!in_array(utf8_substr(strrchr($filename, '.'), 1), $allowed)) {
+                $this->error['filetype_'.$inputFileName]  = $this->language->get('error_filetype_'.$inputFileName);
+            }
+
+            if($this->request->files[$inputFileName]['size']>500000)
+            {
+                $this->error['filesize_'.$inputFileName]  = $this->language->get('error_filesize_'.$inputFileName);
+            }
+
+            if ($this->request->files[$inputFileName]['error'] != UPLOAD_ERR_OK) {
+                $this->error[$inputFileName] = $this->language->get('error_upload_' . $this->request->files['upload']['error']);
+            }
+            //print_r($this->error[$inputFileName]);exit();
+        }
+    }
 }
