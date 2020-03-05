@@ -61,7 +61,7 @@
         {{ column_right }}</div>
 </div>-->
 
-<section id="account-account" class="register update-profile" style="background: #F3F3F3;">
+<section id="account-account" class="register update-profile main-dashboard" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -258,27 +258,53 @@
                             {% if role == 'buyer' %}
                                 <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_orders }}</h3>
                                 <hr>
-                               <div class="row">
-                                        <div class="col-md-6 py-3">
-                                            <div class="media">
-                                                <div class="media-left mr-3">
-                                                    <a href="{{ order }}">
-                                                        <i class="fas fa-shopping f-60 text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading mb-0">
-                                                        <a href="{{ order }}"
-                                                           class="f-15 font-weight-bold">{{ text_order }}</a>
-                                                    </h4>
-                                                    <p>
-                                                        <a href="{{ order }}" class="f-13 text-muted">View your order details</a>
-                                                    </p>
-                                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ order }}">
+                                                    <i class="fas fa-shopping-bag f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ order }}"
+                                                       class="f-15 font-weight-bold">{{ text_order }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ order }}" class="f-13 text-muted">View your order details</a>
+                                                </p>
                                             </div>
                                         </div>
-
                                     </div>
+
+                                </div>
+                            {% endif %}
+
+                            {% if role == 'buyer' %}
+                                <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_seller_enquiries }}</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ my_seller_enquiries_href }}">
+                                                    <i class="fas fa-question-circle f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ my_seller_enquiries_href }}"
+                                                       class="f-15 font-weight-bold">{{ text_seller_enquiries }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ my_seller_enquiries_href }}" class="f-13 text-muted">A place where you can get information</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             {% endif %}
 
 

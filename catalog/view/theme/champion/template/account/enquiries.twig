@@ -1,33 +1,25 @@
 {{ header }}
-<div id="container" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumbs in breadcrumb %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+<div id="enquiry-list" class="bg-light">
+  <div class="container">
+
     {% if custom_themename != 'journal2' %}<div class="row">{% endif %}
     {{ column_left }}
     {% if custom_themename == 'journal2' %} {{ column_right }} {% endif %}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}{{ mpseller_links }}
-      <div class="mv-dashboard-wrap">
-        <div class="row">
-          <div class="col-sm-12 mv-reviews">
+
+    <div id="content" class="col-12 my-5">{{ content_top }}{{ mpseller_links }}
+      <div class="mv-dashboard-wrap card p-3">
+
+          <div class="mv-reviews">
             <div class="panel panel-default">
-              <div class="panel-heading clearfix"><span>{{ heading_title }}</span></div>
+              <div class="panel-heading clearfix"><h3 class="f-35 text-center mb-5 font-weight-bold">{{ heading_title }}</h3></div>
             </div>
             <div class="well">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label" for="input-date-added">{{ entry_date_added }}</label>
+
                     <div class="input-group date">
+                      <label class="control-label mr-2" for="input-date-added">{{ entry_date_added }}</label>
                       <input type="text" name="filter_date_added" value="{{ filter_date_added }}" class="form-control" data-date-format="YYYY-MM-DD">
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
@@ -36,31 +28,34 @@
                   </div>
                 </div>
                 <div class="col-sm-6">
-                  <label class="control-label btn-block">&nbsp;</label>
+
                   <button type="button" id="button-filter" class="btn btn-primary"><i class="fa fa-filter"></i> {{ button_filter }}</button>
                 </div>
               </div>
             </div>
             {% if enquiries %}
               {% for enquiry in enquiries %}
-                <table class="table table-bordered">
-                <tr>
+                <table class="table table-hover mb-4">
+                <tr class="bg-light f-15">
                   <th>{{ entry_store }}</th>
                   <th>{{ entry_date_modified }}</th>
                   <th>{{ entry_date_added }}</th>
                   <th class="text-right">{{ entry_action }}</th>
                 </tr>
-                <tr>
+                <tr class="f-15">
                   <td>{{ enquiry.store_name }}</td>
                   <td>{{ enquiry.date_modified }}</td>
                   <td>{{ enquiry.date_added }}</td>
                   <td class="text-right"><a href="{{ enquiry.view_store }}" class="btn btn-primary btn-sm">{{ button_view_store }}</a></td>
                 </tr>
-                <tr>
+                <tr class="f-15">
                   <td colspan="3">{{ enquiry.message }}</td>
                   <td class="text-right"><a href="{{ enquiry.view }}" class="btn btn-primary btn-sm">{{ button_view }}</a></td>
                 </tr>
+
                 </table>
+
+
               {% endfor %}
               <div class="row">
                 <div class="col-sm-6 text-left">{{ pagination }}</div>
@@ -72,7 +67,7 @@
               </div>
               {% endif %}
           </div>
-        </div>
+
       </div>
       {{ content_bottom }}</div>
     {% if custom_themename != 'journal2' %} {{ column_right }}
@@ -106,5 +101,6 @@ $('.datetime').datetimepicker({
   pickTime: true
 });
 //--></script>
+</div>
 </div>
 {{ footer }}

@@ -1412,81 +1412,10 @@ footer ul {
     width: 30px;
     text-align: center; }
 
-#error-not-found {
-  height: 500px;
-  background: #1aade45c;
-  position: relative; }
-  #error-not-found svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -250px;
-    margin-left: -400px; }
-  #error-not-found .message-box {
-    height: 200px;
-    width: 300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: 50px;
-    color: #FFF;
-    font-family: Roboto;
-    font-weight: 300; }
-  #error-not-found .message-box h1 {
-    font-size: 60px;
-    line-height: 46px;
-    margin-bottom: 40px; }
-  #error-not-found .buttons-con .action-link-wrap {
-    margin-top: 40px; }
-  #error-not-found .buttons-con .action-link-wrap a {
-    background: #68c950;
-    padding: 8px 25px;
-    border-radius: 4px;
-    color: #FFF;
-    font-weight: bold;
-    font-size: 14px;
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear;
-    cursor: pointer;
-    text-decoration: none;
-    margin-right: 10px; }
-  #error-not-found .buttons-con .action-link-wrap a:hover {
-    background: #5A5C6C;
-    color: #fff; }
-  #error-not-found #Polygon-1, #error-not-found #Polygon-2, #error-not-found #Polygon-3, #error-not-found #Polygon-4, #error-not-found #Polygon-4, #error-not-found #Polygon-5 {
-    -webkit-animation: float 1s infinite ease-in-out alternate;
-            animation: float 1s infinite ease-in-out alternate; }
-  #error-not-found #Polygon-2 {
-    -webkit-animation-delay: .2s;
-            animation-delay: .2s; }
-  #error-not-found #Polygon-3 {
-    -webkit-animation-delay: .4s;
-            animation-delay: .4s; }
-  #error-not-found #Polygon-4 {
-    -webkit-animation-delay: .6s;
-            animation-delay: .6s; }
-  #error-not-found #Polygon-5 {
-    -webkit-animation-delay: .8s;
-            animation-delay: .8s; }
-@-webkit-keyframes float {
-  100% {
-    -webkit-transform: translateY(20px);
-            transform: translateY(20px); } }
-@keyframes float {
-  100% {
-    -webkit-transform: translateY(20px);
-            transform: translateY(20px); } }
-  @media (max-width: 450px) {
-    #error-not-found svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -250px;
-      margin-left: -190px; }
-    #error-not-found .message-box {
-      top: 50%;
-      left: 50%;
-      margin-top: -100px;
-      margin-left: -190px;
-      text-align: center; } }
+.main-dashboard #account-account .row .col-md-6 {
+  -webkit-transition: all .6s ease;
+  transition: all .6s ease; }
+  .main-dashboard #account-account .row .col-md-6:hover {
+    background-color: #87cefa52;
+    -webkit-transition: all .6s ease;
+    transition: all .6s ease; }
