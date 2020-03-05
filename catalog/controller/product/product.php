@@ -13,6 +13,7 @@ class ControllerProductProduct extends Controller {
 		);
 
 		$this->load->model('catalog/category');
+        $this->load->model('account/mpmultivendor/seller');
 
 		if (isset($this->request->get['path'])) {
 			$path = '';
@@ -462,6 +463,12 @@ class ControllerProductProduct extends Controller {
 
 			//if loggin user is purchased this product before this time
             $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
+
+            //view seller profile link
+            if(!empty($product_info['mpseller_id'])) {
+                $data['product_seller_link'] = $this->url->link('mpmultivendor/store', '&mpseller_id=' . $product_info['mpseller_id'], true);
+            }
+
 			$this->response->setOutput($this->load->view('product/product', $data));
 		} else {
 			$url = '';

@@ -2,7 +2,8 @@
 
 <section class="product-details pt-5 pb-4">
     <div class="container box-shadow">
-        <a href='javascript:history.back(1);' class="position-absolute" style="z-index: 1"><i class="fas fa-long-arrow-alt-left f-25 on-hover"></i></a>
+        <a href='javascript:history.back(1);' class="position-absolute" style="z-index: 1"><i
+                    class="fas fa-long-arrow-alt-left f-25 on-hover"></i></a>
         <div class="row">
             <div class="col-xs-12 col-md-12 col-sm-12 col-lg-5 m-auto">
                 <div class="product-images">
@@ -103,7 +104,8 @@
                             {% endif %}
                         </ul>
                     {% endif %}
-                    <div class="delivery d-inline-block float-right"><span class="" style="color: #BBB7B7; font-size: 0.8125rem;">Delivered in 7 - 11 days</span>
+                    <div class="delivery d-inline-block float-right"><span class=""
+                                                                           style="color: #BBB7B7; font-size: 0.8125rem;">Delivered in 7 - 11 days</span>
                     </div>
                 </div>
 
@@ -155,39 +157,40 @@
                                             <label class="control-label">{{ option.name }}</label>
                                             <div id="input-option{{ option.product_option_id }}">
                                                 {% for option_value in option.product_option_value %}
-                                                {% if option.name == 'Color' or option.name == 'Colour' %}
-                                                    <div class="radio radio-image d-inline-block">
-                                                        <label>
-                                                            <input type="radio"
-                                                                   name="option[{{ option.product_option_id }}]"
-                                                                   value="{{ option_value.product_option_value_id }}"/>
+                                                    {% if option.name == 'Color' or option.name == 'Colour' %}
+                                                        <div class="radio radio-image d-inline-block">
+                                                            <label>
+                                                                <input type="radio"
+                                                                       name="option[{{ option.product_option_id }}]"
+                                                                       value="{{ option_value.product_option_value_id }}"/>
 
-                                                            <img src="{{ option_value.color_image }}" width="50"
-                                                                 height="50"
-                                                                 class="img-thumbnail rounded-0" data-toggle="tooltip"
-                                                                 data-html="true"
-                                                                 title="{{ option_value.name }} {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}) {% endif %}"/>
-                                                        </label>
-                                                    </div>
-                                                {% else %}
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio"
-                                                                   name="option[{{ option.product_option_id }}]"
-                                                                   value="{{ option_value.product_option_value_id }}"/>
-                                                            {% if option_value.image %} <img
-                                                                    src="{{ option_value.image }}"
-                                                                    alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"
-                                                                    class="img-thumbnail"/> {% endif %}
-                                                            {{ option_value.name }}
-                                                            {% if option_value.price %}
-                                                                ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                            {% endif %} </label>
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
+                                                                <img src="{{ option_value.color_image }}" width="50"
+                                                                     height="50"
+                                                                     class="img-thumbnail rounded-0"
+                                                                     data-toggle="tooltip"
+                                                                     data-html="true"
+                                                                     title="{{ option_value.name }} {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}) {% endif %}"/>
+                                                            </label>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio"
+                                                                       name="option[{{ option.product_option_id }}]"
+                                                                       value="{{ option_value.product_option_value_id }}"/>
+                                                                {% if option_value.image %} <img
+                                                                        src="{{ option_value.image }}"
+                                                                        alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"
+                                                                        class="img-thumbnail"/> {% endif %}
+                                                                {{ option_value.name }}
+                                                                {% if option_value.price %}
+                                                                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                                {% endif %} </label>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 {% endif %}
                                 {% if option.type == 'checkbox' %}
@@ -262,114 +265,121 @@
                         <div class="col-md-4">
                             <div class="text-left position-relative btn-border-div add-to-cart">
                                 <a type="button" id="button-cart" data-loading-text="{{ text_loading }}"
-                                   class="btn btn-primary text-white w-100"><i class="fas fa-cart-plus"></i> {{ button_cart }}</a>
+                                   class="btn btn-primary text-white w-100"><i
+                                            class="fas fa-cart-plus"></i> {{ button_cart }}</a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-left position-relative btn-border-div buy-now">
-                                <a class="btn btn-primary w-100" href="javascript: void(0)" id="buy-now" role="button"><i class="fas fa-bolt"></i> Buy Now</a>
+                                <a class="btn btn-primary w-100" href="javascript: void(0)" id="buy-now"
+                                   role="button"><i class="fas fa-bolt"></i> Buy Now</a>
                             </div>
                         </div>
-                            <div class="col-md-4 mt-auto">
-                                <div class="text-left position-relative btn-border-div">
-                                    <a href="{{ seller_link }}" class="btn on-hover text-uppercase f-12 font-weight-bold w-100 p-0">View Seller Profile</a>
-                                </div>
+                        <div class="col-md-4 mt-auto">
+                            {% if product_seller_link %}
+                            <div class="text-left position-relative btn-border-div">
+                                <a href="{{ product_seller_link }}"
+                                   class="btn on-hover text-uppercase f-12 font-weight-bold w-100 p-0">View Seller
+                                    Profile</a>
+                            </div>
+                            {% endif %}
                         </div>
 
-                            <!-- Button trigger modal -->
-                            <!--<div class="mt-auto ml-auto mr-3">
+                        <!-- Button trigger modal -->
+                        <!--<div class="mt-auto ml-auto mr-3">
                                 <a type="button" class="on-hover text-right f-13" data-toggle="modal"
                                         data-target="#exampleModalCenter">
                                     <i class="fas fa-ribbon"></i> {{ text_request_product }}
                                 </a>
                             </div>-->
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-success">
-                                            <h3 class="modal-title f-20 text-white text-uppercase"
-                                                id="exampleModalLongTitle">{{ text_purchase_product }}</h3>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span class="f-25 text-white" aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ request_form_action }}" id = "request_for_product_form" class="request-form">
-                                                <div class="form-group">
-                                                    <div class="">
-                                                        <label class="control-label"
-                                                               for="input-quantity">{{ product_name }}</label>
-                                                    </div>
-                                                    <div class="p-2 border rounded bg-light">
-                                                        {{ heading_title }}
-                                                    </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success">
+                                        <h3 class="modal-title f-20 text-white text-uppercase"
+                                            id="exampleModalLongTitle">{{ text_purchase_product }}</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span class="f-25 text-white" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ request_form_action }}" id="request_for_product_form"
+                                              class="request-form">
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <label class="control-label"
+                                                           for="input-quantity">{{ product_name }}</label>
                                                 </div>
-                                                <div class="product-size form-group">
+                                                <div class="p-2 border rounded bg-light">
+                                                    {{ heading_title }}
+                                                </div>
+                                            </div>
+                                            <div class="product-size form-group">
+                                                <div class="">
+                                                    <label class="control-label"
+                                                           for="input-request-quantity">{{ entry_qty }}</label>
+                                                </div>
+                                                <div class="select w-100">
+                                                    <input type="text" name="request_quantity" value="{{ minimum }}"
+                                                           size="2"
+                                                           id="input-request_quantity"
+                                                           class="form-control"/>
+                                                    <input type="hidden" name="product_id"
+                                                           value="{{ product_id }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="form-group col-md-6">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-request-quantity">{{ entry_qty }}</label>
+                                                               for="input-email">Email</label>
                                                     </div>
-                                                    <div class="select w-100">
-                                                        <input type="text" name="request_quantity" value="{{ minimum }}"
-                                                               size="2"
-                                                               id="input-request_quantity"
+                                                    <div class="">
+                                                        <input type="email" name="email" value="" id="email"
                                                                class="form-control"/>
-                                                        <input type="hidden" name="product_id"
-                                                               value="{{ product_id }}"/>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-
-                                                    <div class="form-group col-md-6">
-                                                        <div class="">
-                                                            <label class="control-label"
-                                                                   for="input-email">Email</label>
-                                                        </div>
-                                                        <div class="">
-                                                            <input type="email" name="email" value="" id="email"
-                                                                   class="form-control"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <div class="">
-                                                            <label class="control-label"
-                                                                   for="input-contact">Contact Number</label>
-                                                        </div>
-                                                        <div class="">
-                                                            <input type="text" name="contact" value=""
-                                                                   id="contact-number" class="form-control"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="">
-                                                        <label class="control-label" for="input-address">Address</label>
-                                                    </div>
-                                                    <div class="">
-                                                        <input type="text" name="address" value="" placeholder=""
-                                                               id="address" class="form-control"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
+                                                <div class="form-group col-md-6">
                                                     <div class="">
                                                         <label class="control-label"
-                                                               for="input-comment">Comment</label>
+                                                               for="input-contact">Contact Number</label>
                                                     </div>
                                                     <div class="">
+                                                        <input type="text" name="contact" value=""
+                                                               id="contact-number" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <label class="control-label" for="input-address">Address</label>
+                                                </div>
+                                                <div class="">
+                                                    <input type="text" name="address" value="" placeholder=""
+                                                           id="address" class="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <label class="control-label"
+                                                           for="input-comment">Comment</label>
+                                                </div>
+                                                <div class="">
                                                         <textarea id="Comment" name="comment" rows="4"
                                                                   class="w-100"></textarea>
-                                                    </div>
                                                 </div>
-                                                <input type="submit" class="btn btn-success px-5" value="Submit">
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <input type="submit" class="btn btn-success px-5" value="Submit">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                     </div>
 
@@ -377,7 +387,7 @@
                         <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
                     {% endif %}
                 </div>
-<hr>
+                <hr>
                 <div class="row mb-2">
                     <div class="col-12">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -883,30 +893,29 @@
 
     //modal: form submit
     $("#request_for_product_form").on("submit", function () {
-alert('iook');
+        alert('iook');
         var form = $("#request_for_product_form");
         var action = form.attr('action');
 
         $.ajax({
-            url    : action,
-            type   : "post",
-            data   : new FormData(form),
-            cache  :false,
+            url: action,
+            type: "post",
+            data: new FormData(form),
+            cache: false,
             contentType: false,
             processData: false,
-            beforeSend:function()
-            {
+            beforeSend: function () {
                 $("#submit").hide();
                 $("#spinner_request").html('<i class="fa fa-refresh fa-lg fa-spin"></i>');
             },
             success: function (response) {
-                if(response.flag) {
+                if (response.flag) {
 
                 }
                 $("#loader_container_model").hide();
             },
 
-            complete:function() {
+            complete: function () {
                 $("#submit").show();
                 $("#spinner_workout").hide();
             },
@@ -918,7 +927,7 @@ alert('iook');
         });
     });
     //-------------quanity counter
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.minus').click(function () {
             var $input = $(this).parent().find('input');
             var count = parseInt($input.val()) - 1;
