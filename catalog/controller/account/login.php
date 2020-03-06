@@ -83,6 +83,7 @@ class ControllerAccountLogin extends Controller {
                 if(!empty($this->session->data['loggedInCountry'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];
                     $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+                    $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
                     $this->session->data['loggedInCountry'] = $dataArray->geoplugin_countryName;
                 }
 				$this->response->redirect($this->url->link('account/account', '', true));

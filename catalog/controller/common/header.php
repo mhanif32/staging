@@ -3,6 +3,7 @@ class ControllerCommonHeader extends Controller {
 	public function index() {
 		// Analytics
 		$this->load->model('setting/extension');
+		$this->load->model('account/address');
 
 		$data['analytics'] = array();
 
@@ -94,9 +95,17 @@ class ControllerCommonHeader extends Controller {
         $data['countries'] = $this->model_localisation_country->getCountries();
 
         //check logged in user country
-        if(!empty($this->session->data['loggedInCountry'])) {
+        $data['loggedInCountry'] = '';
+        if(!empty($this->session->data['loggedInCountry']) && !$this->customer->loggedIn()) {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
+        } else {
+            // Default Shipping Address
+            $defaultAddress = $this->model_account_address->getDefaultAddress();
+            if(!empty($defaultAddress)) {
+                $data['loggedInCountry'] = $defaultAddress['zone'].', '.$defaultAddress['country'];
+            }
         }
+
 		return $this->load->view('common/header', $data);
 	}
 }

@@ -1,4 +1,8 @@
 <div class="list-group">
+  {% if category_name %}
+    <a href="javascript:void(0)" class="list-group-item active">&nbsp;&nbsp;&nbsp;{{ category_name }}</a>
+  {% endif %}
+
   {% for category in categories %}
   {% if category.category_id == category_id %} 
   <a href="{{ category.href }}" class="list-group-item active">{{ category.name }}</a> 
