@@ -436,10 +436,13 @@
                                     {% if product.price %}
                                         <div class="product-price text-primary font-weight-bold f-20">
                                             {% if not product.special %}
+                                            <span class="price-new text-success font-weight-bold mr-2">
                                                 {{ product.price }}
+                                            </span>
                                             {% else %}
-                                                <span class="price-new">{{ product.special }}</span> <strike><span
-                                                        class="price-old text-accent font-weight-normal f-15 ml-2 ">{{ product.price }}</span></strike>
+                                                <span class="price-new text-success font-weight-bold">{{ product.special }}</span> <strike><span
+                                                        class="price-old text-accent font-weight-normal f-12">{{ product.price }}</span></strike>
+                                                
                                             {% endif %}
                                             {#{% if product.tax %}#}
                                             {#<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>#}
