@@ -1,6 +1,10 @@
 <?php
 class ControllerCommonHeader extends Controller {
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		// Analytics
 		$this->load->model('setting/extension');
 		$this->load->model('account/address');
@@ -96,7 +100,7 @@ class ControllerCommonHeader extends Controller {
 
         //check logged in user country
         $data['loggedInCountry'] = '';
-        if(!empty($this->session->data['loggedInCountry']) && !$this->customer->loggedIn()) {
+        if(!empty($this->session->data['loggedInCountry']) && !$this->customer->isLogged()) {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
         } else {
             // Default Shipping Address
