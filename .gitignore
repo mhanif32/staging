@@ -10,6 +10,7 @@
 
 # Image Cache Files
 /image/cache/*
+/image/mpseller/*
 !/image/cache/index.html
 
 # Templates Files
