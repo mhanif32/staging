@@ -20,7 +20,7 @@ $_['button_cancel']    	= 'Cancel';
 $_['tab_general'] 		= 'General';
 $_['tab_store'] 		= 'Store Info';
 $_['tab_local'] 		= 'Local';
-$_['tab_image'] 		= 'Image';
+$_['tab_image'] 		= 'Image & Docs';
 $_['tab_social_profiles'] = 'Social Profiles';
 $_['tab_seo'] 			= 'SEO';
 
@@ -52,6 +52,8 @@ $_['entry_youtube'] 				= 'Youtube';
 $_['entry_instagram'] 				= 'Instagram';
 $_['entry_flickr'] 					= 'Flickr';
 $_['entry_store']            		= 'Stores';
+$_['entry_id_proof']            	= 'Attach ID Proof';
+$_['entry_address_proof']           = 'Attach Address Proof';
 
 // Help
 $_['help_banner'] 					= 'W: %s X H: %s';
@@ -76,3 +78,11 @@ $_['error_keyword']          = 'SEO URL already in use!';
 $_['error_seo_keyword']		= 'SEO URL already in use!';
 $_['error_review_seo_keyword'] = 'SEO URL already in use!';
 $_['error_warning']         = 'Warning: Please check the form carefully for errors!';
+
+$_['error_filename_id_proof'] = 'Filename must be between 3 and 128 charecters!';
+$_['error_filetype_id_proof'] = 'Only Doc, PDF & JPG file should be allow!';
+$_['error_filesize_id_proof'] = 'File size is too big to upload!';
+
+$_['error_filename_address_proof'] = 'Filename must be between 3 and 128 charecters!';
+$_['error_filetype_address_proof'] = 'Only Doc, PDF & JPG file should be allow!';
+$_['error_filesize_address_proof'] = 'File size is too big to upload!';

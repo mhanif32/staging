@@ -1,9 +1,18 @@
 <?php
 class ModelAccountMpmultivendorSeller extends Model {
-	public function addSellerStoreInfo($data) {
+	public function addSellerStoreInfo($data, $dataFile = NULL) {
 		$query = $this->db->query("SELECT * FROM ". DB_PREFIX ."mpseller WHERE customer_id = '". (int)$this->customer->isLogged() ."'");
 		if($query->row) {
-			$sql = "UPDATE ". DB_PREFIX ."mpseller SET description = '". $this->db->escape($data['description']) ."', meta_description = '". $this->db->escape($data['meta_description']) ."', meta_keyword = '". $this->db->escape($data['meta_keyword']) ."', store_owner = '". $this->db->escape($data['store_owner']) ."', store_name = '". $this->db->escape($data['store_name']) ."', address = '". $this->db->escape($data['address']) ."', email = '". $this->db->escape($data['email']) ."', telephone = '". $this->db->escape($data['telephone']) ."', fax = '". $this->db->escape($data['fax']) ."', city = '". $this->db->escape($data['city']) ."', zone_id = '". $this->db->escape($data['zone_id']) ."', country_id = '". (int)$data['country_id'] ."', logo = '". $this->db->escape($data['logo']) ."', banner = '". $this->db->escape($data['banner']) ."', image = '". $this->db->escape($data['image']) ."', facebook_url = '". $this->db->escape($data['facebook_url']) ."', google_plus_url = '". $this->db->escape($data['google_plus_url']) ."', twitter_url = '". $this->db->escape($data['twitter_url']) ."', pinterest_url = '". $this->db->escape($data['pinterest_url']) ."', linkedin_url = '". $this->db->escape($data['linkedin_url']) ."', youtube_url = '". $this->db->escape($data['youtube_url']) ."', instagram_url = '". $this->db->escape($data['instagram_url']) ."', flickr_url = '". $this->db->escape($data['flickr_url']) ."', store_id = '" . (int)$this->config->get('config_store_id') . "', language_id = '" . (int)$this->config->get('config_language_id') . "' WHERE mpseller_id = '". (int)$query->row['mpseller_id'] ."' AND customer_id = '". (int)$this->customer->isLogged() ."' AND status = '1'";
+			$sql = "UPDATE ". DB_PREFIX ."mpseller SET description = '". $this->db->escape($data['description']) ."', meta_description = '". $this->db->escape($data['meta_description']) ."', meta_keyword = '". $this->db->escape($data['meta_keyword']) ."', store_owner = '". $this->db->escape($data['store_owner']) ."', store_name = '". $this->db->escape($data['store_name']) ."', address = '". $this->db->escape($data['address']) ."', email = '". $this->db->escape($data['email']) ."', telephone = '". $this->db->escape($data['telephone']) ."', fax = '". $this->db->escape($data['fax']) ."', city = '". $this->db->escape($data['city']) ."', zone_id = '". $this->db->escape($data['zone_id']) ."', country_id = '". (int)$data['country_id'] ."', logo = '". $this->db->escape($data['logo']) ."', banner = '". $this->db->escape($data['banner']) ."', image = '". $this->db->escape($data['image']) ."', facebook_url = '". $this->db->escape($data['facebook_url']) ."', google_plus_url = '". $this->db->escape($data['google_plus_url']) ."', twitter_url = '". $this->db->escape($data['twitter_url']) ."', pinterest_url = '". $this->db->escape($data['pinterest_url']) ."', linkedin_url = '". $this->db->escape($data['linkedin_url']) ."', youtube_url = '". $this->db->escape($data['youtube_url']) ."', instagram_url = '". $this->db->escape($data['instagram_url']) ."', flickr_url = '". $this->db->escape($data['flickr_url']) ."', store_id = '" . (int)$this->config->get('config_store_id') . "',";
+
+			if(!empty($dataFile['id_proof'])) {
+			    $sql.=" id_proof = '".$this->db->escape($dataFile['id_proof'])."', ";
+            }
+            if(!empty($dataFile['address_proof'])) {
+                $sql.=" address_proof = '".$this->db->escape($dataFile['address_proof'])."', ";
+            }
+
+			$sql.=" language_id = '" . (int)$this->config->get('config_language_id') . "' WHERE mpseller_id = '". (int)$query->row['mpseller_id'] ."' AND customer_id = '". (int)$this->customer->isLogged() ."' AND status = '1'";
 			
 			$this->db->query($sql);
 

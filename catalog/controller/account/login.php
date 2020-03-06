@@ -80,9 +80,11 @@ class ControllerAccountLogin extends Controller {
 			    $this->response->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
                 //set login country
-                $ip = $_SERVER['REMOTE_ADDR'];
-                $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
-                $this->session->data['loggedInCountry'] = $dataArray->geoplugin_countryName;
+                if(!empty($this->session->data['loggedInCountry'])) {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                    $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+                    $this->session->data['loggedInCountry'] = $dataArray->geoplugin_countryName;
+                }
 				$this->response->redirect($this->url->link('account/account', '', true));
 			}
 		}
