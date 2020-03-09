@@ -65,8 +65,9 @@
             <form id="form-address">
             <nav class="nav d-flex justify-content-between">
                 {% if loggedInCountry %}
-                    <h3 class="f-13 font-weight-medium"><i class="fa fa-map-marker"></i> Hello, {{ firstname }}
-                        <p>Deliver To {{ loggedInCountry }}</p></h3>
+                <div class="w-100">
+                    <h3 class="f-13 font-weight-medium mb-0 text-white"><i class="fa fa-map-marker text-danger f-35"></i> Hello, Deliver To {% if firstname %} {{ firstname }} {% else %} You {% endif %}, <span class="text-white f-20"> {{ loggedInCountry }}</span> </h3>
+                </div>
                 {% else %}
                 <div class="">
                     <h3 class="f-13 text-white font-weight-medium">
@@ -103,7 +104,7 @@
                 {% endif %}
             </nav>
             </form>
-            <p class="text-white text-center m-0" style="font-size: 12px;">Note : The product has been listed as per the
+            <p class="text-white text-center m-0" style="font-size: 12px; display:  {% if loggedInCountry %} none {% else %} block {% endif %}">Note : The product has been listed as per the
                 chosen location.</p>
         </div>
     </section>
