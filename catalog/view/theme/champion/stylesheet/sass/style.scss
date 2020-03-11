@@ -1257,34 +1257,14 @@ i{width: 20px;}}}}
 
 //------------------------
 //custom size radio button
-
-
   .radio-toolbar {
-    margin: 10px;
-
-
-
-    input.size-radio[type="radio"] {
-      opacity: 0;
-      position: fixed;
-      width: 0;
-      &:focus ~ *  {
-        border: 1px dashed $success !important;
-      }
-      &:checked ~ *{
-        background-color: #F2F9FF !important;
-        border-color: $success !important;
-      }
+    input.size-radio[type="radio"] { opacity: 0; position: fixed; width: 0;
+      &:focus ~ *  { border: 1px dashed $success !important; }
+      &:checked ~ *{ background-color: #F2F9FF !important; border-color: $success !important; }
     }
 
-   label span {
-    padding: 5px 20px;
-    font-size: 15px;
-    border: 1px solid #b4b4b4;
-    border-radius: 4px;
-     &:hover {
-       background-color: #F2F9FF;
-     }
+   label span { padding: 5px 20px; font-size: 15px; border: 1px solid #b4b4b4; border-radius: 4px;
+     &:hover { background-color: #F2F9FF; }
   }
   }
-
+//==========end size radio======

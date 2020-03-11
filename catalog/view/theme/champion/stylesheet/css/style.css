@@ -1423,21 +1423,19 @@ footer ul {
     -webkit-transition: all .6s ease;
     transition: all .6s ease; }
 
-.radio-toolbar {
-  margin: 10px; }
-  .radio-toolbar input.size-radio[type="radio"] {
-    opacity: 0;
-    position: fixed;
-    width: 0; }
-    .radio-toolbar input.size-radio[type="radio"]:focus ~ * {
-      border: 1px dashed #01B0F1 !important; }
-    .radio-toolbar input.size-radio[type="radio"]:checked ~ * {
-      background-color: #F2F9FF !important;
-      border-color: #01B0F1 !important; }
-  .radio-toolbar label span {
-    padding: 5px 20px;
-    font-size: 15px;
-    border: 1px solid #b4b4b4;
-    border-radius: 4px; }
-    .radio-toolbar label span:hover {
-      background-color: #F2F9FF; }
+.radio-toolbar input.size-radio[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0; }
+  .radio-toolbar input.size-radio[type="radio"]:focus ~ * {
+    border: 1px dashed #01B0F1 !important; }
+  .radio-toolbar input.size-radio[type="radio"]:checked ~ * {
+    background-color: #F2F9FF !important;
+    border-color: #01B0F1 !important; }
+.radio-toolbar label span {
+  padding: 5px 20px;
+  font-size: 15px;
+  border: 1px solid #b4b4b4;
+  border-radius: 4px; }
+  .radio-toolbar label span:hover {
+    background-color: #F2F9FF; }
