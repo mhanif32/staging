@@ -25,7 +25,7 @@ function getURLVar(key) {
 $(document).ready(function() {
 
     //ICHECK
-    $('input').iCheck({
+    $('.icheck-input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue'
     });

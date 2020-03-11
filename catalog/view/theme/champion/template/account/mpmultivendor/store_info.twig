@@ -43,14 +43,14 @@
                                 <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2">
                                     <li class="active"><a href="#tab-store" data-toggle="tab"
                                                           class="active">{{ tab_store }}</a></li>
-                                    <li><a href="#tab-local" data-toggle="tab">{{ tab_local }}</a></li>
+                                    <li><a href="#tab-local" data-toggle="tab">{{ tab_address }}</a></li>
                                     <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
                                     <li><a href="#tab-social" data-toggle="tab">{{ tab_social_profiles }}</a></li>
                                 </ul>
                                 <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
                                     <div class="tab-pane active mt-3" id="tab-store">
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_store_owner }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_store_owner }} <a class="text-danger">*</a> </label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="store_owner"
                                                        placeholder="{{ entry_store_owner }}" value="{{ store_owner }}"/>
@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_store_name }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_store_name }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" name="store_name" class="form-control"
                                                        placeholder="{{ entry_store_name }}" value="{{ store_name }}"/>
@@ -70,7 +70,28 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_description }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_email }}<a class="text-danger">*</a></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control" name="email"
+                                                       placeholder="{{ entry_email }}" value="{{ email }}"/>
+                                                {% if error_email %}
+                                                    <div class="text-danger">{{ error_email }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_telephone }}<a class="text-danger">*</a></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control" name="telephone"
+                                                       placeholder="{{ entry_telephone }}" value="{{ telephone }}"/>
+                                                {% if error_telephone %}
+                                                    <div class="text-danger">{{ error_telephone }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_description }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <textarea name="description" rows="5"
                                                           class="form-control">{{ description }}</textarea>
@@ -80,7 +101,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_meta_description }} <i
+                                            <label class="control-label col-sm-12">{{ entry_meta_description }}<a class="text-danger">*</a> <i
                                                         class="fas fa-question-circle" data-toggle="tooltip"
                                                         data-placement="right"
                                                         title="Search engines show the meta description in search results mostly when the searched-for phrase is within the description"></i></label>
@@ -93,7 +114,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_meta_keyword }} <i
+                                            <label class="control-label col-sm-12">{{ entry_meta_keyword }}<a class="text-danger">*</a> <i
                                                         class="fas fa-question-circle" data-toggle="tooltip"
                                                         data-placement="right"
                                                         title="describe the content of a website shortly and concisely, the keywords are generally written in lower case, and separated with a comma."></i></label>
@@ -106,8 +127,22 @@
                                             </div>
                                         </div>
 
+
+
+                                        {#<div class="form-group">#}
+                                            {#<label class="control-label col-sm-12">{{ entry_fax }}</label>#}
+                                            {#<div class="col-sm-12">#}
+                                                {#<input type="text" class="form-control" name="fax"#}
+                                                       {#placeholder="{{ entry_fax }}" value="{{ fax }}"/>#}
+                                                {#{% if error_fax %}#}
+                                                    {#<div class="text-danger">{{ error_fax }}</div>#}
+                                                {#{% endif %}#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    </div>
+                                    <div class="tab-pane mt-3" id="tab-local">
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_address }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_address }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <textarea name="address" class="form-control"
                                                           placeholder="{{ entry_address }}">{{ address }}</textarea>
@@ -116,40 +151,9 @@
                                                 {% endif %}
                                             </div>
                                         </div>
+
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_email }}</label>
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="email"
-                                                       placeholder="{{ entry_email }}" value="{{ email }}"/>
-                                                {% if error_email %}
-                                                    <div class="text-danger">{{ error_email }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_telephone }}</label>
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="telephone"
-                                                       placeholder="{{ entry_telephone }}" value="{{ telephone }}"/>
-                                                {% if error_telephone %}
-                                                    <div class="text-danger">{{ error_telephone }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-12">{{ entry_fax }}</label>
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="fax"
-                                                       placeholder="{{ entry_fax }}" value="{{ fax }}"/>
-                                                {% if error_fax %}
-                                                    <div class="text-danger">{{ error_fax }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane mt-3" id="tab-local">
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_city }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_city }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="city"
                                                        placeholder="{{ entry_city }}" value="{{ city }}"/>
@@ -160,7 +164,7 @@
                                         </div>
                                         <div class="form-group required">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-country">{{ entry_country }}</label>
+                                                   for="input-country">{{ entry_country }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <select name="country_id" id="input-country" class="form-control">
                                                     <option value="">{{ text_select }}</option>
@@ -180,7 +184,7 @@
                                         </div>
                                         <div class="form-group required">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-zone">{{ entry_zone }}</label>
+                                                   for="input-zone">{{ entry_zone }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <select name="zone_id" id="input-zone" class="form-control">
                                                 </select>

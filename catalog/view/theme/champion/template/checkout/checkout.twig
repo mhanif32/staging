@@ -38,26 +38,7 @@
                     </div>
 
                     <div class="steps-data" style="display: {{ style_data }}">
-                    {% if not logged and account != 'guest' %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">{{ text_checkout_account }}</h4>
-                            </div>
-                            <div class="panel-collapse collapse" id="collapse-payment-address">
-                                <div class="panel-body"></div>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">{{ text_checkout_payment_address }}</h4>
-                            </div>
-                            <div class="panel-collapse collapse" id="collapse-payment-address">
-                                <div class="panel-body"></div>
-                            </div>
-                        </div>
 
-                    {% endif %}
                     {% if shipping_required %}
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -75,7 +56,6 @@
                                 <div class="panel-body"></div>
                             </div>
                         </div>
-
                     {% endif %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -85,6 +65,27 @@
                             <div class="panel-body"></div>
                         </div>
                     </div>
+
+                        {% if not logged and account != 'guest' %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">{{ text_checkout_account }}</h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="collapse-payment-address">
+                                    <div class="panel-body"></div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">{{ text_checkout_payment_address }}</h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="collapse-payment-address">
+                                    <div class="panel-body"></div>
+                                </div>
+                            </div>
+                        {% endif %}
+
 
                     <div class="panel panel-default">
                         <div class="panel-heading">

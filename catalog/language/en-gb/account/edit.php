@@ -11,8 +11,10 @@ $_['text_success']       = 'Success: Your account has been successfully updated.
 // Entry
 $_['entry_firstname']    = 'First Name';
 $_['entry_lastname']     = 'Last Name';
-$_['entry_email']        = 'E-Mail';
-$_['entry_telephone']    = 'Telephone';
+$_['entry_email']        = 'Personal E-mail';
+$_['entry_telephone']    = 'Personal Mobile';
+$_['entry_date_of_birth']    = 'Date of Birth';
+$_['entry_home_address']    = 'Home Address';
 
 // Error
 $_['error_exists']       = 'Warning: E-Mail address is already registered!';

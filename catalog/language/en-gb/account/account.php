@@ -26,3 +26,4 @@ $_['text_affiliate_edit'] = 'Edit your affiliate information';
 $_['text_tracking']       = 'Custom Affiliate Tracking Code';
 $_['text_my_seller_enquiries']       = 'My Seller Enquiries';
 $_['text_seller_enquiries']       = 'Seller Enquiries';
+$_['text_messages'] 		= 'Admin Messages';

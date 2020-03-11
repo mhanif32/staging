@@ -37,6 +37,7 @@ class ControllerAccountAccount extends Controller {
 		$data['edit'] = $this->url->link('account/edit', '', true);
 		$data['password'] = $this->url->link('account/password', '', true);
 		$data['address'] = $this->url->link('account/address', '', true);
+        $data['seller_messages'] = $this->url->link('account/mpmultivendor/message', '', true);
 		
 		$data['credit_cards'] = array();
 		

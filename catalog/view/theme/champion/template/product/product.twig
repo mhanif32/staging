@@ -172,6 +172,21 @@
                                                                      title="{{ option_value.name }} {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}) {% endif %}"/>
                                                             </label>
                                                         </div>
+
+                                                    {% elseif option.name == 'Size' %}
+                                                        <div class="radio-toolbar size-radio-btn d-inline-block">
+                                                            <label data-toggle="tooltip" data-placement="top" title=" {% if option_value.price %}
+                                                                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                                    {% else %} 00.00 {% endif %}">
+                                                                <input class="size-radio"  type="radio"
+                                                                       name="option[{{ option.product_option_id }}]"
+                                                                       value="{{ option_value.product_option_value_id }}"/>
+                                                                <span>
+                                                                {{ option_value.name }}
+                                                               </span>
+                                                            </label>
+                                                        </div>
+
                                                     {% else %}
                                                         <div class="radio">
                                                             <label>
@@ -185,7 +200,8 @@
                                                                 {{ option_value.name }}
                                                                 {% if option_value.price %}
                                                                     ({{ option_value.price_prefix }}{{ option_value.price }})
-                                                                {% endif %} </label>
+                                                                {% endif %}
+                                                            </label>
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
@@ -200,7 +216,7 @@
                                             <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox"
+                                                            <input class="icheck-input" type="checkbox"
                                                                    name="option[{{ option.product_option_id }}][]"
                                                                    value="{{ option_value.product_option_value_id }}"/>
                                                             {% if option_value.image %} <img
@@ -277,11 +293,11 @@
                         </div>
                         <div class="col-md-4 mt-auto">
                             {% if product_seller_link %}
-                            <div class="text-left position-relative btn-border-div">
-                                <a href="{{ product_seller_link }}"
-                                   class="btn on-hover text-uppercase f-12 font-weight-bold w-100 p-0">View Seller
-                                    Profile</a>
-                            </div>
+                                <div class="text-left position-relative btn-border-div">
+                                    <a href="{{ product_seller_link }}"
+                                       class="btn on-hover text-uppercase f-12 font-weight-bold w-100 p-0">View Seller
+                                        Profile</a>
+                                </div>
                             {% endif %}
                         </div>
 

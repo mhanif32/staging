@@ -43,16 +43,60 @@
                 {% endif %}
 
                 <div class="reply-section">
+
+                    <form action="" class="">
+
                     <div class="form-group row">
-                        <label class="col-sm-12 control-label">{{ entry_message }}</label>
-                        <div class="col-sm-12">
-                            <textarea name="message" rows="8" class="form-control"></textarea>
+
+                        <div class="col-lg-12">
+
+                                <label class="col-sm-12 control-label bg-success text-center py-3 f-25 text-white font-weight-black text-center text-uppercase">{{ entry_message }}</label>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <div class="form-group required">
+                                            <label class="text-primary font-weight-bold f-15 control-label" for="input-name">Name</label>
+                                            <input type="text" name="name" value="{{ text_username }}" id="input-name" class="form-control" disabled/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group required">
+                                            <label class="text-primary font-weight-bold f-15 control-label" for="input-email">{{ entry_email }}</label>
+                                            <input type="text" name="email" value="{{ text_email }}" id="input-email" class="form-control" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <label class="text-primary font-weight-bold f-15 control-label" for="input-email">Message</label>
+                                        <textarea name="message" rows="8" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+
+                            <button type="button" class="btn btn-success py-2 w-50 text-white font-weight-medium button-reply-submit"><i
+                                        class="fa fa-paper-plane"></i> {{ button_submit }}</button>
+
                         </div>
+
+
+
+
+
+                        {#<label class="col-sm-12 control-label bg-success text-center py-3 f-25 text-white font-weight-black text-center text-uppercase">{{ entry_message }}</label>#}
+
+
+                        {#<div class="col-sm-12">#}
+                            {#<textarea name="message" rows="8" class="form-control"></textarea>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<div class="buttons-holder text-center">#}
+                        {#<button type="button" class="button btn btn-success button-reply-submit"><i#}
+                                    {#class="fa fa-paper-plane"></i> {{ button_submit }}</button>#}
+                    {#</div>#}
                     </div>
-                    <div class="buttons-holder text-center">
-                        <button type="button" class="button btn btn-success button-reply-submit"><i
-                                    class="fa fa-paper-plane"></i> {{ button_submit }}</button>
-                    </div>
+                    </form>
                 </div>
 
             </div>
