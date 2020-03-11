@@ -2,8 +2,14 @@
 class ControllerCommonHeader extends Controller {
 	public function index() {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
+	    //LogOut after 30 min of inactivity
+        if (isset($this->session->data['last']) && (time() - $this->session->data['last'] > 30 * 60)) {
+            $this->customer->logout();
+            unset($this->session->data['last']);
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+        $this->session->data['last'] = time();
+        //end of : LogOut
 
 		// Analytics
 		$this->load->model('setting/extension');
