@@ -121,7 +121,7 @@ class ModelAccountOrder extends Model {
 	}
 
 	public function getOrderProducts($order_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+		$query = $this->db->query("SELECT oc.*, p.mpseller_id FROM " . DB_PREFIX . "order_product oc LEFT JOIN " . DB_PREFIX . "product p ON (oc.product_id = p.product_id) WHERE order_id = '" . (int)$order_id . "'");
 
 		return $query->rows;
 	}
