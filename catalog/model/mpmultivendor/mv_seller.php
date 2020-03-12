@@ -252,7 +252,7 @@ class ModelMpmultivendorMvSeller extends Model {
 		return $query->row;
 	}
 
-	public function getactiveTheme(){
+	public function getactiveTheme() {
 		/* Theme Work Starts */
 		if($this->config->get('config_theme')) {
      		$custom_themename = $this->config->get('config_theme');
@@ -278,4 +278,14 @@ class ModelMpmultivendorMvSeller extends Model {
 		return $custom_themename;
 		/* Theme Work Ends */
 	}
+
+	public function isProductPurchased($mpseller_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product p 
+        LEFT JOIN " . DB_PREFIX . "order_product op ON op.product_id = p.product_id 
+        LEFT JOIN " . DB_PREFIX . "order o ON o.order_id = op.order_id
+        WHERE o.customer_id = '".$this->customer->getId()."' AND mpseller_id = '" . (int)$mpseller_id . "' AND status = '1'");
+
+        return $query->row;
+    }
 }

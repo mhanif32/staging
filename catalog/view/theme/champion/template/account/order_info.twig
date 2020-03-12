@@ -75,9 +75,13 @@
 
                             {% for product in products %}
                                 <tr>
-                                    <td class="text-left">{{ product.name }}
+                                    <td class="text-left">
+                                        <a href="{{ product.link }}" class="text-success">
+                                        {{ product.name }}
                                         {% for option in product.option %} <br />
-                                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}</td>
+                                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
+                                        </a>
+                                    </td>
                                     <td class="text-left">{{ product.model }}</td>
                                     <td class="text-right">{{ product.quantity }}</td>
                                     <td class="text-right">{{ product.price }}</td>

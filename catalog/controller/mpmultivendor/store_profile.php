@@ -73,6 +73,8 @@ class ControllerMpmultivendorStoreProfile extends Controller {
 			$data['instagram_url'] = $seller_info['instagram_url'];
 			$data['flickr_url'] = $seller_info['flickr_url'];
 
+            $data['is_product_purchased'] = !$this->customer->isLogged() ? false : ($this->model_mpmultivendor_mv_seller->isProductPurchased($seller_info['mpseller_id']) ? true : false);
+
 			if(VERSION < '2.2.0.0') {
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mpmultivendor/store_profile.tpl')) {
 			    	return $this->load->view($this->config->get('config_template') . '/template/mpmultivendor/store_profile.tpl', $data);
