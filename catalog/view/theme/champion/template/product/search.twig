@@ -183,7 +183,7 @@
                 </div>
             </div>
             <div class="row justify-content-between my-3">
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <select name="category_id" class="form-control">
                         <option value="0">{{ text_category }}</option>
                         {% for category_1 in categories %}
@@ -211,7 +211,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <label class="checkbox-inline">
                         {% if sub_category %}
                             <input type="checkbox" name="sub_category" value="1" checked="checked"/>
@@ -220,7 +220,7 @@
                         {% endif %}
                         {{ text_sub_category }}</label>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <label class="checkbox-inline">
                         <label class="checkbox-inline">
                             {% if description %}
@@ -409,7 +409,7 @@
                                             alt="{{ product.name }}"
                                             title="{{ product.name }}" class="img-fluid"></a>
                                 <div class="card-body">
-                                    <h4 class="product-title"><a href="{{ product.href }}"
+                                    <h4 class="product-title text-truncate"><a href="{{ product.href }}"
                                                                  class="f-15 font-weight-bold text-primary ">{{ product.name }}</a>
                                     </h4>
                                     <p class="mb-0">{{ product.description }}</p>
@@ -436,10 +436,13 @@
                                     {% if product.price %}
                                         <div class="product-price text-primary font-weight-bold f-20">
                                             {% if not product.special %}
+                                            <span class="price-new text-success font-weight-bold mr-2">
                                                 {{ product.price }}
+                                            </span>
                                             {% else %}
-                                                <span class="price-new">{{ product.special }}</span> <strike><span
-                                                        class="price-old text-accent font-weight-normal f-15 ml-2 ">{{ product.price }}</span></strike>
+                                                <span class="price-new text-success font-weight-bold">{{ product.special }}</span> <strike><span
+                                                        class="price-old text-accent font-weight-normal f-12">{{ product.price }}</span></strike>
+
                                             {% endif %}
                                             {#{% if product.tax %}#}
                                             {#<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>#}

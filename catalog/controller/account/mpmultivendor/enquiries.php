@@ -10,6 +10,7 @@ class ControllerAccountMpmultivendorEnquiries extends Controller {
 		if(!$this->config->get('mpmultivendor_status')) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
+        $this->load->language('account/edit');
 
 		$this->load->language('account/mpmultivendor/enquiries');
 

@@ -54,18 +54,18 @@ class ControllerCheckoutCheckout extends Controller {
 			'href' => $this->url->link('checkout/checkout', '', true)
 		);
 
-		$data['text_checkout_option'] = sprintf($this->language->get('text_checkout_option'), 1);
-		$data['text_checkout_account'] = sprintf($this->language->get('text_checkout_account'), 2);
-		$data['text_checkout_payment_address'] = sprintf($this->language->get('text_checkout_payment_address'), 2);
-		$data['text_checkout_shipping_address'] = sprintf($this->language->get('text_checkout_shipping_address'), 3);
-		$data['text_checkout_shipping_method'] = sprintf($this->language->get('text_checkout_shipping_method'), 4);
+//		$data['text_checkout_option'] = sprintf($this->language->get('text_checkout_option'), 1);
+		$data['text_checkout_account'] = sprintf($this->language->get('text_checkout_account'), 1);
+		$data['text_checkout_payment_address'] = sprintf($this->language->get('text_checkout_payment_address'), 1);
+		$data['text_checkout_shipping_address'] = sprintf($this->language->get('text_checkout_shipping_address'), 2);
+		$data['text_checkout_shipping_method'] = sprintf($this->language->get('text_checkout_shipping_method'), 3);
 		
 		if ($this->cart->hasShipping()) {
-			$data['text_checkout_payment_method'] = sprintf($this->language->get('text_checkout_payment_method'), 5);
-			$data['text_checkout_confirm'] = sprintf($this->language->get('text_checkout_confirm'), 6);
+			$data['text_checkout_payment_method'] = sprintf($this->language->get('text_checkout_payment_method'), 4);
+			$data['text_checkout_confirm'] = sprintf($this->language->get('text_checkout_confirm'), 5);
 		} else {
-			$data['text_checkout_payment_method'] = sprintf($this->language->get('text_checkout_payment_method'), 3);
-			$data['text_checkout_confirm'] = sprintf($this->language->get('text_checkout_confirm'), 4);	
+			$data['text_checkout_payment_method'] = sprintf($this->language->get('text_checkout_payment_method'), 2);
+			$data['text_checkout_confirm'] = sprintf($this->language->get('text_checkout_confirm'), 2);
 		}
 
 		if (isset($this->session->data['error'])) {
@@ -76,6 +76,7 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 
 		$data['logged'] = $this->customer->isLogged();
+		$data['style_data'] = $this->customer->isLogged() ? 'block' : 'none';
 
 		if (isset($this->session->data['account'])) {
 			$data['account'] = $this->session->data['account'];

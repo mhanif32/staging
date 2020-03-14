@@ -13,6 +13,7 @@ class ControllerProductProduct extends Controller {
 		);
 
 		$this->load->model('catalog/category');
+        $this->load->model('account/mpmultivendor/seller');
 
 		if (isset($this->request->get['path'])) {
 			$path = '';
@@ -308,7 +309,7 @@ class ControllerProductProduct extends Controller {
 
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
 				$product_option_value_data = array();
-
+//echo '<pre>';print_r($option['product_option_value']);exit('aaaaaa');
 				foreach ($option['product_option_value'] as $option_value) {
 					if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 						if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
@@ -317,13 +318,27 @@ class ControllerProductProduct extends Controller {
 							$price = false;
 						}
 
+                        $thumb_image = isset($option_value['color_image']) ? $option_value['color_image'] : $option_value['image'];
+                        $thumb = (!empty($thumb_image)) ?
+                            $this->model_tool_image->resize($thumb_image, 50, 50) : null;
+
+                        $large_image = isset($option_value['color_image']) ? $option_value['color_image'] : $option_value['image'];
+
+                        if ($large_image) {
+                            $large_image = $this->model_tool_image->resize($option_value['color_image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
+                        }
+
+                        $large = (!empty($thumb)) ? $large_image : null;
+
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
-							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
+							//'image'                   => $thumb,
+                            'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 							'price'                   => $price,
-							'price_prefix'            => $option_value['price_prefix']
+							'price_prefix'            => $option_value['price_prefix'],
+							'color_image'             => $large,
 						);
 					}
 				}
@@ -447,7 +462,12 @@ class ControllerProductProduct extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
 			//if loggin user is purchased this product before this time
-            $data['isRatingForProduct'] = $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId());
+            $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
+
+            //view seller profile link
+            if(!empty($product_info['mpseller_id'])) {
+                $data['product_seller_link'] = $this->url->link('mpmultivendor/store', '&mpseller_id=' . $product_info['mpseller_id'], true);
+            }
 
 			$this->response->setOutput($this->load->view('product/product', $data));
 		} else {
@@ -519,6 +539,7 @@ class ControllerProductProduct extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+
 			$this->response->setOutput($this->load->view('error/not_found', $data));
 		}
 	}
@@ -568,16 +589,24 @@ class ControllerProductProduct extends Controller {
 		$json = array();
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+		    //echo '<pre>';print_r($this->request->post);exit('aa');
+
 			if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
 				$json['error'] = $this->language->get('error_name');
 			}
 
 			if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
 				$json['error'] = $this->language->get('error_text');
+				$json['error ']['text'] = $this->language->get('error_text');
 			}
 
 			if (empty($this->request->post['rating']) || $this->request->post['rating'] < 0 || $this->request->post['rating'] > 5) {
+
+
 				$json['error'] = $this->language->get('error_rating');
+//print_r($this->language->get('error_rating'));
+				//$json['error']['ratingrev'] = $this->language->get('error_rating');
 			}
 
 			// Captcha

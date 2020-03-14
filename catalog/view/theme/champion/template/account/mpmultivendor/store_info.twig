@@ -27,61 +27,30 @@
                     <div class="text-right">
                         <button type="submit" form="form-storeinfo" data-toggle="tooltip" title=""
                                 class="btn btn-primary" data-original-title="{{ button_save }}"><i
-                                    class="fa fa-save"></i></button>
-                        <a href="" data-toggle="tooltip" title="" class="btn btn-default"
-                           data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i></a>
+                                    class="fa fa-save"></i> Save
+                        </button>
+                        {#<a href="" data-toggle="tooltip" title="" class="btn btn-default"#}
+                        {#data-original-title="{{ button_cancel }}"><i class="fa fa-reply"></i> Cancel</a>#}
+
+                        <a href='javascript:history.back(1);' data-toggle="tooltip" title="" class="btn btn-default"
+                           data-original-title="cancel"><i class="fa fa-reply"></i> Cancel</a>
                     </div>
 
                     <div class="row ">
-
                         <div class="col-sm-12 mv-reviews">
-
                             <form method="post" enctype="multipart/form-data" class="form-horizontal"
                                   id="form-storeinfo">
                                 <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2">
-                                    <li class="active"><a href="#tab-general" data-toggle="tab" class="active">{{ tab_general }}</a></li>
-                                    <li><a href="#tab-store" data-toggle="tab">{{ tab_store }}</a></li>
-                                    <li><a href="#tab-local" data-toggle="tab">{{ tab_local }}</a></li>
+                                    <li class="active"><a href="#tab-store" data-toggle="tab"
+                                                          class="active">{{ tab_store }}</a></li>
+                                    <li><a href="#tab-local" data-toggle="tab">{{ tab_address }}</a></li>
                                     <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
                                     <li><a href="#tab-social" data-toggle="tab">{{ tab_social_profiles }}</a></li>
-                                    <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
                                 </ul>
                                 <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
-                                    <div class="tab-pane active mt-3" id="tab-general">
+                                    <div class="tab-pane active mt-3" id="tab-store">
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_description }}</label>
-                                            <div class="col-sm-12">
-                                                <textarea name="description" rows="5"
-                                                          class="form-control">{{ description }}</textarea>
-                                                {% if error_description %}
-                                                    <div class="text-danger">{{ error_description }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_meta_description }}</label>
-                                            <div class="col-sm-12">
-                                                <textarea name="meta_description" id="input-storemeta" rows="5"
-                                                          class="form-control">{{ meta_description }}</textarea>
-                                                {% if error_meta_description %}
-                                                    <div class="text-danger">{{ error_meta_description }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_meta_keyword }}</label>
-                                            <div class="col-sm-12">
-                                                <textarea name="meta_keyword" rows="5"
-                                                          class="form-control">{{ meta_keyword }}</textarea>
-                                                {% if error_meta_keyword %}
-                                                    <div class="text-danger">{{ error_meta_keyword }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane mt-3" id="tab-store">
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_store_owner }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_store_owner }} <a class="text-danger">*</a> </label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="store_owner"
                                                        placeholder="{{ entry_store_owner }}" value="{{ store_owner }}"/>
@@ -91,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_store_name }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_store_name }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" name="store_name" class="form-control"
                                                        placeholder="{{ entry_store_name }}" value="{{ store_name }}"/>
@@ -101,17 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_address }}</label>
-                                            <div class="col-sm-12">
-                                                <textarea name="address" class="form-control"
-                                                          placeholder="{{ entry_address }}">{{ address }}</textarea>
-                                                {% if error_address %}
-                                                    <div class="text-danger">{{ error_address }}</div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_email }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_email }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="email"
                                                        placeholder="{{ entry_email }}" value="{{ email }}"/>
@@ -121,7 +80,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_telephone }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_telephone }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="telephone"
                                                        placeholder="{{ entry_telephone }}" value="{{ telephone }}"/>
@@ -130,20 +89,71 @@
                                                 {% endif %}
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-12">{{ entry_fax }}</label>
+
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_description }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="fax"
-                                                       placeholder="{{ entry_fax }}" value="{{ fax }}"/>
-                                                {% if error_fax %}
-                                                    <div class="text-danger">{{ error_fax }}</div>
+                                                <textarea name="description" rows="5"
+                                                          class="form-control">{{ description }}</textarea>
+                                                {% if error_description %}
+                                                    <div class="text-danger">{{ error_description }}</div>
                                                 {% endif %}
                                             </div>
                                         </div>
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_meta_description }}<a class="text-danger">*</a> <i
+                                                        class="fas fa-question-circle" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Search engines show the meta description in search results mostly when the searched-for phrase is within the description"></i></label>
+                                            <div class="col-sm-12">
+                                                <textarea name="meta_description" id="input-storemeta" rows="5"
+                                                          class="form-control">{{ meta_description }}</textarea>
+                                                {% if error_meta_description %}
+                                                    <div class="text-danger">{{ error_meta_description }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_meta_keyword }}<a class="text-danger">*</a> <i
+                                                        class="fas fa-question-circle" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="describe the content of a website shortly and concisely, the keywords are generally written in lower case, and separated with a comma."></i></label>
+                                            <div class="col-sm-12">
+                                                <textarea name="meta_keyword" rows="5"
+                                                          class="form-control">{{ meta_keyword }}</textarea>
+                                                {% if error_meta_keyword %}
+                                                    <div class="text-danger">{{ error_meta_keyword }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+
+
+                                        {#<div class="form-group">#}
+                                            {#<label class="control-label col-sm-12">{{ entry_fax }}</label>#}
+                                            {#<div class="col-sm-12">#}
+                                                {#<input type="text" class="form-control" name="fax"#}
+                                                       {#placeholder="{{ entry_fax }}" value="{{ fax }}"/>#}
+                                                {#{% if error_fax %}#}
+                                                    {#<div class="text-danger">{{ error_fax }}</div>#}
+                                                {#{% endif %}#}
+                                            {#</div>#}
+                                        {#</div>#}
                                     </div>
                                     <div class="tab-pane mt-3" id="tab-local">
                                         <div class="form-group required">
-                                            <label class="control-label col-sm-12">{{ entry_city }}</label>
+                                            <label class="control-label col-sm-12">{{ entry_address }}<a class="text-danger">*</a></label>
+                                            <div class="col-sm-12">
+                                                <textarea name="address" class="form-control"
+                                                          placeholder="{{ entry_address }}">{{ address }}</textarea>
+                                                {% if error_address %}
+                                                    <div class="text-danger">{{ error_address }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group required">
+                                            <label class="control-label col-sm-12">{{ entry_city }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <input type="text" class="form-control" name="city"
                                                        placeholder="{{ entry_city }}" value="{{ city }}"/>
@@ -154,7 +164,7 @@
                                         </div>
                                         <div class="form-group required">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-country">{{ entry_country }}</label>
+                                                   for="input-country">{{ entry_country }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <select name="country_id" id="input-country" class="form-control">
                                                     <option value="">{{ text_select }}</option>
@@ -174,7 +184,7 @@
                                         </div>
                                         <div class="form-group required">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-zone">{{ entry_zone }}</label>
+                                                   for="input-zone">{{ entry_zone }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <select name="zone_id" id="input-zone" class="form-control">
                                                 </select>
@@ -193,8 +203,9 @@
                                             </label>
                                             <div class="col-sm-12">
                                                 <a href="" id="thumb-banner" data-toggle="image"
-                                                   class="img-thumbnail float-left"><img src="{{ thumb_banner }}" alt="" title=""
-                                                                              data-placeholder="{{ placeholder }}"/></a>
+                                                   class="img-thumbnail float-left"><img src="{{ thumb_banner }}" alt=""
+                                                                                         title=""
+                                                                                         data-placeholder="{{ placeholder }}"/></a>
                                                 <input type="hidden" name="banner" value="{{ banner }}"
                                                        id="input-banner"/>
                                             </div>
@@ -206,12 +217,11 @@
                                                 </p>
                                             </label>
                                             <div class="col-sm-12">
-
                                                 <a href="" id="thumb-logo" data-toggle="image"
-                                                   class="img-thumbnail float-left"><img src="{{ thumb_logo }}" alt="" title=""
-                                                                              data-placeholder="{{ placeholder }}"  /></a>
+                                                   class="img-thumbnail float-left"><img src="{{ thumb_logo }}" alt=""
+                                                                                         title=""
+                                                                                         data-placeholder="{{ placeholder }}"/></a>
                                                 <input type="hidden" name="logo" value="{{ logo }}" id="input-logo"/>
-
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -222,9 +232,51 @@
                                             </label>
                                             <div class="col-sm-12">
                                                 <a href="" id="thumb-image" data-toggle="image"
-                                                   class="img-thumbnail float-left"><img src="{{ thumb_image }}" alt="" title=""
-                                                                              data-placeholder="{{ placeholder }}"/></a>
+                                                   class="img-thumbnail float-left"><img src="{{ thumb_image }}" alt=""
+                                                                                         title=""
+                                                                                         data-placeholder="{{ placeholder }}"/></a>
                                                 <input type="hidden" name="image" value="{{ image }}" id="input-image"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12">{{ entry_id_proof }}</label>
+                                            <div class="col-sm-12">
+                                                <input type="file" class="form-control" name="id_proof" id="input-id_proof">
+                                                {% if error_filename_id_proof or error_filetype_id_proof or error_filesize_id_proof %}
+                                                    <div class="text-danger">
+                                                        {% if error_filename_id_proof %}
+                                                            {{ error_filename_id_proof }}
+                                                        {% elseif error_filetype_id_proof %}
+                                                            {{ error_filetype_id_proof }}
+                                                        {% elseif error_filesize_id_proof %}
+                                                            {{ error_filesize_id_proof }}
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                                {% if link_id_proof %}
+                                                <a href="{{ link_id_proof }}" class="btn btn-primary" target="_blank">Click here to view Id Proof</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-12">{{ entry_address_proof }}</label>
+                                            <div class="col-sm-12">
+                                                <input type="file" class="form-control" name="address_proof" id="input-address_proof">
+                                                {% if error_filename_address_proof or error_filetype_address_proof or error_filesize_address_proof %}
+                                                    <div class="text-danger">
+                                                        {% if error_filename_address_proof %}
+                                                            {{ error_filename_address_proof }}
+                                                        {% elseif error_filetype_address_proof %}
+                                                            {{ error_filetype_address_proof }}
+                                                        {% elseif error_filesize_address_proof %}
+                                                            {{ error_filesize_address_proof }}
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                                {% if link_address_proof %}
+                                                    <a href="{{ link_address_proof }}" class="btn btn-primary" target="_blank">Click here to view Address Proof</a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -233,7 +285,8 @@
                                             <label class="col-sm-2 control-label">{{ entry_facebook }}</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
+                                                    <span class="input-group-addon"><i
+                                                                class="fab fa-facebook-f"></i></span>
                                                     <input type="text" class="form-control" name="facebook_url"
                                                            placeholder="{{ entry_facebook }}"
                                                            value="{{ facebook_url }}">
@@ -325,75 +378,75 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane mt-3" id="tab-seo">
-                                        <div class="alert alert-info information"><i
-                                                    class="fa fa-info-circle"></i> {{ text_keyword }}</div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover list">
-                                                <thead>
-                                                <tr>
-                                                    <td class="text-left">{{ entry_store }}</td>
-                                                    <td class="text-left">{{ entry_keyword }}</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for store in stores %}
-                                                    <tr>
-                                                        <td class="text-left">{{ store.name }}</td>
-                                                        <td class="text-left">{% for language in languages %}
-                                                                <div class="input-group"><span
-                                                                            class="input-group-addon"><img
-                                                                                src="catalog/language/{{ language.code }}/{{ language.code }}.png"
-                                                                                title="{{ language.name }}"/></span>
-                                                                    <input type="text"
-                                                                           name="seller_seo_url[{{ store.store_id }}][{{ language.language_id }}]"
-                                                                           value="{% if seller_seo_url[store.store_id][language.language_id] %}{{ seller_seo_url[store.store_id][language.language_id] }}{% endif %}"
-                                                                           placeholder="{{ entry_keyword }}"
-                                                                           class="form-control"/>
-                                                                </div>
-                                                                {% if error_seo_keyword[store.store_id][language.language_id] %}
-                                                                    <div class="text-danger">{{ error_seo_keyword[store.store_id][language.language_id] }}</div>
-                                                                {% endif %}
-                                                            {% endfor %}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    {#<div class="tab-pane mt-3" id="tab-seo">#}
+                                    {#<div class="alert alert-info information"><i#}
+                                    {#class="fa fa-info-circle"></i> {{ text_keyword }}</div>#}
+                                    {#<div class="table-responsive">#}
+                                    {#<table class="table table-bordered table-hover list">#}
+                                    {#<thead>#}
+                                    {#<tr>#}
+                                    {#<td class="text-left">{{ entry_store }}</td>#}
+                                    {#<td class="text-left">{{ entry_keyword }}</td>#}
+                                    {#</tr>#}
+                                    {#</thead>#}
+                                    {#<tbody>#}
+                                    {#{% for store in stores %}#}
+                                    {#<tr>#}
+                                    {#<td class="text-left">{{ store.name }}</td>#}
+                                    {#<td class="text-left">{% for language in languages %}#}
+                                    {#<div class="input-group"><span#}
+                                    {#class="input-group-addon"><img#}
+                                    {#src="catalog/language/{{ language.code }}/{{ language.code }}.png"#}
+                                    {#title="{{ language.name }}"/></span>#}
+                                    {#<input type="text"#}
+                                    {#name="seller_seo_url[{{ store.store_id }}][{{ language.language_id }}]"#}
+                                    {#value="{% if seller_seo_url[store.store_id][language.language_id] %}{{ seller_seo_url[store.store_id][language.language_id] }}{% endif %}"#}
+                                    {#placeholder="{{ entry_keyword }}"#}
+                                    {#class="form-control"/>#}
+                                    {#</div>#}
+                                    {#{% if error_seo_keyword[store.store_id][language.language_id] %}#}
+                                    {#<div class="text-danger">{{ error_seo_keyword[store.store_id][language.language_id] }}</div>#}
+                                    {#{% endif %}#}
+                                    {#{% endfor %}</td>#}
+                                    {#</tr>#}
+                                    {#{% endfor %}#}
+                                    {#</tbody>#}
+                                    {#</table>#}
+                                    {#</div>#}
 
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover list">
-                                                <thead>
-                                                <tr>
-                                                    <td class="text-left">{{ entry_store }}</td>
-                                                    <td class="text-left">{{ entry_review_seo_keyword }}</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for store in stores %}
-                                                    <tr>
-                                                        <td class="text-left">{{ store.name }}</td>
-                                                        <td class="text-left">{% for language in languages %}
-                                                                <div class="input-group"><span
-                                                                            class="input-group-addon"><img
-                                                                                src="catalog/language/{{ language.code }}/{{ language.code }}.png"
-                                                                                title="{{ language.name }}"/></span>
-                                                                    <input type="text"
-                                                                           name="review_seo_url[{{ store.store_id }}][{{ language.language_id }}]"
-                                                                           value="{% if review_seo_url[store.store_id][language.language_id] %}{{ review_seo_url[store.store_id][language.language_id] }}{% endif %}"
-                                                                           placeholder="{{ entry_keyword }}"
-                                                                           class="form-control"/>
-                                                                </div>
-                                                                {% if error_review_seo_keyword[store.store_id][language.language_id] %}
-                                                                    <div class="text-danger">{{ error_review_seo_keyword[store.store_id][language.language_id] }}</div>
-                                                                {% endif %}
-                                                            {% endfor %}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    {#<div class="table-responsive">#}
+                                    {#<table class="table table-bordered table-hover list">#}
+                                    {#<thead>#}
+                                    {#<tr>#}
+                                    {#<td class="text-left">{{ entry_store }}</td>#}
+                                    {#<td class="text-left">{{ entry_review_seo_keyword }}</td>#}
+                                    {#</tr>#}
+                                    {#</thead>#}
+                                    {#<tbody>#}
+                                    {#{% for store in stores %}#}
+                                    {#<tr>#}
+                                    {#<td class="text-left">{{ store.name }}</td>#}
+                                    {#<td class="text-left">{% for language in languages %}#}
+                                    {#<div class="input-group"><span#}
+                                    {#class="input-group-addon"><img#}
+                                    {#src="catalog/language/{{ language.code }}/{{ language.code }}.png"#}
+                                    {#title="{{ language.name }}"/></span>#}
+                                    {#<input type="text"#}
+                                    {#name="review_seo_url[{{ store.store_id }}][{{ language.language_id }}]"#}
+                                    {#value="{% if review_seo_url[store.store_id][language.language_id] %}{{ review_seo_url[store.store_id][language.language_id] }}{% endif %}"#}
+                                    {#placeholder="{{ entry_keyword }}"#}
+                                    {#class="form-control"/>#}
+                                    {#</div>#}
+                                    {#{% if error_review_seo_keyword[store.store_id][language.language_id] %}#}
+                                    {#<div class="text-danger">{{ error_review_seo_keyword[store.store_id][language.language_id] }}</div>#}
+                                    {#{% endif %}#}
+                                    {#{% endfor %}</td>#}
+                                    {#</tr>#}
+                                    {#{% endfor %}#}
+                                    {#</tbody>#}
+                                    {#</table>#}
+                                    {#</div>#}
+                                    {#</div>#}
                                 </div>
                             </form>
                         </div>

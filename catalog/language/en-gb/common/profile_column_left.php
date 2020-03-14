@@ -1,5 +1,5 @@
 <?php
-$_['text_seller_menus']   = 'Seller Menus';
+$_['text_seller_menus']     = 'Seller Menus';
 $_['text_enabled_seller']   = 'Become a seller';
 $_['text_dashboard'] 		= 'Dashboard';
 $_['text_profile'] 			= 'My Profile';
@@ -14,3 +14,4 @@ $_['text_store_information']= 'Store Information';
 $_['text_store_setting']	= 'Setting';
 $_['text_visit_store'] 		= 'Visit Store';
 $_['text_enquiries'] 		= 'Enquiries';
+$_['text_messages'] 		= 'Admin Messages';

@@ -39,9 +39,34 @@ class ControllerCommonMenu extends Controller {
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 				$data['sale_offer_link'] = $this->url->link('product/special');
+				$data['more_category'] = $this->url->link('product/category/listing');
 			}
 		}
 
+        //more categories
+        $this->load->model('catalog/category');
+        $data['moreCategories'] = array();
+        $categories = $this->model_catalog_category->getMoreCategories(0);
+        foreach($categories as $category) {
+
+            $data['subCategories'] = array();
+            $subCategories = $this->model_catalog_category->getMoreCategories($category['category_id']);
+            foreach($subCategories as $subCategory) {
+                $data['subCategories'][] = array(
+                    'category_id' => $subCategory['category_id'],
+                    'name'        => $subCategory['name'],
+                    'href'        => $this->url->link('product/category', 'path=' . $subCategory['category_id'])
+                );
+            }
+
+            $data['moreCategories'][] = array(
+                'category_id' => $category['category_id'],
+                'name'        => $category['name'],
+                'href'        => $this->url->link('product/category', 'path=' . $category['category_id']),
+                'subCategories' =>  $data['subCategories']
+            );
+        }
+        //echo '<pre>'; print_r($data); exit('okok');
 		return $this->load->view('common/menu', $data);
 	}
 }

@@ -422,12 +422,21 @@ class ControllerProductCategory extends Controller
         $this->load->model('tool/image');
 
         $data['categories'] = array();
-        $categories = $this->model_catalog_category->getCategories(0);
+
+        $categories = $this->model_catalog_category->getMoreCategories(0);
+
         foreach ($categories as $category) {
+
+            if ($category['image']) {
+                $image = $this->model_tool_image->resize($category['image'], 200, 150);
+            } else {
+                $image = $this->model_tool_image->resize('placeholder.png', 200, 150);
+            }
+
             $data['categories'][] = array(
                 'category_id' => $category['category_id'],
                 'name'        => $category['name'],
-                'image'        => $this->model_tool_image->resize($category['image'], 100, 100),
+                'image'       => $image,
                 'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
             );
         }

@@ -27,3 +27,22 @@
 
 {{ footer }}
 
+<script>
+    $('#confirm-address').on('click', function () {
+
+        var data = {
+            country: $('#input-country').val(),
+            state: $('#input-zone').val()
+        };
+
+        $.ajax({
+            url: 'index.php?route=common/home/deliveryaddress',
+            type: 'POST',
+            data: data,
+            success: function (data) {
+            }
+        });
+        return false;
+    });
+
+</script>

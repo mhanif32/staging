@@ -32,7 +32,7 @@
                     {#&nbsp;({{ weight }})#}
                     {#{% endif %}#}
                 </h3>
-                <form action="{{ action }}" method="post" enctype="multipart/form-data">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-update-cart">
                     <div class="table-responsive">
                         <table class="table table-bordered mb-0">
                             <thead class="text-center">
@@ -74,21 +74,43 @@
                                             <small>{{ product.recurring }}</small> {% endif %}
 
                                         <span
-                                              onclick="cart.remove('{{ product.cart_id }}');">
+                                                onclick="cart.remove('{{ product.cart_id }}');" class="on-hover onclick-remove">
                                     Delete
-                            </span>
+                                        </span>
                                     </td>
 
                                     <td class="text-center">
-                                        <div class="input-group btn-block">
-                                            <input type="text" name="quantity[{{ product.cart_id }}]"
-                                                   value="{{ product.quantity }}" size="1" class="form-control"/>
-                                            <span class="input-group-btn">
-                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}"
-                          class="btn btn-primary rounded-0" style="margin: 1px 0"><i
-                              class="fa fa-refresh"></i></button>
+                                        {#<div class="input-group btn-block">#}
+                                        {#<input type="text" name="quantity[{{ product.cart_id }}]"#}
+                                        {#value="{{ product.quantity }}" size="1" class="form-control"/>#}
+                                        {#<span class="input-group-btn">#}
+                                        {#<button type="submit" data-toggle="tooltip" title="{{ button_update }}"#}
+                                        {#class="btn btn-primary rounded-0" style="margin: 1px 0"><i#}
+                                        {#class="fa fa-refresh"></i></button>#}
 
-                  </span></div>
+                                        {#</span></div>#}
+
+                                        {#<div class="input-group btn-block">#}
+
+
+                                            {#<input type="text" name="quantity[{{ product.cart_id }}]"#}
+                                                   {#value="{{ product.quantity }}" size="1" class="form-control"/>#}
+                                            {#<span class="input-group-btn">#}
+                                                {#<button type="submit" data-toggle="tooltip" title="{{ button_update }}"#}
+                          {#class="btn btn-primary rounded-0" style="margin: 1px 0">#}
+                                                    {#<i class="fa fa-refresh"></i>#}
+                                                {#</button>#}
+                                            {#</span>#}
+                                        {#</div>#}
+
+                                        <div class="number d-inline-block">
+                                            <span class="minus update-qty">-</span>
+                                            <input type="text" name="quantity[{{ product.cart_id }}]"
+                                                   value="{{ product.quantity }}" size="1" class="form-control d-inline-block input-qty"/>
+                                            <span class="plus update-qty">+</span>
+                                        </div>
+
+
                                     </td>
                                     <td class="text-center">{{ product.price }}</td>
                                     {#<td class="text-right">{{ product.total }}</td>#}
@@ -143,4 +165,37 @@
             {{ column_right }}</div>
     </div>
 </section>
-{{ footer }} 
+{{ footer }}
+<script type="text/javascript"><!--
+
+$(document).ready(function() {
+    $('.minus').click(function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 1 ? 1 : count;
+        $input.val(count);
+        $input.change();
+        return false;
+    });
+    $('.plus').click(function () {
+        var $input = $(this).parent().find('input');
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        return false;
+    });
+
+    //update quntity
+    $('.update-qty').click(function() {
+        $("#form-update-cart").submit()
+    });
+
+    $('.input-qty').keyup(function() {
+        if($('.input-qty').val() != '') {
+            $("#form-update-cart").submit();
+        }
+    });
+});
+
+
+
+//--></script>

@@ -35,6 +35,12 @@ class ControllerProductSearch extends Controller {
 			$category_id = 0;
 		}
 
+        if (isset($this->request->get['location'])) {
+            $location = $this->request->get['location'];
+        } else {
+            $location = '';
+        }
+
 		if (isset($this->request->get['sub_category'])) {
 			$sub_category = $this->request->get['sub_category'];
 		} else {
@@ -98,6 +104,10 @@ class ControllerProductSearch extends Controller {
 			$url .= '&category_id=' . $this->request->get['category_id'];
 		}
 
+        if (isset($this->request->get['location'])) {
+            $url .= '&location=' . $this->request->get['location'];
+        }
+
 		if (isset($this->request->get['sub_category'])) {
 			$url .= '&sub_category=' . $this->request->get['sub_category'];
 		}
@@ -117,7 +127,7 @@ class ControllerProductSearch extends Controller {
 		if (isset($this->request->get['limit'])) {
 			$url .= '&limit=' . $this->request->get['limit'];
 		}
-
+///echo '<pre>';print_r($url);exit('asd');
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/search', $url)
@@ -173,19 +183,19 @@ class ControllerProductSearch extends Controller {
 
 		$data['products'] = array();
 
-		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
+		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['location'])) {
 			$filter_data = array(
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
 				'filter_category_id'  => $category_id,
+				'filter_location'     => $location,
 				'filter_sub_category' => $sub_category,
 				'sort'                => $sort,
 				'order'               => $order,
 				'start'               => ($page - 1) * $limit,
 				'limit'               => $limit
 			);
-
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
@@ -252,6 +262,10 @@ class ControllerProductSearch extends Controller {
 			if (isset($this->request->get['category_id'])) {
 				$url .= '&category_id=' . $this->request->get['category_id'];
 			}
+
+            if (isset($this->request->get['location'])) {
+                $url .= '&location=' . urlencode(html_entity_decode($this->request->get['location'], ENT_QUOTES, 'UTF-8'));
+            }
 
 			if (isset($this->request->get['sub_category'])) {
 				$url .= '&sub_category=' . $this->request->get['sub_category'];
@@ -325,6 +339,10 @@ class ControllerProductSearch extends Controller {
 				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
 
+            if (isset($this->request->get['location'])) {
+                $url .= '&location=' . urlencode(html_entity_decode($this->request->get['location'], ENT_QUOTES, 'UTF-8'));
+            }
+
 			if (isset($this->request->get['tag'])) {
 				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
 			}
@@ -368,6 +386,10 @@ class ControllerProductSearch extends Controller {
 			if (isset($this->request->get['search'])) {
 				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
 			}
+
+            if (isset($this->request->get['location'])) {
+                $url .= '&location=' . urlencode(html_entity_decode($this->request->get['location'], ENT_QUOTES, 'UTF-8'));
+            }
 
 			if (isset($this->request->get['tag'])) {
 				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
@@ -425,6 +447,7 @@ class ControllerProductSearch extends Controller {
 				$search_data = array(
 					'keyword'       => $search,
 					'category_id'   => $category_id,
+					'location'      => $location,
 					'sub_category'  => $sub_category,
 					'description'   => $description,
 					'products'      => $product_total,
@@ -439,6 +462,7 @@ class ControllerProductSearch extends Controller {
 		$data['search'] = $search;
 		$data['description'] = $description;
 		$data['category_id'] = $category_id;
+		$data['location'] = $location;
 		$data['sub_category'] = $sub_category;
 
 		$data['sort'] = $sort;

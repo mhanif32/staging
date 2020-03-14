@@ -18,19 +18,20 @@ $_['button_save']    	= 'Save';
 $_['button_cancel']    	= 'Cancel';
 
 $_['tab_general'] 		= 'General';
-$_['tab_store'] 		= 'Store';
+$_['tab_store'] 		= 'Store Info';
 $_['tab_local'] 		= 'Local';
-$_['tab_image'] 		= 'Image';
+$_['tab_address'] 		= 'Address';
+$_['tab_image'] 		= 'Image & Docs';
 $_['tab_social_profiles'] = 'Social Profiles';
 $_['tab_seo'] 			= 'SEO';
 
 // Entry
-$_['entry_description'] 			= 'Description';
+$_['entry_description'] 			= 'About Store';
 $_['entry_meta_description'] 		= 'Meta Description';
 $_['entry_meta_keyword'] 			= 'Meta Keyword';
 $_['entry_store_owner'] 			= 'Seller Name';
 $_['entry_store_name'] 				= 'Store Name';
-$_['entry_address'] 				= 'Address';
+$_['entry_address'] 				= 'Store Address';
 $_['entry_email'] 					= 'Email';
 $_['entry_telephone'] 				= 'Telephone';
 $_['entry_fax'] 					= 'Fax';
@@ -52,6 +53,8 @@ $_['entry_youtube'] 				= 'Youtube';
 $_['entry_instagram'] 				= 'Instagram';
 $_['entry_flickr'] 					= 'Flickr';
 $_['entry_store']            		= 'Stores';
+$_['entry_id_proof']            	= 'Attach ID Proof';
+$_['entry_address_proof']           = 'Attach Address Proof';
 
 // Help
 $_['help_banner'] 					= 'W: %s X H: %s';
@@ -76,3 +79,11 @@ $_['error_keyword']          = 'SEO URL already in use!';
 $_['error_seo_keyword']		= 'SEO URL already in use!';
 $_['error_review_seo_keyword'] = 'SEO URL already in use!';
 $_['error_warning']         = 'Warning: Please check the form carefully for errors!';
+
+$_['error_filename_id_proof'] = 'Filename must be between 3 and 128 charecters!';
+$_['error_filetype_id_proof'] = 'Only Doc, PDF & JPG file should be allow!';
+$_['error_filesize_id_proof'] = 'File size is too big to upload!';
+
+$_['error_filename_address_proof'] = 'Filename must be between 3 and 128 charecters!';
+$_['error_filetype_address_proof'] = 'Only Doc, PDF & JPG file should be allow!';
+$_['error_filesize_address_proof'] = 'File size is too big to upload!';

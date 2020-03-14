@@ -45,7 +45,7 @@
 
 <section class="top-collection pb-3">
     <div class="container pt-md-3 pb-4">
-        <h3 class="text-center mb-4 text-primary text-uppercase">{{ heading_title }}</h3>
+        <h3 class="text-center mb-4 text-primary text-uppercase font-weight-bolder">{{ heading_title }}</h3>
         <p style="font-size: 0.9375rem;" class="text-center text-secondary">Aenean sed nibh a magna posuere tempor. Nunc
             faucibus pellentesque
             nunc in aliquet. Donec congue, nunc vel tempor congue, enim sapien lobortis ipsum, in volutpat sem ex in
@@ -95,12 +95,14 @@
                             </div>
 
                             {% if product.price %}
-                                <div class="product-price text-primary font-weight-bold f-20">
+                                <div class="product-price text-primary font-weight-bold f-15">
                                     {% if not product.special %}
-                                        {{ product.price }}
+                                        <span class="price-new text-success font-weight-bold mr-2">
+                                                {{ product.price }}
+                                            </span>
                                     {% else %}
-                                        <span class="price-new">{{ product.special }}</span> <strike><span
-                                                class="price-old text-accent font-weight-normal f-15 ml-2 ">{{ product.price }}</span></strike>
+                                        <span class="price-new text-success font-weight-bold">{{ product.special }}</span> <strike><span
+                                                class="price-old text-accent font-weight-normal f-12">{{ product.price }}</span></strike>
                                     {% endif %}
                                     {#{% if product.tax %}#}
                                     {#<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>#}

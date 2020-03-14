@@ -1,39 +1,68 @@
+<ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2">
+    <li class="active" id="oldCust"><a href="#tab-returning-customer" data-toggle="tab" class="active">Existing User</a></li>
+    <li id="newCust"><a href="#tab-new-customer" data-toggle="tab">New Customer</a></li>
+</ul>
 <div class="row">
-  <div class="col-sm-6">
-    <h2>{{ text_new_customer }}</h2>
-    <p>{{ text_checkout }}</p>
-    <div class="radio">
-      <label> {% if account == 'register' %}
-        <input type="radio" name="account" value="register" checked="checked" />
-        {% else %}
-        <input type="radio" name="account" value="register" />
-        {% endif %}
-        {{ text_register }}</label>
+    <div class="tab-content">
+        <div class="tab-pane active mt-3" id="tab-returning-customer">
+            <div class="col-md-12">
+                <h2>{{ text_returning_customer }}</h2>
+                <p>{{ text_i_am_returning_customer }}</p>
+                <div class="form-group">
+                    <label class="control-label" for="input-email">{{ entry_email }}</label>
+                    <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-email"
+                           class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-password">{{ entry_password }}</label>
+                    <input type="password" name="password" value="" placeholder="{{ entry_password }}"
+                           id="input-password" class="form-control"/>
+
+                </div>
+                <a href="{{ forgotten }}" class="f-13 d-block mb-3">{{ text_forgotten }}</a>
+                <input type="button" value="{{ button_login }}" id="button-login" data-loading-text="{{ text_loading }}"
+                       class="btn btn-primary px-5 mb-4"/>
+
+            </div>
+
+        </div>
+
+        <div class="tab-pane mt-3" id="tab-new-customer">
+            <div class="col-md-12">
+                <h2>{{ text_new_customer }}</h2>
+                <p>{{ text_checkout }}</p>
+                <div class="radio">
+                    <label> {% if account == 'register' %}
+                            <input type="radio" name="account" value="register" checked="checked"/>
+                        {% else %}
+                            <input type="radio" name="account" value="register"/>
+                        {% endif %}
+                        {{ text_register }}</label>
+                </div>
+                {% if checkout_guest %}
+                    <div class="radio">
+                        <label> {% if account == 'guest' %}
+                                <input type="radio" name="account" value="guest" checked="checked"/>
+                            {% else %}
+                                <input type="radio" name="account" value="guest"/>
+                            {% endif %}
+                            {{ text_guest }}</label>
+                    </div>
+                {% endif %}
+                <p>{{ text_register_account }}</p>
+                <input type="button" value="{{ button_continue }}" id="button-account"
+                       data-loading-text="{{ text_loading }}" class="btn btn-primary px-5 mb-4"/>
+            </div>
+        </div>
+
     </div>
-    {% if checkout_guest %}
-    <div class="radio">
-      <label> {% if account == 'guest' %}
-        <input type="radio" name="account" value="guest" checked="checked" />
-        {% else %}
-        <input type="radio" name="account" value="guest" />
-        {% endif %}
-        {{ text_guest }}</label>
-    </div>
-    {% endif %}
-    <p>{{ text_register_account }}</p>
-    <input type="button" value="{{ button_continue }}" id="button-account" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-  </div>
-  <div class="col-sm-6">
-    <h2>{{ text_returning_customer }}</h2>
-    <p>{{ text_i_am_returning_customer }}</p>
-    <div class="form-group">
-      <label class="control-label" for="input-email">{{ entry_email }}</label>
-      <input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="input-password">{{ entry_password }}</label>
-      <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
-      <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
-    <input type="button" value="{{ button_login }}" id="button-login" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-  </div>
 </div>
+
+<script>
+    $('#oldCust').click(function () {
+       $('.steps-data').hide();
+    });
+    $('#newCust').click(function () {
+        $('.steps-data').show();
+    });
+</script>

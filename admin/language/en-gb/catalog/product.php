@@ -55,6 +55,7 @@ $_['entry_option_points']    = 'Points';
 $_['entry_subtract']         = 'Subtract Stock';
 $_['entry_weight_class']     = 'Weight Class';
 $_['entry_weight']           = 'Weight';
+$_['entry_color_image']      = 'Image';
 $_['entry_dimension']        = 'Dimensions (L x W x H)';
 $_['entry_length_class']     = 'Length Class';
 $_['entry_length']           = 'Length';
@@ -99,6 +100,7 @@ $_['help_filter']            = '(Autocomplete)';
 $_['help_download']          = '(Autocomplete)';
 $_['help_related']           = '(Autocomplete)';
 $_['help_tag']               = 'Comma separated';
+$_['help_price']             = 'Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes.';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';

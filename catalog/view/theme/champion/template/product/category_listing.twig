@@ -1,4 +1,5 @@
 {{ header }}
+<<<<<<< HEAD
 
 <div class="container">
     <div class="swiper-viewport">
@@ -238,3 +239,32 @@
     });
     //--></script>
 
+=======
+<div id="more-categories">
+<div class="container">
+    <h3 class="mt-4 mb-4 font-weight-600 text-center ">Shop by Category</h3>
+<div class="row mt-4">
+    {% for category in categories %}
+    <div class="col-md-3 mb-4">
+
+                    <div class="text-center border">
+                        <a href="{{ category.href }}">
+                        {% if category.image %}
+                        <img src="{{ category.image }}" class="img-fluid">
+                        {% else %}
+                            <img src="catalog/view/theme/champion/image/image-regular.svg" width="100" height="100">
+                            {% endif %}
+                        <div class="card-body">
+                           {{ category.name }}
+                        </div>
+                        </a>
+                    </div>
+
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+
+{{ footer }}
+>>>>>>> 6b7d22577507b3961991e0c0cb4d5a45fdfa1f6a

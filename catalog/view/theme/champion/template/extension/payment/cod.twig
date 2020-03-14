@@ -1,6 +1,6 @@
 <div class="buttons">
   <div class="pull-right">
-    <input type="button" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+    <button type="button" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" >{{ button_confirm }}</button>
   </div>
 </div>
 <script type="text/javascript"><!--
@@ -9,7 +9,12 @@ $('#button-confirm').on('click', function() {
 		url: 'index.php?route=extension/payment/cod/confirm',
 		dataType: 'json',
 		beforeSend: function() {
-			$('#button-confirm').button('loading');
+
+			//$('#button-confirm').button('loading');
+            $('#button-confirm').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+            );
+			//return false;
 		},
 		complete: function() {
 			$('#button-confirm').button('reset');

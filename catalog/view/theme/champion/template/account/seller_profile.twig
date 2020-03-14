@@ -1,0 +1,63 @@
+{{ header }}
+<section id="busness-owener-view" class="">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-2">
+                <img src="catalog/view/theme/weedmapz/image/busness-profile.png" class="rounded-circle img-fluid">
+            </div>
+            <div class="col-md-10">
+                <h3 class="d-block text-primary f-22">{{ owner_name }}</h3>
+                <p class="f-14">
+                    {{ owner_description }}
+                </p>
+                <p class="text-muted f-15"><span class="f-15 font-weight-bold">Address:</span> {{ owner_address }}</p>
+                <p class="text-muted f-15"><span class="f-15 font-weight-bold">Email:</span> {{ owner_email }} </p>
+            </div>
+        </div>
+    </div>
+
+    {% if products %}
+        <div class="product-slider section-padding py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="section-title">
+                            <h3 class="f-40">Products</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="owl-carousel staff-list">
+                            {% for product in products %}
+                                <div class="single-staff-item card box-shadow p-2">
+                                    <img src="{{ product.image }}" alt="" width="240" height="126px"
+                                         class="rounded img-fluid">
+                                    <div class="staff-meta">
+                                        <a href="{{ product.href }}"><h3 class="f-18 font-weight-bold">{{ product.name }}</h3></a>
+                                        <p>Philosopher</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+<script>
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            items: 4,
+            autoplay: false,
+            margin: 30,
+            loop: false,
+            nav: true,
+            navText: ["<i class='fas fa-long-arrow-alt-left'></i>", "<i class='fas fa-long-arrow-alt-right'></i>"]
+        });
+    });
+</script>
+{{ footer }}
+

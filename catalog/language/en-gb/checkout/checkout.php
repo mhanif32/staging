@@ -13,9 +13,9 @@ $_['text_checkout_payment_method']   = 'Step %s: Payment Method';
 $_['text_checkout_confirm']          = 'Step %s: Confirm Order';
 $_['text_modify']                    = 'Modify &raquo;';
 $_['text_new_customer']              = 'New Customer';
-$_['text_returning_customer']        = 'Returning Customer';
+$_['text_returning_customer']        = 'Existing User';
 $_['text_checkout']                  = 'Checkout Options:';
-$_['text_i_am_returning_customer']   = 'I am a returning customer';
+$_['text_i_am_returning_customer']   = 'I am a Existing User';
 $_['text_register']                  = 'Register Account';
 $_['text_guest']                     = 'Guest Checkout';
 $_['text_register_account']          = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
@@ -60,12 +60,12 @@ $_['entry_company']                  = 'Company';
 $_['entry_customer_group']           = 'Customer Group';
 $_['entry_address_1']                = 'Address 1';
 $_['entry_address_2']                = 'Address 2';
-$_['entry_postcode']                 = 'Post Code';
+$_['entry_postcode']                 = 'PostCode / Zip Code';
 $_['entry_city']                     = 'City';
 $_['entry_country']                  = 'Country';
 $_['entry_zone']                     = 'Region / State / County';
 $_['entry_newsletter']               = 'I wish to subscribe to the %s newsletter.';
-$_['entry_shipping']                 = 'My delivery and billing addresses are the same.';
+$_['entry_shipping']                 = 'My Address & Delivery To Address Are The Same.';
 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';
@@ -81,7 +81,7 @@ $_['error_password']                 = 'Password must be between 4 and 20 charac
 $_['error_confirm']                  = 'Password confirmation does not match password!';
 $_['error_address_1']                = 'Address 1 must be between 3 and 128 characters!';
 $_['error_city']                     = 'City must be between 2 and 128 characters!';
-$_['error_postcode']                 = 'Postcode must be between 2 and 10 characters!';
+$_['error_postcode']                 = 'PostCode / Zip Code must be between 2 and 10 characters!';
 $_['error_country']                  = 'Please select a country!';
 $_['error_zone']                     = 'Please select a region / state!';
 $_['error_agree']                    = 'Warning: You must agree to the %s!';

@@ -6,6 +6,8 @@ class ControllerAccountEdit extends Controller
 
     public function index()
     {
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/edit', '', true);
 
@@ -23,6 +25,8 @@ class ControllerAccountEdit extends Controller
 
         //edit customer
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+            //echo '<pre>';print_r($this->request->post);exit('aaa');
 
             //upload Image
             $json = array();
@@ -98,6 +102,18 @@ class ControllerAccountEdit extends Controller
             $data['error_lastname'] = '';
         }
 
+        if (isset($this->error['date_of_birth'])) {
+            $data['error_date_of_birth'] = $this->error['date_of_birth'];
+        } else {
+            $data['error_date_of_birth'] = '';
+        }
+
+        if (isset($this->error['gender'])) {
+            $data['error_gender'] = $this->error['gender'];
+        } else {
+            $data['error_gender'] = '';
+        }
+
         if (isset($this->error['email'])) {
             $data['error_email'] = $this->error['email'];
         } else {
@@ -136,6 +152,22 @@ class ControllerAccountEdit extends Controller
             $data['lastname'] = $customer_info['lastname'];
         } else {
             $data['lastname'] = '';
+        }
+
+        if (isset($this->request->post['date_of_birth'])) {
+            $data['date_of_birth'] = $this->request->post['date_of_birth'];
+        } elseif (!empty($customer_info)) {
+            $data['date_of_birth'] = $customer_info['date_of_birth'];
+        } else {
+            $data['date_of_birth'] = '';
+        }
+
+        if (isset($this->request->post['gender'])) {
+            $data['gender'] = $this->request->post['gender'];
+        } elseif (!empty($customer_info)) {
+            $data['gender'] = $customer_info['gender'];
+        } else {
+            $data['gender'] = '';
         }
 
         if (isset($this->request->post['email'])) {
@@ -184,6 +216,10 @@ class ControllerAccountEdit extends Controller
         $data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
         $data['deactivate_link'] = $this->url->link('account/account/deactivate', '', true);
+        $data['manage_address'] = $this->url->link('account/address', '', true);
+
+        $address = $this->model_account_address->getDefaultAddress();
+        $data['home_default_address'] = $address;
 
         $file = !empty($customer_info['image']) ? $customer_info['image'] : 'no-avatar.png';
         $data['image_url'] = '/storage/upload/' . $file;
@@ -203,6 +239,10 @@ class ControllerAccountEdit extends Controller
 
         if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
             $this->error['lastname'] = $this->language->get('error_lastname');
+        }
+
+        if ((utf8_strlen(trim($this->request->post['date_of_birth'])) < 1) || (utf8_strlen(trim($this->request->post['date_of_birth'])) > 32)) {
+            $this->error['date_of_birth'] = $this->language->get('error_date_of_birth');
         }
 
         if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {

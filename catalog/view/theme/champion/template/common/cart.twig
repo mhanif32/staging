@@ -1,24 +1,24 @@
 <div id="cart" class="btn-group btn-block">
     <button type="button" data-toggle="dropdown" data-loading-text="{{ text_loading }}"
-            class="btn btn-inverse btn-block btn-lg dropdown-toggle px-2">
+            class="btn btn-inverse btn-block btn-lg dropdown-toggle">
 {#        <i class="fa fa-shopping-cart"></i>#}
 {#        <span id="cart-total">{{ text_items }}</span>#}
-
-        <a class="nav-link position-relative" href="">
-            <img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:1.8rem;margin-bottom: 2px;">
+        {#<a class="nav-link position-relative pb-1" href="">#}
+            {#<img src="catalog/view/theme/champion/image/catalog/shopping-bag.svg" alt="" style="width:1.8rem;">#}
+        <i class="fas fa-shopping-bag f-35"></i>
             <span class="navbar-tool-label cart-balloon">{{ text_items }}</span>
-            <span class="d-block f-13">Cart</span>
-        </a>
-
+        {#</a>#}
+        <span class="d-block f-13">Cart</span>
     </button>
+
     <ul class="dropdown-menu dropdown-menu-right" style="width: max-content;">
         {% if products or vouchers %}
             <li>
                 <table class="table table-striped">
                     {% for product in products %}
                         <tr>
-                            <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}"><img
-                                            src="{{ product.thumb }}" alt="{{ product.name }}"
+                            <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}">
+                                    <img src="{{ product.thumb }}" alt="{{ product.name }}"
                                             title="{{ product.name }}" class="img-thumbnail"/></a> {% endif %}</td>
                             <td class="text-left align-middle"><a
                                         href="{{ product.href }}">{{ product.name }}</a> {% if product.option %}

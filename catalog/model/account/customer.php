@@ -10,7 +10,7 @@ class ModelAccountCustomer extends Model {
         if (isset($this->request->get['role'])) {
             $data['role'] = $this->request->get['role'];
         } else {
-            $data['role'] = '';
+            $data['role'] = 'buyer';
         }
 
 		$this->load->model('account/customer_group');
@@ -28,7 +28,7 @@ class ModelAccountCustomer extends Model {
 	}
 
     public function editCustomer($customer_id, $data) {
-        $this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', custom_field = '" . $this->db->escape(isset($data['custom_field']['account']) ? json_encode($data['custom_field']['account']) : '') . "' WHERE customer_id = '" . (int)$customer_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', gender = '" . $this->db->escape($data['gender']) . "', date_of_birth = '" . $this->db->escape($data['date_of_birth']) . "', custom_field = '" . $this->db->escape(isset($data['custom_field']['account']) ? json_encode($data['custom_field']['account']) : '') . "' WHERE customer_id = '" . (int)$customer_id . "'");
     }
 
 	public function editAvatar($customer_id, $file, $code) {
@@ -162,4 +162,12 @@ class ModelAccountCustomer extends Model {
 	public function deactivateAccount($customer_id) {
         $this->db->query("UPDATE " . DB_PREFIX . "customer SET `status` = '2' WHERE `customer_id` = '" . (int)$customer_id . "'");
     }
+
+    public function checkIsSellerApproved($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mpseller` WHERE customer_id = '" . (int)$customer_id . "' and  status = '1' and approved  = '1'");
+        return $query->row;
+    }
+
+
 }

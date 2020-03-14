@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_subject'] = '%s - Your Sellect Account is now activated!';
+$_['text_subject'] = '%s - Your Seller Account is now activated!';
 $_['text_welcome'] = 'We Welcome you as seller in our website (%s)';
 
 $_['text_login']   = 'To access your seller account, you need to login with your E-mail and password are use to login in our website. For login click below URL:';

@@ -14,10 +14,11 @@
     <div class="account-account box-shadow" >
         <div id="accordion" class="accordion">
             <div class="card mb-0">
-                <div class="p-3 bg-white" data-toggle="collapse" href="#collapseOne">
+                <a class="card-title text-uppercase mb-0" href="{{ account }}">
+                    <div class="p-3 bg-white" data-toggle="collapse" href="#collapseOne">
                     <i class="fas fa-tachometer-alt text-success mr-2 f-22"></i>
-                    <a class="card-title text-uppercase" href="{{ account }}">Dashboard</a>
-                </div>
+                    Dashboard
+                </div></a>
                 <hr class="m-0">
 
                 <div class="card-header collapsed bg-white p-3" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -29,14 +30,14 @@
 
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
-                        <li class="pl-5 py-2"><a href="{{ order }}">{{ text_order }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ download }}">{{ text_download }}</a></li>
+                        <a href="{{ order }}"><li class="pl-4 py-2">{{ text_order }}</li></a>
+                        <a href="{{ download }}"><li class="pl-4 py-2">{{ text_download }}</li></a>
                         {% if reward %}
-                            <li class="pl-5 py-2"><a href="{{ reward }}">{{ text_reward }}</a></li>
+                            <a href="{{ reward }}"><li class="pl-4 py-2">{{ text_reward }}</li></a>
                         {% endif %}
-                        <li class="pl-5 py-2"><a href="{{ return }}">{{ text_return }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+                        <a href="{{ return }}"><li class="pl-4 py-2">{{ text_return }}</li></a>
+                        <a href="{{ transaction }}"><li class="pl-4 py-2">{{ text_transaction }}</li></a>
+                        <a href="{{ recurring }}"><li class="pl-4 py-2">{{ text_recurring }}</li></a>
                     </ul>
                 </div>
                 <hr class="m-0">
@@ -50,9 +51,9 @@
 
                 <div id="collapseThree" class="collapse" data-parent="#accordion">
                     <ul class="list-unstyled m-0">
-                        <li class="pl-5 py-2"><a href="{{ edit }}"><i class="far fa-address-card"></i> Profile Information</a></li>
-                        <li class="pl-5 py-2"><a href="{{ address }}"><i class="far fa-address-book"></i> {{ text_address }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ change_password }}"><i class="fas fa-unlock-alt"></i> Change Password</a></li>
+                        <a href="{{ edit }}"><li class="pl-4 py-2"><i class="far fa-address-card"></i> Profile Information</li></a>
+                        <a href="{{ address }}"><li class="pl-4 py-2"><i class="far fa-address-book"></i> Manage Address</li></a>
+                        <a href="{{ change_password }}"><li class="pl-4 py-2"><i class="fas fa-unlock-alt"></i> Change Password</li></a>
                     </ul>
                 </div>
                 {% if role == 'seller' %}
@@ -68,35 +69,38 @@
                 <div id="collapseFour" class="collapse" data-parent="#accordion">
 
                     <ul class="list-unstyled m-0">
-                        <li class="pl-5 py-2"><a href="{{ seller_dashboard }}"><i class="fa fa-tachometer"></i> {{ text_dashboard }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_profile }}"><i class="fa fa-user"></i> {{ text_profile }}</a></li>
+                        <a href="{{ seller_dashboard }}"><li class="pl-5 py-2"><i class="fa fa-tachometer"></i> {{ text_dashboard }}</li></a>
+                        <a href="{{ seller_profile }}"><li class="pl-5 py-2"><i class="fa fa-user"></i> {{ text_profile }}</li></a>
                         <li class="pl-5 py-2"><a href="{{ seller_product }}"><i class="fa fa-briefcase"></i> {{ text_product }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_orders }}"><i class="fa fa-shopping-cart"></i> {{ text_orders }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_reviews }}"><i class="fa fa-comments"></i> {{ text_reviews }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_commission }}"><i class="fa fa-money"></i> {{ text_commission }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_payment }}"><i class="fa fa-dollar"></i> {{ text_payment }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_information_section }}"><i class="fa fa-tag"></i> {{ text_information_section }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_store_info }}"><i class="fa fa-info-circle"></i> {{ text_store_information }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_store_setting }}"><i class="fa fa-cog"></i> {{ text_store_setting }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_visit_store }}"><i class="fa fa-external-link"></i> {{ text_visit_store }}</a></li>
-                        <li class="pl-5 py-2"><a href="{{ seller_enquiries }}"><i class="fas fa-question-circle"></i> {{ text_enquiries }}</a></li>
+                        <a href="{{ seller_orders }}"><li class="pl-5 py-2"><i class="fa fa-shopping-cart"></i> {{ text_orders }}</li></a>
+                        <a href="{{ seller_reviews }}"><li class="pl-5 py-2"><i class="fa fa-comments"></i> {{ text_reviews }}</li></a>
+                        <a href="{{ seller_commission }}"><li class="pl-5 py-2"><i class="fa fa-money"></i> {{ text_commission }}</li></a>
+                        <a href="{{ seller_payment }}"><li class="pl-5 py-2"><i class="fa fa-dollar"></i> {{ text_payment }}</li></a>
+                        <a href="{{ seller_information_section }}"><li class="pl-5 py-2"><i class="fa fa-tag"></i> {{ text_information_section }}</li></a>
+                        <a href="{{ seller_store_info }}"><li class="pl-5 py-2"><i class="fa fa-info-circle"></i> {{ text_store_information }}</li></a>
+                        <a href="{{ seller_store_setting }}"><li class="pl-5 py-2"><i class="fa fa-cog"></i> {{ text_store_setting }}</li></a>
+                        <a href="{{ seller_visit_store }}"><li class="pl-5 py-2"><i class="fa fa-external-link"></i> {{ text_visit_store }}</li></a>
+                        <a href="{{ seller_enquiries }}"><li class="pl-5 py-2"><i class="fas fa-question-circle"></i> {{ text_enquiries }}</li></a>
+                        <a href="{{ seller_messages }}"><li class="pl-5 py-2"><i class="fa fa-comments-o"></i> {{ text_messages }}</li></a>
                     </ul>
 
                 </div>
                 {% endif %}
                 <hr class="m-0">
-                <div class="p-3 bg-white" href="">
-
+                <a href="{{ my_wishlist }}" class="card-title text-uppercase mb-0">
+                    <div class="p-3 bg-white" href="">
                     <i class="fas fa-heart text-success mr-2 f-20"></i>
-                    <a href="{{ my_wishlist }}" class="card-title text-uppercase">Wish List</a>
-                </div>
+                    Wish List
+                </div></a>
                 <hr class="m-0">
+                <a href="{{ logout }}" class="card-title text-uppercase mb-0">
                 <div class="p-3 bg-white" href="">
                     <i class="fas fa-sign-out-alt text-success mr-2 f-20"></i>
-                    <a href="{{ logout }}" class="card-title text-uppercase">
+
                         Logout
-                    </a>
+
                 </div>
+                </a>
                 <hr class="m-0">
             </div>
         </div>

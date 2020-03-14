@@ -37,6 +37,7 @@ class ControllerAccountAccount extends Controller {
 		$data['edit'] = $this->url->link('account/edit', '', true);
 		$data['password'] = $this->url->link('account/password', '', true);
 		$data['address'] = $this->url->link('account/address', '', true);
+        $data['seller_messages'] = $this->url->link('account/mpmultivendor/message', '', true);
 		
 		$data['credit_cards'] = array();
 		
@@ -61,6 +62,13 @@ class ControllerAccountAccount extends Controller {
         if(!empty($customer_info['role']) && $customer_info['role'] == 'seller') {
             $data['is_seller'] = true;
             $data['seller_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
+            $checkIsSellerApproved = $this->model_account_customer->checkIsSellerApproved($this->customer->getId());
+            $data['checkIsSellerApproved'] = empty($checkIsSellerApproved) ? false : true;
+            $data['checkIsSellerApprovedtext'] = empty($checkIsSellerApproved) ? 'Complete Your Sellers Registration' : 'Update Seller Info';
+            $data['dashboard_link'] = $this->url->link('account/mpmultivendor/dashboard', '', true);
+            $data['product_link'] = $this->url->link('account/mpmultivendor/product/add', '', true);
+
+            //print_r($data['checkIsSellerApprovedtext'] );exit('addd');
         }
 
 		$data['wishlist'] = $this->url->link('account/wishlist');
@@ -77,6 +85,7 @@ class ControllerAccountAccount extends Controller {
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 		$data['recurring'] = $this->url->link('account/recurring', '', true);
+		$data['my_seller_enquiries_href'] = $this->url->link('account/enquiries', '', true);
 
 		$this->load->model('account/customer');
 		
@@ -93,14 +102,21 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$data['tracking'] = '';
 		}
-		
+
+		//order tracking system
+        $data['orders'] = array();
+        $this->load->model('account/order');
+        $data['order_status'] = $this->model_account_order->getTrackTotalOrders();
+		//echo '<pre>';print_r($data['order_status']);exit('okok');
+
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-		
+		$data['role'] = $customer_info['role'];
+
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 

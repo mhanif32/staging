@@ -67,12 +67,16 @@ class ControllerAccountOrder extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['back_url'] = $this->url->link('account/account', '', true);
 
+		$data['track_link'] = $this->url->link('account/order/track', '', true);
+
 
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
 
 	public function info() {
 		$this->load->language('account/order');
+
+        $this->document->addScript('catalog/view/javascript/mpseller/ratepicker/rate-picker.js');
 
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
@@ -239,6 +243,7 @@ class ControllerAccountOrder extends Controller {
 				}
 
 				$data['products'][] = array(
+					'product_id'=> $product['product_id'],
 					'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
@@ -246,7 +251,9 @@ class ControllerAccountOrder extends Controller {
 					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'reorder'  => $reorder,
-					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
+					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true),
+                    'contact_seller'   => !empty($product['mpseller_id']) ? $this->url->link('mpmultivendor/store', 'mpseller_id=' . $product['mpseller_id'], true) : NULL,
+                    'link'   => $this->url->link('product/product', 'product_id=' . $product['product_id'], true)
 				);
 			}
 
@@ -298,6 +305,9 @@ class ControllerAccountOrder extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
             $data['back_url'] = $this->url->link('account/order ', '', true);
+
+            //rating review
+            $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();;
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');
@@ -364,4 +374,28 @@ class ControllerAccountOrder extends Controller {
 
 		$this->response->redirect($this->url->link('account/order/info', 'order_id=' . $order_id));
 	}
+
+    public function track(){
+
+	    $data = array();
+
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['column_right'] = $this->load->controller('common/column_right');
+        $data['content_top'] = $this->load->controller('common/content_top');
+        $data['content_bottom'] = $this->load->controller('common/content_bottom');
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+
+
+        //order tracking system
+        $data['orders'] = array();
+        $this->load->model('account/order');
+        $data['order_status'] = $this->model_account_order->getTrackTotalOrders();
+
+
+
+
+        $this->response->setOutput($this->load->view('account/order_track', $data));
+    }
+
 }

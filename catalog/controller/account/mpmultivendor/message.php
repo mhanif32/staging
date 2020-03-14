@@ -10,6 +10,7 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 		if(!$this->config->get('mpmultivendor_status')) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
+        $this->load->language('account/edit');
 
 		$this->load->language('account/mpmultivendor/message');
 
@@ -73,7 +74,7 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 		$data['button_submit'] = $this->language->get('button_submit');
 
 		$seller_info = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($this->customer->isLogged());
-
+//print_r($seller_info);exit('aaa');
 		if(!$seller_info) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -147,6 +148,9 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 
 		$data['custom_themename'] = $this->model_account_mpmultivendor_seller->getactiveTheme();
+
+		$data['text_username'] = $seller_info['store_owner'];
+		$data['text_email'] = $seller_info['email'];
 
 		if(VERSION < '2.2.0.0') {
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/message.tpl')) {

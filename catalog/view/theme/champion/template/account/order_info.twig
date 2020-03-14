@@ -20,7 +20,7 @@
                 </h3>
                 </div>
 
-                <table class="table table-bordered table-hover bg-white box-shadow">
+                <table class="table table-hover bg-white box-shadow">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" colspan="2">
@@ -38,7 +38,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <table class="table table-bordered table-hover bg-white box-shadow">
+                <table class="table table-hover bg-white box-shadow">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" style="width: 50%; vertical-align: top;">
@@ -59,7 +59,7 @@
                 <div class="form-signin card px-3 box-shadow mb-4">
                     <h3 class="f-20 font-weight-bold text-uppercase my-3">Order Price Details</h3>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr class="f-15 font-weight-bold bg-light">
                                 <td class="text-left">{{ column_name }}</td>
@@ -75,14 +75,25 @@
 
                             {% for product in products %}
                                 <tr>
-                                    <td class="text-left">{{ product.name }}
+                                    <td class="text-left">
+                                        <a href="{{ product.link }}" class="text-success">
+                                        {{ product.name }}
                                         {% for option in product.option %} <br />
-                                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}</td>
+                                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
+                                        </a>
+                                    </td>
                                     <td class="text-left">{{ product.model }}</td>
                                     <td class="text-right">{{ product.quantity }}</td>
                                     <td class="text-right">{{ product.price }}</td>
                                     <td class="text-right">{{ product.total }}</td>
-                                    <td class="text-right" style="white-space: nowrap;">{% if product.reorder %} <a href="{{ product.reorder }}" data-toggle="tooltip" title="{{ button_reorder }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a> {% endif %} <a href="{{ product.return }}" data-toggle="tooltip" title="{{ button_return }}" class="btn btn-danger"><i class="fa fa-reply"></i></a></td>
+                                    <td class="text-right" style="white-space: nowrap;">{% if product.reorder %} <a href="{{ product.reorder }}" data-toggle="tooltip" title="{{ button_reorder }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a> {% endif %} <a href="{{ product.return }}" data-toggle="tooltip" title="{{ button_return }}" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+
+                                        {% if product.contact_seller %}
+                                        <a href="{{ product.contact_seller }}" data-toggle="tooltip" title="Direct Question To The Store Owner" class="btn btn-success"><i class="fas fa-question"></i></a>
+                                        {% endif %}
+
+                                        <button title="Submit Review" data-id="{{ product.product_id }}" class="btn btn-warning btn-rating"><i class="fas fa-star"></i></button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             {% for voucher in vouchers %}
@@ -103,10 +114,10 @@
                             {% for total in totals %}
                                 <tr>
                                     <td colspan="3" class="border-0"></td>
-                                    <td class="text-right"><b>{{ total.title }}</b></td>
-                                    <td class="text-right">{{ total.text }}</td>
+                                    <td class="text-right border-0"><b>{{ total.title }}</b></td>
+                                    <td class="text-right border-0">{{ total.text }}</td>
                                     {% if products %}
-                                        <td></td>
+                                        <td class="text-right border-0"></td>
                                     {% endif %} </tr>
                             {% endfor %}
                             </tfoot>
@@ -115,7 +126,7 @@
                     </div>
                 </div>
                 {% if comment %}
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <td class="text-left">{{ text_comment }}</td>
@@ -131,7 +142,7 @@
                 {% if histories %}
                     <div class="form-signin card px-3 box-shadow mb-4">
                         <h3 class="f-20 font-weight-bold text-uppercase my-3">{{ text_history }}</h3>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover">
                             <thead>
                             <tr class="f-15 font-weight-bold bg-light">
                                 <td class="text-left">{{ column_date_added }}</td>
@@ -163,4 +174,128 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL : Title Review -->
+<div class="modal fade" id="mv-review">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input type="hidden" name="product_id" id="ratingId">
+                <h4 class="modal-title">{{ review_title }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" id="form-review">
+                    <div class="form-group required">
+                        <div class="col-sm-12">
+                            <label class="control-label">{{ entry_your_name }}</label>
+                            <input name="name" value="{{ author }}" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <!--<div class="form-group required">
+                        <div class="col-sm-12">
+                            <label class="control-label">{{ entry_title }}</label>
+                            <input name="title" value="" class="form-control" type="text">
+                        </div>
+                    </div>-->
+                    <div class="form-group required">
+                        <div class="col-sm-12">
+                            <label class="control-label">{{ entry_description }}</label>
+                            <textarea name="text" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <div class="col-sm-2">
+                            <label class="control-label" style="padding-top: 0;">{{ entry_rating }}</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <span id="rating" class="stars" data-stars="0"></span>
+                        </div>
+                    </div>
+                    <div class="buttons clearfix">
+                        <div class="pull-right">
+                            <button type="button" id="button-review-submit"
+                                    class="btn btn-primary">{{ button_continue }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {{ footer }}
+
+<script type="text/javascript">
+    //open popup
+    $('.btn-rating').on('click', function () {
+        var productId = $(this).attr("data-id");
+        $('#ratingId').val(productId);
+        $('#mv-review').modal('show');
+    });
+
+    $('#button-review-submit').click(function () {
+
+        var product_id = $('#ratingId').val();
+        $.ajax({
+            url: 'index.php?route=product/product/write&product_id='+product_id,
+            dataType: 'json',
+            type: 'post',
+            data: $('#mv-review input, #mv-review textarea, #mv-review input[type=\'hidden\']'),
+            beforeSend: function () {
+                $('#button-review').button('loading');
+            },
+            complete: function () {
+                $('#button-review').button('reset');
+            },
+            success: function (json) {
+                $('#mv-review .alert, #mv-review .text-danger').remove();
+                $('#mv-review .form-group').removeClass('has-error');
+console.log(json['error']);
+                if (json['error']) {
+                    $('#mv-review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                }
+
+                if (json['error']) {
+                    if (json['error']['name']) {
+                        $('#mv-review input[name=\'name\']').after('<div class="text-danger">' + json['error']['name'] + '</div>');
+                    }
+
+                    // if (json['error']['title']) {
+                    //     $('#mv-review input[name=\'title\']').after('<div class="text-danger">' + json['error']['title'] + '</div>');
+                    // }
+
+                    if (json['error']['text']) {
+                        $('#mv-review textarea[name=\'text\']').after('<div class="text-danger">' + json['error']['text'] + '</div>');
+                    }
+
+                    if (json['error']['rating']) {
+                        $('#mv-review #rating').after('<div class="text-danger">' + json['error']['rating'] + '</div>');
+                    }
+
+                    if (json['error']['warning']) {
+                        $('#mv-review .modal-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+                    }
+
+                    $('#mv-review .text-danger').parent().parent().addClass('has-error');
+                }
+
+                if (json['success']) {
+                    //location = json['success'];
+                    $('#form-review').slideUp();
+                    $('#form-review').html('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
+                    setInterval(3000);
+                    $('#mv-review').modal('hide');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ratePicker("#rating");
+    });
+</script>

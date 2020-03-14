@@ -8,12 +8,12 @@
                     <div>
                     <a href="{{ back_url }}" class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover"></i></a>
 
-                    <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">
+
+                        <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">
                         {{ heading_title }}
                     </h3>
                     </div>
                     <hr style="margin: 15px -25px">
-
                     {% if orders %}
                         {#<div class="table-responsive">#}
                         {#<table class="table table-bordered">#}
@@ -58,9 +58,9 @@
                         {#</table>#}
                         {#</div>#}
                         <div class="table-responsive">
-                            <table class="table table-bordered border-bottom-0">
+                            <table class="table border-bottom-0">
                                 <thead>
-                                <tr class="bg-gray-200 font-weight-bold text-uppercase">
+                                <tr class="bg-light font-weight-bold text-uppercase">
                                     <td class="text-center">{{ column_order_id }}</td>
                                     <td class="text-center">{{ column_customer }}</td>
                                     <td class="text-center">{{ column_product }}</td>
@@ -79,7 +79,10 @@
                                         <td class="text-left">{{ order.status }}</td>
                                         <td class="text-center">{{ order.total }}</td>
                                         <td class="text-center">{{ order.date_added }}</td>
-                                        <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn box-shadow on-hover"><i class="fa fa-eye f-22"></i></a></td>
+                                        <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn on-hover-shadow on-hover "><i class="fa fa-eye f-22"></i></a>
+                                            <a href="{{ track_link }}" data-toggle="tooltip" title="Track Order" class="btn on-hover-shadow on-hover "><i class="fa fa-truck f-22"></i></a>
+
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
