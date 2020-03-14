@@ -1268,3 +1268,47 @@ i{width: 20px;}}}}
   }
   }
 //==========end size radio======
+#checkout-checkout{
+  .steps-data{
+    .panel-body {
+      margin: 0 0 8px 70px;
+      padding: 18px;
+    }
+  .panel-default>.panel-heading {
+    color: #333;
+    background-color: #F2F9FF;
+    border-bottom: 1px solid #3e8cd0;
+    margin-bottom: 5px;
+    padding: 0px 5px 0px 5px;
+    position: relative;
+.panel-title{
+  margin-bottom: 0;
+  a{
+    font-size: 18px;
+  }
+}
+  }
+  i.fa{
+    @media only screen and (min-width: 768px){
+      position: absolute;
+      right: 20px;
+      top: 14px;
+    }
+  }
+    span.step-style {
+      background-color: $success;
+      padding: 10px 8px 10px 8px;
+      margin-left: -5px;
+      margin-right: 10px;
+      color: $white;
+      width: 85px;
+      display: inline-block;
+
+    }
+  }
+  .buttons{
+    .pull-right{
+      float: none; margin-bottom: 20px; }
+  }
+
+}

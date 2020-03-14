@@ -112,8 +112,8 @@
                                         <table class="table table-hover list">
                                             <thead>
                                             <tr>
-                                                <td style="width: 1px;" class="text-center"><input type="checkbox"
-                                                                                                   onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                                <td style="width: 1px;" class="text-center">
+                                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                                 </td>
                                                 <td class="text-center">{{ column_image }}</td>
                                                 <td class="text-left">{% if sort == 'pd.name' %}
@@ -153,14 +153,16 @@
                                             {% if products %}
                                                 {% for product in products %}
                                                     <tr>
-                                                        <td class="text-center">{% if product.product_id in selected %}
+                                                        <td class="text-center">
+                                                            {% if product.product_id in selected %}
                                                                 <input type="checkbox" name="selected[]"
                                                                        value="{{ product.product_id }}"
                                                                        checked="checked"/>
                                                             {% else %}
                                                                 <input type="checkbox" name="selected[]"
                                                                        value="{{ product.product_id }}"/>
-                                                            {% endif %}</td>
+                                                            {% endif %}
+                                                        </td>
                                                         <td class="text-center"><img src="{{ product.image }}"
                                                                                      alt="{{ product.name }}"
                                                                                      class="img-thumbnail"></td>

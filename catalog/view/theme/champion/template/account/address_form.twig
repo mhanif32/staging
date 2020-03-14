@@ -190,14 +190,14 @@
                                                                             <label>
                                                                                 <input type="radio"
                                                                                        name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                                       value="{{ custom_field_value.custom_field_value_id }}"
+                                                                                       value="{{ custom_field_value.custom_field_value_id }}" class="icheck-input"
                                                                                        checked="checked"/>
                                                                                 {{ custom_field_value.name }}</label>
                                                                         {% else %}
                                                                             <label>
                                                                                 <input type="radio"
                                                                                        name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                                       value="{{ custom_field_value.custom_field_value_id }}"/>
+                                                                                       value="{{ custom_field_value.custom_field_value_id }}" class="icheck-input"/>
                                                                                 {{ custom_field_value.name }}</label>
                                                                         {% endif %} </div>
                                                                 {% endfor %} </div>
@@ -371,18 +371,18 @@
                                                 <label class="control-label">{{ entry_default }}</label>
                                                 <div class=""> {% if default %}
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="1"
+                                                            <input type="radio" name="default" value="1" class="icheck-input"
                                                                    checked="checked"/>
                                                             {{ text_yes }}</label>
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="0"/>
+                                                            <input type="radio" name="default" value="0" class="icheck-input"/>
                                                             {{ text_no }}</label>
                                                     {% else %}
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="1"/>
+                                                            <input type="radio" name="default" value="1" class="icheck-input"/>
                                                             {{ text_yes }}</label>
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="0"
+                                                            <input type="radio" name="default" value="0" class="icheck-input"
                                                                    checked="checked"/>
                                                             {{ text_no }}</label>
                                                     {% endif %} </div>
