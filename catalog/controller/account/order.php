@@ -76,6 +76,8 @@ class ControllerAccountOrder extends Controller {
 	public function info() {
 		$this->load->language('account/order');
 
+        $this->document->addScript('catalog/view/javascript/mpseller/ratepicker/rate-picker.js');
+
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
 		} else {
@@ -241,6 +243,7 @@ class ControllerAccountOrder extends Controller {
 				}
 
 				$data['products'][] = array(
+					'product_id'=> $product['product_id'],
 					'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
@@ -302,6 +305,9 @@ class ControllerAccountOrder extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
             $data['back_url'] = $this->url->link('account/order ', '', true);
+
+            //rating review
+            $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();;
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');

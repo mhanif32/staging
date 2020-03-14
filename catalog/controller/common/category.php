@@ -3,6 +3,7 @@ class ControllerCommonCategory extends Controller
 {
     public function index()
     {
+        error_reporting(1);
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
         $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
         $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
@@ -22,6 +23,8 @@ class ControllerCommonCategory extends Controller
                 'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
             );
         }
-        return $this->load->view('common/category', $data);
+        //return $this->load->view('common/category', $data);
+        $this->response->setOutput($this->load->view('common/category', $data));
+
     }
 }

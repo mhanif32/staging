@@ -422,6 +422,7 @@ class ControllerProductCategory extends Controller
         $this->load->model('tool/image');
 
         $data['categories'] = array();
+
         $categories = $this->model_catalog_category->getMoreCategories(0);
 
         foreach ($categories as $category) {
