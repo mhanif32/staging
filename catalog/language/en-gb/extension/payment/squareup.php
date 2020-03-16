@@ -1,7 +1,7 @@
 <?php
 // Text
 $_['text_new_card']                     = '+ Add new card';
-$_['text_loading']                      = 'Loading... Please wait...';
+$_['text_loading']                      = 'Processing... Please wait...';
 $_['text_card_details']                 = 'Card Details';
 $_['text_saved_card']                   = 'Use Saved Card:';
 $_['text_card_ends_in']                 = 'Pay with existing %s card that ends on XXXX XXXX XXXX %s';

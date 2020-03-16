@@ -1439,3 +1439,34 @@ footer ul {
   border-radius: 4px; }
   .radio-toolbar label span:hover {
     background-color: #F2F9FF; }
+
+#checkout-checkout .steps-data .panel-body {
+  margin: 0 0 8px 70px;
+  padding: 18px; }
+#checkout-checkout .steps-data .panel-default > .panel-heading {
+  color: #333;
+  background-color: #F2F9FF;
+  border-bottom: 1px solid #3e8cd0;
+  margin-bottom: 5px;
+  padding: 0px 5px 0px 5px;
+  position: relative; }
+  #checkout-checkout .steps-data .panel-default > .panel-heading .panel-title {
+    margin-bottom: 0; }
+    #checkout-checkout .steps-data .panel-default > .panel-heading .panel-title a {
+      font-size: 18px; }
+@media only screen and (min-width: 768px) {
+  #checkout-checkout .steps-data i.fa {
+    position: absolute;
+    right: 20px;
+    top: 14px; } }
+#checkout-checkout .steps-data span.step-style {
+  background-color: #01B0F1;
+  padding: 10px 8px 10px 8px;
+  margin-left: -5px;
+  margin-right: 10px;
+  color: #fff;
+  width: 85px;
+  display: inline-block; }
+#checkout-checkout .buttons .pull-right {
+  float: none;
+  margin-bottom: 20px; }

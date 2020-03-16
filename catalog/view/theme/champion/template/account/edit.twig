@@ -73,6 +73,9 @@
                                                         <div class="d-inline-block float-right"><small><a href="{{ manage_address }}" class="text-success">Manage Address</a></small></div>
                                                     </label>
                                                     <div class="">
+                                                        {% if error_address %}
+                                                            <div class="text-danger">{{ error_address }}</div>
+                                                        {% endif %}
                                                         {% if home_default_address %}
                                                         <p>
                                                             {{ home_default_address.address_1 }},
@@ -95,10 +98,10 @@
                                                 <div class="col-md-12 form-group">
                                                     <label for="inputGender" class="mt-4 d-block">Your Gender</label>
 
-                                                    <input type="radio" name="gender" value="male" {% if gender == 'male' %} checked {% endif %}>
+                                                    <input type="radio" name="gender" value="male" class="icheck-input" {% if gender == 'male' %} checked {% endif %}>
                                                     <label class="mr-5">Male</label>
 
-                                                    <input type="radio" name="gender" value="female" {% if gender == 'female' %} checked {% endif %}>
+                                                    <input type="radio" name="gender" value="female" class="icheck-input" {% if gender == 'female' %} checked {% endif %}>
                                                     <label>Female</label>
                                                 </div>
 
