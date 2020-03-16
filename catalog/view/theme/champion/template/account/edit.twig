@@ -73,6 +73,9 @@
                                                         <div class="d-inline-block float-right"><small><a href="{{ manage_address }}" class="text-success">Manage Address</a></small></div>
                                                     </label>
                                                     <div class="">
+                                                        {% if error_address %}
+                                                            <div class="text-danger">{{ error_address }}</div>
+                                                        {% endif %}
                                                         {% if home_default_address %}
                                                         <p>
                                                             {{ home_default_address.address_1 }},

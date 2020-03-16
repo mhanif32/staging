@@ -22,6 +22,7 @@ class ControllerAccountEdit extends Controller
         $this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
         $this->load->model('account/customer');
+        $this->load->model('account/address');
 
         //edit customer
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -107,6 +108,14 @@ class ControllerAccountEdit extends Controller
         } else {
             $data['error_date_of_birth'] = '';
         }
+
+        if (isset($this->error['address'])) {
+            $data['error_address'] = $this->error['address'];
+        } else {
+            $data['error_address'] = '';
+        }
+
+        //$address = $this->model_account_address->getDefaultAddress();
 
         if (isset($this->error['gender'])) {
             $data['error_gender'] = $this->error['gender'];
@@ -245,6 +254,11 @@ class ControllerAccountEdit extends Controller
             $this->error['date_of_birth'] = $this->language->get('error_date_of_birth');
         }
 
+        $address = $this->model_account_address->getDefaultAddress();
+        if (empty($address)) {
+            $this->error['error_address'] = $this->language->get('error_address');
+        }
+//echo '<pre>'; print_r($address);exit('asd');
         if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
             $this->error['email'] = $this->language->get('error_email');
         }
