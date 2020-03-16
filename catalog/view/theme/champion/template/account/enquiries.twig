@@ -1,106 +1,206 @@
 {{ header }}
 <div id="enquiry-list" class="bg-light">
-  <div class="container">
+    <div class="container">
 
-    {% if custom_themename != 'journal2' %}<div class="row">{% endif %}
-    {{ column_left }}
-    {% if custom_themename == 'journal2' %} {{ column_right }} {% endif %}
+        {% if custom_themename != 'journal2' %}
+        <div class="row">{% endif %}
+            {{ column_left }}
+            {% if custom_themename == 'journal2' %} {{ column_right }} {% endif %}
 
-    <div id="content" class="col-12 my-5">{{ content_top }}{{ mpseller_links }}
-      <div class="mv-dashboard-wrap card p-3">
+            <div id="content" class="col-12 my-5">{{ content_top }}{{ mpseller_links }}
+                <div class="mv-dashboard-wrap card p-3">
 
-          <div class="mv-reviews">
-            <div class="panel panel-default">
-              <div class="panel-heading clearfix"><h3 class="f-35 text-center mb-5 font-weight-bold">{{ heading_title }}</h3></div>
-            </div>
-            <div class="well">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
+                    <div class="mv-reviews">
+                        <div class="panel panel-default">
+                            <div class="panel-heading clearfix"><h3
+                                        class="f-35 text-center mb-5 font-weight-bold">{{ heading_title }}</h3></div>
+                        </div>
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
 
-                    <div class="input-group date">
-                      <label class="control-label mr-2" for="input-date-added">{{ entry_date_added }}</label>
-                      <input type="text" name="filter_date_added" value="{{ filter_date_added }}" class="form-control" data-date-format="YYYY-MM-DD">
-                      <span class="input-group-btn">
+                                        <div class="input-group date">
+                                            <label class="control-label mr-2"
+                                                   for="input-date-added">{{ entry_date_added }}</label>
+                                            <input type="text" name="filter_date_added" value="{{ filter_date_added }}"
+                                                   class="form-control" data-date-format="YYYY-MM-DD">
+                                            <span class="input-group-btn">
                         <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                       </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <button type="button" id="button-filter" class="btn btn-primary"><i
+                                                class="fa fa-filter"></i> {{ button_filter }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" class="btn btn-success" id="btn-create-enquiry">Create an
+                            Enquiry</a>
+                        {% if enquiries %}
+                            {% for enquiry in enquiries %}
+                                <table class="table table-hover mb-4">
+                                    <tr class="bg-light f-15">
+                                        <th>{{ entry_store }}</th>
+                                        <th>{{ entry_date_modified }}</th>
+                                        <th>{{ entry_date_added }}</th>
+                                        <th class="text-right">{{ entry_action }}</th>
+                                    </tr>
+                                    <tr class="f-15">
+                                        <td>{{ enquiry.store_name }}</td>
+                                        <td>{{ enquiry.date_modified }}</td>
+                                        <td>{{ enquiry.date_added }}</td>
+                                        <td class="text-right"><a href="{{ enquiry.view_store }}"
+                                                                  class="btn btn-primary btn-sm">{{ button_view_store }}</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="f-15">
+                                        <td colspan="3">{{ enquiry.message }}</td>
+                                        <td class="text-right"><a href="{{ enquiry.view }}"
+                                                                  class="btn btn-primary btn-sm">{{ button_view }}</a>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+
+                            {% endfor %}
+                            <div class="row">
+                                <div class="col-sm-6 text-left">{{ pagination }}</div>
+                                <div class="col-sm-6 text-right">{{ results }}</div>
+                            </div>
+                        {% else %}
+                            <div class="col-sm-12 text-center">
+                                <h4>{{ text_no_results }}</h4>
+                            </div>
+                        {% endif %}
                     </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
 
-                  <button type="button" id="button-filter" class="btn btn-primary"><i class="fa fa-filter"></i> {{ button_filter }}</button>
                 </div>
-              </div>
+                {{ content_bottom }}</div>
+            {% if custom_themename != 'journal2' %}
+        </div>{% endif %}
+    </div>
+</div>
+
+<!-- MODAL : Title Review -->
+<div class="modal fade" id="mv-enquiry">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="showerror"></div>
+            <div class="modal-header">
+                <input type="hidden" name="product_id" id="ratingId">
+                <h4 class="modal-title">{{ create_enquiry_title }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            {% if enquiries %}
-              {% for enquiry in enquiries %}
-                <table class="table table-hover mb-4">
-                <tr class="bg-light f-15">
-                  <th>{{ entry_store }}</th>
-                  <th>{{ entry_date_modified }}</th>
-                  <th>{{ entry_date_added }}</th>
-                  <th class="text-right">{{ entry_action }}</th>
-                </tr>
-                <tr class="f-15">
-                  <td>{{ enquiry.store_name }}</td>
-                  <td>{{ enquiry.date_modified }}</td>
-                  <td>{{ enquiry.date_added }}</td>
-                  <td class="text-right"><a href="{{ enquiry.view_store }}" class="btn btn-primary btn-sm">{{ button_view_store }}</a></td>
-                </tr>
-                <tr class="f-15">
-                  <td colspan="3">{{ enquiry.message }}</td>
-                  <td class="text-right"><a href="{{ enquiry.view }}" class="btn btn-primary btn-sm">{{ button_view }}</a></td>
-                </tr>
+            <div class="modal-body">
+                <div class="form-horizontal" id="form-create-enquiry">
+                    <form class="form-horizontal">
+{#                        {% if not customer_logged %}#}
+{#                            <div class="form-group">#}
+{#                                <label class="control-label">{{ entry_name }}</label>#}
+{#                                <input type="text" name="name" class="form-control" placeholder="{{ entry_name }}"#}
+{#                                       value="{{ name }}"/>#}
+{#                            </div>#}
+{#                            <div class="form-group">#}
+{#                                <label class="control-label">{{ entry_email }}</label>#}
+{#                                <input type="text" name="email" class="form-control"#}
+{#                                       placeholder="{{ entry_email }}"#}
+{#                                       value="{{ customer_email }}"/>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+                        <div class="form-group required">
+                            <label class="control-label">{{ entry_message }}</label>
+                            <textarea name="message" cols="25" rows="6" placeholder="{{ entry_message }}"
+                          class="form-control"></textarea>
+                            <div class="text-danger">{{ error_message }}</div>
+                        </div>
+                        <div class="buttons clearfix">
+                            <button type="button" class="btn btn-primary pull-right button-submit" id="button-submit">{{ button_send }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                </table>
-
-
-              {% endfor %}
-              <div class="row">
-                <div class="col-sm-6 text-left">{{ pagination }}</div>
-                <div class="col-sm-6 text-right">{{ results }}</div>
-              </div>
-              {% else %}
-              <div class="col-sm-12 text-center">
-                <h4>{{ text_no_results }}</h4>
-              </div>
-              {% endif %}
-          </div>
-
-      </div>
-      {{ content_bottom }}</div>
-    {% if custom_themename != 'journal2' %}
- </div>{% endif %}
+<!-- Script -->
 <script src="catalog/view/javascript/mpseller/datetimepicker/moment.js" type="text/javascript"></script>
-<script src="catalog/view/javascript/mpseller/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-<link href="catalog/view/javascript/mpseller/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
+<script src="catalog/view/javascript/mpseller/datetimepicker/bootstrap-datetimepicker.min.js"
+        type="text/javascript"></script>
+<link href="catalog/view/javascript/mpseller/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css"
+      rel="stylesheet" media="screen"/>
 <script type="text/javascript"><!--
-$('#button-filter').on('click', function() {
-  var url = 'index.php?route=account/enquiries';
+    $('#button-filter').on('click', function () {
+        var url = 'index.php?route=account/enquiries';
 
-  var filter_date_added = $('input[name=\'filter_date_added\']').val();
-  if (filter_date_added) {
-    url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
-  }
+        var filter_date_added = $('input[name=\'filter_date_added\']').val();
+        if (filter_date_added) {
+            url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+        }
 
-  location = url;
-});
-//--></script>
+        location = url;
+    });
+    //-->
+</script>
+
 <script type="text/javascript"><!--
-$('.date').datetimepicker({
-  pickTime: false
-});
+    $('#btn-create-enquiry').on('click', function () {
+        $('#mv-enquiry').modal('show');
+    });
+    //-->
+</script>
+<script type="text/javascript">
+    $('#button-submit').click(function () {
+        $.ajax({
+            url: 'index.php?route=account/enquiries/create',
+            dataType: 'json',
+            type: 'post',
+            data: $('#mv-enquiry input, #mv-enquiry textarea, #mv-enquiry input[type=\'hidden\']'),
+            beforeSend: function () {
+                $('#button-submit').button('loading');
+            },
+            complete: function () {
+                $('#button-submit').button('reset');
+            },
+            success: function (json) {
+                console.log(json);
+                $('#mv-enquiry .alert, #mv-enquiry .text-danger').remove();
+                $('#mv-enquiry .form-group').removeClass('has-error');
 
-$('.time').datetimepicker({
-  pickDate: false
-});
+                if (json['error']) {
+                    $('#showerror').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                }
 
-$('.datetime').datetimepicker({
-  pickDate: true,
-  pickTime: true
-});
-//--></script>
-</div>
-</div>
+                if (json['success']) {
+                    location = json['success'];
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript"><!--
+    $('.date').datetimepicker({
+        pickTime: false
+    });
+
+    $('.time').datetimepicker({
+        pickDate: false
+    });
+
+    $('.datetime').datetimepicker({
+        pickDate: true,
+        pickTime: true
+    });
+    //-->
+</script>
+
 {{ footer }}

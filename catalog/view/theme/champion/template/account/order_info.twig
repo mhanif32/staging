@@ -251,7 +251,6 @@
             success: function (json) {
                 $('#mv-review .alert, #mv-review .text-danger').remove();
                 $('#mv-review .form-group').removeClass('has-error');
-console.log(json['error']);
                 if (json['error']) {
                     $('#showerror').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
                 }

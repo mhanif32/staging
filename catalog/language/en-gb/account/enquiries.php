@@ -8,6 +8,8 @@ $_['button_view']	    = 'View Enquiry';
 
 // Text
 $_['text_account']      = 'Account';
+$_['create_enquiry_title'] = 'Create an Enquiry';
+$_['button_send'] = 'Submit';
 
 
 // Column
