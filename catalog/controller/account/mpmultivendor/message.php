@@ -205,6 +205,7 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 				'mpseller_id'			=> $mpseller_id,
 				'from'					=> 'seller',
 				'message'				=> isset($this->request->post['message']) ? $this->request->post['message'] : '',
+				'subject'				=> isset($this->request->post['subject']) ? $this->request->post['subject'] : '',
 			);
 
 			$this->model_account_mpmultivendor_message->addMessage($add_data);

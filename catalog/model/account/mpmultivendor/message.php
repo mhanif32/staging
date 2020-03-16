@@ -1,7 +1,7 @@
 <?php
 class ModelAccountMpmultivendorMessage extends Model {
 	public function addMessage($data) {
-		$this->db->query("INSERT INTO ". DB_PREFIX ."mpseller_message SET mpseller_id = '". (int)$data['mpseller_id'] ."', `from` = '". $this->db->escape($data['from']) ."', message = '". $this->db->escape($data['message']) ."', date_added = NOW()");
+		$this->db->query("INSERT INTO ". DB_PREFIX ."mpseller_message SET mpseller_id = '". (int)$data['mpseller_id'] ."', `from` = '". $this->db->escape($data['from']) ."', message = '". $this->db->escape($data['message']) ."', subject = '". $this->db->escape($data['subject']) ."', date_added = NOW()");
 
 		// Seller Add a Message, Send Email To Admin
 

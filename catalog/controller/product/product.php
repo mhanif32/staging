@@ -606,7 +606,7 @@ class ControllerProductProduct extends Controller {
 
 				$json['error'] = $this->language->get('error_rating');
 //print_r($this->language->get('error_rating'));
-				//$json['error']['ratingrev'] = $this->language->get('error_rating');
+				//$json['error']['rating'] = $this->language->get('error_rating');
 			}
 
 			// Captcha

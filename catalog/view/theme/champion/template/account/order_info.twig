@@ -179,6 +179,7 @@
 <div class="modal fade" id="mv-review">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div id="showerror"></div>
             <div class="modal-header">
                 <input type="hidden" name="product_id" id="ratingId">
                 <h4 class="modal-title">{{ review_title }}</h4>
@@ -252,8 +253,10 @@
                 $('#mv-review .form-group').removeClass('has-error');
 console.log(json['error']);
                 if (json['error']) {
-                    $('#mv-review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                    $('#showerror').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
                 }
+
+                console.log(json['error']);
 
                 if (json['error']) {
                     if (json['error']['name']) {
@@ -282,9 +285,9 @@ console.log(json['error']);
                 if (json['success']) {
                     //location = json['success'];
                     $('#form-review').slideUp();
-                    $('#form-review').html('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
-                    setInterval(3000);
-                    $('#mv-review').modal('hide');
+                    $('#form-review').after('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
+                    //setInterval(3000);
+                    //$('#mv-review').modal('hide');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
