@@ -28,6 +28,7 @@ $_['error_author'] 			= 'Author must be between 1 and 32 characters!';
 $_['error_title'] 			= 'Title must be between 3 and 255 characters!';
 $_['error_description'] 	= 'Description must be greater than 10 characters!';
 $_['error_rating'] 			= 'Rating required!';
+$_['error_seller_id'] 		= 'Seller required!';
 $_['error_name'] 			= 'Name must be between 1 and 32 characters!';
 $_['error_email']           = 'E-Mail Address does not appear to be valid!';
 $_['error_message'] 	 	= 'Message must be greater than 10 characters!';

@@ -1,7 +1,6 @@
 {{ header }}
 <div id="enquiry-list" class="bg-light">
     <div class="container">
-
         {% if custom_themename != 'journal2' %}
         <div class="row">{% endif %}
             {{ column_left }}
@@ -9,7 +8,6 @@
 
             <div id="content" class="col-12 my-5">{{ content_top }}{{ mpseller_links }}
                 <div class="mv-dashboard-wrap card p-3">
-
                     <div class="mv-reviews">
                         <div class="panel panel-default">
                             <div class="panel-heading clearfix"><h3
@@ -19,7 +17,6 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-
                                         <div class="input-group date">
                                             <label class="control-label mr-2"
                                                    for="input-date-added">{{ entry_date_added }}</label>
@@ -86,7 +83,7 @@
     </div>
 </div>
 
-<!-- MODAL : Title Review -->
+<!-- MODAL : Title Enquiry -->
 <div class="modal fade" id="mv-enquiry">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -99,22 +96,20 @@
             <div class="modal-body">
                 <div class="form-horizontal" id="form-create-enquiry">
                     <form class="form-horizontal">
-{#                        {% if not customer_logged %}#}
-{#                            <div class="form-group">#}
-{#                                <label class="control-label">{{ entry_name }}</label>#}
-{#                                <input type="text" name="name" class="form-control" placeholder="{{ entry_name }}"#}
-{#                                       value="{{ name }}"/>#}
-{#                            </div>#}
-{#                            <div class="form-group">#}
-{#                                <label class="control-label">{{ entry_email }}</label>#}
-{#                                <input type="text" name="email" class="form-control"#}
-{#                                       placeholder="{{ entry_email }}"#}
-{#                                       value="{{ customer_email }}"/>#}
-{#                            </div>#}
-{#                        {% endif %}#}
+                        <div class="form-group required">
+                            <label class="control-label">Store Name</label>
+                            <select name="seller_id" id="seller_id" class="form-control">
+                                <option value="">Select</option>
+                                {% for seller in sellers %}
+                                    <option value="{{ seller.mpseller_id }}">{{ seller.store_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="text-danger">{{ error_message }}</div>
+                        </div>
+
                         <div class="form-group required">
                             <label class="control-label">{{ entry_message }}</label>
-                            <textarea name="message" cols="25" rows="6" placeholder="{{ entry_message }}"
+                            <textarea name="message" id="message" cols="25" rows="6" placeholder="{{ entry_message }}"
                           class="form-control"></textarea>
                             <div class="text-danger">{{ error_message }}</div>
                         </div>
@@ -156,11 +151,13 @@
 </script>
 <script type="text/javascript">
     $('#button-submit').click(function () {
+        var seller_id = $('#seller_id').val();
+        var message = $('#message').val();
         $.ajax({
             url: 'index.php?route=account/enquiries/create',
             dataType: 'json',
             type: 'post',
-            data: $('#mv-enquiry input, #mv-enquiry textarea, #mv-enquiry input[type=\'hidden\']'),
+            data: {seller_id: seller_id, message: message},
             beforeSend: function () {
                 $('#button-submit').button('loading');
             },
@@ -168,7 +165,6 @@
                 $('#button-submit').button('reset');
             },
             success: function (json) {
-                console.log(json);
                 $('#mv-enquiry .alert, #mv-enquiry .text-danger').remove();
                 $('#mv-enquiry .form-group').removeClass('has-error');
 
@@ -177,7 +173,9 @@
                 }
 
                 if (json['success']) {
-                    location = json['success'];
+                    //location = json['success'];
+                    $('#form-create-enquiry').slideUp();
+                    $('#form-create-enquiry').after('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

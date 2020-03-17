@@ -294,4 +294,11 @@ class ModelMpmultivendorMvSeller extends Model {
 echo '<pre>';print_r($query->row);exit('aaa');
         return $query->row;
     }
+
+    public function getSellers()
+    {
+        $sql = "SELECT s.mpseller_id, s.store_name FROM " . DB_PREFIX . "mpseller s WHERE s.mpseller_id > 0 AND s.status = '1' AND s.approved = '1'";
+        $query = $this->db->query($sql);
+        return $query->rows;
+    }
 }

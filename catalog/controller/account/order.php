@@ -244,6 +244,7 @@ class ControllerAccountOrder extends Controller {
 
 				$data['products'][] = array(
 					'product_id'=> $product['product_id'],
+					'mpseller_id'=> $product['mpseller_id'],
 					'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
@@ -305,6 +306,9 @@ class ControllerAccountOrder extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
             $data['back_url'] = $this->url->link('account/order ', '', true);
+
+            $this->load->model('mpmultivendor/mv_seller');
+            $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellers();
 
             //rating review
             $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();;

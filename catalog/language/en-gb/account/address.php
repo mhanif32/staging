@@ -21,7 +21,7 @@ $_['entry_address_2']    = 'Address 2';
 $_['entry_postcode']     = 'Postcode / Zip Code';
 $_['entry_city']         = 'City';
 $_['entry_country']      = 'Country';
-$_['entry_zone']         = 'Region / State / County';
+$_['entry_zone']         = 'Region / State';
 $_['entry_default']      = 'Default Address';
 
 // Error

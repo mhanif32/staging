@@ -59,6 +59,8 @@ $_['entry_message'] 		= 'Message';
 $_['button_continue'] 		= 'Submit';
 $_['button_write_review'] 	= 'Write a Review';
 $_['button_send_message'] 	= 'Send Message';
+$_['button_send'] 	= 'Submit';
+$_['create_enquiry_title'] 	= 'Create an Enquiry';
 
 //Rating Review Error
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';

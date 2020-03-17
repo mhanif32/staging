@@ -172,6 +172,9 @@ class ControllerAccountEnquiries extends Controller
 
         $data['custom_themename'] = $this->model_account_mpmultivendor_seller->getactiveTheme();
 
+        $this->load->model('mpmultivendor/mv_seller');
+        $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellers();
+
         if (VERSION < '2.2.0.0') {
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/enquiries.tpl')) {
                 $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/enquiries.tpl', $data));
@@ -459,7 +462,7 @@ class ControllerAccountEnquiries extends Controller
     public function create()
     {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/enquiries/view', 'enquiry_id=' . $enquiry_id, true);
+            //$this->session->data['redirect'] = $this->url->link('account/enquiries/view', 'enquiry_id=' . $enquiry_id, true);
 
             $json['redirect'] = $this->url->link('account/login', '', true);
         }
@@ -469,46 +472,18 @@ class ControllerAccountEnquiries extends Controller
         $this->load->model('mpmultivendor/mv_seller');
 
         $this->load->language('mpmultivendor/store_profile');
-
-//        if(!$this->customer->isLogged()) {
-//            if ((utf8_strlen(trim($this->request->post['name'])) < 1) || (utf8_strlen(trim($this->request->post['name'])) > 32)) {
-//                $json['error']['name'] = $this->language->get('error_name');
-//            }
-//
-//            if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-//                $json['error']['email'] = $this->language->get('error_email');
-//            }
-//        }
-
-        if ($this->request->post['product_id']) {
-            $json['error']['product_id'] = $this->language->get('error_product_id');
+//print_r($this->request->post['seller_id']);exit();
+        if (empty($this->request->post['seller_id'])) {
+            $json['error'] = $this->language->get('error_seller_id');
         }
 
         if (utf8_strlen(trim($this->request->post['message'])) < 10) {
-            $json['error']['message'] = $this->language->get('error_message');
+            $json['error'] = $this->language->get('error_message');
         }
-
-//        if (isset($this->request->get['mpseller_id'])) {
-//            $mpseller_id = (int)$this->request->get['mpseller_id'];
-//        } else if (isset($this->request->get['review_mpseller_id'])) {
-//            $mpseller_id = (int)$this->request->get['review_mpseller_id'];
-//        } else {
-//            $mpseller_id = 0;
-//        }
-
-        if (isset($this->request->get['product_id'])) {
-            $product_id = (int)$this->request->get['product_id'];
-        }
-
-        //$seller_info = $this->model_mpmultivendor_mv_seller->getSellerFrmProduct($product_id);
-
-//        if (!$seller_info) {
-//            $json['error']['warning'] = $this->language->get('error_seller_notfound');
-//        }
 
         if (!$json) {
             $enquiry_data = array(
-                'mpseller_id' => 1,
+                'mpseller_id' => $this->request->post['seller_id'],
                 'customer_id' => $this->customer->getId(),
                 'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
                 'email' => $this->customer->getEmail(),
@@ -518,7 +493,6 @@ class ControllerAccountEnquiries extends Controller
 
             $json['success'] = $this->language->get('success_send_enquiry');
         }
-
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));

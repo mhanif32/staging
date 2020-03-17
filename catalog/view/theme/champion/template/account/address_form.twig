@@ -16,7 +16,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-firstname">{{ entry_firstname }}</label>
+                                                       for="input-firstname">{{ entry_firstname }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="firstname" value="{{ firstname }}"
                                                            placeholder="{{ entry_firstname }}" id="input-firstname"
@@ -29,7 +29,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-lastname">{{ entry_lastname }}</label>
+                                                       for="input-lastname">{{ entry_lastname }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="lastname" value="{{ lastname }}"
                                                            placeholder="{{ entry_lastname }}" id="input-lastname"
@@ -53,7 +53,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-address-1">{{ entry_address_1 }}</label>
+                                                       for="input-address-1">{{ entry_address_1 }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="address_1" value="{{ address_1 }}"
                                                            placeholder="{{ entry_address_1 }}" id="input-address-1"
@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-city">{{ entry_city }}</label>
+                                                <label class="control-label" for="input-city">{{ entry_city }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="city" value="{{ city }}"
                                                            placeholder="{{ entry_city }}" id="input-city"
@@ -116,7 +116,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-postcode">{{ entry_postcode }}</label>
+                                                       for="input-postcode">{{ entry_postcode }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="postcode" value="{{ postcode }}"
                                                            placeholder="{{ entry_postcode }}" id="input-postcode"
@@ -129,7 +129,7 @@
 
                                         <div class="col-lg-6">
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-zone">{{ entry_zone }}</label>
+                                                <label class="control-label" for="input-zone">{{ entry_zone }} <span class="text-danger">*</span></label>
                                                 <div class="">
                                                     <select name="zone_id" id="input-zone" class="form-control">
                                                     </select>
