@@ -632,6 +632,7 @@ class ControllerProductProduct extends Controller {
 	}
 
 	public function getRecurringDescription() {
+
 		$this->load->language('product/product');
 		$this->load->model('catalog/product');
 
@@ -691,4 +692,23 @@ class ControllerProductProduct extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function getOptionImage()
+    {
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
+        $this->load->model('catalog/product');
+        $this->load->model('tool/image');
+
+        $dataId = (int)$this->request->post['dataId'];
+        $data = array();
+        $optionValueData = $this->model_catalog_product->getOptionValueData($dataId);
+
+        if(!empty($optionValueData)) {
+            $data['colorImage'] = $this->model_tool_image->resize($optionValueData['color_image'], 400, 550);
+
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($data));
+    }
 }
