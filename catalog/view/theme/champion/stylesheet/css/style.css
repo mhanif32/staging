@@ -920,9 +920,9 @@ footer ul {
   border-color: #e4e5e7;
   padding: 0;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 .faq-page .panel-default > .panel-heading a {
   display: block;
   padding: 20px 15px 20px;
@@ -942,21 +942,21 @@ footer ul {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   float: right;
+  -webkit-transition: -webkit-transform 0.25s linear;
   transition: -webkit-transform 0.25s linear;
   transition: transform 0.25s linear;
-  transition: transform 0.25s linear, -webkit-transform 0.25s linear;
-  -webkit-transition: -webkit-transform 0.25s linear; }
+  transition: transform 0.25s linear, -webkit-transform 0.25s linear; }
 .faq-page .panel-default > .panel-heading a[aria-expanded="true"] {
   background-color: #fff;
   color: #01B0F1; }
 .faq-page .panel-default > .panel-heading a[aria-expanded="true"]:after {
   content: "\2212";
   -webkit-transform: rotate(180deg);
-  transform: rotate(180deg); }
+          transform: rotate(180deg); }
 .faq-page .panel-default > .panel-heading a[aria-expanded="false"]:after {
   content: "\002b";
   -webkit-transform: rotate(90deg);
-  transform: rotate(90deg); }
+          transform: rotate(90deg); }
 .faq-page h4 {
   font-size: 1rem; }
 
