@@ -51,13 +51,16 @@
                                                         {% endif %}
                                                     </div>
                                                 </div>
+                                            </div>
 
+                                            <div class="row">
                                                 <div class="col-md-6 form-group required">
                                                     <label class="control-label"
                                                            for="input-date">{{ entry_date_of_birth }}<span
-                                                                class="text-danger">*</span> </label>
+                                                                class="text-danger"> *</span> </label>
                                                     <div class="">
-                                                        <input type="date" name="date_of_birth" value="{{ date_of_birth }}"
+                                                        <input type="date" name="date_of_birth"
+                                                               value="{{ date_of_birth }}"
                                                                placeholder="{{ entry_date_of_birth }}" id="input-date"
                                                                class="form-control rounded-0"/>
                                                         {% if error_date_of_birth %}
@@ -66,45 +69,54 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 form-group required">
+                                                <div class="col-md-6 form-group">
+                                                    <label for="inputGender" class="d-block">Your Gender</label>
+
+                                                    <input type="radio" name="gender" value="male"
+                                                           class="icheck-input" {% if gender == 'male' %} checked {% endif %}>
+                                                    <label class="mr-5">Male</label>
+
+                                                    <input type="radio" name="gender" value="female"
+                                                           class="icheck-input" {% if gender == 'female' %} checked {% endif %}>
+                                                    <label>Female</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 form-group required">
                                                     <label class="control-label"
                                                            for="input-date">{{ entry_home_address }}<span
                                                                 class="text-danger">*</span>
-                                                        <div class="d-inline-block float-right"><small><a href="{{ manage_address }}" class="text-success">Manage Address</a></small></div>
+                                                        <div class="d-inline-block float-right"><small><a
+                                                                        href="{{ manage_address }}"
+                                                                        class="text-success">Manage Address</a></small>
+                                                        </div>
                                                     </label>
                                                     <div class="">
                                                         {% if error_address %}
                                                             <div class="text-danger">{{ error_address }}</div>
                                                         {% endif %}
                                                         {% if home_default_address %}
-                                                        <p>
-                                                            {{ home_default_address.address_1 }},
-                                                            {{ home_default_address.address_2 }},
-                                                            {{ home_default_address.city }},
-                                                            {{ home_default_address.zone }},
-                                                            {{ home_default_address.country }}
-                                                        </p>
+                                                            <p>
+                                                                {{ home_default_address.address_1 }},
+                                                                {{ home_default_address.address_2 }},
+                                                                {{ home_default_address.city }},
+                                                                {{ home_default_address.zone }},
+                                                                {{ home_default_address.country }}
+                                                            </p>
                                                         {% endif %}
-{#                                                        <input type="text" name="address" value="{{ home_address }}"#}
-{#                                                               placeholder="{{ entry_home_address }}"#}
-{#                                                               id="input-home-address"#}
-{#                                                               class="form-control rounded-0"/>#}
-{#                                                        {% if home_address %}#}
-{#                                                            <div class="text-danger">{{ home_address }}</div>#}
-{#                                                        {% endif %}#}
+                                                        {#                                                        <input type="text" name="address" value="{{ home_address }}"#}
+                                                        {#                                                               placeholder="{{ entry_home_address }}"#}
+                                                        {#                                                               id="input-home-address"#}
+                                                        {#                                                               class="form-control rounded-0"/>#}
+                                                        {#                                                        {% if home_address %}#}
+                                                        {#                                                            <div class="text-danger">{{ home_address }}</div>#}
+                                                        {#                                                        {% endif %}#}
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-md-12 form-group">
-                                                    <label for="inputGender" class="mt-4 d-block">Your Gender</label>
-
-                                                    <input type="radio" name="gender" value="male" class="icheck-input" {% if gender == 'male' %} checked {% endif %}>
-                                                    <label class="mr-5">Male</label>
-
-                                                    <input type="radio" name="gender" value="female" class="icheck-input" {% if gender == 'female' %} checked {% endif %}>
-                                                    <label>Female</label>
-                                                </div>
-
+                                            <div class="row">
                                                 <div class="col-md-6 form-group required">
                                                     <label class="control-label" for="input-email">{{ entry_email }}
                                                         <span class="text-danger">*</span> </label>
@@ -131,7 +143,9 @@
                                                         {% endif %}
                                                     </div>
                                                 </div>
+                                            </div>
 
+                                            <div class="row">
                                                 <div class="col-md-12 form-group required image-upload mb-4">
                                                     <label class="control-label" for="input-image">Profile Photo<span
                                                                 class="text-danger">*</span> </label>

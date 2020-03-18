@@ -380,6 +380,13 @@ class ModelCatalogProduct extends Model {
 		return $product_option_data;
 	}
 
+    public function getOptionValueData($optionValueId)
+    {
+        $product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_option_value_id = '" . (int)$optionValueId ."'");
+
+        return $product_option_value_query->row;
+    }
+
 	public function getProductDiscounts($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "' AND customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND quantity > 1 AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) ORDER BY quantity ASC, priority ASC, price ASC");
 

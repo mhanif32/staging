@@ -10,10 +10,12 @@
                     {% if thumb or images %}
                     <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
+                            <div class="firstImage">
                             <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}"
                                                                                                      title="{{ heading_title }}"
                                                                                                      alt="{{ heading_title }}"
                                                                                                      class="img-fluid"/></a>
+                            </div>
                         {% endif %}
                         <div class="row">
                             {% if images %}
@@ -167,8 +169,9 @@
 
                                                                 <img src="{{ option_value.color_image }}" width="50"
                                                                      height="50"
-                                                                     class="img-thumbnail rounded-0"
+                                                                     class="img-thumbnail rounded-0 colorImage"
                                                                      data-toggle="tooltip"
+                                                                     data-id="{{ option_value.product_option_value_id }}"
                                                                      data-html="true"
                                                                      title="{{ option_value.name }} {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}) {% endif %}"/>
                                                             </label>
@@ -187,7 +190,6 @@
                                                                </span>
                                                             </label>
                                                         </div>
-
                                                     {% else %}
                                                         <div class="radio">
                                                             <label>
@@ -251,9 +253,7 @@
                                 </div>
                             {% endif %}
 
-
                             <div class="product-size form-group">
-
                                 <label class="control-label d-inline-block mr-2"
                                        for="input-quantity">{{ entry_qty }}</label>
                                 <div class="number d-inline-block">
@@ -264,9 +264,7 @@
                                     <span class="plus">+</span>
                                 </div>
                                 <input type="hidden" name="product_id" value="{{ product_id }}"/>
-
                             </div>
-
 
                             {##}
                             {#<div class="form-group">#}
@@ -607,7 +605,6 @@
                                                 {#</div>#}
                                                 {#{% endif %}#}
                                                 <div class="wish-list">
-                                                    {#<i class="fas fa-heart" aria-hidden="true"></i>#}
                                                     <button class="border-0 bg-white" type="button"
                                                             data-toggle="tooltip"
                                                             title="{{ button_wishlist }}"
@@ -617,7 +614,6 @@
                                                 </div>
                                             </div>
                                             {% if product.price %}
-
                                                 <div class="product-price text-primary font-weight-bold f-20">
                                                     {% if not product.special %}
                                                         {{ product.price }}
@@ -642,16 +638,11 @@
                                     </div>
                                 </div>
                             {% endfor %}
-
                         </div>
-
                     </div>
                 </section>
-
-
             </div>
         </div>
-
     </section>
 {% endif %}
 
@@ -958,4 +949,21 @@
         });
     });
     //--></script>
+
+<script>
+    $('.colorImage').on('click', function () {
+        var dataId = $(this).attr('data-id');
+        $.ajax({
+            url: 'index.php?route=product/product/getOptionImage',
+            type: 'post',
+            data: {dataId: dataId},
+            success: function (json) {
+
+                var dataHtmlImage = '<a class="thumbnail" href="'+json['colorImage']+'"><img src="'+json['colorImage']+'" class="img-fluid"></a>';
+                $('.firstImage').html(dataHtmlImage);
+            }
+        });
+    });
+
+</script>
 
