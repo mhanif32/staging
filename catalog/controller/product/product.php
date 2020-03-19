@@ -716,15 +716,33 @@ class ControllerProductProduct extends Controller {
 
     public function showSizeChartModal()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
         $data = array();
 
         if(!empty($this->request->post['dataId'])) {
 
             $sizeChartId = $this->request->post['dataId'];
 
+            if($sizeChartId == 1) {
+                $title = 'Mens Socks';
+            } else if($sizeChartId == 2) {
+                $title = 'Mens Hats';
+            } else if($sizeChartId == 3) {
+                $title = 'Mens T-shirts';
+            } else if($sizeChartId == 4) {
+                $title = 'Mens Jeans Pants Trouser - Length';
+            } else if($sizeChartId == 5) {
+                $title = 'Mens Jeans Pants Trouser - Waist';
+            } else if($sizeChartId == 6) {
+                $title = 'Mens Shirts';
+            } else if($sizeChartId == 7) {
+                $title = 'Mens Coat Suits Blazers';
+            } else {
+                $title = 'No records';
+            }
+            $data['size_title'] = $title;
+            $this->response->setOutput($this->load->view('product/size_charts/'.$sizeChartId, $data));
         }
-
-        $this->response->setOutput($this->load->view('product/product', $data));
     }
-
 }
