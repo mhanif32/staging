@@ -239,6 +239,7 @@ class ControllerProductProduct extends Controller {
 			$data['manufacturer'] = $product_info['manufacturer'];
 			$data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
 			$data['model'] = $product_info['model'];
+			$data['show_size_chart'] = $product_info['show_size_chart'];
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
@@ -459,6 +460,7 @@ class ControllerProductProduct extends Controller {
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
+			$data['header'] = $this->load->controller('common/header');
 			$data['header'] = $this->load->controller('common/header');
 
 			//if loggin user is purchased this product before this time
@@ -711,4 +713,18 @@ class ControllerProductProduct extends Controller {
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($data));
     }
+
+    public function showSizeChartModal()
+    {
+        $data = array();
+
+        if(!empty($this->request->post['dataId'])) {
+
+            $sizeChartId = $this->request->post['dataId'];
+
+        }
+
+        $this->response->setOutput($this->load->view('product/product', $data));
+    }
+
 }

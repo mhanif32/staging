@@ -51,7 +51,8 @@ class ModelCatalogProduct extends Model {
 				'date_added'       => $query->row['date_added'],
 				'date_modified'    => $query->row['date_modified'],
 				'viewed'           => $query->row['viewed'],
-				'mpseller_id'           => $query->row['mpseller_id']
+				'show_size_chart'  => $query->row['show_size_chart'],
+				'mpseller_id'      => $query->row['mpseller_id']
 			);
 		} else {
 			return false;

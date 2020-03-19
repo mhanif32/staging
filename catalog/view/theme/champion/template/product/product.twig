@@ -134,7 +134,9 @@
                                                         {% endif %} </option>
                                                 {% endfor %}
                                             </select>
-                                            <a href="javascript:void(0)" class="text-success">Size Chart</a>
+{#                                            {% if show_size_chart %}#}
+                                                <a href="javascript:void(0)" class="text-success"  data-id="{{ show_size_chart }}" id="showSizeChart">Size Chart</a>
+{#                                            {% endif %}#}
                                         </div>
 
                                         {#<div class="form-group{% if option.required %} required {% endif %}">#}
@@ -265,14 +267,6 @@
                                 </div>
                                 <input type="hidden" name="product_id" value="{{ product_id }}"/>
                             </div>
-
-                            {##}
-                            {#<div class="form-group">#}
-                            {#<label class="control-label" for="input-quantity">{{ entry_qty }}</label>#}
-                            {#<input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"#}
-                            {#class="form-control"/>#}
-                            {#<input type="hidden" name="product_id" value="{{ product_id }}"/>#}
-                            {#</div>#}
                         </div>
                     </div>
 
@@ -300,97 +294,19 @@
                             {% endif %}
                         </div>
 
-                        <!-- Button trigger modal -->
-                        <!--<div class="mt-auto ml-auto mr-3">
-                                <a type="button" class="on-hover text-right f-13" data-toggle="modal"
-                                        data-target="#exampleModalCenter">
-                                    <i class="fas fa-ribbon"></i> {{ text_request_product }}
-                                </a>
-                            </div>-->
-
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="showSizeChartModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-success">
-                                        <h3 class="modal-title f-20 text-white text-uppercase"
-                                            id="exampleModalLongTitle">{{ text_purchase_product }}</h3>
+                                        <h3 class="modal-title f-20 text-white text-uppercase" id="sizeModalTitle">Size Chart</h3>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span class="f-25 text-white" aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="{{ request_form_action }}" id="request_for_product_form"
-                                              class="request-form">
-                                            <div class="form-group">
-                                                <div class="">
-                                                    <label class="control-label"
-                                                           for="input-quantity">{{ product_name }}</label>
-                                                </div>
-                                                <div class="p-2 border rounded bg-light">
-                                                    {{ heading_title }}
-                                                </div>
-                                            </div>
-                                            <div class="product-size form-group">
-                                                <div class="">
-                                                    <label class="control-label"
-                                                           for="input-request-quantity">{{ entry_qty }}</label>
-                                                </div>
-                                                <div class="select w-100">
-                                                    <input type="text" name="request_quantity" value="{{ minimum }}"
-                                                           size="2"
-                                                           id="input-request_quantity"
-                                                           class="form-control"/>
-                                                    <input type="hidden" name="product_id"
-                                                           value="{{ product_id }}"/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
+                                    <div class="modal-body" id="modalSizeContent">
 
-                                                <div class="form-group col-md-6">
-                                                    <div class="">
-                                                        <label class="control-label"
-                                                               for="input-email">Email</label>
-                                                    </div>
-                                                    <div class="">
-                                                        <input type="email" name="email" value="" id="email"
-                                                               class="form-control"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <div class="">
-                                                        <label class="control-label"
-                                                               for="input-contact">Contact Number</label>
-                                                    </div>
-                                                    <div class="">
-                                                        <input type="text" name="contact" value=""
-                                                               id="contact-number" class="form-control"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="">
-                                                    <label class="control-label" for="input-address">Address</label>
-                                                </div>
-                                                <div class="">
-                                                    <input type="text" name="address" value="" placeholder=""
-                                                           id="address" class="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="">
-                                                    <label class="control-label"
-                                                           for="input-comment">Comment</label>
-                                                </div>
-                                                <div class="">
-                                                        <textarea id="Comment" name="comment" rows="4"
-                                                                  class="w-100"></textarea>
-                                                </div>
-                                            </div>
-                                            <input type="submit" class="btn btn-success px-5" value="Submit">
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -898,7 +814,6 @@
 
     //modal: form submit
     $("#request_for_product_form").on("submit", function () {
-        alert('iook');
         var form = $("#request_for_product_form");
         var action = form.attr('action');
 
@@ -965,5 +880,20 @@
         });
     });
 
+    $('#showSizeChart').on('click', function () {
+        var dataId = $(this).attr('data-id');
+        $('#showSizeChartModal').modal('show');
+
+        $.ajax({
+            url: 'index.php?route=product/product/showSizeChartModal',
+            type: 'post',
+            data: {dataId: dataId},
+            success: function (json) {
+
+                var dataHtmlImage = '<a class="thumbnail" href="'+json['colorImage']+'"><img src="'+json['colorImage']+'" class="img-fluid"></a>';
+                $('.firstImage').html(dataHtmlImage);
+            }
+        });
+    });
 </script>
 

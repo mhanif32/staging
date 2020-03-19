@@ -1011,6 +1011,14 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $data['date_available'] = date('Y-m-d');
         }
 
+        if (isset($this->request->post['show_size_chart'])) {
+            $data['show_size_chart'] = $this->request->post['show_size_chart'];
+        } elseif (!empty($product_info)) {
+            $data['show_size_chart'] = $product_info['show_size_chart'];
+        } else {
+            $data['show_size_chart'] = '';
+        }
+
         if (isset($this->request->post['quantity'])) {
             $data['quantity'] = $this->request->post['quantity'];
         } elseif (!empty($product_info)) {
