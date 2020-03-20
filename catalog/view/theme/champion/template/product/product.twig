@@ -188,7 +188,6 @@
                                                                 {{ option_value.name }}
                                                                </span>
                                                             </label>
-                                                            <a href="javascript:void(0)" class="text-success"  data-id="{{ show_size_chart }}" id="showSizeChart">Size Chart</a>
                                                         </div>
                                                     {% else %}
                                                         <div class="radio">
@@ -208,6 +207,9 @@
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
+                                                {% if option.name == 'Size' %}
+                                                    <a href="javascript:void(0)" class="text-success"  data-id="{{ show_size_chart }}" id="showSizeChart">Size Chart</a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
