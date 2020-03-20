@@ -164,6 +164,9 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 	}
 
 	public function Submitreply() {
+
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
 		$json = array();
 
 		$this->load->language('account/mpmultivendor/message');

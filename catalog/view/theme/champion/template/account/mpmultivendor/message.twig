@@ -121,7 +121,10 @@
             data: $('.reply-section input, .reply-section textarea'),
             dataType: 'json',
             beforeSend: function () {
-                $('.button-reply-submit').button('loading');
+                //$('.button-reply-submit').button('loading');
+                $('.button-reply-submit').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...`
+                );
             },
             complete: function () {
                 $('.button-reply-submit').button('reset');
