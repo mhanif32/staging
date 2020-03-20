@@ -890,8 +890,7 @@
             data: {dataId: dataId},
             success: function (json) {
 
-                var dataHtmlImage = '<a class="thumbnail" href="'+json['colorImage']+'"><img src="'+json['colorImage']+'" class="img-fluid"></a>';
-                $('.firstImage').html(dataHtmlImage);
+                $('#modalSizeContent').html(json);
             }
         });
     });
