@@ -113,6 +113,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
     public function edit()
     {
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -1220,13 +1222,24 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $product_options = array();
         }
 
-        $data['product_options'] = array();
+        //echo '<pre>';print_r($product_options);exit('aaaa');
 
+        $data['product_options'] = array();
+        $this->load->model('tool/image');
         foreach ($product_options as $product_option) {
             $product_option_value_data = array();
 
             if (isset($product_option['product_option_value'])) {
                 foreach ($product_option['product_option_value'] as $product_option_value) {
+
+                    //option color images
+                    if (!empty($product_option_value['color_image']) && isset($product_option_value['color_image']) && is_file(DIR_IMAGE . $product_option_value['color_image'])) {
+                        $product_option_value_image = $this->model_tool_image->resize($product_option_value['color_image'], 100, 100);
+                        //$product_option_value_image = $product_option_value['color_image'];
+                    } else {
+                        $product_option_value_image = $this->model_tool_image->resize('no_image.png', 100, 100);;
+                    }
+
                     $product_option_value_data[] = array(
                         'product_option_value_id' => $product_option_value['product_option_value_id'],
                         'option_value_id' => $product_option_value['option_value_id'],
@@ -1237,6 +1250,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
                         'points' => $product_option_value['points'],
                         'points_prefix' => $product_option_value['points_prefix'],
                         'weight' => $product_option_value['weight'],
+                        'color_image_thumb'   => $product_option_value_image,
+                        'color_image'   => $product_option_value['color_image'],
                         'weight_prefix' => $product_option_value['weight_prefix']
                     );
                 }

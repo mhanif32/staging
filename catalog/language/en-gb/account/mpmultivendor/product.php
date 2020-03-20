@@ -86,6 +86,7 @@ $_['entry_option_points']    = 'Points';
 $_['entry_subtract']         = 'Subtract Stock';
 $_['entry_weight_class']     = 'Weight Class';
 $_['entry_weight']           = 'Weight';
+$_['entry_color_image']      = 'Image';
 $_['entry_dimension']        = 'Dimensions (L x W x H)';
 $_['entry_length_class']     = 'Length Class';
 $_['entry_length']           = 'Length';

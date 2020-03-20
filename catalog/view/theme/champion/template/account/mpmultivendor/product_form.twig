@@ -371,13 +371,27 @@
                                                                         value="{{ show_size_chart }}"
                                                                         id="input-show-size-chart" class="form-control">
                                                                     <option value="">Select</option>
-                                                                    <option value="1" {% if show_size_chart == 1 %} selected="selected" {% endif %}>Mens Socks</option>
-                                                                    <option value="2" {% if show_size_chart == 2 %} selected="selected" {% endif %}>Mens Hats</option>
-                                                                    <option value="3" {% if show_size_chart == 3 %} selected="selected" {% endif %}>Mens T-shirts</option>
-                                                                    <option value="4" {% if show_size_chart == 4 %} selected="selected" {% endif %}>Mens Jeans Pants Trouser - Length</option>
-                                                                    <option value="5" {% if show_size_chart == 5 %} selected="selected" {% endif %}>Mens Jeans Pants Trouser - Waist</option>
-                                                                    <option value="6" {% if show_size_chart == 6 %} selected="selected" {% endif %}>Mens Shirts</option>
-                                                                    <option value="7" {% if show_size_chart == 7 %} selected="selected" {% endif %}>Mens Coat Suits Blazers</option>
+                                                                    <option value="1" {% if show_size_chart == 1 %} selected="selected" {% endif %}>
+                                                                        Mens Socks
+                                                                    </option>
+                                                                    <option value="2" {% if show_size_chart == 2 %} selected="selected" {% endif %}>
+                                                                        Mens Hats
+                                                                    </option>
+                                                                    <option value="3" {% if show_size_chart == 3 %} selected="selected" {% endif %}>
+                                                                        Mens T-shirts
+                                                                    </option>
+                                                                    <option value="4" {% if show_size_chart == 4 %} selected="selected" {% endif %}>
+                                                                        Mens Jeans Pants Trouser - Length
+                                                                    </option>
+                                                                    <option value="5" {% if show_size_chart == 5 %} selected="selected" {% endif %}>
+                                                                        Mens Jeans Pants Trouser - Waist
+                                                                    </option>
+                                                                    <option value="6" {% if show_size_chart == 6 %} selected="selected" {% endif %}>
+                                                                        Mens Shirts
+                                                                    </option>
+                                                                    <option value="7" {% if show_size_chart == 7 %} selected="selected" {% endif %}>
+                                                                        Mens Coat Suits Blazers
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -842,6 +856,7 @@
                                                                                     <td class="text-right">{{ entry_price }}</td>
                                                                                     <td class="text-right">{{ entry_option_points }}</td>
                                                                                     <td class="text-right">{{ entry_weight }}</td>
+                                                                                    <td class="text-right">{{ entry_color_image }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                                 </thead>
@@ -1063,6 +1078,20 @@
                                                                                                    placeholder="{{ entry_weight }}"
                                                                                                    class="form-control"/>
                                                                                         </td>
+
+                                                                                        <td class="text-right">
+                                                                                            <a href=""
+                                                                                               id="thumb-color-image{{ option_value_row }}"
+                                                                                               data-toggle="image"
+                                                                                               class="img-thumbnail">
+                                                                                                <img src="{{ product_option_value.color_image_thumb }}" />
+                                                                                            </a>
+                                                                                            <input type="hidden"
+                                                                                                   name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][color_image]"
+                                                                                                   value="{{ product_option_value.color_image }}"
+                                                                                                   id="input-color-image{{ option_value_row }}"/>
+                                                                                        </td>
+
                                                                                         <td class="text-right">
                                                                                             <button type="button"
                                                                                                     onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();"
@@ -1749,6 +1778,7 @@
                 html += '        <td class="text-right">{{ entry_price }}</td>';
                 html += '        <td class="text-right">{{ entry_option_points }}</td>';
                 html += '        <td class="text-right">{{ entry_weight }}</td>';
+                html += '        <td class="text-right">{{ entry_color_image }}</td>';
                 html += '        <td></td>';
                 html += '      </tr>';
                 html += '  	 </thead>';
@@ -1828,6 +1858,7 @@
         html += '  </select>';
         html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points]" value="" placeholder="{{ entry_points }}" class="form-control" /></td>';
         html += '  <td class="text-right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]" class="form-control">';
+        html += '<td class="text-right"><a href="" id="thumb-color-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder=""></a><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][color_image]" value="" id="input-color-image' + option_value_row + '"></td>';
         html += '    <option value="+">+</option>';
         html += '    <option value="-">-</option>';
         html += '  </select>';

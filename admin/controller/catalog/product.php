@@ -960,10 +960,6 @@ class ControllerCatalogProduct extends Controller {
 				foreach ($product_option['product_option_value'] as $product_option_value) {
 
                     //option color images
-                    error_reporting(E_ALL);
-                    ini_set("display_errors", 1);
-                    //echo '<pre>';print_r(DIR_IMAGE . $product_option_value['color_image']);exit('asd');
-
                     if (!empty($product_option_value['color_image']) && isset($product_option_value['color_image']) && is_file(DIR_IMAGE . $product_option_value['color_image'])) {
                         $product_option_value_image = $this->model_tool_image->resize($product_option_value['color_image'], 100, 100);
                         //$product_option_value_image = $product_option_value['color_image'];
