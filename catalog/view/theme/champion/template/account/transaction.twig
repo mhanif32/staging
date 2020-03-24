@@ -9,7 +9,10 @@
   <div class="row">
     <div id="content" class="col-sm-12 py-5">{{ content_top }}
       <div class="form-signin card px-4 box-shadow">
+        <div>
+        <a href='javascript:history.back(1);' class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover"></i></a>
       <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
+        </div>
       <p>{{ text_total }} <b>{{ total }}</b>.</p>
       <div class="table-responsive">
         <table class="table table-hover">
@@ -43,9 +46,9 @@
         <div class="col-sm-6 text-left">{{ pagination }}</div>
         <div class="col-sm-6 text-right">{{ results }}</div>
       </div>
-      <div class="buttons clearfix mb-3 ">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-      </div>
+      {#<div class="buttons clearfix mb-3 ">#}
+        {#<div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>#}
+      {#</div>#}
       {{ content_bottom }}</div>
     {{ column_right }}
     </div>
