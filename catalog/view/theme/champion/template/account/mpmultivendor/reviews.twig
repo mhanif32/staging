@@ -112,12 +112,12 @@
                                                                      data-toggle="buttons">
                                                                     <label class="action_status btn btn-default {{ review.status ? 'active' : '' }}">
                                                                         <input type="radio" value="1"
-                                                                               rel="{{ review.mpseller_review_id }}"/>
+                                                                               rel="{{ review.mpseller_review_id }}" class="d-none"/>
                                                                         {{ text_enabled }}
                                                                     </label>
                                                                     <label class="action_status btn btn-default {{ not review.status ? 'active' : '' }}">
                                                                         <input type="radio" value="0"
-                                                                               rel="{{ review.mpseller_review_id }}"/>
+                                                                               rel="{{ review.mpseller_review_id }}" class="d-none"/>
                                                                         {{ text_disabled }}
                                                                     </label>
                                                                 </div>
@@ -134,14 +134,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {% if review.description %}
-                                                <div class="panel-body">
-                                                    {{ review.description }}
-                                                </div>
-                                            {% endif %}
                                         </div>
+                                        {% if review.description %}
+                                            <div class="panel-body mt-5">
+                                                {{ review.description }}
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
-                                    <div class="row">
+                                    <div class="row my-4">
                                         <div class="col-sm-6 text-left">{{ pagination }}</div>
                                         <div class="col-sm-6 text-right">{{ results }}</div>
                                     </div>

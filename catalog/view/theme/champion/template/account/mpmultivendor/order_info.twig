@@ -15,7 +15,7 @@
         {% if custom_themename != 'journal2' %}
         <div class="row">{% endif %}{{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
 
-            <div id="content" class="col-sm-12 py-5 mv-dashboard-wrap">{{ content_top }}{{ mpseller_links }}
+            <div id="content" class="col-sm-12 my-5 py-3 mv-dashboard-wrap bg-white">{{ content_top }}{{ mpseller_links }}
                 <div class="pull-right"><a href="{{ invoice }}" target="_blank" data-toggle="tooltip"
                                            title="{{ button_invoice_print }}" class="btn btn-primary"><i
                                 class="fa fa-print"></i></a> <a href="{{ shipping }}" target="_blank"
@@ -188,7 +188,7 @@
 {#                {% endif %}#}
 
                 {{ content_bottom }}</div>
-            {% if custom_themename != 'journal2' %}{{ column_right }}{% endif %}
+            {#{% if custom_themename != 'journal2' %}{{ column_right }}{% endif %}#}
             {% if custom_themename != 'journal2' %}</div>{% endif %}
         <script type="text/javascript">
             $('#history').load('index.php?route=account/mpmultivendor/orders/history&order_id={{ order_id }}');

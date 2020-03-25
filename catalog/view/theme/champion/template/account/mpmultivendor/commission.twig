@@ -105,13 +105,13 @@
                                         {% if commissions %}
                                             {% for commission in commissions %}
                                                 <tr>
-                                                    <td class="text-right">{{ commission.order_id }} </td>
-                                                    <td class="text-right">{{ commission.name }}</td>
-                                                    <td class="text-right">{{ commission.price }}</td>
-                                                    <td class="text-right">{{ commission.quantity }}</td>
-                                                    <td class="text-right">{{ commission.total }}</td>
-                                                    <td class="text-right">{{ commission.amount }}</td>
-                                                    <td class="text-right">{{ commission.date_added }}</td>
+                                                    <td class="text-left">{{ commission.order_id }} </td>
+                                                    <td class="text-left">{{ commission.name }}</td>
+                                                    <td class="text-left">{{ commission.price }}</td>
+                                                    <td class="text-center">{{ commission.quantity }}</td>
+                                                    <td class="text-left">{{ commission.total }}</td>
+                                                    <td class="text-left">{{ commission.amount }}</td>
+                                                    <td class="text-left">{{ commission.date_added }}</td>
                                                 </tr>
                                             {% endfor %}
                                         {% else %}
