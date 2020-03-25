@@ -13,8 +13,10 @@ $_['entry_firstname']    = 'First Name';
 $_['entry_lastname']     = 'Last Name';
 $_['entry_email']        = 'Personal E-mail';
 $_['entry_telephone']    = 'Personal Mobile';
-$_['entry_date_of_birth']    = 'Date of Birth';
-$_['entry_home_address']    = 'Home Address';
+$_['entry_date_of_birth']= 'Date of Birth';
+$_['entry_home_address'] = 'Home Address';
+$_['entry_country']      = 'Select Countries';
+$_['entry_countries']    = 'Select countries where you available for delivery service';
 
 // Error
 $_['error_exists']       = 'Warning: E-Mail address is already registered!';

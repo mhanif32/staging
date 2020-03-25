@@ -732,7 +732,6 @@ class ModelAccountMpmultivendorProduct extends Model {
 		return $query->row;
 	}
 
-
 	public function getProductFilters($product_id) {
 		$product_filter_data = array();
 

@@ -187,6 +187,56 @@ class ControllerAccountAccount extends Controller {
         $this->response->setOutput($this->load->view('account/deactivate', $data));
     }
 
+    public function addDeliveryInfo()
+    {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/account', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->model('account/customer');
+        $this->load->model('localisation/country');
+        $this->load->model('localisation/zone');
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post);
+        }
+
+        $data['back'] = $this->url->link('account/account', '', true);
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['column_right'] = $this->load->controller('common/column_right');
+        $data['content_top'] = $this->load->controller('common/content_top');
+        $data['content_bottom'] = $this->load->controller('common/content_bottom');
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+
+        $customer_id = $this->customer->getId();
+        $deliveryInfos = $this->model_account_customer->getDeliveryInfo($customer_id);
+        $delivery = [];
+        foreach ($deliveryInfos as $info) {
+            $deliveryArray = array();
+            $deliveryArray['country_id'] = $info['country_id'];
+            $deliveryArray['zone_id'] = $info['zone_id'];
+            $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+            //echo '<pre>';print_r($deliveryArray['zones']);exit('aaa');
+            $deliveryArray['days'] = $info['days'];
+            $deliveryArray['rate'] = $info['rate'];
+            $delivery[] = $deliveryArray;
+
+        }
+
+        $data['deliveryInfos'] = $delivery;
+        $data['countries'] = $this->model_localisation_country->getCountries();
+        $data['action'] = $this->url->link('account/account/addDeliveryInfo', '', true);
+        //echo '<pre>';print_r($data);exit('aaa');
+        $this->response->setOutput($this->load->view('account/delivery-info-form', $data));
+    }
+
     protected function validate()
     {
         if ((utf8_strlen(trim($this->request->post['reason'])) < 1)) {

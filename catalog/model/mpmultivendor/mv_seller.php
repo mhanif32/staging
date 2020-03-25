@@ -291,7 +291,7 @@ class ModelMpmultivendorMvSeller extends Model {
 
     public function getSellerFrmProduct($product_id) {
         $query = $this->db->query("SELECT ms.mpseller_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "mpseller ms on ms.mpseller_id = p.mpseller_id WHERE p.product_id = '". (int)$product_id ."' AND ms.status = '1'");
-echo '<pre>';print_r($query->row);exit('aaa');
+
         return $query->row;
     }
 

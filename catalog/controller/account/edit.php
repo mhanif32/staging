@@ -23,11 +23,14 @@ class ControllerAccountEdit extends Controller
 
         $this->load->model('account/customer');
         $this->load->model('account/address');
+        $this->load->model('localisation/country');
+
+        $customer = $this->model_account_customer->getCustomer($this->customer->getId());
 
         //edit customer
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-            //echo '<pre>';print_r($this->request->post);exit('aaa');
+            //echo '<pre>'; print_r($this->customer->getRole());exit('aaa');
 
             //upload Image
             $json = array();
@@ -81,6 +84,13 @@ class ControllerAccountEdit extends Controller
             }
 
             $this->model_account_customer->editCustomer($this->customer->getId(), $this->request->post);
+
+            // save the countries for delivery partner
+            if(!empty($customer['role']) && $customer['role'] == 'delivery-partner') {
+                $this->model_account_customer->saveCountries($this->customer->getId(), $this->request->post);
+            }
+            //print_r($role);exit('aaa');
+
             $this->session->data['success'] = $this->language->get('text_success');
             $this->response->redirect($this->url->link('account/account', '', true));
         }
@@ -226,9 +236,26 @@ class ControllerAccountEdit extends Controller
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
         $data['deactivate_link'] = $this->url->link('account/account/deactivate', '', true);
         $data['manage_address'] = $this->url->link('account/address', '', true);
+        $data['delivery_link'] = $this->url->link('account/account/addDeliveryInfo', '', true);
 
         $address = $this->model_account_address->getDefaultAddress();
         $data['home_default_address'] = $address;
+        $data['role'] = $customer['role'];
+
+
+
+//        $data['my_countries'] = array();
+//        $my_countries = $this->model_localisation_country->getSavedCountries($this->customer->getId());
+//        foreach ($my_countries as $country_id) {
+//            $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
+//            //print_r($country_info);exit();
+//            if ($country_info) {
+//                $data['my_countries'][] = array(
+//                    'country_id' => $country_info['country_id'],
+//                    'name' => $country_info['name']
+//                );
+//            }
+//        }
 
         $file = !empty($customer_info['image']) ? $customer_info['image'] : 'no-avatar.png';
         $data['image_url'] = '/storage/upload/' . $file;
@@ -287,5 +314,42 @@ class ControllerAccountEdit extends Controller
         }
 
         return !$this->error;
+    }
+
+    public function country_autocomplete()
+    {
+        $json = array();
+
+        if (isset($this->request->get['filter_name'])) {
+            $this->load->model('localisation/country');
+
+            $filter_data = array(
+                'filter_name' => $this->request->get['filter_name'],
+                'sort' => 'name',
+                'order' => 'ASC',
+                'start' => 0,
+                'limit' => 5
+            );
+
+            $results = $this->model_localisation_country->getCountriesFilter($filter_data);
+
+            foreach ($results as $result) {
+                $json[] = array(
+                    'country_id' => $result['country_id'],
+                    'name' => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+                );
+            }
+        }
+
+        $sort_order = array();
+
+        foreach ($json as $key => $value) {
+            $sort_order[$key] = $value['name'];
+        }
+
+        array_multisort($sort_order, SORT_ASC, $json);
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 }

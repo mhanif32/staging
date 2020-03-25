@@ -21,6 +21,11 @@
                                 {% endif %}
                                 <div id="content" class="{{ class }}">{{ content_top }}
                                     <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title }}</h4>
+
+                                    {% if role == 'delivery-partner' %}
+                                        <a href="{{ delivery_link }}" class="btn btn-success">Add Delivery Info</a>
+                                    {% endif %}
+
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
                                           class="form-horizontal">
                                         <fieldset class="">
@@ -105,13 +110,6 @@
                                                                 {{ home_default_address.country }}
                                                             </p>
                                                         {% endif %}
-                                                        {#                                                        <input type="text" name="address" value="{{ home_address }}"#}
-                                                        {#                                                               placeholder="{{ entry_home_address }}"#}
-                                                        {#                                                               id="input-home-address"#}
-                                                        {#                                                               class="form-control rounded-0"/>#}
-                                                        {#                                                        {% if home_address %}#}
-                                                        {#                                                            <div class="text-danger">{{ home_address }}</div>#}
-                                                        {#                                                        {% endif %}#}
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,13 +151,6 @@
                                                         <div class="file-upload ">
                                                             <img src="catalog/view/theme/champion/image/upload-bg.jpg"
                                                                  alt="" class="img-fluid">
-                                                            {#<label class="d-flex align-items-center justify-content-center">#}
-                                                            {#<input type="file" name="avatar"#}
-                                                            {#id="input-avatar"#}
-                                                            {#class="w-50 border"/>#}
-                                                            {#<i class="fa fa-plus rounded"></i>#}
-                                                            {#</label>#}
-
                                                             <input type="file" name="avatar"
                                                                    id="input-avatar"
                                                                    class="image"/>
@@ -174,6 +165,32 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {% if role == 'delivery-partner' %}
+{#                                                <!-- If delivery partner -->#}
+{#                                                <hr>#}
+{#                                                <b>Delivery Partner Profile</b>#}
+{#                                                <div class="row">#}
+{#                                                    <div class="form-group">#}
+{#                                                        <label class="col-sm-12 control-label"#}
+{#                                                               for="input-category">{{ entry_countries }}</label>#}
+{#                                                        <div class="col-sm-12">#}
+{#                                                            <input type="text" name="country" value=""#}
+{#                                                                   placeholder="{{ entry_country }}" id="input-country"#}
+{#                                                                   class="form-control"/>#}
+{#                                                            <div id="countries" class="card card-sm"#}
+{#                                                                 style="height: 150px; overflow: auto;"> {% for data_country in my_countries %}#}
+{#                                                                    <div id="countries{{ data_country.country_id }}">#}
+{#                                                                        <i class="fa fa-minus-circle"></i> {{ data_country.name }}#}
+{#                                                                        <input type="hidden" name="countries[]"#}
+{#                                                                               value="{{ data_country.country_id }}"/>#}
+{#                                                                    </div>#}
+{#                                                                {% endfor %}</div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+                                            {% endif %}
+
                                         </fieldset>
                                         <div class="buttons clearfix">
                                             <input type="submit" value="UPDATE"
@@ -298,6 +315,35 @@
 
     $("#input-avatar").change(function () {
         readURL(this);
+    });
+
+    // Category
+    $('input[name=\'country\']').autocomplete({
+        'source': function (request, response) {
+            $.ajax({
+                url: 'index.php?route=account/edit/country_autocomplete&filter_name=' + encodeURIComponent(request),
+                dataType: 'json',
+                success: function (json) {
+                    response($.map(json, function (item) {
+                        return {
+                            label: item['name'],
+                            value: item['country_id']
+                        }
+                    }));
+                }
+            });
+        },
+        'select': function (item) {
+            $('input[name=\'country\']').val('');
+
+            $('#countries' + item['value']).remove();
+
+            $('#countries').append('<div id="countries' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="countries[]" value="' + item['value'] + '" /></div>');
+        }
+    });
+
+    $('#countries').delegate('.fa-minus-circle', 'click', function () {
+        $(this).parent().remove();
     });
     //--></script>
 {{ footer }}
