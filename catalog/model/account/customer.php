@@ -57,6 +57,17 @@ class ModelAccountCustomer extends Model {
 		return $query->row;
 	}
 
+	public function saveCountries($customer_id, $data)
+    {
+        if(!empty($data['countries'])) {
+            $this->db->query("DELETE FROM " . DB_PREFIX . "delivery_partner_countries WHERE customer_id = '" . (int)$customer_id . "'");
+            foreach ($data['countries'] as $country) {
+
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', country_id = '" . $this->db->escape($country) . "'");
+            }
+        }
+    }
+
 	public function getCustomerByEmail($email) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
@@ -169,5 +180,25 @@ class ModelAccountCustomer extends Model {
         return $query->row;
     }
 
+    public function getDeliveryInfo($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "delivery_partner_countries` WHERE customer_id = '" . (int)$customer_id . "'");
+        return $query->rows;
+    }
 
+    public function updateDeliveryInfos($customer_id, $data) {
+
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "delivery_partner_countries` WHERE customer_id = '" . (int)$customer_id . "'");
+//echo '<pre>'; print_r($data); exit('aaa');
+        foreach ($data['delivery_info'] as $info) {
+
+            $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
+            country_id = '" . $this->db->escape($info['country_id']) . "', 
+            zone_id = '" . $this->db->escape($info['zone_id']) . "',
+            days = '" . $this->db->escape($info['days']) . "',
+            rate = '" . $this->db->escape($info['rate']) . "',
+            added_date = NOW()
+            ");
+        }
+    }
 }

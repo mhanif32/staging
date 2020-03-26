@@ -2,6 +2,8 @@
 class ControllerCommonHeader extends Controller {
 	public function index() {
 
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
 	    //LogOut after 30 min of inactivity
         if (isset($this->session->data['last']) && (time() - $this->session->data['last'] > 30 * 60)) {
             $this->customer->logout();
@@ -102,7 +104,8 @@ class ControllerCommonHeader extends Controller {
         $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
 
         $this->load->model('localisation/country');
-        $data['countries'] = $this->model_localisation_country->getCountries();
+
+        $data['countries'] = $this->model_localisation_country->getDeliveryPartnerCountries();
 
         //check logged in user country
         $data['loggedInCountry'] = '';

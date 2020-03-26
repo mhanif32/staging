@@ -19,4 +19,58 @@ class ModelLocalisationCountry extends Model {
 
 		return $country_data;
 	}
+
+    public function getDeliveryPartnerCountries() {
+
+            $query = $this->db->query("SELECT ct.* FROM " . DB_PREFIX . "delivery_partner_countries dpc
+            LEFT JOIN " . DB_PREFIX . "country ct ON ct.country_id = dpc.country_id
+            WHERE status = '1' 
+            GROUP BY dpc.country_id
+            ORDER BY name ASC");
+
+            return $query->rows;
+    }
+
+	public function getSavedCountries($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_countries WHERE customer_id = '" . (int)$customer_id . "'");
+
+        return $query->rows;
+    }
+
+    public function getCountriesFilter($data = array()) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "country cd2 WHERE status = '1' ";
+
+        if (!empty($data['filter_name'])) {
+            $sql .= " AND cd2.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+        }
+
+        $sql .= " GROUP BY cd2.country_id";
+
+        $sort_data = array(
+            'name'
+        );
+
+        if (isset($data['order']) && ($data['order'] == 'DESC')) {
+            $sql .= " DESC";
+        } else {
+            $sql .= " ASC";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+        //echo  $sql;exit('aaaa');
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
 }
