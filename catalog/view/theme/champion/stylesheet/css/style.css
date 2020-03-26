@@ -374,6 +374,18 @@ header {
         background-position: left bottom; }
         header .navbar-nav-menu > li:hover > a {
           color: #fff; }
+    header .navbar-nav-menu .home-location {
+      width: 185px;
+      margin-right: 5px; }
+      header .navbar-nav-menu .home-location .home-location-icon {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px; }
+      header .navbar-nav-menu .home-location .home-location-text {
+        text-align: left;
+        font-size: 10px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        padding: 0 5px; }
     header .navbar-nav-menu > a {
       width: 100px;
       text-align: center;

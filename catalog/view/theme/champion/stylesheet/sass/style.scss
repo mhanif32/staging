@@ -220,7 +220,12 @@ header {background: white;z-index: 9999;
       a{text-decoration: none;transition: all .6s ease-out;}
       &:hover{background-position: left bottom;
        > a{color: $white;}}
-    }}
+    }
+  .home-location{width: 185px; margin-right: 5px;
+    .home-location-icon{ border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+    .home-location-text { text-align: left; font-size: 10px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding: 0 5px;}
+  }
+  }
 
     .navbar-nav-menu{
       > a{width: 100px;text-align: center;border-right: 3px solid #fff;background: linear-gradient(to right, $success 50%, $gray-100 50%);background-size: 200% 100%;background-position: right bottom;transition: all .5s ease-out;

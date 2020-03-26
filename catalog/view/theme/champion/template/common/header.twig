@@ -236,10 +236,18 @@
             <div class="collapse navbar-collapse" id="navbarsExample08">
                 <ul class="navbar-nav navbar-nav-menu">
                     {% if loggedInCountry %}
-                        <small class="font-weight-medium mb-0">
-                            <i class="fa fa-map-marker text-danger"></i> Deliver To
-                        <span class=""> {{ loggedInCountry }}</span></small>
+                        {#<small class="font-weight-medium mb-0">#}
+                            {#<i class="fa fa-map-marker text-danger"></i><span class=""> {{ loggedInCountry }}</span></small>#}
+                        <div class="home-location d-flex d-flex-row d-flex-nowrap">
+                            <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                <i class="fa fa-map-marker text-danger"></i>
+                            </div>
+                            <div class="home-location-text d-flex d-flex-column justify-content-center bg-black text-white">
+                                {{ loggedInCountry }}
+                            </div>
+                        </div>
                     {% endif %}
+
                     {{ menu }}
                 </ul>
             </div>
