@@ -99,11 +99,9 @@ class Smtp {
 				}
 			}
 
-			//fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
-            fputs($handle, 'EHLO [' . getenv('SERVER_ADDR') . ']' . $this->crlf);
+			fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
-
-            $reply = '';
+			$reply = '';
 
 			while ($line = fgets($handle, 515)) {
 				$reply .= $line;
@@ -143,11 +141,9 @@ class Smtp {
 			}
 
 			if (!empty($this->smtp_username)  && !empty($this->smtp_password)) {
-				//fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
-                fputs($handle, 'EHLO [' . getenv('SERVER_ADDR') . ']' . $this->crlf);
+				fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
-
-                $reply = '';
+				$reply = '';
 
 				while ($line = fgets($handle, 515)) {
 					$reply .= $line;
@@ -209,10 +205,9 @@ class Smtp {
 					throw new \Exception('Error: Password not accepted from server!');
 				}
 			} else {
-				//fputs($handle, 'HELO ' . getenv('SERVER_NAME') . "\r\n");
-                fputs($handle, 'EHLO [' . getenv('SERVER_ADDR') . ']' . $this->crlf);
+				fputs($handle, 'HELO ' . getenv('SERVER_NAME') . "\r\n");
 
-                $reply = '';
+				$reply = '';
 
 				while ($line = fgets($handle, 515)) {
 					$reply .= $line;
