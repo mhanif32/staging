@@ -186,10 +186,35 @@ class ModelAccountCustomer extends Model {
         return $query->rows;
     }
 
-    public function updateDeliveryInfos($customer_id, $data) {
+    public function updateDeliveryInfos($customer_id, $data)
+    {
+        //update documents
+        $dataFile = array();
+        $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/'; // set you upload path here
+        if (is_uploaded_file($this->request->files['id_proof']['tmp_name'])) {
 
+            move_uploaded_file($this->request->files['id_proof']['tmp_name'],$uploads_dir.$this->request->files['id_proof']['name']);
+            $dataFile['id_proof'] = $this->request->files['id_proof']['name'];
+        }
+        if (is_uploaded_file($this->request->files['address_proof']['tmp_name'])) {
+
+            move_uploaded_file($this->request->files['address_proof']['tmp_name'],$uploads_dir.$this->request->files['address_proof']['name']);
+            $dataFile['address_proof'] = $this->request->files['address_proof']['name'];
+        }
+
+        $sql ="SELECT * FROM ".DB_PREFIX . "delivery_partner_info WHERE `customer_id`='".$customer_id."'";
+        $result2 = $this->db->query($sql);
+        if ($result2->num_rows > 0)
+        {
+            $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_info SET 
+            `vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "'                    
+             WHERE `customer_id` = '" . (int)$customer_id . "'");
+        } else {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "', customer_id = '" . (int)$customer_id . "'");
+        }
+
+        //multilevel location
         $this->db->query("DELETE FROM `" . DB_PREFIX . "delivery_partner_countries` WHERE customer_id = '" . (int)$customer_id . "'");
-//echo '<pre>'; print_r($data); exit('aaa');
         foreach ($data['delivery_info'] as $info) {
 
             $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 

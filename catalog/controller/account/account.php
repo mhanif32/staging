@@ -201,6 +201,12 @@ class ControllerAccountAccount extends Controller {
         $this->load->model('localisation/country');
         $this->load->model('localisation/zone');
 
+        $customer_id = $this->customer->getId();
+        $customer_info = $this->model_account_customer->getCustomer($customer_id);
+        if($customer_info['role'] != 'delivery-partner') {
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 
             $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post);
@@ -215,7 +221,7 @@ class ControllerAccountAccount extends Controller {
         $data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 
-        $customer_id = $this->customer->getId();
+
         $deliveryInfos = $this->model_account_customer->getDeliveryInfo($customer_id);
         $delivery = [];
         foreach ($deliveryInfos as $info) {
