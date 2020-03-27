@@ -240,7 +240,7 @@ class ControllerAccountAccount extends Controller {
         $data['countries'] = $this->model_localisation_country->getCountries();
 
         $partnerInfos = $this->model_account_customer->getDocumentsInfo($customer_id);
-        $data['vehicle_type'] = $partnerInfos['vehicle_type'];
+        $data['vehicle_type'] = !empty($partnerInfos['vehicle_type']) ? $partnerInfos['vehicle_type'] : '';
 
         $data['action'] = $this->url->link('account/account/addDeliveryInfo', '', true);
         //echo '<pre>';print_r($data);exit('aaa');
