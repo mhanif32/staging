@@ -135,7 +135,6 @@
                                                         <td class="text-left">Country</td>
                                                         <td class="text-left">Zone</td>
                                                         <td class="text-left">Time <small>(in days)</small></td>
-                                                        <td class="text-left">Rate/Charges</td>
                                                         <td></td>
                                                     </tr>
                                                     </thead>
@@ -181,15 +180,8 @@
                                                             </td>
 
                                                             <td class="text-left">
-                                                                <input name="delivery_info[{{ delivery_row }}][rate]"
-                                                                       class="form-control"
-                                                                       value="{{ deliveryInfo.rate }}"
-                                                                       size="1">
-                                                            </td>
-
-                                                            <td class="text-left">
                                                                 <button type="button"
-                                                                        onclick="$('#special-row{{ special_row }}').remove();"
+                                                                        onclick="$('#delivery-row{{ delivery_row }}').remove();"
                                                                         data-toggle="tooltip"
                                                                         title="{{ button_remove }}"
                                                                         class="btn btn-danger"><i
