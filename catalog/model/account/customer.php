@@ -186,6 +186,12 @@ class ModelAccountCustomer extends Model {
         return $query->rows;
     }
 
+    public function getDocumentsInfo($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "delivery_partner_info` WHERE customer_id = '" . (int)$customer_id . "'");
+        return $query->row;
+    }
+
     public function updateDeliveryInfos($customer_id, $data)
     {
         //update documents

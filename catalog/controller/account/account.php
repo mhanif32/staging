@@ -191,6 +191,9 @@ class ControllerAccountAccount extends Controller {
     {
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
+
+        $this->load->language('account/delivery_partner');
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -221,7 +224,6 @@ class ControllerAccountAccount extends Controller {
         $data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
 
-
         $deliveryInfos = $this->model_account_customer->getDeliveryInfo($customer_id);
         $delivery = [];
         foreach ($deliveryInfos as $info) {
@@ -233,11 +235,13 @@ class ControllerAccountAccount extends Controller {
             $deliveryArray['days'] = $info['days'];
             $deliveryArray['rate'] = $info['rate'];
             $delivery[] = $deliveryArray;
-
         }
-
         $data['deliveryInfos'] = $delivery;
         $data['countries'] = $this->model_localisation_country->getCountries();
+
+        $partnerInfos = $this->model_account_customer->getDocumentsInfo($customer_id);
+        $data['vehicle_type'] = $partnerInfos['vehicle_type'];
+
         $data['action'] = $this->url->link('account/account/addDeliveryInfo', '', true);
         //echo '<pre>';print_r($data);exit('aaa');
         $this->response->setOutput($this->load->view('account/delivery-info-form', $data));

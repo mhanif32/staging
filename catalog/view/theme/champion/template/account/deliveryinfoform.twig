@@ -82,6 +82,48 @@
                                                            target="_blank">Click here to view Address Proof</a>
                                                     {% endif %}
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Travel License</label>
+                                                    <input type="file" class="form-control" name="travel_license"
+                                                           id="input-travel_license">
+                                                    {% if error_filename_travel_license or error_filetype_travel_license or error_filesize_travel_license %}
+                                                        <div class="text-danger">
+                                                            {% if error_filename_travel_license %}
+                                                                {{ error_filename_travel_license }}
+                                                            {% elseif error_filetype_travel_license %}
+                                                                {{ error_filetype_travel_license }}
+                                                            {% elseif error_filesize_travel_license %}
+                                                                {{ error_filesize_travel_license }}
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if link_travel_license %}
+                                                        <a href="{{ link_travel_license }}" class="btn btn-primary"
+                                                           target="_blank">Click here to view Travel License</a>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Vehicle Insurance</label>
+                                                    <input type="file" class="form-control" name="vehicle_insurance"
+                                                           id="input-vehicle_insurance">
+                                                    {% if error_filename_vehicle_insurance or error_filetype_vehicle_insurance or error_filesize_vehicle_insurance %}
+                                                        <div class="text-danger">
+                                                            {% if error_filename_vehicle_insurance %}
+                                                                {{ error_filename_vehicle_insurance }}
+                                                            {% elseif error_filetype_vehicle_insurance %}
+                                                                {{ error_filetype_vehicle_insurance }}
+                                                            {% elseif error_filesize_vehicle_insurance %}
+                                                                {{ error_filesize_vehicle_insurance }}
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if link_vehicle_insurance %}
+                                                        <a href="{{ link_vehicle_insurance }}" class="btn btn-primary"
+                                                           target="_blank">Click here to view Vehicle Insurance</a>
+                                                    {% endif %}
+                                                </div>
                                             </div>
 
                                             <div class="tab-pane" id="tab-location">
