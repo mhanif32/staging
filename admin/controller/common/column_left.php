@@ -324,6 +324,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+
+            //if ($this->user->hasPermission('access', 'customer/delivery_partner')) {
+                $customer[] = array(
+                    'name'	   => $this->language->get('text_delivery_partner'),
+                    'href'     => $this->url->link('customer/delivery_partner', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            //}
 						
 			if ($this->user->hasPermission('access', 'customer/custom_field')) {		
 				$customer[] = array(
