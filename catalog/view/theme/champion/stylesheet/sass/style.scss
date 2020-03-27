@@ -223,7 +223,7 @@ header {background: white;z-index: 9999;
     }
   .home-location{width: 185px; margin-right: 5px;
     .home-location-icon{ border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
-    .home-location-text { text-align: left; font-size: 10px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding: 0 5px;}
+    .home-location-text { text-align: left; font-size: 10px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding: 0 5px; min-width: 155px;}
   }
   }
 

@@ -9,14 +9,16 @@
                         <div id="delivery-info" class="container">
                             <div class="row">
                                 <div id="content" class="col-sm-12">
+                                    <div class="justify-content-between row mx-0">
                                     <h4 class="f-20 font-weight-bold text-uppercase mb-3">Add Delivery Locations</h4>
                                     <div class="my-auto">
                                         <button type="submit" form="form-delivery" data-toggle="tooltip"
                                                 title="Save" class="btn btn-primary"><i
                                                     class="fa fa-save"></i> Save
                                         </button>
-                                        <a href="{{ cancel }}" data-toggle="tooltip" title="Cancel"
+                                        <a href='javascript:history.back(1);' data-toggle="tooltip" title="Cancel"
                                            class="btn btn-default"><i class="fa fa-reply"></i> Cancel</a>
+                                    </div>
                                     </div>
 
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
