@@ -20,12 +20,16 @@
                                     {% set class = 'col-sm-12' %}
                                 {% endif %}
                                 <div id="content" class="{{ class }}">{{ content_top }}
+                                    <div class="justify-content-between row mx-0">
+<div>
                                     <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title }}</h4>
-
+</div>
+                                        <div>
                                     {% if role == 'delivery-partner' %}
-                                        <a href="{{ delivery_link }}" class="btn btn-success">Update Delivery Partner Info</a>
+                                        <a href="{{ delivery_link }}" class="btn btn-success ">Update Delivery Partner Info</a>
                                     {% endif %}
-
+                                        </div>
+                                    </div>
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
                                           class="form-horizontal">
                                         <fieldset class="">
@@ -88,15 +92,16 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-12 form-group required">
+                                                <div class="col-md-6 form-group required">
                                                     <label class="control-label"
                                                            for="input-date">{{ entry_home_address }}<span
                                                                 class="text-danger">*</span>
-                                                        <div class="d-inline-block float-right"><small><a
-                                                                        href="{{ manage_address }}"
-                                                                        class="text-success">Manage Address</a></small>
-                                                        </div>
+
                                                     </label>
+                                                    <div class="d-inline-block float-right"><small><a
+                                                                    href="{{ manage_address }}"
+                                                                    class="text-success">Manage Address</a></small>
+                                                    </div>
                                                     <div class="">
                                                         {% if error_address %}
                                                             <div class="text-danger">{{ error_address }}</div>
