@@ -220,30 +220,36 @@ class ModelAccountCustomer extends Model
         return $query->row;
     }
 
-    public function updateDeliveryInfos($customer_id, $data)
+    public function updateDeliveryInfos($customer_id, $data, $dataFile)
     {
-        //update documents
-        $dataFile = array();
-        $uploads_dir = 'image/mpseller/customer-' . $this->customer->getId() . '/'; // set you upload path here
-        if (is_uploaded_file($this->request->files['id_proof']['tmp_name'])) {
-
-            move_uploaded_file($this->request->files['id_proof']['tmp_name'], $uploads_dir . $this->request->files['id_proof']['name']);
-            $dataFile['id_proof'] = $this->request->files['id_proof']['name'];
-        }
-        if (is_uploaded_file($this->request->files['address_proof']['tmp_name'])) {
-
-            move_uploaded_file($this->request->files['address_proof']['tmp_name'], $uploads_dir . $this->request->files['address_proof']['name']);
-            $dataFile['address_proof'] = $this->request->files['address_proof']['name'];
-        }
-
         $sql = "SELECT * FROM " . DB_PREFIX . "delivery_partner_info WHERE `customer_id`='" . $customer_id . "'";
         $result2 = $this->db->query($sql);
+
+        $fileSql = '';
+        if(!empty($dataFile['id_proof'])) {
+            $fileSql.=" id_proof = '".$this->db->escape($dataFile['id_proof'])."', ";
+        }
+        if(!empty($dataFile['address_proof'])) {
+            $fileSql.=" address_proof = '".$this->db->escape($dataFile['address_proof'])."', ";
+        }
+        if(!empty($dataFile['travel_license'])) {
+            $fileSql.=" travel_license = '".$this->db->escape($dataFile['travel_license'])."', ";
+        }
+        if(!empty($dataFile['vehicle_insurance'])) {
+            $fileSql.=" vehicle_insurance = '".$this->db->escape($dataFile['vehicle_insurance'])."', ";
+        }
+
         if ($result2->num_rows > 0) {
-            $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_info SET 
-            `vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "'                    
-             WHERE `customer_id` = '" . (int)$customer_id . "'");
+            $sql = "UPDATE " . DB_PREFIX . "delivery_partner_info SET ";
+            $sql.= $fileSql;
+            $sql.="`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
+            $this->db->query($sql);
         } else {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "', customer_id = '" . (int)$customer_id . "'");
+
+            $sql = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "',";
+            $sql.= $fileSql;
+            $sql.="customer_id = '" . (int)$customer_id . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
+            $this->db->query($sql);
         }
 
         //multilevel location
@@ -255,7 +261,6 @@ class ModelAccountCustomer extends Model
             country_id = '" . $this->db->escape($info['country_id']) . "', 
             zone_id = '" . $this->db->escape($info['zone_id']) . "',
             days = '" . $this->db->escape($info['days']) . "',
-            rate = '" . $this->db->escape($info['rate']) . "',
             added_date = NOW()
             ");
             }

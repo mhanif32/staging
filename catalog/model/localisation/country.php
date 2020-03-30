@@ -34,7 +34,12 @@ class ModelLocalisationCountry extends Model {
 	public function getSavedCountries($customer_id)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_countries WHERE customer_id = '" . (int)$customer_id . "'");
+        return $query->rows;
+    }
 
+    public function getProductLocation($product_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_location WHERE product_id = '" . (int)$product_id . "'");
         return $query->rows;
     }
 

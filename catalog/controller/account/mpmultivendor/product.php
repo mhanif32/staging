@@ -36,6 +36,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
     public function add()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -53,6 +55,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
         $this->load->model('account/mpmultivendor/seller');
 
         $this->load->model('account/mpmultivendor/product');
+        $this->load->model('localisation/country');
 
         $seller_info = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($this->customer->isLogged());
 
@@ -113,8 +116,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
     public function edit()
     {
-//        error_reporting(E_ALL);
-//        ini_set("display_errors", 1);
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -677,6 +680,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
         }
 
         $this->document->addScript('catalog/view/javascript/mpseller/seller.js');
+        $this->load->model('localisation/currency');
 
         $data['heading_title'] = $this->language->get('heading_title');
 
@@ -993,6 +997,14 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $data['price'] = $product_info['price'];
         } else {
             $data['price'] = '';
+        }
+
+        if (isset($this->request->post['currency'])) {
+            $data['currency'] = $this->request->post['currency'];
+        } elseif (!empty($product_info)) {
+            $data['currency'] = $product_info['currency'];
+        } else {
+            $data['currency'] = '';
         }
 
         $data['tax_classes'] = $this->model_account_mpmultivendor_product->getTaxClasses();
@@ -1407,13 +1419,13 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $data['product_reward'] = array();
         }
 
-        if (isset($this->request->post['product_seo_url'])) {
-            $data['product_seo_url'] = $this->request->post['product_seo_url'];
-        } elseif (isset($this->request->get['product_id'])) {
-            $data['product_seo_url'] = $this->model_account_mpmultivendor_product->getProductSeoUrls($this->request->get['product_id']);
-        } else {
-            $data['product_seo_url'] = array();
-        }
+//        if (isset($this->request->post['product_seo_url'])) {
+//            $data['product_seo_url'] = $this->request->post['product_seo_url'];
+//        } elseif (isset($this->request->get['product_id'])) {
+//            $data['product_seo_url'] = $this->model_account_mpmultivendor_product->getProductSeoUrls($this->request->get['product_id']);
+//        } else {
+//            $data['product_seo_url'] = array();
+//        }
 
 
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -1423,6 +1435,21 @@ class ControllerAccountMpmultivendorProduct extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
+        $data['currencies'] = $this->model_localisation_currency->getCurrencies();
+        //$data['countries'] = $this->model_localisation_country->getCountries();
+        $data['my_countries'] = array();
+        $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
+        //echo '<pre>';print_r($my_countries);exit('aaa');
+        foreach ($my_countries as $country_id) {
+            $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
+            if ($country_info) {
+                $data['my_countries'][] = array(
+                    'country_id' => $country_info['country_id'],
+                    'name' => $country_info['name']
+                );
+            }
+        }
+//echo '<pre>';print_r($data);exit('aaaa');
         /* Theme Work Starts */
         if ($this->config->get('config_theme')) {
             $custom_themename = $this->config->get('config_theme');
@@ -1480,27 +1507,27 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $this->error['model'] = $this->language->get('error_model');
         }
 
-        if ($this->request->post['product_seo_url']) {
-            foreach ($this->request->post['product_seo_url'] as $store_id => $language) {
-                foreach ($language as $language_id => $keyword) {
-                    if (!empty($keyword)) {
-                        if (count(array_keys($language, $keyword)) > 1) {
-                            $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_unique');
-                        }
-
-                        $seo_urls = $this->model_account_mpmultivendor_product->getSeoUrlsByKeyword($keyword);
-
-                        foreach ($seo_urls as $seo_url) {
-                            if (($seo_url['store_id'] == $store_id) && (!isset($this->request->get['product_id']) || (($seo_url['query'] != 'product_id=' . $this->request->get['product_id'])))) {
-                                $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        if ($this->request->post['product_seo_url']) {
+//            foreach ($this->request->post['product_seo_url'] as $store_id => $language) {
+//                foreach ($language as $language_id => $keyword) {
+//                    if (!empty($keyword)) {
+//                        if (count(array_keys($language, $keyword)) > 1) {
+//                            $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_unique');
+//                        }
+//
+//                        $seo_urls = $this->model_account_mpmultivendor_product->getSeoUrlsByKeyword($keyword);
+//
+//                        foreach ($seo_urls as $seo_url) {
+//                            if (($seo_url['store_id'] == $store_id) && (!isset($this->request->get['product_id']) || (($seo_url['query'] != 'product_id=' . $this->request->get['product_id'])))) {
+//                                $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');
+//
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         if ($this->error && !isset($this->error['warning'])) {
             $this->error['warning'] = $this->language->get('error_warning');

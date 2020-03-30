@@ -141,6 +141,25 @@
                                                                            class="form-control"/>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="form-group">
+                                                                <label class="col-sm-12 control-label"
+                                                                       for="input-category">Select Countries where products available</label>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="country" value=""
+                                                                           id="input-country"
+                                                                           class="form-control"/>
+                                                                    <div id="countries" class="card card-sm"
+                                                                         style="height: 150px; overflow: auto;"> {% for data_country in my_countries %}
+                                                                            <div id="countries{{ data_country.country_id }}">
+                                                                                <i class="fa fa-minus-circle"></i> {{ data_country.name }}
+                                                                                <input type="hidden" name="countries[]"
+                                                                                       value="{{ data_country.country_id }}"/>
+                                                                            </div>
+                                                                        {% endfor %}</div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     {% endfor %}</div>
                                             </div>
@@ -218,16 +237,16 @@
                                                                    class="form-control"/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="col-sm-12 control-label"
-                                                               for="input-location">{{ entry_location }}</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" name="location" value="{{ location }}"
-                                                                   placeholder="{{ entry_location }}"
-                                                                   id="input-location"
-                                                                   class="form-control"/>
-                                                        </div>
-                                                    </div>
+                                                    {#                                                    <div class="col-md-4 form-group">#}
+                                                    {#                                                        <label class="col-sm-12 control-label"#}
+                                                    {#                                                               for="input-location">{{ entry_location }}</label>#}
+                                                    {#                                                        <div class="col-sm-12">#}
+                                                    {#                                                            <input type="text" name="location" value="{{ location }}"#}
+                                                    {#                                                                   placeholder="{{ entry_location }}"#}
+                                                    {#                                                                   id="input-location"#}
+                                                    {#                                                                   class="form-control"/>#}
+                                                    {#                                                        </div>#}
+                                                    {#                                                    </div>#}
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label" for="input-price">
 									<span data-toggle="tooltip"
@@ -236,6 +255,24 @@
                                                             <input type="text" name="price" value="{{ price }}"
                                                                    placeholder="{{ entry_price }}" id="input-price"
                                                                    class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-group">
+                                                        <label class="col-sm-12 control-label" for="input-currency">
+                                                            <span data-toggle="tooltip"> Currency</span></label>
+                                                        <div class="col-sm-12">
+                                                            <select name="currency" id="input-currency"
+                                                                    class="form-control">
+                                                                <option value="">Select</option>
+                                                                {% for currencyData in currencies %}
+                                                                    {% if currencyData.code == currency %}
+                                                                        <option value="{{ currencyData.code }}"
+                                                                                selected="selected">{{ currencyData.title }}</option>
+                                                                    {% else %}
+                                                                        <option value="{{ currencyData.code }}">{{ currencyData.title }}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 form-group">
@@ -1084,7 +1121,7 @@
                                                                                                id="thumb-color-image{{ option_value_row }}"
                                                                                                data-toggle="image"
                                                                                                class="img-thumbnail">
-                                                                                                <img src="{{ product_option_value.color_image_thumb }}" />
+                                                                                                <img src="{{ product_option_value.color_image_thumb }}"/>
                                                                                             </a>
                                                                                             <input type="hidden"
                                                                                                    name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][color_image]"
@@ -1965,5 +2002,35 @@
 <script type="text/javascript"><!--
     $('#language a:first').tab('show');
     $('#option a:first').tab('show');
+    //--></script>
+
+<script type="text/javascript"><!--
+    $('input[name=\'country\']').autocomplete({
+        'source': function (request, response) {
+            $.ajax({
+                url: 'index.php?route=account/edit/country_autocomplete&filter_name=' + encodeURIComponent(request),
+                dataType: 'json',
+                success: function (json) {
+                    response($.map(json, function (item) {
+                        return {
+                            label: item['name'],
+                            value: item['country_id']
+                        }
+                    }));
+                }
+            });
+        },
+        'select': function (item) {
+            $('input[name=\'country\']').val('');
+
+            $('#countries' + item['value']).remove();
+
+            $('#countries').append('<div id="countries' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="countries[]" value="' + item['value'] + '" /></div>');
+        }
+    });
+
+    $('#countries').delegate('.fa-minus-circle', 'click', function () {
+        $(this).parent().remove();
+    });
     //--></script>
 {{ footer }}

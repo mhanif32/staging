@@ -1,66 +1,4 @@
 {{ header }}
-
-<!--<div id="account-account" class="container">
-    <ul class="breadcrumb">
-        {% for breadcrumb in breadcrumbs %}
-            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-        {% endfor %}
-    </ul>
-    {% if success %}
-        <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
-    {% endif %}
-    <div class="row">{{ column_left }}
-        {% if column_left and column_right %}
-            {% set class = 'col-sm-6' %}
-        {% elseif column_left or column_right %}
-            {% set class = 'col-sm-9' %}
-        {% else %}
-            {% set class = 'col-sm-12' %}
-        {% endif %}
-        <div id="content" class="{{ class }}">{{ content_top }}
-            <h2>{{ text_my_account }}</h2>
-            <ul class="list-unstyled">
-                <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-                <li><a href="{{ password }}">{{ text_password }}</a></li>
-                <li><a href="{{ address }}">{{ text_address }}</a></li>
-                <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-            </ul>
-            {% if credit_cards %}
-                <h2>{{ text_credit_card }}</h2>
-                <ul class="list-unstyled">
-                    {% for credit_card in credit_cards %}
-                        <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            <h2>{{ text_my_orders }}</h2>
-            <ul class="list-unstyled">
-                <li><a href="{{ order }}">{{ text_order }}</a></li>
-                <li><a href="{{ download }}">{{ text_download }}</a></li>
-                {% if reward %}
-                    <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-                {% endif %}
-                <li><a href="{{ return }}">{{ text_return }}</a></li>
-                <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
-            </ul>
-            <h2>{{ text_my_affiliate }}</h2>
-            <ul class="list-unstyled">
-                {% if not tracking %}
-                    <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
-                {% else %}
-                    <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
-                    <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
-                {% endif %}
-            </ul>
-            <h2>{{ text_my_newsletter }}</h2>
-            <ul class="list-unstyled">
-                <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-            </ul>
-            {{ content_bottom }}</div>
-        {{ column_right }}</div>
-</div>-->
-
 <section id="account-account" class="register update-profile main-dashboard" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
@@ -75,8 +13,6 @@
                             {% endif %}
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
-
-
                                     <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
                                     <hr>
                                     <div class="row">
@@ -158,6 +94,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% endif %}
+                                        {% if role == 'delivery-partner' %}
+                                            <div class="col-md-6 py-3 pl-md-5 border-left">
+                                                <div class="media">
+                                                    <div class="media-left mr-3">
+                                                        <a href="{{ delivery_partner_link }}">
+                                                            <i class="fas fa-truck f-60 text-success"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading mb-0">
+                                                            <a href="{{ delivery_partner_link }}"
+                                                               class="f-15 font-weight-bold">{{ text_delivery_partner }}</a>
+                                                        </h4>
+                                                        <p>
+                                                            <a href="{{ delivery_partner_link }}" class="f-13 text-muted">Edit your delivery locations & documents</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         {% endif %}
                                     </div>
 

@@ -72,6 +72,7 @@ class ControllerAccountAccount extends Controller {
         }
 
 		$data['wishlist'] = $this->url->link('account/wishlist');
+		$data['delivery_partner_link'] = $this->url->link('account/account/addDeliveryInfo');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
 		
@@ -212,7 +213,34 @@ class ControllerAccountAccount extends Controller {
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 
-            $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post);
+            //update documents
+            $dataFile = array();
+            $uploads_dir = 'image/deliverypartner/customer-' . $this->customer->getId() . '/'; // set you upload path here
+            if (!file_exists($uploads_dir)) {
+                mkdir($uploads_dir, 0777, true);
+            }
+            if (is_uploaded_file($this->request->files['id_proof']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['id_proof']['tmp_name'], $uploads_dir . $this->request->files['id_proof']['name']);
+                $dataFile['id_proof'] = $this->request->files['id_proof']['name'];
+            }
+            if (is_uploaded_file($this->request->files['address_proof']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['address_proof']['tmp_name'], $uploads_dir . $this->request->files['address_proof']['name']);
+                $dataFile['address_proof'] = $this->request->files['address_proof']['name'];
+            }
+            if (is_uploaded_file($this->request->files['travel_license']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['travel_license']['tmp_name'], $uploads_dir . $this->request->files['travel_license']['name']);
+                $dataFile['travel_license'] = $this->request->files['travel_license']['name'];
+            }
+            if (is_uploaded_file($this->request->files['vehicle_insurance']['tmp_name'])) {
+
+                move_uploaded_file($this->request->files['vehicle_insurance']['tmp_name'], $uploads_dir . $this->request->files['vehicle_insurance']['name']);
+                $dataFile['vehicle_insurance'] = $this->request->files['vehicle_insurance']['name'];
+            }
+
+            $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post, $dataFile);
         }
 
         $data['back'] = $this->url->link('account/account', '', true);
@@ -231,9 +259,7 @@ class ControllerAccountAccount extends Controller {
             $deliveryArray['country_id'] = $info['country_id'];
             $deliveryArray['zone_id'] = $info['zone_id'];
             $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
-            //echo '<pre>';print_r($deliveryArray['zones']);exit('aaa');
             $deliveryArray['days'] = $info['days'];
-            $deliveryArray['rate'] = $info['rate'];
             $delivery[] = $deliveryArray;
         }
         $data['deliveryInfos'] = $delivery;
@@ -243,7 +269,40 @@ class ControllerAccountAccount extends Controller {
         $data['vehicle_type'] = !empty($partnerInfos['vehicle_type']) ? $partnerInfos['vehicle_type'] : '';
 
         $data['action'] = $this->url->link('account/account/addDeliveryInfo', '', true);
-        //echo '<pre>';print_r($data);exit('aaa');
+
+        $uploads_dir = 'image/deliverypartner/customer-'.$this->customer->getId().'/';
+        if(isset($this->request->post['id_proof'])) {
+            $data['link_id_proof'] = $this->request->post['id_proof'];
+        } else if($partnerInfos['id_proof']) {
+            $data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['id_proof'];
+        } else {
+            $data['link_id_proof'] = '';
+        }
+
+        if(isset($this->request->post['address_proof'])) {
+            $data['link_address_proof'] = $this->request->post['address_proof'];
+        } else if($partnerInfos['address_proof']) {
+            $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$partnerInfos['address_proof'];
+        } else {
+            $data['link_address_proof'] = '';
+        }
+
+        if(isset($this->request->post['travel_license'])) {
+            $data['link_travel_license'] = $this->request->post['travel_license'];
+        } else if($partnerInfos['travel_license']) {
+            $data['link_travel_license'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['travel_license'];
+        } else {
+            $data['link_travel_license'] = '';
+        }
+
+        if(isset($this->request->post['vehicle_insurance'])) {
+            $data['link_vehicle_insurance'] = $this->request->post['vehicle_insurance'];
+        } else if($partnerInfos['vehicle_insurance']) {
+            $data['link_vehicle_insurance'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['vehicle_insurance'];
+        } else {
+            $data['link_vehicle_insurance'] = '';
+        }
+
         $this->response->setOutput($this->load->view('account/delivery-info-form', $data));
     }
 

@@ -14,6 +14,7 @@ $_['text_address']        = 'Manage Address';
 $_['text_credit_card']    = 'Manage Stored Credit Cards';
 $_['text_wishlist']       = 'Your Wish list';
 $_['text_order']          = 'Order History';
+$_['text_delivery_partner']= 'Update Delivery Partner Info';
 $_['text_download']       = 'Downloads';
 $_['text_reward']         = 'Your Reward Points';
 $_['text_return']         = 'Return Requests';
