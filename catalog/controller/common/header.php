@@ -2,8 +2,6 @@
 class ControllerCommonHeader extends Controller {
 	public function index() {
 
-//        error_reporting(E_ALL);
-//        ini_set("display_errors", 1);
 	    //LogOut after 30 min of inactivity
         if (isset($this->session->data['last']) && (time() - $this->session->data['last'] > 30 * 60)) {
             $this->customer->logout();
@@ -111,6 +109,7 @@ class ControllerCommonHeader extends Controller {
         $data['loggedInCountry'] = '';
         if(!empty($this->session->data['loggedInCountry']) && !$this->customer->isLogged()) {
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
+            $data['session_country_id'] = $this->session->data['loggedInCountry'];
         } else {
             // Default Shipping Address
             $defaultAddress = $this->model_account_address->getDefaultAddress();

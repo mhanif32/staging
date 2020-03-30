@@ -17,6 +17,10 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['voucher']);
 			unset($this->session->data['vouchers']);
 
+			//session country : locations
+            unset($this->session->data['loggedInCountry']);
+            unset($this->session->data['session_country_id']);
+
 			$this->response->redirect($this->url->link('account/logout', '', true));
 		}
 
