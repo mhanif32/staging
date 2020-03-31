@@ -147,6 +147,28 @@ class ControllerAccountAccount extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
+    public function zone() {
+        $json = array();
+
+        $this->load->model('localisation/zone');
+        $this->load->model('localisation/area');
+
+        $zone_info = $this->model_localisation_zone->getZone($this->request->get['zone_id']);
+
+        if ($zone_info) {
+
+            $json = array(
+                'zone_id'           => $zone_info['zone_id'],
+                'name'              => $zone_info['name'],
+                'area'              => $this->model_localisation_area->getAreasByZoneId($this->request->get['zone_id']),
+                'status'            => $zone_info['status']
+            );
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
 	public function deactivate() {
 
         if (!$this->customer->isLogged()) {
@@ -204,6 +226,7 @@ class ControllerAccountAccount extends Controller {
         $this->load->model('account/customer');
         $this->load->model('localisation/country');
         $this->load->model('localisation/zone');
+        $this->load->model('localisation/area');
 
         $customer_id = $this->customer->getId();
         $customer_info = $this->model_account_customer->getCustomer($customer_id);
@@ -239,7 +262,7 @@ class ControllerAccountAccount extends Controller {
                 move_uploaded_file($this->request->files['vehicle_insurance']['tmp_name'], $uploads_dir . $this->request->files['vehicle_insurance']['name']);
                 $dataFile['vehicle_insurance'] = $this->request->files['vehicle_insurance']['name'];
             }
-
+//echo '<pre>';print_r($this->request->post);exit('aaa');
             $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post, $dataFile);
         }
 
@@ -259,6 +282,8 @@ class ControllerAccountAccount extends Controller {
             $deliveryArray['country_id'] = $info['country_id'];
             $deliveryArray['zone_id'] = $info['zone_id'];
             $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+            $deliveryArray['area_id'] = $info['area_id'];
+            $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
             $deliveryArray['days'] = $info['days'];
             $delivery[] = $deliveryArray;
         }

@@ -257,9 +257,12 @@ class ModelAccountCustomer extends Model
         if (!empty($data['delivery_info'])) {
             foreach ($data['delivery_info'] as $info) {
 
+                $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
+
                 $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
             country_id = '" . $this->db->escape($info['country_id']) . "', 
             zone_id = '" . $this->db->escape($info['zone_id']) . "',
+            area_id = '" . $area . "',
             days = '" . $this->db->escape($info['days']) . "',
             added_date = NOW()
             ");
