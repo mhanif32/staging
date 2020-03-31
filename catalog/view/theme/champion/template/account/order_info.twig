@@ -200,6 +200,7 @@
                             <input name="title" value="" class="form-control" type="text">
                         </div>
                     </div>-->
+
                     <div class="form-group required">
                         <div class="col-sm-12">
                             <label class="control-label">{{ entry_description }}</label>
@@ -248,6 +249,10 @@
                                 {% endfor %}
                             </select>
                             <div class="text-danger">{{ error_message }}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubject" class="control-label">Subject</label>
+                            <input type="email" id="inputSubject" class="form-control" placeholder="" required="" autofocus="">
                         </div>
 
                         <div class="form-group required">

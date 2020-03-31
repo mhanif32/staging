@@ -75,8 +75,9 @@ class ControllerAccountAccount extends Controller {
 		$data['delivery_partner_link'] = $this->url->link('account/account/addDeliveryInfo');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
-		
-		if ($this->config->get('total_reward_status')) {
+        $data['edit_product_href'] = $this->url->link('account/mpmultivendor/product', '', true);
+
+        if ($this->config->get('total_reward_status')) {
 			$data['reward'] = $this->url->link('account/reward', '', true);
 		} else {
 			$data['reward'] = '';

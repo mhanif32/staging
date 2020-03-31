@@ -26,6 +26,10 @@ class ControllerExtensionModuleSlideshow extends Controller {
 
 		$data['module'] = $module++;
         $data['search_by_nigeria'] = $this->url->link('product/search', '&location=Nigeria');
-		return $this->load->view('extension/module/slideshow', $data);
+        $data['sale_href'] = $this->url->link('product/special', '', true);
+        $data['information_href'] = $this->url->link('information/information&information_id=7', '', true);
+
+        return $this->load->view('extension/module/slideshow', $data);
+
 	}
 }
