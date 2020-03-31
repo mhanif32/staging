@@ -431,8 +431,7 @@ class ControllerLocalisationCountry extends Controller {
 				'status'            => $country_info['status']
 			);
 		}
-
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
-	}	
+	}
 }
