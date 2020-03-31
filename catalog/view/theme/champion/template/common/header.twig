@@ -115,6 +115,71 @@
     </section>
 {% endif %}
 
+
+
+
+
+
+
+<section class="top-headerbar bg-success pb-1 collapse" id="top-header-bar">
+    <div class="container address_container">
+        <form id="form-address">
+            <nav class="nav d-flex justify-content-between">
+
+                    <div class="">
+                        <h3 class="f-13 text-white font-weight-medium">
+                            Choose your country & delivery location
+                        </h3>
+                    </div>
+                    <div class="select">
+                        <select name="country_id" id="input-country" class="form-control rounded-0">
+                            <option value="">{{ text_select }}</option>
+                            {% for country in countries %}
+                                {% if country.country_id == country_id %}
+                                    <option value="{{ country.country_id }}"
+                                            selected="selected">{{ country.name }}</option>
+                                {% else %}
+                                    <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if error_country %}
+                            <div class="text-danger">{{ error_country }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="select">
+                        <select name="zone_id" id="input-zone" class="form-control rounded-0">
+                        </select>
+                        {% if error_zone %}
+                            <div class="text-danger">{{ error_zone }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="text-left position-relative btn-border-div">
+                        <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"
+                           id="confirm-address" role="button"
+                           style="height: 34px;">CONFIRM</a>
+                    </div>
+
+            </nav>
+        </form>
+        <p class="text-white text-center m-0"
+           style="font-size: 12px; display:  {% if loggedInCountry %} none {% else %} block {% endif %}">Note : The
+            product has been listed as per the
+            chosen location.</p>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
 <header>
     <div class="container">
         <div class="row">
@@ -234,11 +299,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsExample08">
-                <ul class="navbar-nav navbar-nav-menu">
+                <ul class="navbar-nav navbar-nav-menu ">
                     {% if loggedInCountry %}
                         {#<small class="font-weight-medium mb-0">#}
                             {#<i class="fa fa-map-marker text-danger"></i><span class=""> {{ loggedInCountry }}</span></small>#}
-                        <div class="home-location d-flex d-flex-row d-flex-nowrap">
+                        <div class="home-location d-flex d-flex-row d-flex-nowrap" data-toggle="collapse" data-target="#top-header-bar">
                             <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
                                 <i class="fa fa-map-marker text-danger"></i>
                             </div>
