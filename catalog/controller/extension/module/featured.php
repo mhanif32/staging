@@ -66,6 +66,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 		}
 
         $data['count_retailers'] = $this->model_catalog_product->getRetailersCount();
+        $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
 
 		//men count and path
         $categoryMen = $this->model_catalog_product->getCountMen();

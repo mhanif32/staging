@@ -376,7 +376,8 @@ header {
           color: #fff; }
     header .navbar-nav-menu .home-location {
       width: 185px;
-      margin-right: 5px; }
+      margin-right: 5px;
+      cursor: pointer; }
       header .navbar-nav-menu .home-location .home-location-icon {
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px; }
