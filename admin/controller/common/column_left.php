@@ -527,6 +527,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+
+            if ($this->user->hasPermission('access', 'localisation/area')) {
+                $localisation[] = array(
+                    'name'	   => $this->language->get('text_area'),
+                    'href'     => $this->url->link('localisation/area', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
 			
 			if ($this->user->hasPermission('access', 'localisation/geo_zone')) {
 				$localisation[] = array(

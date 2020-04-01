@@ -113,8 +113,9 @@ class ControllerCommonHeader extends Controller {
         } else {
             // Default Shipping Address
             $defaultAddress = $this->model_account_address->getDefaultAddress();
-            if(!empty($defaultAddress)) {
-                $data['loggedInCountry'] = $defaultAddress['zone'].', '.$defaultAddress['country'];
+            //print_r($defaultAddress);exit('aaaa');
+            if(!empty($defaultAddress['country'])) {
+                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['zone'].', '.$defaultAddress['country'] : '';
             }
         }
 

@@ -2,8 +2,8 @@
 <section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
-            {{ profile_column_left }}
-            <div class="col-12 col-md-9 col-lg-9">
+{#            {{ profile_column_left }}#}
+            <div class="col-12 col-md-12 col-lg-12">
                 <div class="py-5">
                     <div class="form-signin card py-4 px-2">
                         <div id="delivery-info" class="container">
@@ -24,9 +24,9 @@
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
                                           id="form-delivery" class="form-horizontal">
                                         <ul id="tabs" class="nav nav-tabs htabs font-weight-bold pb-2 mb-2">
-                                            <li><a href="#tab-documents" data-toggle="tab" class="active">Documents</a>
+                                            <li><a href="#tab-documents" data-toggle="tab" class="active">General</a>
                                             </li>
-                                            <li><a href="#tab-location" data-toggle="tab">Locations</a></li>
+                                            <li><a href="#tab-location" data-toggle="tab">Your Delivery Areas</a></li>
                                         </ul>
 
                                         <div class="tab-content">
@@ -134,7 +134,9 @@
                                                     <tr>
                                                         <td class="text-left">Country</td>
                                                         <td class="text-left">Zone</td>
-                                                        <td class="text-left">Time <small>(in days)</small></td>
+                                                        <td class="text-left">Area</td>
+                                                        <td class="text-left">Time <small>(in hrs)</small></td>
+                                                        <td class="text-left">Per Hour Rate</td>
                                                         <td></td>
                                                     </tr>
                                                     </thead>
@@ -160,7 +162,8 @@
 
                                                             <td class="text-left">
                                                                 <select name="delivery_info[{{ delivery_row }}][zone_id]"
-                                                                        class="form-control zoneSelect">
+                                                                        class="form-control zoneSelect"
+                                                                        data-id="{{ delivery_row }}">
                                                                     {% for zone in deliveryInfo.zones %}
                                                                         {% if deliveryInfo.zone_id == zone.zone_id %}
                                                                             <option value="{{ zone.zone_id }}"
@@ -173,10 +176,28 @@
                                                             </td>
 
                                                             <td class="text-left">
+                                                                <select name="delivery_info[{{ delivery_row }}][area_id]"
+                                                                        class="form-control areaSelect"
+                                                                        data-id="{{ delivery_row }}">
+                                                                    {% for area in deliveryInfo.areas %}
+                                                                        {% if deliveryInfo.area_id == area.area_id %}
+                                                                            <option value="{{ area.area_id }}"
+                                                                                    selected="selected">{{ area.name }}</option>
+                                                                        {% else %}
+                                                                            <option value="{{ area.area_id }}">{{ area.name }}</option>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </td>
+
+                                                            <td class="text-left">
                                                                 <input name="delivery_info[{{ delivery_row }}][days]"
                                                                        class="form-control"
                                                                        value="{{ deliveryInfo.days }}"
                                                                        size="1">
+                                                            </td>
+
+                                                            <td class="text-left">
                                                             </td>
 
                                                             <td class="text-left">
@@ -194,7 +215,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                     <tr>
-                                                        <td colspan="4"></td>
+                                                        <td colspan="5"></td>
                                                         <td class="text-left">
                                                             <button type="button" onclick="addDeliveryInfo();"
                                                                     data-toggle="tooltip"
@@ -233,7 +254,12 @@
         html += '  <td class="text-left"><select name="delivery_info[' + delivery_row + '][zone_id]" class="form-control zoneSelect" data-id="' + delivery_row + '">';
         html += '  </select></td>';
 
+        html += '  <td class="text-left"><select name="delivery_info[' + delivery_row + '][area_id]" class="form-control areaSelect" data-id="' + delivery_row + '">';
+        html += '  </select></td>';
+
         html += '  <td class="text-left"><input type="text" name="delivery_info[' + delivery_row + '][days]" value="" class="form-control" size="1"/></td>';
+
+        html += '  <td class="text-left"></td>';
 
         html += '  <td class="text-left"><button type="button" onclick="$(\'#delivery-row' + delivery_row + '\').remove();" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
         html += '</tr>';
@@ -289,6 +315,47 @@
     });
 
     $('select[name=\'country_id\']').trigger('change');
+    //--></script>
+
+<script type="text/javascript"><!--
+    $(document).on('change', 'select.zoneSelect', function () {
+        var zoneId = $(this).children("option:selected").val();
+        var dataZoneId = $(this).attr('data-id');
+        $.ajax({
+            url: 'index.php?route=account/account/zone&zone_id=' + zoneId,
+            dataType: 'json',
+            beforeSend: function () {
+                $('select[name=\'zone_id\']').prop('disabled', true);
+            },
+            complete: function () {
+                $('select[name=\'zone_id\']').prop('disabled', false);
+            },
+            success: function (json) {
+                console.log(json);
+                areaHtml = '<option value="">{{ text_select }}</option>';
+
+                if (json['area'] && json['area'] != '') {
+                    for (i = 0; i < json['area'].length; i++) {
+                        areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
+
+                        if (json['area'][i]['area_id'] == '{{ area_id }}') {
+                            areaHtml += ' selected="selected"';
+                        }
+
+                        areaHtml += '>' + json['area'][i]['name'] + '</option>';
+                    }
+                } else {
+                    areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+                    $('select[name=\'delivery_info[' + dataZoneId + '][area_id]\']').html(areaHtml);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('select[name=\'zone_id\']').trigger('change');
     //--></script>
 
 <script type="text/javascript"><!--
