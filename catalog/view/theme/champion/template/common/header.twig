@@ -365,3 +365,24 @@
 
     $('select[name=\'country_id\']').trigger('change');
     //--></script>
+
+<script>
+    $('#confirm-address').on('click', function () {
+
+        var data = {
+            country: $('#input-country').val(),
+            state: $('#input-zone').val()
+        };
+
+        $.ajax({
+            url: 'index.php?route=common/home/deliveryaddress',
+            type: 'POST',
+            data: data,
+            success: function (data) {
+                //console.log(data);
+                location.reload(true);
+            }
+        });
+        return false;
+    });
+</script>
