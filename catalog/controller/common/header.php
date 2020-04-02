@@ -137,11 +137,14 @@ class ControllerCommonHeader extends Controller
             if (!empty($defaultAddress['country'])) {
                 $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['zone'] . ', ' . $defaultAddress['country'] : '';
             } else {
-                if (!empty($this->session->data['loggedInCountry'])) {
+                if (empty($this->session->data['loggedInCountry'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];
                     $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
                     $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
                     $this->session->data['loggedInCountry'] = $dataArray->geoplugin_countryName;
+                } else {
+                    $data['loggedInCountry'] = isset($this->session->data['loggedInCountry']) ? $this->session->data['loggedInCountry'] : '';
+
                 }
             }
         }
