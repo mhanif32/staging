@@ -213,9 +213,6 @@ class ControllerAccountAccount extends Controller {
 
     public function addDeliveryInfo()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         $this->load->language('account/delivery_partner');
 
         if (!$this->customer->isLogged()) {
@@ -286,6 +283,7 @@ class ControllerAccountAccount extends Controller {
             $deliveryArray['area_id'] = $info['area_id'];
             $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
             $deliveryArray['days'] = $info['days'];
+            $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
             $delivery[] = $deliveryArray;
         }
         $data['deliveryInfos'] = $delivery;
