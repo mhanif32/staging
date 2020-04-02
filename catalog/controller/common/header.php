@@ -123,7 +123,7 @@ class ControllerCommonHeader extends Controller
         }*/
         if (!$this->customer->isLogged()) { //before login
 
-            if (!empty($this->session->data['loggedInCountry'])) {
+            if (empty($this->session->data['loggedInCountry'])) {
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
                 $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
