@@ -33,6 +33,7 @@ $_['text_localisation']         = 'Localisation';
 $_['text_location']             = 'Store Location';
 $_['text_contact']              = 'Mail';
 $_['text_marketing']            = 'Marketing';
+$_['text_partner_shipping']     = 'Delivery Partner Shipping';
 $_['text_marketplace']          = 'Marketplace';
 $_['text_maintenance']          = 'Maintenance';
 $_['text_menu']                 = 'Menu Manager';
