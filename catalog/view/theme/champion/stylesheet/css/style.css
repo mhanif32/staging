@@ -387,7 +387,48 @@ header {
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
         padding: 0 5px;
-        min-width: 155px; }
+        min-width: 155px;
+        /* :before */
+        /* :after */
+        /* Span on :hover and :active */
+        /*
+            We show :before pseudo-element on :hover
+            and :after pseudo-element on :active
+        */
+        /*
+          We hide :before pseudo-element on :active
+        */ }
+        header .navbar-nav-menu .home-location .home-location-text .button span {
+          -webkit-transition: 0.6s;
+          transition: 0.6s;
+          -webkit-transition-delay: 0.2s;
+                  transition-delay: 0.2s; }
+        header .navbar-nav-menu .home-location .home-location-text .button:before, header .navbar-nav-menu .home-location .home-location-text .button:after {
+          content: '';
+          position: absolute;
+          top: 0.67em;
+          left: 35px;
+          text-align: center;
+          opacity: 0;
+          -webkit-transition: .4s,opacity .6s;
+          transition: .4s,opacity .6s; }
+        header .navbar-nav-menu .home-location .home-location-text .button:before {
+          content: attr(data-hover); }
+        header .navbar-nav-menu .home-location .home-location-text .button:after {
+          content: attr(data-active); }
+        header .navbar-nav-menu .home-location .home-location-text .button:hover span, header .navbar-nav-menu .home-location .home-location-text .button:active span {
+          opacity: 0;
+          -webkit-transform: scale(0.3);
+                  transform: scale(0.3); }
+        header .navbar-nav-menu .home-location .home-location-text .button:hover:before, header .navbar-nav-menu .home-location .home-location-text .button:active:after {
+          opacity: 1;
+          -webkit-transform: translate(0, 0);
+                  transform: translate(0, 0);
+          -webkit-transition-delay: .4s;
+                  transition-delay: .4s; }
+        header .navbar-nav-menu .home-location .home-location-text .button:active:before {
+          -webkit-transition-delay: 0s;
+                  transition-delay: 0s; }
     header .navbar-nav-menu > a {
       width: 100px;
       text-align: center;
