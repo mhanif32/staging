@@ -223,7 +223,36 @@ header {background: white;z-index: 9999;
     }
   .home-location{width: 185px; margin-right: 5px; cursor: pointer;
     .home-location-icon{ border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
-    .home-location-text { text-align: left; font-size: 10px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding: 0 5px; min-width: 155px;}
+    .home-location-text { text-align: left; font-size: 10px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; padding: 0 5px; min-width: 155px;
+
+      .button span { transition: 0.6s; transition-delay: 0.2s; }
+      .button:before, .button:after { content: ''; position: absolute; top: 0.67em; left: 35px; text-align: center; opacity: 0; transition: .4s,opacity .6s; }
+
+      /* :before */
+
+      .button:before { content: attr(data-hover); }
+
+      /* :after */
+
+      .button:after { content: attr(data-active); }
+
+      /* Span on :hover and :active */
+
+      .button:hover span, .button:active span { opacity: 0; transform: scale(0.3); }
+
+      /*
+          We show :before pseudo-element on :hover
+          and :after pseudo-element on :active
+      */
+
+      .button:hover:before, .button:active:after { opacity: 1; transform: translate(0,0); transition-delay: .4s; }
+
+      /*
+        We hide :before pseudo-element on :active
+      */
+
+      .button:active:before {  transition-delay: 0s; }
+    }
   }
   }
 
