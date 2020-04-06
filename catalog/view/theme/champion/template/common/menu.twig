@@ -1,51 +1,6 @@
 {% if categories %}
-    {#<div class="container">#}
-    {#<nav id="menu" class="navbar">#}
-    {#<div class="navbar-header"><span id="category" class="visible-xs">{{ text_category }}</span>#}
-    {#<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>#}
-    {#</div>#}
-    {#<div class="collapse navbar-collapse navbar-ex1-collapse">#}
-    {#<ul class="nav navbar-nav">#}
-    {#{% for category in categories %}#}
-    {#{% if category.children %}#}
-    {#<li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>#}
-    {#<div class="dropdown-menu">#}
-    {#<div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}#}
-    {#<ul class="list-unstyled">#}
-    {#{% for child in children %}#}
-    {#<li><a href="{{ child.href }}">{{ child.name }}</a></li>#}
-    {#{% endfor %}#}
-    {#</ul>#}
-    {#{% endfor %}</div>#}
-    {#<a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a> </div>#}
-    {#</li>#}
-    {#{% else %}#}
-    {#<li><a href="{{ category.href }}">{{ category.name }}</a></li>#}
-    {#{% endif %}#}
-    {#{% endfor %}#}
-    {#</ul>#}
-    {#</div>#}
-    {#</nav>#}
-
     {% for category in categories %}
         {% if category.children %}
-            {#<li class="dropdown nav-item py-2" style="line-height: 12px;">#}
-                {#<a href="{{ category.href }}" class="f-12"#}
-                                                                             {#data-toggle="dropdown">{{ category.name }}</a>#}
-                {#<div class="dropdown-menu px-2">#}
-                    {#<div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}#}
-                            {#<ul class="list-unstyled">#}
-                                {#{% for child in children %}#}
-                                    {#<li class="py-2" style="line-height: 12px;"><a href="{{ child.href }}"#}
-                                                                                   {#class="f-12">{{ child.name }}</a>#}
-                                    {#</li>#}
-                                {#{% endfor %}#}
-                            {#</ul>#}
-                        {#{% endfor %}#}
-                    {#</div>#}
-                    {#<a href="{{ category.href }}" class="see-all f-12">{{ text_all }} {{ category.name }}</a></div>#}
-            {#</li>#}
-
             <li class="dropdown nav-mega">
                 <a href="#" class="f-12" data-toggle="dropdown" style="line-height: 12px;">
                     {{ category.name }}
@@ -53,62 +8,43 @@
 
                 <ul class="dropdown-menu mega-menu">
                     <li>
-            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                        {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 
-                            <ul class="row media-list span4">
-                                {% for moreCategory in moreCategories %}
-                                    {% if moreCategory.subCategories %}
-                                        <li class="col-md-3 media">
-                                            <div class="media-body">
-
-                                                <h3 class="media-heading f-15"><a href="{{ moreCategory.href }}"
-                                                                                  class="f-15 font-weight-bold">{{ moreCategory.name }}</a>
-                                                </h3>
-                                                <hr>
-                                                <div class="list-unstyled row">
-
-                                                    {% for subCategory in moreCategory.subCategories %}
-
-                                                        <div class="col-md-6"><a href="{{ subCategory.href }}"
-                                                                                 class="f-12 text-success">{{ subCategory.name }}</a>
-                                                        </div>
-                                                    {% endfor %}
-
+                            {% if moreCategories %}
+                                <ul class="row media-list span4">
+                                    {% for child in category.children %}
+                                        {% if child.name %}
+                                            <li class="col-md-3 media">
+                                                <div class="media-body">
+                                                    <h3 class="media-heading f-15"><a href="{{ child.href }}"
+                                                                                      class="f-15 font-weight-bold">{{ child.name }}</a>
+                                                    </h3>
+                                                    <hr>
+                                                    <div class="list-unstyled row">
+                                                        {% for subCategory in child.subCategories %}
+                                                            <div class="col-md-6"><a href="{{ subCategory.href }}" class="f-12 text-success">{{ subCategory.name }}</a>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
                                                 </div>
-
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-
-            {% endfor %}
-
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
                         <div class="text-right"><a href="{{ more_category }}" class="f-12 on-hover">View all Categories</a>
                         </div>
-
                     </li>
                 </ul>
             </li>
-
-
-
-
-
-
-
-
-
-
-
-
         {% else %}
             <a class="f-12" href="{{ category.href }}">
                 <li class="nav-item py-2" style="line-height: 12px;">{{ category.name }}
                 </li>
-            </a>            {% endif %}
+            </a>
+        {% endif %}
     {% endfor %}
-
 
     {#<a class="f-12" href="{{ more_category }}"><li class="nav-item py-2 bg-primary text-white" style="line-height: 12px;">MORE</li></a>#}
 
@@ -119,49 +55,36 @@
         <ul class="dropdown-menu mega-menu">
             <li>
                 <h3 class="text-center f-20 font-weight-bold text-uppercase mt-3">MORE CATEGORIES</h3>
-
-
                 {% if moreCategories %}
-
                     <ul class="row media-list span4">
                         {% for moreCategory in moreCategories %}
                             {% if moreCategory.subCategories %}
                                 <li class="col-md-3 media">
                                     <div class="media-body">
-
                                         <h3 class="media-heading f-15"><a href="{{ moreCategory.href }}"
                                                                           class="f-15 font-weight-bold">{{ moreCategory.name }}</a>
                                         </h3>
                                         <hr>
                                         <div class="list-unstyled row">
-
                                             {% for subCategory in moreCategory.subCategories %}
-
-                                                <div class="col-md-6"><a href="{{ subCategory.href }}"
-                                                                         class="f-12 text-success">{{ subCategory.name }}</a>
+                                                <div class="col-md-6">
+                                                    <a href="{{ subCategory.href }}" class="f-12 text-success">{{ subCategory.name }}</a>
                                                 </div>
                                             {% endfor %}
-
                                         </div>
-
                                     </div>
                                 </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
-
                 {% endif %}
 
                 <div class="text-right"><a href="{{ more_category }}" class="f-12 on-hover">View all Categories</a>
                 </div>
-
             </li>
         </ul>
     </li>
     <a class="f-12 text-white" href="{{ sale_offer_link }}">
-        <li class="nav-item py-2" style="line-height: 12px; background-color: red;">SALE
-        </li>
+        <li class="nav-item py-2" style="line-height: 12px; background-color: red;">SALE</li>
     </a>
 {% endif %}
-
-
