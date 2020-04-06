@@ -369,14 +369,22 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);	
 			}
-			
+
 			if ($this->user->hasPermission('access', 'marketing/contact')) {
 				$marketing[] = array(
 					'name'	   => $this->language->get('text_contact'),
 					'href'     => $this->url->link('marketing/contact', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
+					'children' => array()
 				);
 			}
+
+            if ($this->user->hasPermission('access', 'extension/shipping/partner_shipping')) {
+                $marketing[] = array(
+                    'name'	   => $this->language->get('text_partner_shipping'),
+                    'href'     => $this->url->link('extension/shipping/partner_shipping', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
 			
 			if ($marketing) {
 				$data['menus'][] = array(

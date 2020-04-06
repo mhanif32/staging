@@ -36,8 +36,6 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
     public function add()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -1437,19 +1435,20 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $data['currencies'] = $this->model_localisation_currency->getCurrencies();
         //$data['countries'] = $this->model_localisation_country->getCountries();
-        $data['my_countries'] = array();
-        $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
-        //echo '<pre>';print_r($my_countries);exit('aaa');
-        foreach ($my_countries as $country_id) {
-            $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
-            if ($country_info) {
-                $data['my_countries'][] = array(
-                    'country_id' => $country_info['country_id'],
-                    'name' => $country_info['name']
-                );
+        if(!empty($this->request->get['product_id'])) {
+            $data['my_countries'] = array();
+            $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
+            foreach ($my_countries as $country_id) {
+                $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
+                if ($country_info) {
+                    $data['my_countries'][] = array(
+                        'country_id' => $country_info['country_id'],
+                        'name' => $country_info['name']
+                    );
+                }
             }
         }
-//echo '<pre>';print_r($data);exit('aaaa');
+
         /* Theme Work Starts */
         if ($this->config->get('config_theme')) {
             $custom_themename = $this->config->get('config_theme');

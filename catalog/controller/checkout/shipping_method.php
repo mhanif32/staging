@@ -1,6 +1,9 @@
 <?php
 class ControllerCheckoutShippingMethod extends Controller {
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 		$this->load->language('checkout/checkout');
 
 		if (isset($this->session->data['shipping_address'])) {
@@ -62,6 +65,8 @@ class ControllerCheckoutShippingMethod extends Controller {
 		} else {
 			$data['comment'] = '';
 		}
+
+		//echo '<pre>';print_r($data['shipping_methods']);exit('aaaa');
 		
 		$this->response->setOutput($this->load->view('checkout/shipping_method', $data));
 	}

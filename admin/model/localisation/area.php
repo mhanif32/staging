@@ -90,4 +90,18 @@ class ModelLocalisationArea extends Model {
 
 		return $query->row['total'];
 	}
+
+    public function getAreasByZoneId($zone_id) {
+        $area_data = $this->cache->get('area.' . (int)$zone_id);
+
+        if (!$area_data) {
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area WHERE zone_id = '" . (int)$zone_id . "' AND status = '1' ORDER BY name");
+
+            $area_data = $query->rows;
+
+            $this->cache->set('area.' . (int)$zone_id, $area_data);
+        }
+
+        return $area_data;
+    }
 }

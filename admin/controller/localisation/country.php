@@ -411,6 +411,7 @@ class ControllerLocalisationCountry extends Controller {
 	}
 	
 	public function country() {
+
 		$json = array();
 
 		$this->load->model('localisation/country');

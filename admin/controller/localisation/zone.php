@@ -390,4 +390,26 @@ class ControllerLocalisationZone extends Controller {
 
 		return !$this->error;
 	}
+
+    public function zone() {
+        $json = array();
+
+        $this->load->model('localisation/zone');
+        $this->load->model('localisation/area');
+
+        $zone_info = $this->model_localisation_zone->getZone($this->request->get['zone_id']);
+
+        if ($zone_info) {
+
+            $json = array(
+                'zone_id'           => $zone_info['zone_id'],
+                'name'              => $zone_info['name'],
+                'area'              => $this->model_localisation_area->getAreasByZoneId($this->request->get['zone_id']),
+                'status'            => $zone_info['status']
+            );
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
 }

@@ -31,6 +31,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab-delivery-partner" data-toggle="tab">Delivery Partner Info</a>
                         </li>
+                        <li><a href="#tab-delivery_areas" data-toggle="tab">Delivery Areas</a></li>
                         <li><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
                         <li><a href="#tab-affiliate" data-toggle="tab">{{ tab_affiliate }}</a></li>
                         {% if customer_id %}
@@ -140,6 +141,109 @@
                                     {% endif %}
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="tab-pane" id="tab-delivery_areas">
+                            <table id="delivery" class="table table-striped table-hover list">
+                                <thead>
+                                <tr>
+                                    <td class="text-left">Country</td>
+                                    <td class="text-left">Zone</td>
+                                    <td class="text-left">Area</td>
+                                    <td class="text-left">Time <small>(in hrs)</small></td>
+                                    <td class="text-left">Per Hour Rate</td>
+                                    <td></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% set delivery_row = 0 %}
+                                {% for deliveryInfo in deliveryInfos %}
+                                    <tr id="delivery-row{{ delivery_row }}">
+                                        <td class="text-left">
+                                            <select name="delivery_info[{{ delivery_row }}][country_id]"
+                                                    class="form-control countrySelect"
+                                                    data-id="{{ delivery_row }}">
+                                                <option value="">Select</option>
+                                                {% for country in countries %}
+                                                    {% if deliveryInfo.country_id == country.country_id %}
+                                                        <option value="{{ country.country_id }}"
+                                                                selected="selected">{{ country.name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+
+                                        <td class="text-left">
+                                            <select name="delivery_info[{{ delivery_row }}][zone_id]"
+                                                    class="form-control zoneSelect"
+                                                    data-id="{{ delivery_row }}">
+                                                {% for zone in deliveryInfo.zones %}
+                                                    {% if deliveryInfo.zone_id == zone.zone_id %}
+                                                        <option value="{{ zone.zone_id }}"
+                                                                selected="selected">{{ zone.name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ zone.zone_id }}">{{ zone.name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+
+                                        <td class="text-left">
+                                            <select name="delivery_info[{{ delivery_row }}][area_id]"
+                                                    class="form-control areaSelect"
+                                                    data-id="{{ delivery_row }}">
+                                                {% for area in deliveryInfo.areas %}
+                                                    {% if deliveryInfo.area_id == area.area_id %}
+                                                        <option value="{{ area.area_id }}"
+                                                                selected="selected">{{ area.name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ area.area_id }}">{{ area.name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+
+                                        <td class="text-left">
+                                            <input name="delivery_info[{{ delivery_row }}][days]"
+                                                   class="form-control"
+                                                   value="{{ deliveryInfo.days }}"
+                                                   size="1">
+                                        </td>
+
+                                        <td class="text-left">
+                                            <input name="delivery_info[{{ delivery_row }}][rate_per_hour]"
+                                                   class="form-control"
+                                                   value="{{ deliveryInfo.rate_per_hour }}"
+                                                   size="1">
+                                        </td>
+
+                                        <td class="text-left">
+                                            <button type="button"
+                                                    onclick="$('#delivery-row{{ delivery_row }}').remove();"
+                                                    data-toggle="tooltip"
+                                                    title="{{ button_remove }}"
+                                                    class="btn btn-danger"><i
+                                                        class="fa fa-minus-circle"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% set delivery_row = delivery_row + 1 %}
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td class="text-left">
+                                        <button type="button" onclick="addDeliveryInfo();"
+                                                data-toggle="tooltip"
+                                                class="btn btn-primary"><i
+                                                    class="fa fa-plus-circle"></i></button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
 
                         <div class="tab-pane" id="tab-general">
@@ -1896,6 +2000,126 @@
         });
 
         $('input[name=\'payment\']:checked').trigger('change');
+        //--></script>
+
+    <script type="text/javascript"><!--
+        var delivery_row = {{ delivery_row }};
+
+        function addDeliveryInfo() {
+            html = '<tr id="delivery-row' + delivery_row + '">';
+
+            html += ' <td class="text-left"><select name="delivery_info[' + delivery_row + '][country_id]" class="form-control countrySelect" data-id="' + delivery_row + '">';
+            html += ' <option value="">Select</option>';
+            {% for country in countries %}
+            html += '      <option value="{{ country.country_id }}">{{ country.name|escape('js') }}</option>';
+            {% endfor %}
+            html += '  </select></td>';
+
+            html += '  <td class="text-left"><select name="delivery_info[' + delivery_row + '][zone_id]" class="form-control zoneSelect" data-id="' + delivery_row + '">';
+            html += '  </select></td>';
+
+            html += '  <td class="text-left"><select name="delivery_info[' + delivery_row + '][area_id]" class="form-control areaSelect" data-id="' + delivery_row + '">';
+            html += '  </select></td>';
+
+            html += '  <td class="text-left"><input type="text" name="delivery_info[' + delivery_row + '][days]" value="" class="form-control" size="1"/></td>';
+
+            html += '  <td class="text-left"></td>';
+
+            html += '  <td class="text-left"><button type="button" onclick="$(\'#delivery-row' + delivery_row + '\').remove();" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+            html += '</tr>';
+
+            $('#delivery tbody').append(html);
+            delivery_row++;
+        }
+
+        //--></script>
+
+    <script type="text/javascript"><!--
+        $(document).on('change', 'select.countrySelect', function () {
+            var countryId = $(this).children("option:selected").val();
+            var dataId = $(this).attr('data-id');
+            $.ajax({
+                url: 'index.php?route=localisation/country/country&user_token={{ user_token }}&country_id=' + this.value,
+                dataType: 'json',
+                beforeSend: function () {
+                    $('select[name=\'country_id\']').prop('disabled', true);
+                },
+                complete: function () {
+                    $('select[name=\'country_id\']').prop('disabled', false);
+                },
+                success: function (json) {
+                    if (json['postcode_required'] == '1') {
+                        $('input[name=\'postcode\']').parent().parent().addClass('required');
+                    } else {
+                        $('input[name=\'postcode\']').parent().parent().removeClass('required');
+                    }
+
+                    html = '<option value="">{{ text_select }}</option>';
+
+                    if (json['zone'] && json['zone'] != '') {
+                        for (i = 0; i < json['zone'].length; i++) {
+                            html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+                            if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+                                html += ' selected="selected"';
+                            }
+
+                            html += '>' + json['zone'][i]['name'] + '</option>';
+                        }
+                    } else {
+                        html += '<option value="0" selected="selected">{{ text_none }}</option>';
+                    }
+
+                    $('select[name=\'delivery_info[' + dataId + '][zone_id]\']').html(html);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        });
+
+        $('select[name=\'country_id\']').trigger('change');
+        //--></script>
+
+    <script type="text/javascript"><!--
+        $(document).on('change', 'select.zoneSelect', function () {
+            var zoneId = $(this).children("option:selected").val();
+            var dataZoneId = $(this).attr('data-id');
+            $.ajax({
+                url: 'index.php?route=localisation/zone/zone&user_token={{ user_token }}&zone_id=' + this.value,
+                dataType: 'json',
+                beforeSend: function () {
+                    $('select[name=\'zone_id\']').prop('disabled', true);
+                },
+                complete: function () {
+                    $('select[name=\'zone_id\']').prop('disabled', false);
+                },
+                success: function (json) {
+                    console.log(json);
+                    areaHtml = '<option value="">{{ text_select }}</option>';
+
+                    if (json['area'] && json['area'] != '') {
+                        for (i = 0; i < json['area'].length; i++) {
+                            areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
+
+                            if (json['area'][i]['area_id'] == '{{ area_id }}') {
+                                areaHtml += ' selected="selected"';
+                            }
+
+                            areaHtml += '>' + json['area'][i]['name'] + '</option>';
+                        }
+                    } else {
+                        areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
+                    }
+                    $('select[name=\'delivery_info[' + dataZoneId + '][area_id]\']').html(areaHtml);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        });
+
+        $('select[name=\'zone_id\']').trigger('change');
         //--></script>
 </div>
 {{ footer }} 

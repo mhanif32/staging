@@ -972,6 +972,14 @@ class ControllerMpmultivendorMpseller extends Controller {
 			$data['approved'] = true;
 		}
 
+        if (isset($this->request->post['approved_for_delivery'])) {
+            $data['approved_for_delivery'] = $this->request->post['approved_for_delivery'];
+        } elseif (!empty($mpseller_info)) {
+            $data['approved_for_delivery'] = $mpseller_info['approved_for_delivery'];
+        } else {
+            $data['approved_for_delivery'] = true;
+        }
+
 		$this->load->model('tool/image');
 
 		if (isset($this->request->post['logo'])) {

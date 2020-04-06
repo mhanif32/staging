@@ -108,7 +108,22 @@
                       </select>
                     </div>
                   </div>
-                </div>                            
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-approved_for_delivery">Approve for Delivery of Product?</label>
+                    <div class="col-sm-10">
+                      <select name="approved_for_delivery" id="input-approved_for_delivery" class="form-control">
+                        <?php if ($approved_for_delivery) { ?>
+                        <option value="1" selected="selected">Enable</option>
+                        <option value="0">Disable</option>
+                        <?php } else { ?>
+                        <option value="1">Enable</option>
+                        <option value="0" selected="selected">Disable</option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="tab-pane" id="tab-seo">
                   <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?php echo $text_keyword; ?></div>            
                   <div class="table-responsive">

@@ -617,6 +617,12 @@ class ModelCustomerCustomer extends Model
         return $query->row;
     }
 
+    public function getDeliveryInfo($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "delivery_partner_countries` WHERE customer_id = '" . (int)$customer_id . "'");
+        return $query->rows;
+    }
+
     public function updateDeliveryInfos($customer_id, $data)
     {
         $sql = "UPDATE " . DB_PREFIX . "delivery_partner_info SET ";
@@ -626,5 +632,23 @@ class ModelCustomerCustomer extends Model
         $sql .= "`currency_id` = '" . $this->db->escape($data['currency_id']) . "'";
         $sql .= " WHERE `customer_id` = '" . (int)$customer_id . "'";
         $this->db->query($sql);
+
+        //multilevel location
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "delivery_partner_countries` WHERE customer_id = '" . (int)$customer_id . "'");
+        if (!empty($data['delivery_info'])) {
+            foreach ($data['delivery_info'] as $info) {
+
+                $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
+
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
+            country_id = '" . $this->db->escape($info['country_id']) . "', 
+            zone_id = '" . $this->db->escape($info['zone_id']) . "',
+            area_id = '" . $area . "',
+            days = '" . $this->db->escape($info['days']) . "',
+            rate_per_hour = '" . $this->db->escape($info['rate_per_hour']) . "',
+            added_date = NOW()
+            ");
+            }
+        }
     }
 }
