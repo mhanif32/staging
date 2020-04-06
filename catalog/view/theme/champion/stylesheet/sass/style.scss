@@ -240,7 +240,9 @@ header {background: white;z-index: 9999;
   }
 
   //mega menu
-  .nav-mega.dropdown {position: static; background: $primary;}
+  .nav-mega.dropdown {position: static;
+    &.bg-color{
+    background: $primary;}}
   .nav-mega {
     width: 100%;
     .dropdown-menu.mega-menu {box-sizing: border-box;border-top-left-radius: 0;border-top-right-radius: 0;min-width: auto;width: 100%;margin-top: 0;padding: 0;border-color: #ccc;

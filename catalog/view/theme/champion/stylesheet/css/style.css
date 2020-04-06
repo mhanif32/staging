@@ -413,8 +413,9 @@ header {
     -webkit-box-shadow: none !important;
             box-shadow: none !important; }
   header .nav-mega.dropdown {
-    position: static;
-    background: #262525; }
+    position: static; }
+    header .nav-mega.dropdown.bg-color {
+      background: #262525; }
   header .nav-mega {
     width: 100%; }
     header .nav-mega .dropdown-menu.mega-menu {
