@@ -44,6 +44,7 @@ $_['tab_special']		= 'Special';
 $_['tab_image']			= 'Image';
 $_['tab_reward']		= 'Reward Points';
 $_['tab_seo']			= 'SEO';
+$_['tab_delivery_locations']='Delivery Locations';
 
 // Column
 $_['column_image']		= 'Image';
