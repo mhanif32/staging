@@ -145,6 +145,51 @@
                             </div>
                             {% endif %}
 
+                            <h3 class="f-20 font-weight-bold text-uppercase mt-4"">MY ORDER</h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6 py-3">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ order_hidtory_link }}">
+                                                <i class="fas fa-shopping-bag f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ order_hidtory_link }}"
+                                                   class="f-15 font-weight-bold">Order Histor</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ order_hidtory_link }}" class="f-13 text-muted">View order history details</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 py-3 pl-md-5 border-left">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ transactions_link }}">
+                                                <i class="fas fa-random f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ transactions_link }}"
+                                                   class="f-15 font-weight-bold">Your Transactions</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ transactions_link }}" class="f-13 text-muted">Add your new product</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
                             {% if is_seller %}
                             <h3 class="f-20 font-weight-bold text-uppercase mt-4">Seller Panel</h3>
                             <hr>
