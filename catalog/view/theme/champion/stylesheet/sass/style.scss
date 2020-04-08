@@ -294,7 +294,7 @@ header {background: white;z-index: 9999;
 
 // top-collection
 
-.top-collection {
+.top-collection, .product-manufacturer {
   .product-layout{
     .product-card{
       &:hover {
@@ -1272,4 +1272,14 @@ i{width: 20px;}}}}
       float: none; margin-bottom: 20px; }
   }
 
+}
+
+//=========== product-manufacturer
+#product-manufacturer {
+  .manufacturer-col {
+    &:hover {
+      background-color: #87cefa52;
+     transition: all .6s ease;
+    }
+  }
 }
