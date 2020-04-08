@@ -9,10 +9,8 @@
             {% set class = 'col-sm-12' %}
         {% endif %}
         <div id="content" class="{{ class }}">{{ content_top }}
-
             {% if products %}
                 <div class="row">
-
                     <div class="col-md-8 col-sm-6">
                         <div class="form-group">143 Search result in your category
                         </div>
@@ -23,110 +21,20 @@
                                    for="input-sort">{{ text_sort }}</label>
                             <select id="input-sort" class="form-control" style="height: 40px"
                                     onchange="location = this.value;">
-
-
                                 {% for sorts in sorts %}
                                     {% if sorts.value == '%s-%s'|format(sort, order) %}
-
-
-
                                         <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-
-
-
                                     {% else %}
-
-
-
                                         <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-
-
-
                                     {% endif %}
                                 {% endfor %}
-
-
                             </select>
                         </div>
                     </div>
-
-
                 </div>
-
-                {#<div class="row pt-4">#}
-                {#{% for product in products %}#}
-                {#<div class="col-lg-4 col-md-4 col-sm-6 px-2 mb-4 product-layout">#}
-                {#<div class="card product-card h-100">#}
-                {#<a class="card-img-top d-block overflow-hidden p-3 text-center h-100" href="{{ product.href }}"><img#}
-                {#src="{{ product.thumb }}"#}
-                {#alt="{{ product.name }}"#}
-                {#title="{{ product.name }}" class="img-fluid"></a>#}
-                {#<div class="card-body p-3">#}
-                {#<h4 class="product-title"><a {{ product.href }}#}
-                {#class="f-15 font-weight-medium text-primary">{{ product.name }}</a>#}
-                {#</h4>#}
-
-
-                {#<div class="d-flex justify-content-between mb-2">#}
-
-                {#<div class="star-rating">#}
-                {#<img src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt=""><img#}
-                {#src="image/icons/Star.svg" alt=""><img src="image/icons/Star.svg" alt="">#}
-                {#</div>#}
-
-                {#{% if product.rating %}#}
-                {#<div class="rating star-rating">#}
-                {#{% for i in 5 %}#}
-                {#{% if product.rating < i %}#}
-                {#<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>#}
-                {#{% else %}#}
-                {#<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i#}
-                {#class="fa fa-star-o fa-stack-2x"></i></span>#}
-                {#{% endif %}#}
-                {#{% endfor %}#}
-                {#</div>#}
-                {#{% endif %}#}
-                {#<div class="wish-list">#}
-                {#<i class="fas fa-heart" aria-hidden="true"></i>#}
-                {#<button class="border-0 bg-white" type="button" data-toggle="tooltip"#}
-                {#title="{{ button_wishlist }}"#}
-                {#onclick="wishlist.add('{{ product.product_id }}');"><i#}
-                {#class="fa fa-heart"></i>#}
-                {#</button>#}
-                {#</div>#}
-                {#</div>#}
-                {#{% if product.price %}#}
-
-                {#<div class="product-price text-primary font-weight-bold f-20">#}
-                {#{% if not product.special %}#}
-                {#{{ product.price }}#}
-                {#{% else %}#}
-                {#<span class="price-new">{{ product.special }}</span> <strike><span#}
-                {#class="price-old text-accent font-weight-normal f-15 ml-2 ">{{ product.price }}</span></strike>#}
-                {#{% endif %}#}
-                {#{% if product.tax %}#}
-                {#<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>#}
-                {#{% endif %}#}
-                {#</div>#}
-                {#{% endif %}#}
-                {#</div>#}
-                {#<div class="text-center">#}
-                {#<a href="{{ product.href }}">#}
-                {#<div class="view-details bg-primary text-white py-2 f-15 font-weight-normal">#}
-                {#View Details#}
-                {#</div>#}
-                {#</a>#}
-                {#</div>#}
-                {#</div>#}
-                {#</div>#}
-                {#{% endfor %}#}
-
-                {#</div>#}
-
 
                 <div class="row pt-4">
                     {% for product in products %}
-
                         <div class="col-lg-4 col-md-4 col-sm-6 px-1 mb-4 product-layout">
                             <div class="product-card position-relative p-3">
                                 <div class="wish-list text-right position-absolute"
@@ -191,10 +99,7 @@
                             </div>
                         </div>
                     {% endfor %}
-
                 </div>
-
-
 
                 <div class="row">
                     <div class="col-sm-6 text-left">{{ pagination }}</div>

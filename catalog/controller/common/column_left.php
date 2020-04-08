@@ -47,7 +47,6 @@ class ControllerCommonColumnLeft extends Controller {
 
 		foreach ($modules as $module) {
 			$part = explode('.', $module['code']);
-
 			if (isset($part[0]) && $this->config->get('module_' . $part[0] . '_status')) {
 				$module_data = $this->load->controller('extension/module/' . $part[0]);
 
@@ -57,21 +56,23 @@ class ControllerCommonColumnLeft extends Controller {
 				}
 			}
 
-			if (isset($part[1])) {
-				$setting_info = $this->model_setting_module->getModule($part[1]);
+			//just to remove image from category page : below
 
-				if ($setting_info && $setting_info['status']) {
-
-					$output = $this->load->controller('extension/module/' . $part[0], $setting_info);
-
-					if ($output) {
-						$data['modules'][] = $output;
-					}
-				}
-			}
+//			if (isset($part[1])) {
+//				$setting_info = $this->model_setting_module->getModule($part[1]);
+//
+//				if ($setting_info && $setting_info['status']) {
+//
+//					$output = $this->load->controller('extension/module/' . $part[0], $setting_info);
+//
+//					if ($output) {
+//						$data['modules'][] = $output;
+//					}
+//				}
+//			}
 		}
 
-		//print_r($data);exit('asd');
+		//echo '<pre>';print_r($data);exit('asd');
 
 		return $this->load->view('common/column_left', $data);
 	}

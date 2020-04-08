@@ -1449,6 +1449,22 @@ class ControllerAccountMpmultivendorProduct extends Controller
             }
         }
 
+        $deliveryInfos = $this->model_account_customer->getDeliveryInfo($this->customer->getId());
+        $delivery = [];
+        foreach ($deliveryInfos as $info) {
+            $deliveryArray = array();
+            $deliveryArray['country_id'] = $info['country_id'];
+            $deliveryArray['zone_id'] = $info['zone_id'];
+            $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+            $deliveryArray['area_id'] = $info['area_id'];
+            $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
+            $deliveryArray['days'] = $info['days'];
+            $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
+            $delivery[] = $deliveryArray;
+        }
+        $data['deliveryInfos'] = $delivery;
+        $data['countries'] = $this->model_localisation_country->getCountries();
+
         /* Theme Work Starts */
         if ($this->config->get('config_theme')) {
             $custom_themename = $this->config->get('config_theme');
@@ -1502,9 +1518,9 @@ class ControllerAccountMpmultivendorProduct extends Controller
             }
         }
 
-        if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-            $this->error['model'] = $this->language->get('error_model');
-        }
+//        if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
+//            $this->error['model'] = $this->language->get('error_model');
+//        }
 
 //        if ($this->request->post['product_seo_url']) {
 //            foreach ($this->request->post['product_seo_url'] as $store_id => $language) {
