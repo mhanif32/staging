@@ -20,8 +20,9 @@
                                         <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}"
                                            class="btn btn-default"><i class="fa fa-reply"></i></a>
                                     </div>
+
                                 </div>
-                            </div>
+                                <hr style="margin: 15px -25px">
                             {% if error_warning %}
                                 <div class="alert alert-danger warning"><i
                                             class="fa fa-exclamation-circle"></i> {{ error_warning }}
@@ -41,14 +42,14 @@
                                         <li><a href="#tab-discount" data-toggle="tab">{{ tab_discount }}</a></li>
                                         <li><a href="#tab-special" data-toggle="tab">{{ tab_special }}</a></li>
                                         <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
-                                        <li><a href="#tab-reward" data-toggle="tab">{{ tab_reward }}</a></li>
-                                        <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
+                                        {#<li><a href="#tab-reward" data-toggle="tab">{{ tab_reward }}</a></li>#}
+                                        {#<li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>#}
                                         <li><a href="#tab-delivery_locations"
                                                data-toggle="tab">{{ tab_delivery_locations }}</a></li>
                                     </ul>
                                     <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
                                         <div class="tab-pane active" id="tab-general">
-                                            <ul class="nav nav-tabs" id="language">
+                                            <ul class="nav nav-tabs py-2 mb-2" id="language">
                                                 {% for language in languages %}
                                                     <li><a href="#language{{ language.language_id }}" data-toggle="tab"><img
                                                                     src="catalog/language/{{ language.code }}/{{ language.code }}.png"
@@ -59,7 +60,7 @@
                                             <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">{% for language in languages %}
                                                     <div class="tab-pane" id="language{{ language.language_id }}">
                                                         <div class="form-group required">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-name{{ language.language_id }}">{{ entry_name }}</label>
                                                             <div class="col-sm-10">
                                                                 <input type="text"
@@ -73,7 +74,7 @@
                                                                 {% endif %} </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-description{{ language.language_id }}">{{ entry_description }}</label>
                                                             <div class="col-sm-10">
                                                                 <textarea
@@ -84,7 +85,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group required">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-meta-title{{ language.language_id }}">{{ entry_meta_title }}</label>
                                                             <div class="col-sm-10">
                                                                 <input type="text"
@@ -98,7 +99,7 @@
                                                                 {% endif %} </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-meta-description{{ language.language_id }}">{{ entry_meta_description }}</label>
                                                             <div class="col-sm-10">
                                                                 <textarea
@@ -110,7 +111,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-meta-keyword{{ language.language_id }}">{{ entry_meta_keyword }}</label>
                                                             <div class="col-sm-10">
                                                                 <textarea
@@ -121,7 +122,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label"
+                                                            <label class="col-sm-12 control-label"
                                                                    for="input-tag{{ language.language_id }}"><span
                                                                         data-toggle="tooltip"
                                                                         title="{{ help_tag }}">{{ entry_tag }}</span></label>
@@ -139,7 +140,7 @@
                                         </div>
                                         <div class="tab-pane" id="tab-data">
                                             <div class="form-group required">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-model">{{ entry_model }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="model" value="{{ model }}"
@@ -150,7 +151,7 @@
                                                     {% endif %}</div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-sku"><span
+                                                <label class="col-sm-12 control-label" for="input-sku"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_sku }}">{{ entry_sku }}</span></label>
                                                 <div class="col-sm-10">
@@ -160,7 +161,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-upc"><span
+                                                <label class="col-sm-12 control-label" for="input-upc"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_upc }}">{{ entry_upc }}</span></label>
                                                 <div class="col-sm-10">
@@ -170,7 +171,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-ean"><span
+                                                <label class="col-sm-12 control-label" for="input-ean"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_ean }}">{{ entry_ean }}</span></label>
                                                 <div class="col-sm-10">
@@ -180,7 +181,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-jan"><span
+                                                <label class="col-sm-12 control-label" for="input-jan"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_jan }}">{{ entry_jan }}</span></label>
                                                 <div class="col-sm-10">
@@ -190,7 +191,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-isbn"><span
+                                                <label class="col-sm-12 control-label" for="input-isbn"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_isbn }}">{{ entry_isbn }}</span></label>
                                                 <div class="col-sm-10">
@@ -200,7 +201,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-mpn"><span
+                                                <label class="col-sm-12 control-label" for="input-mpn"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_mpn }}">{{ entry_mpn }}</span></label>
                                                 <div class="col-sm-10">
@@ -210,7 +211,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-location">{{ entry_location }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="location" value="{{ location }}"
@@ -219,7 +220,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-price">{{ entry_price }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="price" value="{{ price }}"
@@ -228,7 +229,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-tax-class">{{ entry_tax_class }}</label>
                                                 <div class="col-sm-10">
                                                     <select name="tax_class_id" id="input-tax-class"
@@ -258,7 +259,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-quantity">{{ entry_quantity }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="quantity" value="{{ quantity }}"
@@ -267,7 +268,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-minimum"><span
+                                                <label class="col-sm-12 control-label" for="input-minimum"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_minimum }}">{{ entry_minimum }}</span></label>
                                                 <div class="col-sm-10">
@@ -277,7 +278,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-subtract">{{ entry_subtract }}</label>
                                                 <div class="col-sm-10">
                                                     <select name="subtract" id="input-subtract" class="form-control">
@@ -305,7 +306,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-stock-status"><span
+                                                <label class="col-sm-12 control-label" for="input-stock-status"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_stock_status }}">{{ entry_stock_status }}</span></label>
                                                 <div class="col-sm-10">
@@ -335,7 +336,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">{{ entry_shipping }}</label>
+                                                <label class="col-sm-12 control-label">{{ entry_shipping }}</label>
                                                 <div class="col-sm-10">
                                                     <label class="radio-inline"> {% if shipping %}
                                                             <input type="radio" name="shipping" value="1"
@@ -356,7 +357,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-date-available">{{ entry_date_available }}</label>
                                                 <div class="col-sm-3">
                                                     <div class="input-group date">
@@ -372,7 +373,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-length">{{ entry_dimension }}</label>
                                                 <div class="col-sm-10">
                                                     <div class="row">
@@ -395,7 +396,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-length-class">{{ entry_length_class }}</label>
                                                 <div class="col-sm-10">
                                                     <select name="length_class_id" id="input-length-class"
@@ -424,7 +425,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-weight">{{ entry_weight }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="weight" value="{{ weight }}"
@@ -433,7 +434,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-weight-class">{{ entry_weight_class }}</label>
                                                 <div class="col-sm-10">
                                                     <select name="weight_class_id" id="input-weight-class"
@@ -462,7 +463,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-status">{{ entry_status }}</label>
                                                 <div class="col-sm-10">
                                                     <select name="status" id="input-status" class="form-control">
@@ -491,7 +492,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"
+                                                <label class="col-sm-12 control-label"
                                                        for="input-sort-order">{{ entry_sort_order }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" name="sort_order" value="{{ sort_order }}"
@@ -502,7 +503,7 @@
                                         </div>
                                         <div class="tab-pane" id="tab-links">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-manufacturer"><span
+                                                <label class="col-sm-12 control-label" for="input-manufacturer"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_manufacturer }}">{{ entry_manufacturer }}</span></label>
                                                 <div class="col-sm-10">
@@ -514,7 +515,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-category"><span
+                                                <label class="col-sm-12 control-label" for="input-category"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_category }}">{{ entry_category }}</span></label>
                                                 <div class="col-sm-10">
@@ -532,7 +533,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-filter"><span
+                                                <label class="col-sm-12 control-label" for="input-filter"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_filter }}">{{ entry_filter }}</span></label>
                                                 <div class="col-sm-10">
@@ -550,7 +551,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">{{ entry_store }}</label>
+                                                <label class="col-sm-12 control-label">{{ entry_store }}</label>
                                                 <div class="col-sm-10">
                                                     <div class="well well-sm"
                                                          style="height: 150px; overflow: auto;"> {% for store in stores %}
@@ -570,7 +571,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-download"><span
+                                                <label class="col-sm-12 control-label" for="input-download"><span
                                                             data-toggle="tooltip"
                                                             title="{{ help_download }}">{{ entry_download }}</span></label>
                                                 <div class="col-sm-10">
@@ -654,7 +655,7 @@
                                         </div>
                                         <div class="tab-pane" id="tab-option">
                                             <div class="row">
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-12">
                                                     <ul class="nav nav-pills nav-stacked" id="option">
                                                         {% set option_row = 0 %}
                                                         {% for product_option in product_options %}
@@ -689,7 +690,7 @@
                                                                        name="product_option[{{ option_row }}][type]"
                                                                        value="{{ product_option.type }}"/>
                                                                 <div class="form-group">
-                                                                    <label class="col-sm-2 control-label"
+                                                                    <label class="col-sm-12 control-label"
                                                                            for="input-required{{ option_row }}">{{ entry_required }}</label>
                                                                     <div class="col-sm-10">
                                                                         <select name="product_option[{{ option_row }}][required]"
@@ -721,7 +722,7 @@
                                                                 </div>
                                                                 {% if product_option.type == 'text' %}
                                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-10">
                                                                             <input type="text"
@@ -735,7 +736,7 @@
                                                                 {% endif %}
                                                                 {% if product_option.type == 'textarea' %}
                                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-10">
                                                                             <textarea
@@ -749,7 +750,7 @@
                                                                 {% endif %}
                                                                 {% if product_option.type == 'file' %}
                                                                     <div class="form-group" style="display: none;">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-10">
                                                                             <input type="text"
@@ -763,7 +764,7 @@
                                                                 {% endif %}
                                                                 {% if product_option.type == 'date' %}
                                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-3">
                                                                             <div class="input-group date">
@@ -782,7 +783,7 @@
                                                                 {% endif %}
                                                                 {% if product_option.type == 'time' %}
                                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-10">
                                                                             <div class="input-group time">
@@ -801,7 +802,7 @@
                                                                 {% endif %}
                                                                 {% if product_option.type == 'datetime' %}
                                                                     <div class="form-group">
-                                                                        <label class="col-sm-2 control-label"
+                                                                        <label class="col-sm-12 control-label"
                                                                                for="input-value{{ option_row }}">{{ entry_option_value }}</label>
                                                                         <div class="col-sm-10">
                                                                             <div class="input-group datetime">
@@ -1384,77 +1385,77 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="tab-reward">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-points"><span
-                                                            data-toggle="tooltip"
-                                                            title="{{ help_points }}">{{ entry_points }}</span></label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="points" value="{{ points }}"
-                                                           placeholder="{{ entry_points }}" id="input-points"
-                                                           class="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover list">
-                                                    <thead>
-                                                    <tr>
-                                                        <td class="text-left">{{ entry_customer_group }}</td>
-                                                        <td class="text-right">{{ entry_reward }}</td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
+                                        {#<div class="tab-pane" id="tab-reward">#}
+                                            {#<div class="form-group">#}
+                                                {#<label class="col-sm-12 control-label" for="input-points"><span#}
+                                                            {#data-toggle="tooltip"#}
+                                                            {#title="{{ help_points }}">{{ entry_points }}</span></label>#}
+                                                {#<div class="col-sm-10">#}
+                                                    {#<input type="text" name="points" value="{{ points }}"#}
+                                                           {#placeholder="{{ entry_points }}" id="input-points"#}
+                                                           {#class="form-control"/>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                            {#<div class="table-responsive">#}
+                                                {#<table class="table table-bordered table-hover list">#}
+                                                    {#<thead>#}
+                                                    {#<tr>#}
+                                                        {#<td class="text-left">{{ entry_customer_group }}</td>#}
+                                                        {#<td class="text-right">{{ entry_reward }}</td>#}
+                                                    {#</tr>#}
+                                                    {#</thead>#}
+                                                    {#<tbody>#}
 
-                                                    {% for customer_group in customer_groups %}
-                                                        <tr>
-                                                            <td class="text-left">{{ customer_group.name }}</td>
-                                                            <td class="text-right"><input type="text"
-                                                                                          name="product_reward[{{ customer_group.customer_group_id }}][points]"
-                                                                                          value="{{ product_reward[customer_group.customer_group_id] ? product_reward[customer_group.customer_group_id].points }}"
-                                                                                          class="form-control"/></td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                    </tbody>
+                                                    {#{% for customer_group in customer_groups %}#}
+                                                        {#<tr>#}
+                                                            {#<td class="text-left">{{ customer_group.name }}</td>#}
+                                                            {#<td class="text-right"><input type="text"#}
+                                                                                          {#name="product_reward[{{ customer_group.customer_group_id }}][points]"#}
+                                                                                          {#value="{{ product_reward[customer_group.customer_group_id] ? product_reward[customer_group.customer_group_id].points }}"#}
+                                                                                          {#class="form-control"/></td>#}
+                                                        {#</tr>#}
+                                                    {#{% endfor %}#}
+                                                    {#</tbody>#}
 
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tab-seo">
-                                            <div class="alert alert-info warning"><i
-                                                        class="fa fa-info-circle"></i> {{ text_keyword }}</div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover list">
-                                                    <thead>
-                                                    <tr>
-                                                        <td class="text-left">{{ entry_store }}</td>
-                                                        <td class="text-left">{{ entry_keyword }}</td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {% for store in stores %}
-                                                        <tr>
-                                                            <td class="text-left">{{ store.name }}</td>
-                                                            <td class="text-left">{% for language in languages %}
-                                                                    <div class="input-group"><span
-                                                                                class="input-group-addon"><img
-                                                                                    src="catalog/language/{{ language.code }}/{{ language.code }}.png"
-                                                                                    title="{{ language.name }}"/></span>
-                                                                        <input type="text"
-                                                                               name="product_seo_url[{{ store.store_id }}][{{ language.language_id }}]"
-                                                                               value="{% if product_seo_url[store.store_id][language.language_id] %}{{ product_seo_url[store.store_id][language.language_id] }}{% endif %}"
-                                                                               placeholder="{{ entry_keyword }}"
-                                                                               class="form-control"/>
-                                                                    </div>
-                                                                    {% if error_keyword[store.store_id][language.language_id] %}
-                                                                        <div class="text-danger">{{ error_keyword[store.store_id][language.language_id] }}</div>
-                                                                    {% endif %}
-                                                                {% endfor %}</td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                {#</table>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                        {#<div class="tab-pane" id="tab-seo">#}
+                                            {#<div class="alert alert-info warning"><i#}
+                                                        {#class="fa fa-info-circle"></i> {{ text_keyword }}</div>#}
+                                            {#<div class="table-responsive">#}
+                                                {#<table class="table table-bordered table-hover list">#}
+                                                    {#<thead>#}
+                                                    {#<tr>#}
+                                                        {#<td class="text-left">{{ entry_store }}</td>#}
+                                                        {#<td class="text-left">{{ entry_keyword }}</td>#}
+                                                    {#</tr>#}
+                                                    {#</thead>#}
+                                                    {#<tbody>#}
+                                                    {#{% for store in stores %}#}
+                                                        {#<tr>#}
+                                                            {#<td class="text-left">{{ store.name }}</td>#}
+                                                            {#<td class="text-left">{% for language in languages %}#}
+                                                                    {#<div class="input-group"><span#}
+                                                                                {#class="input-group-addon"><img#}
+                                                                                    {#src="catalog/language/{{ language.code }}/{{ language.code }}.png"#}
+                                                                                    {#title="{{ language.name }}"/></span>#}
+                                                                        {#<input type="text"#}
+                                                                               {#name="product_seo_url[{{ store.store_id }}][{{ language.language_id }}]"#}
+                                                                               {#value="{% if product_seo_url[store.store_id][language.language_id] %}{{ product_seo_url[store.store_id][language.language_id] }}{% endif %}"#}
+                                                                               {#placeholder="{{ entry_keyword }}"#}
+                                                                               {#class="form-control"/>#}
+                                                                    {#</div>#}
+                                                                    {#{% if error_keyword[store.store_id][language.language_id] %}#}
+                                                                        {#<div class="text-danger">{{ error_keyword[store.store_id][language.language_id] }}</div>#}
+                                                                    {#{% endif %}#}
+                                                                {#{% endfor %}</td>#}
+                                                        {#</tr>#}
+                                                    {#{% endfor %}#}
+                                                    {#</tbody>#}
+                                                {#</table>#}
+                                            {#</div>#}
+                                        {#</div>#}
                                         <div class="tab-pane" id="tab-delivery_locations">
                                             <table id="delivery" class="table table-striped table-hover list">
                                                 <thead>
@@ -1761,7 +1762,7 @@
                 html += '	<input type="hidden" name="product_option[' + option_row + '][type]" value="' + item['type'] + '" />';
 
                 html += '	<div class="form-group">';
-                html += '	  <label class="col-sm-2 control-label" for="input-required' + option_row + '">{{ entry_required }}</label>';
+                html += '	  <label class="col-sm-12 control-label" for="input-required' + option_row + '">{{ entry_required }}</label>';
                 html += '	  <div class="col-sm-10"><select name="product_option[' + option_row + '][required]" id="input-required' + option_row + '" class="form-control">';
                 html += '	      <option value="1">{{ text_yes }}</option>';
                 html += '	      <option value="0">{{ text_no }}</option>';
@@ -1770,42 +1771,42 @@
 
                 if (item['type'] == 'text') {
                     html += '	<div class="form-group">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="form-control" /></div>';
                     html += '	</div>';
                 }
 
                 if (item['type'] == 'textarea') {
                     html += '	<div class="form-group">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-10"><textarea name="product_option[' + option_row + '][value]" rows="5" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="form-control"></textarea></div>';
                     html += '	</div>';
                 }
 
                 if (item['type'] == 'file') {
                     html += '	<div class="form-group" style="display: none;">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="form-control" /></div>';
                     html += '	</div>';
                 }
 
                 if (item['type'] == 'date') {
                     html += '	<div class="form-group">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-3"><div class="input-group date"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" data-date-format="YYYY-MM-DD" id="input-value' + option_row + '" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></div>';
                     html += '	</div>';
                 }
 
                 if (item['type'] == 'time') {
                     html += '	<div class="form-group">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-10"><div class="input-group time"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" data-date-format="HH:mm" id="input-value' + option_row + '" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></div>';
                     html += '	</div>';
                 }
 
                 if (item['type'] == 'datetime') {
                     html += '	<div class="form-group">';
-                    html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
+                    html += '	  <label class="col-sm-12 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
                     html += '	  <div class="col-sm-10"><div class="input-group datetime"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-value' + option_row + '" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></div>';
                     html += '	</div>';
                 }

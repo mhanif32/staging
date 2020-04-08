@@ -1194,7 +1194,7 @@ footer ul {
   background-color: #eeeeee; }
 
 #tabs li {
-  margin: 10px 0 0; }
+  margin: 10px 0; }
   #tabs li a {
     padding: 10px 10px 10px 10px;
     -webkit-transition: all .4s ease;
