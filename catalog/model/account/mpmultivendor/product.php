@@ -8,11 +8,11 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$product_id = $this->db->getLastId();
 
 		//for product locations
-        if (isset($data['countries'])) {
-            foreach ($data['countries'] as $country) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
-            }
-        }
+//        if (isset($data['countries'])) {
+//            foreach ($data['countries'] as $country) {
+//                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+//            }
+//        }
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
@@ -121,6 +121,23 @@ class ModelAccountMpmultivendorProduct extends Model {
 //				}
 //			}
 //		}
+
+        //multilevel location
+        if (!empty($data['delivery_info'])) {
+            foreach ($data['delivery_info'] as $info) {
+
+                $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
+
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "mpseller_delivery_location` SET customer_id = '" . (int)$this->customer->getId() . "', 
+                product_id = '" . (int)$product_id . "', 
+                country_id = '" . $this->db->escape($info['country_id']) . "', 
+                zone_id = '" . $this->db->escape($info['zone_id']) . "',
+                area_id = '" . $area . "',
+                days = '" . $this->db->escape($info['days']) . "',
+                added_date = NOW()
+                ");
+            }
+        }
 
 		$this->cache->delete('product');
 
@@ -271,6 +288,25 @@ class ModelAccountMpmultivendorProduct extends Model {
 				}
 			}
 		}
+
+        //multilevel location
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "mpseller_delivery_location` WHERE product_id = '" . (int)(int)$product_id . "'");
+
+        if (!empty($data['delivery_info'])) {
+            foreach ($data['delivery_info'] as $info) {
+
+                $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
+
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "mpseller_delivery_location` SET customer_id = '" . (int)$this->customer->getId() . "', 
+            product_id = '" . (int)$product_id . "', 
+            country_id = '" . $this->db->escape($info['country_id']) . "', 
+            zone_id = '" . $this->db->escape($info['zone_id']) . "',
+            area_id = '" . $area . "',
+            days = '" . $this->db->escape($info['days']) . "',
+            added_date = NOW()
+            ");
+            }
+        }
 
 		$this->cache->delete('product');
 	}
@@ -1107,4 +1143,10 @@ class ModelAccountMpmultivendorProduct extends Model {
 
 		return $query->rows;
 	}
+
+    public function getDeliveryLocations($product_id)
+    {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mpseller_delivery_location` WHERE product_id = '" . (int)$product_id . "'");
+        return $query->rows;
+    }
 }
