@@ -380,6 +380,8 @@ header {
         display: table-cell;
         vertical-align: middle;
         width: 80px; }
+        header .navbar-nav-menu > li .display-middle-block span {
+          font-size: 10px; }
     header .navbar-nav-menu .home-location {
       width: 185px;
       margin-right: 5px;
@@ -459,7 +461,9 @@ header {
         height: 35px;
         display: table-cell;
         vertical-align: middle;
-        width: 80px; } }
+        width: 80px; }
+        header .navbar-nav-menu > a .display-middle-block span {
+          font-size: 10px; } }
   header a.bg-white:hover, header a.bg-white:focus, header button.bg-white:hover, header button.bg-white:focus, header .btn:focus, header .btn.focus {
     background-color: transparent !important;
     outline: none;
