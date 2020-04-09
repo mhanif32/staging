@@ -65,6 +65,8 @@ class ControllerCatalogProduct extends Controller {
 	}
 
 	public function edit() {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -583,6 +585,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['user_token'] = $this->session->data['user_token'];
 
 		$this->load->model('localisation/language');
+		$this->load->model('localisation/country');
+		$this->load->model('localisation/zone');
+		$this->load->model('localisation/area');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
@@ -1158,6 +1163,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['points'] = '';
 		}
 
+        if (isset($this->request->post['mpseller_delivery_approved'])) {
+            $data['mpseller_delivery_approved'] = $this->request->post['mpseller_delivery_approved'];
+        } elseif (!empty($product_info)) {
+            $data['mpseller_delivery_approved'] = $product_info['mpseller_delivery_approved'];
+        } else {
+            $data['mpseller_delivery_approved'] = '';
+        }
+
 		if (isset($this->request->post['product_reward'])) {
 			$data['product_reward'] = $this->request->post['product_reward'];
 		} elseif (isset($this->request->get['product_id'])) {
@@ -1189,6 +1202,25 @@ class ControllerCatalogProduct extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
+
+        $delivery = [];
+        if (isset($this->request->get['product_id'])) {
+            $deliveryInfos = $this->model_catalog_product->getDeliveryLocations($this->request->get['product_id']);
+
+            foreach ($deliveryInfos as $info) {
+                $deliveryArray = array();
+                $deliveryArray['country_id'] = $info['country_id'];
+                $deliveryArray['zone_id'] = $info['zone_id'];
+                $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+                $deliveryArray['area_id'] = $info['area_id'];
+                $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
+                $deliveryArray['days'] = $info['days'];
+                $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
+                $delivery[] = $deliveryArray;
+            }
+        }
+        $data['deliveryInfos'] = $delivery;
+        $data['countries'] = $this->model_localisation_country->getCountries();
 
 		$this->response->setOutput($this->load->view('catalog/product_form', $data));
 	}

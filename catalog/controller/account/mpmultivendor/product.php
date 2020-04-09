@@ -679,6 +679,9 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $this->document->addScript('catalog/view/javascript/mpseller/seller.js');
         $this->load->model('localisation/currency');
+        $this->load->model('localisation/country');
+        $this->load->model('localisation/zone');
+        $this->load->model('localisation/area');
 
         $data['heading_title'] = $this->language->get('heading_title');
 
@@ -1232,8 +1235,6 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $product_options = array();
         }
 
-        //echo '<pre>';print_r($product_options);exit('aaaa');
-
         $data['product_options'] = array();
         $this->load->model('tool/image');
         foreach ($product_options as $product_option) {
@@ -1435,32 +1436,34 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $data['currencies'] = $this->model_localisation_currency->getCurrencies();
         //$data['countries'] = $this->model_localisation_country->getCountries();
-        if(!empty($this->request->get['product_id'])) {
-            $data['my_countries'] = array();
-            $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
-            foreach ($my_countries as $country_id) {
-                $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
-                if ($country_info) {
-                    $data['my_countries'][] = array(
-                        'country_id' => $country_info['country_id'],
-                        'name' => $country_info['name']
-                    );
-                }
-            }
-        }
+//        if(!empty($this->request->get['product_id'])) {
+//            $data['my_countries'] = array();
+//            $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
+//            foreach ($my_countries as $country_id) {
+//                $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
+//                if ($country_info) {
+//                    $data['my_countries'][] = array(
+//                        'country_id' => $country_info['country_id'],
+//                        'name' => $country_info['name']
+//                    );
+//                }
+//            }
+//        }
 
-        $deliveryInfos = $this->model_account_customer->getDeliveryInfo($this->customer->getId());
         $delivery = [];
-        foreach ($deliveryInfos as $info) {
-            $deliveryArray = array();
-            $deliveryArray['country_id'] = $info['country_id'];
-            $deliveryArray['zone_id'] = $info['zone_id'];
-            $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
-            $deliveryArray['area_id'] = $info['area_id'];
-            $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
-            $deliveryArray['days'] = $info['days'];
-            $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
-            $delivery[] = $deliveryArray;
+        if (isset($this->request->get['product_id'])) {
+            $deliveryInfos = $this->model_account_mpmultivendor_product->getDeliveryLocations($this->request->get['product_id']);
+            foreach ($deliveryInfos as $info) {
+                $deliveryArray = array();
+                $deliveryArray['country_id'] = $info['country_id'];
+                $deliveryArray['zone_id'] = $info['zone_id'];
+                $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+                $deliveryArray['area_id'] = $info['area_id'];
+                $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
+                $deliveryArray['days'] = $info['days'];
+                $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
+                $delivery[] = $deliveryArray;
+            }
         }
         $data['deliveryInfos'] = $delivery;
         $data['countries'] = $this->model_localisation_country->getCountries();
