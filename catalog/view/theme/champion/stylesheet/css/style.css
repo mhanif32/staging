@@ -357,7 +357,7 @@ header {
       transition: all .7s ease-in-out; }
   @media only screen and (min-width: 992px) {
     header .navbar-nav-menu > li {
-      width: 100px;
+      width: 80px;
       text-align: center;
       border-right: 3px solid #fff;
       background: -webkit-gradient(linear, left top, right top, color-stop(50%, #01B0F1), color-stop(50%, #f3f3f3));
@@ -369,11 +369,17 @@ header {
       header .navbar-nav-menu > li a {
         text-decoration: none;
         -webkit-transition: all .6s ease-out;
-        transition: all .6s ease-out; }
+        transition: all .6s ease-out;
+        line-height: 11px; }
       header .navbar-nav-menu > li:hover {
         background-position: left bottom; }
         header .navbar-nav-menu > li:hover > a {
           color: #fff; }
+      header .navbar-nav-menu > li .display-middle-block {
+        height: 35px;
+        display: table-cell;
+        vertical-align: middle;
+        width: 80px; }
     header .navbar-nav-menu .home-location {
       width: 185px;
       margin-right: 5px;
@@ -430,7 +436,7 @@ header {
           -webkit-transition-delay: 0s;
                   transition-delay: 0s; }
     header .navbar-nav-menu > a {
-      width: 100px;
+      width: 80px;
       text-align: center;
       border-right: 3px solid #fff;
       background: -webkit-gradient(linear, left top, right top, color-stop(50%, #01B0F1), color-stop(50%, #f3f3f3));
@@ -443,11 +449,17 @@ header {
         text-decoration: none; }
       header .navbar-nav-menu > a li {
         -webkit-transition: all .6s ease-out;
-        transition: all .6s ease-out; }
+        transition: all .6s ease-out;
+        line-height: 11px; }
       header .navbar-nav-menu > a:hover {
         background-position: left bottom; }
         header .navbar-nav-menu > a:hover > li {
-          color: #fff; } }
+          color: #fff; }
+      header .navbar-nav-menu > a .display-middle-block {
+        height: 35px;
+        display: table-cell;
+        vertical-align: middle;
+        width: 80px; } }
   header a.bg-white:hover, header a.bg-white:focus, header button.bg-white:hover, header button.bg-white:focus, header .btn:focus, header .btn.focus {
     background-color: transparent !important;
     outline: none;
