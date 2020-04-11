@@ -1,58 +1,65 @@
 {% if not redirect %}
-<div class="table-responsive .my-order">
-  <table class="table table-bordered">
-    <thead>
-      <tr class="bg-light font-weight-bold">
-        <td class="text-center">{{ column_name }}</td>
-        <td class="text-center">{{ column_model }}</td>
-        <td class="text-center">{{ column_quantity }}</td>
-        <td class="text-center">{{ column_price }}</td>
-        <td class="text-center">{{ column_total }}</td>
-      </tr>
-    </thead>
-    <tbody>
-    
-    {% for product in products %}
-    <tr>
-      <td class="text-center"><a href="{{ product.href }}">{{ product.name }}</a> {% for option in product.option %} <br />
-        &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
-        {% if product.recurring %} <br />
-        <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
-      <td class="text-center">{{ product.model }}</td>
-      <td class="text-center">{{ product.quantity }}</td>
-      <td class="text-center">{{ product.price }}</td>
-      <td class="text-center">{{ product.total }}</td>
-    </tr>
-    {% endfor %}
-    {% for voucher in vouchers %}
-    <tr>
-      <td class="text-center">{{ voucher.description }}</td>
-      <td class="text-center"></td>
-      <td class="text-center">1</td>
-      <td class="text-center">{{ voucher.amount }}</td>
-      <td class="text-center">{{ voucher.amount }}</td>
-    </tr>
-    {% endfor %}
-      </tbody>
-    
-    <tfoot>
-    
-    {% for total in totals %}
-    <tr>
-      <td class="border-0"></td>
-      <td class="border-0"></td>
-      <td class="border-0"></td>
-      <td class="text-right border-0"><strong>{{ total.title }}:</strong></td>
-      <td class="text-right border-0">{{ total.text }}</td>
-    </tr>
-    {% endfor %}
-      </tfoot>
-    
-  </table>
-</div>
-{{ payment }}
-{% else %} 
-<script type="text/javascript"><!--
-location = '{{ redirect }}';
-//--></script> 
+    <div class="table-responsive .my-order">
+        <table class="table table-bordered">
+            <thead>
+            <tr class="bg-light font-weight-bold">
+                <td class="text-center">{{ column_name }}</td>
+                <td class="text-center">{{ column_model }}</td>
+                <td class="text-center">{{ column_quantity }}</td>
+                <td class="text-center">{{ column_price }}</td>
+                <td class="text-center">{{ column_total }}</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for product in products %}
+                <tr>
+                    <td class="text-center"><a
+                                href="{{ product.href }}">{{ product.name }}</a> {% for option in product.option %}
+                            <br/>
+                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
+                        {% if product.recurring %} <br/>
+                            <span class="label label-info">{{ text_recurring_item }}</span>
+                            <small>{{ product.recurring }}</small> {% endif %}</td>
+                    <td class="text-center">{{ product.model }}</td>
+                    <td class="text-center">{{ product.quantity }}</td>
+                    <td class="text-center">{{ product.price }}</td>
+                    <td class="text-center">{{ product.total }}</td>
+                </tr>
+            {% endfor %}
+            {% for voucher in vouchers %}
+                <tr>
+                    <td class="text-center">{{ voucher.description }}</td>
+                    <td class="text-center"></td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">{{ voucher.amount }}</td>
+                    <td class="text-center">{{ voucher.amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <tfoot>
+
+            {% for total in totals %}
+                <tr>
+                    <td class="border-0"></td>
+                    <td class="border-0"></td>
+                    <td class="border-0"></td>
+                    <td class="text-right border-0"><strong>{{ total.title }}:</strong></td>
+                    <td class="text-right border-0">{{ total.text }}</td>
+                </tr>
+            {% endfor %}
+            </tfoot>
+
+        </table>
+    </div>
+    {%  if subTotal >= 100 %}
+    {{ payment }}
+      {% else %}
+          <div class="alert alert-danger alert-dismissible">Warning: Minimum Order Amount on this site is 100!<button type="button" class="close" data-dismiss="alert">×</button></div>
+      {% endif %}
+        {% else %}
+    <script type="text/javascript"><!--
+        location = '{{ redirect }}';
+        //--></script>
 {% endif %} 

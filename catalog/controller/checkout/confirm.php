@@ -412,6 +412,7 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['redirect'] = $redirect;
 		}
 
+        $data['subTotal'] = $this->cart->getSubtotal();
 		$this->response->setOutput($this->load->view('checkout/confirm', $data));
 	}
 }

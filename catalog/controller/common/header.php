@@ -4,7 +4,6 @@ class ControllerCommonHeader extends Controller
 {
     public function index()
     {
-
         //LogOut after 30 min of inactivity
         if (isset($this->session->data['last']) && (time() - $this->session->data['last'] > 30 * 60)) {
             $this->customer->logout();
