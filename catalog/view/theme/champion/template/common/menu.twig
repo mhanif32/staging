@@ -2,9 +2,11 @@
     {% for category in categories %}
         {% if category.children %}
             <li class="dropdown nav-mega">
-                <a href="#" class="f-12" data-toggle="dropdown" style="line-height: 12px;">
-                    {{ category.name }}
+
+                <a href="#" class="" data-toggle="dropdown">
+                    <div class="display-middle-block"><span>{{ category.name }}</span></div>
                 </a>
+
 
                 <ul class="dropdown-menu mega-menu">
                     <li>
@@ -39,18 +41,23 @@
                 </ul>
             </li>
         {% else %}
-            <a class="f-12" href="{{ category.href }}">
-                <li class="nav-item py-2" style="line-height: 12px;">{{ category.name }}
+
+            <a class="" href="{{ category.href }}">
+
+                <li class="nav-item"> <div class="display-middle-block"> <span>{{ category.name }}</span></div>
+
                 </li>
-            </a>
+                            </a>
+
         {% endif %}
     {% endfor %}
 
     {#<a class="f-12" href="{{ more_category }}"><li class="nav-item py-2 bg-primary text-white" style="line-height: 12px;">MORE</li></a>#}
 
     <li class="dropdown nav-mega bg-color">
-        <a href="#" class="f-12 text-white" data-toggle="dropdown" style="line-height: 12px;">
-            MORE
+        <a href="#" class="text-white" data-toggle="dropdown">
+            <div class="display-middle-block"><span>
+                    MORE </span> </div>
         </a>
         <ul class="dropdown-menu mega-menu">
             <li>
@@ -84,7 +91,7 @@
             </li>
         </ul>
     </li>
-    <a class="f-12 text-white" href="{{ sale_offer_link }}">
-        <li class="nav-item py-2" style="line-height: 12px; background-color: red;">SALE</li>
+    <a class="text-white" href="{{ sale_offer_link }}">
+        <li class="nav-item" style="background-color: red;"><div class="display-middle-block"> <span>SALE</span></div></li>
     </a>
 {% endif %}

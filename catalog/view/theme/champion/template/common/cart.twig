@@ -70,8 +70,19 @@
             </li>
         {% else %}
             <li>
-                <p class="text-center">{{ text_empty }}</p>
+                <p class="text-center f-12">{{ text_empty }}</p>
             </li>
         {% endif %}
+        <li>
+            <p class="f-12 text-uppercase px-2 mb-1">track a parcel</p>
+
+            <div class="input-group mb-3 px-2">
+
+                <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary f-12" type="button" id="button-addon2">Search</button>
+                </div>
+            </div>
+        </li>
     </ul>
 </div>

@@ -216,10 +216,16 @@ header {background: white;z-index: 9999;
   }
   @media only screen and (min-width: 992px) {
   .navbar-nav-menu{
-    > li{width: 100px;text-align: center;border-right: 3px solid #fff;background: linear-gradient(to right, $success 50%, $gray-100 50%);background-size: 200% 100%;background-position: right bottom;transition: all .5s ease-out;
-      a{text-decoration: none;transition: all .6s ease-out;}
+    > li{width: 80px;text-align: center;border-right: 3px solid #fff;background: linear-gradient(to right, $success 50%, $gray-100 50%);background-size: 200% 100%;background-position: right bottom;transition: all .5s ease-out;
+      a{text-decoration: none;transition: all .6s ease-out; line-height: 11px}
       &:hover{background-position: left bottom;
        > a{color: $white;}}
+      .display-middle-block {
+        height: 35px;
+        display: table-cell;
+        vertical-align: middle; width: 80px;
+        span {font-size: 10px; }
+      }
     }
   .home-location{width: 185px; margin-right: 5px; cursor: pointer;
     .home-location-icon{ border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
@@ -257,11 +263,19 @@ header {background: white;z-index: 9999;
   }
 
     .navbar-nav-menu{
-      > a{width: 100px;text-align: center;border-right: 3px solid #fff;background: linear-gradient(to right, $success 50%, $gray-100 50%);background-size: 200% 100%;background-position: right bottom;transition: all .5s ease-out;
-        a{text-decoration: none}
-        li{transition: all .6s ease-out;}
+      > a{width: 80px; text-align: center; border-right: 3px solid #fff; background: linear-gradient(to right, $success 50%, $gray-100 50%); background-size: 200% 100%; background-position: right bottom;transition: all .5s ease-out;
+        a{ text-decoration: none }
+        li{ transition: all .6s ease-out; line-height: 11px;; }
         &:hover{ background-position: left bottom;
           > li{color: $white;}}
+
+        .display-middle-block {
+          height: 35px;
+          display: table-cell;
+          vertical-align: middle; width: 80px;
+          span {font-size: 10px }
+
+        }
       }}
   }
   a.bg-white:hover, a.bg-white:focus, button.bg-white:hover, button.bg-white:focus, .btn:focus, .btn.focus{

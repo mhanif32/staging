@@ -77,7 +77,8 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 //print_r($seller_info);exit('aaa');
 		if(!$seller_info) {
 			$this->response->redirect($this->url->link('account/account', '', true));
-		}
+
+        }
 
 		if(!empty($seller_info)) {
 			$mpseller_id = $seller_info['mpseller_id'];
@@ -146,6 +147,7 @@ class ControllerAccountMpmultivendorMessage extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+        $data['back_url'] = $this->url->link('account/account', '', true);
 
 		$data['custom_themename'] = $this->model_account_mpmultivendor_seller->getactiveTheme();
 
