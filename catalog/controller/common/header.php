@@ -126,7 +126,7 @@ class ControllerCommonHeader extends Controller
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
                 $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
-                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = $dataArray->geoplugin_countryName;
+                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? ($dataArray->geoplugin_regionName .', '.$dataArray->geoplugin_countryName) : '';
             } else {
                 $data['loggedInCountry'] = isset($this->session->data['loggedInCountry']) ? $this->session->data['loggedInCountry'] : '';
             }
@@ -134,7 +134,7 @@ class ControllerCommonHeader extends Controller
             // Default Shipping Address
             $defaultAddress = $this->model_account_address->getDefaultAddress();
             if (!empty($defaultAddress['country'])) {
-                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['zone'] . ', ' . $defaultAddress['country'] : '';
+                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['city']. ', ' .$defaultAddress['zone'] . ', ' . $defaultAddress['country'] : '';
             } else {
                 if (empty($this->session->data['loggedInCountry'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];
