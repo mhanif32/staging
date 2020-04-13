@@ -473,6 +473,8 @@ header {
     position: static; }
     header .nav-mega.dropdown.bg-color {
       background: #262525; }
+    header .nav-mega.dropdown:hover .dropdown-menu {
+      display: block !important; }
   header .nav-mega {
     width: 100%; }
     header .nav-mega .dropdown-menu.mega-menu {
