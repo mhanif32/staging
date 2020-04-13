@@ -6,7 +6,6 @@ class ControllerCommonMenu extends Controller
     {
         $this->load->language('common/menu');
 
-        // Menu
         $this->load->model('catalog/category');
 
         $this->load->model('catalog/product');
@@ -80,7 +79,6 @@ class ControllerCommonMenu extends Controller
                 'subCategories' => $data['subCategories']
             );
         }
-        //echo '<pre>'; print_r($data); exit('okok');
         return $this->load->view('common/menu', $data);
     }
 }
