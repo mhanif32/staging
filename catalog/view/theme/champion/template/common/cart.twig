@@ -95,16 +95,3 @@
         </li>
     </ul>
 </div>
-
-<script>
-    /* Search/Track Order */
-    $('#searchInputOrder input[name=\'search_order\']').parent().find('button').on('click', function () {
-        var url = $('base').attr('href') + 'index.php?route=account/order/track';
-
-        var value = $('#searchInputOrder input[name=\'search_order\']').val();
-        if (value) {
-            url += '&order_id=' + encodeURIComponent(value);
-        }
-        location = url;
-    });
-</script>
