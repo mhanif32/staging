@@ -20,6 +20,8 @@ class ControllerInformationBecomeDeliveryPartnerInfo extends Controller {
 
 
         $data['my_account_href'] = $this->url->link('account/edit', '', true);
+        $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
+
 
 
         // Load the template file and show output
