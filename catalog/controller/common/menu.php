@@ -42,7 +42,7 @@ class ControllerCommonMenu extends Controller
                         'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),
                         'subCategories' => !empty($subCategoriesArray) ? $subCategoriesArray : []
                     );
-                }
+                } 
 
                 // Level 1
                 $data['categories'][] = array(
