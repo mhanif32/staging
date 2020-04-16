@@ -37,12 +37,14 @@ class ControllerCommonFooter extends Controller {
         $data['login'] = $this->url->link('account/login', '', true);
         $data['logout'] = $this->url->link('account/logout', '', true);
         $data['logged'] = $this->customer->isLogged();
+
         $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
         $data['affiliate_info_href'] = $this->url->link('information/affiliate_info', '', true);
         $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
         $data['delivery_info_href'] = $this->url->link('information/delivery_info', '', true);
         $data['return_policy_href'] = $this->url->link('information/return_policy', '', true);
         $data['become_delivery_partner_info_href'] = $this->url->link('information/become_delivery_partner_info', '', true);
+        $data['become_our_partner_href'] = $this->url->link('information/become_our_partner_info', '', true);
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 
