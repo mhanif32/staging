@@ -104,6 +104,12 @@
                                     <option value="{{ seller.mpseller_id }}">{{ seller.store_name }}</option>
                                 {% endfor %}
                             </select>
+
+                            <label for="inputSubject" class="text-primary control-label mt-3">Subject</label>
+                            <input type="email" id="inputSubject" class="form-control" placeholder="" required="" autofocus="">
+
+
+
                             <div class="text-danger">{{ error_message }}</div>
                         </div>
 

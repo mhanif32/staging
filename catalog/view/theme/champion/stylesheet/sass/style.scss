@@ -149,7 +149,7 @@ p {font-size: 0.9375rem;}
 }
 
 // header style starts from here
-header {background: white;z-index: 9999;
+header {background: white;z-index: 9999; position: relative; z-index: 9999;
   .container-fluid{max-width: 1550px}
   .dropdown-left {right: 0 !important;left: auto !important;}
 
@@ -1299,5 +1299,22 @@ i{width: 20px;}}}}
       background-color: #87cefa52;
      transition: all .6s ease;
     }
+  }
+}
+
+
+//home banner dynamic
+.home-banner-dynamic {
+  .swiper-viewport {
+    border: none; box-shadow: none; border-radius: 0px; margin: 0;
+  }
+  .swiper-pagination {
+    bottom: 20px;
+  }
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 5px;}
+  .swiper-pagination-bullet-active {
+    background: $success;
   }
 }
