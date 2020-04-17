@@ -241,6 +241,13 @@ class ControllerAccountAccount extends Controller {
             $this->response->redirect($this->url->link('account/account', '', true));
         }
 
+        if (isset($this->session->data['success'])) {
+
+            unset($this->session->data['success']);
+        } else {
+            $data['success'] = '';
+        }
+
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 
             //update documents
@@ -269,8 +276,11 @@ class ControllerAccountAccount extends Controller {
                 move_uploaded_file($this->request->files['vehicle_insurance']['tmp_name'], $uploads_dir . $this->request->files['vehicle_insurance']['name']);
                 $dataFile['vehicle_insurance'] = $this->request->files['vehicle_insurance']['name'];
             }
-//echo '<pre>';print_r($this->request->post);exit('aaa');
+
             $this->model_account_customer->updateDeliveryInfos($this->customer->getId(), $this->request->post, $dataFile);
+            $data['success'] = $this->session->data['success'] = 'Success : Your DELIVERY PARTNER INFO
+ has been successfully updated.
+';
         }
 
         $data['back'] = $this->url->link('account/account', '', true);

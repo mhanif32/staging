@@ -2,23 +2,28 @@
 <section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
-{#            {{ profile_column_left }}#}
+            {#            {{ profile_column_left }}#}
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="py-5">
                     <div class="form-signin card py-4 px-2">
                         <div id="delivery-info" class="container">
                             <div class="row">
                                 <div id="content" class="col-sm-12">
+                                    {% if success %}
+                                        <div class="alert alert-success alert-dismissible"><i
+                                                    class="fa fa-check-circle"></i> {{ success }}</div>
+                                    {% endif %}
                                     <div class="justify-content-between row mx-0">
-                                    <h4 class="f-20 font-weight-bold text-uppercase mb-3">Update Delivery Partner Info</h4>
-                                    <div class="my-auto">
-                                        <button type="submit" form="form-delivery" data-toggle="tooltip"
-                                                title="Save" class="btn btn-primary"><i
-                                                    class="fa fa-save"></i> Save
-                                        </button>
-                                        <a href='javascript:history.back(1);' data-toggle="tooltip" title="Cancel"
-                                           class="btn btn-default"><i class="fa fa-reply"></i> Cancel</a>
-                                    </div>
+                                        <h4 class="f-20 font-weight-bold text-uppercase mb-3">Update Delivery Partner
+                                            Info</h4>
+                                        <div class="my-auto">
+                                            <button type="submit" form="form-delivery" data-toggle="tooltip"
+                                                    title="Save" class="btn btn-primary"><i
+                                                        class="fa fa-save"></i> Save
+                                            </button>
+                                            <a href='javascript:history.back(1);' data-toggle="tooltip" title="Cancel"
+                                               class="btn btn-default"><i class="fa fa-reply"></i> Cancel</a>
+                                        </div>
                                     </div>
 
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
@@ -348,7 +353,7 @@
                 } else {
                     areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
                 }
-                    $('select[name=\'delivery_info[' + dataZoneId + '][area_id]\']').html(areaHtml);
+                $('select[name=\'delivery_info[' + dataZoneId + '][area_id]\']').html(areaHtml);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
