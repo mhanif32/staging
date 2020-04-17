@@ -12,11 +12,11 @@ $_['text_checkout_shipping_method']  = '<span class="step-style"> Step %s </span
 $_['text_checkout_payment_method']   = '<span class="step-style"> Step %s </span> Payment Method';
 $_['text_checkout_confirm']          = '<span class="step-style"> Step %s </span> Confirm Order';
 $_['text_modify']                    = 'Modify &raquo;';
-$_['text_new_customer']              = 'Create A New Account';
+$_['text_new_customer']              = 'New Customer';
 $_['text_returning_customer']        = 'Existing User';
 $_['text_checkout']                  = 'Checkout Options:';
 $_['text_i_am_returning_customer']   = 'I am a Existing User';
-$_['text_register']                  = 'Register Account';
+$_['text_register']                  = 'Create A New Account';
 $_['text_guest']                     = 'Guest Checkout';
 $_['text_register_account']          = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
 $_['text_forgotten']                 = 'Forgotten Password';
