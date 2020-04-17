@@ -472,7 +472,7 @@ class ControllerAccountEnquiries extends Controller
         $this->load->model('mpmultivendor/mv_seller');
 
         $this->load->language('mpmultivendor/store_profile');
-//print_r($this->request->post['seller_id']);exit();
+
         if (empty($this->request->post['seller_id'])) {
             $json['error'] = $this->language->get('error_seller_id');
         }
@@ -488,6 +488,8 @@ class ControllerAccountEnquiries extends Controller
                 'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
                 'email' => $this->customer->getEmail(),
                 'message' => $this->request->post['message'],
+                'subject' => $this->request->post['subject'],
+                'product_name' => $this->request->post['product_name'],
             );
             $this->model_mpmultivendor_mv_seller->sendEnquiry($enquiry_data);
 

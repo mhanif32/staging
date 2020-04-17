@@ -242,6 +242,15 @@ class ModelCheckoutOrder extends Model {
 		
 		return $query->rows;
 	}
+
+    public function getSellerDataFrProductId($product_id)
+    {
+        $query = $this->db->query("SELECT mpseller_id, store_name, email,telephone FROM " . DB_PREFIX . "product p
+        LEFT JOIN " . DB_PREFIX . "mpseller mp ON p.mpseller_id=mp.mpseller_id
+        WHERE p.product_id = '" . (int)$product_id . "'");
+
+        return $query->row;
+    }
 	
 	public function getOrderOptions($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");

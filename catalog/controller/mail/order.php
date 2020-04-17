@@ -410,13 +410,19 @@ class ControllerMailOrder extends Controller {
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);					
 				}
+
+				//get seller data
+                $sellerData = $this->model_checkout_order->getSellerDataFrProductId($order_product['product_Id']);
 					
 				$data['products'][] = array(
 					'name'     => $order_product['name'],
 					'model'    => $order_product['model'],
 					'quantity' => $order_product['quantity'],
 					'option'   => $option_data,
-					'total'    => html_entity_decode($this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8')
+					'total'    => html_entity_decode($this->currency->format($order_product['total'] + ($this->config->get('config_tax') ? ($order_product['tax'] * $order_product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8'),
+                    'sellerEmail' => !empty($sellerData['email']) ? $sellerData['email'] : '',
+                    'sellerStore' => !empty($sellerData['store_name']) ? $sellerData['store_name'] : '',
+                    'sellerPhone' => !empty($sellerData['telephone']) ? $sellerData['telephone'] : '',
 				);
 			}
 			

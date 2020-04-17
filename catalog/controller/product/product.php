@@ -718,8 +718,8 @@ class ControllerProductProduct extends Controller {
     {
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
-        $data = array();
 
+        $data = array();
         if(!empty($this->request->post['dataId'])) {
 
             $sizeChartId = $this->request->post['dataId'];

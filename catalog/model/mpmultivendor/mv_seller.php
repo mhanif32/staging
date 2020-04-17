@@ -9,7 +9,7 @@ class ModelMpmultivendorMvSeller extends Model {
 	}
 
 	public function sendEnquiry($data) {
-		$this->db->query("INSERT INTO ". DB_PREFIX ."mpseller_enquiry SET mpseller_id = '". (int)$data['mpseller_id'] ."', customer_id = '". (int)$data['customer_id'] ."', name = '". $this->db->escape($data['name']) ."', email = '". $this->db->escape($data['email']) ."', message = '". $this->db->escape($data['message']) ."', date_added = NOW(), date_modified = NOW()");
+		$this->db->query("INSERT INTO ". DB_PREFIX ."mpseller_enquiry SET mpseller_id = '". (int)$data['mpseller_id'] ."', customer_id = '". (int)$data['customer_id'] ."', name = '". $this->db->escape($data['name']) ."', email = '". $this->db->escape($data['email']) ."', message = '". $this->db->escape($data['message']) ."', date_added = NOW(), date_modified = NOW(), subject = '". $this->db->escape($data['subject']) ."', product_name = '". $this->db->escape($data['product_name']) ."'");
 
 		$mpseller_enquiry_id = $this->db->getLastId();
 

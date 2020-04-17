@@ -104,13 +104,16 @@
                                     <option value="{{ seller.mpseller_id }}">{{ seller.store_name }}</option>
                                 {% endfor %}
                             </select>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="inputProductName" class="text-primary control-label mt-3">Product Name</label>
+                            <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Product Name">
+                        </div>
+
+                        <div class="form-group">
                             <label for="inputSubject" class="text-primary control-label mt-3">Subject</label>
-                            <input type="email" id="inputSubject" class="form-control" placeholder="" required="" autofocus="">
-
-
-
-                            <div class="text-danger">{{ error_message }}</div>
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
                         </div>
 
                         <div class="form-group required">
@@ -159,11 +162,13 @@
     $('#button-submit').click(function () {
         var seller_id = $('#seller_id').val();
         var message = $('#message').val();
+        var subject = $('#subject').val();
+        var product_name = $('#product_name').val();
         $.ajax({
             url: 'index.php?route=account/enquiries/create',
             dataType: 'json',
             type: 'post',
-            data: {seller_id: seller_id, message: message},
+            data: {seller_id: seller_id, message: message, subject: subject, product_name: product_name},
             beforeSend: function () {
                 $('#button-submit').button('loading');
             },

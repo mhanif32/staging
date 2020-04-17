@@ -104,7 +104,7 @@ class ModelAccountEnquiries extends Model {
 		$pending_conversations = $this->getRecentReplies($data['enquiry_id']);
 		// Show Pending Conversations Ends
 
-		$this->db->query("INSERT INTO " . DB_PREFIX . "mpseller_enquiry_chat SET mpseller_enquiry_id = '". (int)$data['enquiry_id'] ."', mpseller_id = '". (int)$data['mpseller_id'] ."', customer_id = '". (int)$data['customer_id'] ."', `from` = '". $this->db->escape($data['from']) ."', message = '". $this->db->escape($data['message']) ."', date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "mpseller_enquiry_chat SET mpseller_enquiry_id = '". (int)$data['enquiry_id'] ."', mpseller_id = '". (int)$data['mpseller_id'] ."', customer_id = '". (int)$data['customer_id'] ."', `from` = '". $this->db->escape($data['from']) ."', mess, subject = '". $this->db->escape($data['subject']) ."', product_name = '". $this->db->escape($data['product_name']) ."'age = '". $this->db->escape($data['message']) ."', date_added = NOW()");
 
 		$this->db->query("UPDATE " . DB_PREFIX . "mpseller_enquiry SET date_modified = NOW() WHERE mpseller_enquiry_id = '". (int)$data['enquiry_id'] ."'");
 
