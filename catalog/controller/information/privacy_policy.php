@@ -1,7 +1,7 @@
 <?php
 class ControllerInformationPrivacyPolicy extends Controller {
     public function index() {
-              // All the necessary page elements
+        // All the necessary page elements
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
         $data['content_top'] = $this->load->controller('common/content_top');

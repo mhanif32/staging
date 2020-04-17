@@ -12,7 +12,7 @@ $_['text_checkout_shipping_method']  = '<span class="step-style"> Step %s </span
 $_['text_checkout_payment_method']   = '<span class="step-style"> Step %s </span> Payment Method';
 $_['text_checkout_confirm']          = '<span class="step-style"> Step %s </span> Confirm Order';
 $_['text_modify']                    = 'Modify &raquo;';
-$_['text_new_customer']              = 'New Customer';
+$_['text_new_customer']              = 'Create A New Account';
 $_['text_returning_customer']        = 'Existing User';
 $_['text_checkout']                  = 'Checkout Options:';
 $_['text_i_am_returning_customer']   = 'I am a Existing User';
