@@ -219,6 +219,9 @@ class ControllerAccountAccount extends Controller {
 
     public function addDeliveryInfo()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         $this->load->language('account/delivery_partner');
 
         if (!$this->customer->isLogged()) {
@@ -303,7 +306,7 @@ class ControllerAccountAccount extends Controller {
         $uploads_dir = 'image/deliverypartner/customer-'.$this->customer->getId().'/';
         if(isset($this->request->post['id_proof'])) {
             $data['link_id_proof'] = $this->request->post['id_proof'];
-        } else if($partnerInfos['id_proof']) {
+        } else if(isset($partnerInfos['id_proof']) && $partnerInfos['id_proof']) {
             $data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['id_proof'];
         } else {
             $data['link_id_proof'] = '';
@@ -311,7 +314,7 @@ class ControllerAccountAccount extends Controller {
 
         if(isset($this->request->post['address_proof'])) {
             $data['link_address_proof'] = $this->request->post['address_proof'];
-        } else if($partnerInfos['address_proof']) {
+        } else if(isset($partnerInfos['address_proof']) && $partnerInfos['address_proof']) {
             $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$partnerInfos['address_proof'];
         } else {
             $data['link_address_proof'] = '';
@@ -319,7 +322,7 @@ class ControllerAccountAccount extends Controller {
 
         if(isset($this->request->post['travel_license'])) {
             $data['link_travel_license'] = $this->request->post['travel_license'];
-        } else if($partnerInfos['travel_license']) {
+        } else if(isset($partnerInfos['travel_license']) && $partnerInfos['travel_license']) {
             $data['link_travel_license'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['travel_license'];
         } else {
             $data['link_travel_license'] = '';
@@ -327,7 +330,7 @@ class ControllerAccountAccount extends Controller {
 
         if(isset($this->request->post['vehicle_insurance'])) {
             $data['link_vehicle_insurance'] = $this->request->post['vehicle_insurance'];
-        } else if($partnerInfos['vehicle_insurance']) {
+        } else if(isset($partnerInfos['vehicle_insurance']) && $partnerInfos['vehicle_insurance']) {
             $data['link_vehicle_insurance'] =$this->config->get('config_ssl').$uploads_dir.$partnerInfos['vehicle_insurance'];
         } else {
             $data['link_vehicle_insurance'] = '';

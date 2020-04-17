@@ -248,7 +248,7 @@ class ModelAccountCustomer extends Model
 
             $sql = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "',";
             $sql.= $fileSql;
-            $sql.="customer_id = '" . (int)$customer_id . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
+            $sql.="customer_id = '" . (int)$customer_id . "'";
             $this->db->query($sql);
         }
 
