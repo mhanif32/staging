@@ -14,18 +14,3 @@
 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <div class="elfsight-app-9711fefc-bc8b-4712-9285-e36e7d0ec1d2"></div>
 {{ footer }}
-
-<script>
-    /* Search/Track Order */
-    $('#searchInputOrder input[name=\'search_order\']').parent().find('button').on('click', function () {
-        var url = $('base').attr('href') + 'index.php?route=account/order/track';
-
-        var value = $('#searchInputOrder input[name=\'search_order\']').val();
-        if (value) {
-            url += '&order_id=' + encodeURIComponent(value);
-        }
-
-        location = url;
-
-    });
-</script>
