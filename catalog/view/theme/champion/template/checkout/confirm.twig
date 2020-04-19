@@ -53,10 +53,10 @@
 
         </table>
     </div>
-    {%  if subTotal >= 100 %}
+    {%  if subTotal >= max_checkout_amount %}
     {{ payment }}
       {% else %}
-          <div class="alert alert-danger alert-dismissible">Warning: Minimum Order Amount on this site is 100!<button type="button" class="close" data-dismiss="alert">×</button></div>
+          <div class="alert alert-danger alert-dismissible">Warning: Minimum Order Amount on this site is {{ max_checkout_amount }}!<button type="button" class="close" data-dismiss="alert">×</button></div>
       {% endif %}
         {% else %}
     <script type="text/javascript"><!--

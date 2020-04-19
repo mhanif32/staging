@@ -413,6 +413,7 @@ class ControllerCheckoutConfirm extends Controller {
 		}
 
         $data['subTotal'] = $this->cart->getSubtotal();
+		$data['max_checkout_amount'] = $this->config->get('config_max_checkout_amount');
 		$this->response->setOutput($this->load->view('checkout/confirm', $data));
 	}
 }

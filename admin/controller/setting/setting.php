@@ -501,6 +501,12 @@ class ControllerSettingSetting extends Controller {
 			$data['config_checkout_id'] = $this->config->get('config_checkout_id');
 		}
 
+        if (isset($this->request->post['config_max_checkout_amount'])) {
+            $data['config_max_checkout_amount'] = $this->request->post['config_max_checkout_amount'];
+        } else {
+            $data['config_max_checkout_amount'] = $this->config->get('config_max_checkout_amount');
+        }
+
 		if (isset($this->request->post['config_invoice_prefix'])) {
 			$data['config_invoice_prefix'] = $this->request->post['config_invoice_prefix'];
 		} elseif ($this->config->get('config_invoice_prefix')) {
