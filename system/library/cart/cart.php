@@ -261,7 +261,8 @@ class Cart {
 					'width'           => $product_query->row['width'],
 					'height'          => $product_query->row['height'],
 					'length_class_id' => $product_query->row['length_class_id'],
-					'recurring'       => $recurring
+					'recurring'       => $recurring,
+					'mpseller_id'       => $product_query->row['mpseller_id'],
 				);
 			} else {
 				$this->remove($cart['cart_id']);
