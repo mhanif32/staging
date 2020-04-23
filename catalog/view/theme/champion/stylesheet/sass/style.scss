@@ -1142,10 +1142,18 @@ i{width: 20px;}}}}
 
 .mv-seller-store {
   #find-category{
-    .label-category{border-radius: 0;}
+    .label-category{border-radius: 0; transition: all .5s ease;
+      &:hover { background-color: $success; transition: all .5s ease; color: $white;}
+    }
     .label-category-green {
     background: $success; border-radius: 0;
-  }}
+  }
+
+    .scrollmenu { overflow: auto; white-space: nowrap; }
+
+
+
+  }
   .mvndr-dl{
     .follow-us ul li{ display: inline-block; }
   }

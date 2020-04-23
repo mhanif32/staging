@@ -6,7 +6,7 @@
                 <div class="">
                     <img src="catalog/view/theme/champion/image/retailer-image.png" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Retailers</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Shopping By Retailer</h6>
                         <p>
                             {{ count_retailers }}
                         </p>
@@ -47,12 +47,11 @@
 
 <section class="top-collection pb-3">
     <div class="container pt-md-3 pb-4">
-        <h3 class="text-center mb-4 text-primary text-uppercase font-weight-bolder">{{ heading_title }}</h3>
-        <p style="font-size: 0.9375rem;" class="text-center text-secondary">Aenean sed nibh a magna posuere tempor. Nunc
-            faucibus pellentesque
-            nunc in aliquet. Donec congue, nunc vel tempor congue, enim sapien lobortis ipsum, in volutpat sem ex in
-            ligula.
-            Nunc purus est, consequat condimentum faucibus sed, iaculis sit amet massa.</p>
+        <h3 class="text-center mb-4 text-primary text-uppercase font-weight-bolder">
+            {#{{ heading_title }}#}
+            These are our recent top bought products.
+        </h3>
+        <p style="font-size: 0.9375rem;" class="text-center text-secondary"></p>
         <div class="row pt-4">
             {% for product in products %}
                 <div class="col-lg-3 col-md-3 col-sm-6 px-3 mb-4 product-layout">

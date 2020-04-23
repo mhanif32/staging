@@ -16,6 +16,7 @@
                         {{ store_profile }}
                     </div>
                     <div class="col-sm-9">
+                        <a href='javascript:history.back(1);' class=""><i class="fas fa-long-arrow-alt-left f-35 on-hover position-absolute" style="z-index: 1; left: 25px"></i></a>
                         {{ store_banner }}
 
                         <div class="row">
@@ -23,17 +24,32 @@
                                 <div class="form-group">
                                     <div id="find-category">
                                         <h3>{{ entry_category }}</h3>
+
+                                        <div class="scrollmenu">
+
+
+
                                         <a href="{{ no_category_href }}"
                                            class="{{ filter_category_id ? 'label-category' : 'label-category-green' }} f-13 p-2">{{ text_all_category }}</a>
                                         {% for product_category in product_categories %}
                                             {% if product_category.category_id == filter_category_id %}
-                                                <a href="{{ product_category.href }}"><label
-                                                            class="label-category-green f-13 p-2">{{ product_category.name }}</label></a>
+                                                <a href="{{ product_category.href }}">
+                                                    <label
+                                                            class="label-category-green f-13 p-2 border-0">{{ product_category.name }}</label>
+                                                </a>
                                             {% else %}
                                                 <a href="{{ product_category.href }}"><label
-                                                            class="label-category f-13 p-2">{{ product_category.name }}</label></a>
+                                                            class="label-category f-13 p-2 border-0">{{ product_category.name }}</label></a>
                                             {% endif %}
                                         {% endfor %}
+
+
+</div>
+
+
+
+
+
                                     </div>
                                 </div>
                             </div>
