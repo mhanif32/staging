@@ -154,7 +154,7 @@
                   <td class="text-right"><?php echo $order['order_id']; ?></td>
                   <td class="text-left"><?php echo $order['customer']; ?></td>
                   <td class="text-center">
-                    <table class="table table-bordered mp-orderproducts">
+                    <table class="table mp-orderproducts">
                       <thead>
                         <tr>
                           <td><?php echo $column_product_name; ?></td>

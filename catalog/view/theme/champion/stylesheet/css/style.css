@@ -1448,10 +1448,20 @@ footer ul {
     width: 20px; }
 
 .mv-seller-store #find-category .label-category {
-  border-radius: 0; }
+  border-radius: 0;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
+  .mv-seller-store #find-category .label-category:hover {
+    background-color: #01B0F1;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    color: #fff; }
 .mv-seller-store #find-category .label-category-green {
   background: #01B0F1;
   border-radius: 0; }
+.mv-seller-store #find-category .scrollmenu {
+  overflow: auto;
+  white-space: nowrap; }
 .mv-seller-store .mvndr-dl .follow-us ul li {
   display: inline-block; }
 
