@@ -48,6 +48,8 @@ class ControllerCommonColumnLeft extends Controller {
 		foreach ($modules as $module) {
 			$part = explode('.', $module['code']);
 			if (isset($part[0]) && $this->config->get('module_' . $part[0] . '_status')) {
+
+                echo '<pre>';print_r($part[0]);exit('asd');
 				$module_data = $this->load->controller('extension/module/' . $part[0]);
 
 				if ($module_data) {
@@ -72,7 +74,7 @@ class ControllerCommonColumnLeft extends Controller {
 //			}
 		}
 
-		//echo '<pre>';print_r($data);exit('asd');
+		echo '<pre>';print_r($modules);exit('asd');
 
 		return $this->load->view('common/column_left', $data);
 	}

@@ -72,16 +72,31 @@ class ControllerExtensionModuleFeatured extends Controller {
         $categoryMen = $this->model_catalog_product->getCountMen();
         $data['count_men'] = $categoryMen['total'];
         $data['path_men'] = !empty($categoryMen['total']) ? $this->url->link('product/category', 'path=' . $categoryMen['path']) : '#';
+        if ($categoryMen['image']) {
+            $data['women_thumb'] = $this->model_tool_image->resize($categoryMen['image'], 250, 177);
+        } else {
+            $data['women_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
+        }
 
         //women count and path
         $categoryWomen = $this->model_catalog_product->getCountWomen();
         $data['count_women'] = $categoryWomen['total'];
         $data['path_women'] = !empty($categoryWomen['total']) ? $this->url->link('product/category', 'path=' . $categoryWomen['path']) : '#';
+        if ($categoryWomen['image']) {
+            $data['women_thumb'] = $this->model_tool_image->resize($categoryWomen['image'], 250, 177);
+        } else {
+            $data['women_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
+        }
 
         //brand category and path
         $categoryDesignerBrands = $this->model_catalog_product->getCountDesignerBrands();
         $data['count_brands'] = $categoryDesignerBrands['total'];
         $data['path_brands'] = !empty($categoryDesignerBrands['total']) ? $this->url->link('product/category', 'path=' . $categoryDesignerBrands['path']) : '#';
+        if ($categoryDesignerBrands['image']) {
+            $data['brand_thumb'] = $this->model_tool_image->resize($categoryDesignerBrands['image'], 250, 177);
+        } else {
+            $data['brand_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
+        }
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);

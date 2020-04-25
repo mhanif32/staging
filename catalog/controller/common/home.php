@@ -2,9 +2,6 @@
 class ControllerCommonHome extends Controller {
 	public function index() {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
 		$this->document->setTitle($this->config->get('config_meta_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		$this->document->setKeywords($this->config->get('config_meta_keyword'));
