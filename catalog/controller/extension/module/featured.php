@@ -1,6 +1,8 @@
 <?php
 class ControllerExtensionModuleFeatured extends Controller {
 	public function index($setting) {
+
+	    //print_r($setting);exit('ook');
 		$this->load->language('extension/module/featured');
 
 		$this->load->model('catalog/product');

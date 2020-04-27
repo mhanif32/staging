@@ -379,8 +379,8 @@ class ControllerAccountOrder extends Controller {
 		$this->response->redirect($this->url->link('account/order/info', 'order_id=' . $order_id));
 	}
 
-    public function track(){
-
+    public function track()
+    {
 	    $data = array();
 
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -396,7 +396,8 @@ class ControllerAccountOrder extends Controller {
         $this->load->model('account/order');
         $orderId = !empty($this->request->get['order_id']) ? $this->request->get['order_id'] : '';
         $data['order_status'] = $this->model_account_order->getTrackTotalOrders($orderId);
-
+        $data['order_id'] = $orderId;
+        $data['action'] = $this->url->link('account/order/track');
         $this->response->setOutput($this->load->view('account/order_track', $data));
     }
 
