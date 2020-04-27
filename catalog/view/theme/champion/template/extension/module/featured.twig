@@ -4,9 +4,9 @@
             <div class="col-md-3">
                 <a href="{{ sellers_href }}">
                 <div class="">
-                    <img src="catalog/view/theme/champion/image/retailer-image.png" alt="" class="img-fluid">
+                    <img src="{{ RetailerBanners.image }}" alt="" class="img-fluid">
                     <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Shopping By Retailer</h6>
+                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">{{ RetailerBanners.title }}</h6>
                         <p>
                             {{ count_retailers }} Sellers
                         </p>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-3">
                 <div class="">
-                    <img src="{{ women_thumb }}" alt="" class="img-fluid">
+                    <img src="{{ men_thumb }}" alt="" class="img-fluid">
                     <div class="">
                         <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Men</h6>
                         <p class="f-14"><a href="{{ path_men }}"> {{ count_men }} Items</a></p>
