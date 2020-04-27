@@ -395,7 +395,7 @@ class ControllerAccountOrder extends Controller {
         $data['orders'] = array();
         $this->load->model('account/order');
         $orderId = !empty($this->request->get['order_id']) ? $this->request->get['order_id'] : '';
-        $data['order_status'] = $this->model_account_order->getTrackTotalOrders($orderId);
+        $data['order_status'] = !empty($orderId) ? $this->model_account_order->getTrackTotalOrders($orderId) : '';
         $data['order_id'] = $orderId;
         $data['action'] = $this->url->link('account/order/track');
         $this->response->setOutput($this->load->view('account/order_track', $data));
