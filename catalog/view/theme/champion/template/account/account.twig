@@ -13,136 +13,139 @@
                             {% endif %}
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
-                                    <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-6 py-3">
-                                            <div class="media">
-                                                <div class="media-left mr-3">
-                                                    <a href="{{ edit }}">
-                                                        <i class="fas fa-user-circle f-60 text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading mb-0">
-                                                        <a href="{{ edit }}"
-                                                           class="f-15 font-weight-bold">{{ text_edit }}</a>
-                                                    </h4>
-                                                    <p>
-                                                        <a href="{{ edit }}" class="f-13 text-muted">Edit your account
-                                                            details</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 py-3 pl-md-5 border-left">
-                                            <div class="media">
-                                                <div class="media-left mr-3">
-                                                    <a href="{{ password }}">
-                                                        <i class="fas fa-unlock-alt f-60 text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading mb-0">
-                                                        <a href="{{ password }}"
-                                                           class="f-15 font-weight-bold">{{ text_password }}</a>
-                                                    </h4>
-                                                    <p>
-                                                        <a href="{{ password }}" class="f-13 text-muted">Reset your
-                                                            password</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 py-3">
-                                            <div class="media">
-                                                <div class="media-left mr-3">
-                                                    <a href="{{ address }}">
-                                                        <i class="far fa-address-book f-60 text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading mb-0">
-                                                        <a href="{{ address }}"
-                                                           class="f-15 font-weight-bold">{{ text_address }}</a>
-                                                    </h4>
-                                                    <p>
-                                                        <a href="{{ address }}" class="f-13 text-muted">Edit your address
-                                                            details</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% if role == 'buyer' %}
-                                        <div class="col-md-6 py-3 pl-md-5 border-left">
-                                            <div class="media">
-                                                <div class="media-left mr-3">
-                                                    <a href="{{ wishlist }}">
-                                                        <i class="fas fa-heart f-60 text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading mb-0">
-                                                        <a href="{{ wishlist }}"
-                                                           class="f-15 font-weight-bold">{{ text_wishlist }}</a>
-                                                    </h4>
-                                                    <p>
-                                                        <a href="{{ wishlist }}" class="f-13 text-muted">Edit your wishlist</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% if role == 'delivery-partner' %}
-                                            <div class="col-md-6 py-3 pl-md-5 border-left">
-                                                <div class="media">
-                                                    <div class="media-left mr-3">
-                                                        <a href="{{ delivery_partner_link }}">
-                                                            <i class="fas fa-truck f-60 text-success"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading mb-0">
-                                                            <a href="{{ delivery_partner_link }}"
-                                                               class="f-15 font-weight-bold">{{ text_delivery_partner }}</a>
-                                                        </h4>
-                                                        <p>
-                                                            <a href="{{ delivery_partner_link }}" class="f-13 text-muted">Edit your delivery locations & documents</a>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-
-                            {% if credit_cards %}
-                            <h3 class="f-20 font-weight-bold text-uppercase">{{ text_credit_card }}</h3>
+                            <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
                             <hr>
                             <div class="row">
-                                {% for credit_card in credit_cards %}
                                 <div class="col-md-6 py-3">
                                     <div class="media">
                                         <div class="media-left mr-3">
-                                            <a href="{{ credit_card.href }}">
-                                                <i class="fas fa-credit-card f-60 text-success"></i>
+                                            <a href="{{ edit }}">
+                                                <i class="fas fa-user-circle f-60 text-success"></i>
                                             </a>
                                         </div>
                                         <div class="media-body">
                                             <h4 class="media-heading mb-0">
-                                                <a href="{{ credit_card.href }}"
-                                                   class="f-15 font-weight-bold">{{ credit_card.name }}</a>
+                                                <a href="{{ edit }}"
+                                                   class="f-15 font-weight-bold">{{ text_edit }}</a>
                                             </h4>
                                             <p>
-                                                <a href="{{ credit_card.href }}" class="f-13 text-muted">Edit your credit card
+                                                <a href="{{ edit }}" class="f-13 text-muted">Edit your account
                                                     details</a>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                {% endfor %}
+                                <div class="col-md-6 py-3 pl-md-5 border-left">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ password }}">
+                                                <i class="fas fa-unlock-alt f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ password }}"
+                                                   class="f-15 font-weight-bold">{{ text_password }}</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ password }}" class="f-13 text-muted">Reset your
+                                                    password</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 py-3">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ address }}">
+                                                <i class="far fa-address-book f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ address }}"
+                                                   class="f-15 font-weight-bold">{{ text_address }}</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ address }}" class="f-13 text-muted">Edit your address
+                                                    details</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if role == 'buyer' %}
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ wishlist }}">
+                                                    <i class="fas fa-heart f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ wishlist }}"
+                                                       class="f-15 font-weight-bold">{{ text_wishlist }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ wishlist }}" class="f-13 text-muted">Edit your
+                                                        wishlist</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if role == 'delivery-partner' %}
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ delivery_partner_link }}">
+                                                    <i class="fas fa-truck f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ delivery_partner_link }}"
+                                                       class="f-15 font-weight-bold">{{ text_delivery_partner }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ delivery_partner_link }}" class="f-13 text-muted">Edit
+                                                        your delivery locations & documents</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {% if credit_cards %}
+                                <h3 class="f-20 font-weight-bold text-uppercase">{{ text_credit_card }}</h3>
+                                <hr>
+                                <div class="row">
+                                    {% for credit_card in credit_cards %}
+                                        <div class="col-md-6 py-3">
+                                            <div class="media">
+                                                <div class="media-left mr-3">
+                                                    <a href="{{ credit_card.href }}">
+                                                        <i class="fas fa-credit-card f-60 text-success"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading mb-0">
+                                                        <a href="{{ credit_card.href }}"
+                                                           class="f-15 font-weight-bold">{{ credit_card.name }}</a>
+                                                    </h4>
+                                                    <p>
+                                                        <a href="{{ credit_card.href }}" class="f-13 text-muted">Edit
+                                                            your credit card
+                                                            details</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             {% endif %}
 
                             <h3 class="f-20 font-weight-bold text-uppercase mt-4"">MY ORDER</h3>
@@ -161,7 +164,8 @@
                                                    class="f-15 font-weight-bold">Order History</a>
                                             </h4>
                                             <p>
-                                                <a href="{{ order_hidtory_link }}" class="f-13 text-muted">View order history details</a>
+                                                <a href="{{ order_hidtory_link }}" class="f-13 text-muted">View order
+                                                    history details</a>
                                             </p>
                                         </div>
                                     </div>
@@ -180,120 +184,125 @@
                                                    class="f-15 font-weight-bold">Your Transactions</a>
                                             </h4>
                                             <p>
-                                                <a href="{{ transactions_link }}" class="f-13 text-muted">Add your new product</a>
+                                                <a href="{{ transactions_link }}" class="f-13 text-muted">Add your new
+                                                    product</a>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-
 
 
                             {% if is_seller %}
-                            <h3 class="f-20 font-weight-bold text-uppercase mt-4">Seller Panel</h3>
-                            <hr>
-                            {% if checkIsSellerApproved %}
-                            <div class="row">
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ dashboard_link }}">
-                                                <i class="fa fa-tachometer f-60 text-success"></i>
-                                            </a>
+                                <h3 class="f-20 font-weight-bold text-uppercase mt-4">Seller Panel</h3>
+                                <hr>
+                                {% if checkIsSellerApproved %}
+                                    <div class="row">
+                                        <div class="col-md-6 py-3">
+                                            <div class="media">
+                                                <div class="media-left mr-3">
+                                                    <a href="{{ dashboard_link }}">
+                                                        <i class="fa fa-tachometer f-60 text-success"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading mb-0">
+                                                        <a href="{{ dashboard_link }}"
+                                                           class="f-15 font-weight-bold">Dashboard</a>
+                                                    </h4>
+                                                    <p>
+                                                        <a href="{{ dashboard_link }}" class="f-13 text-muted">View
+                                                            seller dashboard details</a>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ dashboard_link }}"
-                                                   class="f-15 font-weight-bold">Dashboard</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ dashboard_link }}" class="f-13 text-muted">View seller dashboard details</a>
-                                            </p>
+                                        <div class="col-md-6 py-3 pl-md-5 border-left">
+                                            <div class="media">
+                                                <div class="media-left mr-3">
+                                                    <a href="{{ product_link }}">
+                                                        <i class="fab fa-product-hunt f-60 text-success"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading mb-0">
+                                                        <a href="{{ product_link }}"
+                                                           class="f-15 font-weight-bold">Add New Product</a>
+                                                    </h4>
+                                                    <p>
+                                                        <a href="{{ product_link }}" class="f-13 text-muted">Add your
+                                                            new product</a>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 py-3 pl-md-5 border-left">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ product_link }}">
-                                                <i class="fab fa-product-hunt f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ product_link }}"
-                                                   class="f-15 font-weight-bold">Add New Product</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ product_link }}" class="f-13 text-muted">Add your new product</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% endif %}
 
-                            <div class="row">
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ seller_link }}">
-                                                <i class="fa fa-info-circle f-60 text-success"></i>
-                                            </a>
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ seller_link }}">
+                                                    <i class="fa fa-info-circle f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ seller_link }}"
+                                                       class="f-15 font-weight-bold">{{ checkIsSellerApprovedtext }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ seller_link }}" class="f-13 text-muted">Get paid by
+                                                        selling your work!</a>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ seller_link }}"
-                                                   class="f-15 font-weight-bold">{{ checkIsSellerApprovedtext }}</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ seller_link }}" class="f-13 text-muted">Get paid by selling your work!</a>
-                                            </p>
+                                    </div>
+
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ seller_messages }}">
+                                                    <i class="fa fa-comments-o f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ seller_messages }}"
+                                                       class="f-15 font-weight-bold">{{ text_messages }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ seller_messages }}" class="f-13 text-muted">Add to
+                                                        conversation with Admin</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 py-3 pl-md-5 border-left">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ seller_messages }}">
-                                                <i class="fa fa-comments-o f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ seller_messages }}"
-                                                   class="f-15 font-weight-bold">{{ text_messages }}</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ seller_messages }}" class="f-13 text-muted">Add to conversation with Admin</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ edit_product_href }}">
-                                                <i class="far fa-edit f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ edit_product_href }}"
-                                                   class="f-15 font-weight-bold">{{ edit_product }}</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ edit_product_href }}" class="f-13 text-muted">Edit your existing products</a>
-                                            </p>
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ edit_product_href }}">
+                                                    <i class="far fa-edit f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ edit_product_href }}"
+                                                       class="f-15 font-weight-bold">{{ edit_product }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ edit_product_href }}" class="f-13 text-muted">Edit your
+                                                        existing products</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endif %}
 
                             {% if role == 'buyer' %}
@@ -313,7 +322,8 @@
                                                        class="f-15 font-weight-bold">{{ text_order }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ order }}" class="f-13 text-muted">View your order details</a>
+                                                    <a href="{{ order }}" class="f-13 text-muted">View your order
+                                                        details</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -332,12 +342,12 @@
                                                        class="f-15 font-weight-bold">Return Product History</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="#" class="f-13 text-muted">View your return product history</a>
+                                                    <a href="#" class="f-13 text-muted">View your return product
+                                                        history</a>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             {% endif %}
 
@@ -363,207 +373,13 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             {% endif %}
-
-
-</div>
-
-
-
-                            {#<div class="row">#}
-                            {#<div id="content" class="col-12 col-sm-6 col-md-4 col-lg-4">#}
-                                {#<div class="card p-lg-4 p-3 h-100">#}
-                                    {#<h4 class="card-title">{{ text_my_account }}</h4>#}
-                                    {#<ul class="list-unstyled card-text">#}
-                                        {#<li><a href="{{ edit }}">{{ text_edit }}</a></li>#}
-                                        {#<li><a href="{{ password }}">{{ text_password }}</a></li>#}
-                                        {#<li><a href="{{ address }}">{{ text_address }}</a></li>#}
-                                        {#{% if role == 'buyer' %}#}
-                                            {#<li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>#}
-                                        {#{% endif %}#}
-                                    {#</ul>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#{% if credit_cards %}#}
-                                {#<div id="content" class="col-12 col-sm-6 col-md-4 col-lg-4">#}
-                                    {#<div class="card p-lg-4 p-3 h-100">#}
-                                        {#<h4>{{ text_credit_card }}</h4>#}
-                                        {#<ul class="list-unstyled">#}
-                                            {#{% for credit_card in credit_cards %}#}
-                                                {#<li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>#}
-                                            {#{% endfor %}#}
-                                        {#</ul>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#{% endif %}#}
-
-                            {#{% if is_seller %}#}
-                                {#<div id="content" class="col-12 col-sm-6 col-md-4 col-lg-4">#}
-                                    {#<div class="card p-lg-4 p-3 h-100">#}
-                                        {#<h4>Seller Panel</h4>#}
-                                        {#<ul class="list-unstyled">#}
-                                            {#<li><a href="{{ seller_link }}">{{ checkIsSellerApprovedtext }}</a></li>#}
-                                            {#{% if checkIsSellerApproved %}#}
-                                                {#<li><a href="{{ dashboard_link }}">Dashboard</a></li>#}
-                                                {#<li><a href="{{ product_link }}">Add New Product</a></li>#}
-                                            {#{% endif %}#}
-                                        {#</ul>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#{% endif %}#}
-
-                            {#{% if role == 'buyer' %}#}
-                                {#<div id="content" class="col-12 col-sm-6 col-md-4 col-lg-4">#}
-                                    {#<div class="card p-lg-4 p-3 h-100">#}
-                                        {#<h4>{{ text_my_orders }}</h4>#}
-                                        {#<ul class="list-unstyled">#}
-                                            {#<li><a href="{{ order }}">{{ text_order }}</a></li>#}
-                                        {#</ul>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#{% endif %}#}
-
-                            {#                                <div id="content" class="col-12 col-sm-4 col-md-4 col-lg-4">#}
-                            {#                                    <div class="card p-lg-5 p-3 h-100">#}
-                            {#                                        <h4>{{ text_my_affiliate }}</h4>#}
-                            {#                                        <ul class="list-unstyled">#}
-                            {#                                            {% if not tracking %}#}
-                            {#                                                <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>#}
-                            {#                                            {% else %}#}
-                            {#                                                <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>#}
-                            {#                                                <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>#}
-                            {#                                            {% endif %}#}
-                            {#                                        </ul>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                                <div id="content" class="col-12 col-sm-4 col-md-4 col-lg-4 mt-lg-4">#}
-                            {#                                    <div class="card p-lg-5 p-3 h-100">#}
-                            {#                                        <h4>{{ text_my_newsletter }}</h4>#}
-                            {#                                        <ul class="list-unstyled">#}
-                            {#                                            <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>#}
-                            {#                                        </ul>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                        {#</div>#}
-
-
-                    {% if order_status %}
-
-                        <div class="container my-4">
-
-
-                                <div class="row justify-content-between mx-4 mt-3">
-                                    <div class="d-flex">
-                                        <h5>ORDER <span
-                                                    class="text-primary font-weight-bold">#{{ order_status.invoice_prefix }}{{ order_status.order_id }}</span>
-                                        </h5>
-                                    </div>
-                                    <div class="d-flex flex-column text-sm-right">
-                                        <!--<p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-                                        <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>-->
-                                    </div>
-                                </div> <!-- Add class 'active' to progress -->
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-12">
-                                        <ul id="progressbar" class="text-center">
-                                            {% if order_status.status == 'Pending' %}
-                                                <li class="active step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                            {% elseif order_status.status == 'Processing' %}
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                            {% elseif order_status.status == 'Processed' %}
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                            {% elseif order_status.status == 'Shipped' %}
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="step0"></li>
-                                            {% elseif order_status.status == 'Complete' %}
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                                <li class="active step0"></li>
-                                            {% else %}
-                                                <li class="step0">{{ order_status.status }}</li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                                <li class="step0"></li>
-                                            {% endif %}
-
-                                        </ul>
-                                    </div>
-                                </div>
-
-
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-12">
-                                        <ul id="progressbar-icons" class="text-center">
-                                            <li class="">
-                                                <div class="">
-                                                    <i class="fas fa-pause-circle f-35"></i>
-                                                    <p class="font-weight-bold">Order<br>Pending</p>
-                                                </div>
-                                            </li>
-                                            <li class="">
-                                                <div class="">
-                                                    <i class="fas fa-truck f-35"></i>
-                                                    <p class="font-weight-bold">Order<br>Processing</p>
-                                                </div>
-                                            </li>
-                                            <li class="">
-                                                <div class="">
-                                                    <i class="fas fa-shipping-fast f-35"></i>
-                                                    <p class="font-weight-bold">Order<br>Processed</p>
-                                                </div>
-                                            </li>
-                                            <li class="">
-                                                <div class="">
-                                                    <i class="fas fa-truck-loading f-35"></i>
-                                                    <p class="font-weight-bold">Order<br>Shipped</p>
-                                                </div>
-                                            </li>
-                                            <li class="">
-                                                <div class="">
-                                                    <i class="fas fa-check-double f-35"></i>
-                                                    <p class="font-weight-bold">Order<br>Complete</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-
-
                         </div>
-
-
-
-                    {% endif %}
-
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
 </section>
-
-
 {{ footer }}
