@@ -1,6 +1,9 @@
 <?php
-class ModelExtensionShippingPartnerShipping extends Model {
-    function getQuote($address) {
+
+class ModelExtensionShippingPartnerShipping extends Model
+{
+    function getQuote($address)
+    {
         $this->load->language('extension/shipping/partner_shipping');
         /**
          * Query for finding if the customer is from the same zone as selected by the admin in the backend
@@ -22,27 +25,54 @@ class ModelExtensionShippingPartnerShipping extends Model {
          * You can also make use of $address array as it contains the address of the customer
          * @var integer
          */
-        $cost = 10;
+
+        //START : Champion Mall Delivery Charges Algorithm
+        $cartProducts = $this->cart->getProducts();
+        $deliveryValues = array();
+        foreach ($cartProducts as $product) {
+            if ( ! isset($deliveryValues[$product['mpseller_id']])) {
+                $deliveryValues[$product['mpseller_id']] = 0;
+            }
+            $deliveryValues[$product['mpseller_id']]+= $product['total'];
+        }
+        $deliveryCharges = array_values($deliveryValues);
+
+        $totalDeliveryAmt = 0;
+        foreach ($deliveryCharges as $deliveryCharge) {
+
+            if ($deliveryCharge < 500) {
+                $totalDeliveryAmt+= $deliveryCharge * 20 / 100; //20%
+            } else if ($deliveryCharge >= 500 && $deliveryCharge < 700) {
+
+                $totalDeliveryAmt+= $deliveryCharge * 10 / 100; //10%
+            } else if ($deliveryCharge >= 700 && $deliveryCharge < 1000) {
+
+                $totalDeliveryAmt+= $deliveryCharge * 5 / 100; //5%
+            } else if ($deliveryCharge >= 1000) {
+
+                $totalDeliveryAmt+= $deliveryCharge * 3 / 100; //3%
+            }
+        }
+        //END : Champion Mall Delivery Charges Algorithm
 
         $method_data = array();
-
         if ($status) {
             $quote_data = array();
 
             $quote_data['partner_shipping'] = array(
-                'code'         => 'partner_shipping.partner_shipping',
-                'title'        => $this->language->get('text_description'),
-                'cost'         => $cost,
+                'code' => 'partner_shipping.partner_shipping',
+                'title' => $this->language->get('text_description'),
+                'cost' => $totalDeliveryAmt,
                 'tax_class_id' => $this->config->get('partner_shipping_tax_class_id'),
-                'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
+                'text' => $this->currency->format($this->tax->calculate($totalDeliveryAmt, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
             );
 
             $method_data = array(
-                'code'       => 'partner_shipping',
-                'title'      => $this->language->get('text_title'),
-                'quote'      => $quote_data,
+                'code' => 'partner_shipping',
+                'title' => $this->language->get('text_title'),
+                'quote' => $quote_data,
                 'sort_order' => $this->config->get('partner_shipping_sort_order'),
-                'error'      => false
+                'error' => false
             );
         }
 

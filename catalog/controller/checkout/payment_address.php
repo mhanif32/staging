@@ -122,15 +122,13 @@ class ControllerCheckoutPaymentAddress extends Controller {
 
 				$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 
-//				if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
-//					$json['error']['postcode'] = $this->language->get('error_postcode');
-//				}
+				if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
+					$json['error']['postcode'] = $this->language->get('error_postcode');
+				}
 
-
-                if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 6) || !is_numeric($this->request->post['postcode']) || (utf8_strlen($this->request->post['postcode']) > 6)) {
-                    $this->error['postcode'] = $this->language->get('error_postcode');
-                }
-
+//                if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 6) || !is_numeric($this->request->post['postcode']) || (utf8_strlen($this->request->post['postcode']) > 6)) {
+//                    $this->error['postcode'] = $this->language->get('error_postcode');
+//                }
 
 				if ($this->request->post['country_id'] == '') {
 					$json['error']['country'] = $this->language->get('error_country');

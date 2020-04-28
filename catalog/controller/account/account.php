@@ -71,8 +71,6 @@ class ControllerAccountAccount extends Controller {
             $data['checkIsSellerApprovedtext'] = empty($checkIsSellerApproved) ? 'Complete Your Sellers Registration' : 'Update Seller Info';
             $data['dashboard_link'] = $this->url->link('account/mpmultivendor/dashboard', '', true);
             $data['product_link'] = $this->url->link('account/mpmultivendor/product/add', '', true);
-
-            //print_r($data['checkIsSellerApprovedtext'] );exit('addd');
         }
 
 		$data['wishlist'] = $this->url->link('account/wishlist');
@@ -110,12 +108,6 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$data['tracking'] = '';
 		}
-
-		//order tracking system
-        $data['orders'] = array();
-        $this->load->model('account/order');
-        $data['order_status'] = $this->model_account_order->getTrackTotalOrders();
-		//echo '<pre>';print_r($data['order_status']);exit('okok');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');

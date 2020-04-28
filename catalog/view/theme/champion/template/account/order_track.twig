@@ -9,7 +9,7 @@
             <div class="row justify-content-between mx-5 px-5 mt-3">
 
                 <div class="d-flex">
-                    <h3 class="f-20 font-weight-bold text-uppercase text-center">ORDER <span
+                    <h3 class="f-20 font-weight-bold text-uppercase text-center">Track Your Order <span
                                 class="text-primary font-weight-bold">#{{ order_status.invoice_prefix }}{{ order_status.order_id }}</span>
                     </h3>
                 </div>
@@ -21,94 +21,140 @@
                 </div>
             </div> <!-- Add class 'active' to progress -->
 
+            <form method="get" id="track-form" action="{{ action }}">
+                <div class="row justify-content-between mx-5 px-5 mt-3">
+                    <div class="col-sm-5">
+                        <label class="f-12 px-2 mb-1">Order Number </label>
+                        <div id="searchInputOrder" class="input-group mb-3 px-2">
+                            <input type="text" name="search_order" value="{{ order_id }}"
+                                   placeholder="Enter the Order Number here"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <label class="f-12 px-2 mb-1">Email </label>
+                        <div id="searchEmail" class="input-group mb-3 px-2">
+                            <input type="text" name="email" value="{{ email }}"
+                                   placeholder="Enter the Order Email here"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary f-12 mt-4">
+                            <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    </div>
+                </div>
+            </form>
+
             <div class="row d-flex justify-content-center">
                 {% if order_status is empty %}
                     <b>No order found!</b>
+                {% else %}
+                    <div class="col-12">
+                        <ul id="progressbar" class="text-center">
+                            {% if order_status.status == 'Pending' %}
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            {% elseif order_status.status == 'Processing' %}
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            {% elseif order_status.status == 'Processed' %}
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            {% elseif order_status.status == 'Shipped' %}
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                            {% elseif order_status.status == 'Complete' %}
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                            {% else %}
+                                <li class="step0">{{ order_status.status }}</li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                                <li class="step0"></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+
+                    <div class="col-12">
+                        <ul id="progressbar-icons" class="text-center">
+                            <li class="">
+                                <div class="">
+                                    <i class="fas fa-pause-circle f-35"></i>
+                                    <p class="font-weight-bold">Order<br>Pending</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="">
+                                    <i class="fas fa-truck f-35"></i>
+                                    <p class="font-weight-bold">Order<br>Processing</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="">
+                                    <i class="fas fa-shipping-fast f-35"></i>
+                                    <p class="font-weight-bold">Order<br>Processed</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="">
+                                    <i class="fas fa-truck-loading f-35"></i>
+                                    <p class="font-weight-bold">Order<br>Shipped</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="">
+                                    <i class="fas fa-check-double f-35"></i>
+                                    <p class="font-weight-bold">Order<br>Complete</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 {% endif %}
-                <div class="col-12">
-                    <ul id="progressbar" class="text-center">
-                        {% if order_status.status == 'Pending' %}
-                            <li class="active step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                        {% elseif order_status.status == 'Processing' %}
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                        {% elseif order_status.status == 'Processed' %}
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                        {% elseif order_status.status == 'Shipped' %}
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="step0"></li>
-                        {% elseif order_status.status == 'Complete' %}
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                            <li class="active step0"></li>
-                        {% else %}
-                            <li class="step0">{{ order_status.status }}</li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                            <li class="step0"></li>
-                        {% endif %}
-
-                    </ul>
-                </div>
-            </div>
-
-
-            <div class="row d-flex justify-content-center">
-                <div class="col-12">
-                    <ul id="progressbar-icons" class="text-center">
-                        <li class="">
-                            <div class="">
-                                <i class="fas fa-pause-circle f-35"></i>
-                                <p class="font-weight-bold">Order<br>Pending</p>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="">
-                                <i class="fas fa-truck f-35"></i>
-                                <p class="font-weight-bold">Order<br>Processing</p>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="">
-                                <i class="fas fa-shipping-fast f-35"></i>
-                                <p class="font-weight-bold">Order<br>Processed</p>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="">
-                                <i class="fas fa-truck-loading f-35"></i>
-                                <p class="font-weight-bold">Order<br>Shipped</p>
-                            </div>
-                        </li>
-                        <li class="">
-                            <div class="">
-                                <i class="fas fa-check-double f-35"></i>
-                                <p class="font-weight-bold">Order<br>Complete</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
     {#{% endif %}#}
 </div>
+<script>
+    /* Search/Track Order */
+    $('#searchInputOrder input[name=\'search_order\']').parent().find('button').on('click', function () {
+        searchOrder();
+    });
 
+    $("#track-form").submit(function (event) {
+        searchOrder();
+        event.preventDefault();
+    });
+
+    function searchOrder() {
+        var url = $('base').attr('href') + 'index.php?route=account/order/track';
+
+        var orderId = $('#searchInputOrder input[name=\'search_order\']').val();
+        var email = $('#searchEmail input[name=\'email\']').val();
+        if (orderId && email) {
+            url += '&order_id=' + encodeURIComponent(orderId);
+            url += '&email=' + encodeURIComponent(email);
+        }
+
+        location = url;
+    }
+</script>
 {{ footer }}

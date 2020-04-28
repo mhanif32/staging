@@ -621,40 +621,57 @@ class ModelCatalogProduct extends Model {
 
     //get men count for home page
     public function getCountMen() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Men'");
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Men'");
 
         if (isset($query->row['total'])) {
             return [
                     'total' => $query->row['total'],
-                    'path' => $query->row['category_id']
                 ];
         } else {
             return 0;
         }
     }
-
-    //get men count for home page
-    public function getCountWomen() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Women'");
-
-        if (isset($query->row['total'])) {
+    public function getCategoryMen() {
+        $query = $this->db->query("SELECT c.category_id, c.image FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE name = 'Men'");
+        if (isset($query->row)) {
             return [
-                'total' => $query->row['total'],
-                'path' => $query->row['category_id']
+                'path' => $query->row['category_id'],
+                'image' => $query->row['image']
             ];
-        } else {
-            return 0;
         }
+        return false;
     }
 
     //get men count for home page
+    public function getCountWomen() {
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Women'");
+        if (isset($query->row['total'])) {
+            return [
+                'total' => $query->row['total'],
+            ];
+        }
+        return false;
+    }
+    public function getCategoryWomen() {
+        $query = $this->db->query("SELECT c.category_id, c.image FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE name = 'Women'");
+        if (isset($query->row)) {
+            return [
+                'path' => $query->row['category_id'],
+                'image' => $query->row['image']
+            ];
+        }
+        return false;
+    }
+
+    //get brands count for home page
     public function getCountDesignerBrands() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Designer Brands'");
+        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Designer Brands'");
 
         if (isset($query->row['total'])) {
             return [
                 'total' => $query->row['total'],
-                'path' => $query->row['category_id']
+                'path' => $query->row['category_id'],
+                'image' => $query->row['image']
             ];
         } else {
             return 0;

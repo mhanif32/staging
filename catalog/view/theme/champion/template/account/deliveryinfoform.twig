@@ -140,8 +140,8 @@
                                                         <td class="text-left">Country</td>
                                                         <td class="text-left">Zone</td>
                                                         <td class="text-left">Area</td>
-                                                        <td class="text-left">Time <small>(in hrs)</small></td>
-                                                        <td class="text-left">Per Hour Rate</td>
+{#                                                        <td class="text-left">Time <small>(in hrs)</small></td>#}
+{#                                                        <td class="text-left">Per Hour Rate</td>#}
                                                         <td></td>
                                                     </tr>
                                                     </thead>
@@ -195,16 +195,16 @@
                                                                 </select>
                                                             </td>
 
-                                                            <td class="text-left">
-                                                                <input name="delivery_info[{{ delivery_row }}][days]"
-                                                                       class="form-control"
-                                                                       value="{{ deliveryInfo.days }}"
-                                                                       size="1">
-                                                            </td>
+{#                                                            <td class="text-left">#}
+{#                                                                <input name="delivery_info[{{ delivery_row }}][days]"#}
+{#                                                                       class="form-control"#}
+{#                                                                       value="{{ deliveryInfo.days }}"#}
+{#                                                                       size="1">#}
+{#                                                            </td>#}
 
-                                                            <td class="text-left">
-                                                                <b>{{ deliveryInfo.rate_per_hour }}</b>
-                                                            </td>
+{#                                                            <td class="text-left">#}
+{#                                                                <b>{{ deliveryInfo.rate_per_hour }}</b>#}
+{#                                                            </td>#}
 
                                                             <td class="text-left">
                                                                 <button type="button"
@@ -221,7 +221,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                     <tr>
-                                                        <td colspan="5"></td>
+                                                        <td colspan="3"></td>
                                                         <td class="text-left">
                                                             <button type="button" onclick="addDeliveryInfo();"
                                                                     data-toggle="tooltip"
@@ -263,9 +263,9 @@
         html += '  <td class="text-left"><select name="delivery_info[' + delivery_row + '][area_id]" class="form-control areaSelect" data-id="' + delivery_row + '">';
         html += '  </select></td>';
 
-        html += '  <td class="text-left"><input type="text" name="delivery_info[' + delivery_row + '][days]" value="" class="form-control" size="1"/></td>';
+        //html += '  <td class="text-left"><input type="text" name="delivery_info[' + delivery_row + '][days]" value="" class="form-control" size="1"/></td>';
 
-        html += '  <td class="text-left"></td>';
+        // html += '  <td class="text-left"></td>';
 
         html += '  <td class="text-left"><button type="button" onclick="$(\'#delivery-row' + delivery_row + '\').remove();" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
         html += '</tr>';

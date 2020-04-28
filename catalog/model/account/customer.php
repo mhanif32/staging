@@ -27,6 +27,11 @@ class ModelAccountCustomer extends Model
             $this->db->query("INSERT INTO `" . DB_PREFIX . "customer_approval` SET customer_id = '" . (int)$customer_id . "', type = 'customer', date_added = NOW()");
         }
 
+        //delivery partner
+        if($data['role'] == 'delivery-partner') {
+            $sqlDelInfo = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET delivery_type = '" . $this->db->escape($data['delivery_type']) . "', customer_id = '" . (int)$customer_id . "'";
+            $this->db->query($sqlDelInfo);
+        }
         return $customer_id;
     }
 
