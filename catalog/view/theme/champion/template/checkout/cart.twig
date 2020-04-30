@@ -34,7 +34,7 @@
                 </h3>
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-update-cart">
                     <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
+                        <table class="table mb-0">
                             <thead class="text-center">
                             <tr>
                                 {#<td class="text-center">{{ column_image }}</td>#}
@@ -137,8 +137,8 @@
                             {% for total in totals %}
                                 <tr>
                                     <td class="border-0"></td>
-                                    <td class="text-right"><strong>{{ total.title }}:</strong></td>
-                                    <td class="text-center">{{ total.text }}</td>
+                                    <td class="text-right border-top-0"><strong>{{ total.title }}:</strong></td>
+                                    <td class="text-center border-top-0">{{ total.text }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
