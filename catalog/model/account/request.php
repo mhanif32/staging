@@ -3,7 +3,7 @@ class ModelAccountRequest extends Model
 {
     public function getDeliveryRequest($delivery_partner_id)
     {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request dpr WHERE dpr.delivery_partner_id = '" . (int)$delivery_partner_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request dpr WHERE dpr.delivery_partner_id = '" . (int)$delivery_partner_id . "' ORDER BY requested_date DESC");
         return $query->rows;
     }
 

@@ -29,11 +29,17 @@ class ControllerAccountRequest extends Controller {
         $requests = $this->model_account_request->getDeliveryRequest($this->customer->getId());
         $requestSection = [];
         foreach ($requests as $request) {
+
+            $orderData = $this->model_account_request->getOrderData($request['order_id']);
+
+
+
             $requestArray = array();
             $requestArray['request_id'] = $request['request_id'];
             $customer = $this->model_account_customer->getCustomer($request['customer_id']);
             $requestArray['customer_name'] = $customer['firstname'].' '.$customer['lastname'];
             $requestArray['order_id'] = $request['order_id'];
+            $requestArray['delivery_location'] = $orderData['shipping_address_1'].', '.$orderData['shipping_city'].', '.$orderData['shipping_zone'].', '.$orderData['shipping_country'];
             $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($request['mpseller_id']);
             $requestArray['mpseller_name'] = $seller['store_owner'];
             $requestArray['requested_date'] = $request['requested_date'];
