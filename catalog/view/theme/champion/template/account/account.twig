@@ -116,6 +116,26 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ delivery_partner_request_link }}">
+                                                    <i class="fa fa-cart-arrow-down f-60 text-success" aria-hidden="true"></i>
+
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ delivery_partner_request_link }}"
+                                                       class="f-15 font-weight-bold">Delivery Requests</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ delivery_partner_request_link }}" class="f-13 text-muted">Accept your delivery requests</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endif %}
                             </div>
 
@@ -148,7 +168,7 @@
                                 </div>
                             {% endif %}
 
-                            <h3 class="f-20 font-weight-bold text-uppercase mt-4"">MY ORDER</h3>
+                            <h3 class="f-20 font-weight-bold text-uppercase mt-4">MY ORDERS</h3>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6 py-3">
@@ -191,8 +211,26 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6 py-3">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="#">
+                                                <i class="fas fa-redo f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="#"
+                                                   class="f-15 font-weight-bold">Return Product History</a>
+                                            </h4>
+                                            <p>
+                                                <a href="#" class="f-13 text-muted">View your return product
+                                                    history</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
 
                             {% if is_seller %}
                                 <h3 class="f-20 font-weight-bold text-uppercase mt-4">Seller Panel</h3>
@@ -298,52 +336,6 @@
                                                 <p>
                                                     <a href="{{ edit_product_href }}" class="f-13 text-muted">Edit your
                                                         existing products</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                            {% if role == 'buyer' %}
-                                <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_orders }}</h3>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-6 py-3">
-                                        <div class="media">
-                                            <div class="media-left mr-3">
-                                                <a href="{{ order }}">
-                                                    <i class="fas fa-shopping-bag f-60 text-success"></i>
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading mb-0">
-                                                    <a href="{{ order }}"
-                                                       class="f-15 font-weight-bold">{{ text_order }}</a>
-                                                </h4>
-                                                <p>
-                                                    <a href="{{ order }}" class="f-13 text-muted">View your order
-                                                        details</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 py-3 pl-md-5 border-left">
-                                        <div class="media">
-                                            <div class="media-left mr-3">
-                                                <a href="#">
-                                                    <i class="fas fa-redo f-60 text-success"></i>
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading mb-0">
-                                                    <a href="#"
-                                                       class="f-15 font-weight-bold">Return Product History</a>
-                                                </h4>
-                                                <p>
-                                                    <a href="#" class="f-13 text-muted">View your return product
-                                                        history</a>
                                                 </p>
                                             </div>
                                         </div>

@@ -263,15 +263,22 @@ class ModelAccountCustomer extends Model
             foreach ($data['delivery_info'] as $info) {
 
                 $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
+                $areaData = $this->getArea($area);
 
                 $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
             country_id = '" . $this->db->escape($info['country_id']) . "', 
             zone_id = '" . $this->db->escape($info['zone_id']) . "',
             area_id = '" . $area . "',
-            days = '" . $this->db->escape($info['days']) . "',
+            area_name = '" . $areaData['name'] . "',
             added_date = NOW()
             ");
             }
         }
+    }
+
+    public function getArea($area_id) {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "area WHERE area_id = '" . (int)$area_id . "'");
+
+        return $query->row;
     }
 }

@@ -245,7 +245,7 @@ class ModelCheckoutOrder extends Model {
 
     public function getSellerDataFrProductId($product_id)
     {
-        $query = $this->db->query("SELECT mpseller_id, store_name, email,telephone FROM " . DB_PREFIX . "product p
+        $query = $this->db->query("SELECT p.mpseller_id, store_name, email,telephone FROM " . DB_PREFIX . "product p
         LEFT JOIN " . DB_PREFIX . "mpseller mp ON p.mpseller_id=mp.mpseller_id
         WHERE p.product_id = '" . (int)$product_id . "'");
 

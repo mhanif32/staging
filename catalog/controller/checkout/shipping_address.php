@@ -1,6 +1,7 @@
 <?php
 class ControllerCheckoutShippingAddress extends Controller {
 	public function index() {
+
 		$this->load->language('checkout/checkout');
 
 		if (isset($this->session->data['shipping_address']['address_id'])) {

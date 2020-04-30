@@ -412,7 +412,7 @@ class ControllerMailOrder extends Controller {
 				}
 
 				//get seller data
-                $sellerData = $this->model_checkout_order->getSellerDataFrProductId($order_product['product_Id']);
+                $sellerData = $this->model_checkout_order->getSellerDataFrProductId($order_product['product_id']);
 					
 				$data['products'][] = array(
 					'name'     => $order_product['name'],

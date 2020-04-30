@@ -1,11 +1,22 @@
 <?php
 class ControllerCheckoutSuccess extends Controller {
 	public function index() {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
-			$this->cart->clear();
+
             $orderId = $this->session->data['order_id'];
+
+            //START : send request to delivery partner
+            $this->load->model('account/request');
+            $this->model_account_request->sendRequestToDeliveryPartner($orderId);
+            //END
+
+            $this->cart->clear();
+
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
 			unset($this->session->data['payment_method']);

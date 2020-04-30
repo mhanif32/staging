@@ -5,9 +5,6 @@ class ControllerAccountAccount extends Controller {
 
     public function index() {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -75,6 +72,7 @@ class ControllerAccountAccount extends Controller {
 
 		$data['wishlist'] = $this->url->link('account/wishlist');
 		$data['delivery_partner_link'] = $this->url->link('account/account/addDeliveryInfo');
+		$data['delivery_partner_request_link'] = $this->url->link('account/request');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
         $data['edit_product_href'] = $this->url->link('account/mpmultivendor/product', '', true);
