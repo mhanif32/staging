@@ -38,7 +38,7 @@ class ControllerCommonFooter extends Controller {
         $data['logout'] = $this->url->link('account/logout', '', true);
         $data['logged'] = $this->customer->isLogged();
 
-        $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
+        $data['seller_register_link'] = $this->url->link('information/become_seller_info', true);
         $data['affiliate_info_href'] = $this->url->link('information/affiliate_info', '', true);
         $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
         $data['delivery_info_href'] = $this->url->link('information/delivery_info', '', true);
