@@ -15,3 +15,8 @@ $_['text_order']        = 'Order History';
 $_['text_wishlist']     = 'Wish List';
 $_['text_newsletter']   = 'Newsletter';
 $_['text_powered']      = 'Powered By <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';
+
+$_['text_my_affiliate']   = 'My Affiliate Account';
+$_['text_affiliate_add']  = 'Register for an affiliate account';
+$_['text_affiliate_edit'] = 'Edit your affiliate information';
+$_['text_tracking']       = 'Custom Affiliate Tracking Code';

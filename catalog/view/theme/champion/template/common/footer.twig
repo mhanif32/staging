@@ -64,6 +64,13 @@
                     <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
                     <li><a href="{{ sellers_href }}">Our Sellers</a></li>
 
+
+                    {% if not tracking %}
+                        <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
+                    {% else %}
+                        <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
+                        <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

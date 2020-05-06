@@ -74,6 +74,22 @@ class ControllerCommonFooter extends Controller {
 		}
 
 		$data['scripts'] = $this->document->getScripts('footer');
+
+        $this->load->model('account/customer');
+
+        $affiliate_info = $this->model_account_customer->getAffiliate($this->customer->getId());
+
+        if (!$affiliate_info) {
+            $data['affiliate'] = $this->url->link('account/affiliate/add', '', true);
+        } else {
+            $data['affiliate'] = $this->url->link('account/affiliate/edit', '', true);
+        }
+
+        if ($affiliate_info) {
+            $data['tracking'] = $this->url->link('account/tracking', '', true);
+        } else {
+            $data['tracking'] = '';
+        }
 		
 		return $this->load->view('common/footer', $data);
 	}
