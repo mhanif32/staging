@@ -13,27 +13,6 @@ class ControllerCheckoutSuccess extends Controller {
             $this->model_account_request->sendRequestToDeliveryPartner($orderId);
             //END
 
-            $this->load->model('setting/setting');
-
-            $from = $this->config->get('config_email');
-            //Mail send to  Customer
-            $mail = new Mail($this->config->get('config_mail_engine'));
-            $mail->parameter = $this->config->get('config_mail_parameter');
-            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
-            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
-            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-
-            $mail->setTo('yogeshphp.alkurn@gmail.com');
-            $mail->setFrom($from);
-            $mail->setSender('TheChampionMallWilson');
-            $mail->setSubject(html_entity_decode(sprintf('Test mail', 'TheChampionMall', $orderId), ENT_QUOTES, 'UTF-8'));
-            $mail->setText('Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In ac felis quis tortor malesuada pretium. Ut leo. Duis vel nibh at velit scelerisque suscipit. Cras non dolor.
-
-Vestibulum turpis sem, aliquet eget, lobortis pellentesque, rutrum eu, nisl. Etiam sit amet orci eget eros faucibus tincidunt. Fusce a quam. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Sed hendrerit.');
-            $mail->send();
-
             $this->cart->clear();
 
 			unset($this->session->data['shipping_method']);
