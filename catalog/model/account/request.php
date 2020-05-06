@@ -39,6 +39,23 @@ class ModelAccountRequest extends Model
                         customer_id = '" . (int)$this->customer->getId() . "',
                         order_id = '" . (int)$orderId . "', 
                         requested_date = NOW()");
+
+                        //mail send to delivery partner
+                        $data = [];
+                        $mail = new Mail($this->config->get('config_mail_engine'));
+                        $mail->parameter = $this->config->get('config_mail_parameter');
+                        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                        $mail->setTo($this->customer->getEmail());
+                        $mail->setFrom($this->config->get('config_email'));
+                        $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
+                        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                        $mail->setText($this->load->view('mail/order_delivery_alert', $data));
+                        $mail->send();
                     }
                 }
             }
@@ -46,7 +63,7 @@ class ModelAccountRequest extends Model
     }
 
     public function getMpSellerdata($mpseller_id) {
-        $query = $this->db->query("SELECT * FROM ". DB_PREFIX ."mpseller WHERE mpseller_id = '". (int)$mpseller_id ."'");
+        $query = $this->db->query("SELECT mpseller_id, city, store_name FROM ". DB_PREFIX ."mpseller WHERE mpseller_id = '". (int)$mpseller_id ."'");
 
         return $query->row;
     }
