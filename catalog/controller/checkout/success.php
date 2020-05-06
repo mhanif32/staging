@@ -1,8 +1,6 @@
 <?php
 class ControllerCheckoutSuccess extends Controller {
 	public function index() {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
 
 		$this->load->language('checkout/success');
 
@@ -14,6 +12,27 @@ class ControllerCheckoutSuccess extends Controller {
             $this->load->model('account/request');
             $this->model_account_request->sendRequestToDeliveryPartner($orderId);
             //END
+
+            $this->load->model('setting/setting');
+
+            $from = $this->config->get('config_email');
+            //Mail send to  Customer
+            $mail = new Mail($this->config->get('config_mail_engine'));
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+            $mail->setTo('yogeshphp.alkurn@gmail.com');
+            $mail->setFrom($from);
+            $mail->setSender('TheChampionMallWilson');
+            $mail->setSubject(html_entity_decode(sprintf('Test mail', 'TheChampionMall', $orderId), ENT_QUOTES, 'UTF-8'));
+            $mail->setText('Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In ac felis quis tortor malesuada pretium. Ut leo. Duis vel nibh at velit scelerisque suscipit. Cras non dolor.
+
+Vestibulum turpis sem, aliquet eget, lobortis pellentesque, rutrum eu, nisl. Etiam sit amet orci eget eros faucibus tincidunt. Fusce a quam. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Sed hendrerit.');
+            $mail->send();
 
             $this->cart->clear();
 
@@ -35,26 +54,6 @@ class ControllerCheckoutSuccess extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_basket'),
-			'href' => $this->url->link('checkout/cart')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_checkout'),
-			'href' => $this->url->link('checkout/checkout', '', true)
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_success'),
-			'href' => $this->url->link('checkout/success')
-		);
-
 		if ($this->customer->isLogged()) {
 			$data['text_message'] = sprintf($this->language->get('text_customer'),
                 $this->url->link('account/account', '', true),
@@ -69,10 +68,10 @@ class ControllerCheckoutSuccess extends Controller {
 
 		$data['continue'] = $this->url->link('account/edit');
 
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['column_right'] = $this->load->controller('common/column_right');
-		$data['content_top'] = $this->load->controller('common/content_top');
-		$data['content_bottom'] = $this->load->controller('common/content_bottom');
+//		$data['column_left'] = $this->load->controller('common/column_left');
+//		$data['column_right'] = $this->load->controller('common/column_right');
+//		$data['content_top'] = $this->load->controller('common/content_top');
+//		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
