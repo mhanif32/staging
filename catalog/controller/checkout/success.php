@@ -10,8 +10,49 @@ class ControllerCheckoutSuccess extends Controller {
 
             //START : send request to delivery partner
             $this->load->model('account/request');
-            $this->model_account_request->sendRequestToDeliveryPartner($orderId);
-            //END
+            if(!empty($this->session->data['shipping_address'])) {
+
+                $shippingAddress = $this->session->data['shipping_address'];
+
+                //get total seller
+                $cartProducts = $this->cart->getProducts();
+                $sellerList = array();
+                foreach ($cartProducts as $product) {
+                    $sellerList[] = $product['mpseller_id'];
+                }
+                $totalSellers = array_unique($sellerList);
+
+                if (count($totalSellers) == 1) { //for single seller
+
+                    $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
+                    //echo '<pre>';print_r($mpSellerData);exit('asd');
+                    //check : seller & customer shipping address relates with same city
+                    if ($mpSellerData['city'] == $shippingAddress['city']) {
+
+                        $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpSellerData['mpseller_id']);
+
+                        //Mail send to delivery partner
+                        $dataMail = [];
+                        foreach ($deliveryPartners as $deliveryPartner) {
+
+                            $mail = new Mail($this->config->get('config_mail_engine'));
+                            $mail->parameter = $this->config->get('config_mail_parameter');
+                            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                            $mail->setTo($this->customer->getEmail());
+                            $mail->setFrom($this->config->get('config_email'));
+                            $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
+                            $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                            $mail->setText($this->load->view('mail/order_delivery_alert', $dataMail));
+                            $mail->send();
+                        }
+                    }
+                }
+            }
 
             $this->cart->clear();
 

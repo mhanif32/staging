@@ -7,25 +7,25 @@ class ModelAccountRequest extends Model
         return $query->rows;
     }
 
-    public function sendRequestToDeliveryPartner($orderId)
+    public function sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpseller_id)
     {
-        if(!empty($this->session->data['shipping_address'])) {
-
-            $shippingAddress = $this->session->data['shipping_address'];
-
-            //get total seller
-            $cartProducts = $this->cart->getProducts();
-            $sellerList = array();
-            foreach ($cartProducts as $product) {
-                $sellerList[] = $product['mpseller_id'];
-            }
-            $totalSellers = array_unique($sellerList);
-
-            if(count($totalSellers) == 1) { //for single seller
-
-                $mpSellerData = $this->getMpSellerdata($totalSellers[0]);
-                //check : seller & customer shipping address relates with same city
-                if($mpSellerData['city'] == $shippingAddress['city']) {
+//        if(!empty($this->session->data['shipping_address'])) {
+//
+//            $shippingAddress = $this->session->data['shipping_address'];
+//
+//            //get total seller
+//            $cartProducts = $this->cart->getProducts();
+//            $sellerList = array();
+//            foreach ($cartProducts as $product) {
+//                $sellerList[] = $product['mpseller_id'];
+//            }
+//            $totalSellers = array_unique($sellerList);
+//
+//            if(count($totalSellers) == 1) { //for single seller
+//
+//                $mpSellerData = $this->getMpSellerdata($totalSellers[0]);
+//                //check : seller & customer shipping address relates with same city
+//                if($mpSellerData['city'] == $shippingAddress['city']) {
 
                     //select delivery partner's location
                     $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_countries dpc LEFT JOIN " . DB_PREFIX . "delivery_partner_info dpi ON (dpc.customer_id = dpi.customer_id)  WHERE dpc.area_name = '" . $shippingAddress['city'] . "' and dpi.is_approved = '1'");
@@ -35,35 +35,19 @@ class ModelAccountRequest extends Model
                     foreach ($deliveryPartners as $deliveryPartner) {
 
                         $this->db->query("INSERT INTO " . DB_PREFIX . "delivery_partner_request SET                             delivery_partner_id = '" . (int)$deliveryPartner['customer_id'] . "', 
-                        mpseller_id = '" . (int)$mpSellerData['mpseller_id'] . "',
+                        mpseller_id = '" . (int)$mpseller_id . "',
                         customer_id = '" . (int)$this->customer->getId() . "',
                         order_id = '" . (int)$orderId . "', 
                         requested_date = NOW()");
-
-                        //mail send to delivery partner
-                        $data = [];
-                        $mail = new Mail($this->config->get('config_mail_engine'));
-                        $mail->parameter = $this->config->get('config_mail_parameter');
-                        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-                        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
-                        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-                        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
-                        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-
-                        $mail->setTo($this->customer->getEmail());
-                        $mail->setFrom($this->config->get('config_email'));
-                        $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
-                        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
-                        $mail->setText($this->load->view('mail/order_delivery_alert', $data));
-                        $mail->send();
                     }
-                }
-            }
-        }
+                    return $deliveryPartners;
+//                }
+//            }
+//        }
     }
 
     public function getMpSellerdata($mpseller_id) {
-        $query = $this->db->query("SELECT mpseller_id, city, store_name FROM ". DB_PREFIX ."mpseller WHERE mpseller_id = '". (int)$mpseller_id ."'");
+        $query = $this->db->query("SELECT * FROM ". DB_PREFIX ."mpseller WHERE mpseller_id = '". (int)$mpseller_id ."'");
 
         return $query->row;
     }
