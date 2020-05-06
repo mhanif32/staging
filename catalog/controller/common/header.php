@@ -83,8 +83,19 @@ class ControllerCommonHeader extends Controller
         $data['my_profile'] = $this->url->link('account/edit', '', true);
         $data['register'] = $this->url->link('account/register', '', true);
         $data['affiliate_register'] = $this->url->link('affiliate/register', '', true);
-        $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
-        $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
+//        $data['seller_register_link'] = $this->url->link('account/register', '&role=seller', true);
+//        $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
+
+
+
+        $data['seller_register_link'] = $this->url->link('information/become_seller_info', true);
+        $data['affiliate_info_href'] = $this->url->link('information/affiliate_info', '', true);
+        $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
+        $data['delivery_info_href'] = $this->url->link('information/delivery_info', '', true);
+        $data['return_policy_href'] = $this->url->link('information/return_policy', '', true);
+        $data['become_delivery_partner_info_href'] = $this->url->link('information/become_delivery_partner_info', '', true);
+        $data['become_our_partner_href'] = $this->url->link('information/become_our_partner_info', '', true);
+
 
         $data['login'] = $this->url->link('account/login', '', true);
         $data['order'] = $this->url->link('account/order', '', true);
