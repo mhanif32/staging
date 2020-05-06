@@ -929,30 +929,30 @@ footer ul {
 .product-you-may-also-like {
   background-color: #fafafa; }
 
-.my-order .table-bordered thead {
+.my-order .table thead {
   background-color: #f6f6f6; }
-  .my-order .table-bordered thead th {
+  .my-order .table thead th {
     border-bottom-width: 1px;
     font-size: 0.9375rem;
     font-weight: 600; }
-.my-order .table-bordered tbody td {
+.my-order .table tbody td {
   color: #9b9b9c;
   font-size: 0.8125rem;
   font-weight: 400;
   vertical-align: middle; }
-  .my-order .table-bordered tbody td span.onclick-remove {
+  .my-order .table tbody td span.onclick-remove {
     display: list-item;
     list-style-type: none;
     text-align: right;
     cursor: pointer; }
-  .my-order .table-bordered tbody td i {
+  .my-order .table tbody td i {
     color: #fff;
     font-size: 18px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
-    .my-order .table-bordered tbody td i:hover {
+    .my-order .table tbody td i:hover {
       color: #01B0F1; }
-.my-order .table-bordered tbody .total td {
+.my-order .table tbody .total td {
   color: #272727;
   font-size: 0.9375rem;
   font-weight: 600; }
