@@ -54,29 +54,39 @@
                                 <tr>
                                     <td class="text-left">
                                         {% if product.thumb %}
+
                                             <a href="{{ product.href }}">
                                                 <img
                                                         src="{{ product.thumb }}" alt="{{ product.name }}"
                                                         title="{{ product.name }}" class="img-thumbnail border-0"/>
+
                                             </a>
+
                                         {% endif %}
                                         <a
                                                 href="{{ product.href }}">{{ product.name }}</a>
                                         {% if not product.stock %}
                                             <span class="text-danger">***</span>
                                         {% endif %}
+
+                                        <div class="d-flex justify-content-between">
+                                            <div>
                                         {% if product.option %}
-                                            {% for option in product.option %} <br/>
+                                            {% for option in product.option %}
                                                 <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
                                         {% endif %}
                                         {% if product.recurring %} <br/>
                                             <span class="label label-info">{{ text_recurring_item }}</span>
-                                            <small>{{ product.recurring }}</small> {% endif %}
+                                            <small>{{ product.recurring }}</small>
+                                        {% endif %}
+                                            </div>
+                                            <div>
 
                                         <span
                                                 onclick="cart.remove('{{ product.cart_id }}');" class="on-hover onclick-remove">
                                     Delete
-                                        </span>
+                                        </span></div>
+                                        </div>
                                     </td>
 
                                     <td class="text-center">
