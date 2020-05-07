@@ -33,6 +33,7 @@ class ControllerCheckoutSuccess extends Controller {
 
                         //Mail send to delivery partner
                         $dataMail = [];
+                        echo '<pre>';print_r($deliveryPartners);exit('asd');
                         foreach ($deliveryPartners as $deliveryPartner) {
 
                             $mail = new Mail($this->config->get('config_mail_engine'));
