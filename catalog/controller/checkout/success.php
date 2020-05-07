@@ -1,19 +1,79 @@
 <?php
 class ControllerCheckoutSuccess extends Controller {
 	public function index() {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
 
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
-
             $orderId = $this->session->data['order_id'];
 
             //START : send request to delivery partner
             $this->load->model('account/request');
-            $this->model_account_request->sendRequestToDeliveryPartner($orderId);
-            //END
+            if(!empty($this->session->data['shipping_address'])) {
+
+                $shippingAddress = $this->session->data['shipping_address'];
+
+                //get total seller
+                $cartProducts = $this->cart->getProducts();
+                $sellerList = array();
+                foreach ($cartProducts as $product) {
+                    $sellerList[] = $product['mpseller_id'];
+                }
+                $totalSellers = array_unique($sellerList);
+
+                if (count($totalSellers) == 1) { //for single seller
+
+                    $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
+                    //check : seller & customer shipping address relates with same city
+                    if ($mpSellerData['city'] == $shippingAddress['city']) {
+
+                        $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpSellerData['mpseller_id']);
+
+                        //Mail send to delivery partner
+                        $dataMail = [];
+                        $mail = new Mail($this->config->get('config_mail_engine'));
+                        $mail->parameter = $this->config->get('config_mail_parameter');
+                        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                        if (!empty($deliveryPartners)) {
+                            foreach ($deliveryPartners as $deliveryPartner) {
+
+                                $mail = new Mail($this->config->get('config_mail_engine'));
+                                $mail->parameter = $this->config->get('config_mail_parameter');
+                                $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                                $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                                $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                                $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                                $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                                $mail->setTo($deliveryPartner['email']);
+                                $mail->setFrom($this->config->get('config_email'));
+                                $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
+                                $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                                $mailText = $this->load->view('mail/order_delivery_alert', $dataMail);
+                                $mail->setHtml($mailText);
+                                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                                $mail->send();
+                            }
+                        }
+
+                        //send mail to admin
+                        $dataAdmin = [];
+                        $mail->setTo($this->config->get('config_email'));
+                        $mail->setFrom($this->config->get('config_email'));
+                        $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Customer New Order ', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                        $mailText = $this->load->view('mail/order_admin_alert', $dataAdmin);
+                        $mail->setHtml($mailText);
+                        $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                        $mail->send();
+                    }
+                }
+            }
 
             $this->cart->clear();
 
@@ -35,26 +95,6 @@ class ControllerCheckoutSuccess extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_basket'),
-			'href' => $this->url->link('checkout/cart')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_checkout'),
-			'href' => $this->url->link('checkout/checkout', '', true)
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_success'),
-			'href' => $this->url->link('checkout/success')
-		);
-
 		if ($this->customer->isLogged()) {
 			$data['text_message'] = sprintf($this->language->get('text_customer'),
                 $this->url->link('account/account', '', true),
@@ -69,10 +109,10 @@ class ControllerCheckoutSuccess extends Controller {
 
 		$data['continue'] = $this->url->link('account/edit');
 
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['column_right'] = $this->load->controller('common/column_right');
-		$data['content_top'] = $this->load->controller('common/content_top');
-		$data['content_bottom'] = $this->load->controller('common/content_bottom');
+//		$data['column_left'] = $this->load->controller('common/column_left');
+//		$data['column_right'] = $this->load->controller('common/column_right');
+//		$data['content_top'] = $this->load->controller('common/content_top');
+//		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 

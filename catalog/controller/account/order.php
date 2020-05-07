@@ -402,5 +402,4 @@ class ControllerAccountOrder extends Controller {
         $data['action'] = $this->url->link('account/order/track');
         $this->response->setOutput($this->load->view('account/order_track', $data));
     }
-
 }

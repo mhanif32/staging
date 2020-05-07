@@ -20,7 +20,7 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 
 		$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor.css');
 
-		if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')){
+		if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')) {
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor-journal.css');
 		}
 
