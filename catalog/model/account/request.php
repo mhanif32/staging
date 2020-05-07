@@ -28,7 +28,7 @@ class ModelAccountRequest extends Model
 //                if($mpSellerData['city'] == $shippingAddress['city']) {
 
                     //select delivery partner's location
-                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_countries dpc LEFT JOIN " . DB_PREFIX . "delivery_partner_info dpi ON (dpc.customer_id = dpi.customer_id)  WHERE dpc.area_name = '" . $shippingAddress['city'] . "' and dpi.is_approved = '1'");
+                    $query = $this->db->query("SELECT dpc.customer_id, dpc.area_name, c.email FROM " . DB_PREFIX . "delivery_partner_countries dpc LEFT JOIN " . DB_PREFIX . "customer c ON (dpc.customer_id = c.customer_id) LEFT JOIN " . DB_PREFIX . "delivery_partner_info dpi ON (dpc.customer_id = dpi.customer_id)  WHERE dpc.area_name = '" . $shippingAddress['city'] . "' and dpi.is_approved = '1'");
                     $deliveryPartners = $query->rows;
 
                     //Generate delivery partner requests
