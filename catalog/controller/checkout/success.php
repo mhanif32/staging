@@ -5,7 +5,6 @@ class ControllerCheckoutSuccess extends Controller {
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
-
             $orderId = $this->session->data['order_id'];
 
             //START : send request to delivery partner
@@ -32,26 +31,46 @@ class ControllerCheckoutSuccess extends Controller {
 
                         //Mail send to delivery partner
                         $dataMail = [];
-                        //echo '<pre>';print_r($deliveryPartners);exit('asd');
-                        foreach ($deliveryPartners as $deliveryPartner) {
+                        $mail = new Mail($this->config->get('config_mail_engine'));
+                        $mail->parameter = $this->config->get('config_mail_parameter');
+                        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
-                            $mail = new Mail($this->config->get('config_mail_engine'));
-                            $mail->parameter = $this->config->get('config_mail_parameter');
-                            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-                            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
-                            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-                            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
-                            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+                        if (!empty($deliveryPartners)) {
+                            foreach ($deliveryPartners as $deliveryPartner) {
 
-                            $mail->setTo($deliveryPartner['email']);
-                            $mail->setFrom($this->config->get('config_email'));
-                            $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
-                            $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
-                            $mailText = $this->load->view('mail/order_delivery_alert', $dataMail);
-                            $mail->setHtml($mailText);
-                            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
-                            $mail->send();
+                                $mail = new Mail($this->config->get('config_mail_engine'));
+                                $mail->parameter = $this->config->get('config_mail_parameter');
+                                $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                                $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                                $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                                $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                                $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                                $mail->setTo($deliveryPartner['email']);
+                                $mail->setFrom($this->config->get('config_email'));
+                                $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
+                                $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                                $mailText = $this->load->view('mail/order_delivery_alert', $dataMail);
+                                $mail->setHtml($mailText);
+                                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                                $mail->send();
+                            }
                         }
+
+                        //send mail to admin
+                        $dataAdmin = [];
+                        $mail->setTo($this->config->get('config_email'));
+                        $mail->setFrom($this->config->get('config_email'));
+                        $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Customer New Order ', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                        $mailText = $this->load->view('mail/order_admin_alert', $dataAdmin);
+                        $mail->setHtml($mailText);
+                        $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                        $mail->send();
                     }
                 }
             }
