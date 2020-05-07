@@ -25,7 +25,6 @@ class ControllerCheckoutSuccess extends Controller {
                 if (count($totalSellers) == 1) { //for single seller
 
                     $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
-                    //echo '<pre>';print_r($mpSellerData);exit('asd');
                     //check : seller & customer shipping address relates with same city
                     if ($mpSellerData['city'] == $shippingAddress['city']) {
 
@@ -48,7 +47,9 @@ class ControllerCheckoutSuccess extends Controller {
                             $mail->setFrom($this->config->get('config_email'));
                             $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
                             $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
-                            $mail->setText($this->load->view('mail/order_delivery_alert', $dataMail));
+                            $mailText = $this->load->view('mail/order_delivery_alert', $dataMail);
+                            $mail->setHtml($mailText);
+                            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
                             $mail->send();
                         }
                     }
