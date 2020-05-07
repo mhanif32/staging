@@ -34,7 +34,8 @@ class ModelAccountRequest extends Model
                     //Generate delivery partner requests
                     foreach ($deliveryPartners as $deliveryPartner) {
 
-                        $this->db->query("INSERT INTO " . DB_PREFIX . "delivery_partner_request SET                             delivery_partner_id = '" . (int)$deliveryPartner['customer_id'] . "', 
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "delivery_partner_request SET                             
+                        delivery_partner_id = '" . (int)$deliveryPartner['customer_id'] . "', 
                         mpseller_id = '" . (int)$mpseller_id . "',
                         customer_id = '" . (int)$this->customer->getId() . "',
                         order_id = '" . (int)$orderId . "', 
