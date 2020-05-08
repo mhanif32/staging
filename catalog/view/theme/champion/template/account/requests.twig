@@ -1,4 +1,12 @@
 {{ header }}
+
+<style>
+    .status {
+        color: white;
+        border-radius: 5px;
+        padding: 2px;
+    }
+</style>
 <section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
     <div class="container">
         <div class="row">
@@ -25,7 +33,7 @@
                                                     <td class="text-center">ID</td>
                                                     <td class="text-center">Customer</td>
                                                     <td class="text-center">Delivery Location</td>
-                                                    <td class="text-center">Seller</td>
+                                                    <td class="text-center">Status</td>
                                                     <td class="text-center">Order Date</td>
                                                     <td class="text-center"></td>
                                                 </tr>
@@ -36,7 +44,13 @@
                                                         <td class="text-center">#{{ request.request_id }}</td>
                                                         <td class="text-center">{{ request.customer_name }}</td>
                                                         <td class="text-center">{{ request.delivery_location }}</td>
-                                                        <td class="text-center">{{ request.mpseller_name }}</td>
+{#                                                        <td class="text-center">{{ request.mpseller_name }}</td>#}
+                                                        <td class="text-center">
+                                                            {% if request.is_accept == 1 %} <p class="bg-success status">Accepted</p>
+                                                            {% elseif request.is_accept == 2 %} <p class="bg-danger status">Declined</p>
+                                                            {% else %} <p class="bg-warning status">Pending</p>
+                                                            {% endif %}
+                                                        </td>
                                                         <td class="text-center">{{ request.requested_date }}</td>
                                                         <td class="text-center"><a href="{{ request.view_link }}"
                                                                                    data-toggle="tooltip"
