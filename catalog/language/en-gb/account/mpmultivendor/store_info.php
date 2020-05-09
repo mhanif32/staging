@@ -34,6 +34,7 @@ $_['entry_store_name'] 				= 'Store Name';
 $_['entry_address'] 				= 'Store Address';
 $_['entry_email'] 					= 'Email';
 $_['entry_telephone'] 				= 'Telephone';
+$_['entry_alternate_telephone'] 	= 'Alternate Telephone Number';
 $_['entry_fax'] 					= 'Fax';
 $_['entry_keyword'] 			= 'Seo Keyword for Seller Information Page';
 $_['entry_review_seo_keyword'] 		= 'Seo Keyword for Review Page';

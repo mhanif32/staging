@@ -107,12 +107,18 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		} else {
 			$data['error_email'] = '';
 		}
-		
-		if (isset($this->error['telephone'])) {
-			$data['error_telephone'] = $this->error['telephone'];
-		} else {
-			$data['error_telephone'] = '';
-		}
+
+        if (isset($this->error['telephone'])) {
+            $data['error_telephone'] = $this->error['telephone'];
+        } else {
+            $data['error_telephone'] = '';
+        }
+
+        if (isset($this->error['alternate_telephone'])) {
+            $data['error_alternate_telephone'] = $this->error['alternate_telephone'];
+        } else {
+            $data['error_alternate_telephone'] = '';
+        }
 		
 		if (isset($this->error['fax'])) {
 			$data['error_fax'] = $this->error['fax'];
@@ -230,6 +236,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		$data['entry_address'] = $this->language->get('entry_address');
 		$data['entry_email'] = $this->language->get('entry_email');
 		$data['entry_telephone'] = $this->language->get('entry_telephone');
+		$data['entry_alternate_telephone'] = $this->language->get('entry_alternate_telephone');
 		$data['entry_fax'] = $this->language->get('entry_fax');
 		$data['entry_seo_keyword'] = $this->language->get('entry_seo_keyword');
 		$data['entry_review_seo_keyword'] = $this->language->get('entry_review_seo_keyword');
@@ -323,6 +330,14 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		} else {
 			$data['telephone'] = $this->customer->getTelephone();
 		}
+
+        if(isset($this->request->post['alternate_telephone'])) {
+            $data['alternate_telephone'] = $this->request->post['alternate_telephone'];
+        } else if($seller_info) {
+            $data['alternate_telephone'] = $seller_info['alternate_telephone'];
+        } else {
+            $data['alternate_telephone'] = $this->customer->getAlternateTelephone();
+        }
 
 		if(isset($this->request->post['fax'])) {
 			$data['fax'] = $this->request->post['fax'];
