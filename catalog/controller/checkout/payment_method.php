@@ -72,6 +72,12 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
+			if($this->session->data['currency'] != 'NGN') {
+                if(!empty($method_data['paystack'])) {
+                    unset($method_data['paystack']);
+                }
+            }
+
 			$this->session->data['payment_methods'] = $method_data;
 		}
 
