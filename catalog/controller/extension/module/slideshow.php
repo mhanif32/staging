@@ -33,6 +33,10 @@ class ControllerExtensionModuleSlideshow extends Controller {
         $data['sale_href'] = $this->url->link('product/special', '', true);
         $data['information_href'] = $this->url->link('information/information&information_id=7', '', true);
 
+        //Retailers
+        $this->load->model('catalog/product');
+        $data['count_retailers'] = $this->model_catalog_product->getRetailersCount();
+        $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
         //Start : men count and path
         $this->load->model('catalog/product');
         $countMen = $this->model_catalog_product->getCountMen();
