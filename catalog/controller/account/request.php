@@ -32,8 +32,6 @@ class ControllerAccountRequest extends Controller {
 
             $orderData = $this->model_account_request->getOrderData($request['order_id']);
 
-
-
             $requestArray = array();
             $requestArray['request_id'] = $request['request_id'];
             $customer = $this->model_account_customer->getCustomer($request['customer_id']);
@@ -43,6 +41,7 @@ class ControllerAccountRequest extends Controller {
             $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($request['mpseller_id']);
             $requestArray['mpseller_name'] = $seller['store_owner'];
             $requestArray['requested_date'] = $request['requested_date'];
+            $requestArray['is_accept'] = $request['is_accept'];
             $requestArray['view_link'] = $this->url->link('account/request/view', '&id='.$request['request_id'], true);
             $requestSection[] = $requestArray;
         }
