@@ -610,7 +610,7 @@ class ModelCatalogProduct extends Model {
 
 	//get retailers count for home page
 	public function getRetailersCount() {
-        $query = $this->db->query("SELECT COUNT(DISTINCT ps.customer_id) AS total FROM " . DB_PREFIX . "customer ps WHERE ps.status = '1' and ps.role = 'seller'");
+        $query = $this->db->query("SELECT COUNT(DISTINCT ps.customer_id) AS total FROM " . DB_PREFIX . "mpseller ps WHERE ps.status = '1'");
 
         if (isset($query->row['total'])) {
             return $query->row['total'];
