@@ -1,24 +1,17 @@
 {{ header }}
 <section class="checkout-checkout py-5" style="background:#F3F3F3">
-    <div id="checkout-checkout" class="container bg-white pb-5">
+    <div id="checkout-checkout" class="container">
         {% if error_warning %}
             <div class="alert alert-danger alert-dismissible"><i
                         class="fa fa-exclamation-circle"></i> {{ error_warning }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
-        <div class="row">{{ column_left }}
-            {% if column_left and column_right %}
-                {% set class = 'col-sm-6' %}
-            {% elseif column_left or column_right %}
-                {% set class = 'col-sm-9' %}
-            {% else %}
-                {% set class = 'col-sm-12' %}
-            {% endif %}
-            <div id="content" class="{{ class }} px-4">{{ content_top }}
+        <div class="row justify-content-center">
+            <div id="content" class="col-sm-8 px-4 bg-white pb-5">{{ content_top }}
                 <a href='javascript:history.back(1);' class="position-absolute" style="top:20px"><i
                             class="fas fa-long-arrow-alt-left f-35 on-hover"></i></a>
-                <h3 class="my-4 text-center text-uppercase">
+                <h3 class="my-3 text-center text-uppercase">
                     {{ heading_title }}
                 </h3>
                 <div class="panel-group" id="accordion">
