@@ -39,6 +39,7 @@ p {font-size: 0.9375rem;}
   &::before{content: "|";left: 0; position: absolute;
     top: 23px;}
 }
+.modal-backdrop { z-index: 1; }
 
 .btn-link:hover, .btn-link:focus {text-decoration: none;}
 #common-maintenance{
@@ -322,11 +323,19 @@ header {background: white;z-index: 3; position: relative;
       }
       .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}}
     }
+    &:hover .product-card-featured {  box-shadow: aliceblue;
+      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+      transition: all .5s ease; }
+    .product-card-featured { .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}} }
   }
   a{text-decoration: none;}
   .card-body {padding: 0;}
   .product-card:hover .view-details{background-color: $success !important; transition: all .7s ease;}
+
 }
+
+
+
 
 
 
@@ -560,10 +569,10 @@ footer {
     }
     tbody {
       td {
-        color: #9b9b9c;
+        color: $black;
         font-size: 0.8125rem;
         font-weight: 400;
-        vertical-align: middle;
+        vertical-align: middle;     padding: 0;
         span.onclick-remove{
           display: list-item;
           list-style-type: none;
@@ -600,6 +609,7 @@ footer {
       }
     }
   }
+  .panel-group { .panel-heading { .panel-title { a { font-size: 15px; }}}}
 }
 
 // Your Shipping Address
@@ -1285,7 +1295,7 @@ i{width: 20px;}}}}
       margin: 0 0 8px 70px;
       padding: 18px;
     }
-  .panel-default>.panel-heading { color: #333; background-color: #F2F9FF; border-bottom: 1px solid #3e8cd0; margin-bottom: 5px; padding: 0px 5px 0px 5px; position: relative; max-width: 400px;
+  .panel-default>.panel-heading { color: #333; background-color: #F2F9FF; border-bottom: 1px solid #3e8cd0; margin-bottom: 5px; padding: 0px 5px 0px 5px; position: relative;
 .panel-title{
   margin-bottom: 0;
   a{

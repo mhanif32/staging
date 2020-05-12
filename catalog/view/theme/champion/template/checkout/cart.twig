@@ -1,6 +1,6 @@
 {{ header }}
 <section class="my-order py-5 p-3 bg-gray-100">
-    <div id="checkout-cart" class="container bg-white card box-shadow">
+    <div id="checkout-cart" class="container">
         {% if attention %}
             <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -17,16 +17,9 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
-        <div class="row">{{ column_left }}
-            {% if column_left and column_right %}
-                {% set class = 'col-sm-6' %}
-            {% elseif column_left or column_right %}
-                {% set class = 'col-sm-9' %}
-            {% else %}
-                {% set class = 'col-sm-12' %}
-            {% endif %}
-            <div id="content" class="{{ class }}">{{ content_top }}
-                <h3 class="my-4 text-center">
+        <div class="row">
+            <div id="content" class="col-sm-8  bg-white card box-shadow m-auto">{{ content_top }}
+                <h3 class="my-3 text-center">
                     {{ heading_title }}
                     {#{% if weight %}#}
                     {#&nbsp;({{ weight }})#}
@@ -157,7 +150,7 @@
                 </form>
 
                 {% if modules %}
-                    <h4>{{ text_next }}</h4>
+                    <h4 class="f-15">{{ text_next }}</h4>
                     <p>{{ text_next_choice }}</p>
                     <div class="panel-group" id="accordion"> {% for module in modules %}
                             {{ module }}
@@ -166,7 +159,7 @@
 
                 <div class="buttons clearfix mb-5">
                     <div class="pull-left"><a href="{{ continue }}"
-                                              class="btn btn-default on-hover">{{ button_shopping }}</a>
+                                              class="btn btn-default on-hover px-0">{{ button_shopping }}</a>
                     </div>
                     <div class="pull-right"><a href="{{ checkout }}" class="btn btn-success px-4">Proceed to Buy</a>
                     </div>

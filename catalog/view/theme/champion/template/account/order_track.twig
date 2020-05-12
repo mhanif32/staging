@@ -3,37 +3,35 @@
 <div id="track-order" class="bg-light py-5">
     {#{% if order_status %}#}
 
-    <div class="container">
+    <div class="container" style="max-width: 700px;">
 
         <div class="card border-0 box-shadow">
-            <div class="row justify-content-between mx-5 px-5 mt-3">
 
-                <div class="d-flex">
+
+                <div class="d-flex justify-content-between mx-md-5 px-md-5 mt-3">
+
+
                     <h3 class="f-20 font-weight-bold text-uppercase text-center">Track Your Order <span
                                 class="text-primary font-weight-bold">#{{ order_status.invoice_prefix }}{{ order_status.order_id }}</span>
                     </h3>
-                </div>
-                <div class="d-flex flex-column text-sm-right">
-                    <!--<p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-                    <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>-->
                     <a href='javascript:history.back(1);' class=""><i
                                 class="fas fa-long-arrow-alt-left f-25 on-hover"></i></a>
                 </div>
-            </div> <!-- Add class 'active' to progress -->
+            <!-- Add class 'active' to progress -->
 
             <form method="get" id="track-form" action="{{ action }}">
-                <div class="row justify-content-between mx-5 px-5 mt-3">
+                <div class="row justify-content-between mx-md-5 px-md-4 mt-3">
                     <div class="col-sm-5">
-                        <label class="f-12 px-2 mb-1">Order Number </label>
-                        <div id="searchInputOrder" class="input-group mb-3 px-2">
+                        <label class="f-12 mb-1">Order Number </label>
+                        <div id="searchInputOrder" class="input-group mb-3">
                             <input type="text" name="search_order" value="{{ order_id }}"
                                    placeholder="Enter the Order Number here"
                                    class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <label class="f-12 px-2 mb-1">Email </label>
-                        <div id="searchEmail" class="input-group mb-3 px-2">
+                        <label class="f-12 mb-1">Email </label>
+                        <div id="searchEmail" class="input-group mb-3">
                             <input type="text" name="email" value="{{ email }}"
                                    placeholder="Enter the Order Email here"
                                    class="form-control">
@@ -41,12 +39,12 @@
                     </div>
                     <div class="col-sm-2">
                         <button type="submit" class="btn btn-primary f-12 mt-4">
-                            <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            Search</button>
                     </div>
                 </div>
             </form>
 
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center my-4">
                 {% if order_status is empty %}
                     <b>No order found!</b>
                 {% else %}

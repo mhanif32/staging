@@ -6,9 +6,9 @@
         <p style="font-size: 0.9375rem;" class="text-center text-secondary"> These are our recent top bought products.</p>
         <div class="row pt-4">
             {% for product in products %}
-                <div class="col-lg-3 col-md-3 col-sm-6 px-3 mb-4 product-layout">
-                    <div class="product-card position-relative p-3">
-                        <div class="wish-list text-right position-absolute" style="right:-5px;top: -5px;font-size: 22px;">
+                <div class="col-lg-3 col-md-3 col-sm-6 mb-4 product-layout">
+                    <div class="product-card-featured position-relative">
+                        <div class="wish-list text-right position-absolute" style="right:0px;top: 0px;font-size: 22px;">
                             {#<i class="fas fa-heart" aria-hidden="true"></i>#}
                             <button class="border-0" type="button" data-toggle="tooltip"
                                     title="{{ button_wishlist }}"
