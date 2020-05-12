@@ -24,6 +24,8 @@
 <p>
     <textarea name="comment" rows="8" class="form-control">{{ comment }}</textarea>
 </p>
+<p><label for="input-date" class="text-right"><strong>My order to be delivered on </strong></label></p>
+<p><input type="date" name="my_delivery_date" id="input-deliverydate" class="form-control rounded-0" min="{{ minDate }}"></p>
 {% if text_agree %}
     <div class="buttons">
         <div class="pull-right">{{ text_agree }}

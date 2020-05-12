@@ -50,7 +50,8 @@
             </tfoot>
         </table>
     </div>
-    {%  if subTotal >= max_checkout_amount %}
+
+    {% if subTotal >= max_checkout_amount %}
     {{ payment }}
       {% else %}
           <div class="alert alert-danger alert-dismissible">Warning: Minimum Order 'Sub-Total' Amount on this site is {{ max_checkout_amount }}!<button type="button" class="close" data-dismiss="alert">×</button></div>

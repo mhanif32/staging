@@ -185,7 +185,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
 		}
-
+        $this->session->data['my_delivery_date'] = $this->request->post['my_delivery_date'];
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}

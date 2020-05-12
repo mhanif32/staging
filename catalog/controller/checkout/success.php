@@ -44,6 +44,11 @@ class ControllerCheckoutSuccess extends Controller
                         $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpSellerData['mpseller_id'], 3);
                     }
 
+                    if ($this->request->server['HTTPS']) {
+                        $server = $this->config->get('config_ssl');
+                    } else {
+                        $server = $this->config->get('config_url');
+                    }
                     //Mail send to delivery partners
                     $dataMail = [];
                     $mail = new Mail($this->config->get('config_mail_engine'));
@@ -69,6 +74,8 @@ class ControllerCheckoutSuccess extends Controller
                             $mail->setFrom($this->config->get('config_email'));
                             $mail->setSender(html_entity_decode($mpSellerData['store_name'], ENT_QUOTES, 'UTF-8'));
                             $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                            $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                            $dataMail['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
                             $mailText = $this->load->view('mail/order_delivery_alert', $dataMail);
                             $mail->setHtml($mailText);
                             $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
@@ -82,6 +89,8 @@ class ControllerCheckoutSuccess extends Controller
                     $mail->setFrom($this->config->get('config_email'));
                     $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                     $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Customer New Order ', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
+                    $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                    $dataAdmin['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
                     $mailText = $this->load->view('mail/order_admin_alert', $dataAdmin);
                     $mail->setHtml($mailText);
                     $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
@@ -122,7 +131,6 @@ class ControllerCheckoutSuccess extends Controller
         }
 
         $data['continue'] = $this->url->link('account/edit');
-
 //		$data['column_left'] = $this->load->controller('common/column_left');
 //		$data['column_right'] = $this->load->controller('common/column_right');
 //		$data['content_top'] = $this->load->controller('common/content_top');
