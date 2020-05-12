@@ -24,11 +24,10 @@ class ControllerCheckoutSuccess extends Controller
                     $sellerList[] = $product['mpseller_id'];
                 }
                 $totalSellers = array_unique($sellerList);
-
                 //For Single Seller
                 if (count($totalSellers) == 1) {
                     $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
-                    //echo '<pre>';print_r($shippingAddress);exit('aaa');
+
                     //Same City
                     if (!empty($mpSellerData['city']) && strtolower($mpSellerData['city']) == strtolower($shippingAddress['city']) && $shippingAddress['zone_id'] == $mpSellerData['zone_id']) {
 

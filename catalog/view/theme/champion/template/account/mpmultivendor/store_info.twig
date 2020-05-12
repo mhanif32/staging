@@ -197,6 +197,14 @@
                                                    for="input-zone">{{ entry_zone }}<a class="text-danger">*</a></label>
                                             <div class="col-sm-12">
                                                 <select name="zone_id" id="input-zone" class="form-control">
+                                                    {% for zoneVal in zonesData %}
+                                                        {% if zoneVal.zone_id == zone_id %}
+                                                            <option value="{{ zoneVal.zone_id }}"
+                                                                    selected="selected">{{ zoneVal.name }}</option>
+                                                        {% else %}
+                                                            <option value="{{ zoneVal.zone_id }}">{{ zoneVal.name }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </select>
                                                 {% if error_zone %}
                                                     <div class="text-danger">{{ error_zone }}</div>
