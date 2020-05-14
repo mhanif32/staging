@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             {{  profile_column_left }}
-            <div class="col-12 col-md-9 col-lg-9">
+            <div class="col-12 col-md-12 col-lg-6">
                 <div class="py-5">
                     <div class="form-signin box-shadow card p-4">
 
@@ -16,18 +16,24 @@
                                 {% if error_warning %}
                                     <div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
                                 {% endif %}
-                                <div class="row m-0">
-                                    <div class="col-12 p-4 border mb-5 text-success">
+                                <div class="row">
+                                    {#m-0#}
+                                    <div class="col-12 text-success">
+                                        {#p-4 border mb-5 #}
                                         <a href="{{ add }}">
                                             {#{{ button_new_address }}#}
                                             <i class="fas fa-plus mr-4" aria-hidden="true"></i> Add new Address</a>
                                     </div>
                                 </div>
+                                <hr>
                                 {% if addresses %}
                                     {% for result in addresses %}
                                         <form action="#" class="">
-                                            <div class="row m-0 mb-5">
-                                                <div class="col-12 p-4 border">
+                                            <div class="row ">
+                                                {#m-0 mb-5#}
+
+                                                <div class="col-12">
+                                                    {#p-4 border#}
                                                     <div class="main-address-title d-inline-block">
                                                         <h6>
                                                             Main Delivery Address
@@ -39,12 +45,14 @@
                                                                 href="{{ result.delete }}">{{ button_delete }}</a>
                                                     </div>
                                                 </div>
-                                                <div class="adress-description p-4 border-top-0 border w-100">
+                                                <div class="adress-description col-12">
+                                                    {#p-4 border-top-0 border#}
 
                                                     {{ result.address }}
 
                                                 </div>
                                             </div>
+                                            <hr>
                                         </form>
                                     {% endfor %}
                                 {% else %}
