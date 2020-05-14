@@ -41,6 +41,8 @@ p {font-size: 0.9375rem;}
 }
 .modal-backdrop { z-index: 1; }
 
+#column-left { .list-group-item { border: none; } }
+
 .btn-link:hover, .btn-link:focus {text-decoration: none;}
 #common-maintenance{
   width: 100%;
@@ -219,8 +221,8 @@ header {background: white;z-index: 3; position: relative;
   .navbar-nav-menu{
     > li{width: 80px;text-align: center;border-right: 3px solid #fff;background: linear-gradient(to right, $success 50%, $gray-100 50%);background-size: 200% 100%;background-position: right bottom;transition: all .5s ease-out;
       a{text-decoration: none;transition: all .6s ease-out; line-height: 11px}
-      &:hover{background-position: left bottom;
-       > a{color: $white;}}
+      //&:hover{background-position: left bottom;
+      // > a{color: $white;}}
       .display-middle-block {
         height: 35px;
         display: table-cell;
@@ -267,8 +269,8 @@ header {background: white;z-index: 3; position: relative;
       > a{width: 80px; text-align: center; border-right: 3px solid #fff; background: linear-gradient(to right, $success 50%, $gray-100 50%); background-size: 200% 100%; background-position: right bottom;transition: all .5s ease-out;
         a{ text-decoration: none }
         li{ transition: all .6s ease-out; line-height: 11px;; }
-        &:hover{ background-position: left bottom;
-          > li{color: $white;}}
+        //&:hover{ background-position: left bottom;
+        //  > li{color: $white;}}
 
         .display-middle-block {
           height: 35px;
@@ -323,7 +325,7 @@ header {background: white;z-index: 3; position: relative;
       }
       .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}}
     }
-    &:hover .product-card-featured {  box-shadow: aliceblue;
+    .product-card-featured {  box-shadow: aliceblue;
       box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
       transition: all .5s ease; }
     .product-card-featured { .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}} }
@@ -1183,7 +1185,19 @@ i{width: 20px;}}}}
     background: $success; border-radius: 0;
   }
 
-    .scrollmenu { overflow: auto; white-space: nowrap; }
+    .scrollmenu { overflow-x: auto; white-space: nowrap;
+      &::-webkit-scrollbar { height: 4px; }
+      &::-webkit-scrollbar-thumb { background: $success; border-radius: 10px; }
+      &::-webkit-scrollbar-track { box-shadow: inset 0 0 4px grey; border-radius: 3px;
+        &:hover {
+          background: #a3c8d6;
+          cursor: pointer;
+        }
+
+
+      }
+
+    }
 
 
 

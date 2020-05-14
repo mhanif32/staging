@@ -184,6 +184,9 @@ p {
 .modal-backdrop {
   z-index: 1; }
 
+#column-left .list-group-item {
+  border: none; }
+
 .btn-link:hover, .btn-link:focus {
   text-decoration: none; }
 
@@ -375,10 +378,6 @@ header {
         -webkit-transition: all .6s ease-out;
         transition: all .6s ease-out;
         line-height: 11px; }
-      header .navbar-nav-menu > li:hover {
-        background-position: left bottom; }
-        header .navbar-nav-menu > li:hover > a {
-          color: #fff; }
       header .navbar-nav-menu > li .display-middle-block {
         height: 35px;
         display: table-cell;
@@ -457,10 +456,6 @@ header {
         -webkit-transition: all .6s ease-out;
         transition: all .6s ease-out;
         line-height: 11px; }
-      header .navbar-nav-menu > a:hover {
-        background-position: left bottom; }
-        header .navbar-nav-menu > a:hover > li {
-          color: #fff; }
       header .navbar-nav-menu > a .display-middle-block {
         height: 35px;
         display: table-cell;
@@ -525,7 +520,7 @@ header {
   width: 1em;
   height: 1em;
   line-height: 1em; }
-.top-collection .product-layout:hover .product-card-featured, .product-manufacturer .product-layout:hover .product-card-featured {
+.top-collection .product-layout .product-card-featured, .product-manufacturer .product-layout .product-card-featured {
   -webkit-box-shadow: aliceblue;
           box-shadow: aliceblue;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -1527,8 +1522,20 @@ footer ul {
   background: #01B0F1;
   border-radius: 0; }
 .mv-seller-store #find-category .scrollmenu {
-  overflow: auto;
+  overflow-x: auto;
   white-space: nowrap; }
+  .mv-seller-store #find-category .scrollmenu::-webkit-scrollbar {
+    height: 4px; }
+  .mv-seller-store #find-category .scrollmenu::-webkit-scrollbar-thumb {
+    background: #01B0F1;
+    border-radius: 10px; }
+  .mv-seller-store #find-category .scrollmenu::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px grey;
+            box-shadow: inset 0 0 4px grey;
+    border-radius: 3px; }
+    .mv-seller-store #find-category .scrollmenu::-webkit-scrollbar-track:hover {
+      background: #a3c8d6;
+      cursor: pointer; }
 .mv-seller-store .mvndr-dl .follow-us ul li {
   display: inline-block; }
 
