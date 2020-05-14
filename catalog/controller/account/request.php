@@ -151,10 +151,13 @@ class ControllerAccountRequest extends Controller {
     {
         $json = array();
         $this->load->model('account/request');
+        $this->load->model('account/customer');
         if($this->request->post['request_id']) {
             $requestId = $this->request->post['request_id'];
             $requestId = $this->request->post['request_id'];
             $requestData = $this->model_account_request->getRequestData($requestId);
+
+            $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
             if(!empty($requestData)) {
 
                 $this->model_account_request->updateRequest($requestId, $isAccept = 2);
@@ -174,6 +177,11 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Declined Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+
+                $data['delivery_partner_name'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
+                $data['customer_name'] = $customer['firstname'] .' '. $customer['lastname'];
+                $data['orderId'] = $requestData['order_id'];
+
                 $mailText = $this->load->view('mail/adm_request_decline_alert', $data);
                 $mail->setHtml($mailText);
                 $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));

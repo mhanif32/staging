@@ -2,13 +2,11 @@
 class ControllerMailRegister extends Controller {
 	public function index(&$route, &$args, &$output) {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
 		$this->load->language('mail/register');
 
 		$data['text_welcome'] = sprintf($this->language->get('text_welcome'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 		$data['text_login'] = $this->language->get('text_login');
+		$data['text_link_1'] = $this->language->get('text_link_1');
 		$data['text_approval'] = $this->language->get('text_approval');
 		$data['text_service'] = $this->language->get('text_service');
 		$data['text_thanks'] = $this->language->get('text_thanks');
@@ -53,9 +51,6 @@ class ControllerMailRegister extends Controller {
         $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
         $data['firstname'] = $args[0]['firstname'];
         $data['lastname'] = $args[0]['lastname'];
-
-//		$mail->setText($this->load->view('mail/register', $data));
-//		$mail->send();
 
         $mailText = $this->load->view('mail/register', $data);
         $mail->setHtml($mailText);
