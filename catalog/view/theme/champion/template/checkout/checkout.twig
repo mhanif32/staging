@@ -80,7 +80,7 @@
                                 <h4 class="panel-title">{{ text_checkout_confirm }}</h4>
                             </div>
                             <div class="panel-collapse collapse" id="collapse-checkout-confirm">
-                                <div class="panel-body mt-5"></div>
+                                <div class="panel-body"></div>
                             </div>
                         </div>
                     </div>
@@ -777,7 +777,7 @@
         $.ajax({
             url: 'index.php?route=checkout/payment_method/save',
             type: 'post',
-            data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea'),
+            data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea, #input-deliverydate'),
             dataType: 'json',
             beforeSend: function () {
                 $('#button-payment-method').button('loading');

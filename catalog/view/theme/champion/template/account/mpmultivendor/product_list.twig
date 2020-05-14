@@ -53,13 +53,13 @@
                                                 <label class="control-label" for="input-name">{{ entry_name }}</label>
                                                 <input type="text" name="filter_name" value="{{ filter_name }}"
                                                        placeholder="{{ entry_name }}" id="input-name"
-                                                       class="form-control"/>
+                                                       class="form-control text-click"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="input-model">{{ entry_model }}</label>
                                                 <input type="text" name="filter_model" value="{{ filter_model }}"
                                                        placeholder="{{ entry_model }}" id="input-model"
-                                                       class="form-control"/>
+                                                       class="form-control text-click"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -67,14 +67,14 @@
                                                 <label class="control-label" for="input-price">{{ entry_price }}</label>
                                                 <input type="text" name="filter_price" value="{{ filter_price }}"
                                                        placeholder="{{ entry_price }}" id="input-price"
-                                                       class="form-control"/>
+                                                       class="form-control text-click"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label"
                                                        for="input-quantity">{{ entry_quantity }}</label>
                                                 <input type="text" name="filter_quantity" value="{{ filter_quantity }}"
                                                        placeholder="{{ entry_quantity }}" id="input-quantity"
-                                                       class="form-control"/>
+                                                       class="form-control text-click"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -217,6 +217,16 @@
 </div>
 
 <script type="text/javascript"><!--
+ //   $('.text-click').on('keyup', function () {
+
+    $('.text-click').keypress(function (e) {
+        var key = e.which;
+        if(key == 13)  // the enter key code
+        {
+            $('#button-filter').trigger('click');
+        }
+    });
+
     $('#button-filter').on('click', function () {
         var url = 'index.php?route=account/mpmultivendor/product';
 

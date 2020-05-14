@@ -263,6 +263,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		$data['help_image'] = sprintf($this->language->get('help_image'), $this->config->get('mpmultivendor_profile_image_width'), $this->config->get('mpmultivendor_profile_image_height'));
 
 		$this->load->model('localisation/country');
+		$this->load->model('localisation/zone');
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		$seller_info = $this->model_account_mpmultivendor_seller->getSellerInfo($this->customer->getId());
@@ -358,7 +359,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		if(isset($this->request->post['country_id'])) {
 			$data['country_id'] = $this->request->post['country_id'];
 		} else if($seller_info) {
-			$data['country_id'] = ''. $seller_info['country_id'];
+			$data['country_id'] = $seller_info['country_id'];
 		} else {
 			$data['country_id'] = '';
 		}
@@ -382,10 +383,17 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
         if(isset($this->request->post['zone_id'])) {
             $data['zone_id'] = $this->request->post['zone_id'];
+            if(!empty($data['country_id'])) {
+                $data['zonesData'] = $this->model_localisation_zone->getZonesByCountryId($data['country_id']);
+            }
         } else if($seller_info) {
             $data['zone_id'] = $seller_info['zone_id'];
+            if(!empty($data['country_id'])) {
+                $data['zonesData'] = $this->model_localisation_zone->getZonesByCountryId($data['country_id']);
+            }
         } else {
             $data['zone_id'] = '';
+            $data['zonesData'] = [];
         }
 
 		if(isset($this->request->post['facebook_url'])) {
