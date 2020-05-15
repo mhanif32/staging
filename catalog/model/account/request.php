@@ -13,8 +13,8 @@ class ModelAccountRequest extends Model
         //Select delivery partner's location (For Same Country)
         $query = $this->db->query("SELECT dpc.customer_id, dpc.area_name, c.email FROM " . DB_PREFIX . "delivery_partner_countries dpc LEFT JOIN " . DB_PREFIX . "customer c ON (dpc.customer_id = c.customer_id) LEFT JOIN " . DB_PREFIX . "delivery_partner_info dpi ON (dpc.customer_id = dpi.customer_id)  WHERE dpc.country_id = '" . $shippingAddress['country_id'] . "' and dpc.zone_id = '" . $shippingAddress['zone_id'] . "' and dpc.area_name = '" . $shippingAddress['city'] . "' and dpi.is_approved = '1' and dpi.delivery_type = '" . $delivery_type . "'");
         $deliveryPartners = $query->rows;
-//        echo $shippingAddress['city'].' - '. $delivery_type.' - '. $shippingAddress['zone_id'].' - '. $shippingAddress['country_id'];
-//        echo '<pre>'; print_r($deliveryPartners);exit('asd');
+        echo $shippingAddress['city'].' - '. $delivery_type.' - '. $shippingAddress['zone_id'].' - '. $shippingAddress['country_id'];
+        echo '<pre>'; print_r($deliveryPartners);exit('asd');
         //Generate delivery partner requests
         foreach ($deliveryPartners as $deliveryPartner) {
 
