@@ -79,7 +79,7 @@ class ControllerCheckoutSuccess extends Controller
                             $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Request', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
                             $dataDp['logo'] = $server . 'image/' . $this->config->get('config_logo');
                             $dataDp['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-                            $delPartnerData = $this->model_account_customer->getCustomer($deliveryPartner['customer_id']);
+                            $delPartnerData = $this->model_account_customer->getCustomer($deliveryPartner['delivery_partner_id']);
 
                             $dataDp['delivery_partner_name'] = $delPartnerData['firstname'].' '. $delPartnerData['lastname'];
                             $dataDp['orderId'] = '#'.$orderId;
