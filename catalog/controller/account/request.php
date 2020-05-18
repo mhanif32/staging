@@ -69,7 +69,7 @@ class ControllerAccountRequest extends Controller {
         $this->load->model('localisation/country');
 
         $requestData = $this->model_account_request->getRequestData($this->request->get['id']);
-        $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($requestData['mpseller_id']);
+        $seller = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
 
         $data['seller'] = array(
             'store_owner' => $seller['store_owner'],
@@ -136,9 +136,9 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
-                $mailText = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
-                $mail->setHtml($mailText);
-                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                $mailTextAdmin = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
+                $mail->setHtml($mailTextAdmin);
+                $mail->setText(html_entity_decode($mailTextAdmin, ENT_QUOTES, 'UTF-8'));
                 $mail->send();
             }
         }
