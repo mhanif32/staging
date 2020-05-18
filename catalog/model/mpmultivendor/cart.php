@@ -223,11 +223,7 @@ class ModelMpmultivendorCart extends Model {
 					$mail->setFrom($this->config->get('config_email'));
 					$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 					$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), $this->config->get('config_name'), $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
-					$mail->setText($this->load->view('mpmultivendor_mail/order_alert', $data));
-					$mail->send();
-
-
-                    $mailText = $this->load->view('mail/order_delivery_alert', $dataDp);
+					$mailText = $this->load->view('mpmultivendor_mail/order_alert', $data);
                     $mail->setHtml($mailText);
                     $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
                     $mail->send();

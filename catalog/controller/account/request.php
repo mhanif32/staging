@@ -38,7 +38,7 @@ class ControllerAccountRequest extends Controller {
             $requestArray['customer_name'] = $customer['firstname'].' '.$customer['lastname'];
             $requestArray['order_id'] = $request['order_id'];
             $requestArray['delivery_location'] = $orderData['shipping_address_1'].', '.$orderData['shipping_city'].', '.$orderData['shipping_zone'].', '.$orderData['shipping_country'];
-            $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($request['mpseller_id']);
+            $seller = $this->model_account_request->getMpSellerdata($request['mpseller_id']);
             $requestArray['mpseller_name'] = $seller['store_owner'];
             $requestArray['requested_date'] = $request['requested_date'];
             $requestArray['is_accept'] = $request['is_accept'];
