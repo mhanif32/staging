@@ -104,6 +104,10 @@ class ControllerAccountRequest extends Controller {
                 $this->load->model('account/customer');
                 $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
 
+                $deliveryPartData = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
+
+                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
+
                 //Send Mail to Delivery Partner
                 $dataMail = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
@@ -117,6 +121,17 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+                if ($this->request->server['HTTPS']) {
+                    $server = $this->config->get('config_ssl');
+                } else {
+                    $server = $this->config->get('config_url');
+                }
+                $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                $dataMail['order_id'] = $requestData['order_id'];
+                $dataMail['deliveryPartnerName'] = $deliveryPartData['firstname'] . ' ' .$deliveryPartData['lastname'];
+                $dataMail['store_owner'] = $sellerData['store_owner'];
+                $dataMail['customerName'] = $customerData['firstname'] . ' ' .$customerData['lastname'];
+
                 $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
                 $mail->setHtml($mailText);
                 $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
