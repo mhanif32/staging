@@ -65,7 +65,9 @@ class ControllerMailOrder extends Controller {
 		$data['title'] = sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']);
 
 		$data['text_greeting'] = sprintf($language->get('text_greeting'), $order_info['store_name']);
+		$data['text_greeting_1'] = $language->get('text_greeting_1');
 		$data['text_link'] = $language->get('text_link');
+		$data['text_table_invoice'] = $language->get('text_table_invoice');
 		$data['text_download'] = $language->get('text_download');
 		$data['text_order_detail'] = $language->get('text_order_detail');
 		$data['text_instruction'] = $language->get('text_instruction');
@@ -85,6 +87,8 @@ class ControllerMailOrder extends Controller {
 		$data['text_price'] = $language->get('text_price');
 		$data['text_total'] = $language->get('text_total');
 		$data['text_footer'] = $language->get('text_footer');
+		$data['text_footer_1'] = $language->get('text_footer_1');
+		$data['text_footer_2'] = $language->get('text_footer_2');
 
 		$data['logo'] = $order_info['store_url'] . 'image/' . $this->config->get('config_logo');
 		$data['store_name'] = $order_info['store_name'];
@@ -271,6 +275,8 @@ class ControllerMailOrder extends Controller {
 		$mail->setFrom($from);
 		$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
+
+        $data['customer_name'] = $order_info['firstname'];
 		$mail->setHtml($this->load->view('mail/order_add', $data));
 		$mail->send();
 	}

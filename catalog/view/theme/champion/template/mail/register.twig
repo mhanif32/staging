@@ -102,10 +102,14 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hi {{ firstname }}, {{ text_welcome }}</h3>
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello {{ firstname }},</h3>
+
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">{{ text_welcome }}</p>
 
                                         {% if not approval %}
                                         <p style="margin-bottom: 0px; text-align: center;">{{ text_login }}</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_link_1 }}</p>
+
                                         <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
                                         <p align="center" style="margin-bottom: 0px; padding: 10px 0px;"> {{ text_service }} </p>
                                         <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>
@@ -118,13 +122,13 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:26px;text-align:left;color:#000000;">
                                         <p align="center" style="margin-bottom: 0px; padding: 10px 0px;">If this isn’t {{ firstname }} {{ lastname }} email please send an email to <a href="mailto:wilson.olayinka@gmail.com" style="color:#01B0F1" target="_top">wilson.olayinka@gmail.com</a> and we’ll remove your email from our mailing list.</p>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </table>
                     </div>
                     <!--[if mso | IE]>

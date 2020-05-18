@@ -83,19 +83,14 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello,</h3>
-                                        <p style="margin-bottom: 0px; text-align: center;">You have received a request of delivery of products.</p>
-<p style="margin-bottom: 0px; text-align: center;">Please login from your delivery partner account and Accept/ Decline a request.</p>
-
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Dear {{ delivery_partner_name }},</h3>
+                                        <p style="margin-bottom: 0px; text-align: center;">The following order {{ orderId }} to be delivered to {{ delivery_address }} has been placed and its ready
+                                            for pick up from {{ seller_name }} {{ seller_address }}</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">Would you like to accept or decline this delivery request.</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">Click the link below to view order details and accept or decline promptly as necessary.</p>
+                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ request_view_link }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">View Order Details</a></p>
 
                                         <p style="margin-bottom: 0px;"> Thanks,<br>{{ store }} Team</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:26px;text-align:left;color:#000000;">
-                                        <p align="center" style="margin-bottom: 0px; padding: 10px 0px;">If this isn’t {{ text_firstname }} email please send an email to <a href="mailto:wilson.olayinka@gmail.com" style="color:#01B0F1" target="_top">wilson.olayinka@gmail.com</a> and we’ll remove your email from our mailing list.</p>
                                     </div>
                                 </td>
                             </tr>

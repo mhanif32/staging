@@ -24,17 +24,18 @@
 <p>
     <textarea name="comment" rows="8" class="form-control">{{ comment }}</textarea>
 </p>
-<p><label for="input-date" class="text-right"><strong>My order to be delivered on </strong></label></p>
-<p><input type="date" name="my_delivery_date" id="input-deliverydate" class="form-control rounded-0" min="{{ minDate }}"></p>
+<strong>If You Have A Specific Preferred Delivery Date For Your Order, Please Specify Here.</strong>
+<p><input type="date" style="width: 180px" name="my_delivery_date" id="input-deliverydate" class="form-control rounded-0" min="{{ minDate }}"></p>
 {% if text_agree %}
     <div class="buttons">
-        <div class="pull-right">{{ text_agree }}
+        <div class="pull-right">
             {% if agree %}
-                <input type="checkbox" name="agree" value="1" checked="checked"/>
+                <p><input type="checkbox" name="agree" value="1" checked="checked"/>
             {% else %}
-                <input type="checkbox" name="agree" value="1"/>
+                <p><input type="checkbox" name="agree" value="1"/>
             {% endif %}
-            &nbsp;
+                &nbsp;{{ text_agree }}</p>
+
             <input type="button" value="{{ button_continue }}" id="button-payment-method"
                    data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
         </div>
