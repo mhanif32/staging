@@ -520,13 +520,6 @@ header {
   width: 1em;
   height: 1em;
   line-height: 1em; }
-.top-collection .product-layout .product-card-featured, .product-manufacturer .product-layout .product-card-featured {
-  -webkit-box-shadow: aliceblue;
-          box-shadow: aliceblue;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease; }
 .top-collection .product-layout .product-card-featured .rating .fa-stack, .product-manufacturer .product-layout .product-card-featured .rating .fa-stack {
   width: 1em;
   height: 1em;
