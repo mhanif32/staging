@@ -325,9 +325,7 @@ header {background: white;z-index: 3; position: relative;
       }
       .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}}
     }
-    .product-card-featured {  box-shadow: aliceblue;
-      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-      transition: all .5s ease; }
+
     .product-card-featured { .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}} }
   }
   a{text-decoration: none;}
