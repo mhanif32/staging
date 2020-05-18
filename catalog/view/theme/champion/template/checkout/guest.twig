@@ -25,22 +25,22 @@
                 {% endfor %}</div>
             <div class="row">
             <div class="form-group required col-md-6">
-                <label class="control-label" for="input-payment-firstname">{{ entry_firstname }}</label>
+                <label class="control-label" for="input-payment-firstname">{{ entry_firstname }}*</label>
                 <input type="text" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}"
                        id="input-payment-firstname" class="form-control"/>
             </div>
             <div class="form-group required col-md-6">
-                <label class="control-label" for="input-payment-lastname">{{ entry_lastname }}</label>
+                <label class="control-label" for="input-payment-lastname">{{ entry_lastname }}*</label>
                 <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}"
                        id="input-payment-lastname" class="form-control"/>
             </div>
             <div class="form-group required col-md-6">
-                <label class="control-label" for="input-payment-email">{{ entry_email }}</label>
+                <label class="control-label" for="input-payment-email">{{ entry_email }}*</label>
                 <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}"
                        id="input-payment-email" class="form-control"/>
             </div>
             <div class="form-group required col-md-6">
-                <label class="control-label" for="input-payment-telephone">{{ entry_telephone }}</label>
+                <label class="control-label" for="input-payment-telephone">{{ entry_telephone }}*</label>
                 <input type="text" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}"
                        id="input-payment-telephone" class="form-control"/>
             </div>
@@ -225,7 +225,7 @@
                            id="input-payment-company" class="form-control"/>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}</label>
+                    <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}*</label>
                     <input type="text" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}"
                            id="input-payment-address-1" class="form-control"/>
                 </div>
@@ -235,17 +235,17 @@
                            id="input-payment-address-2" class="form-control"/>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-city">{{ entry_city }}</label>
+                    <label class="control-label" for="input-payment-city">{{ entry_city }}*</label>
                     <input type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}"
                            id="input-payment-city" class="form-control"/>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}</label>
+                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}*</label>
                     <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
                            id="input-payment-postcode" class="form-control"/>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-country">{{ entry_country }}</label>
+                    <label class="control-label" for="input-payment-country">{{ entry_country }}*</label>
                     <select name="country_id" id="input-payment-country" class="form-control">
                         <option value="">{{ text_select }}</option>
 
@@ -270,7 +270,7 @@
                     </select>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-zone">{{ entry_zone }}</label>
+                    <label class="control-label" for="input-payment-zone">{{ entry_zone }}*</label>
                     <select name="zone_id" id="input-payment-zone" class="form-control">
                     </select>
                 </div>
@@ -453,7 +453,7 @@
             {% else %}
                 <input type="checkbox" name="shipping_address" value="1"/>
             {% endif %}
-            {{ entry_shipping }}</label>
+            {{ entry_shipping }}*</label>
     </div>
 {% endif %}
 <div class="buttons">

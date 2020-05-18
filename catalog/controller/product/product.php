@@ -15,7 +15,10 @@ class ControllerProductProduct extends Controller {
 		$this->load->model('catalog/category');
         $this->load->model('account/mpmultivendor/seller');
 
-		if (isset($this->request->get['path'])) {
+        $data['continue_href'] = $this->url->link('common/home', '', true);
+
+
+        if (isset($this->request->get['path'])) {
 			$path = '';
 
 			$parts = explode('_', (string)$this->request->get['path']);
