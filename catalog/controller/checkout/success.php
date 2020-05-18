@@ -81,21 +81,23 @@ class ControllerCheckoutSuccess extends Controller
                             $dataDp['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
                             $delPartnerData = $this->model_account_customer->getCustomer($deliveryPartner['customer_id']);
 
-                            $dataDp['delivery_partner_name'] = $delPartnerData['firstname'].' '. $delPartnerData['lastname'];
-                            $dataDp['orderId'] = '#'.$orderId;
-                            $dataDp['delivery_address'] = $shippingAddress['address_1'].', '.$shippingAddress['city'].', '.$shippingAddress['zone'].', '.$shippingAddress['country'];
-                            $dataDp['seller_name'] = $mpSellerData['store_owner'];
+                            if(!empty($delPartnerData)) { // if delivery partner not found
+                                $dataDp['delivery_partner_name'] = $delPartnerData['firstname'] . ' ' . $delPartnerData['lastname'];
+                                $dataDp['orderId'] = '#' . $orderId;
+                                $dataDp['delivery_address'] = $shippingAddress['address_1'] . ', ' . $shippingAddress['city'] . ', ' . $shippingAddress['zone'] . ', ' . $shippingAddress['country'];
+                                $dataDp['seller_name'] = $mpSellerData['store_owner'];
 
-                            //echo '<pre>';print_r($mpSellerData);exit('asd');
-                            $zone = $this->model_localisation_zone->getZone($mpSellerData['zone_id']);
-                            $country = $this->model_localisation_country->getCountry($mpSellerData['country_id']);
+                                //echo '<pre>';print_r($mpSellerData);exit('asd');
+                                $zone = $this->model_localisation_zone->getZone($mpSellerData['zone_id']);
+                                $country = $this->model_localisation_country->getCountry($mpSellerData['country_id']);
 
-                            $dataDp['seller_address'] = $mpSellerData['address'].', '.$mpSellerData['city'].', '.$zone['name'].', '.$country['name'];
-                            $dataDp['request_view_link'] = $this->url->link('account/request/index', '', true);
-                            $mailText = $this->load->view('mail/order_delivery_alert', $dataDp);
-                            $mail->setHtml($mailText);
-                            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
-                            $mail->send();
+                                $dataDp['seller_address'] = $mpSellerData['address'] . ', ' . $mpSellerData['city'] . ', ' . $zone['name'] . ', ' . $country['name'];
+                                $dataDp['request_view_link'] = $this->url->link('account/request/index', '', true);
+                                $mailText = $this->load->view('mail/order_delivery_alert', $dataDp);
+                                $mail->setHtml($mailText);
+                                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                                $mail->send();
+                            }
                         }
                     }
 

@@ -5,6 +5,8 @@ class ControllerExtensionPaymentCod extends Controller {
 	}
 
 	public function confirm() {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 		$json = array();
 		
 		if ($this->session->data['payment_method']['code'] == 'cod') {

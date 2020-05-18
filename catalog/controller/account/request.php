@@ -38,7 +38,7 @@ class ControllerAccountRequest extends Controller {
             $requestArray['customer_name'] = $customer['firstname'].' '.$customer['lastname'];
             $requestArray['order_id'] = $request['order_id'];
             $requestArray['delivery_location'] = $orderData['shipping_address_1'].', '.$orderData['shipping_city'].', '.$orderData['shipping_zone'].', '.$orderData['shipping_country'];
-            $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($request['mpseller_id']);
+            $seller = $this->model_account_request->getMpSellerdata($request['mpseller_id']);
             $requestArray['mpseller_name'] = $seller['store_owner'];
             $requestArray['requested_date'] = $request['requested_date'];
             $requestArray['is_accept'] = $request['is_accept'];
@@ -69,7 +69,7 @@ class ControllerAccountRequest extends Controller {
         $this->load->model('localisation/country');
 
         $requestData = $this->model_account_request->getRequestData($this->request->get['id']);
-        $seller = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($requestData['mpseller_id']);
+        $seller = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
 
         $data['seller'] = array(
             'store_owner' => $seller['store_owner'],
@@ -104,6 +104,10 @@ class ControllerAccountRequest extends Controller {
                 $this->load->model('account/customer');
                 $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
 
+                $deliveryPartData = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
+
+                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
+
                 //Send Mail to Delivery Partner
                 $dataMail = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
@@ -117,6 +121,17 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+                if ($this->request->server['HTTPS']) {
+                    $server = $this->config->get('config_ssl');
+                } else {
+                    $server = $this->config->get('config_url');
+                }
+                $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                $dataMail['order_id'] = $requestData['order_id'];
+                $dataMail['deliveryPartnerName'] = $deliveryPartData['firstname'] . ' ' .$deliveryPartData['lastname'];
+                $dataMail['store_owner'] = $sellerData['store_owner'];
+                $dataMail['customerName'] = $customerData['firstname'] . ' ' .$customerData['lastname'];
+
                 $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
                 $mail->setHtml($mailText);
                 $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
@@ -136,9 +151,9 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
-                $mailText = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
-                $mail->setHtml($mailText);
-                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                $mailTextAdmin = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
+                $mail->setHtml($mailTextAdmin);
+                $mail->setText(html_entity_decode($mailTextAdmin, ENT_QUOTES, 'UTF-8'));
                 $mail->send();
             }
         }
