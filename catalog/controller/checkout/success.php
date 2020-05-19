@@ -109,6 +109,12 @@ class ControllerCheckoutSuccess extends Controller
                     $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Customer New Order ', $this->config->get('config_name'), $orderId), ENT_QUOTES, 'UTF-8'));
                     $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
                     $dataAdmin['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+                    $dataAdmin['order_id'] =  '#' . $orderId;
+                    $dataAdmin['customer_address'] = $shippingAddress['address_1'] . ', ' . $shippingAddress['city'] . ', ' . $shippingAddress['zone'] . ', ' . $shippingAddress['country'];
+                    $dataAdmin['customer_name'] = $this->customer->getFirstName().' '.$this->customer->getLastName();
+                    $dataAdmin['seller_name'] = $mpSellerData['store_owner'];
+                    $dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $this->session->data['user_token'];
+
                     $mailText = $this->load->view('mail/order_admin_alert', $dataAdmin);
                     $mail->setHtml($mailText);
                     $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
@@ -117,7 +123,6 @@ class ControllerCheckoutSuccess extends Controller
             }
 
             $this->cart->clear();
-
             unset($this->session->data['shipping_method']);
             unset($this->session->data['shipping_methods']);
             unset($this->session->data['payment_method']);
