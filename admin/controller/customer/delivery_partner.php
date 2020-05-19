@@ -821,7 +821,7 @@ class ControllerCustomerDeliveryPartner extends Controller
     }
 
     protected function validateForm() {
-        if (!$this->user->hasPermission('modify', 'customer/customer')) {
+        if (!$this->user->hasPermission('modify', 'customer/delivery_partner')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
