@@ -3,7 +3,7 @@
       xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
     <title>THECHAMPIONMALL.COM</title>
-    <!--[if !mso]><!-- -->
+    <!--[if !mso]>-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<![endif]-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -138,18 +138,18 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">
-                                            Hello,</h3>
-                                        {{ text_received }}
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello Administrator,</h3>
 
-                                        {{ text_order_id }} {{ order_id }}
-                                        {{ text_date_added }} {{ date_added }}
-                                        {{ text_order_status }} {{ order_status }}
+                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_received }}</p>
 
-                                        {{ text_product }}
+                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_order_id }} {{ order_id }}</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_date_added }} {{ date_added }}</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_order_status }} {{ order_status }}</p>
+
+                                        <p style="margin-bottom: 0px; text-align: center;"><strong>{{ text_product }}</strong></p>
 
                                         {% for product in products %}
-                                            {{ product.quantity }}x {{ product.name }} ({{ product.model }}) {{ product.total }}
+                                            <p style="margin-bottom: 0px; text-align: center;">{{ product.quantity }}x {{ product.name }} ({{ product.model }}) {{ product.total }}</p>
                                             {% if option %}
                                                 {% for option in product.option %}
                                                     - {{ option.name }} {{ option.value }}
@@ -157,29 +157,29 @@
                                             {% endif %}
 
                                             {% if product.sellerEmail %}
-                                                Seller Details :
-                                                Store Name: {{ product.sellerStore }}
-                                                Store Email: {{ product.sellerEmail }}
-                                                Store Phone: {{ product.sellerPhone }}
+                                                <strong>Seller Details :</strong>
+                                                <p style="margin-bottom: 0px; text-align: center;">Store Name: {{ product.sellerStore }}</p>
+                                                <p style="margin-bottom: 0px; text-align: center;">Store Email: {{ product.sellerEmail }}</p>
+                                                <p style="margin-bottom: 0px; text-align: center;">Store Phone: {{ product.sellerPhone }}</p>
                                             {% endif %}
                                         {% endfor %}
-                                        2
+
                                         {% if vouchers %}
 
                                             {% for voucher in vouchers %}
-                                                1x {{ voucher.description }} {{ voucher.amount }}
+                                                <p style="margin-bottom: 0px; text-align: center;">1x {{ voucher.description }} {{ voucher.amount }}</p>
                                             {% endfor %}
                                         {% endif %}
-                                        {{ text_total }}
+                                        <p style="margin-bottom: 0px; text-align: center;"><strong>{{ text_total }}</strong></p>
 
                                         {% for total in totals %}
-                                            {{ total.title }}: {{ total.value }}
+                                            <p style="margin-bottom: 0px; text-align: center;"><strong>{{ total.title }}: {{ total.value }}</strong></p>
                                         {% endfor %}
 
                                         {% if comment %}
-                                            {{ text_comment }}
+                                            <p style="margin-bottom: 0px; text-align: center;">{{ text_comment }}</p>
 
-                                            {{ comment }}
+                                            <p style="margin-bottom: 0px; text-align: center;">{{ comment }}</p>
                                         {% endif %}
                                     </div>
                                 </td>
