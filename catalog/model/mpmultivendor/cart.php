@@ -197,7 +197,7 @@ class ModelMpmultivendorCart extends Model {
 					}
 
 					$data['comment'] = strip_tags($order_info['comment']);
-
+                    $data['store_owner'] = $seller_info['store_owner'];
 					if(VERSION >= '3.0.0.0') {
 						$mail = new Mail($this->config->get('config_mail_engine'));
 						$mail->parameter = $this->config->get('config_mail_parameter');
