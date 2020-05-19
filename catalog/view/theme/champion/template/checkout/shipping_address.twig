@@ -26,13 +26,13 @@
   <div id="shipping-new" style="display: {% if addresses %}none{% else %}block{% endif %};">
     <div class="row">
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-firstname">{{ entry_firstname }}</label>
+      <label class="control-label" for="input-shipping-firstname">{{ entry_firstname }}*</label>
 
         <input type="text" name="firstname" value="" placeholder="{{ entry_firstname }}" id="input-shipping-firstname" class="form-control" />
 
     </div>
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-lastname">{{ entry_lastname }}</label>
+      <label class="control-label" for="input-shipping-lastname">{{ entry_lastname }}*</label>
 
         <input type="text" name="lastname" value="" placeholder="{{ entry_lastname }}" id="input-shipping-lastname" class="form-control" />
 
@@ -44,7 +44,7 @@
       {#</div>#}
     {#</div>#}
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
+      <label class="control-label" for="input-shipping-address-1">{{ entry_address_1 }}*</label>
 
         <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}" id="input-shipping-address-1" class="form-control" />
 
@@ -56,19 +56,19 @@
 
     </div>
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-city">{{ entry_city }}</label>
+      <label class="control-label" for="input-shipping-city">{{ entry_city }}*</label>
 
         <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-shipping-city" class="form-control" />
 
     </div>
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
+      <label class="control-label" for="input-shipping-postcode">{{ entry_postcode }}*</label>
 
         <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-shipping-postcode" class="form-control" />
 
     </div>
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-country">{{ entry_country }}</label>
+      <label class="control-label" for="input-shipping-country">{{ entry_country }}*</label>
 
         <select name="country_id" id="input-shipping-country" class="form-control">
           <option value="">{{ text_select }}</option>
@@ -83,7 +83,7 @@
 
     </div>
     <div class="form-group required col-md-6">
-      <label class="control-label" for="input-shipping-zone">{{ entry_zone }}</label>
+      <label class="control-label" for="input-shipping-zone">{{ entry_zone }}*</label>
 
         <select name="zone_id" id="input-shipping-zone" class="form-control">
         </select>
