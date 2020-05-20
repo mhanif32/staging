@@ -73,6 +73,7 @@ class ControllerAccountAccount extends Controller {
 		$data['wishlist'] = $this->url->link('account/wishlist');
 		$data['delivery_partner_link'] = $this->url->link('account/account/addDeliveryInfo');
 		$data['delivery_partner_request_link'] = $this->url->link('account/request');
+		$data['delivery_partner_orders_link'] = $this->url->link('account/request/orders');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
         $data['edit_product_href'] = $this->url->link('account/mpmultivendor/product', '', true);
