@@ -1,11 +1,11 @@
 {{ header }}
 <section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             {#            {{ profile_column_left }}#}
-            <div class="col-12 col-md-12 col-lg-12">
+            <div class="col-12 col-md-8 col-lg-8">
                 <div class="py-5">
-                    <div class="form-signin card py-4 px-2">
+                    <div class="form-signin card py-3 px-2">
                         <div id="delivery-info" class="container">
                             <div class="row">
                                 <div id="content" class="col-sm-12">
@@ -13,8 +13,8 @@
                                         <div class="alert alert-success alert-dismissible"><i
                                                     class="fa fa-check-circle"></i> {{ success }}</div>
                                     {% endif %}
-                                    <div class="justify-content-between row mx-0">
-                                        <h4 class="f-20 font-weight-bold text-uppercase mb-3">Update Delivery Partner
+                                    <div class="justify-content-between align-items-center row mx-0">
+                                        <h4 class="f-18 font-weight-bold text-uppercase mb-3">Update Delivery Partner
                                             Info</h4>
                                         <div class="my-auto">
                                             <button type="submit" form="form-delivery" data-toggle="tooltip"
@@ -25,6 +25,7 @@
                                                class="btn btn-default"><i class="fa fa-reply"></i> Cancel</a>
                                         </div>
                                     </div>
+                                    <br>
 
                                     <form action="{{ action }}" method="post" enctype="multipart/form-data"
                                           id="form-delivery" class="form-horizontal">
@@ -35,7 +36,7 @@
                                         </ul>
 
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab-documents">
+                                            <div class="tab-pane  col-md-9 pl-md-0 active" id="tab-documents">
                                                 <div class="form-group">
                                                     <label for="inputType" class="d-block">Vehicle Type</label>
 
@@ -133,16 +134,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane" id="tab-location">
+                                            <div class="tab-pane col-md-10 pl-md-0" id="tab-location">
                                                 <table id="delivery" class="table table-striped table-hover list">
                                                     <thead>
                                                     <tr>
-                                                        <td class="text-left">Country</td>
-                                                        <td class="text-left">Zone</td>
-                                                        <td class="text-left">Area</td>
+                                                        <td class="text-left border-0">Country</td>
+                                                        <td class="text-left border-0">Zone</td>
+                                                        <td class="text-left border-0">Area</td>
 {#                                                        <td class="text-left">Time <small>(in hrs)</small></td>#}
 {#                                                        <td class="text-left">Per Hour Rate</td>#}
-                                                        <td></td>
+                                                        <td class="text-left border-0"></td>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

@@ -40,10 +40,10 @@
             <tfoot>
             {% for total in totals %}
                 <tr>
-                    <td class="border-0"></td>
-                    <td class="border-0"></td>
-                    <td class="border-0"></td>
-                    <td class="text-right border-0"><strong>{{ total.title }}:</strong></td>
+                    {#<td class="border-0"></td>#}
+                    {#<td class="border-0"></td>#}
+                    {#<td class="border-0"></td>#}
+                    <td class="text-right border-0" colspan="4"><strong>{{ total.title }}:</strong></td>
                     <td class="text-right border-0">{{ total.text }}</td>
                 </tr>
             {% endfor %}
