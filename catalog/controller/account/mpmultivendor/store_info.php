@@ -341,7 +341,9 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
         } else if($seller_info) {
             $data['alternate_telephone'] = $seller_info['alternate_telephone'];
         } else {
-            $data['alternate_telephone'] = $this->customer->getAlternateTelephone();
+            //below commented not working on server
+            //$data['alternate_telephone'] = $this->customer->getAlternateTelephone();
+            $data['alternate_telephone'] = '';
         }
 
 		if(isset($this->request->post['fax'])) {
