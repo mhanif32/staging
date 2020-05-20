@@ -139,11 +139,18 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">
-                                            Hello {{ store_owner }},</h3>
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Dear {{ store_owner }},</h3>
+                                        <p style="margin-bottom: 0px; text-align: center;">A new order with {{ order_id }}, has been purchased from your store on the {{ date_added }} by {{ customer_name }}.</p>
 
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_received }}</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">Click on the link below to view details relating to the order. We request that you prepare and get the
+                                            order prepared according to our procedures and policies.</p>
+                                        {{ order_link }}
 
+                                        <p style="margin-bottom: 0px; text-align: center;">Thank You For Your Custom.</p>
+
+                                        <p style="margin-bottom: 0px; text-align: center;">Thechampionmall.com</p>
+
+                                        <!--<p style="margin-bottom: 0px; text-align: center;">{{ text_received }}</p>
                                         <p style="margin-bottom: 0px; text-align: center;">{{ text_order_id }} {{ order_id }}</p>
                                         <p style="margin-bottom: 0px; text-align: center;">{{ text_date_added }} {{ date_added }}</p>
                                         <p style="margin-bottom: 0px; text-align: center;">{{ text_order_status }} {{ order_status }}</p>
@@ -171,7 +178,7 @@
                                             <p style="margin-bottom: 0px; text-align: center;">{{ text_comment }}</p>
 
                                             <p style="margin-bottom: 0px; text-align: center;">{{ comment }}</p>
-                                        {% endif %}
+                                        {% endif %}-->
 									</div>
 								</td>
 							</tr>

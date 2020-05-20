@@ -37,7 +37,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				}
 			}
 
-			// Payment Methods
+			// Payment Methods$order_data
 			$method_data = array();
 
 			$this->load->model('setting/extension');

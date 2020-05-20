@@ -3,6 +3,10 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 	private $error = array();
 	
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 

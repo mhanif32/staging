@@ -198,6 +198,16 @@ class ModelMpmultivendorCart extends Model {
 
 					$data['comment'] = strip_tags($order_info['comment']);
                     $data['store_owner'] = $seller_info['store_owner'];
+                    $data['date_added'] = $seller_info['date_added'];
+                    $data['customer_name'] = $seller_info['firstname'].' '.$seller_info['lastname'];
+                    $data['order_link'] = $this->config->get('config_url') . '/index.php?route=account/mpmultivendor/orders/info&order_id=' . $order_info['order_id'];
+
+                    if ($this->request->server['HTTPS']) {
+                        $server = $this->config->get('config_ssl');
+                    } else {
+                        $server = $this->config->get('config_url');
+                    }
+                    $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
 					if(VERSION >= '3.0.0.0') {
 						$mail = new Mail($this->config->get('config_mail_engine'));
 						$mail->parameter = $this->config->get('config_mail_parameter');
