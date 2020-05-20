@@ -207,4 +207,58 @@ class ControllerAccountRequest extends Controller {
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
     }
+
+    public function orders() {
+//        error_reporting(E_ALL);
+//        ini_set("display_errors", 1);
+
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/request/orders', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->language('account/request');
+        $this->document->setTitle('Assigned Orders');
+
+        $data['breadcrumbs'] = array();
+        if (isset($this->session->data['success'])) {
+            $data['success'] = $this->session->data['success'];
+
+            unset($this->session->data['success']);
+        } else {
+            $data['success'] = '';
+        }
+
+        $this->load->model('account/request');
+        $this->load->model('account/customer');
+        $this->load->model('account/mpmultivendor/seller');
+
+        $assignedOrders = $this->model_account_request->getAssignedOrders($this->customer->getId());
+        //echo '<pre>';print_r($assignedOrders);exit('assd');
+
+        $orderSection = [];
+        foreach ($assignedOrders as $order) {
+
+            $orderData = $this->model_account_request->getOrderData($order['order_id']);
+
+            $orderArray = array();
+            $orderArray['request_id'] = $order['request_id'];
+            $orderArray['customer_name'] = $order['firstname'].' '.$order['lastname'];
+            $orderArray['order_id'] = $order['order_id'];
+            $orderArray['delivery_location'] = $order['shipping_address_1'].', '.$order['shipping_city'].', '.$order['shipping_zone'].', '.$order['shipping_country'];
+            $seller = $this->model_account_request->getMpSellerdata($order['mpseller_id']);
+            $orderArray['mpseller_name'] = $seller['store_owner'];
+//            $requestArray['requested_date'] = $request['requested_date'];
+//            $requestArray['is_accept'] = $request['is_accept'];
+//            $requestArray['view_link'] = $this->url->link('account/request/view', '&id='.$request['request_id'], true);
+            $orderSection[] = $orderArray;
+        }
+
+        $data['orders'] = $orderSection;
+        $data['heading_title'] = 'Assigned Orders';
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+        $this->response->setOutput($this->load->view('account/assigned_orders', $data));
+    }
 }

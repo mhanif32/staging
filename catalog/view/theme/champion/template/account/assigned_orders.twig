@@ -1,0 +1,81 @@
+{{ header }}
+
+<style>
+    .status {
+        color: white;
+        border-radius: 5px;
+        padding: 2px;
+    }
+</style>
+<section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="py-5">
+                    <div class="form-signin card py-4 px-2">
+                        <div id="delivery-info" class="container">
+                            <div class="row">
+                                <div id="content" class="col-sm-12">
+                                    {% if success %}
+                                        <div class="alert alert-success alert-dismissible"><i
+                                                    class="fa fa-check-circle"></i> {{ success }}</div>
+                                    {% endif %}
+                                    <div class="justify-content-between row mx-0">
+                                        <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title }}</h4>
+                                    </div>
+
+                                    <hr style="margin: 15px -25px">
+                                    {% if orders %}
+                                        <div class="table-responsive">
+                                            <table class="table border-bottom-0">
+                                                <thead>
+                                                <tr class="bg-light font-weight-bold text-uppercase">
+                                                    <td class="text-center">Order ID</td>
+                                                    <td class="text-center">Customer</td>
+                                                    <td class="text-center">Delivery Location</td>
+{#                                                    <td class="text-center">Status</td>#}
+{#                                                    <td class="text-center">Order Date</td>#}
+                                                    <td class="text-center"></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for order in orders %}
+                                                    <tr>
+                                                        <td class="text-center">#{{ order.order_id }}</td>
+                                                        <td class="text-center">{{ order.customer_name }}</td>
+                                                        <td class="text-center">{{ order.delivery_location }}</td>
+
+{#                                                        <td class="text-center">#}
+{#                                                            {% if request.is_accept == 1 %} <p class="bg-success status">Accepted</p>#}
+{#                                                            {% elseif request.is_accept == 2 %} <p class="bg-danger status">Declined</p>#}
+{#                                                            {% else %} <p class="bg-warning status">Pending</p>#}
+{#                                                            {% endif %}#}
+{#                                                        </td>#}
+{#                                                        <td class="text-center">{{ request.requested_date }}</td>#}
+                                                        <td class="text-center"><a href="#"
+                                                                                   data-toggle="tooltip"
+                                                                                   title="{{ button_view }}"
+                                                                                   class="btn btn-success btn-sm">View</a></td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 text-left">{{ pagination }}</div>
+                                            <div class="col-sm-6 text-right">{{ results }}</div>
+                                        </div>
+                                    {% else %}
+                                        <p>Your Delivery Partner Request is empty!</p>
+                                    {% endif %}
+                                    {{ content_bottom }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ footer }}

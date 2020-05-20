@@ -56,4 +56,11 @@ class ModelAccountRequest extends Model
         $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_request SET is_accept = '" . (int)$isAccept . "' WHERE request_id = '" . (int)$requestId . "' and delivery_partner_id = '" . (int)$delivery_partner_id . "'");
         return true;
     }
+
+    public function getAssignedOrders($customerId)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id WHERE dpr.delivery_partner_id = '" . (int)$customerId . "' and dpr.is_accept = 1");
+
+        return $query->rows;
+    }
 }
