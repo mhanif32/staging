@@ -3,6 +3,10 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 	private $error = array();
 	
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -337,7 +341,9 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
         } else if($seller_info) {
             $data['alternate_telephone'] = $seller_info['alternate_telephone'];
         } else {
-            $data['alternate_telephone'] = $this->customer->getAlternateTelephone();
+            //below commented not working on server
+            //$data['alternate_telephone'] = $this->customer->getAlternateTelephone();
+            $data['alternate_telephone'] = '';
         }
 
 		if(isset($this->request->post['fax'])) {
@@ -367,7 +373,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
         $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/';
 		if(isset($this->request->post['id_proof'])) {
 			$data['link_id_proof'] = $this->request->post['id_proof'];
-		} else if($seller_info['id_proof']) {
+		} else if(isset($seller_info['id_proof'])) {
 			$data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$seller_info['id_proof'];
 		} else {
 			$data['link_id_proof'] = '';
@@ -375,7 +381,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
         if(isset($this->request->post['address_proof'])) {
             $data['link_address_proof'] = $this->request->post['address_proof'];
-        } else if($seller_info['address_proof']) {
+        } else if(isset($seller_info['address_proof'])) {
             $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$seller_info['address_proof'];
         } else {
             $data['link_address_proof'] = '';

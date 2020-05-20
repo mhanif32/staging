@@ -8,6 +8,7 @@ class ControllerCheckoutSuccess extends Controller
         $this->load->language('checkout/success');
 
         if (isset($this->session->data['order_id'])) {
+
             $orderId = $this->session->data['order_id'];
 
             //START : send request to delivery partner
@@ -18,7 +19,6 @@ class ControllerCheckoutSuccess extends Controller
             if (!empty($this->session->data['shipping_address'])) {
 
                 $shippingAddress = $this->session->data['shipping_address'];
-                //echo '<pre>';print_r($shippingAddress);exit('aaa');
 
                 //get total seller
                 $cartProducts = $this->cart->getProducts();
@@ -121,6 +121,7 @@ class ControllerCheckoutSuccess extends Controller
                     $mail->send();
                 }
             }
+            //END
 
             $this->cart->clear();
             unset($this->session->data['shipping_method']);

@@ -162,9 +162,9 @@ class ModelAccountOrder extends Model {
 
 	    //check for guest checkout
         $queryGuest = $this->db->query("SELECT * FROM " . DB_PREFIX . "order WHERE order_id = '" . (int)$order_id . "'");
-        if ($this->customer->isLogged()) {
-            $sql .= "customer_id = '" . (int)$this->customer->getId() . "' AND ";
-        }
+//        if ($this->customer->isLogged()) {
+//            $sql .= "customer_id = '" . (int)$this->customer->getId() . "' AND ";
+//        }
 
 	    if (!empty($order_id)) {
             $sql .= "o.order_id = '" . (int)$order_id . "' AND ";

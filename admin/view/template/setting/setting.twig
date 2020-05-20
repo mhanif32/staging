@@ -42,6 +42,7 @@
                         <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
                         <li><a href="#tab-mail" data-toggle="tab">{{ tab_mail }}</a></li>
                         <li><a href="#tab-server" data-toggle="tab">{{ tab_server }}</a></li>
+                        <li><a href="#tab-delivery" data-toggle="tab">Delivery</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab-general">
@@ -767,7 +768,8 @@
                                     <div class="col-sm-10">
                                         <input type="text" name="config_max_checkout_amount"
                                                value="{{ config_max_checkout_amount }}"
-                                               placeholder="{{ entry_max_checkout_amount }}" id="input-max-checkout-amount"
+                                               placeholder="{{ entry_max_checkout_amount }}"
+                                               id="input-max-checkout-amount"
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -1619,6 +1621,44 @@
                                             <div class="text-danger">{{ error_log }}</div>
                                         {% endif %} </div>
                                 </div>
+                            </fieldset>
+                        </div>
+                        <div class="tab-pane" id="tab-delivery">
+                            <fieldset>
+                                <legend>Delivery Days Settings</legend>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="generalDays">
+                                        <span data-toggle="tooltip"
+                                              title="Generally, Estimated Delivery Days should be X days for general products">Estimated Delivery Days (for general products)</span>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="generalDays" id="generalDays"
+                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="groceryDays">
+                                        <span data-toggle="tooltip"
+                                              title="Generally, Estimated Delivery Days should be X days for Groceries/SuperMarket">Estimated Delivery Days (for Groceries/SuperMarket)</span>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="groceryDays" id="groceryDays"
+                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="interstateDays">
+                                        <span data-toggle="tooltip"
+                                              title="Generally, Interstate Estimated Delivery Days should be X days">Interstate Estimated Delivery Days (for Groceries/SuperMarket)</span>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="interstateDays" id="interstateDays"
+                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    </div>
+                                </div>
+
                             </fieldset>
                         </div>
                     </div>
