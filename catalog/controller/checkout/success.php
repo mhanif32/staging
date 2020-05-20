@@ -12,7 +12,7 @@ class ControllerCheckoutSuccess extends Controller
             $orderId = $this->session->data['order_id'];
 
             //START : send request to delivery partner
-            /*$this->load->model('account/request');
+            $this->load->model('account/request');
             $this->load->model('account/customer');
             $this->load->model('localisation/zone');
             $this->load->model('localisation/country');
@@ -120,7 +120,7 @@ class ControllerCheckoutSuccess extends Controller
                     $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
                     $mail->send();
                 }
-            }*/
+            }
             //END
 
             $this->cart->clear();
