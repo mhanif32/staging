@@ -199,7 +199,7 @@ class ModelMpmultivendorCart extends Model {
 					$data['comment'] = strip_tags($order_info['comment']);
                     $data['store_owner'] = $seller_info['store_owner'];
                     $data['date_added'] = $seller_info['date_added'];
-                    $data['customer_name'] = $seller_info['firstname'].' '.$seller_info['lastname'];
+                    $data['customer_name'] = $order_info['firstname'].' '.$order_info['lastname'];
                     $data['order_link'] = $this->config->get('config_url') . '/index.php?route=account/mpmultivendor/orders/info&order_id=' . $order_info['order_id'];
 
                     if ($this->request->server['HTTPS']) {
