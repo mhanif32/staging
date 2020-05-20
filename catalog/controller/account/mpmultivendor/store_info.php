@@ -373,7 +373,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
         $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/';
 		if(isset($this->request->post['id_proof'])) {
 			$data['link_id_proof'] = $this->request->post['id_proof'];
-		} else if($seller_info['id_proof']) {
+		} else if(isset($seller_info['id_proof'])) {
 			$data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$seller_info['id_proof'];
 		} else {
 			$data['link_id_proof'] = '';
@@ -381,7 +381,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
         if(isset($this->request->post['address_proof'])) {
             $data['link_address_proof'] = $this->request->post['address_proof'];
-        } else if($seller_info['address_proof']) {
+        } else if(isset($seller_info['address_proof'])) {
             $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$seller_info['address_proof'];
         } else {
             $data['link_address_proof'] = '';
