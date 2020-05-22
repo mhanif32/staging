@@ -29,3 +29,4 @@ $_['text_my_seller_enquiries']       = 'My Seller Enquiries';
 $_['text_seller_enquiries']       = 'Seller Enquiries';
 $_['text_messages'] 		= 'Admin Messages';
 $_['edit_product'] 		= 'Edit Products';
+$_['text_customer_order'] 		= 'Customer Order';

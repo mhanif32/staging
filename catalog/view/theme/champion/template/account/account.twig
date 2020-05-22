@@ -75,6 +75,29 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                {% if is_seller %}
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ customer_order_href }}">
+                                                    <i class="fas fa-unlock-alt f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ customer_order_href }}"
+                                                       class="f-15 font-weight-bold">{{ text_customer_order }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ customer_order_href }}" class="f-13 text-muted">View customer order</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+
                                 {% if role == 'buyer' %}
                                     <div class="col-md-6 py-3 pl-md-5 border-left">
                                         <div class="media">
@@ -186,6 +209,8 @@
                                 </div>
                             {% endif %}
 
+
+                            {% if role == 'buyer' %}
                             <h3 class="f-20 font-weight-bold text-uppercase mt-4">MY ORDERS</h3>
                             <hr>
                             <div class="row">
@@ -249,6 +274,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {% endif %}
 
                             {% if is_seller %}
                                 <h3 class="f-20 font-weight-bold text-uppercase mt-4">Seller Panel</h3>
