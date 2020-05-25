@@ -267,7 +267,7 @@ p {
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0 1em;
+      padding: 2px 2px;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
@@ -340,7 +340,7 @@ header {
       position: absolute;
       top: 5px;
       right: 0;
-      padding: 0 1em;
+      padding: 2px;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
@@ -1581,22 +1581,29 @@ footer ul {
     -webkit-transition: all .6s ease;
     transition: all .6s ease; }
 
-.radio-toolbar input.size-radio[type="radio"] {
-  opacity: 0;
-  position: fixed;
-  width: 0; }
-  .radio-toolbar input.size-radio[type="radio"]:focus ~ * {
-    border: 1px dashed #01B0F1 !important; }
-  .radio-toolbar input.size-radio[type="radio"]:checked ~ * {
-    background-color: #F2F9FF !important;
-    border-color: #01B0F1 !important; }
-.radio-toolbar label span {
-  padding: 5px 20px;
-  font-size: 15px;
-  border: 1px solid #b4b4b4;
-  border-radius: 4px; }
-  .radio-toolbar label span:hover {
-    background-color: #F2F9FF; }
+.radio-toolbar {
+  position: relative; }
+  .radio-toolbar input.size-radio[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0; }
+    .radio-toolbar input.size-radio[type="radio"]:checked {
+      background-color: #F2F9FF !important;
+      border-color: #01B0F1 !important; }
+      .radio-toolbar input.size-radio[type="radio"]:checked + b {
+        background: url(../../image/tu_cur.png) no-repeat left top;
+        width: 10px;
+        height: 10px;
+        display: block;
+        position: absolute;
+        bottom: 3px;
+        right: 0px; }
+  .radio-toolbar label span {
+    padding: 5px 20px;
+    font-size: 15px;
+    border: 1px solid #b4b4b4; }
+    .radio-toolbar label span:hover {
+      background-color: #F2F9FF; }
 
 #checkout-checkout .steps-data .panel-body {
   margin: 0 0 8px 70px;
