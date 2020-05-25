@@ -1315,15 +1315,16 @@ i{width: 20px;}}}}
     &:checked {
       background-color: #F2F9FF !important;
       border-color: $success !important;
-      + b {
-
-        background: url(../../image/tu_cur.png) no-repeat left top;
-        width: 10px;
-        height: 10px;
+      border: 1px solid red;
+      + span {  padding: 5px 20px; font-size: 15px; border: 1px solid red;
+        &:after {
+          content:  url(../../image/tu_cur.png) ;
         display: block;
         position: absolute;
-        bottom: 3px;
+        bottom: -3px;
         right: 0px;
+      }
+
       }
 
     }
@@ -1331,7 +1332,9 @@ i{width: 20px;}}}}
 
 
   label span { padding: 5px 20px; font-size: 15px; border: 1px solid #b4b4b4;
-    &:hover { background-color: #F2F9FF; }
+    &:hover { background-color: #F2F9FF; border-color: red;}
+
+
   }
 
 }

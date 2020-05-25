@@ -1589,21 +1589,25 @@ footer ul {
     width: 0; }
     .radio-toolbar input.size-radio[type="radio"]:checked {
       background-color: #F2F9FF !important;
-      border-color: #01B0F1 !important; }
-      .radio-toolbar input.size-radio[type="radio"]:checked + b {
-        background: url(../../image/tu_cur.png) no-repeat left top;
-        width: 10px;
-        height: 10px;
-        display: block;
-        position: absolute;
-        bottom: 3px;
-        right: 0px; }
+      border-color: #01B0F1 !important;
+      border: 1px solid red; }
+      .radio-toolbar input.size-radio[type="radio"]:checked + span {
+        padding: 5px 20px;
+        font-size: 15px;
+        border: 1px solid red; }
+        .radio-toolbar input.size-radio[type="radio"]:checked + span:after {
+          content: url(../../image/tu_cur.png);
+          display: block;
+          position: absolute;
+          bottom: -3px;
+          right: 0px; }
   .radio-toolbar label span {
     padding: 5px 20px;
     font-size: 15px;
     border: 1px solid #b4b4b4; }
     .radio-toolbar label span:hover {
-      background-color: #F2F9FF; }
+      background-color: #F2F9FF;
+      border-color: red; }
 
 #checkout-checkout .steps-data .panel-body {
   margin: 0 0 8px 70px;
