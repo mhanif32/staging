@@ -1415,10 +1415,9 @@ i{width: 20px;}}}}
   .title-information{ h4 {text-align: center; color: white; text-transform: uppercase; font-size: 25px; margin-top: 50px;} }
 
 }
-.main-side { height: 1000px; background: #f2f2f2; transition: margin-left .5s;
-  .menu_bg { position: fixed; top: 50%; left: -75px; width: 150px; height: 150px; background: #243458; border-radius: 100%; z-index: 4; }
-  #menu {
-    position: fixed; top: 56%; left: 15px; font-size: 30px; font-weight: bold; cursor: pointer; transition-duration: .5s; z-index: 5; color: $white;
+.main-side {transition: margin-left .5s;
+  .menu_bg { position: fixed; top: 50%; left: -75px; width: 150px; height: 150px; background: #243458; border-radius: 100%; z-index: 4; transform: translate(0%, -50%); }
+  #menu { position: fixed; top: 50%; left: 50%; font-size: 30px; font-weight: bold; cursor: pointer; transition-duration: .5s; z-index: 5; color: $white; transform: translate(50%, -50%);
     &:hover { color: #fff; }
   }
 }
