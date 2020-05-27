@@ -26,6 +26,12 @@ class ModelLocalisationArea extends Model {
 		return $query->row;
 	}
 
+    public function getAreaByName($area_name, $find_language_id) {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "area WHERE name = '" . trim($area_name) . "'");
+
+        return $query->row;
+    }
+
 	public function getAreas($data = array()) {
 		$sql = "SELECT area_id, a.name AS area, a.code AS code, c.name AS country, z.name AS state FROM " . DB_PREFIX . "area a LEFT JOIN " . DB_PREFIX . "country c ON (a.country_id = c.country_id) LEFT JOIN " . DB_PREFIX . "zone z ON (a.zone_id = z.zone_id)";
 
@@ -103,5 +109,10 @@ class ModelLocalisationArea extends Model {
         }
 
         return $area_data;
+    }
+
+    public function uploadAreas($files)
+    {
+
     }
 }

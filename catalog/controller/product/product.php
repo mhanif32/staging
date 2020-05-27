@@ -469,6 +469,11 @@ class ControllerProductProduct extends Controller {
 			//if loggin user is purchased this product before this time
             $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
 
+            //estimated Delivery Dates
+            $estimatedDateText = 'Delivered in '. $this->config->get('config_minGeneralDays') .' - '.$this->config->get('config_maxGeneralDays').' days';
+
+            $data['estimatedDateText'] = $estimatedDateText;
+
             //view seller profile link
             if(!empty($product_info['mpseller_id'])) {
                 $data['product_seller_link'] = $this->url->link('mpmultivendor/store', '&mpseller_id=' . $product_info['mpseller_id'], true);

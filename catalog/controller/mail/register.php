@@ -1,7 +1,7 @@
 <?php
 class ControllerMailRegister extends Controller {
 	public function index(&$route, &$args, &$output) {
-
+//echo '<pre>'; print_r($this->request->get['role']);exit('kokok');
 		$this->load->language('mail/register');
 
 		$data['text_welcome'] = sprintf($this->language->get('text_welcome'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
@@ -52,7 +52,16 @@ class ControllerMailRegister extends Controller {
         $data['firstname'] = $args[0]['firstname'];
         $data['lastname'] = $args[0]['lastname'];
 
-        $mailText = $this->load->view('mail/register', $data);
+        if($this->request->get['role'] == 'delivery-partner') {
+
+            $mailText = $this->load->view('mail/register_delivery_partner', $data);
+        } else if ($this->request->get['role'] == 'seller') {
+
+            $mailText = $this->load->view('mail/register_seller', $data);
+        } else {
+            $mailText = $this->load->view('mail/register', $data);
+        }
+
         $mail->setHtml($mailText);
         $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
         $mail->send();

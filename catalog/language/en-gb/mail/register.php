@@ -15,4 +15,4 @@ $_['text_firstname']      = 'First Name:';
 $_['text_lastname']       = 'Last Name:';
 $_['text_email']          = 'E-Mail:';
 $_['text_telephone']      = 'Telephone:';
-$_['text_conform_email']  = 'Conform your email';
+$_['text_conform_email']  = 'Confirm your email';

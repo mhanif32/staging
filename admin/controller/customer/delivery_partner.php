@@ -806,6 +806,7 @@ class ControllerCustomerDeliveryPartner extends Controller
         //delivery partner info
         $deliveryPartnerInfo = $this->model_customer_customer->getDocumentsInfo($this->request->get['customer_id']);
         $data['partner_approve'] = $deliveryPartnerInfo['is_approved'];
+        $data['delivery_type'] = $deliveryPartnerInfo['delivery_type'];
         $data['vehicle_type'] = $deliveryPartnerInfo['vehicle_type'];
         $data['per_hour_rate'] = $deliveryPartnerInfo['per_hour_rate'];
         $data['currency_code'] = $deliveryPartnerInfo['currency_id'];

@@ -97,6 +97,7 @@ class ControllerAccountRequest extends Controller {
         if($this->request->post['request_id']) {
             $requestId = $this->request->post['request_id'];
             $requestData = $this->model_account_request->getRequestData($requestId);
+            $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
             if(!empty($requestData)) {
                 $this->model_account_request->updateRequest($requestId, $isAccept = 1);
                 $json['success'] = 'Your request has been successfully accepted.';
@@ -151,6 +152,12 @@ class ControllerAccountRequest extends Controller {
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+
+                $dataAdminMail['delivery_partner_name'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
+                $dataAdminMail['customer_name'] = $customer['firstname'] .' '. $customer['lastname'];
+                $dataAdminMail['orderId'] = $requestData['order_id'];
+                $dataAdminMail['store_owner'] = $sellerData['store_owner'];
+
                 $mailTextAdmin = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
                 $mail->setHtml($mailTextAdmin);
                 $mail->setText(html_entity_decode($mailTextAdmin, ENT_QUOTES, 'UTF-8'));

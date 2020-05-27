@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
     <title>THECHAMPIONMALL.COM</title>
-    <!--[if !mso]>-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<![endif]-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -83,14 +82,39 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello tcmseller@Support,</h3>
-                                        <p style="margin-bottom: 0px; text-align: center;">“{{ orderId }}” has been accepted by “{{ delivery_partner_name }}” for pick up from {{ store_owner }} and delivery to {{ customer_name }}.</p>
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello {{ firstname }},</h3>
 
-                                        <p style="margin-bottom: 0px;"> Thank You</p>
-                                        <p style="margin-bottom: 0px;"> thechampionmall.com</p>
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">Welcome and thank you for registering as a Delivery Partner with thechampionmall.com.</p>
+
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">You can now Sign-in with your Username and Password on the TCM login page to complete the necessary profile information in your dashboard to ensure you validate your registration, you will need to upload the necessary required kyc documents from your dashboard.</p>
+
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">Click on the link below to go to the login in page.</p>
+                                        {% if not approval %}
+{#                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_login }}</p>#}
+{#                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_link_1 }}</p>#}
+
+                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
+{#                                        <p align="center" style="margin-bottom: 0px; padding: 10px 0px;"> {{ text_service }} </p>#}
+{#                                        <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>#}
+
+                                        {% else %}
+{#                                            <p style="margin-bottom: 0px; text-align: center;"> {{ text_approval }}</p>#}
+                                            <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
+{#                                            <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>#}
+                                        {% endif %}
+
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">Thank You For Your Custom</p>
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">Thechampionmall.com Support Team.</p>
                                     </div>
                                 </td>
                             </tr>
+                            <!--<tr>
+                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                    <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:26px;text-align:left;color:#000000;">
+                                        <p align="center" style="margin-bottom: 0px; padding: 10px 0px;">If this isn’t {{ firstname }} {{ lastname }} email please send an email to <a href="mailto:wilson.olayinka@gmail.com" style="color:#01B0F1" target="_top">wilson.olayinka@gmail.com</a> and we’ll remove your email from our mailing list.</p>
+                                    </div>
+                                </td>
+                            </tr>-->
                         </table>
                     </div>
                     <!--[if mso | IE]>

@@ -43,6 +43,21 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab-delivery-partner">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-delivery_partner_status">Delivery
+                                    Type</label>
+                                <div class="col-sm-10">
+                                    {% if delivery_type == 1 %}
+                                        <label class="btn btn-warning">Within City</label>
+                                    {% elseif delivery_type == 2 %}
+                                        <label class="btn btn-success">Within State</label>
+                                    {% elseif delivery_type == 3 %}
+                                        <label class="btn btn-info">Within Country</label>
+                                    {% endif %}
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-delivery_partner_status">Delivery
                                     Partner Approval</label>
@@ -113,7 +128,8 @@
                                 <label class="col-sm-2 control-label" for="input-per_hour_rate">Address Proof</label>
                                 <div class="col-sm-10">
                                     {% if link_address_proof %}
-                                        <a href="{{ link_address_proof }}" target="_blank">Click to view Address Proof</a>
+                                        <a href="{{ link_address_proof }}" target="_blank">Click to view Address
+                                            Proof</a>
                                     {% else %}
                                         <p>Not Found!</p>
                                     {% endif %}
@@ -124,7 +140,8 @@
                                 <label class="col-sm-2 control-label" for="input-per_hour_rate">Travel License</label>
                                 <div class="col-sm-10">
                                     {% if link_travel_license %}
-                                        <a href="{{ link_travel_license }}" target="_blank">Click to view Travel License</a>
+                                        <a href="{{ link_travel_license }}" target="_blank">Click to view Travel
+                                            License</a>
                                     {% else %}
                                         <p>Not Found!</p>
                                     {% endif %}
@@ -132,10 +149,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="input-per_hour_rate">Vehicle Insurance</label>
+                                <label class="col-sm-2 control-label" for="input-per_hour_rate">Vehicle
+                                    Insurance</label>
                                 <div class="col-sm-10">
                                     {% if link_vehicle_insurance %}
-                                        <a href="{{ link_vehicle_insurance }}" target="_blank">Click to view Vehicle Insurance</a>
+                                        <a href="{{ link_vehicle_insurance }}" target="_blank">Click to view Vehicle
+                                            Insurance</a>
                                     {% else %}
                                         <p>Not Found!</p>
                                     {% endif %}

@@ -247,6 +247,42 @@ class ControllerSettingSetting extends Controller {
 			$data['config_email'] = $this->config->get('config_email');
 		}
 
+        if (isset($this->request->post['config_minGeneralDays'])) {
+            $data['config_minGeneralDays'] = $this->request->post['config_minGeneralDays'];
+        } else {
+            $data['config_minGeneralDays'] = $this->config->get('config_minGeneralDays');
+        }
+
+        if (isset($this->request->post['config_maxGeneralDays'])) {
+            $data['config_maxGeneralDays'] = $this->request->post['config_maxGeneralDays'];
+        } else {
+            $data['config_maxGeneralDays'] = $this->config->get('config_maxGeneralDays');
+        }
+
+        if (isset($this->request->post['config_minGroceryDays'])) {
+            $data['config_minGroceryDays'] = $this->request->post['config_minGroceryDays'];
+        } else {
+            $data['config_minGroceryDays'] = $this->config->get('config_minGroceryDays');
+        }
+
+        if (isset($this->request->post['config_maxGroceryDays'])) {
+            $data['config_maxGroceryDays'] = $this->request->post['config_maxGroceryDays'];
+        } else {
+            $data['config_maxGroceryDays'] = $this->config->get('config_maxGroceryDays');
+        }
+
+        if (isset($this->request->post['config_minInterstateDays'])) {
+            $data['config_minInterstateDays'] = $this->request->post['config_minInterstateDays'];
+        } else {
+            $data['config_minInterstateDays'] = $this->config->get('config_minInterstateDays');
+        }
+
+        if (isset($this->request->post['config_maxInterstateDays'])) {
+            $data['config_maxInterstateDays'] = $this->request->post['config_maxInterstateDays'];
+        } else {
+            $data['config_maxInterstateDays'] = $this->config->get('config_maxInterstateDays');
+        }
+
 		if (isset($this->request->post['config_telephone'])) {
 			$data['config_telephone'] = $this->request->post['config_telephone'];
 		} else {

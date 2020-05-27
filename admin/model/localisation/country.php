@@ -26,6 +26,12 @@ class ModelLocalisationCountry extends Model {
 		return $query->row;
 	}
 
+    public function getCountryByName($country_name) {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "country WHERE name = '" . trim($country_name) . "'");
+
+        return $query->row;
+    }
+
 	public function getCountries($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "country";

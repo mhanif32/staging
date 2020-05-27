@@ -26,6 +26,12 @@ class ModelLocalisationZone extends Model {
 		return $query->row;
 	}
 
+    public function getZoneByName($zone_name) {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "zone WHERE name = '" . trim($zone_name) . "'");
+
+        return $query->row;
+    }
+
 	public function getZones($data = array()) {
 		$sql = "SELECT *, z.name, c.name AS country FROM " . DB_PREFIX . "zone z LEFT JOIN " . DB_PREFIX . "country c ON (z.country_id = c.country_id)";
 

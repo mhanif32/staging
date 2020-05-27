@@ -1627,24 +1627,31 @@
                             <fieldset>
                                 <legend>Delivery Days Settings</legend>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="generalDays">
+                                    <label class="col-sm-2 control-label" for="minGeneralDays">
                                         <span data-toggle="tooltip"
                                               title="Generally, Estimated Delivery Days should be X days for general products">Estimated Delivery Days (for general products)</span>
                                     </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="generalDays" id="generalDays"
-                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    <div class="col-sm-3">
+                                        <label>Enter Min Days</label>
+                                        <input type="text" name="config_minGeneralDays" id="minGeneralDays" value="{{ config_minGeneralDays }}" class="form-control" placeholder="Enter Min Days (Eg. 1, 2, 5)" style="width: 200px">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <label>Enter Max Days</label>
+                                        <input type="text" name="config_maxGeneralDays" id="maxGeneralDays" value="{{ config_maxGeneralDays }}" class="form-control" placeholder="Enter Max Days (Eg. 1, 2, 5)" style="width: 200px">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="groceryDays">
-                                        <span data-toggle="tooltip"
-                                              title="Generally, Estimated Delivery Days should be X days for Groceries/SuperMarket">Estimated Delivery Days (for Groceries/SuperMarket)</span>
+                                    <label class="col-sm-2 control-label" for="minGroceryDays">
+                                        <span data-toggle="tooltip" title="Generally, Estimated Delivery Days should be X days for Groceries/SuperMarket">Estimated Delivery Days (for Groceries/SuperMarket)</span>
                                     </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="groceryDays" id="groceryDays"
-                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    <div class="col-sm-3">
+                                        <label>Enter Min Days</label>
+                                        <input type="text" name="config_minGroceryDays" id="minGroceryDays" value="{{ config_minGroceryDays }}" class="form-control" placeholder="Enter Min Days (Eg. 1, 2, 5)" style="width: 200px">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <label>Enter Max Days</label>
+                                        <input type="text" name="config_maxGroceryDays" id="maxGroceryDays" value="{{ config_maxGroceryDays }}" class="form-control" placeholder="Enter Max Days (Eg. 1, 2, 5)" style="width: 200px">
                                     </div>
                                 </div>
 
@@ -1653,12 +1660,16 @@
                                         <span data-toggle="tooltip"
                                               title="Generally, Interstate Estimated Delivery Days should be X days">Interstate Estimated Delivery Days (for Groceries/SuperMarket)</span>
                                     </label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="interstateDays" id="interstateDays"
-                                               class="form-control" placeholder="Enter only integer value (Eg. 1, 2, 5)">
+                                    <div class="col-sm-3">
+                                        <label>Enter Min Days</label>
+                                        <input type="text" name="config_minInterstateDays" id="minInterstateDays" value="{{ config_minInterstateDays }}"
+                                               class="form-control" placeholder="Enter Min Days (Eg. 1, 2, 5)" style="width: 200px">
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <label>Enter Max Days</label>
+                                        <input type="text" name="config_maxInterstateDays" id="maxInterstateDays" value="{{ config_maxInterstateDays }}" class="form-control" placeholder="Enter Max Days (Eg. 1, 2, 5)" style="width: 200px">
                                     </div>
                                 </div>
-
                             </fieldset>
                         </div>
                     </div>
