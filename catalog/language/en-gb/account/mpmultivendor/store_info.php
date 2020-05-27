@@ -27,8 +27,8 @@ $_['tab_seo'] 			= 'SEO';
 
 // Entry
 $_['entry_description'] 			= 'About Store';
-$_['entry_meta_description'] 		= 'Meta Description';
-$_['entry_meta_keyword'] 			= 'Meta Keyword';
+$_['entry_meta_description'] 		= 'Description What The Store Sells';
+$_['entry_meta_keyword'] 			= 'Keywords About Your Store';
 $_['entry_store_owner'] 			= 'Seller Name';
 $_['entry_store_name'] 				= 'Store Name';
 $_['entry_address'] 				= 'Store Address';

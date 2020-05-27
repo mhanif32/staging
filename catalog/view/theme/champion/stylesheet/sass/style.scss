@@ -137,7 +137,7 @@ p {font-size: 0.9375rem;}
                 position: absolute;
                 top: 0;
                 right: 0;
-                padding: 0 1em;
+                padding: 2px 2px;
                 color: #b4b4b4;
                 cursor: pointer;
                 pointer-events: none;
@@ -198,7 +198,7 @@ header {background: white;z-index: 3; position: relative;
       position: absolute;
       top: 5px;
       right: 0;
-      padding: 0 1em;
+      padding: 2px;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
@@ -1289,17 +1289,55 @@ i{width: 20px;}}}}
 }
 
 //------------------------
-//custom size radio button
-  .radio-toolbar {
-    input.size-radio[type="radio"] { opacity: 0; position: fixed; width: 0;
-      &:focus ~ *  { border: 1px dashed $success !important; }
-      &:checked ~ *{ background-color: #F2F9FF !important; border-color: $success !important; }
-    }
+//custom size radio button old
+//  .radio-toolbar {
+//    input.size-radio[type="radio"] { opacity: 0; position: fixed; width: 0;
+//      &:focus ~ *  { border: 1px dashed $success !important; }
+//      &:checked ~ *{ background-color: #F2F9FF !important; border-color: $success !important; }
+//    }
+//
+//   label span { padding: 5px 20px; font-size: 15px; border: 1px solid #b4b4b4; border-radius: 4px;
+//     &:hover { background-color: #F2F9FF; }
+//  }
+//
+//  }
 
-   label span { padding: 5px 20px; font-size: 15px; border: 1px solid #b4b4b4; border-radius: 4px;
-     &:hover { background-color: #F2F9FF; }
+//custom size radio button new
+.radio-toolbar {
+  position: relative;
+  input.size-radio[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+    &:focus ~ * {
+
+    }
+    &:checked {
+      background-color: #F2F9FF !important;
+      border-color: $success !important;
+      border: 1px solid red;
+      + span {  padding: 5px 20px; font-size: 15px; border: 1px solid red;
+        &:after {
+          content:  url(../../image/tu_cur.png) ;
+        display: block;
+        position: absolute;
+        bottom: -3px;
+        right: 0px;
+      }
+
+      }
+
+    }
   }
+
+
+  label span { padding: 5px 20px; font-size: 15px; border: 1px solid #b4b4b4;
+    &:hover { background-color: #F2F9FF; border-color: red;}
+
+
   }
+
+}
 //==========end size radio======
 #checkout-checkout{
   .steps-data{
@@ -1366,3 +1404,27 @@ i{width: 20px;}}}}
     background: $success;
   }
 }
+
+
+//===============Information sidebar
+
+#sidebar { position: fixed; top: 0px; left: 0px; height: 100%; width: 0; z-index: 1; background: #243458; overflow-x: hidden; transition: 0.5s; z-index: 5;
+  a.btn_close{ display: inline; position: absolute; top: 0px; right: 20px; font-size: 50px; font-weight: bold; cursor: pointer; color: #000; transition-duration: 0.5s;
+    &:hover { color: #fff; }
+}
+  .title-information{ h4 {text-align: center; color: white; text-transform: uppercase; font-size: 25px; margin-top: 50px;} }
+
+}
+.main-side {transition: margin-left .5s;
+  .menu_bg { position: fixed; top: 50%; left: -75px; width: 150px; height: 150px; background: #243458; border-radius: 100%; z-index: 4; transform: translate(0%, -50%); }
+  #menu { position: fixed; top: 50%; left: 50%; font-size: 30px; font-weight: bold; cursor: pointer; transition-duration: .5s; z-index: 5; color: $white; transform: translate(50%, -50%);
+    &:hover { color: #fff; }
+  }
+}
+
+
+
+
+
+
+

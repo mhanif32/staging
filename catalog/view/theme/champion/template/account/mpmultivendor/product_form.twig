@@ -46,7 +46,7 @@
                                             {#<li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>#}
                                         </ul>
                                         <div class="{% if custom_themename != 'journal2' %} tab-content {% else %} tabs-content {% endif %}">
-                                            <div class="tab-pane active" id="tab-general">
+                                            <div class="tab-pane active col-md-8 pl-md-0" id="tab-general">
                                                 <ul class="nav nav-tabs font-weight-bold pb-2" id="language">
                                                     {% for language in languages %}
                                                         <li><a href="#language{{ language.language_id }}"
@@ -169,7 +169,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4 form-group required">
                                                         <label class="col-sm-12 control-label"
-                                                               for="input-model">{{ entry_model }}<a class="text-danger">*</a></label>
+                                                               for="input-model">{{ entry_model }}</label>
                                                         <div class="col-sm-12">
                                                             <input type="text" name="model" value="{{ model }}"
                                                                    placeholder="{{ entry_model }}" id="input-model"
@@ -251,7 +251,7 @@
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label" for="input-price">
 									<span data-toggle="tooltip"
-                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span></label>
+                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span><a class="text-danger">*</a></label>
                                                         <div class="col-sm-12">
                                                             <input type="text" name="price" value="{{ price }}"
                                                                    placeholder="{{ entry_price }}" id="input-price"
@@ -260,7 +260,7 @@
                                                     </div>
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label" for="input-currency">
-                                                            <span data-toggle="tooltip"> Currency</span></label>
+                                                            <span data-toggle="tooltip"> Currency</span><a class="text-danger">*</a></label>
                                                         <div class="col-sm-12">
                                                             <select name="currency" id="input-currency"
                                                                     class="form-control">
@@ -308,7 +308,7 @@
                                                     </div>
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label"
-                                                               for="input-quantity">{{ entry_quantity }}</label>
+                                                               for="input-quantity">{{ entry_quantity }}<a class="text-danger">*</a></label>
                                                         <div class="col-sm-12">
                                                             <input type="text" name="quantity" value="{{ quantity }}"
                                                                    placeholder="{{ entry_quantity }}"
@@ -319,7 +319,7 @@
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label" for="input-minimum"><span
                                                                     data-toggle="tooltip"
-                                                                    title="{{ help_minimum }}">{{ entry_minimum }}</span></label>
+                                                                    title="{{ help_minimum }}">{{ entry_minimum }}</span><a class="text-danger">*</a></label>
                                                         <div class="col-sm-12">
                                                             <input type="text" name="minimum" value="{{ minimum }}"
                                                                    placeholder="{{ entry_minimum }}" id="input-minimum"
@@ -559,7 +559,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane" id="tab-links">
+                                            <div class="tab-pane col-md-8 pl-md-0" id="tab-links">
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label"
                                                            for="input-manufacturer"><span data-toggle="tooltip"

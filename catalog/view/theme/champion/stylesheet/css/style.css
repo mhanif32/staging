@@ -267,7 +267,7 @@ p {
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0 1em;
+      padding: 2px 2px;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
@@ -340,7 +340,7 @@ header {
       position: absolute;
       top: 5px;
       right: 0;
-      padding: 0 1em;
+      padding: 2px;
       color: #b4b4b4;
       cursor: pointer;
       pointer-events: none;
@@ -1581,22 +1581,33 @@ footer ul {
     -webkit-transition: all .6s ease;
     transition: all .6s ease; }
 
-.radio-toolbar input.size-radio[type="radio"] {
-  opacity: 0;
-  position: fixed;
-  width: 0; }
-  .radio-toolbar input.size-radio[type="radio"]:focus ~ * {
-    border: 1px dashed #01B0F1 !important; }
-  .radio-toolbar input.size-radio[type="radio"]:checked ~ * {
-    background-color: #F2F9FF !important;
-    border-color: #01B0F1 !important; }
-.radio-toolbar label span {
-  padding: 5px 20px;
-  font-size: 15px;
-  border: 1px solid #b4b4b4;
-  border-radius: 4px; }
-  .radio-toolbar label span:hover {
-    background-color: #F2F9FF; }
+.radio-toolbar {
+  position: relative; }
+  .radio-toolbar input.size-radio[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0; }
+    .radio-toolbar input.size-radio[type="radio"]:checked {
+      background-color: #F2F9FF !important;
+      border-color: #01B0F1 !important;
+      border: 1px solid red; }
+      .radio-toolbar input.size-radio[type="radio"]:checked + span {
+        padding: 5px 20px;
+        font-size: 15px;
+        border: 1px solid red; }
+        .radio-toolbar input.size-radio[type="radio"]:checked + span:after {
+          content: url(../../image/tu_cur.png);
+          display: block;
+          position: absolute;
+          bottom: -3px;
+          right: 0px; }
+  .radio-toolbar label span {
+    padding: 5px 20px;
+    font-size: 15px;
+    border: 1px solid #b4b4b4; }
+    .radio-toolbar label span:hover {
+      background-color: #F2F9FF;
+      border-color: red; }
 
 #checkout-checkout .steps-data .panel-body {
   margin: 0 0 8px 70px;
@@ -1647,3 +1658,65 @@ footer ul {
   height: 5px; }
 .home-banner-dynamic .swiper-pagination-bullet-active {
   background: #01B0F1; }
+
+#sidebar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  background: #243458;
+  overflow-x: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  z-index: 5; }
+  #sidebar a.btn_close {
+    display: inline;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s; }
+    #sidebar a.btn_close:hover {
+      color: #fff; }
+  #sidebar .title-information h4 {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 25px;
+    margin-top: 50px; }
+
+.main-side {
+  -webkit-transition: margin-left .5s;
+  transition: margin-left .5s; }
+  .main-side .menu_bg {
+    position: fixed;
+    top: 50%;
+    left: -75px;
+    width: 150px;
+    height: 150px;
+    background: #243458;
+    border-radius: 100%;
+    z-index: 4;
+    -webkit-transform: translate(0%, -50%);
+            transform: translate(0%, -50%); }
+  .main-side #menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition-duration: .5s;
+            transition-duration: .5s;
+    z-index: 5;
+    color: #fff;
+    -webkit-transform: translate(50%, -50%);
+            transform: translate(50%, -50%); }
+    .main-side #menu:hover {
+      color: #fff; }

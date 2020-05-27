@@ -11,10 +11,11 @@
                     <div class="mySlides text-center thumbnails" style="display: block;">
                         {% if thumb %}
                             <div class="firstImage">
-                            <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}"
-                                                                                                     title="{{ heading_title }}"
-                                                                                                     alt="{{ heading_title }}"
-                                                                                                     class="img-fluid"/></a>
+                                <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img
+                                            src="{{ thumb }}"
+                                            title="{{ heading_title }}"
+                                            alt="{{ heading_title }}"
+                                            class="img-fluid"/></a>
                             </div>
                         {% endif %}
                         <div class="row">
@@ -178,12 +179,16 @@
 
                                                     {% elseif option.name == 'Size' %}
                                                         <div class="radio-toolbar size-radio-btn d-inline-block">
-                                                            <label data-toggle="tooltip" data-placement="top" title=" {% if option_value.price %}
+                                                            <label data-toggle="tooltip" data-placement="top"
+                                                                   title=" {% if option_value.price %}
                                                                     ({{ option_value.price_prefix }}{{ option_value.price }})
                                                                     {% else %} 00.00 {% endif %}">
-                                                                <input class="size-radio"  type="radio"
+
+                                                                <input class="size-radio" type="radio"
                                                                        name="option[{{ option.product_option_id }}]"
                                                                        value="{{ option_value.product_option_value_id }}"/>
+
+
                                                                 <span>
                                                                 {{ option_value.name }}
                                                                </span>
@@ -208,7 +213,8 @@
                                                     {% endif %}
                                                 {% endfor %}
                                                 {% if option.name == 'Size' %}
-                                                    <a href="javascript:void(0)" class="text-success"  data-id="{{ show_size_chart }}" id="showSizeChart">Size Chart</a>
+                                                    <a href="javascript:void(0)" class="text-success"
+                                                       data-id="{{ show_size_chart }}" id="showSizeChart">Size Chart</a>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -300,7 +306,8 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-success">
-                                        <h3 class="modal-title f-20 text-white text-uppercase" id="sizeModalTitle">Size Chart</h3>
+                                        <h3 class="modal-title f-20 text-white text-uppercase" id="sizeModalTitle">Size
+                                            Chart</h3>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span class="f-25 text-white" aria-hidden="true">&times;</span>
                                         </button>
@@ -340,7 +347,7 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>
                 <div class="row mb-3">
                     <div class="col-12">
                         <a href="{{ continue_href }}" class="f-15 text-uppercase btn btn-primary">
@@ -883,7 +890,7 @@
             data: {dataId: dataId},
             success: function (json) {
 
-                var dataHtmlImage = '<a class="thumbnail" href="'+json['colorImage']+'"><img src="'+json['colorImage']+'" class="img-fluid"></a>';
+                var dataHtmlImage = '<a class="thumbnail" href="' + json['colorImage'] + '"><img src="' + json['colorImage'] + '" class="img-fluid"></a>';
                 $('.firstImage').html(dataHtmlImage);
             }
         });
