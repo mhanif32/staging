@@ -71,39 +71,39 @@
                         {#                    <h3 class="f-13 font-weight-medium mb-0 text-white"><i class="fa fa-map-marker text-danger f-35"></i> Hello, Deliver To {% if firstname %} {{ firstname }} {% else %} You {% endif %}, <span class="text-white"> {{ loggedInCountry }}</span> </h3>#}
                         {#                </div>#}
                     {% else %}
-                        <div class="">
-                            <h3 class="f-13 text-white font-weight-medium">
-                                Choose your country & delivery location
-                            </h3>
-                        </div>
-                        <div class="select">
-                            <select name="country_id" id="input-country" class="form-control rounded-0">
-                                <option value="">{{ text_select }}</option>
-                                {% for country in countries %}
-                                    {% if country.country_id == country_id %}
-                                        <option value="{{ country.country_id }}"
-                                                selected="selected">{{ country.name }}</option>
-                                    {% else %}
-                                        <option value="{{ country.country_id }}">{{ country.name }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            {% if error_country %}
-                                <div class="text-danger">{{ error_country }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="select">
-                            <select name="zone_id" id="input-zone" class="form-control rounded-0">
-                            </select>
-                            {% if error_zone %}
-                                <div class="text-danger">{{ error_zone }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="text-left position-relative btn-border-div">
-                            <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"
-                               id="confirm-address" role="button"
-                               style="height: 34px;">CONFIRM</a>
-                        </div>
+{#                        <div class="">#}
+{#                            <h3 class="f-13 text-white font-weight-medium">#}
+{#                                Choose your country & delivery location#}
+{#                            </h3>#}
+{#                        </div>#}
+{#                        <div class="select">#}
+{#                            <select name="country_id" id="input-country" class="form-control rounded-0">#}
+{#                                <option value="">{{ text_select }}</option>#}
+{#                                {% for country in countries %}#}
+{#                                    {% if country.country_id == country_id %}#}
+{#                                        <option value="{{ country.country_id }}"#}
+{#                                                selected="selected">{{ country.name }}</option>#}
+{#                                    {% else %}#}
+{#                                        <option value="{{ country.country_id }}">{{ country.name }}</option>#}
+{#                                    {% endif %}#}
+{#                                {% endfor %}#}
+{#                            </select>#}
+{#                            {% if error_country %}#}
+{#                                <div class="text-danger">{{ error_country }}</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                        <div class="select">#}
+{#                            <select name="zone_id" id="input-zone" class="form-control rounded-0">#}
+{#                            </select>#}
+{#                            {% if error_zone %}#}
+{#                                <div class="text-danger">{{ error_zone }}</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                        <div class="text-left position-relative btn-border-div">#}
+{#                            <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"#}
+{#                               id="confirm-address" role="button"#}
+{#                               style="height: 34px;">CONFIRM</a>#}
+{#                        </div>#}
                     {% endif %}
                 </nav>
             </form>

@@ -1435,20 +1435,21 @@ class ControllerAccountMpmultivendorProduct extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         $data['currencies'] = $this->model_localisation_currency->getCurrencies();
-        //$data['countries'] = $this->model_localisation_country->getCountries();
-//        if(!empty($this->request->get['product_id'])) {
-//            $data['my_countries'] = array();
-//            $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
-//            foreach ($my_countries as $country_id) {
-//                $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
-//                if ($country_info) {
-//                    $data['my_countries'][] = array(
-//                        'country_id' => $country_info['country_id'],
-//                        'name' => $country_info['name']
-//                    );
-//                }
-//            }
-//        }
+
+        $data['countries'] = $this->model_localisation_country->getCountries();
+        if(!empty($this->request->get['product_id'])) {
+            $data['my_countries'] = array();
+            $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
+            foreach ($my_countries as $country_id) {
+                $country_info = $this->model_localisation_country->getCountry($country_id['country_id']);
+                if ($country_info) {
+                    $data['my_countries'][] = array(
+                        'country_id' => $country_info['country_id'],
+                        'name' => $country_info['name']
+                    );
+                }
+            }
+        }
 
         $delivery = [];
         if (isset($this->request->get['product_id'])) {

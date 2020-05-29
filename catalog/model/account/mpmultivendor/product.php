@@ -8,11 +8,11 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$product_id = $this->db->getLastId();
 
 		//for product locations
-//        if (isset($data['countries'])) {
-//            foreach ($data['countries'] as $country) {
-//                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
-//            }
-//        }
+        if (isset($data['countries'])) {
+            foreach ($data['countries'] as $country) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+            }
+        }
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");

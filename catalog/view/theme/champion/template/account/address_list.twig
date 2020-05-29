@@ -36,7 +36,11 @@
                                                     {#p-4 border#}
                                                     <div class="main-address-title d-inline-block">
                                                         <h6>
-                                                            Main Delivery Address
+                                                            {% if result.isDefaultAddress %}
+                                                                Main Delivery Address
+                                                            {% else %}
+                                                                Other Delivery Address
+                                                            {% endif %}
                                                         </h6>
                                                     </div>
                                                     <div class="edit delete d-inline-block float-right buttons clearfix">

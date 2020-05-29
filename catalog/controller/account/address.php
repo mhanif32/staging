@@ -131,6 +131,8 @@ class ControllerAccountAddress extends Controller {
 
 	protected function getList() {
 
+	    $this->load->model('account/customer');
+
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -183,7 +185,10 @@ class ControllerAccountAddress extends Controller {
 				'country'   => $result['country']
 			);
 
+
+			$customerData = $this->model_account_customer->getCustomer($this->customer->getId());
 			$data['addresses'][] = array(
+				'isDefaultAddress' => ($result['address_id'] == $customerData['address_id']) ? true : false,
 				'address_id' => $result['address_id'],
 				'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),
 				'update'     => $this->url->link('account/address/edit', 'address_id=' . $result['address_id'], true),
