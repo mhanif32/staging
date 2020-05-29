@@ -4,12 +4,14 @@ class ControllerCheckoutSuccess extends Controller
 {
     public function index()
     {
-
         $this->load->language('checkout/success');
 
         if (isset($this->session->data['order_id'])) {
 
             $orderId = $this->session->data['order_id'];
+
+            //TODO Update Order : Set order delivery date & also Generated alphanumeric order number
+
 
             //START : send request to delivery partner
             $this->load->model('account/request');

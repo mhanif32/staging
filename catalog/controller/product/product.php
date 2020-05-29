@@ -159,6 +159,7 @@ class ControllerProductProduct extends Controller {
 		}
 
 		$this->load->model('catalog/product');
+		$this->load->model('catalog/category');
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -470,7 +471,14 @@ class ControllerProductProduct extends Controller {
             $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
 
             //estimated Delivery Dates
-            $estimatedDateText = 'Delivered in '. $this->config->get('config_minGeneralDays') .' - '.$this->config->get('config_maxGeneralDays').' days';
+
+            $productCategoryData = $this->model_catalog_category->checkProductCategory($data['product_id']);
+            //echo '<pre>'; print_r($productCategoryData); exit('aaaa');
+            if(!empty($productCategoryData)) {
+                $estimatedDateText = 'Delivered in '. $this->config->get('config_minGroceryDays') .' - '.$this->config->get('config_maxGroceryDays').' days';
+            } else {
+                $estimatedDateText = 'Delivered in '. $this->config->get('config_minGeneralDays') .' - '.$this->config->get('config_maxGeneralDays').' days';
+            }
 
             $data['estimatedDateText'] = $estimatedDateText;
 
