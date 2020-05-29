@@ -21,11 +21,13 @@
                                     {% endif %}
                                     <div class="justify-content-between row mx-0">
                                         <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title_view }}</h4>
-                                        <small>Note : Check below delivery details & Accept/Decline your request from
-                                            here.</small>
+
+                                        <a href='javascript:history.back(1);'><i class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
                                     </div>
 
                                     <div class=" row mx-0">
+                                        <small>Note : Check below delivery details & Accept/Decline your request from
+                                            here.</small>
                                     <strong>Request Status : </strong> &nbsp;&nbsp;&nbsp;
                                     {% if is_accept == 1 %} <p class="bg-success status">Accepted</p>
                                     {% elseif is_accept == 2 %} <p class="bg-danger status">Declined</p>
