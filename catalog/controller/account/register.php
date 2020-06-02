@@ -23,6 +23,9 @@ class ControllerAccountRegister extends Controller {
 
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
 
+			//get a role from customer_id, and send a mail to that diff roles
+
+
 			// Clear any previous login attempts for unregistered accounts.
 			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
 
