@@ -94,6 +94,8 @@ class ControllerAccountRequest extends Controller {
     {
         $json = array();
         $this->load->model('account/request');
+        $this->load->model('account/order');
+
         if($this->request->post['request_id']) {
             $requestId = $this->request->post['request_id'];
             $requestData = $this->model_account_request->getRequestData($requestId);
@@ -131,14 +133,16 @@ class ControllerAccountRequest extends Controller {
                 $dataMail['order_id'] = $requestData['order_id'];
                 $dataMail['deliveryPartnerName'] = $deliveryPartData['firstname'] . ' ' .$deliveryPartData['lastname'];
                 $dataMail['store_owner'] = $sellerData['store_owner'];
-                $dataMail['customerName'] = $customerData['firstname'] . ' ' .$customerData['lastname'];
-
+                $dataMail['seller_address'] = $sellerData['seller_address'];
+                $dataMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
+                $dataMail['view_request_link'] = $this->url->link('account/request/view', '&id='.$requestData['request_id'], true);
                 $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
                 $mail->setHtml($mailText);
                 $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
                 $mail->send();
 
                 //Send Mail for Request Accept to Admin
+                $orderData = $this->model_account_order->getOrder($requestData['order_id']);
                 $dataAdminMail = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
                 $mail->parameter = $this->config->get('config_mail_parameter');
@@ -157,6 +161,9 @@ class ControllerAccountRequest extends Controller {
                 $dataAdminMail['customer_name'] = $customer['firstname'] .' '. $customer['lastname'];
                 $dataAdminMail['orderId'] = $requestData['order_id'];
                 $dataAdminMail['store_owner'] = $sellerData['store_owner'];
+                $dataAdminMail['order_link'] = $this->url->link('account/order/info', '&order_id='.$requestData['order_id'], true);
+
+                $dataAdminMail['customer_address'] = $orderData['shipping_address_1'].' '. $orderData['shipping_city'].' '. $orderData['shipping_zone'].' '. $orderData['shipping_country'];
 
                 $mailTextAdmin = $this->load->view('mail/adm_request_accept_alert', $dataAdminMail);
                 $mail->setHtml($mailTextAdmin);

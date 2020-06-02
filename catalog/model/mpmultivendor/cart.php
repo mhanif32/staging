@@ -207,7 +207,7 @@ class ModelMpmultivendorCart extends Model {
                     } else {
                         $server = $this->config->get('config_url');
                     }
-                    $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                    $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 					if(VERSION >= '3.0.0.0') {
 						$mail = new Mail($this->config->get('config_mail_engine'));
 						$mail->parameter = $this->config->get('config_mail_parameter');

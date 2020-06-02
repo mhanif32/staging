@@ -83,21 +83,26 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello{{ text_firstname }},  {{ text_greeting }}</h3>
-                                        <p style="margin-bottom: 0px; text-align: center;">You have successfully accepted the order delivery request.</p>
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello {{ deliveryPartnerName }},</h3>
+                                        <p style="margin-bottom: 0px; text-align: center;">The following order {{ order_id }} to be delivered to {{ customer_address }} has been placed and it's ready
+                                            for pick up from Seller : {{ store_owner }} and Address : {{ seller_address }}.</p>
 
+                                        <p style="margin-bottom: 0px;">Please click on the link below to view order details and accept or decline promptly as necessary</p>
 
-                                        <p style="margin-bottom: 0px;"> Thanks,<br>{{ store }} Team</p>
+                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ view_request_link }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">Click to View Request</a></p>
+
+                                        <p style="margin-bottom: 0px;"> Thank You</p>
+                                        <p style="margin-bottom: 0px;">Thechampionmall.com</p>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:26px;text-align:left;color:#000000;">
                                         <p align="center" style="margin-bottom: 0px; padding: 10px 0px;">If this isn’t {{ text_firstname }} email please send an email to <a href="mailto:wilson.olayinka@gmail.com" style="color:#01B0F1" target="_top">wilson.olayinka@gmail.com</a> and we’ll remove your email from our mailing list.</p>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </table>
                     </div>
                     <!--[if mso | IE]>

@@ -81,7 +81,6 @@ class ModelMpmultivendorMvSeller extends Model {
 			$mail->setHtml(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 
-
 			// Enquiry Email To Customer
 			$this->load->language('mpmultivendor_mail/enquiry_email_to_customer');
 

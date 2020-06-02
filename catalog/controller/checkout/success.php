@@ -104,7 +104,8 @@ class ControllerCheckoutSuccess extends Controller
                     }
 
                     //send mail to admin
-                    $dataAdmin = [];
+                    //commented : because already sending mail to admin : order_alertd
+                    /*$dataAdmin = [];
                     $mail->setTo($this->config->get('config_email'));
                     $mail->setFrom($this->config->get('config_email'));
                     $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
@@ -120,7 +121,7 @@ class ControllerCheckoutSuccess extends Controller
                     $mailText = $this->load->view('mail/order_admin_alert', $dataAdmin);
                     $mail->setHtml($mailText);
                     $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
-                    $mail->send();
+                    $mail->send();*/
                 }
             }
             //END

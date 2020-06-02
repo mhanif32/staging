@@ -247,11 +247,11 @@ class ModelAccountCustomer extends Model
         if ($result2->num_rows > 0) {
             $sql = "UPDATE " . DB_PREFIX . "delivery_partner_info SET ";
             $sql.= $fileSql;
-            $sql.="`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
+            $sql.="`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "', `delivery_type` = '" . $this->db->escape($data['delivery_type']) . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
             $this->db->query($sql);
         } else {
 
-            $sql = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "',";
+            $sql = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "', delivery_type = '" . $this->db->escape($data['delivery_type']) . "',";
             $sql.= $fileSql;
             $sql.="customer_id = '" . (int)$customer_id . "'";
             $this->db->query($sql);

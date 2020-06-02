@@ -140,45 +140,15 @@
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
                                         <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Dear {{ store_owner }},</h3>
-                                        <p style="margin-bottom: 0px; text-align: center;">A new order with {{ order_id }}, has been purchased from your store on the {{ date_added }} by {{ customer_name }}.</p>
+                                        <p style="margin-bottom: 0px; text-align: center;">A new order with Order Number {{ order_id }}, has been purchased from your store on the date : {{ date_added }} by {{ customer_name }}.</p>
 
-                                        <p style="margin-bottom: 0px; text-align: center;">Click on the link below to view details relating to the order. We request that you prepare and get the
-                                            order prepared according to our procedures and policies.</p>
-                                        {{ order_link }}
+                                        <p style="margin-bottom: 0px; text-align: center;">Click on the link below to view details relating to the order. We request that you prepare and get the order prepared according to our procedures and policies.</p>
+
+                                        <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ order_link }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">Click to View Order</a></p>
 
                                         <p style="margin-bottom: 0px; text-align: center;">Thank You For Your Custom.</p>
 
                                         <p style="margin-bottom: 0px; text-align: center;">Thechampionmall.com</p>
-
-                                        <!--<p style="margin-bottom: 0px; text-align: center;">{{ text_received }}</p>
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_order_id }} {{ order_id }}</p>
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_date_added }} {{ date_added }}</p>
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_order_status }} {{ order_status }}</p>
-
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_product }}</p>
-
-                                        {% for product in products %}
-                                            <p style="margin-bottom: 0px; text-align: center;">{{ product.quantity }}
-                                                x {{ product.name }} ({{ product.model }}) {{ product.total }}</p>
-                                            {% if option %}
-                                                {% for option in product.option %}
-                                                    <p style="margin-bottom: 0px; text-align: center;">
-                                                        - {{ option.name }} {{ option.value }}</p>
-                                                {% endfor %}
-                                            {% endif %}
-                                        {% endfor %}
-                                        <p style="margin-bottom: 0px; text-align: center;">{{ text_total }}</p>
-
-                                        {% for total in totals %}
-                                            <p style="margin-bottom: 0px; text-align: center;"><strong>{{ total.title }}
-                                                    : {{ total.value }}</strong></p>
-                                        {% endfor %}
-
-                                        {% if comment %}
-                                            <p style="margin-bottom: 0px; text-align: center;">{{ text_comment }}</p>
-
-                                            <p style="margin-bottom: 0px; text-align: center;">{{ comment }}</p>
-                                        {% endif %}-->
 									</div>
 								</td>
 							</tr>
