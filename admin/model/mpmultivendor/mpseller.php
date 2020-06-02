@@ -192,8 +192,11 @@ class ModelMpmultivendorMpseller extends Model {
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($store_name);
 			$mail->setSubject($subject);
-			$mail->setText($this->load->view('mpmultivendor_mail/seller_approve', $data));
-			$mail->send(); 
+			//$mail->setText($this->load->view('mpmultivendor_mail/seller_approve', $data));
+            $mailText = $this->load->view('mpmultivendor_mail/seller_approve', $data);
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
 			/* Email Work Ends */
 		}
 	}

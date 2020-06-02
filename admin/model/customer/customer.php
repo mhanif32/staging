@@ -627,6 +627,7 @@ class ModelCustomerCustomer extends Model
     {
         $sql = "UPDATE " . DB_PREFIX . "delivery_partner_info SET ";
         $sql .= "`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "',";
+        $sql .= "`delivery_type` = '" . $this->db->escape($data['delivery_type']) . "',";
         $sql .= "`is_approved` = '" . $this->db->escape($data['is_approved']) . "',";
         $sql .= "`per_hour_rate` = '" . $this->db->escape($data['per_hour_rate']) . "',";
         $sql .= "`currency_id` = '" . $this->db->escape($data['currency_id']) . "'";

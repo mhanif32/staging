@@ -294,6 +294,8 @@ class ControllerMailOrder extends Controller {
 		$data['text_footer'] = $language->get('text_footer');
 
 		$data['order_id'] = $order_info['order_id'];
+		$data['firstname'] = $order_info['firstname'];
+		$data['lastname'] = $order_info['lastname'];
 		$data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
 		
 		$order_status_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int)$order_status_id . "' AND language_id = '" . (int)$order_info['language_id'] . "'");
@@ -477,7 +479,14 @@ class ControllerMailOrder extends Controller {
             $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
             $dataAdmin['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
-            $mailText = $this->load->view('mail/order_alert', $data);
+            $dataAdmin['order_id'] =  '#' . $order_info['order_id'];
+            $dataAdmin['customer_address'] = $order_info['shipping_address_1'] . ', ' . $order_info['shipping_city'] . ', ' . $order_info['shipping_zone'] . ', ' . $order_info['shipping_country'];
+            //echo '<pre>';print_r($order_info);exit('aaa');
+            $dataAdmin['customer_name'] = $order_info['firstname'].' '.$order_info['lastname'];
+            //$dataAdmin['seller_name'] = $mpSellerData['store_owner'];
+            $dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $this->session->data['user_token'];
+
+            $mailText = $this->load->view('mail/order_alert', $dataAdmin);
             $mail->setHtml($mailText);
             $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
             $mail->send();

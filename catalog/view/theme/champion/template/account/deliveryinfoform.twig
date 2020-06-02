@@ -38,6 +38,17 @@
                                         <div class="tab-content">
                                             <div class="tab-pane  col-md-9 pl-md-0 active" id="tab-documents">
                                                 <div class="form-group">
+                                                    <label for="inputType" class="d-block">Delivery Type</label>
+
+                                                    <select name="delivery_type" id="select-delivery_type" class="form-control">
+                                                        <option value=""> --- Please Select ---</option>
+                                                        <option value="1" {% if delivery_type == 1 %} selected="selected" {% endif %} >Within City</option>
+                                                        <option value="2" {% if delivery_type == 2 %} selected="selected" {% endif %} >Within State</option>
+                                                        <option value="3" {% if delivery_type == 3 %} selected="selected" {% endif %} >Within Country</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label for="inputType" class="d-block">Vehicle Type</label>
 
                                                     <input type="radio" name="vehicle_type" value="1"

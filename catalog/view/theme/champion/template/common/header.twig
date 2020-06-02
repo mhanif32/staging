@@ -71,39 +71,39 @@
                         {#                    <h3 class="f-13 font-weight-medium mb-0 text-white"><i class="fa fa-map-marker text-danger f-35"></i> Hello, Deliver To {% if firstname %} {{ firstname }} {% else %} You {% endif %}, <span class="text-white"> {{ loggedInCountry }}</span> </h3>#}
                         {#                </div>#}
                     {% else %}
-{#                        <div class="">#}
-{#                            <h3 class="f-13 text-white font-weight-medium">#}
-{#                                Choose your country & delivery location#}
-{#                            </h3>#}
-{#                        </div>#}
-{#                        <div class="select">#}
-{#                            <select name="country_id" id="input-country" class="form-control rounded-0">#}
-{#                                <option value="">{{ text_select }}</option>#}
-{#                                {% for country in countries %}#}
-{#                                    {% if country.country_id == country_id %}#}
-{#                                        <option value="{{ country.country_id }}"#}
-{#                                                selected="selected">{{ country.name }}</option>#}
-{#                                    {% else %}#}
-{#                                        <option value="{{ country.country_id }}">{{ country.name }}</option>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                            </select>#}
-{#                            {% if error_country %}#}
-{#                                <div class="text-danger">{{ error_country }}</div>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-{#                        <div class="select">#}
-{#                            <select name="zone_id" id="input-zone" class="form-control rounded-0">#}
-{#                            </select>#}
-{#                            {% if error_zone %}#}
-{#                                <div class="text-danger">{{ error_zone }}</div>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-{#                        <div class="text-left position-relative btn-border-div">#}
-{#                            <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"#}
-{#                               id="confirm-address" role="button"#}
-{#                               style="height: 34px;">CONFIRM</a>#}
-{#                        </div>#}
+                        {#                        <div class="">#}
+                        {#                            <h3 class="f-13 text-white font-weight-medium">#}
+                        {#                                Choose your country & delivery location#}
+                        {#                            </h3>#}
+                        {#                        </div>#}
+                        {#                        <div class="select">#}
+                        {#                            <select name="country_id" id="input-country" class="form-control rounded-0">#}
+                        {#                                <option value="">{{ text_select }}</option>#}
+                        {#                                {% for country in countries %}#}
+                        {#                                    {% if country.country_id == country_id %}#}
+                        {#                                        <option value="{{ country.country_id }}"#}
+                        {#                                                selected="selected">{{ country.name }}</option>#}
+                        {#                                    {% else %}#}
+                        {#                                        <option value="{{ country.country_id }}">{{ country.name }}</option>#}
+                        {#                                    {% endif %}#}
+                        {#                                {% endfor %}#}
+                        {#                            </select>#}
+                        {#                            {% if error_country %}#}
+                        {#                                <div class="text-danger">{{ error_country }}</div>#}
+                        {#                            {% endif %}#}
+                        {#                        </div>#}
+                        {#                        <div class="select">#}
+                        {#                            <select name="zone_id" id="input-zone" class="form-control rounded-0">#}
+                        {#                            </select>#}
+                        {#                            {% if error_zone %}#}
+                        {#                                <div class="text-danger">{{ error_zone }}</div>#}
+                        {#                            {% endif %}#}
+                        {#                        </div>#}
+                        {#                        <div class="text-left position-relative btn-border-div">#}
+                        {#                            <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"#}
+                        {#                               id="confirm-address" role="button"#}
+                        {#                               style="height: 34px;">CONFIRM</a>#}
+                        {#                        </div>#}
                     {% endif %}
                 </nav>
             </form>
@@ -144,7 +144,7 @@
                 </div>
 
                 {#<div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">#}
-                    {#{{ cart }}#}
+                {#{{ cart }}#}
                 {#</div>#}
             </div>
 
@@ -167,28 +167,27 @@
             </div>
 
 
-                {% if logged %}
-                <div class="col-3 m-auto d-lg-inline-block d-none text-right">
-                    <div class="dropdown show d-inline-block">
-                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
-                           role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="fas fa-user-circle f-35"></i>
-                            <span class="d-block f-13 text-wrap"
-                                  style="margin-bottom: -6px;">Welcome, {{ firstname }}</span>
-                            {% if loggedInRole %}
-                                <small class="text-success f-12">{{ loggedInRole }}</small>
-                            {% endif %}
-                        </a>
+            {% if logged %}
+            <div class="col-3 m-auto d-lg-inline-block d-none text-right">
+                <div class="dropdown show d-inline-block">
+                    <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
+                       role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <i class="fas fa-user-circle f-35"></i>
+                        <span class="d-block f-13 text-wrap"
+                              style="margin-bottom: -6px;">Welcome, {{ firstname }}</span>
+                        {% if loggedInRole %}
+                            <small class="text-success f-12">{{ loggedInRole }}</small>
+                        {% endif %}
+                    </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item text-left f-12" href="{{ account }}">{{ text_dashboard }}</a>
-                            <a class="dropdown-item text-left f-12" href="{{ my_profile }}">{{ text_account }}</a>
-                            <a class="dropdown-item text-left f-12" href="{{ track_your_order }}">Track Your Order</a>
-                            <a class="dropdown-item text-left f-12" href="{{ logout }}">{{ text_logout }}</a>
-                        </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-left f-12" href="{{ account }}">{{ text_dashboard }}</a>
+                        <a class="dropdown-item text-left f-12" href="{{ my_profile }}">{{ text_account }}</a>
+                        <a class="dropdown-item text-left f-12" href="{{ track_your_order }}">Track Your Order</a>
+                        <a class="dropdown-item text-left f-12" href="{{ logout }}">{{ text_logout }}</a>
                     </div>
-
+                </div>
 
 
                 {% else %}
@@ -215,64 +214,70 @@
                                 <a class="dropdown-item text-left f-12" href="{{ become_delivery_partner_info_href }}">Become
                                     Delivery Partner</a>
                                 <a class="dropdown-item text-left f-12" href="#">Become Executive Members</a>
-                                <a class="dropdown-item text-left f-12" href="{{ become_our_partner_href }}">Become Partner</a>
+                                <a class="dropdown-item text-left f-12" href="{{ become_our_partner_href }}">Become
+                                    Partner</a>
                             </div>
                             <a class="dropdown-item text-left f-12" href="{{ track_your_order }}">Track Your Order</a>
                         </div>
                     </div>
 
-                {% endif %}
-                <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
-                    {{ cart }}
+                    {% endif %}
+                    <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
+                        {{ cart }}
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark px-0 pb-1 pt-0">
-            <button class="navbar-toggler bg-success" type="button" data-toggle="collapse"
-                    data-target="#navbarsExample08"
-                    aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExample08">
-                <ul class="navbar-nav navbar-nav-menu ">
-                    {% if loggedInCountry %}
-                        {#<small class="font-weight-medium mb-0">#}
+            <nav class="navbar navbar-expand-lg navbar-dark px-0 pb-1 pt-0">
+                <button class="navbar-toggler bg-success" type="button" data-toggle="collapse"
+                        data-target="#navbarsExample08"
+                        aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExample08">
+                    <ul class="navbar-nav navbar-nav-menu ">
+                        {% if loggedInCountry %}
+                            {#<small class="font-weight-medium mb-0">#}
                             {#<i class="fa fa-map-marker text-danger"></i><span class=""> {{ loggedInCountry }}</span></small>#}
-                        <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
-                                <i class="fa fa-map-marker text-danger"></i>
-                            </div>
-                            <div class="home-location-text d-flex d-flex-column bg-black text-white">
+                            <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button" data-toggle="modal"
+                                 data-target="#exampleModalCenter">
+                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                    <i class="fa fa-map-marker text-danger"></i>
+                                </div>
+                                <div class="home-location-text d-flex d-flex-column bg-black text-white">
 
-                                <a class="button w-100" type="button" data-hover="Click to Choose New Location" data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
+                                    <a class="button w-100" type="button" data-hover="Click to Choose New Location"
+                                       data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-success text-uppercase f-25" id="exampleModalLongTitle">Add Address</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">Change Address Form</div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                                        <button type="button" class="btn btn-primary">Submit</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-success text-uppercase f-25"
+                                                id="exampleModalLongTitle">Add Address</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Change Address Form</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
-                    {{ menu }}
-                </ul>
-            </div>
-        </nav>
-    </div>
+                        {% endif %}
+                        {{ menu }}
+                    </ul>
+                </div>
+            </nav>
+        </div>
 </header>
 
 <script type="text/javascript"><!--

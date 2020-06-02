@@ -303,6 +303,7 @@ class ControllerAccountAccount extends Controller {
 
         $partnerInfos = $this->model_account_customer->getDocumentsInfo($customer_id);
         $data['vehicle_type'] = !empty($partnerInfos['vehicle_type']) ? $partnerInfos['vehicle_type'] : '';
+        $data['delivery_type'] = !empty($partnerInfos['delivery_type']) ? $partnerInfos['delivery_type'] : '';
 
         $data['action'] = $this->url->link('account/account/addDeliveryInfo', '', true);
 

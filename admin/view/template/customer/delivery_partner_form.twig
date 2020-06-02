@@ -43,18 +43,15 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab-delivery-partner">
-
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="input-delivery_partner_status">Delivery
-                                    Type</label>
+                                <label class="col-sm-2 control-label" for="input-delivery_partner_status">Delivery Type</label>
                                 <div class="col-sm-10">
-                                    {% if delivery_type == 1 %}
-                                        <label class="btn btn-warning">Within City</label>
-                                    {% elseif delivery_type == 2 %}
-                                        <label class="btn btn-success">Within State</label>
-                                    {% elseif delivery_type == 3 %}
-                                        <label class="btn btn-info">Within Country</label>
-                                    {% endif %}
+                                    <select name="delivery_type" id="select-delivery_type" class="form-control">
+                                        <option value=""> --- Please Select ---</option>
+                                        <option value="1" {% if delivery_type == 1 %} selected="selected" {% endif %} >Within City</option>
+                                        <option value="2" {% if delivery_type == 2 %} selected="selected" {% endif %} >Within State</option>
+                                        <option value="3" {% if delivery_type == 3 %} selected="selected" {% endif %} >Within Country</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -62,8 +59,7 @@
                                 <label class="col-sm-2 control-label" for="input-delivery_partner_status">Delivery
                                     Partner Approval</label>
                                 <div class="col-sm-10">
-                                    <select name="is_approved" id="input-delivery_partner_status"
-                                            class="form-control">
+                                    <select name="is_approved" id="input-delivery_partner_status" class="form-control">
                                         {% if partner_approve %}
                                             <option value="1" selected="selected">{{ text_enabled }}</option>
                                             <option value="0">{{ text_disabled }}</option>
