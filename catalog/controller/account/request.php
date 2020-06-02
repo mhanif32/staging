@@ -34,7 +34,7 @@ class ControllerAccountRequest extends Controller {
 
             $requestArray = array();
             $requestArray['request_id'] = $request['request_id'];
-            $customer = $this->model_account_customer->getCustomer($request['customer_id']);
+            //$customer = $this->model_account_customer->getCustomer($request['customer_id']);
             $requestArray['customer_name'] = $orderData['firstname'].' '.$orderData['lastname'];
             $requestArray['order_id'] = $request['order_id'];
             $requestArray['delivery_location'] = $orderData['shipping_address_1'].', '.$orderData['shipping_city'].', '.$orderData['shipping_zone'].', '.$orderData['shipping_country'];

@@ -481,11 +481,12 @@ class ControllerMailOrder extends Controller {
 
             $dataAdmin['order_id'] =  '#' . $order_info['order_id'];
             $dataAdmin['customer_address'] = $order_info['shipping_address_1'] . ', ' . $order_info['shipping_city'] . ', ' . $order_info['shipping_zone'] . ', ' . $order_info['shipping_country'];
+            //echo '<pre>';print_r($order_info);exit('aaa');
             $dataAdmin['customer_name'] = $order_info['firstname'].' '.$order_info['lastname'];
             //$dataAdmin['seller_name'] = $mpSellerData['store_owner'];
             $dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $this->session->data['user_token'];
 
-            $mailText = $this->load->view('mail/order_alert', $data);
+            $mailText = $this->load->view('mail/order_alert', $dataAdmin);
             $mail->setHtml($mailText);
             $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
             $mail->send();
