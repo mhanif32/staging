@@ -484,7 +484,7 @@ class ControllerMailOrder extends Controller {
             //echo '<pre>';print_r($order_info);exit('aaa');
             $dataAdmin['customer_name'] = $order_info['firstname'].' '.$order_info['lastname'];
             //$dataAdmin['seller_name'] = $mpSellerData['store_owner'];
-            $dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $this->session->data['user_token'];
+            //$dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $_['user_token'];
 
             $mailText = $this->load->view('mail/order_alert', $dataAdmin);
             $mail->setHtml($mailText);
