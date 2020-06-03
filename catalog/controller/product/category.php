@@ -430,9 +430,9 @@ class ControllerProductCategory extends Controller
         foreach ($categories as $category) {
 
             if ($category['image']) {
-                $image = $this->model_tool_image->resize($category['image'], 200, 150);
+                $image = $this->model_tool_image->resize($category['image'], 200, 200);
             } else {
-                $image = $this->model_tool_image->resize('placeholder.png', 200, 150);
+                $image = $this->model_tool_image->resize('placeholder.png', 200, 200);
             }
 
             $data['categories'][] = array(
