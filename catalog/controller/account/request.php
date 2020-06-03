@@ -55,6 +55,9 @@ class ControllerAccountRequest extends Controller {
 
     public function view() {
 
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request', '', true);
 
@@ -92,13 +95,18 @@ class ControllerAccountRequest extends Controller {
 
     public function acceptRequest()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         $json = array();
         $this->load->model('account/request');
         $this->load->model('account/order');
+        $this->load->model('account/customer');
 
         if($this->request->post['request_id']) {
             $requestId = $this->request->post['request_id'];
             $requestData = $this->model_account_request->getRequestData($requestId);
+
             $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
             if(!empty($requestData)) {
                 $this->model_account_request->updateRequest($requestId, $isAccept = 1);
@@ -133,7 +141,7 @@ class ControllerAccountRequest extends Controller {
                 $dataMail['order_id'] = $requestData['order_id'];
                 $dataMail['deliveryPartnerName'] = $deliveryPartData['firstname'] . ' ' .$deliveryPartData['lastname'];
                 $dataMail['store_owner'] = $sellerData['store_owner'];
-                $dataMail['seller_address'] = $sellerData['seller_address'];
+                $dataMail['seller_address'] = $sellerData['address'];
                 $dataMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
                 $dataMail['view_request_link'] = $this->url->link('account/request/view', '&id='.$requestData['request_id'], true);
                 $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
