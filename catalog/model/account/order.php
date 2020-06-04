@@ -209,9 +209,9 @@ class ModelAccountOrder extends Model
         return $this->db->getLastId();
     }
 
-    public function getLatestOrderHistory($order_id)
+    public function getLatestOrderHistory($order_id, $customer_id)
     {
-        $query = $this->db->query("SELECT order_status_id FROM `" . DB_PREFIX . "order_history` WHERE order_id = '" . (int)$order_id . "' ORDER BY date_added DESC LIMIT 1");
+        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id");
 
         return $query->row['order_status_id'];
     }

@@ -192,7 +192,7 @@ class ControllerAccountRequest extends Controller {
         $this->load->model('account/request');
         $this->load->model('account/customer');
         if($this->request->post['request_id']) {
-            $requestId = $this->request->post['request_id'];
+
             $requestId = $this->request->post['request_id'];
             $requestData = $this->model_account_request->getRequestData($requestId);
 
@@ -201,8 +201,39 @@ class ControllerAccountRequest extends Controller {
 
                 $this->model_account_request->updateRequest($requestId, $isAccept = 2);
                 $json['success'] = 'Your request has been successfully declined.';
+                if ($this->request->server['HTTPS']) {
+                    $server = $this->config->get('config_ssl');
+                } else {
+                    $server = $this->config->get('config_url');
+                }
 
-                //Send Mail for Request Accept to Admin
+                //Send Mail for declining Request to Delivery Partner
+                $dataMail = [];
+                $mail = new Mail($this->config->get('config_mail_engine'));
+                $mail->parameter = $this->config->get('config_mail_parameter');
+                $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+                $mail->setTo($customer['email']);
+                $mail->setFrom($this->config->get('config_email'));
+                $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Declined Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+
+                $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                $dataMail['order_id'] = $requestData['order_id'];
+                $dataMail['deliveryPartnerName'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
+//                $dataMail['store_owner'] = $sellerData['store_owner'];
+//                $dataMail['seller_address'] = $sellerData['address'];
+                $dataMail['customerName'] = $customer['firstname'] . ' ' . $customer['lastname'];
+
+                $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
+                $mail->setHtml($mailText);
+                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                $mail->send();
+
+                //Send Mail for declining Request to Admin
                 $data = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
                 $mail->parameter = $this->config->get('config_mail_parameter');
@@ -220,6 +251,7 @@ class ControllerAccountRequest extends Controller {
                 $data['delivery_partner_name'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
                 $data['customer_name'] = $customer['firstname'] .' '. $customer['lastname'];
                 $data['orderId'] = $requestData['order_id'];
+                $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 
                 $mailText = $this->load->view('mail/adm_request_decline_alert', $data);
                 $mail->setHtml($mailText);

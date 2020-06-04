@@ -74,6 +74,10 @@ class ControllerAccountOrder extends Controller {
 	}
 
 	public function info() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('account/order');
 
         $this->document->addScript('catalog/view/javascript/mpseller/ratepicker/rate-picker.js');
@@ -313,7 +317,7 @@ class ControllerAccountOrder extends Controller {
             //rating review
             $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
 
-            $order_status_id = $this->model_account_order->getLatestOrderHistory($order_id);
+            $order_status_id = $this->model_account_order->getLatestOrderHistory($order_id, $this->customer->getId());
             $data['isVisibleCancelBtn'] =  false;
 
             if (in_array($order_status_id, array(1, 2,15))) {
@@ -420,6 +424,7 @@ class ControllerAccountOrder extends Controller {
         $json = array();
 
         $this->load->model('account/order');
+        $this->load->model('account/customer');
 
         $this->load->language('account/order');
 
@@ -435,9 +440,10 @@ class ControllerAccountOrder extends Controller {
             $json['error'] = $this->language->get('error_reason');
         }
 
+        $order_id = $this->request->post['order_id'];
         if (!$json) {
             $cancel_data = array(
-                'order_id' => $this->request->post['order_id'],
+                'order_id' => $order_id,
                 'customer_id' => $this->customer->getId(),
                 'order_status_id' => 7,
                 'notify' => 0,
@@ -445,6 +451,63 @@ class ControllerAccountOrder extends Controller {
                 'cancel_reason_id' => $this->request->post['selectReason'],
             );
             $this->model_account_order->cancelOrder($cancel_data);
+
+            if ($this->request->server['HTTPS']) {
+                $server = $this->config->get('config_ssl');
+            } else {
+                $server = $this->config->get('config_url');
+            }
+
+            $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
+            $orderData = $this->model_account_order->getOrder($order_id);
+
+            //Send mail to customer
+            $data = [];
+            $mail = new Mail($this->config->get('config_mail_engine'));
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+            $mail->setTo($customerData['email']);
+            $mail->setFrom($this->config->get('config_email'));
+            $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+            $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Cancelled Order', $this->config->get('config_name'), $order_id), ENT_QUOTES, 'UTF-8'));
+            $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+            $data['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+            $data['customer_name'] = $customerData['firstname'].' '.$customerData['lastname'];
+
+            $mailText = $this->load->view('mail/order_cancel_to_customer', $data);
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
+
+            //Send mail to admin
+            $dataAdmin = [];
+            $mail = new Mail($this->config->get('config_mail_engine'));
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom($this->config->get('config_email'));
+            $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+            $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Cancelled Order By Customer', $this->config->get('config_name'), $order_id), ENT_QUOTES, 'UTF-8'));
+            $dataAdmin['logo'] = $server . 'image/' . $this->config->get('config_logo');
+            $dataAdmin['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+            $dataAdmin['order_id'] =  '#' . $order_id;
+            $dataAdmin['date_added'] = substr($orderData['date_added'], 0, 10);
+
+            $mailText = $this->load->view('mail/order_cancel_to_admin', $dataAdmin);
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
+
+            //todo send mail to multiple sellers (having that seller's products bought by customer)
+
 
             $json['success'] = $this->language->get('success_cancel_order');
         }
