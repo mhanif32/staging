@@ -7,34 +7,43 @@
             </div>
         {% endif %}
         {% if error_warning %}
-            <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <div class="alert alert-danger alert-dismissible"><i
+                        class="fa fa-exclamation-circle"></i> {{ error_warning }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
         {% endif %}
         <div class="row">
             <div id="content" class="col-sm-12 py-4">{{ content_top }}
                 <div>
-                    <a href="{{ back_url }}" class="position-absolute"><i class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
-                <h3 class="f-25 font-weight-bold text-uppercase text-center mt-3">
-                    {{ heading_title }}
-                </h3>
+                    <a href="{{ back_url }}" class="position-absolute"><i
+                                class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
+                    <h3 class="f-25 font-weight-bold text-uppercase text-center mt-3">
+                        {{ heading_title }}
+                    </h3>
                 </div>
 
                 <table class="table table-hover bg-white box-shadow">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" colspan="2">
-                            <h3 class="f-20 font-weight-bold text-uppercase my-2">{{ text_order_detail }}</h3></td>
+                            <h3 class="f-20 font-weight-bold text-uppercase my-2">{{ text_order_detail }} {{ isVisibleCancelBtn }}</h3>
+                            {% if isVisibleCancelBtn %}
+                            <a href="javascript:void(0)" class="btn btn-warning btn-cancel" id="btn-cancel-order" data-id = "{{ order_id }}">Cancel Order</a>
+                            {% endif %}
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="text-left f-15" style="width: 50%;">{% if invoice_no %} <b>{{ text_invoice_no }}</b> {{ invoice_no }}<br />
-                            {% endif %} <b>{{ text_order_id }}</b> #{{ order_id }}<br />
+                        <td class="text-left f-15" style="width: 50%;">{% if invoice_no %}
+                                <b>{{ text_invoice_no }}</b> {{ invoice_no }}<br/>
+                            {% endif %} <b>{{ text_order_id }}</b> #{{ order_id }}<br/>
                             <b>{{ text_date_added }}</b> {{ date_added }}</td>
-                        <td class="text-left f-15" style="width: 50%;">{% if payment_method %} <b>{{ text_payment_method }}</b> {{ payment_method }}<br />
+                        <td class="text-left f-15" style="width: 50%;">{% if payment_method %}
+                                <b>{{ text_payment_method }}</b> {{ payment_method }}<br/>
                             {% endif %}
-                            {% if shipping_method %} <b>{{ text_shipping_method }}</b> {{ shipping_method }} {% endif %}</td>
+                            {% if shipping_method %} <b>{{ text_shipping_method }}</b> {{ shipping_method }} {% endif %}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,7 +54,8 @@
                             <h3 class="f-20 font-weight-bold text-uppercase my-2">{{ text_payment_address }}</h3></td>
                         {% if shipping_address %}
                             <td class="text-left f-20 font-weight-black" style="width: 50%; vertical-align: top;">
-                                <h3 class="f-20 font-weight-bold text-uppercase my-2">{{ text_shipping_address }}</h3></td>
+                                <h3 class="f-20 font-weight-bold text-uppercase my-2">{{ text_shipping_address }}</h3>
+                            </td>
                         {% endif %} </tr>
                     </thead>
                     <tbody>
@@ -77,23 +87,34 @@
                                 <tr>
                                     <td class="text-left">
                                         <a href="{{ product.link }}" class="text-success">
-                                        {{ product.name }}
-                                        {% for option in product.option %} <br />
-                                            &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
+                                            {{ product.name }}
+                                            {% for option in product.option %} <br/>
+                                                &nbsp;<small> - {{ option.name }}
+                                                : {{ option.value }}</small> {% endfor %}
                                         </a>
                                     </td>
                                     <td class="text-left">{{ product.model }}</td>
                                     <td class="text-right">{{ product.quantity }}</td>
                                     <td class="text-right">{{ product.price }}</td>
                                     <td class="text-right">{{ product.total }}</td>
-                                    <td class="text-right" style="white-space: nowrap;">{% if product.reorder %} <a href="{{ product.reorder }}" data-toggle="tooltip" title="{{ button_reorder }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a> {% endif %} <a href="{{ product.return }}" data-toggle="tooltip" title="{{ button_return }}" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+                                    <td class="text-right" style="white-space: nowrap;">{% if product.reorder %} <a
+                                                href="{{ product.reorder }}" data-toggle="tooltip"
+                                                title="{{ button_reorder }}" class="btn btn-primary"><i
+                                                    class="fa fa-shopping-cart"></i></a> {% endif %} <a
+                                                href="{{ product.return }}" data-toggle="tooltip"
+                                                title="{{ button_return }}" class="btn btn-danger"><i
+                                                    class="fa fa-reply"></i></a>
 
                                         {% if product.contact_seller %}
-{#                                        <a href="{{ product.contact_seller }}" data-toggle="tooltip" title="Direct Question To The Store Owner" class="btn btn-success"><i class="fas fa-question"></i></a>#}
-                                            <a href="javascript:void(0)" data-id="{{ product.mpseller_id }}" data-toggle="tooltip" title="Direct Question To The Store Owner" class="btn btn-success question-to-seller"><i class="fas fa-question"></i></a>
+                                            {#                                        <a href="{{ product.contact_seller }}" data-toggle="tooltip" title="Direct Question To The Store Owner" class="btn btn-success"><i class="fas fa-question"></i></a>#}
+                                            <a href="javascript:void(0)" data-id="{{ product.mpseller_id }}"
+                                               data-toggle="tooltip" title="Direct Question To The Store Owner"
+                                               class="btn btn-success question-to-seller"><i
+                                                        class="fas fa-question"></i></a>
                                         {% endif %}
 
-                                        <button title="Submit Review" data-id="{{ product.product_id }}" class="btn btn-warning btn-rating"><i class="fas fa-star"></i></button>
+                                        <button title="Submit Review" data-id="{{ product.product_id }}"
+                                                class="btn btn-warning btn-rating"><i class="fas fa-star"></i></button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -252,7 +273,8 @@
                         </div>
                         <div class="form-group">
                             <label for="inputSubject" class="control-label">Subject</label>
-                            <input type="email" id="inputSubject" class="form-control" placeholder="" required="" autofocus="">
+                            <input type="email" id="inputSubject" class="form-control" placeholder="" required=""
+                                   autofocus="">
                         </div>
 
                         <div class="form-group required">
@@ -262,7 +284,8 @@
                             <div class="text-danger">{{ error_message }}</div>
                         </div>
                         <div class="buttons clearfix">
-                            <button type="button" class="btn btn-primary pull-right button-submit" id="button-submit">{{ button_send }}</button>
+                            <button type="button" class="btn btn-primary pull-right button-submit"
+                                    id="button-submit">{{ button_send }}</button>
                         </div>
                     </form>
                 </div>
@@ -270,6 +293,52 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL : Order Cancel -->
+<div class="modal fade" id="modal-cancel-order">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="showCancelError"></div>
+            <div class="modal-header">
+                <input type="hidden" name="orderId" id="orderId" value="{{ order_id }}">
+                <h4 class="modal-title">Cancel Your Order</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" id="form-cancel-order">
+                    <form class="form-horizontal">
+                        <div class="form-group required">
+                            <label class="control-label">Select The Reason For Cancelling The Order</label>
+                            <select name="selectReason" id="selectReason" class="form-control" readonly>
+                                <option value="">Select</option>
+                                <option value="1">Bought The Wrong Item</option>
+                                <option value="2">Changed My Mind</option>
+                                <option value="3">The Seller Shipped The Wrong Item</option>
+                                <option value="4">Purchased Arrived To Late</option>
+                                <option value="5">The Product Was Damaged or Defective</option>
+                                <option value="6">Product Not Suitable For Purpose</option>
+                                <option value="7">Others</option>
+                            </select>
+                            <div class="text-danger">{{ error_message }}</div>
+                        </div>
+
+                        <div class="form-group" style="display: none" id="textReason">
+                            <label for="inputReason" class="control-label">Please Tell Us The Reason</label>
+                            <textarea id="inputReason" class="form-control" cols="25" rows="6"></textarea>
+                            <div class="text-danger">{{ error_message }}</div>
+                        </div>
+
+                        <div class="buttons clearfix">
+                            <button type="button" class="btn btn-success pull-right button-cancel-submit"
+                                    id="button-cancel-submit">{{ button_send }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{ footer }}
 
 <script type="text/javascript">
@@ -284,7 +353,7 @@
 
         var product_id = $('#ratingId').val();
         $.ajax({
-            url: 'index.php?route=product/product/write&product_id='+product_id,
+            url: 'index.php?route=product/product/write&product_id=' + product_id,
             dataType: 'json',
             type: 'post',
             data: $('#mv-review input, #mv-review textarea, #mv-review input[type=\'hidden\']'),
@@ -328,7 +397,7 @@
                 if (json['success']) {
                     //location = json['success'];
                     $('#form-review').slideUp();
-                    $('#form-review').after('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
+                    $('#form-review').after('<span style="font-size: 19px; text-align: center;color: green;">' + json['success'] + '</span>');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -379,7 +448,59 @@
                 if (json['success']) {
                     //location = json['success'];
                     $('#form-create-enquiry').slideUp();
-                    $('#form-create-enquiry').after('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
+                    $('#form-create-enquiry').after('<span style="font-size: 19px; text-align: center;color: green;">' + json['success'] + '</span>');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript"><!--
+    $('#btn-cancel-order').on('click', function () {
+        $('#modal-cancel-order').modal('show');
+    });
+
+    $('#selectReason').on('change', function () {
+        //alert($(this).val())
+        if($(this).val() == '7') {
+            $('#textReason').show();
+        } else {
+            $('#textReason').hide();
+        }
+    });
+    //-->
+</script>
+<script type="text/javascript">
+    $('#button-cancel-submit').click(function () {
+        var selectReason = $('#selectReason').val();
+        var order_id = $('#orderId').val();
+        var inputReason = $('#inputReason').val();
+        $.ajax({
+            url: 'index.php?route=account/order/cancel',
+            dataType: 'json',
+            type: 'post',
+            data: {selectReason: selectReason, inputReason: inputReason, order_id: order_id},
+            beforeSend: function () {
+                $('#button-cancel-submit').button('loading');
+            },
+            complete: function () {
+                $('#button-cancel-submit').button('reset');
+            },
+            success: function (json) {
+                $('#modal-cancel-order .alert, #modal-cancel-order .text-danger').remove();
+                $('#modal-cancel-order .form-group').removeClass('has-error');
+
+                if (json['error']) {
+                    $('#showCancelError').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                }
+
+                if (json['success']) {
+                    //location = json['success'];
+                    $('#form-cancel-order').slideUp();
+                    $('#form-cancel-order').after('<span style="font-size: 19px; text-align: center;color: green;">' + json['success'] + '</span>');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {

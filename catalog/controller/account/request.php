@@ -119,6 +119,8 @@ class ControllerAccountRequest extends Controller {
 
                 $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
 
+                $orderData = $this->model_account_order->getOrder($requestData['order_id']);
+
                 //Send Mail to Delivery Partner
                 $dataMail = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
@@ -143,6 +145,7 @@ class ControllerAccountRequest extends Controller {
                 $dataMail['store_owner'] = $sellerData['store_owner'];
                 $dataMail['seller_address'] = $sellerData['address'];
                 $dataMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
+                $dataMail['customer_address'] = $orderData['shipping_address_1'].' '. $orderData['shipping_city'].' '. $orderData['shipping_zone'].' '. $orderData['shipping_country'];
                 $dataMail['view_request_link'] = $this->url->link('account/request/view', '&id='.$requestData['request_id'], true);
                 $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
                 $mail->setHtml($mailText);
@@ -150,7 +153,6 @@ class ControllerAccountRequest extends Controller {
                 $mail->send();
 
                 //Send Mail for Request Accept to Admin
-                $orderData = $this->model_account_order->getOrder($requestData['order_id']);
                 $dataAdminMail = [];
                 $mail = new Mail($this->config->get('config_mail_engine'));
                 $mail->parameter = $this->config->get('config_mail_parameter');

@@ -283,7 +283,7 @@ class ControllerAccountOrder extends Controller {
 			}
 
 			$data['comment'] = nl2br($order_info['comment']);
-
+            $data['order_id'] = $order_id;
 			// History
 			$data['histories'] = array();
 
@@ -311,7 +311,15 @@ class ControllerAccountOrder extends Controller {
             $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellers();
 
             //rating review
-            $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();;
+            $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
+
+            $order_status_id = $this->model_account_order->getLatestOrderHistory($order_id);
+            $data['isVisibleCancelBtn'] =  false;
+
+            if (in_array($order_status_id, array(1, 2,15))) {
+                $data['isVisibleCancelBtn'] =  true;
+            }
+            //print_r($order_status_id);exit('aaa');
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');
@@ -401,5 +409,47 @@ class ControllerAccountOrder extends Controller {
         $data['email'] = $email;
         $data['action'] = $this->url->link('account/order/track');
         $this->response->setOutput($this->load->view('account/order_track', $data));
+    }
+
+    public function cancel()
+    {
+        if (!$this->customer->isLogged()) {
+            $json['redirect'] = $this->url->link('account/login', '', true);
+        }
+
+        $json = array();
+
+        $this->load->model('account/order');
+
+        $this->load->language('account/order');
+
+        if (empty($this->request->post['order_id'])) {
+            $json['error'] = $this->language->get('error_order_id');
+        }
+
+        if (empty($this->request->post['selectReason'])) {
+            $json['error'] = $this->language->get('error_selectReason');
+        }
+
+        if ((utf8_strlen(trim($this->request->post['inputReason'])) < 10) && $this->request->post['order_id'] == 7) {
+            $json['error'] = $this->language->get('error_reason');
+        }
+
+        if (!$json) {
+            $cancel_data = array(
+                'order_id' => $this->request->post['order_id'],
+                'customer_id' => $this->customer->getId(),
+                'order_status_id' => 7,
+                'notify' => 0,
+                'comment' => $this->request->post['inputReason'],
+                'cancel_reason_id' => $this->request->post['selectReason'],
+            );
+            $this->model_account_order->cancelOrder($cancel_data);
+
+            $json['success'] = $this->language->get('success_cancel_order');
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 }
