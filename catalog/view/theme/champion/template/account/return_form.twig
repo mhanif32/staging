@@ -5,60 +5,77 @@
         </div>
     {% endif %}
     <div class="row">
-        <div id="content" class="col-sm-12"> {{ content_top }}
-            <h1>{{ heading_title }}</h1>
-            <p>{{ text_description }}</p>
+        <div id="content" class="col-12 my-5"> {{ content_top }}
+            <div class="form-signin card px-4 box-shadow">
+                <div>
+                    <a href="javascript:history.back(1);" class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover" aria-hidden="true"></i></a>
+                    <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
+                </div>
+
             <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <p>{{ text_description }}</p>
                 <fieldset>
                     <legend>{{ text_order }}</legend>
+                    <div class="row">
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-firstname">{{ entry_firstname }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-firstname">{{ entry_firstname }}</label>
+                        <div class="">
                             <input type="text" name="firstname" value="{{ firstname }}"
                                    placeholder="{{ entry_firstname }}" id="input-firstname" class="form-control"/>
                             {% if error_firstname %}
                                 <div class="text-danger">{{ error_firstname }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-lastname">{{ entry_lastname }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-lastname">{{ entry_lastname }}</label>
+                        <div class="">
                             <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}"
                                    id="input-lastname" class="form-control"/>
                             {% if error_lastname %}
                                 <div class="text-danger">{{ error_lastname }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-email">{{ entry_email }}</label>
+                        <div class="">
                             <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}"
                                    id="input-email" class="form-control"/>
                             {% if error_email %}
                                 <div class="text-danger">{{ error_email }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-telephone">{{ entry_telephone }}</label>
+                        <div class="">
                             <input type="text" name="telephone" value="{{ telephone }}"
                                    placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control"/>
                             {% if error_telephone %}
                                 <div class="text-danger">{{ error_telephone }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-order-id">{{ entry_order_id }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-order-id">{{ entry_order_id }}</label>
+                        <div class="">
                             <input type="text" name="order_id" value="{{ order_id }}" placeholder="{{ entry_order_id }}"
                                    id="input-order-id" class="form-control"/>
                             {% if error_order_id %}
                                 <div class="text-danger">{{ error_order_id }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-date-ordered">{{ entry_date_ordered }}</label>
-                        <div class="col-sm-3">
+                        <label class="control-label" for="input-date-ordered">{{ entry_date_ordered }}</label>
+                        <div class="">
                             <div class="input-group date">
                                 <input type="text" name="date_ordered" value="{{ date_ordered }}"
                                        placeholder="{{ entry_date_ordered }}" data-date-format="YYYY-MM-DD"
@@ -68,37 +85,47 @@
                 </span></div>
                         </div>
                     </div>
+                        </div>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>{{ text_product }}</legend>
+                    <div class="row">
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-product">{{ entry_product }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-product">{{ entry_product }}</label>
+                        <div class="">
                             <input type="text" name="product" value="{{ product }}" placeholder="{{ entry_product }}"
                                    id="input-product" class="form-control"/>
                             {% if error_product %}
                                 <div class="text-danger">{{ error_product }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-model">{{ entry_model }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-model">{{ entry_model }}</label>
+                        <div class="">
                             <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}"
                                    id="input-model" class="form-control"/>
                             {% if error_model %}
                                 <div class="text-danger">{{ error_model }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-quantity">{{ entry_quantity }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-quantity">{{ entry_quantity }}</label>
+                        <div class="">
                             <input type="text" name="quantity" value="{{ quantity }}" placeholder="{{ entry_quantity }}"
                                    id="input-quantity" class="form-control"/>
                         </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label">{{ entry_reason }}</label>
-                        <div class="col-sm-10"> {% for return_reason in return_reasons %}
+                        <label class="control-label">{{ entry_reason }}</label>
+                        <div class=""> {% for return_reason in return_reasons %}
                                 {% if return_reason.return_reason_id == return_reason_id %}
                                     <div class="radio">
                                         <label>
@@ -119,9 +146,11 @@
                                 <div class="text-danger">{{ error_reason }}</div>
                             {% endif %} </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label">{{ entry_opened }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label">{{ entry_opened }}</label>
+                        <div class="">
                             <label class="radio-inline"> {% if opened %}
                                     <input type="radio" name="opened" value="1" checked="checked"/>
                                 {% else %}
@@ -136,11 +165,15 @@
                                 {{ text_no }}</label>
                         </div>
                     </div>
+                        </div>
+                        <div class="col-md-4">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-comment">{{ entry_fault_detail }}</label>
-                        <div class="col-sm-10">
+                        <label class="control-label" for="input-comment">{{ entry_fault_detail }}</label>
+                        <div class="">
                             <textarea name="comment" rows="10" placeholder="{{ entry_fault_detail }}" id="input-comment"
                                       class="form-control">{{ comment }}</textarea>
+                        </div>
+                    </div>
                         </div>
                     </div>
                     {{ captcha }}
@@ -158,15 +191,16 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="buttons clearfix">
-                        <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
-                        <div class="pull-right">
+                    <div class="d-flex mb-4">
+                        <div class=""><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
+                        <div class="">
                             <input type="submit" value="{{ button_submit }}" class="btn btn-primary"/>
                         </div>
                     </div>
                 {% endif %}
             </form>
             {{ content_bottom }}</div>
+    </div>
     </div>
 </div>
 <script type="text/javascript"><!--
