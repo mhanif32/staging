@@ -229,7 +229,7 @@ class ControllerAccountRequest extends Controller {
 //                $dataMail['seller_address'] = $sellerData['address'];
                 $dataMail['customerName'] = $customer['firstname'] . ' ' . $customer['lastname'];
 
-                $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
+                $mailText = $this->load->view('mail/dp_request_decline_alert', $dataMail);
                 $mail->setHtml($mailText);
                 $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
                 $mail->send();
