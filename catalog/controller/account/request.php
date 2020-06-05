@@ -197,6 +197,7 @@ class ControllerAccountRequest extends Controller {
             $requestData = $this->model_account_request->getRequestData($requestId);
 
             $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
+            $deliveryPartner = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
             if(!empty($requestData)) {
 
                 $this->model_account_request->updateRequest($requestId, $isAccept = 2);
@@ -216,14 +217,14 @@ class ControllerAccountRequest extends Controller {
                 $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
                 $mail->smtp_port = $this->config->get('config_mail_smtp_port');
                 $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-                $mail->setTo($customer['email']);
+                $mail->setTo($deliveryPartner['email']);
                 $mail->setFrom($this->config->get('config_email'));
                 $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                 $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Declined Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
 
                 $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
                 $dataMail['order_id'] = $requestData['order_id'];
-                $dataMail['deliveryPartnerName'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
+                $dataMail['deliveryPartnerName'] = $deliveryPartner['firstname'] .' '. $deliveryPartner['lastname'];
 //                $dataMail['store_owner'] = $sellerData['store_owner'];
 //                $dataMail['seller_address'] = $sellerData['address'];
                 $dataMail['customerName'] = $customer['firstname'] . ' ' . $customer['lastname'];
