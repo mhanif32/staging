@@ -82,7 +82,7 @@
                                                 <label class="control-label"
                                                        for="input-status">{{ entry_status }}</label>
                                                 <select name="filter_status" id="input-status" class="form-control">
-                                                    <option value="*"></option>
+                                                    <option value="*">Select</option>
                                                     {% if filter_status == '1' %}
                                                         <option value="1"
                                                                 selected="selected">{{ text_enabled }}</option>
@@ -113,7 +113,8 @@
                                             <thead>
                                             <tr>
                                                 <td style="width: 1px;" class="text-center">
-                                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                                    <input type="checkbox"
+                                                           onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                                 </td>
                                                 <td class="text-center">{{ column_image }}</td>
                                                 <td class="text-left">{% if sort == 'pd.name' %}
@@ -183,7 +184,15 @@
                                                             {% else %}
                                                                 <span class="label label-success">{{ product.quantity }}</span>
                                                             {% endif %}</td>
-                                                        <td class="text-left">{{ product.status }}</td>
+
+                                                        <td class="text-left">
+                                                            {% if product.status == 'Enabled' %}
+                                                                <span class="btn-sm btn-success">{{ product.status }}</span>
+                                                            {% else %}
+                                                                <span class="btn-sm btn-danger">{{ product.status }}</span>
+                                                            {% endif %}
+                                                        </td>
+
                                                         <td class="text-right"><a href="{{ product.edit }}"
                                                                                   data-toggle="tooltip"
                                                                                   title="{{ button_edit }}"
@@ -217,11 +226,11 @@
 </div>
 
 <script type="text/javascript"><!--
- //   $('.text-click').on('keyup', function () {
+    //   $('.text-click').on('keyup', function () {
 
     $('.text-click').keypress(function (e) {
         var key = e.which;
-        if(key == 13)  // the enter key code
+        if (key == 13)  // the enter key code
         {
             $('#button-filter').trigger('click');
         }
