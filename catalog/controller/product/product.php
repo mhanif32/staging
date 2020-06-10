@@ -741,20 +741,22 @@ class ControllerProductProduct extends Controller {
             $sizeChartId = $this->request->post['dataId'];
 
             if($sizeChartId == 1) {
-                $title = 'Mens Socks';
+                $title = 'Socks';
             } else if($sizeChartId == 2) {
-                $title = 'Mens Hats';
+                $title = 'Hats';
             } else if($sizeChartId == 3) {
-                $title = 'Mens T-shirts';
+                $title = 'T-shirts';
             } else if($sizeChartId == 4) {
-                $title = 'Mens Jeans Pants Trouser - Length';
+                $title = 'Jeans Pants Trouser - Length';
             } else if($sizeChartId == 5) {
-                $title = 'Mens Jeans Pants Trouser - Waist';
+                $title = 'Jeans Pants Trouser - Waist';
             } else if($sizeChartId == 6) {
-                $title = 'Mens Shirts';
+                $title = 'Shirts';
             } else if($sizeChartId == 7) {
-                $title = 'Mens Coat Suits Blazers';
-            } else {
+                $title = 'Coat, Suit jackets and Blazers';
+            } else if($sizeChartId == 8) {
+                $title = 'Dress shirt sizes, Neck size';
+            }  else {
                 $title = 'No records';
             }
             $data['size_title'] = $title;
