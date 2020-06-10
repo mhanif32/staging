@@ -77,6 +77,7 @@ class ControllerAccountAccount extends Controller {
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
         $data['edit_product_href'] = $this->url->link('account/mpmultivendor/product', '', true);
+        $data['edit_special_product_href'] = $this->url->link('account/mpmultivendor/product/special/', '', true);
         $data['order_hidtory_link'] = $this->url->link('account/order', '', true);
         $data['transactions_link'] = $this->url->link('account/transaction', '', true);
         $data['customer_order_href'] = $this->url->link('account/mpmultivendor/orders', '', true);

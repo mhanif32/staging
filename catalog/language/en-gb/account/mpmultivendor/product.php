@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']     = 'Products';
+$_['special_heading_title']     = 'Sales & Special Products';
 
 // Text
 $_['text_account']      = 'Account';
