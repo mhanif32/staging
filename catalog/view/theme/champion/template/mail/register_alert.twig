@@ -1,14 +1,3 @@
-{#{{ text_signup }}#}
-
-{#{{ text_firstname }} {{ firstname }}#}
-{#{{ text_lastname }} {{ lastname }}#}
-{#{% if customer_group %}#}
-{#{{ text_customer_group }} {{ customer_group }}#}
-{#{% endif %}#}
-{#{{ text_email }} {{ email }}#}
-{#{{ text_telephone }} {{ telephone }}#}
-
-
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -93,23 +82,11 @@
                             <tr>
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
-                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Hello {{ firstname }},</h3>
+                                        <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Dear tcmseller@Support,</h3>
 
-                                        <p style="text-align: center; color: #191B20; font-weight:bold;">{{ text_welcome }}</p>
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">{{ firstname }} {{ lastname }} has registered as a customer.</p>
 
-                                        {% if not approval %}
-                                            <p style="margin-bottom: 0px; text-align: center;">{{ text_login }}</p>
-                                            <p style="margin-bottom: 0px; text-align: center;">{{ text_link_1 }}</p>
-
-                                            <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
-                                            <p align="center" style="margin-bottom: 0px; padding: 10px 0px;"> {{ text_service }} </p>
-                                            <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>
-
-                                        {% else %}
-                                            <p style="margin-bottom: 0px; text-align: center;"> {{ text_approval }}</p>
-                                            <p align="center" style="margin-bottom: 0px; padding: 20px 0px;"><a href="{{ login }}" target="_blank" style="color: #fff; background-color: #01B0F1; text-decoration: none; padding: 14px 45px; border-radius: 3px; font-size: 13px; text-transform: uppercase">{{ text_conform_email }}</a></p>
-                                            <p style="margin-bottom: 0px;"> {{ text_cheers }},<br>{{ store }} Team</p>
-                                        {% endif %}
+                                        <p style="text-align: center; color: #191B20; font-weight:bold;">Thank You<br>thechampionmall.com</p>
                                     </div>
                                 </td>
                             </tr>
