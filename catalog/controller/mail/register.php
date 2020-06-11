@@ -119,6 +119,7 @@ class ControllerMailRegister extends Controller {
 			
 			$data['email'] = $args[0]['email'];
 			$data['telephone'] = $args[0]['telephone'];
+			$data['delivery_type'] = !empty($args[0]['delivery_type']) ? $args[0]['delivery_type'] : '';
             if ($this->request->server['HTTPS']) {
                 $server = $this->config->get('config_ssl');
             } else {
