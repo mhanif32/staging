@@ -26,23 +26,21 @@
                                                     class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
                                     </div>
 
-                                    <div class=" row mx-0">
+                                    <div class="">
                                         <p>Note : Check below delivery details & Accept/Decline your request from
                                             here.</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
                                             <strong>Request Status : </strong> &nbsp;&nbsp;&nbsp;
-                                            {% if is_accept == 1 %} <p class="bg-success status">Accepted</p>
-                                            {% elseif is_accept == 2 %} <p class="bg-danger status">Declined</p>
-                                            {% else %} <p class="bg-warning status">Pending</p>
+                                            {% if is_accept == 1 %} <span class="bg-success status">Accepted</span>
+                                            {% elseif is_accept == 2 %} <span class="bg-danger status">Declined</span>
+                                            {% else %} <span class="bg-warning status">Pending</span>
                                             {% endif %}
                                             </div>
                                             <div>
-                                                <p><strong>Order Id :</strong> # {{ order.order_id }}</p>
-                                                <p><strong>Order Invoice Number : {</strong> { order.invoice_prefix }}{{ order.invoice_no }}</p>
+                                                <p class="mb-0"><strong>Order Id :</strong> # {{ order.order_id }}</p>
+                                                <p class="mb-0"><strong>Order Invoice Number : {</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                             </div>
-
-                                            >
                                         </div>
 
                                     </div>
