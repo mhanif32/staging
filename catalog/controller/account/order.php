@@ -132,6 +132,7 @@ class ControllerAccountOrder extends Controller {
 			}
 
 			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_invoice'] = $order_info['invoice_prefix'].$order_info['invoice_no'];
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 
 			if ($order_info['payment_address_format']) {
@@ -321,9 +322,9 @@ class ControllerAccountOrder extends Controller {
             $data['isVisibleCancelBtn'] =  false;
 
             if (in_array($order_status_id, array(1, 2,15))) {
-                $data['isVisibleCancelBtn'] =  true;
+                $data['isVisibleCancelBtn'] = true;
             }
-            //print_r($order_status_id);exit('aaa');
+            //echo '<pre>';print_r($data);exit('aaa');
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');

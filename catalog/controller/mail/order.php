@@ -103,6 +103,7 @@ class ControllerMailOrder extends Controller {
 		}
 
 		$data['order_id'] = $order_info['order_id'];
+		$data['order_invoice'] = $order_info['invoice_prefix'].$order_info['invoice_no'];
 		$data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
 		$data['payment_method'] = $order_info['payment_method'];
 		$data['shipping_method'] = $order_info['shipping_method'];

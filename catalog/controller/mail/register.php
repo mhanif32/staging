@@ -42,7 +42,6 @@ class ControllerMailRegister extends Controller {
 		$mail->setTo($args[0]['email']);
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-		$mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
 
         if ($this->request->server['HTTPS']) {
             $server = $this->config->get('config_ssl');
@@ -56,11 +55,14 @@ class ControllerMailRegister extends Controller {
         if($this->request->get['role'] == 'delivery-partner') {
 
             $mailText = $this->load->view('mail/register_delivery_partner', $data);
+            $mail->setSubject(sprintf('Registered New Delivery Partner', html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         } else if ($this->request->get['role'] == 'seller') {
 
             $mailText = $this->load->view('mail/register_seller', $data);
+            $mail->setSubject(sprintf('Registered New Seller', html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         } else {
             $mailText = $this->load->view('mail/register', $data);
+            $mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         }
 
         $mail->setHtml($mailText);
@@ -69,6 +71,7 @@ class ControllerMailRegister extends Controller {
 	}
 	
 	public function alert(&$route, &$args, &$output) {
+	    //Send to Admin on registration
 		// Send to main admin email if new account email is enabled
 		if (in_array('account', (array)$this->config->get('config_mail_alert'))) {
 			$this->load->language('mail/register');
@@ -82,6 +85,21 @@ class ControllerMailRegister extends Controller {
 			
 			$data['firstname'] = $args[0]['firstname'];
 			$data['lastname'] = $args[0]['lastname'];
+
+			//echo '<pre>';print_r($args[0]);exit('aaa');
+            /*
+             [0] => Array
+                    (
+                        [customer_group_id] => 1
+                        [firstname] => Raja
+                        [lastname] => Rani
+                        [email] => rabja@gmail.com
+                        [telephone] => 9663524185
+                        [password] => 123456
+                        [confirm] => 123456
+                        [agree] => 1
+                    )
+            */
 			
 			$this->load->model('account/customer_group');
 			
@@ -101,6 +119,13 @@ class ControllerMailRegister extends Controller {
 			
 			$data['email'] = $args[0]['email'];
 			$data['telephone'] = $args[0]['telephone'];
+			$data['delivery_type'] = !empty($args[0]['delivery_type']) ? $args[0]['delivery_type'] : '';
+            if ($this->request->server['HTTPS']) {
+                $server = $this->config->get('config_ssl');
+            } else {
+                $server = $this->config->get('config_url');
+            }
+            $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
@@ -115,9 +140,22 @@ class ControllerMailRegister extends Controller {
 			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
 
-			//$mail->setText($this->load->view('mail/register_alert', $data));
-            $mail->setHtml($this->load->view('mail/register_alert', $data));
-            $mail->setText(html_entity_decode($this->load->view('mail/register_alert', $data), ENT_QUOTES, 'UTF-8'));
+            if($this->request->get['role'] == 'delivery-partner') {
+
+                $mailText = $this->load->view('mail/adm_register_delivery_partner', $data);
+                $mail->setSubject(html_entity_decode('Registered New Delivery Partner', ENT_QUOTES, 'UTF-8'));
+            } else if ($this->request->get['role'] == 'seller') {
+
+                $mailText = $this->load->view('mail/adm_register_seller', $data);
+                $mail->setSubject(html_entity_decode('Registered New Seller', ENT_QUOTES, 'UTF-8'));
+            } else {
+                $mailText = $this->load->view('mail/register_alert', $data);
+                $mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
+            }
+
+
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 
 			// Send to additional alert emails if new account email is enabled

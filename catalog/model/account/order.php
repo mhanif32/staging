@@ -206,13 +206,33 @@ class ModelAccountOrder extends Model
     {
         $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$data['order_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (int)$data['notify'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_added = NOW(), cancel_reason_id = '" . (int)$data['cancel_reason_id'] . "'");
 
+        $this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$data['order_status_id'] . "' WHERE order_id = '" . (int)$data['order_id'] . "'");
+
         return $this->db->getLastId();
     }
 
     public function getLatestOrderHistory($order_id, $customer_id)
     {
-        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id");
+        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id ORDER BY oh.order_history_id DESC LIMIT 1");
 
         return $query->row['order_status_id'];
+    }
+
+    public function createInvoiceNo($order_id) {
+        $order_info = $this->getOrder($order_id);
+
+        if ($order_info && !$order_info['invoice_no']) {
+            $query = $this->db->query("SELECT MAX(invoice_no) AS invoice_no FROM `" . DB_PREFIX . "order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
+
+            if ($query->row['invoice_no']) {
+                $invoice_no = $query->row['invoice_no'] + 1;
+            } else {
+                $invoice_no = 1;
+            }
+
+            $this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' WHERE order_id = '" . (int)$order_id . "'");
+
+            return $order_info['invoice_prefix'] . $invoice_no;
+        }
     }
 }

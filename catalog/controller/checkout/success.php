@@ -4,20 +4,26 @@ class ControllerCheckoutSuccess extends Controller
 {
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
         $this->load->language('checkout/success');
+
+        $this->load->model('account/request');
+        $this->load->model('account/customer');
+        $this->load->model('account/order');
+        $this->load->model('localisation/zone');
+        $this->load->model('localisation/country');
 
         if (isset($this->session->data['order_id'])) {
 
             $orderId = $this->session->data['order_id'];
 
-            //TODO Update Order : Set order delivery date & also Generated alphanumeric order number
+            //TODO Update Order : Set order delivery date
 
+            //Generated alphanumeric order number
+            $invoice_no = $this->model_account_order->createInvoiceNo($orderId);
 
             //START : send request to delivery partner
-            $this->load->model('account/request');
-            $this->load->model('account/customer');
-            $this->load->model('localisation/zone');
-            $this->load->model('localisation/country');
             if (!empty($this->session->data['shipping_address'])) {
 
                 $shippingAddress = $this->session->data['shipping_address'];
@@ -151,6 +157,7 @@ class ControllerCheckoutSuccess extends Controller
                 $this->url->link('account/order', '', true),
                 $this->url->link('account/download', '', true),
                 $orderId,
+                $invoice_no,
                 $this->url->link('information/contact')
             );
         } else {

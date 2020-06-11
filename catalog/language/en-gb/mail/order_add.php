@@ -12,6 +12,7 @@ $_['text_table_invoice']             = 'This goes below the invoice';
 $_['text_order_detail']     = 'Order Details';
 $_['text_instruction']      = 'Instructions';
 $_['text_order_id']         = 'Order ID:';
+$_['text_invoice_no']       = 'Order Invoice No:';
 $_['text_date_added']       = 'Date Added:';
 $_['text_order_status']     = 'Order Status:';
 $_['text_payment_method']   = 'Payment Method:';
