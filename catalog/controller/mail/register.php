@@ -84,7 +84,7 @@ class ControllerMailRegister extends Controller {
 			$data['firstname'] = $args[0]['firstname'];
 			$data['lastname'] = $args[0]['lastname'];
 
-			echo '<pre>';print_r($args[0]);exit('aaa');
+			//echo '<pre>';print_r($args[0]);exit('aaa');
             /*
              [0] => Array
                     (
