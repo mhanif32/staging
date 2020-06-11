@@ -84,10 +84,22 @@
                                     <div style="font-family:openSans, sans-serif;font-size:13px;line-height:26px;text-align:left;color:#000000;">
                                         <h3 style="font-size: 20px; color: #191B20; font-weight:bold;">Dear tcmseller@Support,</h3>
 
-                                        <p style="color: #191B20; font-weight:bold;">{{ firstname }} {{ lastname }} has registered as a customer.</p>
+                                        <p style="color: #191B20; font-weight:bold;">{{ firstname }} {{ lastname }} has registered as a delivery partner.</p>
 
-                                        <p style="color: #191B20; font-weight:bold;">Below is the information of the customer : </p>
+                                        <p style="color: #191B20; font-weight:bold;">Below is the information for the Delivery Partner : </p>
+
                                         <strong>Name : {{ firstname }} {{ lastname }}</strong><br>
+
+                                        <strong>Delivery Coverage Area :
+                                            {% if delivery_type == 3 %}
+                                                <span>Within Country</span>
+                                            {% elseif delivery_type == 2 %}
+                                                <span>Within State</span>
+                                            {% else %}
+                                                <span>Within City</span>
+                                            {% endif %}
+                                        </strong><br>
+
                                         <strong>Email : {{ email }}</strong><br>
                                         <strong>Phone Number : {{ telephone }}</strong><br>
 

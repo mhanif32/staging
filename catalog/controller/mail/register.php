@@ -83,6 +83,21 @@ class ControllerMailRegister extends Controller {
 			
 			$data['firstname'] = $args[0]['firstname'];
 			$data['lastname'] = $args[0]['lastname'];
+
+			echo '<pre>';print_r($args[0]);exit('aaa');
+            /*
+             [0] => Array
+                    (
+                        [customer_group_id] => 1
+                        [firstname] => Raja
+                        [lastname] => Rani
+                        [email] => rabja@gmail.com
+                        [telephone] => 9663524185
+                        [password] => 123456
+                        [confirm] => 123456
+                        [agree] => 1
+                    )
+            */
 			
 			$this->load->model('account/customer_group');
 			
@@ -122,8 +137,15 @@ class ControllerMailRegister extends Controller {
 			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
 
+            if($this->request->get['role'] == 'delivery-partner') {
 
-			$mailText = $this->load->view('mail/register_alert', $data);
+                $mailText = $this->load->view('mail/adm_register_delivery_partner', $data);
+            } else if ($this->request->get['role'] == 'seller') {
+
+                $mailText = $this->load->view('mail/adm_register_seller', $data);
+            } else {
+                $mailText = $this->load->view('mail/register_alert', $data);
+            }
 
 
             $mail->setHtml($mailText);
