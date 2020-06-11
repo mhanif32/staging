@@ -70,7 +70,7 @@ a.btn-primary:hover {
   width: 100% !important; }
 
 body {
-  font-family: "Poppins", sans-serif; }
+  font-family: 'Arial', sans-serif; }
 
 .main-body {
   width: 100%;
@@ -298,7 +298,7 @@ header {
   header #cart .dropdown-toggle:after {
     display: none; }
   header a {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Arial', sans-serif;
     font-weight: 400; }
   header .navbar-tool-label {
     position: absolute;
