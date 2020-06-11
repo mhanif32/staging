@@ -45,7 +45,7 @@ class ModelAccountRequest extends Model
 
     public function getOrderData($order_id)
     {
-        $order_query = $this->db->query("SELECT firstname, lastname, email, telephone, shipping_address_1, shipping_address_2, shipping_postcode, shipping_city, shipping_zone, shipping_country, total FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");
+        $order_query = $this->db->query("SELECT order_id, invoice_no, invoice_prefix, firstname, lastname, email, telephone, shipping_address_1, shipping_address_2, shipping_postcode, shipping_city, shipping_zone, shipping_country, total FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");
 
         return $order_query->row;
     }

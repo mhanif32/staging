@@ -22,17 +22,21 @@
                                     <div class="justify-content-between row mx-0">
                                         <h4 class="f-20 font-weight-bold text-uppercase mb-3">{{ heading_title_view }}</h4>
 
-                                        <a href='javascript:history.back(1);'><i class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
+                                        <a href='javascript:history.back(1);'><i
+                                                    class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
                                     </div>
 
                                     <div class=" row mx-0">
                                         <p>Note : Check below delivery details & Accept/Decline your request from
                                             here.</p>
-                                    <strong>Request Status : </strong> &nbsp;&nbsp;&nbsp;
-                                    {% if is_accept == 1 %} <p class="bg-success status">Accepted</p>
-                                    {% elseif is_accept == 2 %} <p class="bg-danger status">Declined</p>
-                                    {% else %} <p class="bg-warning status">Pending</p>
-                                    {% endif %}
+                                        <p><strong>Order Id : # {{ order.order_id }}</strong></p>
+                                        <p><strong>Order Invoice Number
+                                                : {{ order.invoice_prefix }}{{ order.invoice_no }}</strong></p>
+                                        <strong>Request Status : </strong> &nbsp;&nbsp;&nbsp;
+                                        {% if is_accept == 1 %} <p class="bg-success status">Accepted</p>
+                                        {% elseif is_accept == 2 %} <p class="bg-danger status">Declined</p>
+                                        {% else %} <p class="bg-warning status">Pending</p>
+                                        {% endif %}
                                     </div>
 
                                     <table class="table table-hover bg-white box-shadow">
