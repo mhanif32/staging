@@ -42,7 +42,6 @@ class ControllerMailRegister extends Controller {
 		$mail->setTo($args[0]['email']);
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-		$mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
 
         if ($this->request->server['HTTPS']) {
             $server = $this->config->get('config_ssl');
@@ -56,11 +55,14 @@ class ControllerMailRegister extends Controller {
         if($this->request->get['role'] == 'delivery-partner') {
 
             $mailText = $this->load->view('mail/register_delivery_partner', $data);
+            $mail->setSubject(sprintf('Registered New Delivery Partner', html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         } else if ($this->request->get['role'] == 'seller') {
 
             $mailText = $this->load->view('mail/register_seller', $data);
+            $mail->setSubject(sprintf('Registered New Seller', html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         } else {
             $mailText = $this->load->view('mail/register', $data);
+            $mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
         }
 
         $mail->setHtml($mailText);
