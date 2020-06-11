@@ -142,11 +142,14 @@ class ControllerMailRegister extends Controller {
             if($this->request->get['role'] == 'delivery-partner') {
 
                 $mailText = $this->load->view('mail/adm_register_delivery_partner', $data);
+                $mail->setSubject(html_entity_decode('Registered New Delivery Partner', ENT_QUOTES, 'UTF-8'));
             } else if ($this->request->get['role'] == 'seller') {
 
                 $mailText = $this->load->view('mail/adm_register_seller', $data);
+                $mail->setSubject(html_entity_decode('Registered New Seller', ENT_QUOTES, 'UTF-8'));
             } else {
                 $mailText = $this->load->view('mail/register_alert', $data);
+                $mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
             }
 
 
