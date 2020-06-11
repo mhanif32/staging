@@ -91,9 +91,9 @@
                                         <strong>Name : {{ firstname }} {{ lastname }}</strong><br>
 
                                         <strong>Delivery Coverage Area :
-                                            {% if delivery_type == 3 %}
+                                            {% if delivery_type == '3' %}
                                                 <span>Within Country</span>
-                                            {% elseif delivery_type == 2 %}
+                                            {% elseif delivery_type == '2' %}
                                                 <span>Within State</span>
                                             {% else %}
                                                 <span>Within City</span>
