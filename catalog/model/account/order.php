@@ -206,12 +206,14 @@ class ModelAccountOrder extends Model
     {
         $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$data['order_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (int)$data['notify'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_added = NOW(), cancel_reason_id = '" . (int)$data['cancel_reason_id'] . "'");
 
+        $this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$data['order_status_id'] . "' WHERE order_id = '" . (int)$data['order_id'] . "'");
+
         return $this->db->getLastId();
     }
 
     public function getLatestOrderHistory($order_id, $customer_id)
     {
-        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id");
+        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id ORDER BY oh.order_history_id DESC LIMIT 1");
 
         return $query->row['order_status_id'];
     }

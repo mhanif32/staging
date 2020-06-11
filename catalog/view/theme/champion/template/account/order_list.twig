@@ -6,57 +6,58 @@
 
                 <div class="form-signin card px-4 box-shadow">
                     <div>
-                    <a href="{{ back_url }}" class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover"></i></a>
+                        <a href="{{ back_url }}" class="position-absolute f-35"><i
+                                    class="fas fa-long-arrow-alt-left on-hover"></i></a>
 
 
                         <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">
-                        {{ heading_title }}
-                    </h3>
+                            {{ heading_title }}
+                        </h3>
                     </div>
                     <hr style="margin: 15px -25px">
                     {% if orders %}
-                        {#<div class="table-responsive">#}
-                        {#<table class="table table-bordered">#}
-                        {#<thead>#}
-                        {#<tr class="bg-gray-200 font-weight-bold text-uppercase">#}
-                        {#<td class="text-right">{{ column_order_id }}</td>#}
-                        {#<td class="text-left">{{ column_customer }}</td>#}
-                        {#<td class="text-right">{{ column_product }}</td>#}
-                        {#<td class="text-left">{{ column_status }}</td>#}
-                        {#<td class="text-right">{{ column_total }}</td>#}
-                        {#<td class="text-left">{{ column_date_added }}</td>#}
-                        {#<td></td>#}
-                        {#</tr>#}
-                        {#</thead>#}
-                        {#<tbody>#}
-                        {#{% for order in orders %}#}
-                        {#<tr>#}
-                        {#<td class="text-right">#{{ order.order_id }}</td>#}
-                        {#<td class="text-left">{{ order.name }}</td>#}
-                        {#<td class="text-right">{{ order.products }}</td>#}
-                        {#<td class="text-left">#}
-                        {#{% if order.status == 'Pending' %}#}
-                        {#<span class="badge badge-pending-order px-4 py-2 ">{{ order.status }}</span>#}
-                        {#{% elseif order.status == 'Shipped' %}#}
-                        {#<span class="badge badge-shipped-order px-4 py-2 ">{{ order.status }}</span>#}
-                        {#{% elseif order.status == 'Complete' %}#}
-                        {#<span class="badge badge-complete-order px-4 py-2 ">{{ order.status }}</span>#}
-                        {#{% elseif order.status == 'Processing' %}#}
-                        {#<span class="badge badge-processing-order px-4 py-2 ">{{ order.status }}</span>#}
-                        {#{% else %}#}
-                        {#<span class="badge badge-gray-100 px-4 py-2 ">{{ order.status }}</span>#}
-                        {#{% endif %}#}
-                        {#</td>#}
-                        {#<td class="text-right">{{ order.total }}</td>#}
-                        {#<td class="text-left">{{ order.date_added }}</td>#}
-                        {#<td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip"#}
-                        {#title="{{ button_view }}" class="btn box-shadow on-hover"><i#}
-                        {#class="fa fa-eye f-22"></i></a></td>#}
-                        {#</tr>#}
-                        {#{% endfor %}#}
-                        {#</tbody>#}
-                        {#</table>#}
-                        {#</div>#}
+                        {# <div class="table-responsive"> #}
+                        {# <table class="table table-bordered"> #}
+                        {# <thead> #}
+                        {# <tr class="bg-gray-200 font-weight-bold text-uppercase"> #}
+                        {# <td class="text-right">{{ column_order_id }}</td> #}
+                        {# <td class="text-left">{{ column_customer }}</td> #}
+                        {# <td class="text-right">{{ column_product }}</td> #}
+                        {# <td class="text-left">{{ column_status }}</td> #}
+                        {# <td class="text-right">{{ column_total }}</td> #}
+                        {# <td class="text-left">{{ column_date_added }}</td> #}
+                        {# <td></td> #}
+                        {# </tr> #}
+                        {# </thead> #}
+                        {# <tbody> #}
+                        {# {% for order in orders %} #}
+                        {# <tr> #}
+                        {# <td class="text-right">#{{ order.order_id }}</td> #}
+                        {# <td class="text-left">{{ order.name }}</td> #}
+                        {# <td class="text-right">{{ order.products }}</td> #}
+                        {# <td class="text-left"> #}
+                        {# {% if order.status == 'Pending' %} #}
+                        {# <span class="badge badge-pending-order px-4 py-2 ">{{ order.status }}</span> #}
+                        {# {% elseif order.status == 'Shipped' %} #}
+                        {# <span class="badge badge-shipped-order px-4 py-2 ">{{ order.status }}</span> #}
+                        {# {% elseif order.status == 'Complete' %} #}
+                        {# <span class="badge badge-complete-order px-4 py-2 ">{{ order.status }}</span> #}
+                        {# {% elseif order.status == 'Processing' %} #}
+                        {# <span class="badge badge-processing-order px-4 py-2 ">{{ order.status }}</span> #}
+                        {# {% else %} #}
+                        {# <span class="badge badge-gray-100 px-4 py-2 ">{{ order.status }}</span> #}
+                        {# {% endif %} #}
+                        {# </td> #}
+                        {# <td class="text-right">{{ order.total }}</td> #}
+                        {# <td class="text-left">{{ order.date_added }}</td> #}
+                        {# <td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip" #}
+                        {# title="{{ button_view }}" class="btn box-shadow on-hover"><i #}
+                        {# class="fa fa-eye f-22"></i></a></td> #}
+                        {# </tr> #}
+                        {# {% endfor %} #}
+                        {# </tbody> #}
+                        {# </table> #}
+                        {# </div> #}
                         <div class="table-responsive">
                             <table class="table border-bottom-0">
                                 <thead>
@@ -76,11 +77,29 @@
                                         <td class="text-center">#{{ order.order_id }}</td>
                                         <td class="text-center">{{ order.name }}</td>
                                         <td class="text-center">{{ order.products }}</td>
-                                        <td class="text-center">{{ order.status }}</td>
+                                        <td class="text-center">
+                                            {% if order.status == 'Pending' %}
+                                                <span class="btn-sm btn-warning">{{ order.status }}</span>
+                                            {% elseif order.status == 'Shipped' %}
+                                                <span class="btn-sm btn-gold">{{ order.status }}</span>
+                                            {% elseif order.status == 'Complete' %}
+                                                <span class="btn-sm btn-success">{{ order.status }}</span>
+                                            {% elseif order.status == 'Processing' %}
+                                                <span class="btn-sm btn-danger">{{ order.status }}</span>
+                                            {% else %}
+                                                <span class="btn-sm btn-primary">{{ order.status }}</span>
+                                            {% endif %}
+
+
+                                        </td>
                                         <td class="text-center">{{ order.total }}</td>
                                         <td class="text-center">{{ order.date_added }}</td>
-                                        <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-success btn-sm">View</a>
-                                            <a href="{{ track_link }}" data-toggle="tooltip" title="Track Order" class="btn on-hover-shadow on-hover "><i class="fa fa-truck f-22"></i></a>
+                                        <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip"
+                                                                   title="{{ button_view }}"
+                                                                   class="btn btn-success btn-sm">View</a>
+                                            <a href="{{ track_link }}" data-toggle="tooltip" title="Track Order"
+                                               class="btn on-hover-shadow on-hover "><i
+                                                        class="fa fa-truck f-22"></i></a>
 
                                         </td>
                                     </tr>
@@ -96,7 +115,8 @@
                         <p>{{ text_empty }}</p>
                     {% endif %}
                     {{ content_bottom }}
-                </div></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
