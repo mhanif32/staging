@@ -1,6 +1,13 @@
 {{ header }}
-<div class="breadcrumb p-0 m-0"></div>
-<section class="product-details pt-5 pb-4">
+
+<section class="product-details pt-3 pb-4">
+    <div class="container p-0">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
     <div class="container box-shadow">
         <a href='javascript:history.back(1);' class="position-absolute" style="z-index: 1"><i
                     class="fas fa-long-arrow-alt-left f-25 on-hover"></i></a>

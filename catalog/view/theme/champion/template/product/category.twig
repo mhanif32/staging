@@ -1,5 +1,10 @@
 {{ header }}
-<div id="product-category" class="container top-collection mt-5">
+<div id="product-category" class="container top-collection mt-4">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
     <div class="row">{{ column_left }}
         {% if column_left and column_right %}
             {% set class = 'col-sm-6' %}

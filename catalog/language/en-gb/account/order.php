@@ -70,6 +70,6 @@ $_['error_rating']             = 'Warning: Please select a review rating!';
 $_['error_order_id'] = 'Something wrong found in Order!';
 $_['error_reason']   = 'Reason Text must be between 25 and 1000 characters!';
 $_['error_selectReason'] = 'Warning: Please select a reason!';
-$_['success_cancel_order']	= 'Your order has been successfully cancelled.';
+$_['success_cancel_order']	= 'Your cancellation has been submitted and its been processed. Thank you for shopping with us.';
 
 

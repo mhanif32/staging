@@ -1425,6 +1425,16 @@ i{width: 20px;}}}}
   }
 }
 
+//========breadcrums
+ul.breadcrumb li {
+  padding: 0 15px;
+  position: relative;
+  &:after {
+    content: "|";
+    position: absolute;
+    right: 0px;
+    }
+}
 
 
 
