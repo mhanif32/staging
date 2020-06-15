@@ -1247,4 +1247,10 @@ class ModelAccountMpmultivendorProduct extends Model {
         $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mpseller_delivery_location` WHERE product_id = '" . (int)$product_id . "'");
         return $query->rows;
     }
+
+    public function getMpsellerFromProduct($product_id)
+    {
+        $query =  $this->db->query("SELECT * FROM `" . DB_PREFIX . "product` p LEFT JOIN " . DB_PREFIX . "mpseller ms ON (p.mpseller_id = ms.mpseller_id) WHERE p.product_id = '" . (int)$product_id . "'");
+        return $query->row;
+    }
 }
