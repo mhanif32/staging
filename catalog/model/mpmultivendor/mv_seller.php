@@ -300,4 +300,15 @@ class ModelMpmultivendorMvSeller extends Model {
         $query = $this->db->query($sql);
         return $query->rows;
     }
+
+    public function getSellersForEnquiry($customerId)
+    {
+        $sql = "SELECT DISTINCT s.mpseller_id, s.store_name FROM " . DB_PREFIX . "mpseller s 
+        LEFT JOIN " . DB_PREFIX . "product p on p.mpseller_id = s.mpseller_id 
+        LEFT JOIN " . DB_PREFIX . "order_product op on op.product_id = p.product_id
+        LEFT JOIN " . DB_PREFIX . "order o on o.order_id = op.order_id
+        WHERE s.status = '1' AND o.customer_id = '".(int)$customerId."'";
+        $query = $this->db->query($sql);
+        return $query->rows;
+    }
 }

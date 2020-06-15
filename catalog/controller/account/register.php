@@ -61,6 +61,12 @@ class ControllerAccountRegister extends Controller {
 			$data['error_email'] = '';
 		}
 
+        if (isset($this->error['confirm_email'])) {
+            $data['error_confirm_email'] = $this->error['confirm_email'];
+        } else {
+            $data['error_confirm_email'] = '';
+        }
+
 		if (isset($this->error['telephone'])) {
 			$data['error_telephone'] = $this->error['telephone'];
 		} else {
@@ -122,6 +128,12 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$data['email'] = '';
 		}
+
+        if (isset($this->request->post['confirm_email'])) {
+            $data['confirm_email'] = $this->request->post['confirm_email'];
+        } else {
+            $data['confirm_email'] = '';
+        }
 
 		if (isset($this->request->post['telephone'])) {
 			$data['telephone'] = $this->request->post['telephone'];
@@ -223,6 +235,10 @@ class ControllerAccountRegister extends Controller {
 		if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
 			$this->error['email'] = $this->language->get('error_email');
 		}
+
+        if ($this->request->post['confirm_email'] != $this->request->post['email']) {
+            $this->error['confirm_email'] = $this->language->get('error_confirm_email');
+        }
 
 		if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_exists');

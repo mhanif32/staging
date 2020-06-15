@@ -341,7 +341,7 @@ class ControllerAccountReturn extends Controller {
 		} else {
 			$data['error_reason'] = '';
 		}
-//print_r($this->request->get['order_id']);exit('asd');
+
         $order_id = $this->request->get['order_id'];
         $product_id = $this->request->get['product_id'];
 		$data['action'] = $this->url->link('account/return/add', '&order_id='.$order_id.'&product_id='.$product_id, true);

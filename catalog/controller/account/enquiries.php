@@ -4,6 +4,9 @@ class ControllerAccountEnquiries extends Controller
 {
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/enquiries', '', true);
 
@@ -173,7 +176,8 @@ class ControllerAccountEnquiries extends Controller
         $data['custom_themename'] = $this->model_account_mpmultivendor_seller->getactiveTheme();
 
         $this->load->model('mpmultivendor/mv_seller');
-        $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellers();
+        $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellersForEnquiry($this->customer->getId());
+        //echo '<pre>';print_r($data['sellers']);exit('aaaa');
 
         if (VERSION < '2.2.0.0') {
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/enquiries.tpl')) {
