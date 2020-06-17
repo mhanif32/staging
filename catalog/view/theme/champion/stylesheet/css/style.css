@@ -1599,8 +1599,8 @@ footer ul {
           content: url(../../image/tu_cur.png);
           display: block;
           position: absolute;
-          bottom: -3px;
-          right: 0px; }
+          bottom: 6px;
+          right: 1px; }
   .radio-toolbar label span {
     padding: 5px 20px;
     font-size: 15px;
