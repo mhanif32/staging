@@ -313,7 +313,7 @@ class ControllerAccountOrder extends Controller {
             $data['back_url'] = $this->url->link('account/order ', '', true);
 
             $this->load->model('mpmultivendor/mv_seller');
-            $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellers();
+            $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellersForEnquiry($this->customer->getId());
 
             //rating review
             $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();

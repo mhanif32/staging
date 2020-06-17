@@ -216,12 +216,51 @@ class ControllerAccountReturn extends Controller {
 	}
 
 	public function add() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('account/return');
 
 		$this->load->model('account/return');
+        $this->load->model('account/mpmultivendor/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_return->addReturn($this->request->post);
+
+			//TODO : Send mail to the seller for returning a product by the customer
+            if ($this->request->server['HTTPS']) {
+                $server = $this->config->get('config_ssl');
+            } else {
+                $server = $this->config->get('config_url');
+            }
+
+            $productId = $this->request->get['product_id'];
+            $order_id = $this->request->get['order_id'];
+            $mpSeller = $this->model_account_mpmultivendor_product->getMpsellerFromProduct($productId);
+
+            $mail = new Mail($this->config->get('config_mail_engine'));
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+            $mail->setTo($mpSeller['email']);
+            $mail->setFrom($this->config->get('config_email'));
+            $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+            $mail->setSubject(html_entity_decode(sprintf('TheChampionMall : Returned Product', $this->config->get('config_name'), $productId), ENT_QUOTES, 'UTF-8'));
+
+            $dataDp['logo'] = $server . 'image/' . $this->config->get('config_logo');
+            $dataDp['store_owner'] = $mpSeller['store_owner'];
+            $dataDp['store_name'] = $mpSeller['store_name'];
+            $dataDp['order_id'] = $order_id;
+            $dataDp['customer_name'] = $this->customer->getFirstname() .' '. $this->customer->getLastname();
+
+            $mailText = $this->load->view('mail/product_return_to_seller', $dataDp);
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
 
 			$this->response->redirect($this->url->link('account/return/success', '', true));
 		}
@@ -303,7 +342,9 @@ class ControllerAccountReturn extends Controller {
 			$data['error_reason'] = '';
 		}
 
-		$data['action'] = $this->url->link('account/return/add', '', true);
+        $order_id = $this->request->get['order_id'];
+        $product_id = $this->request->get['product_id'];
+		$data['action'] = $this->url->link('account/return/add', '&order_id='.$order_id.'&product_id='.$product_id, true);
 
 		$this->load->model('account/order');
 
