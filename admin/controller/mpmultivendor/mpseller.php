@@ -12,6 +12,20 @@ class ControllerMpmultivendorMpseller extends Controller {
 		$this->getList();
 	}
 
+    public function pendingUsers() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        $this->load->language('mpmultivendor/mpseller');
+
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('mpmultivendor/mpseller');
+
+        $this->getPendingUserList();
+    }
+
 	public function edit() {
 		$this->load->language('mpmultivendor/mpseller');
 
@@ -504,6 +518,321 @@ class ControllerMpmultivendorMpseller extends Controller {
 		$this->config->set('template_engine', 'template');
 		$this->response->setOutput($this->load->view('mpmultivendor/mpseller_list', $data));
 	}
+
+    protected function getPendingUserList() {
+        $this->document->addStyle('view/stylesheet/mpmultivendor/mpmultivendor.css');
+
+        if (isset($this->request->get['filter_store_owner'])) {
+            $filter_store_owner = $this->request->get['filter_store_owner'];
+        } else {
+            $filter_store_owner = null;
+        }
+
+        if (isset($this->request->get['filter_store_name'])) {
+            $filter_store_name = $this->request->get['filter_store_name'];
+        } else {
+            $filter_store_name = null;
+        }
+
+        if (isset($this->request->get['filter_email'])) {
+            $filter_email = $this->request->get['filter_email'];
+        } else {
+            $filter_email = null;
+        }
+
+        if (isset($this->request->get['filter_status'])) {
+            $filter_status = $this->request->get['filter_status'];
+        } else {
+            $filter_status = null;
+        }
+
+        if (isset($this->request->get['filter_approved'])) {
+            $filter_approved = $this->request->get['filter_approved'];
+        } else {
+            $filter_approved = null;
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $filter_date_added = $this->request->get['filter_date_added'];
+        } else {
+            $filter_date_added = null;
+        }
+
+        if (isset($this->request->get['sort'])) {
+            $sort = $this->request->get['sort'];
+        } else {
+            $sort = 'name';
+        }
+
+        if (isset($this->request->get['order'])) {
+            $order = $this->request->get['order'];
+        } else {
+            $order = 'ASC';
+        }
+
+        if (isset($this->request->get['page'])) {
+            $page = $this->request->get['page'];
+        } else {
+            $page = 1;
+        }
+
+        $url = '';
+
+        if (isset($this->request->get['filter_store_owner'])) {
+            $url .= '&filter_store_owner=' . urlencode(html_entity_decode($this->request->get['filter_store_owner'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_store_name'])) {
+            $url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_email'])) {
+            $url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_status'])) {
+            $url .= '&filter_status=' . $this->request->get['filter_status'];
+        }
+
+        if (isset($this->request->get['filter_approved'])) {
+            $url .= '&filter_approved=' . $this->request->get['filter_approved'];
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+        }
+
+        if (isset($this->request->get['sort'])) {
+            $url .= '&sort=' . $this->request->get['sort'];
+        }
+
+        if (isset($this->request->get['order'])) {
+            $url .= '&order=' . $this->request->get['order'];
+        }
+
+        if (isset($this->request->get['page'])) {
+            $url .= '&page=' . $this->request->get['page'];
+        }
+
+        $data['breadcrumbs'] = array();
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => 'Registration Pending Approval',
+            'href' => $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . $url, true)
+        );
+
+        $data['delete'] = $this->url->link('mpmultivendor/mpseller/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
+
+        $data['mpsellers'] = array();
+
+        $filter_data = array(
+            'filter_store_owner'       => $filter_store_owner,
+            'filter_store_name' 	   => $filter_store_name,
+            'filter_email'             => $filter_email,
+            'filter_status'            => $filter_status,
+            'filter_approved'          => $filter_approved,
+            'filter_date_added'        => $filter_date_added,
+            'sort'                     => $sort,
+            'order'                    => $order,
+            'start'                    => ($page - 1) * $this->config->get('config_limit_admin'),
+            'limit'                    => $this->config->get('config_limit_admin')
+        );
+
+        $seller_total = $this->model_mpmultivendor_mpseller->getTotalPendingSeller($filter_data);
+
+        $results = $this->model_mpmultivendor_mpseller->getMpsellers($filter_data);
+
+        foreach ($results as $result) {
+            if (!$result['approved']) {
+                $approve = $this->url->link('mpmultivendor/mpseller/approve', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true);
+            } else {
+                $approve = '';
+            }
+
+            $data['mpsellers'][] = array(
+                'mpseller_id'    => $result['mpseller_id'],
+                'customer_id'    => $result['customer_id'],
+                'store_owner'    => $result['store_owner'],
+                'store_name'     => $result['store_name'],
+                'total_products'     => $result['total_products'],
+                'email'          => $result['email'],
+                'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+                'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+                'approve'        => $approve,
+                'message_link'           => $this->url->link('mpmultivendor/mpseller_message/view', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true),
+                'edit'           => $this->url->link('mpmultivendor/mpseller/edit', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true)
+            );
+        }
+
+        $data['heading_title'] = $this->language->get('heading_title');
+
+        $data['text_list'] = $this->language->get('text_list');
+        $data['text_enabled'] = $this->language->get('text_enabled');
+        $data['text_disabled'] = $this->language->get('text_disabled');
+        $data['text_yes'] = $this->language->get('text_yes');
+        $data['text_no'] = $this->language->get('text_no');
+        $data['text_default'] = $this->language->get('text_default');
+        $data['text_no_results'] = $this->language->get('text_no_results');
+        $data['text_confirm'] = $this->language->get('text_confirm');
+
+        $data['column_store_owner'] = $this->language->get('column_store_owner');
+        $data['column_store_name'] = $this->language->get('column_store_name');
+        $data['column_products'] = $this->language->get('column_products');
+        $data['column_email'] = $this->language->get('column_email');
+        $data['column_status'] = $this->language->get('column_status');
+        $data['column_approved'] = $this->language->get('column_approved');
+        $data['column_date_added'] = $this->language->get('column_date_added');
+        $data['column_action'] = $this->language->get('column_action');
+
+        $data['entry_store_name'] = $this->language->get('entry_store_name');
+        $data['entry_store_owner'] = $this->language->get('entry_store_owner');
+        $data['entry_email'] = $this->language->get('entry_email');
+        $data['entry_status'] = $this->language->get('entry_status');
+        $data['entry_approved'] = $this->language->get('entry_approved');
+        $data['entry_date_added'] = $this->language->get('entry_date_added');
+
+        $data['button_message'] = $this->language->get('button_message');
+        $data['button_approve'] = $this->language->get('button_approve');
+        $data['button_edit'] = $this->language->get('button_edit');
+        $data['button_delete'] = $this->language->get('button_delete');
+        $data['button_filter'] = $this->language->get('button_filter');
+        $data['button_login'] = $this->language->get('button_login');
+
+        $data['user_token'] = $this->session->data['user_token'];
+
+        if (isset($this->error['warning'])) {
+            $data['error_warning'] = $this->error['warning'];
+        } else {
+            $data['error_warning'] = '';
+        }
+
+        if (isset($this->session->data['success'])) {
+            $data['success'] = $this->session->data['success'];
+
+            unset($this->session->data['success']);
+        } else {
+            $data['success'] = '';
+        }
+
+        if (isset($this->request->post['selected'])) {
+            $data['selected'] = (array)$this->request->post['selected'];
+        } else {
+            $data['selected'] = array();
+        }
+
+        $url = '';
+
+        if (isset($this->request->get['filter_store_owner'])) {
+            $url .= '&filter_store_owner=' . urlencode(html_entity_decode($this->request->get['filter_store_owner'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_store_name'])) {
+            $url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_email'])) {
+            $url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_status'])) {
+            $url .= '&filter_status=' . $this->request->get['filter_status'];
+        }
+
+        if (isset($this->request->get['filter_approved'])) {
+            $url .= '&filter_approved=' . $this->request->get['filter_approved'];
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+        }
+
+        if ($order == 'ASC') {
+            $url .= '&order=DESC';
+        } else {
+            $url .= '&order=ASC';
+        }
+
+        if (isset($this->request->get['page'])) {
+            $url .= '&page=' . $this->request->get['page'];
+        }
+
+        $data['sort_store_owner'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.store_owner' . $url, true);
+        $data['sort_store_name'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.store_name' . $url, true);
+        $data['sort_total_products'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.total_products' . $url, true);
+        $data['sort_email'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.email' . $url, true);
+        $data['sort_status'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.status' . $url, true);
+        $data['sort_date_added'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=mps.date_added' . $url, true);
+        $data['sort_products'] = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . '&sort=total_products' . $url, true);
+
+        $url = '';
+
+        if (isset($this->request->get['filter_store_owner'])) {
+            $url .= '&filter_store_owner=' . urlencode(html_entity_decode($this->request->get['filter_store_owner'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_store_name'])) {
+            $url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_email'])) {
+            $url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
+        }
+
+        if (isset($this->request->get['filter_status'])) {
+            $url .= '&filter_status=' . $this->request->get['filter_status'];
+        }
+
+        if (isset($this->request->get['filter_approved'])) {
+            $url .= '&filter_approved=' . $this->request->get['filter_approved'];
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+        }
+
+        if (isset($this->request->get['sort'])) {
+            $url .= '&sort=' . $this->request->get['sort'];
+        }
+
+        if (isset($this->request->get['order'])) {
+            $url .= '&order=' . $this->request->get['order'];
+        }
+
+        $pagination = new Pagination();
+        $pagination->total = $seller_total;
+        $pagination->page = $page;
+        $pagination->limit = $this->config->get('config_limit_admin');
+        $pagination->url = $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+
+        $data['pagination'] = $pagination->render();
+
+        $data['results'] = sprintf($this->language->get('text_pagination'), ($seller_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($seller_total - $this->config->get('config_limit_admin'))) ? $seller_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $seller_total, ceil($seller_total / $this->config->get('config_limit_admin')));
+
+        $data['filter_store_owner'] = $filter_store_owner;
+        $data['filter_store_name'] = $filter_store_name;
+        $data['filter_email'] = $filter_email;
+        $data['filter_status'] = $filter_status;
+        $data['filter_approved'] = $filter_approved;
+        $data['filter_date_added'] = $filter_date_added;
+
+        $this->load->model('setting/store');
+        $data['stores'] = $this->model_setting_store->getStores();
+
+        $data['sort'] = $sort;
+        $data['order'] = $order;
+
+        $data['header'] = $this->load->controller('common/header');
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['footer'] = $this->load->controller('common/footer');
+
+        $this->config->set('template_engine', 'template');
+        $this->response->setOutput($this->load->view('mpmultivendor/mpseller_pending_list', $data));
+    }
 
 	protected function getForm() {
 		$this->document->addStyle('view/stylesheet/mpmultivendor/mpmultivendor.css');

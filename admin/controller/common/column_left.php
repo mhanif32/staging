@@ -331,6 +331,12 @@ class ControllerCommonColumnLeft extends Controller {
                     'href'     => $this->url->link('customer/delivery_partner', 'user_token=' . $this->session->data['user_token'], true),
                     'children' => array()
                 );
+
+                $customer[] = array(
+                    'name'	   => 'Registration Pending Approval',
+                    'href'     => $this->url->link('mpmultivendor/mpseller/pending-users', 'user_token=' . $this->session->data['user_token']),
+                    'children' => array()
+                );
             //}
 						
 			if ($this->user->hasPermission('access', 'customer/custom_field')) {		
@@ -675,7 +681,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => $this->url->link('report/statistics', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
-			}	
+			}
 			
 			$data['menus'][] = array(
 				'id'       => 'menu-report',

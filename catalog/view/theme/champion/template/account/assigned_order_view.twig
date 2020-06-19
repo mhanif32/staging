@@ -1,0 +1,171 @@
+{{ header }}
+<style>
+    .status {
+        color: white;
+        border-radius: 5px;
+        padding: 3px;
+    }
+</style>
+<section id="account-edit" class="register update-profile" style="background: #F3F3F3;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-8">
+                <div class="py-5">
+                    <div class="form-signin card py-4 px-2">
+                        <div id="delivery-info" class="container">
+                            <div class="row">
+                                <div id="content" class="col-sm-12">
+                                    {% if success %}
+                                        <div class="alert alert-success alert-dismissible"><i
+                                                    class="fa fa-check-circle"></i> {{ success }}</div>
+                                    {% endif %}
+                                    <div class="justify-content-between row mx-0">
+                                        <h4 class="f-20 font-weight-bold text-uppercase mb-3">Assigned Order View</h4>
+
+                                        <a href='javascript:history.back(1);'><i
+                                                    class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
+                                    </div>
+
+                                    <div class="">
+                                        <p>Note : Check below delivery details & Accept/Decline your request from
+                                            here.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                            <strong>Request Status : </strong>
+                                            {% if is_accept == 1 %} <span class="bg-success status">Accepted</span>
+                                            {% elseif is_accept == 2 %} <span class="bg-danger status">Declined</span>
+                                            {% else %} <span class="bg-warning status">Pending</span>
+                                            {% endif %}
+                                            </div>
+                                            <div>
+                                                <p class="mb-0"><strong>Order Id :</strong> # {{ order.order_id }}</p>
+                                                <p class="mb-0"><strong>Order Invoice Number :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <table class="table table-hover bg-white box-shadow">
+                                        <thead>
+                                        <tr>
+                                            <td class="text-left f-20 font-weight-black"
+                                                style="width: 50%; vertical-align: top;">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller Info</h3>
+                                            </td>
+                                            <td class="text-left f-20 font-weight-black"
+                                                style="width: 50%; vertical-align: top;">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller
+                                                    Address</h3></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-left f-15">
+                                                <strong>Store Owner : </strong>{{ seller.store_owner }} <br>
+                                                <strong>Store Name : </strong>{{ seller.store_name }} <br>
+                                                <strong>Email : </strong>{{ seller.email }} <br>
+                                                <strong>Telephone : </strong>{{ seller.telephone }}
+                                            </td>
+                                            <td class="text-left f-15">
+                                                <strong>Address : </strong>{{ seller.address }} <br>
+                                                <strong>City : </strong>{{ seller.city }} <br>
+                                                <strong>State : </strong>{{ seller.zone.name }} <br>
+                                                <strong>Country : </strong>{{ seller.country.name }} <br>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-hover bg-white box-shadow">
+                                        <thead>
+                                        <tr>
+                                            <td class="text-left f-20 font-weight-black"
+                                                style="width: 50%; vertical-align: top;">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery Info</h3>
+                                            </td>
+                                            <td class="text-left f-20 font-weight-black"
+                                                style="width: 50%; vertical-align: top;">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
+                                                    Address</h3></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-left f-15">
+                                                <strong>Customer Name
+                                                    : </strong>{{ order.shipping_firstname }} {{ order.shipping_lastname }}
+                                                <br>
+                                                <strong>Email : </strong>{{ order.email }} <br>
+                                                <strong>Telephone : </strong>{{ order.telephone }}
+                                            </td>
+                                            <td class="text-left f-15">
+                                                <strong>Address 1 : </strong>{{ order.shipping_address_1 }} <br>
+                                                <strong>Address 2 : </strong>{{ order.shipping_address_2 }} <br>
+                                                <strong>City : </strong>{{ order.shipping_city }} <br>
+                                                <strong>State : </strong>{{ order.shipping_zone }} <br>
+                                                <strong>Country : </strong>{{ order.shipping_country }} <br>
+                                                <strong>Post Code : </strong>{{ order.shipping_postcode }} <br>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    {% if is_accept == 0 %}
+                                        <div id="option-button">
+                                            <label>Click any one of below options. </label><br>
+                                            <button class="btn btn-success" id="accept">Accept</button>
+                                            <button class="btn btn-danger" id="decline">Decline</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript"><!--
+    $('button[id^=\'accept\']').on('click', function () {
+
+        var request_id = {{ request_id }}
+            $.ajax({
+                url: 'index.php?route=account/request/acceptRequest',
+                method: 'post',
+                data: {request_id: request_id},
+                success: function (response) {
+
+                    if (response['success']) {
+                        $('#option-button').slideUp();
+                        $('#option-button').after('<span style="font-size: 19px; text-align: center;color: green;">' + response['success'] + '</span>');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+    });
+
+    $('button[id^=\'decline\']').on('click', function () {
+
+        var request_id = {{ request_id }}
+            $.ajax({
+                url: 'index.php?route=account/request/declineRequest',
+                method: 'post',
+                data: {request_id: request_id},
+                success: function (response) {
+
+                    if (response['success']) {
+                        $('#option-button').slideUp();
+                        $('#option-button').after('<span style="font-size: 19px; text-align: center;color: red;">' + response['success'] + '</span>');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+    });
+    //--></script>
+{{ footer }}
