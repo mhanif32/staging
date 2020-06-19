@@ -680,10 +680,8 @@ class ModelCatalogProduct extends Model {
 
     public function getIsProductPurchasedForReview($product_id, $customer_id)
     {
-        $query = $this->db->query("SELECT COUNT(o.customer_id) AS total FROM " . DB_PREFIX . "order o LEFT JOIN " . DB_PREFIX . "order_product op ON (o.order_id = op.order_id) WHERE op.product_id = '".$product_id."' and o.customer_id = '".$customer_id."'");
-
-        //print_r($query->row['total']);exit('aaa');
-
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order o RIGHT JOIN " . DB_PREFIX . "order_product op ON (o.order_id = op.order_id) WHERE op.product_id = '".$product_id."' and o.customer_id = '".$customer_id."'");
+        
         if (isset($query->row['total'])) {
             return $query->row['total'];
         }
