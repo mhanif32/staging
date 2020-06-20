@@ -1,6 +1,11 @@
 {{ header }}
 <div id="account-order-info" class="bg-light">
     <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
         {% if success %}
             <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -13,10 +18,10 @@
             </div>
         {% endif %}
         <div class="row">
-            <div id="content" class="col-sm-12 py-4">{{ content_top }}
+            <div id="content" class="col-sm-12 pb-4">{{ content_top }}
                 <div>
-                    <a href="{{ back_url }}" class="position-absolute"><i
-                                class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
+                    {#<a href="{{ back_url }}" class="position-absolute"><i#}
+                                {#class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>#}
                     <h3 class="f-25 font-weight-bold text-uppercase text-center mt-3">
                         {{ heading_title }}
                     </h3>

@@ -1,14 +1,19 @@
 {{ header }}
 <div id="mv-information-section-form" class="bg-light">
 <div id="container" class="container">
+  <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+      {% endfor %}
+  </ul>
   {% if error_warning %}
   <div class="alert alert-danger warning"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
   {% endif %}
-  <div class="row">
+  <div class="row justify-content-center">
       {{ profile_column_left }}
-    <div id="content" class="col-12 col-md-9 col-lg-9 py-5">
+    <div id="content" class="col-12 col-md-9 col-lg-9 pb-5">
     {#<div id="content" class="{{ class }}">{{ content_top }}{{ mpseller_links }}#}
       <div class="mv-dashboard-wrap">
         <div class="row">

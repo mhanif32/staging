@@ -1,17 +1,22 @@
 {{ header }}
 <div id="container" class="container">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
     {% if success %}
         <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
     {% endif %}
     <div id="content" class="col-sm-12">{{ content_top }} {{ mpseller_links }}
-        <div class="mv-dashboard-wrap my-4">
+        <div class="mv-dashboard-wrap mb-4">
             <div class="row">
                 <div class="col-sm-12 mv-reviews">
                     <div class="panel panel-default">
                         <div class="panel-heading clearfix">
                             {#<h4 class="f-35 text-center mb-4">{{ heading_title }}</h4>#}
                             <div>
-                                <a href="{{ back_url }}" class="position-absolute"><i class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>
+                                {#<a href="{{ back_url }}" class="position-absolute"><i class="fas fa-long-arrow-alt-left on-hover f-35"></i></a>#}
                                 <h4 class="f-35 text-center mb-4">
                                     {{ heading_title }}
                                 </h4>
