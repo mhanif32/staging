@@ -471,7 +471,6 @@ class ControllerProductProduct extends Controller {
             $data['isRatingForProduct'] = ($this->customer->isLogged()) ? $this->model_catalog_product->getIsProductPurchasedForReview($this->request->get['product_id'], $this->customer->getId()) : false;
 
             //estimated Delivery Dates
-
             $productCategoryData = $this->model_catalog_category->checkProductCategory($data['product_id']);
             //echo '<pre>'; print_r($productCategoryData); exit('aaaa');
             if(!empty($productCategoryData)) {

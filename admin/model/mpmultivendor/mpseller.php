@@ -239,6 +239,36 @@ class ModelMpmultivendorMpseller extends Model {
 		return $query->row['total'];
 	}
 
+    public function getTotalPendingSeller($data = array()) {
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c RIGHT JOIN " . DB_PREFIX . "mpseller mps ON c.customer_id = c.customer_id WHERE c.customer_id > 0 AND mps.mpseller_id IS NULL";
+
+        $implode = array();
+
+        if (!empty($data['filter_email'])) {
+            $implode[] = "c.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
+        }
+
+        if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+            $implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
+        }
+
+//        if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
+//            $implode[] = "mps.approved = '" . (int)$data['filter_approved'] . "'";
+//        }
+
+        if (!empty($data['filter_date_added'])) {
+            $implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+        }
+
+        if ($implode) {
+            $sql .= " AND " . implode(" AND ", $implode);
+        }
+        $sql .= " AND c.role = 'seller'";
+        $query = $this->db->query($sql);
+
+        return $query->row['total'];
+    }
+
 	public function getTransactions($mpseller_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
