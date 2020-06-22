@@ -209,7 +209,7 @@ p {
 
 .form-control {
   color: #262525;
-  border-color: #d1cdcd;
+  border-color: #ccc5c540;
   font-size: 13px;
   border-radius: 0; }
   .form-control:focus {
@@ -675,7 +675,7 @@ footer ul {
     padding: 15px;
     margin: auto; }
     .account-login .login-form form.form-signin .form-control, #account-forgotten .login-form form.form-signin .form-control {
-      border: 1px solid #d1cdcd;
+      border: 1px solid #ccc5c540;
       border-radius: 0; }
   @media only screen and (min-width: 600px) {
     .account-login .login-form form.form-signin, #account-forgotten .login-form form.form-signin {
@@ -726,7 +726,7 @@ footer ul {
     padding: 15px;
     margin: auto; }
     #account-login .login-form form.form-signin .form-control {
-      border: 1px solid #d1cdcd;
+      border: 1px solid #ccc5c540;
       border-radius: 0; }
   @media only screen and (min-width: 600px) {
     #account-login .login-form form.form-signin {

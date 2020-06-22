@@ -1,13 +1,14 @@
 {{ header }}
 <div id="account-return" class="bg-light">
-  {#<ul class="breadcrumb">#}
-    {#{% for breadcrumb in breadcrumbs %}#}
-    {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
-    {#{% endfor %}#}
-  {#</ul>#}
+
   <div class="container">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
   <div class="row">
-    <div id="content" class="col-12 my-5">{{ content_top }}
+    <div id="content" class="col-12 mb-5">{{ content_top }}
       <div class="form-signin card px-4 box-shadow">
       <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
       {% if returns %}

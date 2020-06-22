@@ -27,6 +27,24 @@ class ControllerAccountEdit extends Controller
 
         $customer = $this->model_account_customer->getCustomer($this->customer->getId());
 
+//breadcrumbs
+        $data['breadcrumbs'] = array();
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/home')
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_account'),
+            'href' => $this->url->link('account/account', '', true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_edit'),
+            'href' => $this->url->link('account/edit', '', true)
+        );
+//end
         //edit customer
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 

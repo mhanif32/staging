@@ -47,7 +47,7 @@ $_['entry_product']      = 'Product Name';
 $_['entry_model']        = 'Product Code';
 $_['entry_quantity']     = 'Quantity';
 $_['entry_reason']       = 'Reason for Return';
-$_['entry_opened']       = 'Has the product seal been broken';
+$_['entry_opened']       = 'Has the product seal been broken?';
 $_['entry_fault_detail'] = 'Faulty or other details';
 
 // Error
