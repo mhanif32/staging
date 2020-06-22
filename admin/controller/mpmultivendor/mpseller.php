@@ -1765,8 +1765,8 @@ class ControllerMpmultivendorMpseller extends Controller {
 	public function remind()
     {
         $this->load->model('customer/customer');
-        $customerId = $this->request->post('customer_id');
-        $customer = $this->model_customr_customer->getCustomer($customerId);
+        $customerId = $this->request->post['customer_id'];
+        $customer = $this->model_customer_customer->getCustomer($customerId);
 
         if ($this->request->server['HTTPS']) {
             $server = $this->config->get('config_ssl');
@@ -1795,5 +1795,10 @@ class ControllerMpmultivendorMpseller extends Controller {
         $mail->setHtml($mailText);
         $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
         $mail->send();
+
+        $json = array();
+        $json['success'] = 'Success : The reminder mail has been sent to Seller.';
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 }

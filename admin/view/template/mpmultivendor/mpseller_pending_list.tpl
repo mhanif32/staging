@@ -15,6 +15,11 @@
             </ul>
         </div>
     </div>
+    <div class="file-dummy">
+        <div class="success" >
+
+        </div>
+    </div>
     <div class="container-fluid">
         <?php if ($error_warning) { ?>
         <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $error_warning; ?>
@@ -317,12 +322,12 @@
             var dataId = $(this).attr('data-id');
 
             $.ajax({
-                url: 'index.php?route=mpmultivendor/mpseller/remind',
+                url: 'index.php?route=mpmultivendor/mpseller/remind&user_token=<?php echo $user_token; ?>',
                 type: 'POST',
                 data: {customer_id : dataId},
-                success: function (response) {
+                success: function (json) {
 
-
+                    $('.file-dummy').find('.success').html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
                 }
             });
         });
