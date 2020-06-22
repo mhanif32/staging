@@ -1791,7 +1791,7 @@ class ControllerMpmultivendorMpseller extends Controller {
         $data['firstname'] = $customer['firstname'];
         $data['seller_info_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
 
-        $mailText = $this->load->view('mpmultivendor_mail/seller_approve', $data);
+        $mailText = $this->load->view('mpmultivendor_mail/seller_remind', $data);
         $mail->setHtml($mailText);
         $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
         $mail->send();
