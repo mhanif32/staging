@@ -140,9 +140,11 @@ class ControllerCustomerDeliveryPartner extends Controller
             'limit'                    => $this->config->get('config_limit_admin')
         );
 
-        $customer_total = $this->model_customer_customer->getTotalCustomers($filter_data);
+        $customer_total = $this->model_customer_customer->getTotalDeliveryPartners($filter_data);
 
         $results = $this->model_customer_customer->getDeliveryPartners($filter_data);
+
+        //echo '<pre>';print_r($results);exit('okokk');
 
         foreach ($results as $result) {
             $login_info = $this->model_customer_customer->getTotalLoginAttempts($result['email']);
@@ -175,6 +177,7 @@ class ControllerCustomerDeliveryPartner extends Controller
                 //'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                 'status'         =>
                     ($result['status'] == 1) ? $this->language->get('text_enabled') : (($result['status'] == 2) ? 'Deactivated' : $this->language->get('text_disabled')),
+                'delPartStatus' => $result['delPartStatus'],
                 'ip'             => $result['ip'],
                 'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
                 'unlock'         => $unlock,

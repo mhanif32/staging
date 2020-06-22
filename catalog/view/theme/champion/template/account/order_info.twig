@@ -109,7 +109,7 @@
 
                                         {% if product.contact_seller %}
                                             {#                                        <a href="{{ product.contact_seller }}" data-toggle="tooltip" title="Direct Question To The Store Owner" class="btn btn-success"><i class="fas fa-question"></i></a>#}
-                                            <a href="javascript:void(0)" data-id="{{ product.mpseller_id }}"
+                                            <a href="javascript:void(0)" data-id="{{ product.mpseller_id }}" data-text="{{ product.store_name }}"
                                                data-toggle="tooltip" title="Direct Question To The Store Owner"
                                                class="btn btn-success question-to-seller"><i
                                                         class="fas fa-question"></i></a>
@@ -266,10 +266,10 @@
                         <div class="form-group required">
                             <label class="control-label">Store Name</label>
                             <select name="seller_id" id="seller_id" class="form-control" readonly>
-                                <option value="">Select</option>
-                                {% for seller in sellers %}
-                                    <option value="{{ seller.mpseller_id }}">{{ seller.store_name }}</option>
-                                {% endfor %}
+{#                                <option value="">Select</option>#}
+{#                                {% for seller in sellers %}#}
+{#                                    <option value="{{ seller.mpseller_id }}">{{ seller.store_name }}</option>#}
+{#                                {% endfor %}#}
                             </select>
                             <div class="text-danger">{{ error_message }}</div>
                         </div>
@@ -434,7 +434,8 @@
 <script type="text/javascript"><!--
     $('.question-to-seller').on('click', function () {
         var sellerId = $(this).attr("data-id");
-        $('#seller_id').val(sellerId);
+        var sellerName = $(this).attr("data-text");
+        $('#seller_id').append('<option value="'+ sellerId+'">'+ sellerName+'</option>');
         $('#mv-enquiry').modal('show');
     });
     //-->
