@@ -109,18 +109,8 @@
                                 <td style="width: 1px;" class="text-center"><input type="checkbox"
                                                                                    onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                 </td>
-                                <td class="text-left"><?php if ($sort == 'mps.store_owner') { ?>
-                                    <a href="<?php echo $sort_store_owner; ?>"
-                                       class="<?php echo strtolower($order); ?>"><?php echo $column_store_owner; ?></a>
-                                    <?php } else { ?>
-                                    <a href="<?php echo $sort_store_owner; ?>"><?php echo $column_store_owner; ?></a>
-                                    <?php } ?></td>
-                                <td class="text-left"><?php if ($sort == 'mps.store_name') { ?>
-                                    <a href="<?php echo $sort_store_name; ?>"
-                                       class="<?php echo strtolower($order); ?>"><?php echo $column_store_name; ?></a>
-                                    <?php } else { ?>
-                                    <a href="<?php echo $sort_store_name; ?>"><?php echo $column_store_name; ?></a>
-                                    <?php } ?></td>
+                                <td class="text-left">First Name</td>
+                                <td class="text-left">Last Name</td>
                                 <td class="text-center"><?php if ($sort == 'total_products') { ?>
                                     <a href="<?php echo $sort_products; ?>"
                                        class="<?php echo strtolower($order); ?>"><?php echo $column_products; ?></a>
