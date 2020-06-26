@@ -1213,4 +1213,232 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 
 		$this->response->setOutput($this->load->view('account/mpmultivendor/order_shipping', $data));
 	}
+
+    public function pending() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/account', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        if(!$this->config->get('mpmultivendor_status')) {
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+        $this->load->language('account/edit');
+
+        $this->load->language('account/mpmultivendor/orders');
+
+        $this->load->model('account/mpmultivendor/orders');
+
+        $this->load->model('account/mpmultivendor/seller');
+
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor.css');
+
+        if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')) {
+            $this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor-journal.css');
+        }
+
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        if (isset($this->request->get['filter_order_id'])) {
+            $filter_order_id = $this->request->get['filter_order_id'];
+        } else {
+            $filter_order_id = null;
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $filter_date_added = $this->request->get['filter_date_added'];
+        } else {
+            $filter_date_added = null;
+        }
+
+        if (isset($this->request->get['filter_order_status_id'])) {
+            $filter_order_status_id = $this->request->get['filter_order_status_id'];
+        } else {
+            $filter_order_status_id = null;
+        }
+
+        if (isset($this->request->get['filter_admin_order_status_id'])) {
+            $filter_admin_order_status_id = $this->request->get['filter_admin_order_status_id'];
+        } else {
+            $filter_admin_order_status_id = null;
+        }
+
+        if (isset($this->request->get['page'])) {
+            $page = $this->request->get['page'];
+        } else {
+            $page = 1;
+        }
+
+        $url = '';
+
+        if (isset($this->request->get['filter_order_id'])) {
+            $url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+        }
+
+        if (isset($this->request->get['filter_order_status_id'])) {
+            $url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+        }
+
+        if (isset($this->request->get['filter_admin_order_status_id'])) {
+            $url .= '&filter_admin_order_status_id=' . $this->request->get['filter_admin_order_status_id'];
+        }
+
+        if (isset($this->request->get['page'])) {
+            $url .= '&page=' . $this->request->get['page'];
+        }
+
+        $data['breadcrumbs'] = array();
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/home')
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_account'),
+            'href' => $this->url->link('account/account', '', true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_orders'),
+            'href' => $this->url->link('account/mpmultivendor/orders', ''. $url, true)
+        );
+
+        $seller_info = $this->model_account_mpmultivendor_seller->getSellerStoreInfo($this->customer->isLogged());
+
+        if(!$seller_info) {
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+
+        if(!empty($seller_info)) {
+            $mpseller_id = $seller_info['mpseller_id'];
+        } else {
+            $mpseller_id = 0;
+        }
+
+        $data['heading_title'] = $this->language->get('heading_title');
+
+        $data['text_empty'] = $this->language->get('text_empty');
+        $data['text_all'] = $this->language->get('text_all');
+
+        $data['entry_order_id'] = $this->language->get('entry_order_id');
+        $data['entry_order_status'] = $this->language->get('entry_order_status');
+        $data['entry_admin_order_status'] = $this->language->get('entry_admin_order_status');
+        $data['entry_date_added'] = $this->language->get('entry_date_added');
+
+        $data['column_order_id'] = $this->language->get('column_order_id');
+        $data['column_customer'] = $this->language->get('column_customer');
+        $data['column_product'] = $this->language->get('column_product');
+        $data['column_total'] = $this->language->get('column_total');
+        $data['column_status'] = $this->language->get('column_status');
+        $data['column_by_admin_status'] = $this->language->get('column_by_admin_status');
+        $data['column_date_added'] = $this->language->get('column_date_added');
+        $data['column_action'] = $this->language->get('column_action');
+
+        $data['button_filter'] = $this->language->get('button_filter');
+        $data['button_view'] = $this->language->get('button_view');
+        $data['button_continue'] = $this->language->get('button_continue');
+
+        $data['order_statuses'] = $this->model_account_mpmultivendor_orders->getOrderStatuses();
+
+        $data['orders'] = array();
+
+        $filter_data = array(
+            'mpseller_id'					=> $mpseller_id,
+            'filter_order_id'				=> $filter_order_id,
+            'filter_date_added'				=> $filter_date_added,
+            'filter_order_status_id'		=> $filter_order_status_id,
+            'filter_admin_order_status_id'	=> $filter_admin_order_status_id,
+            'start'         	=> ($page - 1) * $this->config->get('mpmultivendor_seller_list'),
+            'limit'         	=> $this->config->get('mpmultivendor_seller_list'),
+        );
+
+        $order_total = $this->model_account_mpmultivendor_orders->getTotalPendingOrders($filter_data);
+
+        $results = $this->model_account_mpmultivendor_orders->getPendingOrders($filter_data);
+
+        foreach ($results as $result) {
+            $data['orders'][] = array(
+                'order_id'   => $result['order_id'],
+                'name'       => $result['firstname'] . ' ' . $result['lastname'],
+                'status'     => $result['status'],
+                'order_status_id'     => $result['order_status_id'],
+                //'by_admin_status'     => $result['by_admin_status'],
+                'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+                'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
+                'view'       => $this->url->link('account/mpmultivendor/orders/info', 'order_id=' . $result['order_id'], true),
+            );
+        }
+
+        $pagination = new Pagination();
+        $pagination->total = $order_total;
+        $pagination->page = $page;
+        $pagination->limit = $this->config->get('mpmultivendor_seller_list');
+        $pagination->url = $this->url->link('account/mpmultivendor/orders', ''. $url . '&page={page}', true);
+
+        $data['pagination'] = $pagination->render();
+
+        $data['results'] = sprintf($this->language->get('text_pagination'), ($order_total) ? (($page - 1) * $this->config->get('mpmultivendor_seller_list')) + 1 : 0, ((($page - 1) * $this->config->get('mpmultivendor_seller_list')) > ($order_total - $this->config->get('mpmultivendor_seller_list'))) ? $order_total : ((($page - 1) * $this->config->get('mpmultivendor_seller_list')) + $this->config->get('mpmultivendor_seller_list')), $order_total, ceil($order_total / $this->config->get('mpmultivendor_seller_list')));
+
+        $data['filter_order_id'] = $filter_order_id;
+        $data['filter_date_added'] = $filter_date_added;
+        $data['filter_order_status_id'] = $filter_order_status_id;
+        $data['filter_admin_order_status_id'] = $filter_admin_order_status_id;
+
+        $data['mpseller_links'] = $this->load->controller('account/mpmultivendor/mpseller_links');
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['column_right'] = $this->load->controller('common/column_right');
+        $data['content_top'] = $this->load->controller('common/content_top');
+        $data['content_bottom'] = $this->load->controller('common/content_bottom');
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+
+        /* Theme Work Starts */
+        if($this->config->get('config_theme')) {
+            $custom_themename = $this->config->get('config_theme');
+        } if($this->config->get('theme_default_directory')) {
+            $custom_themename = $this->config->get('theme_default_directory');
+        } if($this->config->get('config_template')) {
+            $custom_themename = $this->config->get('config_template');
+        }
+        // else{
+        // 	$custom_themename = 'default';
+        // }
+
+        if (defined('JOURNAL3_ACTIVE')) {
+            $custom_themename = 'journal3';
+        }
+
+        if(strpos($this->config->get('config_template'), 'journal2') === 0){
+            $custom_themename = 'journal2';
+        }
+
+        if(empty($custom_themename)) {
+            $custom_themename = 'default';
+        }
+
+        $data['custom_themename'] = $custom_themename;
+        /* Theme Work Ends */
+
+        //for profile right column
+        $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+        if(VERSION < '2.2.0.0') {
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/orders.tpl')) {
+                $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/mpmultivendor/orders.tpl', $data));
+            } else {
+                $this->response->setOutput($this->load->view('default/template/account/mpmultivendor/orders.tpl', $data));
+            }
+        } else {
+            $this->response->setOutput($this->load->view('account/mpmultivendor/pendingorders', $data));
+        }
+    }
 }
