@@ -1371,7 +1371,7 @@ class ControllerAccountMpmultivendorOrders extends Controller {
                 'order_id'   => $result['order_id'],
                 'name'       => $result['firstname'] . ' ' . $result['lastname'],
                 'status'     => $result['status'],
-                'order_status_id'     => $result['order_status_id'],
+                //'order_status_id'     => $result['order_status_id'],
                 //'by_admin_status'     => $result['by_admin_status'],
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
                 'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
