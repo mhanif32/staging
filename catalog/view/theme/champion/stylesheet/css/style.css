@@ -1728,3 +1728,15 @@ ul.breadcrumb li {
     content: "|";
     position: absolute;
     right: 0px; }
+
+.product-clothing-sizes .table thead tr th {
+  font-size: 14px; }
+  .product-clothing-sizes .table thead tr th span {
+    font-weight: 100;
+    font-size: 13px; }
+.product-clothing-sizes .table tbody tr th, .product-clothing-sizes .table tbody tr td {
+  font-size: 12px; }
+
+@media (min-width: 576px) {
+  #showSizeChartModal .modal-dialog {
+    max-width: 700px; } }
