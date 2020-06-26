@@ -173,7 +173,7 @@ class ModelCustomerCustomer extends Model
 
     public function getDeliveryPartners($data = array())
     {
-        $sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id)";
+        $sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group, (SELECT is_approved FROM ".DB_PREFIX."delivery_partner_info dpi WHERE dpi.customer_id = c.customer_id) as delPartStatus  FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) ";
 
         if (!empty($data['filter_affiliate'])) {
             $sql .= " LEFT JOIN " . DB_PREFIX . "customer_affiliate ca ON (c.customer_id = ca.customer_id)";
@@ -367,6 +367,52 @@ class ModelCustomerCustomer extends Model
 
         $query = $this->db->query($sql);
 
+        return $query->row['total'];
+    }
+
+    public function getTotalDeliveryPartners($data = array())
+    {
+        //$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer";
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) ";
+
+        $implode = array();
+
+        if (!empty($data['filter_name'])) {
+            $implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+        }
+
+        if (!empty($data['filter_email'])) {
+            $implode[] = "email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
+        }
+
+        if (isset($data['filter_newsletter']) && !is_null($data['filter_newsletter'])) {
+            $implode[] = "newsletter = '" . (int)$data['filter_newsletter'] . "'";
+        }
+
+        if (!empty($data['filter_customer_group_id'])) {
+            $implode[] = "customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
+        }
+
+        if (!empty($data['filter_ip'])) {
+            $implode[] = "customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
+        }
+
+        if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+            $implode[] = "status = '" . (int)$data['filter_status'] . "'";
+        }
+
+        if (!empty($data['filter_date_added'])) {
+            $implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+        }
+
+        $implode[] = "role = 'delivery-partner'";
+
+        if ($implode) {
+            $sql .= " WHERE " . implode(" AND ", $implode);
+        }
+
+        $query = $this->db->query($sql);
+        //print_r($query->row['total']);exit('ijijij');
         return $query->row['total'];
     }
 

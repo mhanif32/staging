@@ -645,27 +645,26 @@ class ControllerMpmultivendorMpseller extends Controller {
 
         $seller_total = $this->model_mpmultivendor_mpseller->getTotalPendingSeller($filter_data);
 
-        $results = $this->model_mpmultivendor_mpseller->getMpsellers($filter_data);
+        $results = $this->model_mpmultivendor_mpseller->getPendingMpsellers($filter_data);
 
         foreach ($results as $result) {
-            if (!$result['approved']) {
-                $approve = $this->url->link('mpmultivendor/mpseller/approve', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true);
-            } else {
-                $approve = '';
-            }
+//            if (!$result['approved']) {
+//                $approve = $this->url->link('mpmultivendor/mpseller/approve', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true);
+//            } else {
+//                $approve = '';
+//            }
 
             $data['mpsellers'][] = array(
-                'mpseller_id'    => $result['mpseller_id'],
                 'customer_id'    => $result['customer_id'],
-                'store_owner'    => $result['store_owner'],
-                'store_name'     => $result['store_name'],
-                'total_products'     => $result['total_products'],
+                'firstname'    => $result['firstname'],
+                'lastname'     => $result['lastname'],
+                'total_products'  => 0,
                 'email'          => $result['email'],
                 'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                 'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-                'approve'        => $approve,
-                'message_link'           => $this->url->link('mpmultivendor/mpseller_message/view', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true),
-                'edit'           => $this->url->link('mpmultivendor/mpseller/edit', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true)
+                //'approve'        => $approve,
+                //'message_link'           => $this->url->link('mpmultivendor/mpseller_message/view', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true),
+                //'edit'           => $this->url->link('mpmultivendor/mpseller/edit', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true)
             );
         }
 
@@ -1762,4 +1761,44 @@ class ControllerMpmultivendorMpseller extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function remind()
+    {
+        $this->load->model('customer/customer');
+        $customerId = $this->request->post['customer_id'];
+        $customer = $this->model_customer_customer->getCustomer($customerId);
+
+        if ($this->request->server['HTTPS']) {
+            $server = $this->config->get('config_ssl');
+        } else {
+            $server = $this->config->get('config_url');
+        }
+
+        $mail = new Mail($this->config->get('config_mail_engine'));
+        $mail->parameter = $this->config->get('config_mail_parameter');
+        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+        $mail->setTo($customer['email']);
+        $mail->setFrom($this->config->get('config_email'));
+        $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Reminder for Seller Info', $this->config->get('config_name')), ENT_QUOTES, 'UTF-8'));
+
+        $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+        $data['firstname'] = $customer['firstname'];
+        $data['seller_info_link'] = $this->url->link('account/mpmultivendor/store_info', '', true);
+
+        $mailText = $this->load->view('mpmultivendor_mail/seller_remind', $data);
+        $mail->setHtml($mailText);
+        $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+        $mail->send();
+
+        $json = array();
+        $json['success'] = 'Success : The reminder mail has been sent to Seller.';
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
 }

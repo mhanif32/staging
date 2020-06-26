@@ -123,6 +123,79 @@ class ModelMpmultivendorMpseller extends Model {
 		return $query->rows;
 	}
 
+    public function getPendingMpsellers($data = array()) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "customer c WHERE c.customer_id NOT IN (select customer_id from ".DB_PREFIX."mpseller mps where mps.mpseller_id > 0) and c.role='seller'";
+
+        //echo $sql;exit('aaa');
+
+        $implode = array();
+
+//        if (!empty($data['filter_store_owner'])) {
+//            $implode[] = "mps.store_owner LIKE '%" . $this->db->escape($data['filter_store_owner']) . "%'";
+//        }
+//
+//        if (!empty($data['filter_store_name'])) {
+//            $implode[] = "mps.store_name LIKE '%" . $this->db->escape($data['filter_store_name']) . "%'";
+//        }
+
+//        if (!empty($data['filter_email'])) {
+//            $implode[] = "c.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
+//        }
+//
+//        if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+//            $implode[] = "mps.status = '" . (int)$data['filter_status'] . "'";
+//        }
+//
+//        if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
+//            $implode[] = "mps.approved = '" . (int)$data['filter_approved'] . "'";
+//        }
+//
+//        if (!empty($data['filter_date_added'])) {
+//            $implode[] = "DATE(mps.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+//        }
+//
+//        if ($implode) {
+//            $sql .= " AND " . implode(" AND ", $implode);
+//        }
+//
+        $sort_data = array(
+            //'mps.store_owner',
+            'mps.email',
+            'mps.status',
+            //'mps.approved',
+            'mps.date_added',
+            //'total_products',
+        );
+
+        if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+            $sql .= " ORDER BY " . $data['sort'];
+        } else {
+            $sql .= " ORDER BY c.firstname";
+        }
+
+        if (isset($data['order']) && ($data['order'] == 'DESC')) {
+            $sql .= " DESC";
+        } else {
+            $sql .= " ASC";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
 	public function approve($mpseller_id) {
 		$mpseller_info = $this->getMpseller($mpseller_id);
 
@@ -240,7 +313,9 @@ class ModelMpmultivendorMpseller extends Model {
 	}
 
     public function getTotalPendingSeller($data = array()) {
-        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c RIGHT JOIN " . DB_PREFIX . "mpseller mps ON c.customer_id = c.customer_id WHERE c.customer_id > 0 AND mps.mpseller_id IS NULL";
+//        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "mpseller mps ON c.customer_id = c.customer_id WHERE c.customer_id > 0 AND mps.mpseller_id = 0";
+
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c WHERE c.customer_id NOT IN (select customer_id from ".DB_PREFIX."mpseller mps where mps.mpseller_id > 0) and c.role = 'seller'";
 
         $implode = array();
 

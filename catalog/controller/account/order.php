@@ -286,6 +286,7 @@ class ControllerAccountOrder extends Controller {
 				$data['products'][] = array(
 					'product_id'=> $product['product_id'],
 					'mpseller_id'=> $product['mpseller_id'],
+					'store_name'=> $product['store_name'],
 					'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
@@ -348,8 +349,8 @@ class ControllerAccountOrder extends Controller {
 			$data['header'] = $this->load->controller('common/header');
             $data['back_url'] = $this->url->link('account/order ', '', true);
 
-            $this->load->model('mpmultivendor/mv_seller');
-            $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellersForEnquiry($this->customer->getId());
+//            $this->load->model('mpmultivendor/mv_seller');
+//            $data['sellers'] = $this->model_mpmultivendor_mv_seller->getSellersForEnquiry($this->customer->getId());
 
             //rating review
             $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
@@ -551,5 +552,10 @@ class ControllerAccountOrder extends Controller {
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
+    }
+
+    public function getSellerFromProduct()
+    {
+        $order_id = $this->request->get['order_id'];
     }
 }
