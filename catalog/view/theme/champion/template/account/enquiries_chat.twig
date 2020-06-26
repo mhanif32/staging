@@ -1,6 +1,11 @@
 {{ header }}
 <section class="enquiry-chat bg-light">
 <div id="container" class="container">
+  <ul class="breadcrumb">
+      {% for breadcrumbs in breadcrumb %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+      {% endfor %}
+  </ul>
 
   {% if custom_themename != 'journal2' %}<div class="row"> {% endif %}
     {{ column_left }}
