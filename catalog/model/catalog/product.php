@@ -82,6 +82,9 @@ class ModelCatalogProduct extends Model {
 //        if (isset($this->session->data['session_country_id'])) {
 //            $sql .= " LEFT JOIN oc_product_location pl ON (p.product_id = pl.product_id)";
 //        }
+        if (!empty($data['product_country'])) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
 
 		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
@@ -104,6 +107,10 @@ class ModelCatalogProduct extends Model {
 				$sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
 			}
 		}
+
+        if (!empty($data['product_country'])) {
+            $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
+        }
 
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 			$sql .= " AND (";

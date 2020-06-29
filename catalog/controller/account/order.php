@@ -538,6 +538,7 @@ class ControllerAccountOrder extends Controller {
             $dataAdmin['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
             $dataAdmin['order_id'] =  '#' . $order_id;
             $dataAdmin['date_added'] = substr($orderData['date_added'], 0, 10);
+            $dataAdmin['customer_name'] = $customerData['firstname'].' '.$customerData['lastname'];
 
             $mailText = $this->load->view('mail/order_cancel_to_admin', $dataAdmin);
             $mail->setHtml($mailText);

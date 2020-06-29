@@ -27,17 +27,17 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <!-- fontawesome cdn -->
     <script src="https://kit.fontawesome.com/d67e01f116.js" crossorigin="anonymous"></script>
-    {#<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>#}
+    {# <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/> #}
     <link href="catalog/view/theme/champion/stylesheet/css/bootstrap.css" rel="stylesheet" media="screen"/>
-    {#<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>#}
+    {# <script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> #}
     <script src="catalog/view/theme/champion/stylesheet/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             type="text/javascript"></script>
     <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    {#<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css"/>#}
+    {# <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css"/> #}
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap"
           rel="stylesheet">
 
-    {#<link href="catalog/view/theme/champion/stylesheet/stylesheet.css" rel="stylesheet">#}
+    {# <link href="catalog/view/theme/champion/stylesheet/stylesheet.css" rel="stylesheet"> #}
     <link href="catalog/view/theme/champion/stylesheet/css/style.css" rel="stylesheet">
     {% for style in styles %}
         <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
@@ -54,24 +54,24 @@
         {{ analytic }}
     {% endfor %}
 
-    {#icheck#}
+    {# icheck #}
     <script src="catalog/view/javascript/icheck/icheck.js" type="text/javascript"></script>
     <link href="catalog/view/javascript/icheck/skins/all.css" rel="stylesheet" media="screen"/>
 
-{#source code disable#}
-    {#<SCRIPT language=JavaScript>#}
+    {# source code disable #}
+    {# <SCRIPT language=JavaScript> #}
 
-        {#<!-- http://www.spacegun.co.uk -->#}
+    {# <!-- http://www.spacegun.co.uk --> #}
 
-        {#var message = "function disabled";#}
+    {# var message = "function disabled"; #}
 
-        {#function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }#}
+    {# function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; } #}
 
-            {#if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }#}
+    {# if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } } #}
 
-        {#document.onmousedown = rtclickcheck;#}
+    {# document.onmousedown = rtclickcheck; #}
 
-    {#</SCRIPT>#}
+    {# </SCRIPT> #}
 
 </head>
 <body>
@@ -82,43 +82,43 @@
             <form id="form-address">
                 <nav class="nav d-flex justify-content-between">
                     {% if loggedInCountry %}
-                        {#                <div class="w-100">#}
-                        {#                    <h3 class="f-13 font-weight-medium mb-0 text-white"><i class="fa fa-map-marker text-danger f-35"></i> Hello, Deliver To {% if firstname %} {{ firstname }} {% else %} You {% endif %}, <span class="text-white"> {{ loggedInCountry }}</span> </h3>#}
-                        {#                </div>#}
+                        {# <div class="w-100"> #}
+                        {# <h3 class="f-13 font-weight-medium mb-0 text-white"><i class="fa fa-map-marker text-danger f-35"></i> Hello, Deliver To {% if firstname %} {{ firstname }} {% else %} You {% endif %}, <span class="text-white"> {{ loggedInCountry }}</span> </h3> #}
+                        {# </div> #}
                     {% else %}
-                        {#                        <div class="">#}
-                        {#                            <h3 class="f-13 text-white font-weight-medium">#}
-                        {#                                Choose your country & delivery location#}
-                        {#                            </h3>#}
-                        {#                        </div>#}
-                        {#                        <div class="select">#}
-                        {#                            <select name="country_id" id="input-country" class="form-control rounded-0">#}
-                        {#                                <option value="">{{ text_select }}</option>#}
-                        {#                                {% for country in countries %}#}
-                        {#                                    {% if country.country_id == country_id %}#}
-                        {#                                        <option value="{{ country.country_id }}"#}
-                        {#                                                selected="selected">{{ country.name }}</option>#}
-                        {#                                    {% else %}#}
-                        {#                                        <option value="{{ country.country_id }}">{{ country.name }}</option>#}
-                        {#                                    {% endif %}#}
-                        {#                                {% endfor %}#}
-                        {#                            </select>#}
-                        {#                            {% if error_country %}#}
-                        {#                                <div class="text-danger">{{ error_country }}</div>#}
-                        {#                            {% endif %}#}
-                        {#                        </div>#}
-                        {#                        <div class="select">#}
-                        {#                            <select name="zone_id" id="input-zone" class="form-control rounded-0">#}
-                        {#                            </select>#}
-                        {#                            {% if error_zone %}#}
-                        {#                                <div class="text-danger">{{ error_zone }}</div>#}
-                        {#                            {% endif %}#}
-                        {#                        </div>#}
-                        {#                        <div class="text-left position-relative btn-border-div">#}
-                        {#                            <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0"#}
-                        {#                               id="confirm-address" role="button"#}
-                        {#                               style="height: 34px;">CONFIRM</a>#}
-                        {#                        </div>#}
+                        {# <div class=""> #}
+                        {# <h3 class="f-13 text-white font-weight-medium"> #}
+                        {# Choose your country & delivery location #}
+                        {# </h3> #}
+                        {# </div> #}
+                        {# <div class="select"> #}
+                        {# <select name="country_id" id="input-country" class="form-control rounded-0"> #}
+                        {# <option value="">{{ text_select }}</option> #}
+                        {# {% for country in countries %} #}
+                        {# {% if country.country_id == country_id %} #}
+                        {# <option value="{{ country.country_id }}" #}
+                        {# selected="selected">{{ country.name }}</option> #}
+                        {# {% else %} #}
+                        {# <option value="{{ country.country_id }}">{{ country.name }}</option> #}
+                        {# {% endif %} #}
+                        {# {% endfor %} #}
+                        {# </select> #}
+                        {# {% if error_country %} #}
+                        {# <div class="text-danger">{{ error_country }}</div> #}
+                        {# {% endif %} #}
+                        {# </div> #}
+                        {# <div class="select"> #}
+                        {# <select name="zone_id" id="input-zone" class="form-control rounded-0"> #}
+                        {# </select> #}
+                        {# {% if error_zone %} #}
+                        {# <div class="text-danger">{{ error_zone }}</div> #}
+                        {# {% endif %} #}
+                        {# </div> #}
+                        {# <div class="text-left position-relative btn-border-div"> #}
+                        {# <a href="javascript:void(0)" class="btn bg-primary text-white w-100 f-13 rounded-0" #}
+                        {# id="confirm-address" role="button" #}
+                        {# style="height: 34px;">CONFIRM</a> #}
+                        {# </div> #}
                     {% endif %}
                 </nav>
             </form>
@@ -148,9 +148,9 @@
                                 <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
                             </div>
                         </div>
-                        {#                        <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li>#}
-                        {#                        <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li>#}
-                        {#                        <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li>#}
+                        {# <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li> #}
+                        {# <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li> #}
+                        {# <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li> #}
 
                     {% else %}
                         <a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>
@@ -158,9 +158,9 @@
                     {% endif %}
                 </div>
 
-                {#<div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">#}
-                {#{{ cart }}#}
-                {#</div>#}
+                {# <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons"> #}
+                {# {{ cart }} #}
+                {# </div> #}
             </div>
 
             <div class="col-12 col-md-3 col-lg-2 m-auto">
@@ -252,19 +252,32 @@
                 <div class="collapse navbar-collapse" id="navbarsExample08">
                     <ul class="navbar-nav navbar-nav-menu ">
                         {% if loggedInCountry %}
-                            {#<small class="font-weight-medium mb-0">#}
-                            {#<i class="fa fa-map-marker text-danger"></i><span class=""> {{ loggedInCountry }}</span></small>#}
-                            <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button" data-toggle="modal"
-                                 data-target="#exampleModalCenter">
-                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
-                                    <i class="fa fa-map-marker text-danger"></i>
+                            {% if logged %}
+                                <div class="home-location d-flex d-flex-row d-flex-nowrap">
+                                    <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                        <i class="fa fa-map-marker text-danger"></i>
+                                    </div>
+                                    <a href="{{ manage_address_link }}">
+                                    <div class="home-location-text d-flex d-flex-column bg-black text-white">
+                                        <a class="button w-100" type="button"
+                                           data-hover="Click to Choose New Location"
+                                           data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
+                                    </div>
+                                    </a>
                                 </div>
-                                <div class="home-location-text d-flex d-flex-column bg-black text-white">
-
-                                    <a class="button w-100" type="button" data-hover="Click to Choose New Location"
-                                       data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
+                            {% else %}
+                                <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
+                                     data-toggle="modal"
+                                     data-target="#exampleModalCenter">
+                                    <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                        <i class="fa fa-map-marker text-danger"></i>
+                                    </div>
+                                    <div class="home-location-text d-flex d-flex-column bg-black text-white">
+                                        <a class="button w-100" type="button" data-hover="Click to Choose New Location"
+                                           data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

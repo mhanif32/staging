@@ -38,6 +38,44 @@ class ModelAccountMpmultivendorOrders extends Model {
 		return $query->rows;
 	}
 
+    public function getPendingOrders($data = array()) {
+        $sql = "SELECT mpo.order_id, o.firstname, o.lastname, os.name as status, osadmin.name as by_admin_status, o.date_added, o.currency_code, o.currency_value, (SELECT `value` FROM ". DB_PREFIX ."mpseller_order_total mpot WHERE mpot.order_id = mpo.order_id AND mpot.mpseller_id = '" . (int)$data['mpseller_id'] . "' AND `code` = 'sub_total') AS total FROM `" . DB_PREFIX . "order` o LEFT JOIN `". DB_PREFIX ."mpseller_order_product` mpo ON (o.order_id=mpo.order_id) LEFT JOIN " . DB_PREFIX . "order_status os ON (mpo.order_status_id = os.order_status_id) LEFT JOIN " . DB_PREFIX . "order_status osadmin ON (o.order_status_id = osadmin.order_status_id) WHERE mpo.mpseller_id = '" . (int)$data['mpseller_id'] . "' AND o.order_status_id > '0' AND mpo.order_status_id != '5' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+        if (!empty($data['filter_order_id'])) {
+            $sql .= " AND o.order_id = '" . (int)$data['filter_order_id'] . "'";
+        }
+
+        if (!empty($data['filter_date_added'])) {
+            $sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+        }
+
+        if (!empty($data['filter_order_status_id'])) {
+            $sql .= " AND mpo.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+        }
+
+        if (!empty($data['filter_admin_order_status_id'])) {
+            $sql .= " AND o.order_status_id = '" . (int)$data['filter_admin_order_status_id'] . "'";
+        }
+
+        $sql .= " GROUP BY mpo.order_id ORDER BY o.order_id DESC ";
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
 	public function getTotalOrders($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "order` o LEFT JOIN `". DB_PREFIX ."mpseller_order_product` mpo ON (o.order_id=mpo.order_id) WHERE mpo.mpseller_id = '" . (int)$data['mpseller_id'] . "' AND o.order_status_id > '0' AND mpo.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
@@ -63,6 +101,32 @@ class ModelAccountMpmultivendorOrders extends Model {
 
 		return $query->num_rows;
 	}
+
+    public function getTotalPendingOrders($data = array()) {
+        $sql = "SELECT * FROM `" . DB_PREFIX . "order` o LEFT JOIN `". DB_PREFIX ."mpseller_order_product` mpo ON (o.order_id=mpo.order_id) WHERE mpo.mpseller_id = '" . (int)$data['mpseller_id'] . "' AND mpo.order_status_id != '5' AND mpo.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+
+        if (!empty($data['filter_order_id'])) {
+            $sql .= " AND o.order_id = '" . (int)$data['filter_order_id'] . "'";
+        }
+
+        if (!empty($data['filter_date_added'])) {
+            $sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+        }
+
+        if (!empty($data['filter_order_status_id'])) {
+            $sql .= " AND mpo.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+        }
+
+        if (!empty($data['filter_admin_order_status_id'])) {
+            $sql .= " AND o.order_status_id = '" . (int)$data['filter_admin_order_status_id'] . "'";
+        }
+        $sql .= " GROUP BY mpo.order_id";
+
+
+        $query = $this->db->query($sql);
+
+        return $query->num_rows;
+    }
 
 	public function getOrder($order_id, $mpseller_id) {
 		$order_query = $this->db->query("SELECT o.*, (SELECT `value` FROM ". DB_PREFIX ."mpseller_order_total mpot WHERE mpot.order_id = mpo.order_id AND mpot.mpseller_id = '" . (int)$mpseller_id . "' AND `code` = 'sub_total') AS total, mpo.order_status_id AS mpseller_order_status_id FROM `" . DB_PREFIX . "order` o LEFT JOIN `". DB_PREFIX ."mpseller_order_product` mpo ON (o.order_id=mpo.order_id) WHERE o.order_id = '" . (int)$order_id . "' AND mpo.mpseller_id = '" . (int)$mpseller_id . "' AND o.order_status_id > '0' AND mpo.order_status_id > '0'");
