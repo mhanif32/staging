@@ -257,13 +257,11 @@
                                     <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
                                         <i class="fa fa-map-marker text-danger"></i>
                                     </div>
-                                    <a href="{{ manage_address_link }}">
                                     <div class="home-location-text d-flex d-flex-column bg-black text-white">
-                                        <a class="button w-100" type="button"
+                                        <a href="{{ manage_address_link }}" class="button w-100" type="button"
                                            data-hover="Click to Choose New Location"
                                            data-active="I'M ACTIVE"><span>{{ loggedInCountry }}</span></a>
                                     </div>
-                                    </a>
                                 </div>
                             {% else %}
                                 <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
