@@ -112,8 +112,7 @@ class ControllerCommonHeader extends Controller
         $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
 
         $this->load->model('localisation/country');
-
-        //$data['countries'] = $this->model_localisation_country->getDeliveryPartnerCountries();
+        $data['countries'] = $this->model_localisation_country->getCountries();
 
         //check logged in user country
         /*$data['loggedInCountry'] = '';
