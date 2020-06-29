@@ -50,6 +50,7 @@
                                                           class="active">{{ tab_store }}</a></li>
                                     <li><a href="#tab-local" data-toggle="tab">{{ tab_address }}</a></li>
                                     <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
+                                    <li><a href="#tab-doc" data-toggle="tab">{{ tab_doc }}</a></li>
                                     <li><a href="#tab-social" data-toggle="tab">{{ tab_social_profiles }}</a></li>
                                 </ul>
                                 <div class="{% if custom_themename != 'journal2' %} tab-content  {% else %} tabs-content {% endif %}col-md-8 pl-0">
@@ -261,6 +262,9 @@
                                                 <input type="hidden" name="image" value="{{ image }}" id="input-image"/>
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div class="tab-pane mt-3" id="tab-doc">
                                         <div class="form-group">
                                             <label class="control-label col-sm-12">{{ entry_id_proof }}</label>
                                             <div class="col-sm-12">
@@ -277,7 +281,7 @@
                                                     </div>
                                                 {% endif %}
                                                 {% if link_id_proof %}
-                                                <a href="{{ link_id_proof }}" class="btn btn-primary" target="_blank">Click here to view Id Proof</a>
+                                                    <a href="{{ link_id_proof }}" class="btn btn-primary" target="_blank">Click here to view Id Proof</a>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -303,6 +307,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="tab-pane mt-3" id="tab-social">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">{{ entry_facebook }}</label>

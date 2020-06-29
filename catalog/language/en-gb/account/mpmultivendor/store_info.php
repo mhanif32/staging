@@ -21,7 +21,8 @@ $_['tab_general'] 		= 'General';
 $_['tab_store'] 		= 'Store Info';
 $_['tab_local'] 		= 'Local';
 $_['tab_address'] 		= 'Address';
-$_['tab_image'] 		= 'Image & Docs';
+$_['tab_image'] 		= 'Upload images';
+$_['tab_doc'] 		= 'Upload Documents';
 $_['tab_social_profiles'] = 'Social Profiles';
 $_['tab_seo'] 			= 'SEO';
 
