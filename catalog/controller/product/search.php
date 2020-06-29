@@ -184,12 +184,21 @@ class ControllerProductSearch extends Controller {
 				'children'    => $level_2_data
 			);
 		}
-
+        $this->load->model('account/address');
 		$data['products'] = array();
 
 		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['location'])) {
+
+            if (!$this->customer->isLogged()) {
+                $countryId = $this->session->data['session_country_id'];
+            } else {
+                $defaultAddress = $this->model_account_address->getDefaultAddress();
+                //echo '<pre>';print_r($defaultAddress);exit('okok');
+                $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+            }
+
 			$filter_data = array(
-				'product_country'     => 1,
+				'product_country'     => $countryId,
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,

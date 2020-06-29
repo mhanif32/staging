@@ -78,10 +78,7 @@ class ModelCatalogProduct extends Model {
 			$sql .= " FROM " . DB_PREFIX . "product p ";
 		}
 
-        //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $sql .= " LEFT JOIN oc_product_location pl ON (p.product_id = pl.product_id)";
-//        }
+        //countrywise location products
         if (!empty($data['product_country'])) {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
@@ -163,12 +160,6 @@ class ModelCatalogProduct extends Model {
 
 			$sql .= ")";
 		}
-
-        //countrywise location
-//        if (!empty($this->session->data['session_country_id'])) {
-//            $country_id = $this->session->data['session_country_id'];
-//            $sql .=" and pl.country_id = '".$country_id."'";
-//        }
         
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
@@ -300,17 +291,17 @@ class ModelCatalogProduct extends Model {
 	    $sql = "SELECT COUNT(DISTINCT ps.product_id) AS total FROM " . DB_PREFIX . "product_special ps LEFT JOIN " . DB_PREFIX . "product p ON (ps.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) ";
 
         //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $sql .= " LEFT JOIN oc_product_location pl ON (p.product_id = pl.product_id)";
-//        }
+        if (isset($this->session->data['session_country_id'])) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
 
         $sql .= " WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW()))";
 
         //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $country_id = $this->session->data['session_country_id'];
-//            $sql .=" and pl.country_id = '".$country_id."'";
-//        }
+        if (isset($this->session->data['session_country_id'])) {
+            $country_id = $this->session->data['session_country_id'];
+            $sql .=" and pl.country_id = '".$country_id."'";
+        }
 
         $query = $this->db->query($sql);
 
@@ -506,9 +497,9 @@ class ModelCatalogProduct extends Model {
 		}
 
         //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $sql .= " LEFT JOIN oc_product_location pl ON (p.product_id = pl.product_id)";
-//        }
+        if (!empty($data['product_country'])) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
 
 		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
@@ -586,6 +577,10 @@ class ModelCatalogProduct extends Model {
 
         if (!empty($data['filter_location'])) {
             $sql .= " AND p.location = '" . $data['filter_location'] . "'";
+        }
+
+        if (!empty($data['product_country'])) {
+            $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
         }
 
 		if (!empty($data['filter_manufacturer_id'])) {
