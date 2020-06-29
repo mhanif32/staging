@@ -14,7 +14,13 @@
  
 <script>
   function payWithPaystack(){
+
+      $('#button-confirm').html(
+          `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+      );
+
     var handler = PaystackPop.setup({
+
       key: '{{key}}',
       currency: '{{currency}}',
       email: '{{email}}',
