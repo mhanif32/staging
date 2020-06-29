@@ -101,6 +101,7 @@ class ControllerCommonHeader extends Controller
         $data['checkout'] = $this->url->link('checkout/checkout', '', true);
         $data['contact'] = $this->url->link('information/contact');
         $data['track_your_order'] = $this->url->link('account/order/track');
+        $data['manage_address_link'] = $this->url->link('account/address');
         $data['telephone'] = $this->config->get('config_telephone');
 
         $data['language'] = $this->load->controller('common/language');

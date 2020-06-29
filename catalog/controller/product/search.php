@@ -2,8 +2,8 @@
 class ControllerProductSearch extends Controller {
 	public function index() {
 
-//        error_reporting(E_ALL);
-//        ini_set("display_errors", 1);
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 
 		$this->load->language('product/search');
 
@@ -131,7 +131,7 @@ class ControllerProductSearch extends Controller {
 		if (isset($this->request->get['limit'])) {
 			$url .= '&limit=' . $this->request->get['limit'];
 		}
-///echo '<pre>';print_r($url);exit('asd');
+
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/search', $url)
@@ -189,6 +189,7 @@ class ControllerProductSearch extends Controller {
 
 		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['location'])) {
 			$filter_data = array(
+				'product_country'     => 1,
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
