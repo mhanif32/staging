@@ -9,10 +9,13 @@ class ControllerExtensionModuleSlideshow extends Controller {
 
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
+//		top message
+        $this->load->model('catalog/information');
 
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
 		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+
 		
 		$data['banners'] = array();
 
@@ -28,10 +31,17 @@ class ControllerExtensionModuleSlideshow extends Controller {
 			}
 		}
 
+
+        $leftSlideMsg = $this->model_catalog_information->getInfoMessage(7);
+
 		$data['module'] = $module++;
         $data['search_by_nigeria'] = $this->url->link('product/search', '&location=Nigeria');
         $data['sale_href'] = $this->url->link('product/special', '', true);
         $data['information_href'] = $this->url->link('information/information&information_id=7', '', true);
+
+        $data['leftSlideMsg'] = $leftSlideMsg;
+
+
 
         //Retailers
         $this->load->model('catalog/product');
@@ -50,6 +60,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
             $data['men_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
         }
 
+        $this->load->model('catalog/information');
         //women count and path
         $countWomen = $this->model_catalog_product->getCountWomen();
         $data['count_women'] = $countWomen['total'];
@@ -81,6 +92,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
         );
 
         return $this->load->view('extension/module/slideshow', $data);
+
 
 	}
 }
