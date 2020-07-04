@@ -31,17 +31,14 @@ class ControllerExtensionModuleSlideshow extends Controller {
 			}
 		}
 
-
-        $leftSlideMsg = $this->model_catalog_information->getInfoMessage(7);
-
 		$data['module'] = $module++;
         $data['search_by_nigeria'] = $this->url->link('product/search', '&location=Nigeria');
         $data['sale_href'] = $this->url->link('product/special', '', true);
         $data['information_href'] = $this->url->link('information/information&information_id=7', '', true);
 
-        $data['leftSlideMsg'] = $leftSlideMsg;
-
-
+        $leftSlideMsg = $this->model_catalog_information->getInfoMessage(2);
+        $data['leftMsgTitle'] = $leftSlideMsg['title'];
+        $data['leftMsgDesc'] = html_entity_decode($leftSlideMsg['description'], ENT_QUOTES, 'UTF-8');
 
         //Retailers
         $this->load->model('catalog/product');

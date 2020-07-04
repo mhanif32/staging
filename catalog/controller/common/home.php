@@ -12,7 +12,7 @@ class ControllerCommonHome extends Controller {
 			$this->document->addLink($this->config->get('config_url'), 'canonical');
 		}
 
-        $leftSlideMsg = $this->model_catalog_information->getInfoMessage(9);
+        $leftSlideMsg = $this->model_catalog_information->getInfoMessage(1);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -20,8 +20,8 @@ class ControllerCommonHome extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-		$data['leftSlideMsg'] = $leftSlideMsg;
-
+		$data['leftMsgTitle'] = $leftSlideMsg['title'];
+		$data['leftMsgDesc'] = html_entity_decode($leftSlideMsg['description'], ENT_QUOTES, 'UTF-8');
 
 		$this->response->setOutput($this->load->view('common/home', $data));
 	}

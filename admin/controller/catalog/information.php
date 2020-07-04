@@ -85,7 +85,11 @@ class ControllerCatalogInformation extends Controller {
 
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $information_id) {
-				$this->model_catalog_information->deleteInformation($information_id);
+
+                if (!in_array($information_id, array(1, 2))) {
+
+                    $this->model_catalog_information->deleteInformation($information_id);
+                }
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
