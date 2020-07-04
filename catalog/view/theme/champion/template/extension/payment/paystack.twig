@@ -1,48 +1,51 @@
 {% if not livemode %}
- <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ text_testmode }}
-{% endif %}
+<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ text_testmode }}
+    {% endif %}
 
-<form >
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-  <div class="buttons">
-      <div class="row justify-content-between">
-          <a href="#" class="btn btn-primary">Continue Shopping</a>
-          <input type="button"  onclick="payWithPaystack()" value="{{button_confirm}}" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-    </div>
-  </div>
-</form>
- 
-<script>
-  function payWithPaystack(){
+    <form>
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+        <div class="buttons">
+            <div class="row justify-content-between">
+                <a href="#" class="btn btn-primary">Continue Shopping</a>
+                <input type="button" onclick="payWithPaystack()" value="{{ button_confirm }}"
+                       data-loading-text="{{ text_loading }}" class="btn btn-primary" id="button-confirm"/>
+            </div>
+        </div>
+    </form>
 
-      $('#button-confirm').html(
-          `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
-      );
+    <script>
+        function payWithPaystack() {
 
-    var handler = PaystackPop.setup({
+            {# $('#button-confirm').html( #}
+            {# `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}` #}
+            {# ); #}
 
-      key: '{{key}}',
-      currency: '{{currency}}',
-      email: '{{email}}',
-      amount: {{amount}},
-      ref: '{{ref}}',
-      metadata:{
-         "custom_fields":[
-            {
-              "display_name":"Plugin",
-              "variable_name":"plugin",
-              "value":"opencart-3.x"
-            }
-          ]
-      },
-      callback: function(response){
-          window.location.href='{{callback}}'.replace('&amp;', '&').replace('&amp;', '&');
-      },
-      onClose: function(){
-          window.location.href='{{callback}}'.replace('&amp;', '&').replace('&amp;', '&');
-      }
-    });
-    console.log(handler);
-    handler.openIframe();
-  }
-</script>
+            $('#button-confirm').prop('disabled', true);
+
+            var handler = PaystackPop.setup({
+
+                key: '{{ key }}',
+                currency: '{{ currency }}',
+                email: '{{ email }}',
+                amount: {{ amount }},
+                ref: '{{ ref }}',
+                metadata: {
+                    "custom_fields": [
+                        {
+                            "display_name": "Plugin",
+                            "variable_name": "plugin",
+                            "value": "opencart-3.x"
+                        }
+                    ]
+                },
+                callback: function (response) {
+                    window.location.href = '{{ callback }}'.replace('&amp;', '&').replace('&amp;', '&');
+                },
+                onClose: function () {
+                    window.location.href = '{{ callback }}'.replace('&amp;', '&').replace('&amp;', '&');
+                }
+            });
+            console.log(handler);
+            handler.openIframe();
+        }
+    </script>
