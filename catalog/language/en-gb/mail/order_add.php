@@ -1,7 +1,7 @@
 <?php
 // Text
 $_['text_subject']          = '%s - Order %s';
-$_['text_greeting']         = 'Thank you for your recent purchase of goods on %s. .  Your order has been completed. Below are the details of your transaction.';
+$_['text_greeting']         = 'Thank you for your recent purchase of goods on %s.com .  Your order has been completed. Below are the details of your transaction.';
 $_['text_greeting_1'] = 'thechampionmall.com is here to provide you with all that you need for yourself and loved ones at
 ease.';
 
