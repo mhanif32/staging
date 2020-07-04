@@ -222,15 +222,18 @@ class ModelAccountOrder extends Model
         $order_info = $this->getOrder($order_id);
 
         if ($order_info && !$order_info['invoice_no']) {
-            $query = $this->db->query("SELECT MAX(invoice_no) AS invoice_no FROM `" . DB_PREFIX . "order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
+            /*$query = $this->db->query("SELECT MAX(invoice_no) AS invoice_no FROM `" . DB_PREFIX . "order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
 
             if ($query->row['invoice_no']) {
                 $invoice_no = $query->row['invoice_no'] + 1;
             } else {
                 $invoice_no = 1;
-            }
+            }*/
 
-            $this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' WHERE order_id = '" . (int)$order_id . "'");
+            $query = $this->db->query("SELECT UPPER(LEFT(UUID(), 8)) as random_no");
+            $invoice_no = $query->row['random_no'];
+
+            $this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . $invoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' WHERE order_id = '" . (int)$order_id . "'");
 
             return $order_info['invoice_prefix'] . $invoice_no;
         }
