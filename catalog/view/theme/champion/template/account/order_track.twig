@@ -6,11 +6,7 @@
     <div class="container" style="max-width: 700px;">
 
         <div class="card border-0 box-shadow">
-
-
                 <div class="d-flex justify-content-between mx-md-5 px-md-5 mt-3">
-
-
                     <h3 class="f-20 font-weight-bold text-uppercase text-center">Track Your Order <span
                                 class="text-primary font-weight-bold">#{{ order_status.invoice_prefix }}{{ order_status.order_id }}</span>
                     </h3>
@@ -21,24 +17,32 @@
 
             <form method="get" id="track-form" action="{{ action }}">
                 <div class="row justify-content-between mx-md-5 px-md-4 mt-3">
-                    <div class="col-sm-5">
-                        <label class="f-12 mb-1">Order Number </label>
-                        <div id="searchInputOrder" class="input-group mb-3">
+                    <div class="col-sm-4">
+                        <label class="f-12">Invoice Number </label>
+                        <div id="searchOrderInvoice" class="input-group">
+                            <input type="text" name="order_invoice" value="{{ order_invoice }}"
+                                   placeholder="Invoice Number"
+                                   class="form-control">
+                        </div>
+                    </div>
+                     <div class="col-sm-3">
+                        <label class="f-12">Order Number </label>
+                        <div id="searchOrder" class="input-group">
                             <input type="text" name="search_order" value="{{ order_id }}"
-                                   placeholder="Enter the Order Number here"
+                                   placeholder="Order Number"
                                    class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <label class="f-12 mb-1">Email </label>
-                        <div id="searchEmail" class="input-group mb-3">
+                        <label class="f-12">Email </label>
+                        <div id="searchEmail" class="input-group">
                             <input type="text" name="email" value="{{ email }}"
-                                   placeholder="Enter the Order Email here"
+                                   placeholder="Email"
                                    class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary f-12 mt-4">
+                        <button type="submit" class="btn btn-primary f-12 mt-1">
                             Search</button>
                     </div>
                 </div>
@@ -144,10 +148,12 @@
 
     function searchOrder() {
         var url = $('base').attr('href') + 'index.php?route=account/order/track';
-
-        var orderId = $('#searchInputOrder input[name=\'search_order\']').val();
+        var invoice = $('#searchOrderInvoice input[name=\'order_invoice\']').val();
+        var orderId = $('#searchOrder input[name=\'search_order\']').val();
         var email = $('#searchEmail input[name=\'email\']').val();
-        if (orderId && email) {
+
+        if (orderId && email && invoice) {
+            url += '&invoice=' + encodeURIComponent(invoice);
             url += '&order_id=' + encodeURIComponent(orderId);
             url += '&email=' + encodeURIComponent(email);
         }

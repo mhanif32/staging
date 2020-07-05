@@ -1,5 +1,4 @@
 <?php
-
 class ControllerAccountMpmultivendorDashboard extends Controller
 {
     public function index()
@@ -110,7 +109,6 @@ class ControllerAccountMpmultivendorDashboard extends Controller
 
         $total_sales = $this->model_account_mpmultivendor_dashboard->getTotalSales($filter_data);
         $data['total_sales'] = $this->currency->format($total_sales, $this->config->get('config_currency'));
-
         $data['total_products'] = $this->model_account_mpmultivendor_dashboard->getTotalProucts($filter_data);
 
         $data['total_services'] = $this->model_account_mpmultivendor_dashboard->getTotalServices($filter_data);

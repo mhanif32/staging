@@ -167,10 +167,10 @@ class ModelAccountOrder extends Model
         return $query->row['total'];
     }
 
-    public function getTrackTotalOrders($order_id = NULL, $email)
+    public function getTrackTotalOrders($order_id = NULL, $email, $order_invoice)
     {
 
-        $sql = "SELECT os.name as status, o.invoice_prefix, o.order_id FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.order_status_id > '0' AND ";
+        $sql = "SELECT os.name as status, o.order_id, o.invoice_prefix, o.invoice_no FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.order_status_id > '0' AND ";
 
         //check for guest checkout
         $queryGuest = $this->db->query("SELECT * FROM " . DB_PREFIX . "order WHERE order_id = '" . (int)$order_id . "'");
@@ -181,9 +181,11 @@ class ModelAccountOrder extends Model
         if (!empty($order_id)) {
             $sql .= "o.order_id = '" . (int)$order_id . "' AND ";
             $sql .= "o.email = '" . $email . "' AND ";
+            $sql .= "concat(o.invoice_prefix, '', o.invoice_no) like '".$order_invoice."' AND ";
         }
 
         $sql .= "o.store_id = '" . (int)$this->config->get('config_store_id') . "' LIMIT 1";
+//echo $sql;exit('asd');
         $query = $this->db->query($sql);
         return $query->row;
     }

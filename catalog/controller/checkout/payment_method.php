@@ -70,11 +70,18 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				$sort_order[$key] = $value['sort_order'];
 			}
 
+			//echo '<pre>';print_r($method_data);exit('oko');
+
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
 			if($this->session->data['currency'] != 'NGN') {
                 if(!empty($method_data['paystack'])) {
                     unset($method_data['paystack']);
+                }
+            } 
+            if($this->session->data['currency'] == 'NGN') {
+				if(!empty($method_data['stripe'])) {
+                    unset($method_data['stripe']);
                 }
             }
 
