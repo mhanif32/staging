@@ -15,7 +15,7 @@ $('#button-confirm').on('click', function() {
             $('#button-confirm').html(
                     `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
             );
-			$("#collapse-checkout-confirm").append('<img src="image/spinner.gif" alt="Wait" />');
+			$("#collapse-checkout-confirm").append('<div class="loading-checkout">Loading&#8230;</div>');
 		},
 		complete: function() {
 			$('#button-confirm').button('reset');
