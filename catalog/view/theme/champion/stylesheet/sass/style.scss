@@ -1518,13 +1518,13 @@ ul.breadcrumb li {
 .info-area {
   position: fixed;
   top: 50%; z-index: 11;
-span.left-menu-icon { background: aquamarine; position: fixed; left: 10px; border-radius: 50%; text-align: center;
-  padding: 10px 25px; font-size: 50px; top: 50%; transform: translate(10px, -50%);}
+span.left-menu-icon { background-color: #01B0F1 ; position: fixed; left: 10px; border-radius: 50%; text-align: center;
+  padding: 10px 36px; font-size: 50px; top: 50%; transform: translate(10px, -50%); color: white;}
 nav.main-menu {
   ul {
-    li.title { text-align: center; color: white; font-size: 22px; font-weight: 600; text-transform: uppercase;
+    li.title { text-align: center; color: white; font-size: 22px; font-weight: 600; text-transform: uppercase; padding: 0 15px;
       h4 { text-align: center; color: white; font-size: 22px; font-weight: 600; text-transform: uppercase; }}
-    li.description { color: white; margin: 30px 0; font-size: 15px;
+    li.description { color: white; margin: 30px 0; font-size: 15px; padding: 0 15px;
       p { color: white; font-size: 15px; }}
   }
 }
