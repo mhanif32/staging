@@ -13,12 +13,12 @@
 </div>
 
 
-<div id="sidebar"><a class="btn_close" onclick="closeNav()"> &times;</a>
-    <div class="title-information">
-        <h4>{{ leftMsgTitle }}</h4>
+{#<div id="sidebar"><a class="btn_close" onclick="closeNav()"> &times;</a>#}
+    {#<div class="title-information">#}
+        {#<h4>{{ leftMsgTitle }}</h4>#}
 
-        <p>{{ leftMsgDesc }}</p>
-    </div>
+        {#<p>{{ leftMsgDesc }}</p>#}
+    {#</div>#}
     {#<ul class="nav_wrapper">#}
         {#<li><a href="">What we do + </a>#}
             {#<ul class="nav_item">#}
@@ -31,23 +31,43 @@
         {#<li> <a href="">Join our team +</a></li>#}
         {#<li><a href="">Contact us</a></li>#}
     {#</ul>#}
+{#</div>#}
+{#<div class="main-side">#}
+    {#<div class="menu_bg"><span id="menu" onclick="openNav()">&#9776;</span></div>#}
+{#</div>#}
+
+
+
+
+<div class="info-area">
+<nav class="main-menu">
+    <ul>
+        <li class="title">
+                        <span class="title-text"> {{ leftMsgTitle }} </span>
+
+        </li>
+        <li class="description">
+            <span class="description-text"> {{ leftMsgDesc }} </span>
+        </li>
+    </ul>
+
+
+</nav>
+    <span class="left-menu-icon"><i class="fas fa-info"></i></span>
 </div>
-<div class="main-side">
-    <div class="menu_bg"><span id="menu" onclick="openNav()">&#9776;</span></div>
-</div>
 
-<script>
-    function openNav() {
-        document.getElementById("sidebar").style.width = "300px";
-    }
+{#<script>#}
+    {#function openNav() {#}
+        {#document.getElementById("sidebar").style.width = "300px";#}
+    {#}#}
 
-    function closeNav() {
-        document.getElementById("sidebar").style.width = "0px";
+    {#function closeNav() {#}
+        {#document.getElementById("sidebar").style.width = "0px";#}
 
-    }
+    {#}#}
 
 
-</script>
+{#</script>#}
 
 
 
