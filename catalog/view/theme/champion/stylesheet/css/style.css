@@ -490,11 +490,6 @@ header {
         padding: 20px; }
       header .nav-mega .dropdown-menu.mega-menu .media-list .media {
         padding: 10px; }
-  header .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden; }
 
 .home-banner .carousel-item {
   min-height: 320px; }
