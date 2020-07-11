@@ -190,7 +190,7 @@ class ControllerProductSearch extends Controller {
 		if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->get['location'])) {
 
             if (!$this->customer->isLogged()) {
-                $countryId = $this->session->data['session_country_id'];
+                $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
             } else {
                 $defaultAddress = $this->model_account_address->getDefaultAddress();
                 //echo '<pre>';print_r($defaultAddress);exit('okok');
