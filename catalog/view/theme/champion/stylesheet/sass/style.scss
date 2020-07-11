@@ -1518,8 +1518,7 @@ ul.breadcrumb li {
 .info-area {
   position: fixed;
   top: 50%; z-index: 11;
-span.left-menu-icon { background-color: #01B0F1 ; position: fixed; left: 10px; border-radius: 50%; text-align: center;
-  padding: 10px 36px; font-size: 50px; top: 50%; transform: translate(10px, -50%); color: white;}
+span.left-menu-icon { background-color: #01B0F1 ; position: fixed; left: 10px; border-radius: 50%; text-align: center; font-size: 50px; top: 50%; transform: translate(10px, -50%); color: white; width: 80px; height: 80px; text-align: center; align-items: center; justify-content: center; display: flex;  }
 nav.main-menu {
   ul {
     li.title { text-align: center; color: white; font-size: 22px; font-weight: 600; text-transform: uppercase; padding: 0 15px;
