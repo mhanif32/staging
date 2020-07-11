@@ -12,6 +12,7 @@ $_['text_coupon']               = 'Coupons';
 $_['text_currency']             = 'Currencies';
 $_['text_customer']             = 'Customers';
 $_['text_delivery_partner']     = 'Delivery Partners';
+$_['text_delivery_partner_message'] = 'Delivery Partners Messages';
 $_['text_customer_group']       = 'Customer Groups';
 $_['text_customer_online']      = 'Customer Online';
 $_['text_customer_approval']    = 'Customer Approvals';

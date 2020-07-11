@@ -332,6 +332,12 @@ class ControllerCommonColumnLeft extends Controller {
                     'children' => array()
                 );
 
+            $customer[] = array(
+                'name'	   => $this->language->get('text_delivery_partner_message'),
+                'href'     => $this->url->link('customer/delivery_partner/message', 'user_token=' . $this->session->data['user_token'], true),
+                'children' => array()
+            );
+
                 $customer[] = array(
                     'name'	   => 'Registration Pending Approval',
                     'href'     => $this->url->link('mpmultivendor/mpseller/pending-users', 'user_token=' . $this->session->data['user_token']),
