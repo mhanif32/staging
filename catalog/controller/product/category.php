@@ -9,7 +9,7 @@ class ControllerProductCategory extends Controller
         $this->load->language('product/category');
 
         $this->load->model('catalog/category');
-
+        $this->load->model('account/address');
         $this->load->model('catalog/product');
 
         $this->load->model('tool/image');
@@ -154,7 +154,15 @@ class ControllerProductCategory extends Controller
 
             $data['products'] = array();
 
+            if (!$this->customer->isLogged()) {
+                $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
+            } else {
+                $defaultAddress = $this->model_account_address->getDefaultAddress();
+                $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+            }
+
             $filter_data = array(
+                'product_country'     => $countryId,
                 'filter_category_id' => $category_id,
                 'filter_filter' => $filter,
                 'sort' => $sort,

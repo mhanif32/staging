@@ -224,18 +224,17 @@ class ModelCatalogProduct extends Model {
 	public function getProductSpecials($data = array()) {
 		$sql = "SELECT DISTINCT ps.product_id, (SELECT AVG(rating) FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = ps.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating FROM " . DB_PREFIX . "product_special ps LEFT JOIN " . DB_PREFIX . "product p ON (ps.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) ";
 
-        //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $sql .= " LEFT JOIN oc_product_location pl ON (p.product_id = pl.product_id)";
-//        }
+        //countrywise location products
+        if (!empty($data['product_country'])) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
 
 		$sql .=" WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW()))";
 
         //countrywise location
-//        if (isset($this->session->data['session_country_id'])) {
-//            $country_id = $this->session->data['session_country_id'];
-//            $sql .=" and pl.country_id = '".$country_id."'";
-//        }
+        if (!empty($data['product_country'])) {
+            $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
+        }
 
 		$sql .= " GROUP BY ps.product_id";
 
@@ -286,21 +285,20 @@ class ModelCatalogProduct extends Model {
 		return $product_data;
 	}
 
-    public function getTotalProductSpecials() {
+    public function getTotalProductSpecials($data = array()) {
 
 	    $sql = "SELECT COUNT(DISTINCT ps.product_id) AS total FROM " . DB_PREFIX . "product_special ps LEFT JOIN " . DB_PREFIX . "product p ON (ps.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) ";
 
-        //countrywise location
-        if (isset($this->session->data['session_country_id'])) {
+        //countrywise location products
+        if (!empty($data['product_country'])) {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
 
         $sql .= " WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW()))";
 
         //countrywise location
-        if (isset($this->session->data['session_country_id'])) {
-            $country_id = $this->session->data['session_country_id'];
-            $sql .=" and pl.country_id = '".$country_id."'";
+        if (!empty($data['product_country'])) {
+            $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
         }
 
         $query = $this->db->query($sql);

@@ -6,7 +6,7 @@ class ControllerProductSpecial extends Controller {
 		$this->load->language('product/special');
 
 		$this->load->model('catalog/product');
-
+        $this->load->model('account/address');
 		$this->load->model('tool/image');
 
 		if (isset($this->request->get['sort'])) {
@@ -71,14 +71,22 @@ class ControllerProductSpecial extends Controller {
 
 		$data['products'] = array();
 
+        if (!$this->customer->isLogged()) {
+            $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
+        } else {
+            $defaultAddress = $this->model_account_address->getDefaultAddress();
+            $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+        }
+
 		$filter_data = array(
+            'product_country' => $countryId,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $limit,
 			'limit' => $limit
 		);
 
-		$product_total = $this->model_catalog_product->getTotalProductSpecials();
+		$product_total = $this->model_catalog_product->getTotalProductSpecials($filter_data);
 
 		$results = $this->model_catalog_product->getProductSpecials($filter_data);
 
