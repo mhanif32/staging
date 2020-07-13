@@ -384,8 +384,12 @@ class ModelAccountMpmultivendorOrders extends Model {
 				$mail->setFrom($from);
 				$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 				$mail->setSubject(sprintf($language->get('text_subject'), $order_info['store_name'], $order_id));
-				$mail->setText($this->load->view('mpmultivendor_mail/seller_order_edit', $data));
+                $mailText = $this->load->view('mpmultivendor_mail/seller_order_edit', $data);
+                $mail->setHtml($mailText);
+                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
 				$mail->send();
+
+
 			}
 
 			// Admin Alert
