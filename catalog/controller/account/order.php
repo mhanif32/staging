@@ -548,7 +548,24 @@ class ControllerAccountOrder extends Controller {
             $mail->send();
 
             //to send mail to multiple sellers (having that seller's products bought by customer)
-
+            $sellers = $this->model_account_order->getMpsellerFromOrder($order_id);
+            foreach ($sellers as $seller) {
+                $dataSeller = [];
+                $mail->setTo($seller['email']);
+                $mail->setFrom($this->config->get('config_email'));
+                $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Cancelled Order', $this->config->get('config_name'), $order_id), ENT_QUOTES, 'UTF-8'));
+                $dataSeller['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                $dataSeller['seller_name'] = $seller['store_owner'];
+                $dataSeller['store_name'] = $seller['store_name'];
+                $dataSeller['order_id'] =  '#' . $order_id;
+                $dataSeller['customer_name'] = $customerData['firstname'].' '.$customerData['lastname'];
+                $dataSeller['order_link'] = $this->url->link('account/mpmultivendor/orders/info', 'order_id=' . $order_id, true);
+                $mailText = $this->load->view('mail/order_cancel_to_seller', $dataSeller);
+                $mail->setHtml($mailText);
+                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                $mail->send();
+            }
 
             $json['success'] = $this->language->get('success_cancel_order');
         }
