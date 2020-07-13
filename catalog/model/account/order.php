@@ -243,8 +243,8 @@ class ModelAccountOrder extends Model
 
     public function getMpsellerFromOrder($orderId)
     {
-        $query = $this->db->query("SELECT mp.store_owner, mp.store_name, mp.email,   FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "product` p ON (p.product_id = op.product_id) LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON (mp.mpseller_id = p.mpseller_id) WHERE op.order_id = '" . (int)$orderId . "'");
+        $query = $this->db->query("SELECT mp.store_owner, mp.store_name, mp.email FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "product` p ON (p.product_id = op.product_id) LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON (mp.mpseller_id = p.mpseller_id) WHERE op.order_id = '" . (int)$orderId . "'");
 
-        return $query->rows['order_status_id'];
+        return $query->rows;
     }
 }
