@@ -226,9 +226,11 @@ class ControllerAccountRequest extends Controller {
 
                 $dataMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
                 $dataMail['order_id'] = $requestData['order_id'];
+
+                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
+                $dataMail['seller_name'] = $sellerData['store_owner'];
                 $dataMail['deliveryPartnerName'] = $deliveryPartner['firstname'] .' '. $deliveryPartner['lastname'];
-//                $dataMail['store_owner'] = $sellerData['store_owner'];
-//                $dataMail['seller_address'] = $sellerData['address'];
+
                 $dataMail['customerName'] = $customer['firstname'] . ' ' . $customer['lastname'];
 
                 $mailText = $this->load->view('mail/dp_request_decline_alert', $dataMail);
