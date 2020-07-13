@@ -345,6 +345,12 @@ class ModelAccountMpmultivendorOrders extends Model {
 				}
 
 				$data['comment'] = strip_tags($comment);
+
+                $data['order_id'] = $order_info['order_id'];
+                $data['firstname'] = $order_info['firstname'];
+                $data['lastname'] = $order_info['lastname'];
+                $data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
+
 				$this->load->model('setting/setting');
 
 				$from = $this->getSettingValue('config_email', $order_info['store_id']);

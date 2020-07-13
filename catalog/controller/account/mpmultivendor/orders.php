@@ -239,7 +239,6 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 
 		$this->load->model('account/mpmultivendor/seller');
 
-
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
 		} else {

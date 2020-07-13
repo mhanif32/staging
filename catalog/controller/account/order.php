@@ -547,7 +547,7 @@ class ControllerAccountOrder extends Controller {
             $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
             $mail->send();
 
-            //todo send mail to multiple sellers (having that seller's products bought by customer)
+            //to send mail to multiple sellers (having that seller's products bought by customer)
 
 
             $json['success'] = $this->language->get('success_cancel_order');
