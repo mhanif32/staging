@@ -345,6 +345,12 @@ class ModelAccountMpmultivendorOrders extends Model {
 				}
 
 				$data['comment'] = strip_tags($comment);
+
+                $data['order_id'] = $order_info['order_id'];
+                $data['firstname'] = $order_info['firstname'];
+                $data['lastname'] = $order_info['lastname'];
+                $data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));
+
 				$this->load->model('setting/setting');
 
 				$from = $this->getSettingValue('config_email', $order_info['store_id']);
@@ -378,8 +384,12 @@ class ModelAccountMpmultivendorOrders extends Model {
 				$mail->setFrom($from);
 				$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 				$mail->setSubject(sprintf($language->get('text_subject'), $order_info['store_name'], $order_id));
-				$mail->setText($this->load->view('mpmultivendor_mail/seller_order_edit', $data));
+                $mailText = $this->load->view('mpmultivendor_mail/seller_order_edit', $data);
+                $mail->setHtml($mailText);
+                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
 				$mail->send();
+
+
 			}
 
 			// Admin Alert

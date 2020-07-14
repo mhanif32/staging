@@ -334,7 +334,7 @@ class ControllerCommonColumnLeft extends Controller {
 
             $customer[] = array(
                 'name'	   => $this->language->get('text_delivery_partner_message'),
-                'href'     => $this->url->link('customer/delivery_partner/message', 'user_token=' . $this->session->data['user_token'], true),
+                'href'     => $this->url->link('deliverypartner/message', 'user_token=' . $this->session->data['user_token'], true),
                 'children' => array()
             );
 
