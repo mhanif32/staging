@@ -1,5 +1,10 @@
 {{ header }}
 <div id="product-search" class="container top-collection">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
     <div class="row">
         <div id="content" class="col-sm-12">{{ content_top }}
             <h3 class="text-primary f-35 text-center my-4">{{ heading_title }}</h3>
