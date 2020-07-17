@@ -20,7 +20,7 @@
                                 <hr style="margin: 15px -25px">
                                 <div class="well">
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="control-label">{{ entry_order_status }}</label>
                                                 <select name="filter_order_status_id" class="form-control">
@@ -36,23 +36,23 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        {#<div class="col-sm-3">#}
+                                            {#<div class="form-group">#}
+                                                {#<label class="control-label">{{ entry_admin_order_status }}</label>#}
+                                                {#<select name="filter_admin_order_status_id" class="form-control">#}
+                                                    {#<option value="">{{ text_all }}</option>#}
+                                                    {#{% for order_status in order_statuses %}#}
+                                                        {#{% if order_status.order_status_id == filter_admin_order_status_id %}#}
+                                                            {#<option value="{{ order_status.order_status_id }}"#}
+                                                                    {#selected="selected">{{ order_status.name }}</option>#}
+                                                        {#{% else %}#}
+                                                            {#<option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>#}
+                                                        {#{% endif %}#}
+                                                    {#{% endfor %}#}
+                                                {#</select>#}
+                                            {#</div>#}
+                                        {#</div>#}
                                         <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="control-label">{{ entry_admin_order_status }}</label>
-                                                <select name="filter_admin_order_status_id" class="form-control">
-                                                    <option value="">{{ text_all }}</option>
-                                                    {% for order_status in order_statuses %}
-                                                        {% if order_status.order_status_id == filter_admin_order_status_id %}
-                                                            <option value="{{ order_status.order_status_id }}"
-                                                                    selected="selected">{{ order_status.name }}</option>
-                                                        {% else %}
-                                                            <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
                                             <div class="form-group">
                                                 <label class="control-label"
                                                        for="input-order-id">{{ entry_order_id }}</label>
@@ -60,7 +60,7 @@
                                                        placeholder="{{ entry_order_id }}" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="control-label"
                                                        for="input-date-added">{{ entry_date_added }}</label>
@@ -93,7 +93,7 @@
                                                 {{ column_order_id }}</th>
                                                 <td class="text-left">{{ column_customer }}</td>
                                                 <td class="text-left">{{ column_status }}</td>
-                                                <td class="text-left">{{ column_by_admin_status }}</td>
+                                                {#<td class="text-left">{{ column_by_admin_status }}</td>#}
                                                 <td class="text-right">{{ column_total }}</td>
                                                 <td class="text-right">{{ column_date_added }}</td>
                                                 <td class="text-right">{{ column_action }}</td>
@@ -105,7 +105,7 @@
                                                     <td class="text-left">#{{ order.order_id }}</td>
                                                     <td class="text-left">{{ order.name }}</td>
                                                     <td class="text-left">{{ order.status }}</td>
-                                                    <td class="text-left">{{ order.by_admin_status }}</td>
+                                                    {#<td class="text-left">{{ order.by_admin_status }}</td>#}
                                                     <td class="text-right">{{ order.total }}</td>
                                                     <td class="text-right">{{ order.date_added }}</td>
                                                     <td class="text-right"><a href="{{ order.view }}"

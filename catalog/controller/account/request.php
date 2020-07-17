@@ -112,7 +112,7 @@ class ControllerAccountRequest extends Controller {
             $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
             if(!empty($requestData)) {
                 $this->model_account_request->updateRequest($requestId, $isAccept = 1);
-                $json['success'] = 'Your request has been successfully accepted.';
+                $json['success'] = 'You have successfully accepted the Delivery Request.';
 
                 $this->load->model('account/customer');
                 $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
@@ -203,7 +203,7 @@ class ControllerAccountRequest extends Controller {
             if(!empty($requestData)) {
 
                 $this->model_account_request->updateRequest($requestId, $isAccept = 2);
-                $json['success'] = 'Your request has been successfully declined.';
+                $json['success'] = 'You have successfully declined the Delivery Request.';
                 if ($this->request->server['HTTPS']) {
                     $server = $this->config->get('config_ssl');
                 } else {
