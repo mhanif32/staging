@@ -93,7 +93,7 @@ class ModelDeliverypartnerMessage extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "delivery_partner_message WHERE delivery_partner_id = '" . (int)$delivery_partner_id . "'");
 	}
 
-	public function getTotalSellerMessageChats($data = array()) {
+	public function getTotalMessageChats($data = array()) {
 		$sql = "SELECT COUNT(*) as total FROM " . DB_PREFIX . "delivery_partner_message WHERE delivery_partner_id = '". (int)$data['delivery_partner_id'] ."'";
 
 		$query = $this->db->query($sql);
@@ -101,8 +101,8 @@ class ModelDeliverypartnerMessage extends Model {
 		return $query->row['total'];
 	}
 
-	public function getSellerMessageChats($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "delivery_partner_message WHERE delivery_partner_id = '". (int)$data['delivery_partner_id'] ."' ORDER BY mpseller_message_id ASC";
+	public function getMessageChats($data = array()) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "delivery_partner_message WHERE delivery_partner_id = '". (int)$data['delivery_partner_id'] ."' ORDER BY delivery_partner_message_id ASC";
 
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -138,30 +138,29 @@ class ModelDeliverypartnerMessage extends Model {
 	}
 
 	public function getSellerMessages($data = array()) {
-		$sql = "SELECT mp.delivery_partner_id, mp.store_owner, mp.store_name, (SELECT message FROM " . DB_PREFIX . "delivery_partner_message mpss WHERE mpss.delivery_partner_id = mps.delivery_partner_id ORDER BY mpss.date_added DESC LIMIT 0, 1) AS message, (SELECT date_added FROM " . DB_PREFIX . "delivery_partner_message mpss WHERE mpss.delivery_partner_id = mps.delivery_partner_id ORDER BY mpss.date_added DESC LIMIT 0, 1) AS date_added FROM " . DB_PREFIX . "mpseller mp LEFT JOIN ". DB_PREFIX  ."delivery_partner_message mps ON (mp.delivery_partner_id = mps.delivery_partner_id) WHERE mp.delivery_partner_id = mps.delivery_partner_id";
+		$sql = "SELECT c.customer_id, c.firstname, c.lastname, (SELECT message FROM " . DB_PREFIX . "delivery_partner_message dpms WHERE dpms.delivery_partner_id = dpm.delivery_partner_id ORDER BY dpm.date_added DESC LIMIT 0, 1) AS message, (SELECT date_added FROM " . DB_PREFIX . "delivery_partner_message dpm2 WHERE dpm2.delivery_partner_id = dpm.delivery_partner_id ORDER BY dpm2.date_added DESC LIMIT 0, 1) AS date_added FROM ". DB_PREFIX  ."delivery_partner_message dpm LEFT JOIN " . DB_PREFIX . "customer c ON (c.customer_id = dpm.delivery_partner_id) WHERE c.customer_id = dpm.delivery_partner_id";
 
-		if (!empty($data['filter_store_owner'])) {
-			$sql .= " AND mp.store_owner LIKE '%" . $this->db->escape($data['filter_store_owner']) . "%'";
+		if (!empty($data['filter_firstname'])) {
+			$sql .= " AND c.firstname LIKE '%" . $this->db->escape($data['filter_firstname']) . "%'";
 		}
 
-		if (!empty($data['filter_store_name'])) {
-			$sql .= " AND mp.store_name LIKE '%" . $this->db->escape($data['filter_store_name']) . "%'";
+		if (!empty($data['filter_lastname'])) {
+			$sql .= " AND c.lastname LIKE '%" . $this->db->escape($data['filter_lastname']) . "%'";
 		}
 
-		$sql .= " GROUP BY mps.delivery_partner_id";
+		$sql .= " GROUP BY dpm.delivery_partner_id";
 
 		$sort_data = array(
-			'mp.store_owner',
-			'mp.store_name',
+			'c.firstname',
+			'c.lastname',
 			'message',
 			'date_added',
 		);
 
-
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY mps.mpseller_message_id";
+			$sql .= " ORDER BY dpm.delivery_partner_message_id";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -181,7 +180,7 @@ class ModelDeliverypartnerMessage extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-
+//echo $sql;exit('aa');
 		$query = $this->db->query($sql);
 
 		return $query->rows;
@@ -189,17 +188,18 @@ class ModelDeliverypartnerMessage extends Model {
 	}
 
 	public function getTotalSellerMessages($data = array()) {
-		$sql = "SELECT mp.customer_id, mp.firstname, mp.lastname, (SELECT message FROM " . DB_PREFIX . "delivery_partner_message mpss WHERE mpss.delivery_partner_id = mps.delivery_partner_id ORDER BY mpss.date_added DESC LIMIT 0, 1) AS message, (SELECT date_added FROM " . DB_PREFIX . "delivery_partner_message mpss WHERE mpss.delivery_partner_id = mps.delivery_partner_id ORDER BY mpss.date_added DESC LIMIT 0, 1) AS date_added FROM " . DB_PREFIX . "customer mp LEFT JOIN ". DB_PREFIX  ."delivery_partner_message mps ON (mp.delivery_partner_id = mps.delivery_partner_id) WHERE mp.customer_id = mps.delivery_partner_id";
 
-		if (!empty($data['filter_store_owner'])) {
-			$sql .= " AND mp.store_owner LIKE '%" . $this->db->escape($data['filter_store_owner']) . "%'";
-		}
+        $sql = "SELECT c.customer_id, c.firstname, c.lastname, (SELECT message FROM " . DB_PREFIX . "delivery_partner_message dpms WHERE dpms.delivery_partner_id = dpm.delivery_partner_id ORDER BY dpm.date_added DESC LIMIT 0, 1) AS message, (SELECT date_added FROM " . DB_PREFIX . "delivery_partner_message dpm2 WHERE dpm2.delivery_partner_id = dpm.delivery_partner_id ORDER BY dpm2.date_added DESC LIMIT 0, 1) AS date_added FROM ". DB_PREFIX  ."delivery_partner_message dpm LEFT JOIN " . DB_PREFIX . "customer c ON (c.customer_id = dpm.delivery_partner_id) WHERE c.customer_id = dpm.delivery_partner_id";
 
-		if (!empty($data['filter_store_name'])) {
-			$sql .= " AND mp.store_name LIKE '%" . $this->db->escape($data['filter_store_name']) . "%'";
-		}
+        if (!empty($data['filter_firstname'])) {
+            $sql .= " AND c.firstname LIKE '%" . $this->db->escape($data['filter_firstname']) . "%'";
+        }
 
-		$sql .= " GROUP BY mps.delivery_partner_id";
+        if (!empty($data['filter_lastname'])) {
+            $sql .= " AND c.lastname LIKE '%" . $this->db->escape($data['filter_lastname']) . "%'";
+        }
+
+        $sql .= " GROUP BY dpm.delivery_partner_id";
 
 		$query = $this->db->query($sql);
 

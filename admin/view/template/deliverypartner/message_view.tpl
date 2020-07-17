@@ -74,7 +74,7 @@
 <script type="text/javascript"><!--
 $('.button-submit').click(function() {
   $.ajax({
-    url: 'index.php?route=mpmultivendor/mpseller_message/SendMessage&user_token=<?php echo $user_token; ?>&mpseller_id=<?php echo $mpseller_id; ?>',
+    url: 'index.php?route=deliverypartner/message/SendMessage&user_token=<?php echo $user_token; ?>&delivery_partner_id=<?php echo $delivery_partner_id; ?>',
     type: 'post',
     data: $('#form-message input, #form-message textarea'),
     dataType: 'json',

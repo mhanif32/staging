@@ -4,9 +4,6 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 	public function index() {
 
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
 		$this->load->language('deliverypartner/message');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -134,16 +131,16 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 		foreach ($results as $result) {
 			// Total unread Messages
-			$total_unreads = $this->model_deliverypartner_message->getTotalUnreadMessages($result['mpseller_id']);
+			$total_unreads = $this->model_deliverypartner_message->getTotalUnreadMessages($result['customer_id']);
 
-			$data['seller_messages'][] = array(
-				'mpseller_id' 	 => $result['mpseller_id'],
-				'seller_name'    => $result['store_owner'],
-				'store_name'     => $result['store_name'],
+			$data['dp_messages'][] = array(
+				'delivery_partner_id' 	 => $result['customer_id'],
+				'firstname'    => $result['firstname'],
+				'lastname'     => $result['lastname'],
 				'message'     	 => $result['message'],
 				'date_added'     => $result['date_added'],
 				'total_unreads'  => $total_unreads,
-				'edit'           => $this->url->link('deliverypartner/message/view', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true)
+				'edit'           => $this->url->link('deliverypartner/message/view', 'user_token=' . $this->session->data['user_token'] . '&delivery_partner_id=' . $result['customer_id'] . $url, true)
 			);
 		}
 
@@ -188,12 +185,12 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 		$url = '';
 
-		if (isset($this->request->get['filter_store_owner'])) {
-			$url .= '&filter_store_owner=' . urlencode(html_entity_decode($this->request->get['filter_store_owner'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_firstname'])) {
+			$url .= '&filter_firstname=' . urlencode(html_entity_decode($this->request->get['filter_firstname'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_store_name'])) {
-			$url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_lastname'])) {
+			$url .= '&filter_lastname=' . urlencode(html_entity_decode($this->request->get['filter_lastname'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if ($order == 'ASC') {
@@ -213,12 +210,12 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 		$url = '';
 
-		if (isset($this->request->get['filter_store_owner'])) {
-			$url .= '&filter_store_owner=' . urlencode(html_entity_decode($this->request->get['filter_store_owner'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_firstname'])) {
+			$url .= '&filter_firstname=' . urlencode(html_entity_decode($this->request->get['filter_firstname'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_store_name'])) {
-			$url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_lastname'])) {
+			$url .= '&filter_lastname=' . urlencode(html_entity_decode($this->request->get['filter_lastname'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -255,24 +252,28 @@ class ControllerDeliverypartnerMessage extends Controller {
 	}
 
 	public function view() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->document->addStyle('view/stylesheet/mpmultivendor/mpmultivendor.css');
 
-		$this->load->model('mpmultivendor/mpseller');
+		$this->load->model('customer/customer');
 
-		if (isset($this->request->get['mpseller_id'])) {
-			$data['mpseller_id'] = $mpseller_id = $this->request->get['mpseller_id'];
+		if (isset($this->request->get['delivery_partner_id'])) {
+			$data['delivery_partner_id'] = $delivery_partner_id = $this->request->get['delivery_partner_id'];
 		} else {
-			$data['mpseller_id'] = $mpseller_id = 0;
+			$data['delivery_partner_id'] = $delivery_partner_id = 0;
 		}
 
 		$page_list = 50;
 
-		$seller_info = $this->model_mpmultivendor_mpseller->getMpseller($mpseller_id);
+		$deliveryPartner_info = $this->model_customer_customer->getCustomer($delivery_partner_id);
 
-		if ($seller_info) {
-			$this->load->language('mpmultivendor/mpseller_message');
+		if ($deliveryPartner_info) {
+			$this->load->language('deliverypartner/message');
 
-			$this->load->model('mpmultivendor/mpseller_message');
+            $this->load->model('deliverypartner/message');
 
 			$this->load->model('tool/image');
 
@@ -280,14 +281,14 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 			$data['heading_title'] = $this->language->get('heading_title');
 
-			$data['text_form'] = sprintf($this->language->get('text_form'), $seller_info['store_owner'], $seller_info['store_name']);
+			$data['text_form'] = sprintf($this->language->get('text_form'), $deliveryPartner_info['firstname'], $deliveryPartner_info['lastname']);
 
 			$data['entry_message'] = $this->language->get('entry_message');
 
 			$data['button_cancel'] = $this->language->get('button_cancel');
 			$data['button_send'] = $this->language->get('button_send');
 
-			$data['cancel'] = $this->url->link('mpmultivendor/mpseller_message', 'user_token=' . $this->session->data['user_token'], true);
+			$data['cancel'] = $this->url->link('deliverypartner/message', 'user_token=' . $this->session->data['user_token'], true);
 
 			if (isset($this->request->get['page'])) {
 				$page = $this->request->get['page'];
@@ -297,8 +298,8 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['mpseller_id'])) {
-				$url .= '&mpseller_id=' . $this->request->get['mpseller_id'];
+			if (isset($this->request->get['delivery_partner_id'])) {
+				$url .= '&delivery_partner_id=' . $this->request->get['delivery_partner_id'];
 			}
 
 			if (isset($this->request->get['page'])) {
@@ -328,20 +329,20 @@ class ControllerDeliverypartnerMessage extends Controller {
 			$data['chats'] = array();
 
 			$filter_data = array(
-				'mpseller_id' 	=> $mpseller_id,
+				'delivery_partner_id' 	=> $delivery_partner_id,
 				'start' 		=> ($page - 1) * $page_list,
 				'limit' 		=> $page_list
 			);
 
-			$chats_total = $this->model_mpmultivendor_mpseller_message->getTotalSellerMessageChats($filter_data);
+			$chats_total = $this->model_deliverypartner_message->getTotalMessageChats($filter_data);
 
-			$chats = $this->model_mpmultivendor_mpseller_message->getSellerMessageChats($filter_data);
+			$chats = $this->model_deliverypartner_message->getMessageChats($filter_data);
 			foreach($chats as $chat) {
-				if($chat['from'] == 'seller') {
-					$from_name = $seller_info['store_owner'];
-					$from_store = $seller_info['store_name'];
-					if($seller_info['image']) {
-						$from_image = $this->model_tool_image->resize($seller_info['image'], 40, 40);
+				if($chat['from'] == 'delivery-partner') {
+					$from_name = $deliveryPartner_info['firstname'];
+					$from_store = $deliveryPartner_info['lastname'];
+					if($deliveryPartner_info['image']) {
+						$from_image = $this->model_tool_image->resize($deliveryPartner_info['image'], 40, 40);
 					} else {
 						$from_image = $this->model_tool_image->resize('nouserpic.png', 40, 40);
 					}
@@ -369,29 +370,29 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['mpseller_id'])) {
-				$url .= '&mpseller_id=' . $this->request->get['mpseller_id'];
+			if (isset($this->request->get['delivery_partner_id'])) {
+				$url .= '&delivery_partner_id=' . $this->request->get['delivery_partner_id'];
 			}
 
 			$pagination = new Pagination();
 			$pagination->total = $chats_total;
 			$pagination->page = $page;
 			$pagination->limit = $page_list;
-			$pagination->url = $this->url->link('mpmultivendor/mpseller_message/view', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+			$pagination->url = $this->url->link('deliverypartner/message/view', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
 			$data['pagination'] = $pagination->render();
 
 			$data['results'] = sprintf($this->language->get('text_pagination'), ($chats_total) ? (($page - 1) * $page_list) + 1 : 0, ((($page - 1) * $page_list) > ($chats_total - $page_list)) ? $chats_total : ((($page - 1) * $page_list) + $page_list), $chats_total, ceil($chats_total / $page_list));
 
 			// Mark as Read Messages
-			$this->model_mpmultivendor_mpseller_message->MarkAsReadMessage($mpseller_id);
+			$this->model_deliverypartner_message->MarkAsReadMessage($delivery_partner_id);
 
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
 
 			$this->config->set('template_engine', 'template');
-			$this->response->setOutput($this->load->view('mpmultivendor/mpseller_message_view', $data));
+			$this->response->setOutput($this->load->view('deliverypartner/message_view', $data));
 		} else {
 			return new Action('error/not_found');
 		}
@@ -420,22 +421,22 @@ class ControllerDeliverypartnerMessage extends Controller {
 	public function SendMessage() {
 		$json = array();
 
-		$this->load->language('mpmultivendor/mpseller_message');
+		$this->load->language('deliverypartner/message');
 
-		$this->load->model('mpmultivendor/mpseller');
+		$this->load->model('customer/customer');
 
-		$this->load->model('mpmultivendor/mpseller_message');
+		$this->load->model('deliverypartner/message');
 
-		if (isset($this->request->get['mpseller_id'])) {
-			$data['mpseller_id'] = $mpseller_id = $this->request->get['mpseller_id'];
+		if (isset($this->request->get['delivery_partner_id'])) {
+			$data['delivery_partner_id'] = $delivery_partner_id = $this->request->get['delivery_partner_id'];
 		} else {
-			$data['mpseller_id'] = $mpseller_id = 0;
+			$data['delivery_partner_id'] = $delivery_partner_id = 0;
 		}
 
-		$seller_info = $this->model_mpmultivendor_mpseller->getMpseller($mpseller_id);
+		$dp_info = $this->model_customer_customer->getCustomer($delivery_partner_id);
 
-		if (!$seller_info) {
-			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('mpmultivendor/mpseller_message', 'user_token='. $this->session->data['user_token'], true));
+		if (!$dp_info) {
+			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('mpmultivendor/message', 'user_token='. $this->session->data['user_token'], true));
 		}
 
 		if (utf8_strlen($this->request->post['message']) < 2) {
@@ -444,18 +445,18 @@ class ControllerDeliverypartnerMessage extends Controller {
 
 		if(!$json) {
 			$add_data = array(
-				'mpseller_id'			=> $mpseller_id,
+				'delivery_partner_id'	=> $delivery_partner_id,
 				'from'					=> 'admin',
 				'message'				=> $this->request->post['message'],
 			);
 
-			$this->model_mpmultivendor_mpseller_message->SendMessage($add_data);
+			$this->model_deliverypartner_message->SendMessage($add_data);
 
 			$json['success'] = true;
 
 			$this->session->data['success'] = $this->language->get('text_success_sent');
 
-			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('mpmultivendor/mpseller_message/view', 'user_token='. $this->session->data['user_token'] . '&mpseller_id='. $mpseller_id, true));
+			$json['redirect'] = str_replace('&amp;', '&', $this->url->link('deliverypartner/message/view', 'user_token='. $this->session->data['user_token'] . '&delivery_partner_id='. $delivery_partner_id, true));
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

@@ -76,23 +76,23 @@
                 </tr>
               </thead>
               <tbody>
-                <?php if ($seller_messages) { ?>
-                <?php foreach ($seller_messages as $seller_message) { ?>
+                <?php if ($dp_messages) { ?>
+                <?php foreach ($dp_messages as $dp_message) { ?>
                 <tr>
-                  <td class="text-center"><?php if (in_array($seller_message['mpseller_id'], $selected)) { ?>
-                    <input type="checkbox" name="selected[]" value="<?php echo $seller_message['mpseller_id']; ?>" checked="checked" />
+                  <td class="text-center"><?php if (in_array($dp_message['delivery_partner_id'], $selected)) { ?>
+                    <input type="checkbox" name="selected[]" value="<?php echo $dp_message['delivery_partner_id']; ?>" checked="checked" />
                     <?php } else { ?>
-                    <input type="checkbox" name="selected[]" value="<?php echo $seller_message['mpseller_id']; ?>" />
+                    <input type="checkbox" name="selected[]" value="<?php echo $dp_message['delivery_partner_id']; ?>" />
                     <?php } ?></td>
-                  <td class="text-left"><?php echo $seller_message['seller_name']; ?></td>
-                  <td class="text-left"><?php echo $seller_message['store_name']; ?></td>
-                  <td class="text-left"><?php echo $seller_message['message']; ?></td>
-                  <td class="text-right"><?php echo $seller_message['date_added']; ?></td>
+                  <td class="text-left"><?php echo $dp_message['firstname']; ?></td>
+                  <td class="text-left"><?php echo $dp_message['lastname']; ?></td>
+                  <td class="text-left"><?php echo $dp_message['message']; ?></td>
+                  <td class="text-right"><?php echo $dp_message['date_added']; ?></td>
                   <td class="text-right">
                     <label style="position:relative">
-                      <a href="<?php echo $seller_message['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-primary">
-                        <?php if($seller_message['total_unreads']) { ?>
-                        <span style="position:absolute;top:-5px;left:-5px; font-size: 13px;" class="label label-danger pull-right"><?php echo $seller_message['total_unreads']; ?></span>
+                      <a href="<?php echo $dp_message['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-primary">
+                        <?php if($dp_message['total_unreads']) { ?>
+                        <span style="position:absolute;top:-5px;left:-5px; font-size: 13px;" class="label label-danger pull-right"><?php echo $dp_message['total_unreads']; ?></span>
                         <?php } ?>
                         <i class="fa fa-eye"></i>
                       </a>
