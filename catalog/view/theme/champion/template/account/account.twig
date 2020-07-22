@@ -313,6 +313,65 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 py-3">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ downloads_href }}">
+                                                <i class="fas fa-download f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ downloads_href }}"
+                                                   class="f-15 font-weight-bold">Downloads</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ downloads_href }}" class="f-13 text-muted">View your Downloads </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if reward %}
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ reward_href }}">
+                                                <i class="fas fa-award f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ reward_href }}"
+                                                   class="f-15 font-weight-bold">YOUR REWARD POINTS</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ reward_href }}" class="f-13 text-muted">View your total number of reward points</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                              <div class="col-md-6 py-3">
+                                    <div class="media">
+                                        <div class="media-left mr-3">
+                                            <a href="{{ recurring_href }}">
+                                                <i class="far fa-credit-card f-60 text-success"></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-0">
+                                                <a href="{{ recurring_href }}"
+                                                   class="f-15 font-weight-bold">Recurring Payments</a>
+                                            </h4>
+                                            <p>
+                                                <a href="{{ recurring_href }}" class="f-13 text-muted">View your Recurring Payments history</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             {% endif %}
