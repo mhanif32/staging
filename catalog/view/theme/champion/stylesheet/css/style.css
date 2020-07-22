@@ -485,7 +485,8 @@ header {
       width: 100%;
       margin-top: 0;
       padding: 0;
-      border-color: #ccc; }
+      border-color: #ccc;
+      background-color: aliceblue; }
       header .nav-mega .dropdown-menu.mega-menu > li {
         padding: 20px; }
       header .nav-mega .dropdown-menu.mega-menu .media-list .media {

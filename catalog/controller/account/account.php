@@ -85,6 +85,9 @@ class ControllerAccountAccount extends Controller {
         $data['update_order_status_link'] = $this->url->link('account/mpmultivendor/orders/pending', '', true);
         $data['return_href'] = $this->url->link('account/return', '', true);
         $data['deliverypartner_message_href'] = $this->url->link('account/deliverypartner/message', '', true);
+        $data['downloads_href'] = $this->url->link('account/download', '', true);
+        $data['reward_href'] = $this->url->link('account/reward', '', true);
+        $data['recurring_href'] = $this->url->link('account/recurring', '', true);
 
         if ($this->config->get('total_reward_status')) {
 			$data['reward'] = $this->url->link('account/reward', '', true);
