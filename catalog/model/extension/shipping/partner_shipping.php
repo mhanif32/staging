@@ -54,10 +54,10 @@ class ModelExtensionShippingPartnerShipping extends Model
             }*/
             if ($deliveryCharge <= 150) {
                 $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
-            } else if ($deliveryCharge >= 150.01 && $deliveryCharge <= 250.00) {
+            } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
 
                 $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100; //10%
-            } else if ($deliveryCharge >= 250.01) {
+            } else if ($deliveryCharge > 250) {
 
                 $totalDeliveryAmt+= $deliveryCharge * 14 / 100; //5%
             }
