@@ -412,7 +412,8 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['redirect'] = $redirect;
 		}
 
-        $data['subTotal'] = $this->cart->getSubtotal();
+        $newSubTotal = $this->currency->formatExceptSymbol($this->tax->calculate($this->cart->getSubtotal(), $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
+        $data['subTotal'] = $newSubTotal;
 		$data['max_checkout_amount'] = $this->config->get('config_max_checkout_amount');
 		$this->response->setOutput($this->load->view('checkout/confirm', $data));
 	}
