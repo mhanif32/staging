@@ -40,7 +40,7 @@ class ModelExtensionShippingPartnerShipping extends Model
         $totalDeliveryAmt = 0;
         foreach ($deliveryCharges as $deliveryCharge) {
 
-            if ($deliveryCharge < 500) {
+            /*if ($deliveryCharge < 500) {
                 $totalDeliveryAmt+= $deliveryCharge * 20 / 100; //20%
             } else if ($deliveryCharge >= 500 && $deliveryCharge < 700) {
 
@@ -51,7 +51,17 @@ class ModelExtensionShippingPartnerShipping extends Model
             } else if ($deliveryCharge >= 1000) {
 
                 $totalDeliveryAmt+= $deliveryCharge * 3 / 100; //3%
+            }*/
+            if ($deliveryCharge <= 150) {
+                $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
+            } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
+
+                $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100; //10%
+            } else if ($deliveryCharge > 250) {
+
+                $totalDeliveryAmt+= $deliveryCharge * 14 / 100; //5%
             }
+
         }
         //END : Champion Mall Delivery Charges Algorithm
 
