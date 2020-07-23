@@ -20,7 +20,9 @@ class ModelExtensionTotalShipping extends Model {
 					}
 				}
 			}
-
+//echo '<pre>';print_r($total['total']);
+//print_r($this->session->data['shipping_method']);
+//exit('okoko');
 			$total['total'] += $this->session->data['shipping_method']['cost'];
 		}
 	}

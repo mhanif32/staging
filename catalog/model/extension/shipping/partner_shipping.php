@@ -52,29 +52,31 @@ class ModelExtensionShippingPartnerShipping extends Model
 
                 $totalDeliveryAmt+= $deliveryCharge * 3 / 100; //3%
             }*/
+
+            //$deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
+
             if ($deliveryCharge <= 150) {
                 $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
             } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
 
-                $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100; //10%
+                $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100;
             } else if ($deliveryCharge > 250) {
 
-                $totalDeliveryAmt+= $deliveryCharge * 14 / 100; //5%
+                $totalDeliveryAmt+= $deliveryCharge * 14 / 100;
             }
-
         }
         //END : Champion Mall Delivery Charges Algorithm
 
         $method_data = array();
         if ($status) {
             $quote_data = array();
-
             $quote_data['partner_shipping'] = array(
                 'code' => 'partner_shipping.partner_shipping',
                 'title' => $this->language->get('text_description'),
                 'cost' => $totalDeliveryAmt,
                 'tax_class_id' => $this->config->get('partner_shipping_tax_class_id'),
                 'text' => $this->currency->format($this->tax->calculate($totalDeliveryAmt, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
+                //'text' => $this->currency->addCurrencySymbol($totalDeliveryAmt, $this->session->data['currency'])
             );
 
             $method_data = array(
