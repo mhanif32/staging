@@ -1886,3 +1886,30 @@ ul.breadcrumb li {
 .info-area:hover .main-menu, nav.main-menu.expanded {
   width: 350px;
   overflow: visible; }
+
+.our-partner .owl-nav button {
+  position: absolute;
+  top: 50%;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+.our-partner .owl-nav button.owl-prev {
+  left: 0; }
+.our-partner .owl-nav button.owl-next {
+  right: 0; }
+.our-partner .owl-dots button.owl-dot {
+  display: none; }
+.our-partner .owl-nav button {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.38) !important; }
+.our-partner span {
+  font-size: 60px;
+  position: relative;
+  top: -5px; }
+.our-partner .owl-nav button:focus {
+  outline: none; }
