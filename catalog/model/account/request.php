@@ -63,4 +63,11 @@ class ModelAccountRequest extends Model
 
         return $query->rows;
     }
+
+    public function updateStatus($requestId, $data)
+    {
+        $delivery_partner_id = $this->customer->getId();
+        $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_request SET status = '" . $this->db->escape($data['selectStatus']) . "', other_status_specification = '".$this->db->escape($data['inputOtherSpecification'])."' WHERE request_id = '" . (int)$requestId . "' and delivery_partner_id = '" . (int)$delivery_partner_id . "'");
+        return true;
+    }
 }
