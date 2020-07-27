@@ -307,10 +307,9 @@
                                             </div>
 
                                             <div class="form-group w-60">
-                                                <label class="control-label f-13" for="input-zone"><b>Please Select
-                                                        State</b></label>
+                                                <label class="control-label f-13" for="input-zone"><b>Please Select State</b></label>
                                                 <div class="">
-                                                    <select name="zone_id" id="input-zone" class="form-control">
+                                                    <select name="zone_id" id="input-zone" class="form-control zoneSelect">
                                                         <option value="">---Select State---</option>
                                                     </select>
                                                     {% if error_zone %}
@@ -440,6 +439,44 @@
             }
         });
     });
-
     $('select[name=\'country_id\']').trigger('change');
+
+    //on change of zone
+    $('select[name=\'zone_id\']').on('change', function () {
+
+        $.ajax({
+            url: 'index.php?route=account/account/zone&zone_id=' + this.value,
+            dataType: 'json',
+            beforeSend: function () {
+                $('select[name=\'zone_id\']').prop('disabled', true);
+            },
+            complete: function () {
+                $('select[name=\'zone_id\']').prop('disabled', false);
+            },
+            success: function (json) {
+                //console.log(json);
+                areaHtml = '<option value="">{{ text_select }}</option>';
+
+                if (json['area'] && json['area'] != '') {
+                    for (i = 0; i < json['area'].length; i++) {
+                        areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
+
+                        if (json['area'][i]['area_id'] == '{{ area_id }}') {
+                            areaHtml += ' selected="selected"';
+                        }
+
+                        areaHtml += '>' + json['area'][i]['name'] + '</option>';
+                    }
+                } else {
+                    areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+                $('select[name=\'city_id\']').html(areaHtml);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('select[name=\'zone_id\']').trigger('change');
     //--></script>
