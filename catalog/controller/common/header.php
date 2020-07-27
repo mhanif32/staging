@@ -135,7 +135,12 @@ class ControllerCommonHeader extends Controller
                 $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
                 $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? ($dataArray->geoplugin_regionName .', '.$dataArray->geoplugin_countryName) : '';
             } else {
+
                 $data['loggedInCountry'] = isset($this->session->data['loggedInCountry']) ? $this->session->data['loggedInCountry'] : '';
+                $data['loggedInState'] = isset($this->session->data['loggedInState']) ? $this->session->data['loggedInState'] : '';
+                $data['loggedInCity'] = isset($this->session->data['loggedInCity']) ? $this->session->data['loggedInCity'] : '';
+                //print_r($data);exit('plplp');
+
             }
         } else { //after login
             // Default Shipping Address

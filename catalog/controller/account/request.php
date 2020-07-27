@@ -88,10 +88,12 @@ class ControllerAccountRequest extends Controller {
         );
         $data['is_accept'] = $requestData['is_accept'];
         $data['request_id'] = $requestData['request_id'];
+        $data['status'] = $requestData['status'];
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
+        $data['action_order_request_status'] = $this->url->link('account/request/update-status', '&id=' . $requestData['request_id'], true);
         $this->response->setOutput($this->load->view('account/request_view', $data));
     }
 
@@ -361,5 +363,22 @@ class ControllerAccountRequest extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $this->response->setOutput($this->load->view('account/assigned_order_view', $data));
+    }
+
+    public function updateStatus()
+    {
+        $this->load->model('account/request');
+
+        $requestId = $this->request->get['id'];
+        if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+            if(!empty($this->request->post['selectStatus'])) {
+                $this->model_account_request->updateStatus($requestId, $this->request->post);
+                $this->session->data['success'] = 'Your order status has been successfully updated.';
+            }
+        }
+
+        //$this->response->redirect($this->url->link('account/request/view', 'id='.$requestId, true));
+        $this->response->redirect($this->url->link('account/request/index', '', true));
     }
 }

@@ -181,7 +181,6 @@
                 {{ currency }}
             </div>
 
-
             {% if logged %}
             <div class="col-3 m-auto d-lg-inline-block d-none text-right">
                 <div class="dropdown show d-inline-block">
@@ -251,126 +250,135 @@
                 </button>
                 <div class="collapse navbar-collapse nav-scroller" id="navbarsExample08">
                     <ul class="navbar-nav navbar-nav-menu ">
-{#                        {% if loggedInCountry %}#}
-                            {% if logged %}
-                                <div class="home-location d-flex d-flex-row d-flex-nowrap">
-                                    <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
-                                        <i class="fa fa-map-marker text-danger"></i>
-                                    </div>
-                                    <div class="home-location-text d-flex d-flex-column bg-black text-white">
-                                        <a href="{{ manage_address_link }}" class="button w-100 text-white text-truncate" type="button"
-                                           data-hover=""
-                                           data-active="I'M ACTIVE">Select Your Delivery Location <br><span>{{ loggedInCountry }}</span></a>
-
-                                    </div>
+                        {# {% if loggedInCountry %} #}
+                        {% if logged %}
+                            <div class="home-location d-flex d-flex-row d-flex-nowrap">
+                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                    <i class="fa fa-map-marker text-danger"></i>
                                 </div>
-                            {% else %}
-                                <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
-                                     data-toggle="modal"
-                                     data-target="#exampleModalCenter">
-                                    <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
-                                        <i class="fa fa-map-marker text-danger"></i>
-                                    </div>
-                                    <div class="home-location-text d-flex d-flex-column bg-black text-white">
-                                        <a class="button w-100 text-white text-truncate" type="button" data-hover=""
-                                           data-active="I'M ACTIVE">Select Your Delivery Location <br><span>{{ loggedInCountry }}</span></a>
-
-
-                                    </div>
+                                <div class="home-location-text d-flex d-flex-column bg-black text-white">
+                                    <a href="{{ manage_address_link }}" class="button w-100 text-white text-truncate"
+                                       type="button"
+                                       data-hover=""
+                                       data-active="I'M ACTIVE">Select Your Delivery Location
+                                        <br><span>{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>
                                 </div>
-                            {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
+                                 data-toggle="modal"
+                                 data-target="#exampleModalCenter">
+                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                                    <i class="fa fa-map-marker text-danger"></i>
+                                </div>
+                                <div class="home-location-text d-flex d-flex-column bg-black text-white">
+                                    <a class="button w-100 text-white text-truncate" type="button" data-hover=""
+                                       data-active="I'M ACTIVE">Select Your Delivery Location
+                                        <br><span id="loggedInAddress">{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content w-70">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-success text-uppercase f-15" id="exampleModalLongTitle">Please Select Country For Your Delivery</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="changeCountryForm">
-                                                <div class="form-group w-75">
-                                                    <label class="control-label f-13" for="input-country">Please Select Country For Your Delivery</label>
-                                                    <select id="input-country" name="selectCountry" class="form-control">
-                                                        <option value="">Select</option>
-                                                        {% for country in countries %}
-                                                            <option value="{{ country.country_id }}">{{ country.name }}</option>
-                                                        {% endfor %}
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-success text-uppercase f-15"
+                                            id="exampleModalLongTitle">Please Select Country For Your Delivery</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="changeCountryForm">
+                                            <div class="form-group w-60">
+                                                <label class="control-label f-13" for="input-country"><b>Please Select
+                                                        Country For Your Delivery</b></label>
+                                                <select id="input-country" name="selectCountry" class="form-control">
+                                                    <option value="">---Select Country---</option>
+                                                    {% for country in countries %}
+                                                        <option value="{{ country.country_id }}">{{ country.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group w-60">
+                                                <label class="control-label f-13" for="input-zone"><b>Please Select State</b></label>
+                                                <div class="">
+                                                    <select name="zone_id" id="input-zone" class="form-control zoneSelect">
+                                                        <option value="">---Select State---</option>
                                                     </select>
+                                                    {% if error_zone %}
+                                                        <div class="text-danger">{{ error_zone }}</div>
+                                                    {% endif %}
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary" id="confirm-address">Submit</button>
+                                            </div>
+
+                                            <div class="form-group w-60">
+                                                <label class="control-label f-13" for="input-city"><b>Please Select
+                                                        City</b></label>
+                                                <div class="">
+                                                    <select name="city_id" id="input-city" class="form-control">
+                                                        <option value="">---Select City---</option>
+                                                    </select>
+                                                    {% if error_city %}
+                                                        <div class="text-danger">{{ error_city }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="confirm-address">Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="modalCurrency" tabindex="-1" role="dialog"
+                             aria-labelledby="modalCurrencyTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-success text-uppercase f-15"
+                                            id="modalCurrencyTitle">Please Change Currency</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group w-100">
+                                            <label class="control-label f-13" for="input-country"><b>Please Change Currency from below dropdown</b></label>
+                                            {{ currency }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-{#                        {% endif %}#}
+                        </div>
+
+                        {# {% endif %} #}
                         {{ menu }}
                     </ul>
                 </div>
             </nav>
         </div>
+    </div>
 </header>
-
-{#<script type="text/javascript"><!--#}
-{#    $('select[name=\'country_id\']').on('change', function () {#}
-{#        $.ajax({#}
-{#            url: 'index.php?route=account/account/country&country_id=' + this.value,#}
-{#            dataType: 'json',#}
-{#            beforeSend: function () {#}
-{#                $('select[name=\'country_id\']').prop('disabled', true);#}
-{#            },#}
-{#            complete: function () {#}
-{#                $('select[name=\'country_id\']').prop('disabled', false);#}
-{#            },#}
-{#            success: function (json) {#}
-{#                if (json['postcode_required'] == '1') {#}
-{#                    $('input[name=\'postcode\']').parent().parent().addClass('required');#}
-{#                } else {#}
-{#                    $('input[name=\'postcode\']').parent().parent().removeClass('required');#}
-{#                }#}
-
-{#                html = '<option value="">{{ text_select }}</option>';#}
-
-{#                if (json['zone'] && json['zone'] != '') {#}
-{#                    for (i = 0; i < json['zone'].length; i++) {#}
-{#                        html += '<option value="' + json['zone'][i]['zone_id'] + '"';#}
-
-{#                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {#}
-{#                            html += ' selected="selected"';#}
-{#                        }#}
-
-{#                        html += '>' + json['zone'][i]['name'] + '</option>';#}
-{#                    }#}
-{#                } else {#}
-{#                    html += '<option value="0" selected="selected">{{ text_none }}</option>';#}
-{#                }#}
-
-{#                $('select[name=\'zone_id\']').html(html);#}
-{#            },#}
-{#            error: function (xhr, ajaxOptions, thrownError) {#}
-{#                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);#}
-{#            }#}
-{#        });#}
-{#    });#}
-
-
-{#    $('select[name=\'country_id\']').trigger('change');#}
-{#    //--></script>#}
 
 <script>
     $('#confirm-address').on('click', function () {
 
         var data = {
             country: $('#input-country').val(),
-            //state: $('#input-zone').val()
+            state: $('#input-zone').val(),
+            city: $('#input-city').val()
         };
 
         $.ajax({
@@ -379,10 +387,96 @@
             data: data,
             success: function (data) {
 
-                //console.log(data);
-                location.reload(true);
+                console.log(data.result);
+                $('#loggedInAddress').html(data.result);
+                $('#exampleModalCenter').modal('toggle');
+                $('#modalCurrency').modal('toggle');
+                //location.reload(true);
             }
         });
         return false;
     });
 </script>
+
+<script type="text/javascript"><!--
+    $('select[name=\'selectCountry\']').on('change', function () {
+        $.ajax({
+            url: 'index.php?route=account/account/country&country_id=' + this.value,
+            dataType: 'json',
+            beforeSend: function () {
+                $('select[name=\'selectCountry\']').prop('disabled', true);
+            },
+            complete: function () {
+                $('select[name=\'selectCountry\']').prop('disabled', false);
+            },
+            success: function (json) {
+                if (json['postcode_required'] == '1') {
+                    $('input[name=\'postcode\']').parent().parent().addClass('required');
+                } else {
+                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
+                }
+
+                html = '<option value="">{{ text_select }}</option>';
+
+                if (json['zone'] && json['zone'] != '') {
+                    for (i = 0; i < json['zone'].length; i++) {
+                        html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+                            html += ' selected="selected"';
+                        }
+
+                        html += '>' + json['zone'][i]['name'] + '</option>';
+                    }
+                } else {
+                    html += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+
+                $('select[name=\'zone_id\']').html(html);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    $('select[name=\'country_id\']').trigger('change');
+
+    //on change of zone
+    $('select[name=\'zone_id\']').on('change', function () {
+
+        $.ajax({
+            url: 'index.php?route=account/account/zone&zone_id=' + this.value,
+            dataType: 'json',
+            beforeSend: function () {
+                $('select[name=\'zone_id\']').prop('disabled', true);
+            },
+            complete: function () {
+                $('select[name=\'zone_id\']').prop('disabled', false);
+            },
+            success: function (json) {
+                //console.log(json);
+                areaHtml = '<option value="">{{ text_select }}</option>';
+
+                if (json['area'] && json['area'] != '') {
+                    for (i = 0; i < json['area'].length; i++) {
+                        areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
+
+                        if (json['area'][i]['area_id'] == '{{ area_id }}') {
+                            areaHtml += ' selected="selected"';
+                        }
+
+                        areaHtml += '>' + json['area'][i]['name'] + '</option>';
+                    }
+                } else {
+                    areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+                $('select[name=\'city_id\']').html(areaHtml);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('select[name=\'zone_id\']').trigger('change');
+    //--></script>

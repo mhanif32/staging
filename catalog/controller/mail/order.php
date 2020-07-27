@@ -277,6 +277,12 @@ class ControllerMailOrder extends Controller {
 		$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 		$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 
+        if ($this->request->server['HTTPS']) {
+            $server = $this->config->get('config_ssl');
+        } else {
+            $server = $this->config->get('config_url');
+        }
+        $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
         $data['customer_name'] = $order_info['firstname'];
 		$mail->setHtml($this->load->view('mail/order_add', $data));
 		$mail->send();

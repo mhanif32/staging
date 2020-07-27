@@ -28,24 +28,49 @@ class ControllerCommonHome extends Controller {
 
 	public function deliveryaddress()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         $this->load->model('localisation/country');
+        $this->load->model('localisation/zone');
+        $this->load->model('localisation/area');
         $this->load->model('catalog/information');
 
-        if(!empty($this->request->post) && $this->request->post['country']) {
+        //print_r($this->request->post);exit('okok');
 
-            //zone
-//            $zone_id = $this->request->post['state'];
-//            $zoneData = $this->model_localisation_zone->getZone($zone_id);
-//            $this->session->data['loggedInState'] = $zoneData['name'];
+        $stringAddress = []; $strAddress = '';
+        if(!empty($this->request->post) && $this->request->post['country']) {
 
             //country
             $country_id = $this->request->post['country'];
             $countryData = $this->model_localisation_country->getCountry($country_id);
-            //$this->session->data['loggedInCountry'] = $zoneData['name'].', '.$countryData['name'];
-            $this->session->data['loggedInCountry'] = $countryData['name'];
+            $stringAddress[] = $this->session->data['loggedInCountry'] = !empty($countryData['name']) ? $countryData['name'] : '';
 
+            //zone
+            if(!empty($this->request->post['state'])) {
+
+                $zone_id = $this->request->post['state'];
+                $zoneData = $this->model_localisation_zone->getZone($zone_id);
+                $stringAddress[] = $this->session->data['loggedInState'] = !empty($zoneData['name']) ? $zoneData['name'] : '';
+            }
+
+            //city
+            if(!empty($this->request->post['city'])) {
+                $city_id = $this->request->post['city'];
+                $cityData = $this->model_localisation_area->getArea($city_id);
+                $stringAddress[] = $this->session->data['loggedInCity'] = !empty($cityData['name']) ? $cityData['name'] : '';
+            }
+//print_r($stringAddress);exit('kokok');
             $this->session->data['session_country_id'] = $country_id;
+            $strAddress = implode(', ', $stringAddress);
         }
-        return true;
+        //print_r($strAddress);exit('kokok');
+        $json = [
+            'result' => $strAddress,
+            'success' => true
+        ];
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 }
