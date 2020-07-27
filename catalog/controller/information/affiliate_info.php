@@ -9,6 +9,7 @@ class ControllerInformationAffiliateInfo extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
+        $data['franchisee_link'] = $this->url->link('affiliate/register', '', true);
         // Load the template file and show output
         $this->response->setOutput($this->load->view('information/affiliate_info', $data));
     }

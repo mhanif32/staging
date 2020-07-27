@@ -223,8 +223,7 @@
                                 <a class="dropdown-item text-left f-12" href="{{ register }}">Become Customer</a>
                                 <a class="dropdown-item text-left f-12" href="{{ seller_register_link }}">Become
                                     Seller</a>
-                                <a class="dropdown-item text-left f-12" href="{{ affiliate_register }}">Become Affiliate
-                                    Member</a>
+                                <a class="dropdown-item text-left f-12" href="{{ affiliate_info_href }}">Become a Franchisee</a>
                                 <a class="dropdown-item text-left f-12" href="{{ become_delivery_partner_info_href }}">Become
                                     Delivery Partner</a>
                                 <a class="dropdown-item text-left f-12" href="#">Become Executive Members</a>
@@ -285,19 +284,19 @@
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content w-auto m-auto">
                                     <div class="modal-header">
-                                        <h5 class="modal-title text-success text-uppercase f-15"
-                                            id="exampleModalLongTitle">Please Select Country For Your Delivery</h5>
+                                        <h5 class="modal-title text-success text-uppercase f-13"
+                                            id="exampleModalLongTitle">Where would you like your order delivered?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <form id="changeCountryForm">
-                                            <div class="form-group w-60">
+                                            <div class="form-group">
                                                 <label class="control-label f-13" for="input-country"><b>Please Select
-                                                        Country For Your Delivery</b></label>
+                                                        Country For This Delivery</b></label>
                                                 <select id="input-country" name="selectCountry" class="form-control">
                                                     <option value="">---Select Country---</option>
                                                     {% for country in countries %}
@@ -306,8 +305,8 @@
                                                 </select>
                                             </div>
 
-                                            <div class="form-group w-60">
-                                                <label class="control-label f-13" for="input-zone"><b>Please Select State</b></label>
+                                            <div class="form-group">
+                                                <label class="control-label f-13" for="input-zone"><b>Now Select The State</b></label>
                                                 <div class="">
                                                     <select name="zone_id" id="input-zone" class="form-control zoneSelect">
                                                         <option value="">---Select State---</option>
@@ -318,9 +317,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group w-60">
-                                                <label class="control-label f-13" for="input-city"><b>Please Select
-                                                        City</b></label>
+                                            <div class="form-group">
+                                                <label class="control-label f-13" for="input-city"><b>You Can Now Select The City</b></label>
                                                 <div class="">
                                                     <select name="city_id" id="input-city" class="form-control">
                                                         <option value="">---Select City---</option>
@@ -345,17 +343,17 @@
                         <div class="modal fade" id="modalCurrency" tabindex="-1" role="dialog"
                              aria-labelledby="modalCurrencyTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content w-auto m-auto">
                                     <div class="modal-header">
-                                        <h5 class="modal-title text-success text-uppercase f-15"
-                                            id="modalCurrencyTitle">Please Change Currency</h5>
+                                        <h5 class="modal-title text-success text-uppercase f-13"
+                                            id="modalCurrencyTitle">What Is Your Payment Card Currency?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group w-100">
-                                            <label class="control-label f-13" for="input-country"><b>Please Change Currency from below dropdown</b></label>
+                                        <div class="form-group text-left">
+                                            <label class="control-label f-13" for="input-country"><b>Please Change Currency From Below Dropdown</b></label>
                                             {{ currency }}
                                         </div>
                                     </div>
