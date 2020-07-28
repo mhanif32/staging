@@ -22,7 +22,9 @@ class ControllerInformationBecomeDeliveryPartnerInfo extends Controller {
         $data['my_account_href'] = $this->url->link('account/edit', '', true);
         $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
 
-
+        $becomeDeliveryPartner = $this->model_catalog_information->getInfoMessage(13);
+        $data['becomeDeliveryPartner'] = $becomeDeliveryPartner['title'];
+        $data['becomeDeliveryPartnerDesc'] = html_entity_decode($becomeDeliveryPartner['description'], ENT_QUOTES, 'UTF-8');
 
         // Load the template file and show output
         $this->response->setOutput($this->load->view('information/become_delivery_partner_info', $data));

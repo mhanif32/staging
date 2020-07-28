@@ -18,6 +18,9 @@ class ControllerInformationBecomeOurPartnerInfo extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
+        $becomeOurPartner = $this->model_catalog_information->getInfoMessage(14);
+        $data['becomeOurPartner'] = $becomeOurPartner['title'];
+        $data['becomeOurPartnerDesc'] = html_entity_decode($becomeOurPartner['description'], ENT_QUOTES, 'UTF-8');
 
         $data['customer_register_link'] = $this->url->link('account/register', '', true);
 
