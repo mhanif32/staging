@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']             = 'Affiliate Member';
+$_['heading_title']             = 'Become a Franchisee';
 
 // Text
 $_['text_account']              = 'Account';
