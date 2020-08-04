@@ -45,10 +45,12 @@
                                                         :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                             </div>
                                         </div>
+                                        {% if status %}
                                         <div class="d-flex">
                                             <strong>Order Request Status : </strong> &nbsp;&nbsp;&nbsp;
                                             <span class="bg-black status">{{ status }}</span>
                                         </div>
+                                        {% endif %}
                                     </div>
                                     <br>
 

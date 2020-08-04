@@ -35,6 +35,7 @@ class ControllerCheckoutSuccess extends Controller
                     $sellerList[] = $product['mpseller_id'];
                 }
                 $totalSellers = array_unique($sellerList);
+
                 //For Single Seller
                 if (count($totalSellers) == 1) {
                     $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
@@ -46,7 +47,7 @@ class ControllerCheckoutSuccess extends Controller
                     }
                     //Same State
                     if (!empty($mpSellerData['city']) && strtolower($mpSellerData['city']) != strtolower($shippingAddress['city']) && $shippingAddress['zone_id'] == $mpSellerData['zone_id']) {
-
+                        //echo '<pre>';print_r($orderId);exit('okoko');
                         $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpSellerData['mpseller_id'], 2);
                     }
                     //Same Country

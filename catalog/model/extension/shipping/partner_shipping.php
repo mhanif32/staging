@@ -53,16 +53,31 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $totalDeliveryAmt+= $deliveryCharge * 3 / 100; //3%
             }*/
 
-            //$deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
+            $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
-            if ($deliveryCharge <= 150) {
-                $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
-            } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
+            //print_r($deliveryChargeNew);exit('okok');
+            if($this->session->data['currency'] == 'NGN') {
+                if ($deliveryChargeNew <= 20000) {
+                    //exit('aaa');
+                    $totalDeliveryAmt+= $deliveryCharge * 23 / 100; //15%
+                } else if ($deliveryChargeNew > 20000 && $deliveryChargeNew <= 35000.00) {
+                    //exit('bbb');
+                    $totalDeliveryAmt+= $deliveryCharge * 22 / 100;
+                } else if ($deliveryChargeNew > 35000) {
+                    //exit('ccc');
+                    $totalDeliveryAmt+= $deliveryCharge * 20 / 100;
+                }
+                //print_r($totalDeliveryAmt);exit('aaaa');
+            } else {
+                if ($deliveryCharge <= 150) {
+                    $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
+                } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
 
-                $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100;
-            } else if ($deliveryCharge > 250) {
+                    $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100;
+                } else if ($deliveryCharge > 250) {
 
-                $totalDeliveryAmt+= $deliveryCharge * 14 / 100;
+                    $totalDeliveryAmt+= $deliveryCharge * 14 / 100;
+                }
             }
         }
         //END : Champion Mall Delivery Charges Algorithm
