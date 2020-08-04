@@ -765,10 +765,6 @@ class ControllerProductProduct extends Controller {
             else if($sizeChartId == 11) {
                 $title = 'Kids\' Shoe Size Conversion Chart';
             }
-
-
-
-
             else {
                 $title = 'No records';
             }
