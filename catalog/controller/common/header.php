@@ -82,7 +82,7 @@ class ControllerCommonHeader extends Controller
         $data['account'] = $this->url->link('account/account', '', true);
         $data['my_profile'] = $this->url->link('account/edit', '', true);
         $data['register'] = $this->url->link('account/register', '', true);
-        $data['affiliate_register'] = $this->url->link('affiliate/register', '', true);
+        $data['affiliate_register_info_link'] = $this->url->link('information/become_franchisee_info', '', true);
 
         $data['seller_register_link'] = $this->url->link('information/become_seller_info', true);
         $data['affiliate_info_href'] = $this->url->link('information/affiliate_info', '', true);

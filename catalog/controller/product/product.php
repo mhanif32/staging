@@ -755,7 +755,17 @@ class ControllerProductProduct extends Controller {
                 $title = 'Coat, Suit jackets and Blazers';
             } else if($sizeChartId == 8) {
                 $title = 'Dress shirt sizes, Neck size';
-            }  else {
+            }
+            else if($sizeChartId == 9) {
+                $title = 'Women\'s Shoe Size Conversion Chart';
+            }
+            else if($sizeChartId == 10) {
+                $title = 'Men\'s Shoe Size Conversion Chart';
+            }
+            else if($sizeChartId == 11) {
+                $title = 'Kids\' Shoe Size Conversion Chart';
+            }
+            else {
                 $title = 'No records';
             }
             $data['size_title'] = $title;

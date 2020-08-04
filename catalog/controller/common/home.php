@@ -20,6 +20,7 @@ class ControllerCommonHome extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+
 		$data['leftMsgTitle'] = $leftSlideMsg['title'];
 		$data['leftMsgDesc'] = html_entity_decode($leftSlideMsg['description'], ENT_QUOTES, 'UTF-8');
 
@@ -34,6 +35,7 @@ class ControllerCommonHome extends Controller {
         $this->load->model('localisation/country');
         $this->load->model('localisation/zone');
         $this->load->model('localisation/area');
+//        information
         $this->load->model('catalog/information');
 
         //print_r($this->request->post);exit('okok');

@@ -16,6 +16,9 @@ class ControllerCommonFooter extends Controller {
 			}
 		}
 
+
+
+
         $data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', true), $this->customer->getFirstName(), $this->url->link('account/logout', '', true));
 
 		$data['contact'] = $this->url->link('information/contact');

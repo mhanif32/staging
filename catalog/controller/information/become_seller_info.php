@@ -21,6 +21,9 @@ class ControllerInformationBecomeSellerInfo extends Controller {
 
         $data['become_seller_link'] = $this->url->link('account/register', '&role=seller', true);
 
+        $becomeSeller = $this->model_catalog_information->getInfoMessage(15);
+        $data['becomeSeller'] = $becomeSeller['title'];
+        $data['becomeSellerDesc'] = html_entity_decode($becomeSeller['description'], ENT_QUOTES, 'UTF-8');
 
         // Load the template file and show output
         $this->response->setOutput($this->load->view('information/become_seller_info', $data));

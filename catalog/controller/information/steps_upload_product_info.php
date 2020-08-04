@@ -1,5 +1,5 @@
 <?php
-class ControllerInformationBecomeDeliveryPartnerInfo extends Controller {
+class ControllerInformationStepsUploadProductInfo extends Controller {
     public function index() {
         // Optional. This calls for your language file
         $this->load->language('information/delivery_info');
@@ -19,14 +19,13 @@ class ControllerInformationBecomeDeliveryPartnerInfo extends Controller {
         $data['header'] = $this->load->controller('common/header');
 
 
-        $data['my_account_href'] = $this->url->link('account/edit', '', true);
-        $data['delivery_partner_register_link'] = $this->url->link('account/register', '&role=delivery-partner', true);
 
-        $becomeDeliveryPartner = $this->model_catalog_information->getInfoMessage(13);
-        $data['becomeDeliveryPartner'] = $becomeDeliveryPartner['title'];
-        $data['becomeDeliveryPartnerDesc'] = html_entity_decode($becomeDeliveryPartner['description'], ENT_QUOTES, 'UTF-8');
+
+        $stepsUploadProduct = $this->model_catalog_information->getInfoMessage(16);
+        $data['stepsUploadProduct'] = $stepsUploadProduct['title'];
+        $data['stepsUploadProductDesc'] = html_entity_decode($stepsUploadProduct['description'], ENT_QUOTES, 'UTF-8');
 
         // Load the template file and show output
-        $this->response->setOutput($this->load->view('information/become_delivery_partner_info', $data));
+        $this->response->setOutput($this->load->view('information/steps_upload_product_info', $data));
     }
 }
