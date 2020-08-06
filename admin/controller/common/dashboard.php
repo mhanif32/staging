@@ -1,6 +1,10 @@
 <?php
 class ControllerCommonDashboard extends Controller {
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('common/dashboard');
 
 		$this->document->setTitle($this->language->get('heading_title'));
