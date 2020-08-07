@@ -520,7 +520,7 @@ class ControllerAccountOrder extends Controller {
             $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
             $data['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
             $data['customer_name'] = $customerData['firstname'].' '.$customerData['lastname'];
-
+            $data['date_added'] = substr($orderData['date_added'], 0, 10);
             $mailText = $this->load->view('mail/order_cancel_to_customer', $data);
             $mail->setHtml($mailText);
             $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
