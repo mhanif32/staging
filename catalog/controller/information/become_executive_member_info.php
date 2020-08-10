@@ -1,5 +1,5 @@
 <?php
-class ControllerInformationBecomeExecutivePartnerInfo extends Controller {
+class ControllerInformationBecomeExecutiveMemberInfo extends Controller {
     public function index() {
         // Optional. This calls for your language file
         $this->load->language('information/delivery_info');
@@ -20,13 +20,13 @@ class ControllerInformationBecomeExecutivePartnerInfo extends Controller {
 
 
         $data['my_account_href'] = $this->url->link('account/edit', '', true);
-        $data['executive_partner_register_link'] = $this->url->link('account/register', '&role=executive-partner', true);
+        $data['executive_member_register_link'] = $this->url->link('account/register', '&role=executive-member', true);
 
-        $becomeDeliveryPartner = $this->model_catalog_information->getInfoMessage(13);
-        $data['becomeExecutivePartner'] = $becomeDeliveryPartner['title'];
-        $data['becomeExecutivePartnerDesc'] = html_entity_decode($becomeExecutivePartner['description'], ENT_QUOTES, 'UTF-8');
+        $becomeExecutiveMember = $this->model_catalog_information->getInfoMessage(17);
+        $data['becomeExecutiveMember'] = $becomeExecutiveMember['title'];
+        $data['becomeExecutiveMemberDesc'] = html_entity_decode($becomeExecutiveMember['description'], ENT_QUOTES, 'UTF-8');
 
         // Load the template file and show output
-        $this->response->setOutput($this->load->view('information/become_executive_partner_info', $data));
+        $this->response->setOutput($this->load->view('information/become_executive_member_info', $data));
     }
 }
