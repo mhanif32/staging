@@ -418,6 +418,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);	
 			}
+
+            if ($this->user->hasPermission('access', 'subscription/plan')) {
+                $system[] = array(
+                    'name'	   => $this->language->get('text_subscription_plan'),
+                    'href'     => $this->url->link('subscription/plan', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
 		
 			// Users
 			$user = array();
