@@ -45,10 +45,6 @@
                                                         :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                             </div>
                                         </div>
-                                        <div class="d-flex">
-                                            <strong>Order Request Status : </strong> &nbsp;&nbsp;&nbsp;
-                                            <span class="bg-black status">{{ status }}</span>
-                                        </div>
                                     </div>
                                     <br>
 
@@ -208,14 +204,4 @@
             });
     });
     //--></script>
-
-<script>
-    $('#selectStatus').on('change', function () {
-        if($(this).val() == 'Others') {
-            $('#textOtherSpecification').show();
-        } else {
-            $('#textOtherSpecification').hide();
-        }
-    });
-</script>
 {{ footer }}

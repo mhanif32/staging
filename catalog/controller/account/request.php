@@ -93,7 +93,6 @@ class ControllerAccountRequest extends Controller {
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
-        $data['action_order_request_status'] = $this->url->link('account/request/update-status', '&id=' . $requestData['request_id'], true);
         $this->response->setOutput($this->load->view('account/request_view', $data));
     }
 
@@ -358,10 +357,12 @@ class ControllerAccountRequest extends Controller {
         );
         $data['is_accept'] = $requestData['is_accept'];
         $data['request_id'] = $requestData['request_id'];
+        $data['status'] = $requestData['status'];
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
+        $data['action_order_request_status'] = $this->url->link('account/request/update-status', '&id=' . $requestData['request_id'], true);
         $this->response->setOutput($this->load->view('account/assigned_order_view', $data));
     }
 
@@ -379,6 +380,6 @@ class ControllerAccountRequest extends Controller {
         }
 
         //$this->response->redirect($this->url->link('account/request/view', 'id='.$requestId, true));
-        $this->response->redirect($this->url->link('account/request/index', '', true));
+        $this->response->redirect($this->url->link('account/request/orders', '', true));
     }
 }

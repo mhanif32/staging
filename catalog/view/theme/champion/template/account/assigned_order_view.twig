@@ -42,7 +42,13 @@
                                                 <p class="mb-0"><strong>Order Invoice Number :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                             </div>
                                         </div>
-
+                                        {% if status %}
+                                            <div class="d-flex">
+                                                <strong>Order Request Status : </strong> &nbsp;&nbsp;&nbsp;
+                                                <span class="bg-black status">{{ status }}</span>
+                                            </div>
+                                            <br>
+                                        {% endif %}
                                     </div>
 
                                     <table class="table table-hover bg-white box-shadow">
@@ -110,12 +116,37 @@
                                         </tbody>
                                     </table>
 
-                                    {% if is_accept == 0 %}
-                                        <div id="option-button">
-                                            <label>Accept or Decline Delivery Request</label><br>
-                                            <button class="btn btn-success" id="accept">Accept</button>
-                                            <button class="btn btn-danger" id="decline">Decline</button>
-                                        </div>
+                                    {% if is_accept == 1 %}
+                                        <hr>
+                                        <h3 class="f-20 font-weight-bold text-uppercase my-2">Update Order Request Status</h3>
+                                        <form action="{{ action_order_request_status }}" id="formOrderStatus" name="formOrderStatus" method="post">
+                                            <div class="form-group required">
+                                                <label class="control-label" for="selectStatus">Select Order Request Status </label>
+                                                <select name="selectStatus" id="selectStatus" class="form-control" readonly>
+                                                    <option value="">Select</option>
+                                                    <option value="Order picked up">Order picked up</option>
+                                                    <option value="En route Delivery">En route Delivery</option>
+                                                    <option value="Parcel delivered">Parcel delivered</option>
+                                                    <option value="Customer not at home">Customer not at home</option>
+                                                    <option value="Wrong delivery address">Wrong delivery address</option>
+                                                    <option value="Parcel not delivered">Parcel not delivered</option>
+                                                    <option value="Parcel returned to seller">Parcel returned to seller</option>
+                                                    <option value="Parcel left with the neighbour">Parcel left with the neighbour</option>
+                                                    <option value="Others">Others (Please specify)</option>
+                                                </select>
+                                                <div class="text-danger">{{ error_message }}</div>
+                                            </div>
+
+                                            <div class="form-group" style="display: none" id="textOtherSpecification">
+                                                <label for="inputOtherSpecification" class="control-label">Please Tell Us The Other Specification</label>
+                                                <textarea id="inputOtherSpecification" name="inputOtherSpecification" class="form-control" cols="25" rows="6"></textarea>
+                                                <div class="text-danger">{{ error_message }}</div>
+                                            </div>
+
+                                            <div class="buttons clearfix">
+                                                <input type="submit" class="btn btn-success pull-right button-cancel-submit" id="button-cancel-submit" value="Submit">
+                                            </div>
+                                        </form>
                                     {% endif %}
                                 </div>
                             </div>
@@ -127,45 +158,13 @@
     </div>
 </section>
 
-<script type="text/javascript"><!--
-    $('button[id^=\'accept\']').on('click', function () {
-
-        var request_id = {{ request_id }}
-            $.ajax({
-                url: 'index.php?route=account/request/acceptRequest',
-                method: 'post',
-                data: {request_id: request_id},
-                success: function (response) {
-
-                    if (response['success']) {
-                        $('#option-button').slideUp();
-                        $('#option-button').after('<span style="font-size: 19px; text-align: center;color: green;">' + response['success'] + '</span>');
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
+<script>
+    $('#selectStatus').on('change', function () {
+        if($(this).val() == 'Others') {
+            $('#textOtherSpecification').show();
+        } else {
+            $('#textOtherSpecification').hide();
+        }
     });
-
-    $('button[id^=\'decline\']').on('click', function () {
-
-        var request_id = {{ request_id }}
-            $.ajax({
-                url: 'index.php?route=account/request/declineRequest',
-                method: 'post',
-                data: {request_id: request_id},
-                success: function (response) {
-
-                    if (response['success']) {
-                        $('#option-button').slideUp();
-                        $('#option-button').after('<span style="font-size: 19px; text-align: center;color: red;">' + response['success'] + '</span>');
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-    });
-    //--></script>
+</script>
 {{ footer }}
