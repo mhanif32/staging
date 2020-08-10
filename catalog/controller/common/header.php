@@ -90,6 +90,7 @@ class ControllerCommonHeader extends Controller
         $data['delivery_info_href'] = $this->url->link('information/delivery_info', '', true);
         $data['return_policy_href'] = $this->url->link('information/return_policy', '', true);
         $data['become_delivery_partner_info_href'] = $this->url->link('information/become_delivery_partner_info', '', true);
+        $data['become_executive_member_info_href'] = $this->url->link('information/become_executive_member_info', '', true);
         $data['become_our_partner_href'] = $this->url->link('information/become_our_partner_info', '', true);
 
         $data['login'] = $this->url->link('account/login', '', true);
