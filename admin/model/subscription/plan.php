@@ -1,14 +1,14 @@
 <?php
 class ModelSubscriptionPlan extends Model {
-	public function addCustomerGroup($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group SET approval = '" . (int)$data['approval'] . "', sort_order = '" . (int)$data['sort_order'] . "'");
+	public function addSubscriptionPlan($data, $stripeData = NULL) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "subscription_plan SET sort_order = '" . (int)$data['sort_order'] . "', `name` = '" . $this->db->escape($data['name']) . "', amount = '" . $this->db->escape($data['amount']) . "', currency = 'usd', `interval` = '" . $this->db->escape($data['interval']) . "', interval_count = '" . (int)$data['interval_count'] . "', rent_percentage = '" . $data['rent_percentage'] . "', date_added = NOW()");
 
 		$customer_group_id = $this->db->getLastId();
 
-		foreach ($data['customer_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group_description SET customer_group_id = '" . (int)$customer_group_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "'");
-		}
-		
+//		foreach ($data['customer_group_description'] as $language_id => $value) {
+//			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group_description SET customer_group_id = '" . (int)$customer_group_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "'");
+//		}
+
 		return $customer_group_id;
 	}
 

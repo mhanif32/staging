@@ -30,14 +30,74 @@
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-subscription"
                       class="form-horizontal">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label">{{ entry_name }}</label>
+                        <label class="col-sm-2 control-label" for="name">{{ entry_name }}</label>
                         <div class="col-sm-10">
-                            <input type="text"
-                                   name="customer_group_description[name]"
-                                   value="{{ customer_group_description ? customer_group_description.name }}"
-                                   placeholder="{{ entry_name }}" class="form-control"/>
+                            <input type="text" name="name" id="name" value="{{ name }}" placeholder="{{ entry_name }}" class="form-control"/>
                             {% if error_name %}
                                 <div class="text-danger">{{ error_name }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="amount">{{ entry_amount }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="amount" id="amount" value="{{ amount }}" placeholder="{{ entry_amount }}" class="form-control"/>
+                            {% if error_amount %}
+                                <div class="text-danger">{{ error_amount }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="interval">{{ entry_interval }}</label>
+                        <div class="col-sm-10">
+{#                            <input type="text" name="interval" id="interval" value="{{ interval }}" placeholder="{{ entry_interval }}" class="form-control"/>#}
+
+                            <select name="interval" id="interval" class="form-control">
+                                <option value="">Select</option>
+                                <option value="month">Month</option>
+                            </select>
+
+                            {% if error_interval %}
+                                <div class="text-danger">{{ error_interval }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="interval_count">{{ entry_interval_count }}</label>
+                        <div class="col-sm-10">
+{#                            <input type="text" name="interval_count" id="interval_count" value="{{ interval_count }}" placeholder="{{ entry_interval_count }}" class="form-control"/>#}
+                            <select name="interval_count" id="interval_count" class="form-control">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+
+                            {% if error_interval_count %}
+                                <div class="text-danger">{{ error_interval_count }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="rent_percentage">{{ entry_rent_percentage }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="rent_percentage" id="rent_percentage" value="{{ rent_percentage }}" placeholder="{{ entry_rent_percentage }}" class="form-control"/>
+
+                            {% if error_rent_percentage %}
+                                <div class="text-danger">{{ error_rent_percentage }}</div>
                             {% endif %}
                         </div>
                     </div>
