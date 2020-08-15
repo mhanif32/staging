@@ -284,7 +284,7 @@ class ModelAccountCustomer extends Model
 
     public function getStripeCustomerId($customer_id)
     {
-        $query = $this->db->query("SELECT stripe_customer_id, email FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+        $query = $this->db->query("SELECT stripe_customer_id, email, role FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
 
         return $query->row;
     }

@@ -6,12 +6,29 @@ class ControllerMpmultivendorSubscription extends Controller
     {
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
-        if (!$this->config->get('mpmultivendor_status')) {
-            $this->response->redirect($this->url->link('common/home', '', true));
+
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->load->language('mpmultivendor/subscription');
         $this->load->model('mpmultivendor/subscription');
+        $this->load->model('account/customer');
+
+        $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
+
+        if (empty($customer['role']) || $customer['role'] != 'seller') {
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+
+        if (!$this->config->get('mpmultivendor_status')) {
+            $this->response->redirect($this->url->link('common/home', '', true));
+        }
+
         $data['breadcrumbs'] = array();
 
         $data['breadcrumbs'][] = array(
@@ -52,18 +69,23 @@ class ControllerMpmultivendorSubscription extends Controller
             $token = $this->request->post['stripe_token'];
             $sellerName = $this->request->post['sellerName'];
             $product = $this->request->post['radioPlan'];
+            $stripe_card = $this->request->post['stripe_card'];
+            $stripe_cvc = $this->request->post['stripe_cvc'];
+            $stripe_expdate = $this->request->post['stripe_expdate'];
+            $expDate = explode('/', $stripe_expdate);
+            echo '<pre>';print_r($this->request->post);exit('okoko');
 
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
-            //print_r($sellerName);exit('okok');
+
             if(empty($customer['stripe_customer_id'])) {
 
                  $paymentMethod = \Stripe\PaymentMethod::create([
                     'type' => 'card',
                     'card' => [
-                        'number' => '4242424242424242',
-                        'exp_month' => 8,
-                        'exp_year' => 2021,
-                        'cvc' => '314',
+                        'number' => $stripe_card,
+                        'exp_month' => $expDate[0],
+                        'exp_year' => $expDate[1],
+                        'cvc' => $stripe_cvc,
                     ],
                 ]);
 
@@ -71,8 +93,6 @@ class ControllerMpmultivendorSubscription extends Controller
                     'name' => $sellerName,
                     'email' => $customer['email'],
                     'payment_method' => $paymentMethod['id'],
-                    //'source' => $token,
-//                    'email' => $this->customer->getEmail()
                 ]);
                 $customerId = $customerData['id'];
             } else {
@@ -91,15 +111,6 @@ class ControllerMpmultivendorSubscription extends Controller
 //                    ]
 //                ],
             ]);
-
-//            $charge = \Stripe\Charge::create([
-//                'amount' => $planAmt,
-//                'customer' => $customerId,
-//                'currency' => 'usd',
-//                'description' => '',
-//                'source' => $token,
-//            ]);
-
         }
     }
 

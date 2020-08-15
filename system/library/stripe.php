@@ -93,6 +93,7 @@ require(DIR_SYSTEM . 'library/stripe/Order.php');
 require(DIR_SYSTEM . 'library/stripe/OrderItem.php');
 require(DIR_SYSTEM . 'library/stripe/OrderReturn.php');
 require(DIR_SYSTEM . 'library/stripe/PaymentIntent.php');
+require(DIR_SYSTEM . 'library/stripe/PaymentMethod.php');
 require(DIR_SYSTEM . 'library/stripe/Payout.php');
 require(DIR_SYSTEM . 'library/stripe/Plan.php');
 require(DIR_SYSTEM . 'library/stripe/Product.php');

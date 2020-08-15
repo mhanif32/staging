@@ -172,14 +172,17 @@
                                     </div>
 
                                     <input type="hidden" name="stripe_token" id="stripe_token">
+                                    <input type="hidden" name="stripe_card" id="stripe_card">
+                                    <input type="hidden" name="stripe_cvc" id="stripe_cvc">
+                                    <input type="hidden" name="stripe_expdate" id="stripe_expdate">
 
                                     <input type="submit" value="Pay" class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
-{#                                    <div class="outcome">#}
-{#                                        <div class="error"></div>#}
-{#                                        <div class="success">#}
-{#                                            Success! Your Stripe token is <span class="token"></span>#}
-{#                                        </div>#}
-{#                                    </div>#}
+                                    <div class="outcome">
+                                        <div class="error"></div>
+                                        <div class="success">
+                                            Success! Your Stripe token is <span class="token"></span>
+                                        </div>
+                                    </div>
                             </div>
                             </form>
                         </div>
@@ -214,9 +217,6 @@
     card.mount('#card-element');
 
     function setOutcome(result) {
-
-        console.log(result);
-
         var successElement = document.querySelector('.success');
         var errorElement = document.querySelector('.error');
         successElement.classList.remove('visible');
@@ -227,6 +227,16 @@
             // https://stripe.com/docs/charges
             //successElement.querySelector('.token').textContent = result.token.id;
             $('#stripe_token').val(result.token.id);
+
+            var cardNumber = $( "input[name*='cardnumber']" ).val();
+            var cvc = $( "input[name*='cvc']" ).val();
+            var expDate = $( "input[name*='exp-date']" ).val();
+            $('#stripe_card').val(cardNumber);
+            $('#stripe_cvc').val(cvc);
+            $('#stripe_expdate').val(expDate);
+
+            //var plan_id = $( "input[name*='radioPlan']" ).attr('id');
+            successElement.classList.add('visible');
             $('form#form-subscription').submit();
 
             //Write ajax function for the charge and
@@ -267,7 +277,7 @@
             });*/
 
 
-            successElement.classList.add('visible');
+
         } else if (result.error) {
             errorElement.textContent = result.error.message;
             errorElement.classList.add('visible');
