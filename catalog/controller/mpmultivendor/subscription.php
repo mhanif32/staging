@@ -73,7 +73,7 @@ class ControllerMpmultivendorSubscription extends Controller
             $stripe_cvc = $this->request->post['stripe_cvc'];
             $stripe_expdate = $this->request->post['stripe_expdate'];
             $expDate = explode('/', $stripe_expdate);
-            echo '<pre>';print_r($this->request->post);exit('okoko');
+            //echo '<pre>';print_r($this->request->post);exit('okoko');
 
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
 
@@ -82,10 +82,10 @@ class ControllerMpmultivendorSubscription extends Controller
                  $paymentMethod = \Stripe\PaymentMethod::create([
                     'type' => 'card',
                     'card' => [
-                        'number' => $stripe_card,
-                        'exp_month' => $expDate[0],
-                        'exp_year' => $expDate[1],
-                        'cvc' => $stripe_cvc,
+                        'number' => '4242 4242 4242 4242',
+                        'exp_month' => '05',
+                        'exp_year' => '2024',
+                        'cvc' => '262',
                     ],
                 ]);
 
@@ -94,6 +94,7 @@ class ControllerMpmultivendorSubscription extends Controller
                     'email' => $customer['email'],
                     'payment_method' => $paymentMethod['id'],
                 ]);
+                print_r($customerData['id']);exit('bbb');
                 $customerId = $customerData['id'];
             } else {
                 $customerId = $customer['stripe_customer_id'];

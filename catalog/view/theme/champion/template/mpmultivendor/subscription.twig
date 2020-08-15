@@ -171,7 +171,7 @@
                                         </label>
                                     </div>
 
-                                    <input type="hidden" name="stripe_token" id="stripe_token">
+                                    <input type="hidden" name="stripe_token" id="stripe_token" />
                                     <input type="hidden" name="stripe_card" id="stripe_card">
                                     <input type="hidden" name="stripe_cvc" id="stripe_cvc">
                                     <input type="hidden" name="stripe_expdate" id="stripe_expdate">
@@ -195,7 +195,7 @@
 {{ footer }}
 
 <script>
-    var stripe = Stripe('pk_test_DhTJNmNXX7Iuxz4qOqii55qp007Zz9YRiW');
+    var stripe = Stripe('pk_test_51H8inyJvSOEFkXrXeZUINSYh5ItyqZSskzu1mfmVTGTHoEcp5KNiBtdGjiKfjiLh9wwdTjnifMuHfbWGLFuCyc2A0052ZePgjl');
     var elements = stripe.elements();
 
     var card = elements.create('card', {
@@ -225,58 +225,20 @@
         if (result.token) {
             // Use the token to create a charge or a customer
             // https://stripe.com/docs/charges
-            //successElement.querySelector('.token').textContent = result.token.id;
+            successElement.querySelector('.token').textContent = result.token.id;
+            console.log(result);
             $('#stripe_token').val(result.token.id);
 
-            var cardNumber = $( "input[name*='cardnumber']" ).val();
-            var cvc = $( "input[name*='cvc']" ).val();
-            var expDate = $( "input[name*='exp-date']" ).val();
-            $('#stripe_card').val(cardNumber);
-            $('#stripe_cvc').val(cvc);
-            $('#stripe_expdate').val(expDate);
+            //var cardNumber = $('[name=cardnumber]').val();
+            //var cvc = $( "input[name*='cvc']" ).val();
+            //var expDate = $( "input[name*='exp-date']" ).val();
+            //$('#stripe_card').val(cardNumber);
+            //$('#stripe_cvc').val(cvc);
+            $('#stripe_expdate').val(result.token.card.exp_month +'/'+result.token.card.exp_year);
 
             //var plan_id = $( "input[name*='radioPlan']" ).attr('id');
             successElement.classList.add('visible');
             $('form#form-subscription').submit();
-
-            //Write ajax function for the charge and
-            /*var checkPlan = $('.checkPlan').val();
-            var sellerName = $('#name').val();
-            var cardNumber = $( "input[name*='cardnumber']" ).val();
-            var cvc = $( "input[name*='cvc']" ).val();
-            var postal = $( "input[name*='postal']" ).val();
-
-            $.ajax({
-                url: 'index.php?route=mpmultivendor/subscription/add',
-                dataType: 'json',
-                type: 'post',
-                data: {checkPlan: checkPlan, sellerName: sellerName, cardNumber: cardNumber, cvc: cvc, postal: postal},
-                beforeSend: function () {
-                    $('#button-submit').button('loading');
-                },
-                complete: function () {
-                    $('#button-submit').button('reset');
-                },
-                success: function (json) {
-                    $('#mv-enquiry .alert, #mv-enquiry .text-danger').remove();
-                    $('#mv-enquiry .form-group').removeClass('has-error');
-
-                    if (json['error']) {
-                        $('#showerror').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
-                    }
-
-                    if (json['success']) {
-                        //location = json['success'];
-                        // $('#form-create-enquiry').slideUp();
-                        // $('#form-create-enquiry').after('<span style="font-size: 19px; text-align: center;color: green;">'+json['success']+'</span>');
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });*/
-
-
 
         } else if (result.error) {
             errorElement.textContent = result.error.message;
@@ -288,7 +250,7 @@
         setOutcome(event);
     });
 
-    /*document.querySelector('form#form-subscription').addEventListener('submit', function(e) {
+    document.querySelector('form#form-subscription').addEventListener('submit', function(e) {
 
         e.preventDefault();
         var name = document.getElementById('name').value;
@@ -302,5 +264,5 @@
             name: name,
         };
         stripe.createToken(card, options).then(setOutcome);
-    });*/
+    });
 </script>
