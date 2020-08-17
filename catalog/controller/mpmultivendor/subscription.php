@@ -101,16 +101,9 @@ class ControllerMpmultivendorSubscription extends Controller
             }
             //print_r($sellerName);exit('okok');
 
-            \Stripe\Subscription::create([
+            $stripedata = \Stripe\Subscription::create([
                 "customer" => $customerId,
-                'items' => [['plan' => $plan->plan_id]],
-//                "items" => [
-//                    'data' => [
-//                        'price' => [
-//                            'product' => $product
-//                        ]
-//                    ]
-//                ],
+                'items' => [['plan' => $product]],
             ]);
         }
     }

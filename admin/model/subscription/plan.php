@@ -1,7 +1,7 @@
 <?php
 class ModelSubscriptionPlan extends Model {
-	public function addSubscriptionPlan($data, $stripe_product_id = NULL) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "subscription_plan SET sort_order = '" . (int)$data['sort_order'] . "', `name` = '" . $this->db->escape($data['name']) . "', amount = '" . $this->db->escape($data['amount']) . "', currency = 'usd', `interval` = '" . $this->db->escape($data['interval']) . "', interval_count = '" . (int)$data['interval_count'] . "', stripe_product_id = '" . $this->db->escape($stripe_product_id) . "', rent_percentage = '" . $data['rent_percentage'] . "', date_added = NOW()");
+	public function addSubscriptionPlan($data, $stripe_plan_id = NULL) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "subscription_plan SET sort_order = '" . (int)$data['sort_order'] . "', `name` = '" . $this->db->escape($data['name']) . "', amount = '" . $this->db->escape($data['amount']) . "', currency = 'usd', `interval` = '" . $this->db->escape($data['interval']) . "', interval_count = '" . (int)$data['interval_count'] . "', $stripe_plan_id = '" . $this->db->escape($stripe_plan_id) . "', rent_percentage = '" . $data['rent_percentage'] . "', date_added = NOW()");
 
 		$customer_group_id = $this->db->getLastId();
 

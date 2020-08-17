@@ -28,6 +28,14 @@ class ControllerSubscriptionPlan extends Controller
 
         $this->load->model('subscription/plan');
 
+        $this->load->library('stripe');
+        $stripe = new \Stripe\StripeObject('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v'
+        );
+        $stripe->products->delete(
+            'prod_Hqk6t2ejJd2GIb',
+            []
+        );
+
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 
             $url = '';
@@ -51,8 +59,6 @@ class ControllerSubscriptionPlan extends Controller
             $product = \Stripe\Product::create([
                 'name' => $this->request->post['name'],
             ]);
-            $stripe_product_id = $product['id'];
-            $this->model_subscription_plan->addSubscriptionPlan($this->request->post, $stripe_product_id);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -74,6 +80,8 @@ class ControllerSubscriptionPlan extends Controller
                 "interval_count" => $this->request->post['interval_count']
             ];
             $response = \Stripe\Plan::create($parameters);
+            $stripe_plan_id = $response['id'];
+            $this->model_subscription_plan->addSubscriptionPlan($this->request->post, $stripe_plan_id);
 
             $this->response->redirect($this->url->link('subscription/plan', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
