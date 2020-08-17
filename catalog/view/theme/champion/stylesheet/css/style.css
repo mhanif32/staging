@@ -1963,3 +1963,30 @@ ul.breadcrumb li {
 .pricing-subscription #form-subscription .princing-item:hover .deco-layer--2 {
   -webkit-transform: translate3d(-15px, 0, 0);
           transform: translate3d(-15px, 0, 0); }
+
+#subscribeModal .modal-lg .modal-content {
+  overflow: hidden; }
+  #subscribeModal .modal-lg .modal-content a.h2 {
+    color: #01B0F1;
+    margin-bottom: 0;
+    text-decoration: none; }
+  #subscribeModal .modal-lg .modal-content .top-strip {
+    height: 155px;
+    background: #01B0F1;
+    -webkit-transform: rotate(141deg);
+            transform: rotate(141deg);
+    margin-top: -106px;
+    margin-right: 457px;
+    margin-left: -130px;
+    border-bottom: 65px solid #E0F5F8;
+    border-top: 10px solid #E0F5F8; }
+  #subscribeModal .modal-lg .modal-content .bottom-strip {
+    height: 155px;
+    background: #01B0F1;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+    margin-top: -115px;
+    margin-right: -339px;
+    margin-left: 421px;
+    border-bottom: 65px solid #E0F5F8;
+    border-top: 10px solid #E0F5F8; }
