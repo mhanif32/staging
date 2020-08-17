@@ -28,14 +28,6 @@ class ControllerSubscriptionPlan extends Controller
 
         $this->load->model('subscription/plan');
 
-        $this->load->library('stripe');
-        $stripe = new \Stripe\StripeObject('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v'
-        );
-        $stripe->products->delete(
-            'prod_Hqk6t2ejJd2GIb',
-            []
-        );
-
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 
             $url = '';
@@ -76,7 +68,6 @@ class ControllerSubscriptionPlan extends Controller
                 "interval" => $this->request->post['interval'],
                 "product" => $product['id'],
                 "currency" => 'usd',
-                "id" => strtolower(trim($this->request->post['name'])),
                 "interval_count" => $this->request->post['interval_count']
             ];
             $response = \Stripe\Plan::create($parameters);
@@ -222,6 +213,9 @@ class ControllerSubscriptionPlan extends Controller
         foreach ($results as $result) {
             $data['plans'][] = array(
                 'plan_id' => $result['plan_id'],
+                'amount' => $result['amount'],
+                'date_added' => $result['date_added'],
+                'rent_percentage' => $result['rent_percentage'],
                 'name' => $result['name'] . (($result['plan_id'] == $this->config->get('plan_id')) ? $this->language->get('text_default') : null),
                 //'sort_order'        => $result['sort_order'],
                 'edit' => $this->url->link('subscription/plan/edit', 'user_token=' . $this->session->data['user_token'] . '&plan_id=' . $result['plan_id'] . $url, true)
