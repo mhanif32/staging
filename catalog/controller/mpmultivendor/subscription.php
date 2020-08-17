@@ -94,7 +94,7 @@ class ControllerMpmultivendorSubscription extends Controller
                     'email' => $customer['email'],
                     'payment_method' => $paymentMethod['id'],
                 ]);
-                print_r($customerData['id']);exit('bbb');
+                //print_r($customerData['id']);exit('bbb');
                 $customerId = $customerData['id'];
             } else {
                 $customerId = $customer['stripe_customer_id'];
@@ -103,7 +103,7 @@ class ControllerMpmultivendorSubscription extends Controller
 
             \Stripe\Subscription::create([
                 "customer" => $customerId,
-                "plan" => 'gold'
+                'items' => [['plan' => $plan->plan_id]],
 //                "items" => [
 //                    'data' => [
 //                        'price' => [

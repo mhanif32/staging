@@ -29,9 +29,6 @@ class ControllerSubscriptionPlan extends Controller
         $this->load->model('subscription/plan');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_subscription_plan->addSubscriptionPlan($this->request->post);
-
-            $this->session->data['success'] = $this->language->get('text_success');
 
             $url = '';
 
@@ -51,24 +48,25 @@ class ControllerSubscriptionPlan extends Controller
             $this->load->library('stripe');
             \Stripe\Stripe::setApiKey('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v');
 
-            //Create a Price
-
             $product = \Stripe\Product::create([
                 'name' => $this->request->post['name'],
             ]);
+            $stripe_product_id = $product['id'];
+            $this->model_subscription_plan->addSubscriptionPlan($this->request->post, $stripe_product_id);
 
-            $stripe = new \Stripe\StripeObject(
-                'sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v'
-            );
-            $price = $stripe->prices->create([
-                'unit_amount' => 2000,
-                'currency' => 'usd',
-                'recurring' => ['interval' => 'month'],
-                'product' => $product['id'],
-            ]);
+            $this->session->data['success'] = $this->language->get('text_success');
 
+//            $stripe = new \Stripe\StripeObject('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v'
+//            );
+//            $price = $stripe->prices->create([
+//                'unit_amount' => $this->request->post['amount'],
+//                'currency' => 'usd',
+//                'recurring' => ['interval' => 'month'],
+//                'product' => $product['id'],
+//            ]);
+//echo '<pre>'; print_r($price); exit('okok');
             $parameters = [
-                //"amount" => $this->request->post['amount'] * 100,
+                "amount" => $this->request->post['amount'] * 100,
                 "interval" => $this->request->post['interval'],
                 "product" => $product['id'],
                 "currency" => 'usd',
