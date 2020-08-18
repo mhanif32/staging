@@ -4,9 +4,6 @@ class ControllerMpmultivendorSubscription extends Controller
 {
     public function index()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
 
@@ -69,49 +66,40 @@ class ControllerMpmultivendorSubscription extends Controller
             $token = $this->request->post['stripe_token'];
             $sellerName = $this->request->post['sellerName'];
             $product = $this->request->post['radioPlan'];
-            $stripe_card = $this->request->post['stripe_card'];
-            $stripe_cvc = $this->request->post['stripe_cvc'];
-            $stripe_expdate = $this->request->post['stripe_expdate'];
-            $expDate = explode('/', $stripe_expdate);
-            //echo '<pre>';print_r($this->request->post);exit('okoko');
+            $plan_id = $this->request->post['plan_id'];
 
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
-
             if(empty($customer['stripe_customer_id'])) {
-
-                 $paymentMethod = \Stripe\PaymentMethod::create([
-                    'type' => 'card',
-                    'card' => [
-                        'number' => '4242 4242 4242 4242',
-                        'exp_month' => '05',
-                        'exp_year' => '2024',
-                        'cvc' => '262',
-                    ],
-                ]);
 
                 $customerData = \Stripe\Customer::create([
                     'name' => $sellerName,
                     'email' => $customer['email'],
-                    'payment_method' => $paymentMethod['id'],
+                    'source' => $token
                 ]);
-                //print_r($customerData['id']);exit('bbb');
                 $customerId = $customerData['id'];
             } else {
                 $customerId = $customer['stripe_customer_id'];
             }
-            //print_r($sellerName);exit('okok');
 
-            \Stripe\Subscription::create([
+            $stripedata = \Stripe\Subscription::create([
                 "customer" => $customerId,
-                'items' => [['plan' => $plan->plan_id]],
-//                "items" => [
-//                    'data' => [
-//                        'price' => [
-//                            'product' => $product
-//                        ]
-//                    ]
-//                ],
+                'items' => [['plan' => $product]],
             ]);
+
+            $subscriptionData = [
+                'customer_id' => $this->customer->getId(),
+                'subscription_plan_id' => $plan_id,
+                'stripe_subscription_id' => $stripedata['id'],
+                'stripe_customer_id' => $stripedata['customer'],
+                'stripe_status' => $stripedata['status'],
+                'amount' => $stripedata['plan']['amount'] / 100,
+                'start_date' => $stripedata['current_period_start'],
+                'end_date' => $stripedata['current_period_end']
+            ];
+            $this->model_mpmultivendor_subscription->createUserSubscription($subscriptionData);
+
+            $this->session->data['success'] = 'Success : Your plan has been successfully subscribed.';
+            $this->response->redirect($this->url->link('account/account', '', true));
         }
     }
 

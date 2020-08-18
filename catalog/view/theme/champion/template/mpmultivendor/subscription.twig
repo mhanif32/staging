@@ -13,11 +13,11 @@
     }
 
     /*body {*/
-    /*    background: #E6EBF1;*/
-    /*    display: flex;*/
-    /*    align-items: center;*/
-    /*    justify-content: center;*/
-    /*    min-height: 100%;*/
+    /* background: #E6EBF1;*/
+    /* display: flex;*/
+    /* align-items: center;*/
+    /* justify-content: center;*/
+    /* min-height: 100%;*/
     /*}*/
 
     form {
@@ -128,6 +128,7 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 {#<section id="account-account" class="register update-profile main-dashboard" style="background: #F3F3F3;">#}
+
     {#<div class="container">#}
         {#<ul class="breadcrumb">#}
             {#{% for breadcrumb in breadcrumbs %}#}
@@ -168,11 +169,13 @@
             {#</div>#}
         {#</div>#}
     {#</div>#}
+
 {#</section>#}
 
 
 <div class="pricing-subscription ">
     <div class="bg-gradient">
+
 <div class="container p-5">
     {% if success %}
         <div class="alert alert-success alert-dismissible"><i
@@ -217,22 +220,21 @@
                         </label>
                     </div>
 
-                    <input type="hidden" name="stripe_token" id="stripe_token" />
-                    <input type="hidden" name="stripe_card" id="stripe_card">
-                    <input type="hidden" name="stripe_cvc" id="stripe_cvc">
-                    <input type="hidden" name="stripe_expdate" id="stripe_expdate">
 
-                    <input type="submit" value="Pay" class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
-                    <div class="outcome">
-                        <div class="error"></div>
-                        <div class="success">
-                            Success! Your Stripe token is <span class="token"></span>
+                        <input type="hidden" name="stripe_token" id="stripe_token" />
+                        <input type="hidden" name="plan_id" id="plan_id">
+
+                        <input type="submit" value="Pay" class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
+                        <div class="outcome">
+                            <div class="error"></div>
+                            <div class="success">
+                                Success! Your Stripe token is <span class="token"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </form>
         </div>
-    </form>
-</div>
     </div>
 </div>
 
@@ -267,20 +269,12 @@
         errorElement.classList.remove('visible');
 
         if (result.token) {
-            // Use the token to create a charge or a customer
-            // https://stripe.com/docs/charges
+// Use the token to create a charge or a customer
+// https://stripe.com/docs/charges
             successElement.querySelector('.token').textContent = result.token.id;
-            console.log(result);
             $('#stripe_token').val(result.token.id);
-
-            //var cardNumber = $('[name=cardnumber]').val();
-            //var cvc = $( "input[name*='cvc']" ).val();
-            //var expDate = $( "input[name*='exp-date']" ).val();
-            //$('#stripe_card').val(cardNumber);
-            //$('#stripe_cvc').val(cvc);
-            $('#stripe_expdate').val(result.token.card.exp_month +'/'+result.token.card.exp_year);
-
-            //var plan_id = $( "input[name*='radioPlan']" ).attr('id');
+            var plan_id = $( "input[name*='radioPlan']" ).attr('id');
+            $('#plan_id').val(plan_id);
             successElement.classList.add('visible');
             $('form#form-subscription').submit();
 

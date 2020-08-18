@@ -51,8 +51,6 @@ class ControllerSubscriptionPlan extends Controller
             $product = \Stripe\Product::create([
                 'name' => $this->request->post['name'],
             ]);
-            $stripe_product_id = $product['id'];
-            $this->model_subscription_plan->addSubscriptionPlan($this->request->post, $stripe_product_id);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,10 +68,11 @@ class ControllerSubscriptionPlan extends Controller
                 "interval" => $this->request->post['interval'],
                 "product" => $product['id'],
                 "currency" => 'usd',
-                "id" => strtolower(trim($this->request->post['name'])),
                 "interval_count" => $this->request->post['interval_count']
             ];
             $response = \Stripe\Plan::create($parameters);
+            $stripe_plan_id = $response['id'];
+            $this->model_subscription_plan->addSubscriptionPlan($this->request->post, $stripe_plan_id);
 
             $this->response->redirect($this->url->link('subscription/plan', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
@@ -214,6 +213,9 @@ class ControllerSubscriptionPlan extends Controller
         foreach ($results as $result) {
             $data['plans'][] = array(
                 'plan_id' => $result['plan_id'],
+                'amount' => $result['amount'],
+                'date_added' => $result['date_added'],
+                'rent_percentage' => $result['rent_percentage'],
                 'name' => $result['name'] . (($result['plan_id'] == $this->config->get('plan_id')) ? $this->language->get('text_default') : null),
                 //'sort_order'        => $result['sort_order'],
                 'edit' => $this->url->link('subscription/plan/edit', 'user_token=' . $this->session->data['user_token'] . '&plan_id=' . $result['plan_id'] . $url, true)
