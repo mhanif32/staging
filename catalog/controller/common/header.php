@@ -16,6 +16,10 @@ class ControllerCommonHeader extends Controller
         // Analytics
         $this->load->model('setting/extension');
         $this->load->model('account/address');
+        $this->load->model('catalog/information');
+        $this->load->model('localisation/country');
+        $this->load->model('account/wishlist');
+        $this->load->model('tool/image');
 
         $data['analytics'] = array();
 
@@ -60,7 +64,6 @@ class ControllerCommonHeader extends Controller
 
         // Wishlist
         if ($this->customer->isLogged()) {
-            $this->load->model('account/wishlist');
 
             $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
             $data['firstname'] = $this->customer->getFirstName();
@@ -112,8 +115,11 @@ class ControllerCommonHeader extends Controller
         $data['menu'] = $this->load->controller('common/menu');
         $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
 
-        $this->load->model('localisation/country');
         $data['countries'] = $this->model_localisation_country->getCountries();
+
+        $fillAddressMessage = $this->model_catalog_information->getInfoMessage(7);
+        $data['popupLogo'] = $this->model_tool_image->resize('/' . $this->config->get('config_logo'), 450, 100);
+        $data['fillAddressMsg'] = html_entity_decode($fillAddressMessage['description'], ENT_QUOTES, 'UTF-8');
 
         //check logged in user country
         /*$data['loggedInCountry'] = '';

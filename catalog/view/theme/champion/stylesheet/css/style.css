@@ -1964,13 +1964,13 @@ ul.breadcrumb li {
   -webkit-transform: translate3d(-15px, 0, 0);
           transform: translate3d(-15px, 0, 0); }
 
-#subscribeModal .modal-lg .modal-content {
+#fillAddressModal .modal-lg .modal-content {
   overflow: hidden; }
-  #subscribeModal .modal-lg .modal-content a.h2 {
+  #fillAddressModal .modal-lg .modal-content a.h2 {
     color: #01B0F1;
     margin-bottom: 0;
     text-decoration: none; }
-  #subscribeModal .modal-lg .modal-content .top-strip {
+  #fillAddressModal .modal-lg .modal-content .top-strip {
     height: 155px;
     background: #01B0F1;
     -webkit-transform: rotate(141deg);
@@ -1980,7 +1980,7 @@ ul.breadcrumb li {
     margin-left: -130px;
     border-bottom: 65px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
-  #subscribeModal .modal-lg .modal-content .bottom-strip {
+  #fillAddressModal .modal-lg .modal-content .bottom-strip {
     height: 155px;
     background: #01B0F1;
     -webkit-transform: rotate(135deg);
