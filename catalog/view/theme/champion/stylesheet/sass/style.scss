@@ -1599,18 +1599,15 @@ span {
   #form-subscription {
 
   .pricing-divider-img {
-    position: absolute; left: 0; width: 100%; height: 80px; }
+    position: absolute; left: 0; width: 100%; height: 57px; top: 65px; }
   .deco-layer { transition: transform 0.5s }
   .img-float { width: 50px; position: absolute; top: -3.5rem; right: 1rem }
 
   .princing-item { transition: all 150ms ease-out;
     .pricing-divider {
-      border-radius: 20px;
-      background: $success;
-      padding: 1em 0 3em;
-      position: relative;
-      .plan-name { font-size: 30px; }
-      .plan-amount { font-size: 3rem; }
+      border-radius: 20px; background: $success; padding: 1em 0 1em; position: relative;
+      .plan-name { font-size: 20px; margin-bottom: 0; }
+      .plan-amount { font-size: 15px; }
     }
   }
 

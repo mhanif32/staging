@@ -1931,7 +1931,8 @@ ul.breadcrumb li {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 80px; }
+  height: 57px;
+  top: 65px; }
 .pricing-subscription #form-subscription .deco-layer {
   -webkit-transition: -webkit-transform 0.5s;
   transition: -webkit-transform 0.5s;
@@ -1948,12 +1949,13 @@ ul.breadcrumb li {
   .pricing-subscription #form-subscription .princing-item .pricing-divider {
     border-radius: 20px;
     background: #01B0F1;
-    padding: 1em 0 3em;
+    padding: 1em 0 1em;
     position: relative; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .plan-name {
-      font-size: 30px; }
+      font-size: 20px;
+      margin-bottom: 0; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .plan-amount {
-      font-size: 3rem; }
+      font-size: 15px; }
 .pricing-subscription #form-subscription .princing-item:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05); }

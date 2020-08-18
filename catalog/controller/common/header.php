@@ -71,7 +71,7 @@ class ControllerCommonHeader extends Controller
 
             $this->load->model('account/customer');
             $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
-            $data['loggedInRole'] = (!empty($customer_info['role']) && $customer_info['role'] != 'buyer') ? 'You are <b>' . ucfirst(str_replace("-", " ", $customer_info['role'])) . '</b>' : '';
+            $data['loggedInRole'] = (!empty($customer_info['role']) && $customer_info['role'] != 'buyer') ? 'You are a <b>' . ucfirst(str_replace("-", " ", $customer_info['role'])) . '</b>' : '';
 
         } else {
             $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));

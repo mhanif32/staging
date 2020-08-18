@@ -128,89 +128,98 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 {#<section id="account-account" class="register update-profile main-dashboard" style="background: #F3F3F3;">#}
-{#<div class="container">#}
-{#<ul class="breadcrumb">#}
-{#{% for breadcrumb in breadcrumbs %}#}
-{#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
-{#{% endfor %}#}
-{#</ul>#}
-{#<div class="row">#}
-{#<div class="col-12">#}
-{#<div class="pb-5">#}
-{#<div class="form-signin card p-4">#}
 
-{#<div id="account-account" class="container">#}
-{#{% if success %}#}
-{#<div class="alert alert-success alert-dismissible"><i#}
-{#class="fa fa-check-circle"></i> {{ success }}</div>#}
-{#{% endif %}#}
-{#<h4 class="f-35 text-center font-weight-bold">Membership Plans</h4>#}
-{#<hr>#}
-{# <form id="form-subscription" action="{{ action_subscribe }}" method="post">#}
-{#<form id="form-subscription" action="{{ action_subscribe }}" method="post">#}
-{#<div class="row">#}
-{#{% for plan in plans %}#}
-{#<div class="col-sm-4">#}
-{#<h3 class="f-20 font-weight-bold text-uppercase text-center">{{ plan.name }}</h3>#}
-{#<input type="radio" name="radioPlan" id="{{ plan.plan_id }}"#}
-{#value="{{ plan.stripe_product_id }}" class="icheck-input checkPlan">{{ plan.name }}#}
+    {#<div class="container">#}
+        {#<ul class="breadcrumb">#}
+            {#{% for breadcrumb in breadcrumbs %}#}
+                {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+            {#{% endfor %}#}
+        {#</ul>#}
+        {#<div class="row">#}
+            {#<div class="col-12">#}
+                {#<div class="pb-5">#}
+                    {#<div class="form-signin card p-4">#}
 
-{#<br>#}
-{#<b>${{ plan.amount }}</b>#}
-{#</div>#}
-{#{% endfor %}#}
+                        {#<div id="account-account" class="container">#}
+                            {#{% if success %}#}
+                                {#<div class="alert alert-success alert-dismissible"><i#}
+                                            {#class="fa fa-check-circle"></i> {{ success }}</div>#}
+                            {#{% endif %}#}
+                            {#<h4 class="f-35 text-center font-weight-bold">Membership Plans</h4>#}
+                            {#<hr>#}
+                            {#<form id="form-subscription" action="{{ action_subscribe }}" method="post">#}
+                            {#<form id="form-subscription" action="{{ action_subscribe }}" method="post">#}
+                            {#<div class="row">#}
+                                    {#{% for plan in plans %}#}
+                                        {#<div class="col-sm-4">#}
+                                            {#<h3 class="f-20 font-weight-bold text-uppercase text-center">{{ plan.name }}</h3>#}
+                                            {#<input type="radio" name="radioPlan" id="{{ plan.plan_id }}"#}
+                                                   {#value="{{ plan.stripe_product_id }}" class="icheck-input checkPlan">{{ plan.name }}#}
 
-{#</div>#}
-{#</form>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
-{#</div>#}
+                                            {#<br>#}
+                                            {#<b>${{ plan.amount }}</b>#}
+                                        {#</div>#}
+                                    {#{% endfor %}#}
+
+                            {#</div>#}
+                            {#</form>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+
 {#</section>#}
 
 
 <div class="pricing-subscription ">
     <div class="bg-gradient">
-        <div class="container p-5">
-            {% if success %}
-                <div class="alert alert-success alert-dismissible"><i
-                            class="fa fa-check-circle"></i> {{ success }}</div>
-            {% endif %}
 
-            <h4 class="f-35 text-center font-weight-bold mb-5">Membership Plans</h4>
-            <form id="form-subscription" action="{{ action_subscribe }}" method="post">
-                <div class="row m-auto text-center w-75">
-                    {% for plan in plans %}
-                        <div class="col-md-4 princing-item">
-                            <div class="pricing-divider ">
-                                <h3 class="text-light plan-name">{{ plan.name }}</h3>
-                                <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount"><span class="h3">$</span>{{ plan.amount }} <span class="h5"></span></h4> <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' y='0px'>
-<path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
-</svg>
-                            </div>
-                            <div class="card-body bg-white mt-0 shadow">
-                                <input type="radio" name="radioPlan" id="{{ plan.plan_id }}"
-                                       value="{{ plan.stripe_plan_id }}" class="icheck-input checkPlan">
+<div class="container p-5">
+    {% if success %}
+        <div class="alert alert-success alert-dismissible"><i
+                    class="fa fa-check-circle"></i> {{ success }}</div>
+    {% endif %}
 
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+    <h4 class="f-35 text-center font-weight-bold mb-5">Membership Plans</h4>
+    <form id="form-subscription" action="{{ action_subscribe }}" method="post">
+    <div class="row m-auto text-center w-75 justify-content-center">
+        {% for plan in plans %}
+        <div class="col-7 princing-item mb-5">
+            <div class="pricing-divider ">
+                <h3 class="text-light plan-name">{{ plan.name }}</h3>
+                <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount"><span class="h3"></span>
+                    Monthly rental is {{ plan.amount }} plus a % of each product sold
+                    <span class="h5"></span>
+                </h4>
 
-                <div class="row m-auto text-center w-75 pt-5">
-                    <div class="col-12">
-                        <div class="group">
-                            <label>
-                                <span>Name</span>
-                                <input id="name" name="sellerName" class="field" placeholder="Jane Doe"/>
-                            </label>
-                            <label>
-                                <span>Card</span>
-                                <div id="card-element" class="field"></div>
-                            </label>
-                        </div>
+                <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' y='0px'>
+                    <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
+                </svg>
+            </div>
+            <div class="card-body bg-white mt-0 shadow">
+                <input type="radio" name="radioPlan" id="{{ plan.plan_id }}"
+                       value="{{ plan.stripe_product_id }}" class="icheck-input checkPlan">
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+        <div class="row m-auto text-center justify-content-center w-75">
+                <div class="col-7">
+                    <div class="group">
+                        <label>
+                            <span>Name</span>
+                            <input id="name" name="sellerName" class="field" placeholder="Jane Doe"/>
+                        </label>
+                        <label>
+                            <span>Card</span>
+                            <div id="card-element" class="field"></div>
+                        </label>
+                    </div>
+
 
                         <input type="hidden" name="stripe_token" id="stripe_token" />
                         <input type="hidden" name="plan_id" id="plan_id">
