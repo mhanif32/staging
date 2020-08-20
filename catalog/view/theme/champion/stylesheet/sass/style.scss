@@ -1289,6 +1289,8 @@ i{width: 20px;}}}}
   .row{
     .col-md-6{transition: all .6s ease;
       &:hover{background-color: #87cefa52; transition: all .6s ease;}
+      .media { align-items: center;
+      p { margin-bottom: 0; }}
     }
   }
 }
