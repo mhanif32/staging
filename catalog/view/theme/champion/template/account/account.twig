@@ -18,6 +18,10 @@
                             {% endif %}
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
+                            {% if is_seller %}
+                            <div class="text-right"><i class="fa fa-flag" aria-hidden="true"></i>
+{{ checkPlan.name }}</div>
+                            {% endif %}
                             <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
                             <hr>
                             <div class="row">
