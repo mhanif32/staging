@@ -1581,6 +1581,12 @@ footer ul {
     background-color: #87cefa52;
     -webkit-transition: all .6s ease;
     transition: all .6s ease; }
+  .main-dashboard #account-account .row .col-md-6 .media {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .main-dashboard #account-account .row .col-md-6 .media p {
+      margin-bottom: 0; }
 
 .radio-toolbar {
   position: relative; }
@@ -1966,13 +1972,13 @@ ul.breadcrumb li {
   -webkit-transform: translate3d(-15px, 0, 0);
           transform: translate3d(-15px, 0, 0); }
 
-#fillAddressModal .modal-lg .modal-content {
+#subscribeModal .modal-lg .modal-content {
   overflow: hidden; }
-  #fillAddressModal .modal-lg .modal-content a.h2 {
+  #subscribeModal .modal-lg .modal-content a.h2 {
     color: #01B0F1;
     margin-bottom: 0;
     text-decoration: none; }
-  #fillAddressModal .modal-lg .modal-content .top-strip {
+  #subscribeModal .modal-lg .modal-content .top-strip {
     height: 155px;
     background: #01B0F1;
     -webkit-transform: rotate(141deg);
@@ -1982,7 +1988,7 @@ ul.breadcrumb li {
     margin-left: -130px;
     border-bottom: 65px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
-  #fillAddressModal .modal-lg .modal-content .bottom-strip {
+  #subscribeModal .modal-lg .modal-content .bottom-strip {
     height: 155px;
     background: #01B0F1;
     -webkit-transform: rotate(135deg);
