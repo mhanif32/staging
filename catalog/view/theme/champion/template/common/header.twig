@@ -384,7 +384,7 @@
                 <div class="delivery-location">
                     <a href=""  type="button"
                        data-toggle="modal"
-                       data-target="#exampleModalCenter">click here to select your delivery location</a>
+                       data-target="#exampleModalCenter" id="selectDeliveryLocation">click here to select your delivery location</a>
                 </div>
 
                 <div class="bottom-strip"></div>
@@ -418,7 +418,12 @@
         return false;
     });
 </script>
-
+<script>
+    $('#selectDeliveryLocation').function('click', function(){
+        $("#fillAddressModal").modal("hide");
+        $('#exampleModalCenter').modal('toggle');
+    });
+</script>
 <script type="text/javascript"><!--
     $('select[name=\'selectCountry\']').on('change', function () {
         $.ajax({
