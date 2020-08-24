@@ -4,7 +4,8 @@ class ControllerAccountAccount extends Controller {
     private $error = array();
 
     public function index() {
-
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -130,6 +131,9 @@ class ControllerAccountAccount extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['role'] = $customer_info['role'];
 
+		//check the seller plan
+        $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
+        $data['checkPlan'] = $checkPlan;
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 

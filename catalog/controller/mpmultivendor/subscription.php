@@ -27,17 +27,6 @@ class ControllerMpmultivendorSubscription extends Controller
         }
 
         $data['breadcrumbs'] = array();
-
-        $data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/home')
-        );
-
-        $data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', true)
-        );
-
         $data['content_top'] = $this->load->controller('common/content_top');
         $data['content_bottom'] = $this->load->controller('common/content_bottom');
         $data['footer'] = $this->load->controller('common/footer');
@@ -59,8 +48,14 @@ class ControllerMpmultivendorSubscription extends Controller
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 
+            //load secret key
+            if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
+                $stripe_secret_key = $this->config->get('payment_stripe_live_secret_key');
+            } else {
+                $stripe_secret_key = $this->config->get('payment_stripe_test_secret_key');
+            }
             $this->load->library('stripe');
-            \Stripe\Stripe::setApiKey('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v');
+            \Stripe\Stripe::setApiKey($stripe_secret_key);
 
             // Token is created using Stripe Checkout or Elements!, Get the payment token ID submitted by the form:
             $token = $this->request->post['stripe_token'];
@@ -68,9 +63,9 @@ class ControllerMpmultivendorSubscription extends Controller
             $product = $this->request->post['radioPlan'];
             $plan_id = $this->request->post['plan_id'];
 
+            //create a stripe customer
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
             if(empty($customer['stripe_customer_id'])) {
-
                 $customerData = \Stripe\Customer::create([
                     'name' => $sellerName,
                     'email' => $customer['email'],
@@ -81,11 +76,13 @@ class ControllerMpmultivendorSubscription extends Controller
                 $customerId = $customer['stripe_customer_id'];
             }
 
+            //create a subscription
             $stripedata = \Stripe\Subscription::create([
                 "customer" => $customerId,
                 'items' => [['plan' => $product]],
             ]);
 
+            //entry in user subscription table
             $subscriptionData = [
                 'customer_id' => $this->customer->getId(),
                 'subscription_plan_id' => $plan_id,
@@ -97,6 +94,14 @@ class ControllerMpmultivendorSubscription extends Controller
                 'end_date' => $stripedata['current_period_end']
             ];
             $this->model_mpmultivendor_subscription->createUserSubscription($subscriptionData);
+
+            //update customer table
+            $updateCustomer = [
+                'stripe_subscription_id' => $stripedata['id'],
+                'stripe_customer_id' => $stripedata['customer'],
+                'subscription_plan_id' => $plan_id,
+            ];
+            $this->model_mpmultivendor_subscription->updateCustomer($updateCustomer, $this->customer->getId());
 
             $this->session->data['success'] = 'Success : Your plan has been successfully subscribed.';
             $this->response->redirect($this->url->link('account/account', '', true));
