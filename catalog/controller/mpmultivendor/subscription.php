@@ -43,6 +43,12 @@ class ControllerMpmultivendorSubscription extends Controller
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
         $this->load->model('mpmultivendor/subscription');
         $this->load->model('account/customer');
 
@@ -65,6 +71,9 @@ class ControllerMpmultivendorSubscription extends Controller
 
             //create a stripe customer
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
+
+            //echo '<pre>';print_r($customer);exit('ookk');
+
             if(empty($customer['stripe_customer_id'])) {
                 $customerData = \Stripe\Customer::create([
                     'name' => $sellerName,
@@ -72,7 +81,19 @@ class ControllerMpmultivendorSubscription extends Controller
                     'source' => $token
                 ]);
                 $customerId = $customerData['id'];
+                //save stripe card
+                $card = $customerData['sources']['data'][0];
+                $this->model_mpmultivendor_subscription->saveStripeCard($card, $this->customer->getId());
             } else {
+
+                //cancel plan
+                if($customer['subscription_plan'] != null){
+                    $subscription = \Stripe\Subscription::retrieve($customer['subscription_plan']);
+                    $subscription->cancel();
+                }
+                //remove subscription entry from the table
+                $this->model_mpmultivendor_subscription->removeUserSubscription($customer['subscription_plan_id']);
+
                 $customerId = $customer['stripe_customer_id'];
             }
 
@@ -100,11 +121,77 @@ class ControllerMpmultivendorSubscription extends Controller
                 'stripe_subscription_id' => $stripedata['id'],
                 'stripe_customer_id' => $stripedata['customer'],
                 'subscription_plan_id' => $plan_id,
+                'subscription_plan' => $stripedata['id']
             ];
             $this->model_mpmultivendor_subscription->updateCustomer($updateCustomer, $this->customer->getId());
 
             $this->session->data['success'] = 'Success : Your plan has been successfully subscribed.';
             $this->response->redirect($this->url->link('account/account', '', true));
+        }
+    }
+
+    public function savedcards()
+    {
+        $data = [];
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription/savedcards', '', true);
+
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->language('mpmultivendor/subscription');
+        $this->load->model('mpmultivendor/subscription');
+
+        $savedCards = $this->model_mpmultivendor_subscription->getSavedCards($this->customer->getId());
+
+        $data['savedCards'] = $savedCards;
+        $data['footer'] = $this->load->controller('common/footer');
+        $data['header'] = $this->load->controller('common/header');
+        $this->response->setOutput($this->load->view('mpmultivendor/saved_cards', $data));
+    }
+
+    public function removecard()
+    {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription/savedcards', '', true);
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->model('mpmultivendor/subscription');
+        $this->load->model('account/customer');
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            //load secret key
+            if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
+                $stripe_secret_key = $this->config->get('payment_stripe_live_secret_key');
+            } else {
+                $stripe_secret_key = $this->config->get('payment_stripe_test_secret_key');
+            }
+            $this->load->library('stripe');
+            \Stripe\Stripe::setApiKey($stripe_secret_key);
+
+            //delete stripe card
+            $user_card_id = $this->request->post['user_card_id'];
+            $userCard = $this->model_mpmultivendor_subscription->getUserCard($user_card_id, $this->customer->getId());
+
+            //echo '<pre>';print_r($userCard);exit('okok');
+            if (!$userCard) {
+                $this->session->data['warning'] = 'Warning : No card found.';
+                $this->response->redirect($this->url->link('mpmultivendor/subscription/savedcards', '', true));
+            }
+            $removed = \Stripe\Customer::deleteSource(
+                $userCard['stripe_customer_id'],
+                $userCard['stripe_card_id']
+            );
+            if($removed['deleted'] == true) {
+                $this->model_mpmultivendor_subscription->removeCard($user_card_id, $this->customer->getId());
+            }
+            $this->session->data['success'] = 'Success : Your card has been successfully removed.';
+            $this->response->redirect($this->url->link('mpmultivendor/subscription/savedcards', '', true));
         }
     }
 
@@ -119,10 +206,5 @@ class ControllerMpmultivendorSubscription extends Controller
 //            $this->error['name'] = $this->language->get('error_name');
 //        }
 //        return !$this->error;
-    }
-
-    protected function getCurrentPlan()
-    {
-
     }
 }

@@ -92,7 +92,8 @@ class ControllerAccountAccount extends Controller {
         $data['step_upload_href'] = $this->url->link('information/steps_upload_product_info', '', true);
         $data['product_commission_href'] = $this->url->link('account/mpmultivendor/commission', '', true);
         $data['subscription_plan_href'] = $this->url->link('mpmultivendor/subscription', '', true);
-        
+        $data['saved_cards_href'] = $this->url->link('mpmultivendor/subscription/savedcards', '', true);
+
 
         if ($this->config->get('total_reward_status')) {
 			$data['reward'] = $this->url->link('account/reward', '', true);
