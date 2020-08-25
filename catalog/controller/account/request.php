@@ -88,7 +88,7 @@ class ControllerAccountRequest extends Controller {
         );
         $data['is_accept'] = $requestData['is_accept'];
         $data['request_id'] = $requestData['request_id'];
-        $data['status'] = $requestData['status'];
+        $data['status'] = isset($requestData['status']) ? $requestData['status'] : '';
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');
