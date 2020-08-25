@@ -249,7 +249,7 @@
             $('#stripe_token').val(result.token.id);
             var plan_id = $("input[name*='radioPlan']:checked").attr('data-id');
             var radioValue = $("input[name='radioPlan']:checked"). attr('value');
-alert(plan_id)
+
             $('#plan_id').val(plan_id);
             successElement.classList.add('visible');
             $('form#form-subscription').submit();

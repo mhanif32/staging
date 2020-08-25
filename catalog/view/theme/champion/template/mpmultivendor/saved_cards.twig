@@ -1,0 +1,59 @@
+{{ header }}
+<section id="account-account" class="register update-profile main-dashboard" style="background: #F3F3F3;">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="row">
+            <div class="col-12">
+                <div class="pb-5">
+                    <div class="form-signin card p-4">
+
+                        <div id="account-account" class="container">
+                            {% if success %}
+                                <div class="alert alert-success alert-dismissible"><i
+                                            class="fa fa-check-circle"></i> {{ success }}</div>
+                            {% endif %}
+
+                            <h4 class="f-35 text-center mb-5 font-weight-bold">My Stripe Saved Cards</h4>
+
+                            {# TODO : Design UI changes #}
+                            {% for card in savedCards %}
+                            <ul class="list-unstyle">
+                                <li>
+                                    <span>{{ card.last4 }}</span>
+
+                                    <button class="btn btn-success removeCard" data-id="{{ card.user_stripe_card_id }}" onclick="confirm('Do you want to remove this card?')" >Remove</button>
+                                </li>
+                            </ul>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ footer }}
+
+<script>
+    $('.removeCard').on('click', function (){
+        var dataId = $(this).attr('data-id');
+        var data = {
+            'user_card_id': dataId
+        };
+        //alert(dataId);
+        $.ajax({
+            url: 'index.php?route=mpmultivendor/subscription/removecard',
+            type: 'POST',
+            data: data,
+            success: function (data) {
+
+
+            }
+        });
+
+    });
+</script>
