@@ -134,33 +134,61 @@
     <div class="container">
         <div class="row">
             <div class="col-12 m-auto d-lg-none d-flex justify-content-between">
-                <div class="login-section my-auto">
-                    {% if logged %}
-                        <div class="dropdown show mt-3">
-                            <a class="btn btn-white bg-white border-0 dropdown-toggle f-15 text-primary pt-2" href="#"
-                               role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">
-                                {{ firstname }}
-                            </a>
+                {% if logged %}
 
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{{ account }}">{{ text_account }}</a>
-                                <a class="dropdown-item" href="{{ logout }}">{{ text_logout }}</a>
-                            </div>
+                    <div class="dropdown show d-inline-block">
+                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
+                           role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user-circle f-35"></i>
+                            <span class="d-block f-13 text-wrap"
+                                  style="margin-bottom: -6px;">Welcome, {{ firstname }}</span>
+                            {% if loggedInRole %}
+                                <small class="text-success f-12">{{ loggedInRole }}</small>
+                            {% endif %}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-left f-12" href="{{ account }}">{{ text_dashboard }}</a>
+                            <a class="dropdown-item text-left f-12" href="{{ my_profile }}">{{ text_account }}</a>
+                            <a class="dropdown-item text-left f-12" href="{{ track_your_order }}">Track Your Order</a>
+                            <a class="dropdown-item text-left f-12" href="{{ logout }}">{{ text_logout }}</a>
                         </div>
-                        {# <li class="nav-item"><a class="nav-link" href="{{ order }}">{{ text_order }}</a></li> #}
-                        {# <li class="nav-item"><a class="nav-link" href="{{ transaction }}">{{ text_transaction }}</a></li> #}
-                        {# <li class="nav-item"><a class="nav-link" href="{{ download }}">{{ text_download }}</a></li> #}
+                    </div>
 
-                    {% else %}
-                        <a class="d-inline-block" href="{{ login }}">{{ text_login }}</a>
-                        <a class="d-inline-block border-left pl-1" href="{{ register }}">{{ text_register }}</a>
-                    {% endif %}
+
+                {% else %}
+                    <div class="d-inline-block dropdown">
+                        <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
+                           id="navbar-mainMenu-dropdown-2" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user-circle f-35"></i>
+                            <span class="d-block f-13">You</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbar-mainMenu-dropdown-2">
+                            <a class="dropdown-item text-left f-12" href="{{ login }}">{{ text_login }}</a>
+                            <a class="dropdown-item text-left f-12" href="#" id="navbar-mainMenu-dropdown-2-submenu-1"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ text_register }}</a>
+                            <div class="dropdown-menu dropdown-menu-right"
+                                 aria-labelledby="navbar-mainMenu-dropdown-2-submenu-1">
+                                <a class="dropdown-item text-left f-12" href="{{ register }}">Become Customer</a>
+                                <a class="dropdown-item text-left f-12" href="{{ seller_register_link }}">Become a Seller</a>
+                                <a class="dropdown-item text-left f-12" href="{{ affiliate_info_href }}">Become a Franchisee</a>
+                                <a class="dropdown-item text-left f-12" href="{{ become_delivery_partner_info_href }}">Become
+                                    Delivery Partner</a>
+                                <a class="dropdown-item text-left f-12" href="{{ become_executive_member_info_href }}">Become An Executive Member</a>
+                                <a class="dropdown-item text-left f-12" href="{{ become_our_partner_href }}">Become Our Synergy Partner</a>
+                            </div>
+                            <a class="dropdown-item text-left f-12" href="{{ track_your_order }}">Track Your Order</a>
+                        </div>
+                    </div>
+
+                {% endif %}
+                <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
+                    {{ cart }}
                 </div>
 
-                {# <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons"> #}
-                {# {{ cart }} #}
-                {# </div> #}
+
             </div>
 
             <div class="col-12 col-md-3 col-lg-2 m-auto">
@@ -381,6 +409,10 @@
                 <h3 class="pt-5 mb-0 text-secondary welcome-title">Welcome to The Champion Mall</h3>
                 <p class="pb-1 pt-2 text-muted welcome-msg" style="height: 170px;">{{ fillAddressMsg }}</p>
 
+                <div class="delivery-location">
+                    <a href="" id="selectDeliveryLocation">click here to select your delivery location</a>
+                </div>
+
                 <div class="bottom-strip"></div>
             </div>
         </div>
@@ -412,7 +444,12 @@
         return false;
     });
 </script>
-
+<script>
+    $('#selectDeliveryLocation').function('click', function(){
+        $("#fillAddressModal").modal("hide");
+        $('#exampleModalCenter').modal('toggle');
+    });
+</script>
 <script type="text/javascript"><!--
     $('select[name=\'selectCountry\']').on('change', function () {
         $.ajax({

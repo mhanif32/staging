@@ -491,6 +491,13 @@ header {
         padding: 20px; }
       header .nav-mega .dropdown-menu.mega-menu .media-list .media {
         padding: 10px; }
+  @media only screen and (max-width: 767px) {
+    header #logo {
+      text-align: center;
+      padding: 15px; }
+    header #form-currency > .btn-group {
+      width: 100%;
+      padding: 15px; } }
 
 .home-banner .carousel-item {
   min-height: 320px; }
@@ -1646,6 +1653,9 @@ footer ul {
 #checkout-checkout .buttons .pull-right {
   float: none;
   margin-bottom: 20px; }
+#checkout-checkout .text-danger {
+  font-size: 12px;
+  font-weight: 700; }
 
 #product-manufacturer .manufacturer-col:hover {
   background-color: #87cefa52;
@@ -1929,10 +1939,6 @@ ul.breadcrumb li {
 .our-partner .owl-nav button:focus {
   outline: none; }
 
-.pricing-subscription .bg-gradient {
-  background: #C9D6FF;
-  background: -webkit-gradient(linear, left top, right top, from(#E2E2E2), to(#C9D6FF));
-  background: linear-gradient(to right, #E2E2E2, #C9D6FF); }
 .pricing-subscription #form-subscription .pricing-divider-img {
   position: absolute;
   left: 0;
@@ -1953,10 +1959,12 @@ ul.breadcrumb li {
   -webkit-transition: all 150ms ease-out;
   transition: all 150ms ease-out; }
   .pricing-subscription #form-subscription .princing-item .pricing-divider {
-    border-radius: 20px;
-    background: #01B0F1;
-    padding: 1em 0 1em;
     position: relative; }
+    .pricing-subscription #form-subscription .princing-item .pricing-divider .card-body {
+      padding: 3.25rem 2rem; }
+    .pricing-subscription #form-subscription .princing-item .pricing-divider .card-text {
+      background: #01B0F1;
+      padding: 1em; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .plan-name {
       font-size: 20px;
       margin-bottom: 0; }
