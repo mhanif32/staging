@@ -92,10 +92,16 @@
                 </div>
             </div>
 
-            <input type="submit" value="Login" class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn"/>
-            {% if redirect %}
-                <input type="hidden" name="redirect" value="{{ redirect }}"/>
-            {% endif %}
+            <div class="d-flex justify-content-between">
+                <input type="submit" value="Login" class="btn btn-primary bg-success border-0 my-3 px-5 custom-btn"/>
+                {% if redirect %}
+                    <input type="hidden" name="redirect" value="{{ redirect }}"/>
+                {% endif %}
+
+                <a href="/"  class="btn btn-default my-3 f-12">Continue Shopping</a>
+            </div>
+           
+
             <div class="justify-content-between d-flex">
                 <div class="d-inline-block">
                     <p style="font-size: 0.7rem;" class="text-secondary"> Don't have an account?
