@@ -1570,10 +1570,11 @@ footer ul {
   text-shadow: none; }
 
 .pagination li {
-  padding: 0 10px;
   height: 30px;
+  width: 30px;
   line-height: 30px;
-  display: inline-block; }
+  display: inline-block;
+  text-align: center; }
   .pagination li.active {
     background-color: #01B0F1;
     color: #fff;
