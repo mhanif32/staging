@@ -143,7 +143,7 @@ class ControllerCommonHeader extends Controller
                 $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? ($dataArray->geoplugin_regionName .', '.$dataArray->geoplugin_countryName) : '';
 
                 $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
-                print_r($countryId);exit('kook');
+                //print_r($countryId);exit('kook');
                 if(!empty($countryId)) {
                     $this->session->data['session_country_id'] = $countryId;
                 }
@@ -152,8 +152,10 @@ class ControllerCommonHeader extends Controller
                 $data['loggedInCountry'] = isset($this->session->data['loggedInCountry']) ? $this->session->data['loggedInCountry'] : '';
                 $data['loggedInState'] = isset($this->session->data['loggedInState']) ? $this->session->data['loggedInState'] : '';
                 $data['loggedInCity'] = isset($this->session->data['loggedInCity']) ? $this->session->data['loggedInCity'] : '';
-                //print_r($data);exit('plplp');
-
+                $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+                if(!empty($countryId)) {
+                    $this->session->data['session_country_id'] = $countryId;
+                }
             }
         } else { //after login
             // Default Shipping Address
