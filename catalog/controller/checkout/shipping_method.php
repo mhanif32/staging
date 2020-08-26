@@ -11,6 +11,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			$method_data = array();
 
 			$this->load->model('setting/extension');
+            $this->load->model('catalog/category');
 
 			$results = $this->model_setting_extension->getExtensions('shipping');
 
@@ -39,6 +40,22 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
+            //echo '<pre>';print_r($method_data);exit('okoko');
+            //check products relates with Supermarket Category
+            $this->session->data['isSuperMarketProduct'] = '';
+            foreach ($this->cart->getProducts() as $product) {
+
+                $dataProduct = $this->model_catalog_category->checkProductCategory($product['product_id']);
+                if(!empty($dataProduct)) {
+                    $this->session->data['isSuperMarketProduct'] = true;
+                }
+            }
+
+            if($this->session->data['isSuperMarketProduct'] == true) {
+                if(!empty($method_data['parcelforce_48'])) {
+                    unset($method_data['parcelforce_48']);
+                }
+            }
 			$this->session->data['shipping_methods'] = $method_data;
 		}
 
