@@ -143,6 +143,7 @@ class ControllerCommonHeader extends Controller
                 $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? ($dataArray->geoplugin_regionName .', '.$dataArray->geoplugin_countryName) : '';
 
                 $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+                print_r($countryId);exit('kook');
                 if(!empty($countryId)) {
                     $this->session->data['session_country_id'] = $countryId;
                 }

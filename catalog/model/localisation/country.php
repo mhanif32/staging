@@ -46,7 +46,7 @@ class ModelLocalisationCountry extends Model {
     public function getCountryIdFromName($name)
     {
         $query = $this->db->query("SELECT country_id FROM " . DB_PREFIX . "country WHERE name = '" .  $this->db->escape($name) . "'");
-        return $query->row['country_id'];
+        return $query->row;
     }
 
     public function getCountriesFilter($data = array()) {
