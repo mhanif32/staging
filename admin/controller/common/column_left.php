@@ -339,7 +339,7 @@ class ControllerCommonColumnLeft extends Controller {
             );
 
                 $customer[] = array(
-                    'name'	   => 'Registration Pending Approval',
+                    'name'	   => 'Sellers Registration Pending Approval',
                     'href'     => $this->url->link('mpmultivendor/mpseller/pending-users', 'user_token=' . $this->session->data['user_token']),
                     'children' => array()
                 );

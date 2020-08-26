@@ -622,7 +622,7 @@ class ControllerMpmultivendorMpseller extends Controller {
         );
 
         $data['breadcrumbs'][] = array(
-            'text' => 'Registration Pending Approval',
+            'text' => 'Sellers Registration Pending Approval',
             'href' => $this->url->link('mpmultivendor/mpseller', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 

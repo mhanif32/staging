@@ -83,6 +83,9 @@ class ModelCatalogProduct extends Model {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
 
+        //hide products of disabled sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+
 		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
 		if (!empty($data['filter_category_id'])) {
@@ -160,7 +163,10 @@ class ModelCatalogProduct extends Model {
 
 			$sql .= ")";
 		}
-        
+
+        //hide products of disabled sellers
+        $sql .= " AND mp.status = 1";
+
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
@@ -620,8 +626,23 @@ class ModelCatalogProduct extends Model {
     }
 
     //get men count for home page
-    public function getCountMen() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Men'");
+    public function getCountMen($countryId) {
+        $sql = "SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id)";
+
+        //countrywise location products
+        $sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = pc.product_id)";
+        if (!empty($countryId)) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
+
+        //hide products of disabled sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+        if (!empty($countryId)) {
+            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
+        }
+
+        $sql .= " WHERE mp.status = 1 AND name = 'Men'";
+        $query = $this->db->query($sql);
 
         if (isset($query->row['total'])) {
             return [
@@ -643,8 +664,23 @@ class ModelCatalogProduct extends Model {
     }
 
     //get men count for home page
-    public function getCountWomen() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Women'");
+    public function getCountWomen($countryId) {
+        $sql = "SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id)";
+
+        //countrywise location products
+        $sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = pc.product_id)";
+        if (!empty($countryId)) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
+
+        //hide products of disabled sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+        if (!empty($countryId)) {
+            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
+        }
+
+        $sql .= " WHERE mp.status = 1 AND name = 'Women'";
+        $query = $this->db->query($sql);
         if (isset($query->row['total'])) {
             return [
                 'total' => $query->row['total'],
@@ -664,8 +700,24 @@ class ModelCatalogProduct extends Model {
     }
 
     //get brands count for home page
-    public function getCountDesignerBrands() {
-        $query = $this->db->query("SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id) WHERE name = 'Designer Brands'");
+    public function getCountDesignerBrands($countryId) {
+        $sql = "SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id)";
+
+        //countrywise location products
+        $sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = pc.product_id)";
+        if (!empty($countryId)) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
+
+        //hide products of disabled sellers
+
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+        if (!empty($countryId)) {
+            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
+        }
+
+        $sql .= " WHERE mp.status = 1 AND name = 'Designer Brands'";
+        $query = $this->db->query($sql);
 
         if (isset($query->row['total'])) {
             return [

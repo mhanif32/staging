@@ -193,7 +193,6 @@ class ControllerProductSearch extends Controller {
                 $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
             } else {
                 $defaultAddress = $this->model_account_address->getDefaultAddress();
-                //echo '<pre>';print_r($defaultAddress);exit('okok');
                 $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
             }
 
