@@ -43,6 +43,12 @@ class ModelLocalisationCountry extends Model {
         return $query->rows;
     }
 
+    public function getCountryIdFromName($name)
+    {
+        $query = $this->db->query("SELECT country_id FROM " . DB_PREFIX . "country WHERE name = '" .  $this->db->escape($name) . "'");
+        return $query->row['country_id'];
+    }
+
     public function getCountriesFilter($data = array()) {
         $sql = "SELECT * FROM " . DB_PREFIX . "country cd2 WHERE status = '1' ";
 
