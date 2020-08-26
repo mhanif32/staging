@@ -1252,10 +1252,11 @@ i{width: 20px;}}}}
 //pagination
 .pagination {
   li {
-    padding: 0 10px;
+    //padding: 0 10px;
     height: 30px;
+    width: 30px;
     line-height: 30px;
-    display: inline-block;
+    display: inline-block; text-align: center;
     &.active{
       background-color: $success;
       color: $white;
@@ -1617,10 +1618,10 @@ span {
 
   .princing-item { transition: all 150ms ease-out;
     .pricing-divider { position: relative;
-      .card-body { padding: 3.25rem 2rem; }
-      .card-text { background: $success; padding: 1em; }
+      .card-body { padding: 2.25rem 2rem; }
+      .card-text { background: $success; padding: 1em 15px; }
       .plan-name { font-size: 20px; margin-bottom: 0; }
-      .plan-amount { font-size: 15px; }
+      .plan-amount { font-size: 11px; }
     }
   }
 
@@ -1781,4 +1782,25 @@ span {
     }
   }
   }
+}
+
+#mv-reviews {
+.review-block {
+  .panel-heading {
+    .cust { font-size: 14px; margin-bottom: 0; }
+    .date { font-size: 12px; margin-bottom: 0; color: #B8B8B8; }
+    .review-title { padding-left: 0px; margin-bottom: 0; }
+    .panel-body { font-size: 14px; color: #262525; }
+    .rating { padding-left: 8px;
+      span.fa { font-size: 12px; }
+    }
+  }
+  .review-btns {
+    position: relative;
+    width: 100%;
+    right: 0;
+    top: 5px;
+    .btn-group { .btn { font-size: 12px; } }
+  }
+}
 }

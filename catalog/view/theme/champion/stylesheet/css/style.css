@@ -1570,10 +1570,11 @@ footer ul {
   text-shadow: none; }
 
 .pagination li {
-  padding: 0 10px;
   height: 30px;
+  width: 30px;
   line-height: 30px;
-  display: inline-block; }
+  display: inline-block;
+  text-align: center; }
   .pagination li.active {
     background-color: #01B0F1;
     color: #fff;
@@ -1961,15 +1962,15 @@ ul.breadcrumb li {
   .pricing-subscription #form-subscription .princing-item .pricing-divider {
     position: relative; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .card-body {
-      padding: 3.25rem 2rem; }
+      padding: 2.25rem 2rem; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .card-text {
       background: #01B0F1;
-      padding: 1em; }
+      padding: 1em 15px; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .plan-name {
       font-size: 20px;
       margin-bottom: 0; }
     .pricing-subscription #form-subscription .princing-item .pricing-divider .plan-amount {
-      font-size: 15px; }
+      font-size: 11px; }
 .pricing-subscription #form-subscription .princing-item:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05); }
@@ -2086,3 +2087,28 @@ ul.breadcrumb li {
     margin-left: 421px;
     border-bottom: 65px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
+
+#mv-reviews .review-block .panel-heading .cust {
+  font-size: 14px;
+  margin-bottom: 0; }
+#mv-reviews .review-block .panel-heading .date {
+  font-size: 12px;
+  margin-bottom: 0;
+  color: #B8B8B8; }
+#mv-reviews .review-block .panel-heading .review-title {
+  padding-left: 0px;
+  margin-bottom: 0; }
+#mv-reviews .review-block .panel-heading .panel-body {
+  font-size: 14px;
+  color: #262525; }
+#mv-reviews .review-block .panel-heading .rating {
+  padding-left: 8px; }
+  #mv-reviews .review-block .panel-heading .rating span.fa {
+    font-size: 12px; }
+#mv-reviews .review-block .review-btns {
+  position: relative;
+  width: 100%;
+  right: 0;
+  top: 5px; }
+  #mv-reviews .review-block .review-btns .btn-group .btn {
+    font-size: 12px; }

@@ -32,4 +32,4 @@ $_['text_messages'] 		= 'Admin Messages';
 $_['edit_product'] 		= 'Edit Products';
 $_['edit_special_product'] 		= 'Sales & Special Products';
 $_['text_customer_order'] 		= 'Customer Order';
-$_['text_saved_cards'] 		= 'Stripe Saved Cards';
+$_['text_saved_cards'] 		= 'Saved Stripe Cards';
