@@ -92,10 +92,23 @@
                                 </div>
                                 {% if reviews %}
                                     {% for review in reviews %}
-                                        <div class="panel panel-default">
+                                        <div class="panel panel-default review-block py-3 border-bottom">
                                             <div class="panel-heading">
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-md-9">
+                                                        <h3 class="cust"><b>{{ review.author }}</b></h3>
+                                                        <p class="date">{{ review.date_added }}</p>
+
+
+                                                        <h3 class="review-title">{{ review.title }}</h3>
+                                                        {% if review.description %}
+                                                            <div class="panel-body">
+                                                                {{ review.description }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-md-3 col-xs-12">
+                                                        <div class="rating">
                                                         {% for i in 1..5 %}
                                                             {% if review.rating < i %}
                                                                 <span class="fa fa-stack"><i
@@ -106,11 +119,8 @@
                                                                             class="fa fa-star-o fa-stack-1x"></i></span>
                                                             {% endif %}
                                                         {% endfor %}
-                                                        <span class="review-title">{{ review.title }}</span>
-                                                    </div>
-                                                    <div class="col-sm-6 col-xs-12 pull-right">
-                                                        <span class="cust">by <b>{{ review.author }}</b></span>
-                                                        <span class="date">on <b>{{ review.date_added }}</b></span>
+                                                        </div>
+                                                        <div class="review-status">
                                                         {% if changereview_status %}
                                                             <div class="review-btns">
                                                                 <div class="btn-group btn-group-justified review-group{{ review.mpseller_review_id }}"
@@ -136,15 +146,12 @@
                                                                 {% endif %}
                                                             </div>
                                                         {% endif %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {% if review.description %}
-                                            <div class="panel-body mt-5">
-                                                {{ review.description }}
-                                            </div>
-                                        {% endif %}
+
                                     {% endfor %}
                                     <div class="row my-4">
                                         <div class="col-sm-6 text-left">{{ pagination }}</div>
