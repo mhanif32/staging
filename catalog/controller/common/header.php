@@ -137,33 +137,27 @@ class ControllerCommonHeader extends Controller
         if (!$this->customer->isLogged()) { //before login
 
             if (empty($this->session->data['loggedInCountry'])) {
+
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-                $this->session->data['loggedInState'] = $dataArray->geoplugin_regionName;
-                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? ($dataArray->geoplugin_regionName .', '.$dataArray->geoplugin_countryName) : '';
-
-                $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
-
-                print_r($data['loggedInCountry']);
-                print_r($countryId);exit('kook');
-                if(!empty($countryId)) {
-                    echo 'okokok'.$this->session->data['session_country_id'] = $countryId;
-                }
+                $this->session->data['loggedInState'] = !empty($dataArray->geoplugin_regionName) ? $dataArray->geoplugin_regionName : '';
+                $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? $dataArray->geoplugin_countryName : '';
+                $data['loggedInState'] = $this->session->data['loggedInState'];
+                $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
             } else {
 
                 $data['loggedInCountry'] = isset($this->session->data['loggedInCountry']) ? $this->session->data['loggedInCountry'] : '';
                 $data['loggedInState'] = isset($this->session->data['loggedInState']) ? $this->session->data['loggedInState'] : '';
                 $data['loggedInCity'] = isset($this->session->data['loggedInCity']) ? $this->session->data['loggedInCity'] : '';
-                $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
-                if(!empty($countryId)) {
-                    $this->session->data['session_country_id'] = $countryId;
-                }
             }
         } else { //after login
             // Default Shipping Address
             $defaultAddress = $this->model_account_address->getDefaultAddress();
             if (!empty($defaultAddress['country'])) {
-                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['city']. ', ' .$defaultAddress['zone'] . ', ' . $defaultAddress['country'] : '';
+
+                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['country'] : '';
+                $data['loggedInState'] = $this->session->data['loggedInState'] = !empty($defaultAddress['state']) ? $defaultAddress['zone'] : '';
+                $data['loggedInCity'] = $this->session->data['loggedInCity'] = !empty($defaultAddress['city']) ? $defaultAddress['city'] : '';
             } else {
                 if (empty($this->session->data['loggedInCountry'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];
@@ -176,7 +170,10 @@ class ControllerCommonHeader extends Controller
                 }
             }
         }
-
+        $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+        if(!empty($countryId)) {
+            $this->session->data['session_country_id'] = $countryId;
+        }
         return $this->load->view('common/header', $data);
     }
 }
