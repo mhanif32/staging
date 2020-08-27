@@ -93,5 +93,5 @@ $_['error_no_payment']               = 'Warning: No Payment options are availabl
 $_['error_custom_field']             = '%s required!';
 
 
-$_['address_accuracy_text']             = 'Address Accuracy Make sure your parcel is delivered! If the address is not entered correctly, your package will be returned. You would then have to place a new order. Save cost, time and any unnecessary stress by entering the address information in the appropriate boxes and double-checking for typos and any other type of error.';
+$_['address_accuracy_text']             = 'Make sure your parcel is delivered! If the address is not entered correctly, your package will be returned. You would then have to place a new order. Save cost, time and any unnecessary stress by entering the address information in the appropriate boxes and double-checking for typos and any other type of error.';
 
