@@ -7,18 +7,20 @@
         <div class="buttons">
             <div class="row justify-content-between">
                 <a href="#" class="btn btn-primary">Continue Shopping</a>
-                <input type="button" onclick="payWithPaystack()" value="{{ button_confirm }}"
-                       data-loading-text="{{ text_loading }}" class="btn btn-primary" id="button-confirm"/>
+{#                <input type="button" onclick="payWithPaystack()" value="{{ button_confirm }}"#}
+{#                       data-loading-text="{{ text_loading }}" class="btn btn-primary" id="button-confirm"/>#}
+
+                <button onclick="payWithPaystack()" value="{{ button_confirm }}"
+                       data-loading-text="{{ text_loading }}" class="btn btn-primary" id="button-confirm">Confirm Order</button>
             </div>
         </div>
     </form>
 
     <script>
         function payWithPaystack() {
-
-            {# $('#button-confirm').html( #}
-            {# `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}` #}
-            {# ); #}
+             $('#button-confirm').html(
+             `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+             );
 
             $('#button-confirm').prop('disabled', true);
 
