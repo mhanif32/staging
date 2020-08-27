@@ -537,11 +537,24 @@
 <script>
     $(document).ready(function() {
         var isshowAddressInfo = localStorage.getItem('isshowAddressInfo');
-        if (isshowAddressInfo== null) {
-            localStorage.setItem('isshowAddressInfo', 1);
 
-            // Show popup here
+        var tdate = new Date();
+        var dd = tdate.getDate(); //yields day
+        var MM = tdate.getMonth(); //yields month
+        var yyyy = tdate.getFullYear(); //yields year
+        var currentDate = dd + "-" +( MM+1) + "-" + yyyy;
+
+        if (isshowAddressInfo == null) {
+            localStorage.setItem('isshowAddressInfo', 1);
+            localStorage.setItem('currentDate', currentDate);
             $('#fillAddressModal').modal('toggle');
+        } else {
+            var date = localStorage.getItem('currentDate');
+            if (date !== currentDate) {
+                localStorage.setItem('isshowAddressInfo', 1);
+                localStorage.setItem('currentDate', currentDate);
+                $('#fillAddressModal').modal('toggle');
+            }
         }
     });
 </script>
