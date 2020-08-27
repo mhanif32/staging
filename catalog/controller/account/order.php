@@ -503,7 +503,7 @@ class ControllerAccountOrder extends Controller {
 
             $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
             $orderData = $this->model_account_order->getOrder($order_id);
-print_r($server . 'image/' . $this->config->get('config_logo'));exit('okok');
+
             //Send mail to customer
             $data = [];
             $mail = new Mail($this->config->get('config_mail_engine'));
