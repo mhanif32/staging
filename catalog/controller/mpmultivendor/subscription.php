@@ -141,7 +141,8 @@ class ControllerMpmultivendorSubscription extends Controller
             ];
             $this->model_mpmultivendor_subscription->updateCustomer($updateCustomer, $this->customer->getId());
 
-            $this->session->data['success'] = 'Success : Your plan has been successfully subscribed.';
+            $planData = $this->model_mpmultivendor_subscription->getSubscriptionPlan($plan_id);
+            $this->session->data['success'] = 'Success : You have successfully subscribed to the '.$planData['name'].' Plan.';
             $this->response->redirect($this->url->link('account/account', '', true));
         }
     }

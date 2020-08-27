@@ -108,7 +108,7 @@
                         <div class="outcome">
                             <div class="error"></div>
                             <div class="success">
-                                Success! Your Stripe token is <span class="token"></span>
+{#                                Success! Your Stripe token is <span class="token"></span>#}
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
         if (result.token) {
 // Use the token to create a charge or a customer
 // https://stripe.com/docs/charges
-            successElement.querySelector('.token').textContent = result.token.id;
+            //successElement.querySelector('.token').textContent = result.token.id;
             $('#stripe_token').val(result.token.id);
             var plan_id = $("input[name*='radioPlan']:checked").attr('data-id');
             var radioValue = $("input[name='radioPlan']:checked"). attr('value');
