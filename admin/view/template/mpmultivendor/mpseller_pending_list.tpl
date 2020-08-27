@@ -7,7 +7,7 @@
                         onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-mpseller').submit() : false;"><i
                             class="fa fa-trash-o"></i></button>
             </div>
-            <h1>Registration Pending Approval</h1>
+            <h1>Sellers Registration Pending Approval</h1>
             <ul class="breadcrumb">
                 <?php foreach ($breadcrumbs as $breadcrumb) { ?>
                 <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>

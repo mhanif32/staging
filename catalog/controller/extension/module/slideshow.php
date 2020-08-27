@@ -9,6 +9,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
 
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
+		$this->load->model('account/address');
 //		top message
         $this->load->model('catalog/information');
 
@@ -16,8 +17,15 @@ class ControllerExtensionModuleSlideshow extends Controller {
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
 		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
 
-		
 		$data['banners'] = array();
+
+		//location wise products count and list
+		if (!$this->customer->isLogged()) {
+            $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
+        } else {
+            $defaultAddress = $this->model_account_address->getDefaultAddress();
+            $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+        }
 
 		$results = $this->model_design_banner->getBanner($setting['banner_id']);
 
@@ -46,7 +54,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
         $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
         //Start : men count and path
         $this->load->model('catalog/product');
-        $countMen = $this->model_catalog_product->getCountMen();
+        $countMen = $this->model_catalog_product->getCountMen($countryId);
         $data['count_men'] = $countMen['total'];
 
         $categoryMen = $this->model_catalog_product->getCategoryMen();
@@ -59,7 +67,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
 
         $this->load->model('catalog/information');
         //women count and path
-        $countWomen = $this->model_catalog_product->getCountWomen();
+        $countWomen = $this->model_catalog_product->getCountWomen($countryId);
         $data['count_women'] = $countWomen['total'];
 
         $categoryWomen = $this->model_catalog_product->getCategoryWomen();
@@ -71,7 +79,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
         }
 
         //brand category and path
-        $categoryDesignerBrands = $this->model_catalog_product->getCountDesignerBrands();
+        $categoryDesignerBrands = $this->model_catalog_product->getCountDesignerBrands($countryId);
         $data['count_brands'] = $categoryDesignerBrands['total'];
         $data['path_brands'] = !empty($categoryDesignerBrands['total']) ? $this->url->link('product/category', 'path=' . $categoryDesignerBrands['path']) : '#';
         if ($categoryDesignerBrands['image']) {
