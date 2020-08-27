@@ -8,7 +8,7 @@ class ControllerCommonHeader extends Controller
         if (isset($this->session->data['last']) && (time() - $this->session->data['last'] > 30 * 60)) {
             $this->customer->logout();
             unset($this->session->data['last']);
-            $this->response->redirect($this->url->link('account/login', '', true));
+            $this->response->redirect($this->url->link('common/home', '', true));
         }
         $this->session->data['last'] = time();
         //end of : LogOut
