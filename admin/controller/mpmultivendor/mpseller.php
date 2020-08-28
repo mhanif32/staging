@@ -1212,6 +1212,23 @@ class ControllerMpmultivendorMpseller extends Controller {
 			$data['country_id'] = '';
 		}
 
+        $uploads_dir = 'image/mpseller/customer-'.$this->customer->getId().'/';
+        if(isset($this->request->post['id_proof'])) {
+            $data['link_id_proof'] = $this->request->post['id_proof'];
+        } else if(isset($seller_info['id_proof'])) {
+            $data['link_id_proof'] =$this->config->get('config_ssl').$uploads_dir.$seller_info['id_proof'];
+        } else {
+            $data['link_id_proof'] = '';
+        }
+        //print_r($data['link_id_proof']);exit('plpl');
+        if(isset($this->request->post['address_proof'])) {
+            $data['link_address_proof'] = $this->request->post['address_proof'];
+        } else if(isset($seller_info['address_proof'])) {
+            $data['link_address_proof'] = $this->config->get('config_ssl').$uploads_dir.$seller_info['address_proof'];
+        } else {
+            $data['link_address_proof'] = '';
+        }
+
 		if(isset($this->request->post['zone_id'])) {
 			$data['zone_id'] = $this->request->post['zone_id'];
 		} else if(!empty($mpseller_info)) {
@@ -1472,6 +1489,7 @@ class ControllerMpmultivendorMpseller extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->config->set('template_engine', 'template');
+
 		$this->response->setOutput($this->load->view('mpmultivendor/mpseller_form', $data));
 	}
 

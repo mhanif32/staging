@@ -225,10 +225,14 @@ class ControllerSaleOrder extends Controller {
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		foreach ($results as $result) {
+
+		    $deliveryRequest = $this->model_sale_order->getDeliveryOrderRequestStatus($result['order_id']);
+
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
+				'delivery_status' => !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-',
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
