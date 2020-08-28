@@ -3,16 +3,18 @@
         <h3 class="text-center mb-4 text-primary text-uppercase font-weight-bolder">
             {{ heading_title }}
         </h3>
-        <p style="font-size: 0.9375rem;" class="text-center text-secondary"> These are our recent top bought products.</p>
+        <p style="font-size: 0.9375rem;" class="text-center text-secondary"> These are our recent top bought
+            products.</p>
         <div class="row pt-4">
             {% for product in products %}
                 <div class="col-lg-3 col-md-3 col-sm-6 mb-4 product-layout">
                     <div class="product-card-featured position-relative">
                         <div class="wish-list text-right position-absolute" style="right:0px;top: 0px;font-size: 22px;">
-                            {#<i class="fas fa-heart" aria-hidden="true"></i>#}
+                            {# <i class="fas fa-heart" aria-hidden="true"></i> #}
                             <button class="border-0" type="button" data-toggle="tooltip"
                                     title="{{ button_wishlist }}"
-                                    onclick="wishlist.add('{{ product.product_id }}');" style="background-color: transparent;"><i
+                                    onclick="wishlist.add('{{ product.product_id }}');"
+                                    style="background-color: transparent;"><i
                                         class="fa fa-heart"></i>
                             </button>
                         </div>
@@ -35,10 +37,11 @@
                                                 {% if product.rating < i %}
                                                     <span class="fa fa-stack">
                                                             <i
-                                                                    class="fa fa-star-o fa-stack-2x text-gold f-15" ></i>
+                                                                    class="fa fa-star-o fa-stack-2x text-gold f-15"></i>
                                                         </span>
                                                 {% else %}
-                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x text-gold f-15"></i><i
+                                                    <span class="fa fa-stack"><i
+                                                                class="fa fa-star fa-stack-2x text-gold f-15"></i><i
                                                                 class="fa fa-star-o fa-stack-2x text-gold f-15"></i></span>
                                                 {% endif %}
                                             {% endfor %}
@@ -54,12 +57,13 @@
                                                 {{ product.price }}
                                             </span>
                                     {% else %}
-                                        <span class="price-new text-success font-weight-bold">{{ product.special }}</span> <strike><span
-                                                class="price-old text-accent font-weight-normal f-12">{{ product.price }}</span></strike>
+                                        <span class="price-new text-success font-weight-bold">{{ product.special }}</span>
+                                        <strike><span
+                                                    class="price-old text-accent font-weight-normal f-12">{{ product.price }}</span></strike>
                                     {% endif %}
-                                    {#{% if product.tax %}#}
-                                    {#<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>#}
-                                    {#{% endif %}#}
+                                    {# {% if product.tax %} #}
+                                    {# <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> #}
+                                    {# {% endif %} #}
                                 </div>
                             {% endif %}
                         </div>
@@ -72,7 +76,11 @@
             <a class="btn btn-primary border-success bg-white text-success px-5" href="#" role="button">VIEW ALL</a>
         </div>-->
         <div class="text-center mt-3">
-            <img src="catalog/view/theme/champion/image/720x90-1.png" alt="" class="img-fluid">
+            {# <img src="catalog/view/theme/champion/image/720x90-1.png" alt="" class="img-fluid"> #}
+            {% for banner in promotionBanners %}
+                <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid">
+            {% endfor %}
+
         </div>
     </div>
 </section>
