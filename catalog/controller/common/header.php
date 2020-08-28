@@ -170,9 +170,9 @@ class ControllerCommonHeader extends Controller
                 }
             }
         }
-        $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
-        if(!empty($countryId)) {
-            $this->session->data['session_country_id'] = $countryId;
+        $country = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+        if(!empty($country)) {
+            $this->session->data['session_country_id'] = $country['country_id'];
         }
         return $this->load->view('common/header', $data);
     }

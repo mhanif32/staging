@@ -161,8 +161,6 @@ class ControllerProductCategory extends Controller
                 $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
             }
 
-            //print_r($countryId);exit('okok');
-
             $filter_data = array(
                 'product_country'     => $countryId,
                 'filter_category_id' => $category_id,
