@@ -171,6 +171,7 @@ class ControllerCommonHeader extends Controller
             }
         }
         $countryId = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+        print_r($countryId);exit('aaa');
         if(!empty($countryId)) {
             $this->session->data['session_country_id'] = $countryId;
         }
