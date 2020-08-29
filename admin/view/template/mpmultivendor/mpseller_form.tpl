@@ -364,7 +364,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">ID Proof</label>
                                         <div class="col-sm-10">
-                                            <a href="<?php echo $link_id_proof?>" class="btn btn-primary"
+                                            <a href="<?php echo $uploads_dir.$link_id_proof?>" class="btn btn-primary"
                                                target="_blank">Click here to view Id Proof</a>
                                         </div>
                                     </div>
@@ -374,7 +374,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">Address Proof</label>
                                         <div class="col-sm-10">
-                                            <a href="<?php echo $link_address_proof?>" class="btn btn-primary"
+                                            <a href="<?php echo $uploads_dir.$link_address_proof?>" class="btn btn-primary"
                                                target="_blank">Click here to view Address Proof</a>
                                         </div>
                                     </div>

@@ -1225,18 +1225,18 @@ class ControllerMpmultivendorMpseller extends Controller
 //        echo '<pre>';
 //        print_r($this->config->get('config_ssl'));
 //        exit('plpl');
-        $uploads_dir = '/image/mpseller/customer-' . $mpseller_info['customer_id'] . '/';
+        $data['uploads_dir'] = '/image/mpseller/customer-' . $mpseller_info['customer_id'] . '/';
         if (isset($this->request->post['id_proof'])) {
             $data['link_id_proof'] = $this->request->post['id_proof'];
         } else if (isset($mpseller_info['id_proof'])) {
-            $data['link_id_proof'] = $uploads_dir . $mpseller_info['id_proof'];
+            $data['link_id_proof'] = $mpseller_info['id_proof'];
         } else {
             $data['link_id_proof'] = '';
         }
         if (isset($this->request->post['address_proof'])) {
             $data['link_address_proof'] = $this->request->post['address_proof'];
         } else if (isset($mpseller_info['address_proof'])) {
-            $data['link_address_proof'] = $uploads_dir . $mpseller_info['address_proof'];
+            $data['link_address_proof'] = $mpseller_info['address_proof'];
         } else {
             $data['link_address_proof'] = '';
         }
