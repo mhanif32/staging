@@ -360,9 +360,24 @@
                                                    id="input-image"/>
                                         </div>
                                     </div>
-                                    <?php if ($link_id_proof) { ?>
-                                    <a href="<?php echo link_id_proof?>" class="btn btn-primary" target="_blank">Click
-                                        here to view Id Proof</a>
+                                    <?php if (isset($link_id_proof)) { ?>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">ID Proof</label>
+                                        <div class="col-sm-10">
+                                            <a href="<?php echo $link_id_proof?>" class="btn btn-primary"
+                                               target="_blank">Click here to view Id Proof</a>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+
+                                    <?php if (isset($link_address_proof)) { ?>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">Address Proof</label>
+                                        <div class="col-sm-10">
+                                            <a href="<?php echo $link_address_proof?>" class="btn btn-primary"
+                                               target="_blank">Click here to view Address Proof</a>
+                                        </div>
+                                    </div>
                                     <?php } ?>
                                 </div>
                                 <div class="tab-pane" id="tab-social">
