@@ -1222,9 +1222,7 @@ class ControllerMpmultivendorMpseller extends Controller
             $data['country_id'] = '';
         }
 
-//        echo '<pre>';
-//        print_r($this->config->get('config_ssl'));
-//        exit('plpl');
+
         $data['uploads_dir'] = '/image/mpseller/customer-' . $mpseller_info['customer_id'] . '/';
         if (isset($this->request->post['id_proof'])) {
             $data['link_id_proof'] = $this->request->post['id_proof'];
@@ -1240,6 +1238,9 @@ class ControllerMpmultivendorMpseller extends Controller
         } else {
             $data['link_address_proof'] = '';
         }
+//        echo '<pre>';
+//        print_r($data);
+//        exit('plpl');
 
         if (isset($this->request->post['zone_id'])) {
             $data['zone_id'] = $this->request->post['zone_id'];

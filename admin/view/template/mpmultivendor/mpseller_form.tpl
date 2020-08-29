@@ -360,7 +360,7 @@
                                                    id="input-image"/>
                                         </div>
                                     </div>
-                                    <?php if (isset($link_id_proof)) { ?>
+                                    <?php if (!empty($link_id_proof)) { ?>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">ID Proof</label>
                                         <div class="col-sm-10">
@@ -370,7 +370,7 @@
                                     </div>
                                     <?php } ?>
 
-                                    <?php if (isset($link_address_proof)) { ?>
+                                    <?php if (!empty($link_address_proof)) { ?>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">Address Proof</label>
                                         <div class="col-sm-10">
