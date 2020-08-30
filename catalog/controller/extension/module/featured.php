@@ -66,6 +66,18 @@ class ControllerExtensionModuleFeatured extends Controller {
 			}
 		}
 
+        $this->load->model('design/banner');
+        $promotionBanners = $this->model_design_banner->getBanner(10);
+        $bannerData = [];
+        foreach ($promotionBanners as $banner) {
+            $bannerData[] = array(
+                'title' => $banner['title'],
+                'link'  => $banner['link'],
+                'image' => $this->model_tool_image->resize($banner['image'], 250, 177)
+            );
+        }
+        $data['promotionBanners'] = $bannerData;
+
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);
 		}
