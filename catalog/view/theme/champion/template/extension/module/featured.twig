@@ -75,14 +75,24 @@
         <!--<div class="text-center position-relative btn-border-div mt-4">
             <a class="btn btn-primary border-success bg-white text-success px-5" href="#" role="button">VIEW ALL</a>
         </div>-->
-        <div class="text-center mt-3">
+        <div class="promotion-banner">
             {# <img src="catalog/view/theme/champion/image/720x90-1.png" alt="" class="img-fluid"> #}
-            {% for banner in promotionBanners %}
-                <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid">
-            {% endfor %}
+
+            <div class="owl-slider">
+                <div id="carousel-promotion" class="owl-carousel">
+                    {% for banner in promotionBanners %}
+                    <div class="item">
+                        <img class="owl-lazy" data-src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
         </div>
     </div>
 </section>
 
+<script>
+
+</script>
 

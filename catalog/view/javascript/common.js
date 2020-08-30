@@ -507,3 +507,40 @@ $('.btn').on('click', function() {
         $this.button('reset');
     }, 8000);
 });
+
+
+$(document).ready(function() {
+jQuery("#carousel-promotion").owlCarousel({
+    autoplay: true,
+    lazyLoad: true,
+    rewind: true,
+    margin: 20,
+    /*
+   animateOut: 'fadeOut',
+   animateIn: 'fadeIn',
+   */
+    responsiveClass: true,
+    autoHeight: true,
+    autoplayTimeout: 7000,
+    smartSpeed: 800,
+    nav: false,
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+
+        600: {
+            items: 1
+        },
+
+        1024: {
+            items: 1
+        },
+
+        1366: {
+            items: 1
+        }
+    }
+});
+});
