@@ -927,6 +927,15 @@ footer {
     width: 160px;
     height: 160px;
   }
+
+  #delivery-info {
+    .tab-content{
+      #tab-location {
+        select.form-control { width: 150px!important; }
+      }
+    }
+
+  }
 }
 
 
