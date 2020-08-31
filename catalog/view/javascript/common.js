@@ -544,3 +544,8 @@ jQuery("#carousel-promotion").owlCarousel({
     }
 });
 });
+$(document).ready(function() {
+$('.spinner-loading').html(
+    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+);
+});
