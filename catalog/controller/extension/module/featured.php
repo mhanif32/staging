@@ -73,7 +73,7 @@ class ControllerExtensionModuleFeatured extends Controller {
             $bannerData[] = array(
                 'title' => $banner['title'],
                 'link'  => $banner['link'],
-                'image' => $this->model_tool_image->resize($banner['image'], 250, 177)
+                'image' => $this->model_tool_image->resize($banner['image'], 1114, 334)
             );
         }
         $data['promotionBanners'] = $bannerData;

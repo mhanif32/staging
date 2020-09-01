@@ -507,3 +507,46 @@ $('.btn').on('click', function() {
         $this.button('reset');
     }, 8000);
 });
+
+
+$(document).ready(function() {
+jQuery("#carousel-promotion").owlCarousel({
+    autoplay: true,
+    lazyLoad: true,
+    rewind: false,
+    loop: true,
+    margin: 20,
+    /*
+   animateOut: 'fadeOut',
+   animateIn: 'fadeIn',
+   */
+    responsiveClass: true,
+    autoHeight: true,
+    autoplayTimeout: 6000,
+    smartSpeed: 800,
+    nav: false,
+    dots: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+
+        600: {
+            items: 1
+        },
+
+        1024: {
+            items: 1
+        },
+
+        1366: {
+            items: 1
+        }
+    }
+});
+});
+$(document).ready(function() {
+$('.spinner-loading').html(
+    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+);
+});

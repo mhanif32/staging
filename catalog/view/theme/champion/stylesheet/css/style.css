@@ -1226,6 +1226,8 @@ footer ul {
   margin-left: 15px;
   width: 160px;
   height: 160px; }
+#account-edit #delivery-info .tab-content #tab-location select.form-control {
+  width: 150px !important; }
 
 #category .swiper-viewport {
   margin: 30px 0 30px; }
