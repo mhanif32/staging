@@ -513,7 +513,8 @@ $(document).ready(function() {
 jQuery("#carousel-promotion").owlCarousel({
     autoplay: true,
     lazyLoad: true,
-    rewind: true,
+    rewind: false,
+    loop: true,
     margin: 20,
     /*
    animateOut: 'fadeOut',
@@ -521,7 +522,7 @@ jQuery("#carousel-promotion").owlCarousel({
    */
     responsiveClass: true,
     autoHeight: true,
-    autoplayTimeout: 7000,
+    autoplayTimeout: 6000,
     smartSpeed: 800,
     nav: false,
     dots: false,
