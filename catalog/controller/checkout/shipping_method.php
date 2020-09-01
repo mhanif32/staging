@@ -14,11 +14,10 @@ class ControllerCheckoutShippingMethod extends Controller {
             $this->load->model('catalog/category');
 
 			$results = $this->model_setting_extension->getExtensions('shipping');
-
 			foreach ($results as $result) {
+
 				if ($this->config->get('shipping_' . $result['code'] . '_status')) {
 					$this->load->model('extension/shipping/' . $result['code']);
-
 					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
 
 					if ($quote) {
@@ -32,6 +31,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 				}
 			}
 
+            //echo '<pre>';print_r($method_data);exit('okoko');
 			$sort_order = array();
 
 			foreach ($method_data as $key => $value) {
