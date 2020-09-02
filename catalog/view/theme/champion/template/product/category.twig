@@ -118,7 +118,12 @@
                 </div>
             {% endif %}
             {% if not categories and not products %}
-                <p>{{ text_empty }}</p>
+                <p>
+                    {{ text_empty }}
+                    {#"We are currently not delivering to your selected delivery point. Please see the list of countries and areas where we are delivering to momentarily and the dates for upcoming Countries. <br>#}
+                    {#Please Click I for more information" <br>#}
+                    {#You can also send us an email requesting us to speedily look into delivering to your selected country. Thank You For Your Custom.#}
+                </p>
                 <div class="buttons">
                     <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a>
                     </div>
