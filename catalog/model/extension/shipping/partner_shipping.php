@@ -30,53 +30,74 @@ class ModelExtensionShippingPartnerShipping extends Model
         $cartProducts = $this->cart->getProducts();
         $deliveryValues = array();
         foreach ($cartProducts as $product) {
+
             if ( ! isset($deliveryValues[$product['mpseller_id']])) {
                 $deliveryValues[$product['mpseller_id']] = 0;
             }
             $deliveryValues[$product['mpseller_id']]+= $product['total'];
         }
+
         $deliveryCharges = array_values($deliveryValues);
-
-        $totalDeliveryAmt = 0;
+        $totalDeliveryAmt = 0; $tempAmt = 0;
         foreach ($deliveryCharges as $deliveryCharge) {
-
-            /*if ($deliveryCharge < 500) {
-                $totalDeliveryAmt+= $deliveryCharge * 20 / 100; //20%
-            } else if ($deliveryCharge >= 500 && $deliveryCharge < 700) {
-
-                $totalDeliveryAmt+= $deliveryCharge * 10 / 100; //10%
-            } else if ($deliveryCharge >= 700 && $deliveryCharge < 1000) {
-
-                $totalDeliveryAmt+= $deliveryCharge * 5 / 100; //5%
-            } else if ($deliveryCharge >= 1000) {
-
-                $totalDeliveryAmt+= $deliveryCharge * 3 / 100; //3%
-            }*/
 
             $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
-            //print_r($deliveryChargeNew);exit('okok');
             if($this->session->data['currency'] == 'NGN') {
+                //for NGN Currency only
                 if ($deliveryChargeNew <= 20000) {
-                    //exit('aaa');
-                    $totalDeliveryAmt+= $deliveryCharge * 23 / 100; //15%
-                } else if ($deliveryChargeNew > 20000 && $deliveryChargeNew <= 35000.00) {
-                    //exit('bbb');
-                    $totalDeliveryAmt+= $deliveryCharge * 22 / 100;
-                } else if ($deliveryChargeNew > 35000) {
-                    //exit('ccc');
-                    $totalDeliveryAmt+= $deliveryCharge * 20 / 100;
+
+                    $tempAmt+= 4000;
+                } else if ($deliveryChargeNew > 20000 && $deliveryChargeNew <= 30000) {
+
+                    $tempAmt+= 4600;
+                } else if ($deliveryChargeNew > 30000 && $deliveryChargeNew <= 35000) {
+
+                    $tempAmt+= 4800;
+                } else if ($deliveryChargeNew > 35000 && $deliveryChargeNew <= 40000) {
+
+                    $tempAmt+= 4950;
+                } else if ($deliveryChargeNew > 40000) {
+                    $tempAmt+= $deliveryChargeNew * 13 / 100;
                 }
-                //print_r($totalDeliveryAmt);exit('aaaa');
+
+                //get USD rate from the currency
+                $NGN_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code = 'NGN'");
+                $nigeria_data = $NGN_query->row;
+                $usdAmt = $tempAmt / $nigeria_data['value'];
+                $totalDeliveryAmt = number_format($usdAmt, 4);
             } else {
-                if ($deliveryCharge <= 150) {
-                    $totalDeliveryAmt+= $deliveryCharge * 15 / 100; //15%
-                } else if ($deliveryCharge > 150 && $deliveryCharge <= 250.00) {
 
-                    $totalDeliveryAmt+= $deliveryCharge * 14.10 / 100;
-                } else if ($deliveryCharge > 250) {
+                //for currency USD
+                if($this->session->data['currency'] != 'USD') {
+                    $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
+                }
 
-                    $totalDeliveryAmt+= $deliveryCharge * 14 / 100;
+                if ($deliveryChargeNew <= 50) {
+                    $tempAmt+= 19.20;
+                } else if($deliveryChargeNew > 50 && $deliveryChargeNew <= 80) {
+                    $tempAmt+= 20;
+                } else if($deliveryChargeNew > 80 && $deliveryChargeNew <= 100) {
+                    $tempAmt+= 22;
+                } else if($deliveryChargeNew > 100 && $deliveryChargeNew <= 150) {
+                    $tempAmt+= 24.50;
+                } else if($deliveryChargeNew > 150 && $deliveryChargeNew <= 250) {
+                    $tempAmt+= 25;
+                } else if($deliveryChargeNew > 250 && $deliveryChargeNew <= 500) {
+                    $tempAmt+= 30;
+                } else if($deliveryChargeNew > 500) {
+                    $tempAmt+= $deliveryChargeNew * 10 / 100;
+                }
+
+                if($this->session->data['currency'] == 'USD') {
+
+                    $totalDeliveryAmt = $tempAmt;
+                } else {
+
+                    $NGN_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code = '".$this->session->data['currency']."'");
+                    $nigeria_data = $NGN_query->row;
+                    $usdAmt = $tempAmt / $nigeria_data['value'];
+                    $totalDeliveryAmt = number_format($usdAmt, 4);
                 }
             }
         }
