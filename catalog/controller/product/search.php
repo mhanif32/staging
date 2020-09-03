@@ -191,13 +191,16 @@ class ControllerProductSearch extends Controller {
 
             if (!$this->customer->isLogged()) {
                 $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
+                $zoneId = isset($this->session->data['session_state_id']) ? $this->session->data['session_state_id'] : '';
             } else {
                 $defaultAddress = $this->model_account_address->getDefaultAddress();
                 $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+                $zoneId = $this->session->data['session_state_id'] = $defaultAddress['zone_id'];
             }
 
 			$filter_data = array(
 				'product_country'     => $countryId,
+				'product_state'       => $zoneId,
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,

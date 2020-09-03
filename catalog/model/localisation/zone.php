@@ -19,4 +19,10 @@ class ModelLocalisationZone extends Model {
 
 		return $zone_data;
 	}
+
+    public function getZoneIdFromName($name)
+    {
+        $query = $this->db->query("SELECT zone_id FROM " . DB_PREFIX . "zone WHERE name = '" .  $this->db->escape($name) . "'");
+        return $query->row;
+    }
 }

@@ -98,6 +98,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
         }
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+
             $this->model_account_mpmultivendor_product->addProduct($this->request->post, $mpseller_id);
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -178,6 +179,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
             if ($this->model_account_mpmultivendor_product->getProductBySellerID($this->request->get['product_id'], $mpseller_id)) {
+
                 $this->model_account_mpmultivendor_product->editProduct($this->request->get['product_id'], $this->request->post, $mpseller_id);
             }
 
@@ -1854,7 +1856,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $data['currencies'] = $this->model_localisation_currency->getCurrencies();
 
-        $data['countries'] = $this->model_localisation_country->getCountries();
+        /*$data['countries'] = $this->model_localisation_country->getCountries();
         if(!empty($this->request->get['product_id'])) {
             $data['my_countries'] = array();
             $my_countries = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
@@ -1867,25 +1869,39 @@ class ControllerAccountMpmultivendorProduct extends Controller
                     );
                 }
             }
-        }
+        }*/
 
-        $delivery = [];
-        if (isset($this->request->get['product_id'])) {
-            $deliveryInfos = $this->model_account_mpmultivendor_product->getDeliveryLocations($this->request->get['product_id']);
-            foreach ($deliveryInfos as $info) {
-                $deliveryArray = array();
-                $deliveryArray['country_id'] = $info['country_id'];
-                $deliveryArray['zone_id'] = $info['zone_id'];
-                $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
-                $deliveryArray['area_id'] = $info['area_id'];
-                $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
-                $deliveryArray['days'] = $info['days'];
-                $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
-                $delivery[] = $deliveryArray;
+        $locationArray = [];
+        if(!empty($this->request->get['product_id'])) {
+            $productLocations = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
+            foreach ($productLocations as $location) {
+                $dataArray = array();
+                $dataArray['country_id'] = $location['country_id'];
+                $dataArray['zone_id'] = $location['zone_id'];
+                $dataArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($location['country_id']);
+                $locationArray[] = $dataArray;
             }
         }
-        $data['deliveryInfos'] = $delivery;
+        $data['productLocations'] = $locationArray;
+        //echo '<pre>';print_r(count($data['productLocations']));exit('okok');
         $data['countries'] = $this->model_localisation_country->getCountries();
+
+//        $delivery = [];
+//        if (isset($this->request->get['product_id'])) {
+//            $deliveryInfos = $this->model_account_mpmultivendor_product->getDeliveryLocations($this->request->get['product_id']);
+//            foreach ($deliveryInfos as $info) {
+//                $deliveryArray = array();
+//                $deliveryArray['country_id'] = $info['country_id'];
+//                $deliveryArray['zone_id'] = $info['zone_id'];
+//                $deliveryArray['zones'] = $this->model_localisation_zone->getZonesByCountryId($info['country_id']);
+//                $deliveryArray['area_id'] = $info['area_id'];
+//                $deliveryArray['areas'] = $this->model_localisation_area->getAreasByZoneId($info['zone_id']);
+//                $deliveryArray['days'] = $info['days'];
+//                $deliveryArray['rate_per_hour'] = $info['rate_per_hour'];
+//                $delivery[] = $deliveryArray;
+//            }
+//        }
+//        $data['deliveryInfos'] = $delivery;
 
         /* Theme Work Starts */
         if ($this->config->get('config_theme')) {

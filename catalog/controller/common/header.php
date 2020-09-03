@@ -18,6 +18,7 @@ class ControllerCommonHeader extends Controller
         $this->load->model('account/address');
         $this->load->model('catalog/information');
         $this->load->model('localisation/country');
+        $this->load->model('localisation/zone');
         $this->load->model('account/wishlist');
         $this->load->model('tool/image');
 
@@ -122,18 +123,6 @@ class ControllerCommonHeader extends Controller
         $data['fillAddressMsg'] = html_entity_decode($fillAddressMessage['description'], ENT_QUOTES, 'UTF-8');
 
         //check logged in user country
-        /*$data['loggedInCountry'] = '';
-        if(!empty($this->session->data['loggedInCountry']) && !$this->customer->isLogged()) {
-            $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
-            $data['session_country_id'] = $this->session->data['loggedInCountry'];
-
-        } else {
-            // Default Shipping Address
-            $defaultAddress = $this->model_account_address->getDefaultAddress();
-            if(!empty($defaultAddress['country'])) {
-                $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['zone'].', '.$defaultAddress['country'] : '';
-            }
-        }*/
         if (!$this->customer->isLogged()) { //before login
 
             if (empty($this->session->data['loggedInCountry'])) {
@@ -171,8 +160,10 @@ class ControllerCommonHeader extends Controller
             }
         }
         $country = $this->model_localisation_country->getCountryIdFromName($data['loggedInCountry']);
+        $zone = $this->model_localisation_zone->getZoneIdFromName($data['loggedInState']);
         if(!empty($country)) {
-            $this->session->data['session_country_id'] = $country['country_id'];
+            $this->session->data['session_country_id'] = !empty($country['country_id']) ? $country['country_id'] : '';
+            $this->session->data['session_state_id'] = !empty($zone['zone_id']) ? $zone['zone_id'] : '';
         }
         return $this->load->view('common/header', $data);
     }

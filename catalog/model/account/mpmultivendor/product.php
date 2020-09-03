@@ -8,9 +8,9 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$product_id = $this->db->getLastId();
 
 		//for product locations
-        if (isset($data['countries'])) {
-            foreach ($data['countries'] as $country) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+        if (isset($data['location_info'])) {
+            foreach ($data['location_info'] as $location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$location['country_id'] . "', zone_id = '" . (int)$location['zone_id'] . "'");
             }
         }
 
@@ -150,11 +150,11 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$this->db->query($sql);
 
         //for product locations
-        if (isset($data['countries'])) {
+        if (isset($data['location_info'])) {
             $this->db->query("DELETE FROM " . DB_PREFIX . "product_location WHERE product_id = '" . (int)$product_id . "'");
 
-            foreach ($data['countries'] as $country) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+            foreach ($data['location_info'] as $location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$location['country_id'] . "', zone_id = '" . (int)$location['zone_id'] . "'");
             }
         }
 
