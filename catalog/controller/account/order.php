@@ -170,6 +170,7 @@ class ControllerAccountOrder extends Controller {
 			$data['order_id'] = $this->request->get['order_id'];
 			$data['order_invoice'] = $order_info['invoice_prefix'].$order_info['invoice_no'];
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
+            $data['my_delivery_date'] = !empty($order_info['my_delivery_date']) ? date($this->language->get('date_format_short'), strtotime($order_info['my_delivery_date'])) : '';
 
 			if ($order_info['payment_address_format']) {
 				$format = $order_info['payment_address_format'];

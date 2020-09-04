@@ -373,6 +373,7 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 			$data['mpseller_order_status_id'] = $order_info['mpseller_order_status_id'];
 			$data['order_id'] = $this->request->get['order_id'];
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
+            $data['my_delivery_date'] = !empty($order_info['my_delivery_date']) ? date($this->language->get('date_format_short'), strtotime($order_info['my_delivery_date'])) : '';
 
 			$data['name'] = $order_info['firstname'] .' '. $order_info['lastname'];
 			$data['email'] = $order_info['email'];
