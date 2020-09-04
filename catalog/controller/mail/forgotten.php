@@ -22,7 +22,10 @@ class ControllerMailForgotten extends Controller {
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 		$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8'));
-		$mail->setText($this->load->view('mail/forgotten', $data));
-		$mail->send();
+
+        $mailText = $this->load->view('mail/forgotten', $data);
+        $mail->setHtml($mailText);
+        $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+        $mail->send();
 	}
 }
