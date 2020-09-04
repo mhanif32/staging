@@ -88,4 +88,4 @@ $_['error_filesize_id_proof'] = 'File size is too big to upload!';
 
 $_['error_filename_address_proof'] = 'Filename must be between 3 and 128 charecters!';
 $_['error_filetype_address_proof'] = 'Only Doc, PDF & JPG file should be allow!';
-$_['error_filesize_address_proof'] = 'File size is too big to upload!';
+$_['error_filesize_address_proof'] = 'File size is too big to upload (Only 500 KB)!';

@@ -276,11 +276,17 @@ class ControllerAccountAddress extends Controller {
 			$data['error_address_1'] = '';
 		}
 
-		if (isset($this->error['city'])) {
-			$data['error_city'] = $this->error['city'];
+		if (isset($this->error['city_id'])) {
+			$data['error_city_id'] = $this->error['city_id'];
 		} else {
-			$data['error_city'] = '';
+			$data['error_city_id'] = '';
 		}
+
+        if (isset($this->error['city'])) {
+            $data['error_city'] = $this->error['city'];
+        } else {
+            $data['error_city'] = '';
+        }
 
 		if (isset($this->error['postcode'])) {
 			$data['error_postcode'] = $this->error['postcode'];
@@ -364,13 +370,21 @@ class ControllerAccountAddress extends Controller {
 			$data['postcode'] = '';
 		}
 
-		if (isset($this->request->post['city'])) {
-			$data['city'] = $this->request->post['city'];
+		if (isset($this->request->post['city_id'])) {
+			$data['city_id'] = $this->request->post['city_id'];
 		} elseif (!empty($address_info)) {
-			$data['city'] = $address_info['city'];
+			$data['city_id'] = $address_info['city_id'];
 		} else {
-			$data['city'] = '';
+			$data['city_id'] = '';
 		}
+
+        if (isset($this->request->post['city'])) {
+            $data['city'] = $this->request->post['city'];
+        } elseif (!empty($address_info)) {
+            $data['city'] = $address_info['city'];
+        } else {
+            $data['city'] = '';
+        }
 
 		if (isset($this->request->post['country_id'])) {
 			$data['country_id'] = (int)$this->request->post['country_id'];
@@ -430,6 +444,8 @@ class ControllerAccountAddress extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
+
+        //echo '<pre>';print_r($data);exit('okok');
 		$this->response->setOutput($this->load->view('account/address_form', $data));
 	}
 

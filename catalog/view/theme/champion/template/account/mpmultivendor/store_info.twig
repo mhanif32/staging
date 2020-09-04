@@ -266,9 +266,10 @@
                                     </div>
                                     <div class="tab-pane mt-3" id="tab-doc">
                                         <div class="form-group">
-                                            <label class="control-label col-sm-12">{{ entry_id_proof }}</label>
+                                            <label class="control-label col-sm-12"><strong>{{ entry_id_proof }}</strong></label>
                                             <div class="col-sm-12">
                                                 <input type="file" class="form-control" name="id_proof" id="input-id_proof">
+                                                <small>Note: Only Doc, PDF & JPG file should be allow!</small><br/>
                                                 {% if error_filename_id_proof or error_filetype_id_proof or error_filesize_id_proof %}
                                                     <div class="text-danger">
                                                         {% if error_filename_id_proof %}
@@ -285,11 +286,12 @@
                                                 {% endif %}
                                             </div>
                                         </div>
-
+<hr>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-12">{{ entry_address_proof }}</label>
+                                            <label class="control-label col-sm-12"><strong>{{ entry_address_proof }}</strong></label>
                                             <div class="col-sm-12">
                                                 <input type="file" class="form-control" name="address_proof" id="input-address_proof">
+                                                <small>Note: Only Doc, PDF & JPG file should be allow!</small><br/>
                                                 {% if error_filename_address_proof or error_filetype_address_proof or error_filesize_address_proof %}
                                                     <div class="text-danger">
                                                         {% if error_filename_address_proof %}

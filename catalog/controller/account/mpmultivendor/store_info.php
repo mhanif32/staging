@@ -769,7 +769,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
                 $this->error['filename_'.$inputFileName]  = $this->language->get('error_filename_'.$inputFileName);
             }
 
-            $allowed = array("doc","pdf","jpg");
+            $allowed = array("doc","pdf","jpg","jpeg");
             if (!in_array(utf8_substr(strrchr($filename, '.'), 1), $allowed)) {
                 $this->error['filetype_'.$inputFileName]  = $this->language->get('error_filetype_'.$inputFileName);
             }
