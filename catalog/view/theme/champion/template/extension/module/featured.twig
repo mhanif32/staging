@@ -82,7 +82,8 @@
                 <div id="carousel-promotion" class="owl-carousel">
                     {% for banner in promotionBanners %}
                     <div class="item">
-                        <img class="owl-lazy" data-src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid">
+                        <a href="{{ banner.link }}" target="_blank">
+                        <img class="owl-lazy" data-src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid"></a>
                     </div>
                     {% endfor %}
                 </div>
