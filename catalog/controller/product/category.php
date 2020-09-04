@@ -156,19 +156,22 @@ class ControllerProductCategory extends Controller
 
             if (!$this->customer->isLogged()) {
                 $countryId = isset($this->session->data['session_country_id']) ? $this->session->data['session_country_id'] : '';
+                $zoneId = isset($this->session->data['session_state_id']) ? $this->session->data['session_state_id'] : '';
             } else {
                 $defaultAddress = $this->model_account_address->getDefaultAddress();
                 $countryId = $this->session->data['session_country_id'] = $defaultAddress['country_id'];
+                $zoneId = $this->session->data['session_state_id'] = $defaultAddress['zone_id'];
             }
 
             $filter_data = array(
                 'product_country'     => $countryId,
-                'filter_category_id' => $category_id,
-                'filter_filter' => $filter,
-                'sort' => $sort,
-                'order' => $order,
-                'start' => ($page - 1) * $limit,
-                'limit' => $limit
+                'product_state'       => $zoneId,
+                'filter_category_id'  => $category_id,
+                'filter_filter'       => $filter,
+                'sort'                => $sort,
+                'order'               => $order,
+                'start'               => ($page - 1) * $limit,
+                'limit'               => $limit
             );
 
             $product_total = $this->model_catalog_product->getTotalProducts($filter_data);

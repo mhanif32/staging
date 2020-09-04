@@ -112,6 +112,9 @@ class ModelCatalogProduct extends Model {
         if (!empty($data['product_country'])) {
             $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
         }
+        if (!empty($data['product_state'])) {
+            $sql .= " AND pl.zone_id = '" . (int)$data['product_state'] . "'";
+        }
 
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 			$sql .= " AND (";
@@ -586,6 +589,9 @@ class ModelCatalogProduct extends Model {
 
         if (!empty($data['product_country'])) {
             $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
+        }
+        if (!empty($data['product_state'])) {
+            $sql .= " AND pl.zone_id = '" . (int)$data['product_state'] . "'";
         }
 
 		if (!empty($data['filter_manufacturer_id'])) {

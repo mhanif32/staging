@@ -50,6 +50,9 @@
                                 <b>{{ text_payment_method }}</b> {{ payment_method }}<br/>
                             {% endif %}
                             {% if shipping_method %} <b>{{ text_shipping_method }}</b> {{ shipping_method }} {% endif %}
+                            {% if my_delivery_date %}
+                            <br/><b>Specific Preferred Delivery Date:</b> {{ my_delivery_date }}
+                            {% endif %}
                         </td>
                     </tr>
                     </tbody>

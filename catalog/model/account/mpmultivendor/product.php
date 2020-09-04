@@ -8,9 +8,9 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$product_id = $this->db->getLastId();
 
 		//for product locations
-        if (isset($data['countries'])) {
-            foreach ($data['countries'] as $country) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+        if (isset($data['location_info'])) {
+            foreach ($data['location_info'] as $location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$location['country_id'] . "', zone_id = '" . (int)$location['zone_id'] . "'");
             }
         }
 
@@ -145,16 +145,16 @@ class ModelAccountMpmultivendorProduct extends Model {
 	}
 
 	public function editProduct($product_id, $data, $mpseller_id) {
-		$sql = "UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', currency = '" . $this->db->escape($data['currency']) . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "' AND mpseller_id = '". (int)$mpseller_id ."'";
+		$sql = "UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', currency = '" . $this->db->escape($data['currency']) . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "' AND mpseller_id = '". (int)$mpseller_id ."'";
 
 		$this->db->query($sql);
 
         //for product locations
-        if (isset($data['countries'])) {
+        if (isset($data['location_info'])) {
             $this->db->query("DELETE FROM " . DB_PREFIX . "product_location WHERE product_id = '" . (int)$product_id . "'");
 
-            foreach ($data['countries'] as $country) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$country . "'");
+            foreach ($data['location_info'] as $location) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_location SET product_id = '" . (int)$product_id . "', country_id = '" . (int)$location['country_id'] . "', zone_id = '" . (int)$location['zone_id'] . "'");
             }
         }
 

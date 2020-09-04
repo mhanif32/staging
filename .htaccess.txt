@@ -1,7 +1,5 @@
 # 1.To use URL Alias you need to be running apache with mod_rewrite enabled.
-
 # 2. In your opencart directory rename htaccess.txt to .htaccess.
-
 # For any support issues please visit: http://www.opencart.com
 
 Options +FollowSymlinks
@@ -28,7 +26,12 @@ RewriteRule ^system/storage/(.*) index.php?route=error/not_found [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
-RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+# RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+
+# To remove index.php from the url
+RewriteRule ^(.*)$ index.php?$1 [L,QSA]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php [NC]
+RewriteRule ^ %1 [R=301,L]
 
 ### Additional Settings that may need to be enabled for some servers
 ### Uncomment the commands by removing the # sign in front of it.
