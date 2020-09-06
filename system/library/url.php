@@ -63,7 +63,7 @@ class Url {
 		foreach ($this->rewrite as $rewrite) {
 			$url = $rewrite->rewrite($url);
 		}
-        $url = str_replace('index.php?route=', '', $url);
+
 		return $url; 
 	}
 }
