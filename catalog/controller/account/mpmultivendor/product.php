@@ -1412,10 +1412,31 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $data['shipping'] = 1;
         }
 
+        $this->load->model('localisation/currency');
         if (isset($this->request->post['price'])) {
             $data['price'] = $this->request->post['price'];
         } elseif (!empty($product_info)) {
             $data['price'] = $product_info['price'];
+
+            //load other currency prices
+            if (!empty($data['price'])) {
+
+                //euru value
+                $euroData = $this->model_localisation_currency->getCurrencyByCode('EUR');
+                $euroValue = $euroData['value'] * $data['price'];
+                $data['price_euro'] = number_format($euroValue, 4);
+
+                //naira value
+                $nairaData = $this->model_localisation_currency->getCurrencyByCode('NGN');
+                $nairaValue = $nairaData['value'] * $data['price'];
+                $data['price_naira'] = number_format($nairaValue, 4);
+
+                //pound value
+                $poundData = $this->model_localisation_currency->getCurrencyByCode('GBP');
+                $poundValue = $poundData['value'] * $data['price'];
+                $data['price_pound'] = number_format($poundValue, 4);
+            }
+
         } else {
             $data['price'] = '';
         }
@@ -1681,8 +1702,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
                         'points' => $product_option_value['points'],
                         'points_prefix' => $product_option_value['points_prefix'],
                         'weight' => $product_option_value['weight'],
-                        'color_image_thumb'   => $product_option_value_image,
-                        'color_image'   => $product_option_value['color_image'],
+                        'color_image_thumb' => $product_option_value_image,
+                        'color_image' => $product_option_value['color_image'],
                         'weight_prefix' => $product_option_value['weight_prefix']
                     );
                 }
@@ -1872,7 +1893,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
         }*/
 
         $locationArray = [];
-        if(!empty($this->request->get['product_id'])) {
+        if (!empty($this->request->get['product_id'])) {
             $productLocations = $this->model_localisation_country->getProductLocation($this->request->get['product_id']);
             foreach ($productLocations as $location) {
                 $dataArray = array();
@@ -2322,5 +2343,50 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
+    }
+
+    public function getAllPrices()
+    {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+        if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+            $post = $this->request->post;
+            $currencyCode = $post['currencyCode'];
+            $currencyAmt = str_replace( ',', '', $post['currencyAmt']);
+            $json = [];
+
+            $this->load->model('localisation/currency');
+            $currencies = $this->model_localisation_currency->getCurrencies();
+            $fetchData = $this->model_localisation_currency->getCurrencyByCode($currencyCode);
+
+            foreach ($currencies as $currency) {
+                //echo $currency['value'].'<br>';
+                $data = [];
+                //$data['value'] = $currency['value'];
+                $data['code'] = $currency['code'];
+
+                if ($currencyCode == $currency['code']) {
+                    $data['amount'] = round($currencyAmt, 4);
+                } else {
+                    if ($currencyCode == 'USD') {
+                        $amount = $currency['value'] * $currencyAmt;
+                        $data['amount'] = round($amount, 4);
+                    } else {
+                        //$data['amount'] = ($currencyAmt * $currency['value']) / $fetchData['value'];
+//                        $data['currencyAmt'] =  $currencyAmt;
+//                        $data['currencyValue'] =  $currency['value'];
+//                        $data['fetchData'] =  $fetchData['value'];
+
+                        $amount = $currencyAmt * $currency['value'] / $fetchData['value'];
+                        $data['amount'] = round($amount, 4);
+                    }
+                }
+                $json[] = $data;
+            }
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode($json));
+        }
     }
 }
