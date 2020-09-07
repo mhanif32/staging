@@ -1,48 +1,83 @@
 {{ header }}
-<div id="account-reset" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <fieldset>
-          <legend>{{ text_password }}</legend>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>
-            <div class="col-sm-10">
-              <input type="password" name="password" value="{{ password }}" id="input-password" class="form-control" />
+{#<div id="account-reset" class="container">#}
+  {#<ul class="breadcrumb">#}
+    {#{% for breadcrumb in breadcrumbs %}#}
+    {#<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+    {#{% endfor %}#}
+  {#</ul>#}
+  {#<div class="row">{{ column_left }}#}
+    {#{% if column_left and column_right %}#}
+    {#{% set class = 'col-sm-6' %}#}
+    {#{% elseif column_left or column_right %}#}
+    {#{% set class = 'col-sm-9' %}#}
+    {#{% else %}#}
+    {#{% set class = 'col-sm-12' %}#}
+    {#{% endif %}#}
+    {#<div id="content" class="{{ class }}">{{ content_top }}#}
+      {#<h1>{{ heading_title }}</h1>#}
+      {#<form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">#}
+        {#<fieldset>#}
+          {#<legend>{{ text_password }}</legend>#}
+          {#<div class="form-group">#}
+            {#<label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>#}
+            {#<div class="col-sm-10">#}
+              {#<input type="password" name="password" value="{{ password }}" id="input-password" class="form-control" />#}
+              {#{% if error_password %}#}
+              {#<div class="text-danger">{{ error_password }}</div>#}
+              {#{% endif %} </div>#}
+          {#</div>#}
+          {#<div class="form-group">#}
+            {#<label class="col-sm-2 control-label" for="input-confirm">{{ entry_confirm }}</label>#}
+            {#<div class="col-sm-10">#}
+              {#<input type="password" name="confirm" value="{{ confirm }}" id="input-confirm" class="form-control" />#}
+              {#{% if error_confirm %}#}
+              {#<div class="text-danger">{{ error_confirm }}</div>#}
+              {#{% endif %}</div>#}
+          {#</div>#}
+        {#</fieldset>#}
+        {#<div class="buttons clearfix">#}
+          {#<div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>#}
+          {#<div class="pull-right">#}
+            {#<button type="submit" class="btn btn-primary">{{ button_continue }}</button>#}
+          {#</div>#}
+        {#</div>#}
+      {#</form>#}
+      {#{{ content_bottom }}</div>#}
+    {#{{ column_right }}</div>#}
+{#</div>#}
+
+<section id="account-reset" class="bg-gray-100 py-5">
+  <div class="login-form forgot-password py-5" style="background-image: none;">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal form-signin">
+      <h3 class="mt-5 mb-4 text-center text-uppercase" style="font-size: 1.8rem; font-weight: 800;">{{ heading_title }}</h3>
+      <p style="font-size: 0.8rem;" class="text-center">{{ text_password }}</p>
+      <fieldset class="w-80 m-auto">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>
+          <div class="col-sm-10">
+            <input type="password" name="password" value="{{ password }}" id="input-password" class="form-control" />
               {% if error_password %}
-              <div class="text-danger">{{ error_password }}</div>
+                <div class="text-danger">{{ error_password }}</div>
               {% endif %} </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-confirm">{{ entry_confirm }}</label>
-            <div class="col-sm-10">
-              <input type="password" name="confirm" value="{{ confirm }}" id="input-confirm" class="form-control" />
-              {% if error_confirm %}
-              <div class="text-danger">{{ error_confirm }}</div>
-              {% endif %}</div>
-          </div>
-        </fieldset>
-        <div class="buttons clearfix">
-          <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
-          <div class="pull-right">
-            <button type="submit" class="btn btn-primary">{{ button_continue }}</button>
-          </div>
         </div>
-      </form>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
-</div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-confirm">{{ entry_confirm }}</label>
+          <div class="col-sm-10">
+            <input type="password" name="confirm" value="{{ confirm }}" id="input-confirm" class="form-control" />
+              {% if error_confirm %}
+                <div class="text-danger">{{ error_confirm }}</div>
+              {% endif %}</div>
+        </div>
+      </fieldset>
+      <div class="buttons clearfix">
+        <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary">{{ button_continue }}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
 {{ footer }}
+
+
