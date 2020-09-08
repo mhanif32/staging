@@ -31,19 +31,21 @@ class ModelExtensionShippingPartnerShipping extends Model
         $deliveryValues = array();
         foreach ($cartProducts as $product) {
 
-            if ( ! isset($deliveryValues[$product['mpseller_id']])) {
+            if (!isset($deliveryValues[$product['mpseller_id']])) {
                 $deliveryValues[$product['mpseller_id']] = 0;
             }
-            $deliveryValues[$product['mpseller_id']]+= $product['total'];
+            $deliveryValues[$product['mpseller_id']] += $product['total'];
         }
 
         $deliveryCharges = array_values($deliveryValues);
-        $totalDeliveryAmt = 0; $tempAmt = 0;
+        $totalDeliveryAmt = 0;
+        $tempAmt = 0;
         foreach ($deliveryCharges as $deliveryCharge) {
 
             $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
-            if($this->session->data['currency'] == 'NGN') {
+
+            /*if($this->session->data['currency'] == 'NGN') {
                 //for NGN Currency only
                 if ($deliveryChargeNew <= 20000) {
 
@@ -99,7 +101,8 @@ class ModelExtensionShippingPartnerShipping extends Model
                     $usdAmt = $tempAmt / $nigeria_data['value'];
                     $totalDeliveryAmt = number_format($usdAmt, 4);
                 }
-            }
+            }*/
+            $totalDeliveryAmt = $deliveryChargeNew * 10 / 100;
         }
         //END : Champion Mall Delivery Charges Algorithm
 
@@ -115,7 +118,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 //'text' => $this->currency->addCurrencySymbol($totalDeliveryAmt, $this->session->data['currency'])
             );
 
-            $method_data = array(
+            $chamethod_data = array(
                 'code' => 'partner_shipping',
                 'title' => $this->language->get('text_title'),
                 'quote' => $quote_data,
