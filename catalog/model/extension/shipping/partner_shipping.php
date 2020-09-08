@@ -44,8 +44,7 @@ class ModelExtensionShippingPartnerShipping extends Model
 
             $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
-
-            /*if($this->session->data['currency'] == 'NGN') {
+            if($this->session->data['currency'] == 'NGN') {
                 //for NGN Currency only
                 if ($deliveryChargeNew <= 20000) {
 
@@ -101,8 +100,8 @@ class ModelExtensionShippingPartnerShipping extends Model
                     $usdAmt = $tempAmt / $nigeria_data['value'];
                     $totalDeliveryAmt = number_format($usdAmt, 4);
                 }
-            }*/
-            $totalDeliveryAmt = $deliveryChargeNew * 10 / 100;
+            }
+            //$totalDeliveryAmt = $deliveryChargeNew * 10 / 100;
         }
         //END : Champion Mall Delivery Charges Algorithm
 
@@ -118,7 +117,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 //'text' => $this->currency->addCurrencySymbol($totalDeliveryAmt, $this->session->data['currency'])
             );
 
-            $chamethod_data = array(
+            $method_data = array(
                 'code' => 'partner_shipping',
                 'title' => $this->language->get('text_title'),
                 'quote' => $quote_data,
