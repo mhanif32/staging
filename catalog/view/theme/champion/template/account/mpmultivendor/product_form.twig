@@ -250,94 +250,94 @@
                                                                    class="form-control"/>
                                                         </div>
                                                     </div>
-                                                    {# <div class="col-md-4 form-group"> #}
-                                                    {# <label class="col-sm-12 control-label" #}
-                                                    {# for="input-location">{{ entry_location }}</label> #}
-                                                    {# <div class="col-sm-12"> #}
-                                                    {# <input type="text" name="location" value="{{ location }}" #}
-                                                    {# placeholder="{{ entry_location }}" #}
-                                                    {# id="input-location" #}
-                                                    {# class="form-control"/> #}
-                                                    {# </div> #}
-                                                    {# </div> #}
-{#                                                    <div class="col-md-4 form-group">#}
-{#                                                        <label class="col-sm-12 control-label" for="input-price">#}
-{#									<span data-toggle="tooltip"#}
-{#                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span><a#}
-{#                                                                    class="text-danger">*</a></label>#}
-{#                                                        <div class="col-sm-12">#}
-{#                                                            <input type="text" name="price" value="{{ price }}"#}
-{#                                                                   placeholder="{{ entry_price }}" id="input-price"#}
-{#                                                                   class="form-control"/>#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                    <div class="col-md-4 form-group">#}
-{#                                                        <label class="col-sm-12 control-label" for="input-currency">#}
-{#                                                            <span data-toggle="tooltip"> Currency</span><a#}
-{#                                                                    class="text-danger">*</a></label>#}
-{#                                                        <div class="col-sm-12">#}
-{#                                                            <select name="currency" id="input-currency"#}
-{#                                                                    class="form-control">#}
-{#                                                                <option value="">Select</option>#}
-{#                                                                {% for currencyData in currencies %}#}
-{#                                                                    {% if currencyData.code == currency %}#}
-{#                                                                        <option value="{{ currencyData.code }}"#}
-{#                                                                                selected="selected">{{ currencyData.title }}</option>#}
-{#                                                                    {% else %}#}
-{#                                                                        <option value="{{ currencyData.code }}">{{ currencyData.title }}</option>#}
-{#                                                                    {% endif %}#}
-{#                                                                {% endfor %}#}
-{#                                                            </select>#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label class="col-sm-12 control-label" for="input-price"><strong>Curreny Price</strong></label>
-                                                        <div class="col-sm-12 table-responsive">
-                                                            <table class="table table-bordered">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="text-left">Curreny Price</th>
-                                                                    <th class="text-left">Price</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td class="text-left">Euro</td>
-                                                                    <td class="text-left">
-                                                                        <input type="text" name="price_euro" value="{{ price_euro }}"
-                                                                               placeholder="{{ entry_price }}" id="input-price_euro" data-id="EUR"
-                                                                               class="form-control price"/>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-left">Naira</td>
-                                                                    <td class="text-left">
-                                                                        <input type="text" name="price_naira" value="{{ price_naira }}"
-                                                                               placeholder="{{ entry_price }}" id="input-price_naira" data-id="NGN"
-                                                                               class="form-control price"/>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-left">Pound Sterling</td>
-                                                                    <td class="text-left">
-                                                                        <input type="text" name="price_pound" value="{{ price_pound }}" data-id="GBP"
-                                                                               placeholder="{{ entry_price }}" id="input-price_pound"
-                                                                               class="form-control price"/>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-left">US Dollar</td>
-                                                                    <td class="text-left">
-                                                                        <input type="text" name="price" value="{{ price }}" data-id="USD"
-                                                                               placeholder="{{ entry_price }}" id="input-price"
-                                                                               class="form-control price"/>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+{#                                                     <div class="col-md-4 form-group"> #}
+{#                                                     <label class="col-sm-12 control-label" #}
+{#                                                     for="input-location">{{ entry_location }}</label> #}
+{#                                                     <div class="col-sm-12"> #}
+{#                                                     <input type="text" name="location" value="{{ location }}" #}
+{#                                                     placeholder="{{ entry_location }}" #}
+{#                                                     id="input-location" #}
+{#                                                     class="form-control"/> #}
+{#                                                     </div> #}
+{#                                                     </div> #}
+                                                    <div class="col-md-4 form-group">
+                                                        <label class="col-sm-12 control-label" for="input-price">
+									<span data-toggle="tooltip"
+                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span><a
+                                                                    class="text-danger">*</a></label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" name="price" value="{{ price }}"
+                                                                   placeholder="{{ entry_price }}" id="input-price"
+                                                                   class="form-control"/>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-4 form-group">
+                                                        <label class="col-sm-12 control-label" for="input-currency">
+                                                            <span data-toggle="tooltip"> Currency</span><a
+                                                                    class="text-danger">*</a></label>
+                                                        <div class="col-sm-12">
+                                                            <select name="currency" id="input-currency"
+                                                                    class="form-control">
+                                                                <option value="">Select</option>
+                                                                {% for currencyData in currencies %}
+                                                                    {% if currencyData.code == currency %}
+                                                                        <option value="{{ currencyData.code }}"
+                                                                                selected="selected">{{ currencyData.title }}</option>
+                                                                    {% else %}
+                                                                        <option value="{{ currencyData.code }}">{{ currencyData.title }}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+{#                                                    <div class="col-md-12 form-group">#}
+{#                                                        <label class="col-sm-12 control-label" for="input-price"><strong>Curreny Price</strong></label>#}
+{#                                                        <div class="col-sm-12 table-responsive">#}
+{#                                                            <table class="table table-bordered">#}
+{#                                                                <thead>#}
+{#                                                                <tr>#}
+{#                                                                    <th class="text-left">Curreny Price</th>#}
+{#                                                                    <th class="text-left">Price</th>#}
+{#                                                                </tr>#}
+{#                                                                </thead>#}
+{#                                                                <tbody>#}
+{#                                                                <tr>#}
+{#                                                                    <td class="text-left">Euro</td>#}
+{#                                                                    <td class="text-left">#}
+{#                                                                        <input type="text" name="price_euro" value="{{ price_euro }}"#}
+{#                                                                               placeholder="{{ entry_price }}" id="input-price_euro" data-id="EUR"#}
+{#                                                                               class="form-control price"/>#}
+{#                                                                    </td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td class="text-left">Naira</td>#}
+{#                                                                    <td class="text-left">#}
+{#                                                                        <input type="text" name="price_naira" value="{{ price_naira }}"#}
+{#                                                                               placeholder="{{ entry_price }}" id="input-price_naira" data-id="NGN"#}
+{#                                                                               class="form-control price"/>#}
+{#                                                                    </td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td class="text-left">Pound Sterling</td>#}
+{#                                                                    <td class="text-left">#}
+{#                                                                        <input type="text" name="price_pound" value="{{ price_pound }}" data-id="GBP"#}
+{#                                                                               placeholder="{{ entry_price }}" id="input-price_pound"#}
+{#                                                                               class="form-control price"/>#}
+{#                                                                    </td>#}
+{#                                                                </tr>#}
+{#                                                                <tr>#}
+{#                                                                    <td class="text-left">US Dollar</td>#}
+{#                                                                    <td class="text-left">#}
+{#                                                                        <input type="text" name="price" value="{{ price }}" data-id="USD"#}
+{#                                                                               placeholder="{{ entry_price }}" id="input-price"#}
+{#                                                                               class="form-control price"/>#}
+{#                                                                    </td>#}
+{#                                                                </tr>#}
+{#                                                                </tbody>#}
+{#                                                            </table>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
 
                                                     <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label"
@@ -1659,7 +1659,7 @@
                                                                 <select name="location_info[{{ location_row }}][zone_id]"
                                                                         class="form-control zoneSelect"
                                                                         data-id="{{ location_row }}">
-                                                                    <option value="">Select</option>
+                                                                    <option value="0">All Zones</option>
                                                                     {% for zone in location.zones %}
                                                                         {% if location.zone_id == zone.zone_id %}
                                                                             <option value="{{ zone.zone_id }}"
@@ -2233,7 +2233,7 @@
                     $('input[name=\'postcode\']').parent().parent().removeClass('required');
                 }
 
-                html = '<option value="">{{ text_select }}</option>';
+                html = '<option value="0">All Zones</option>';
 
                 if (json['zone'] && json['zone'] != '') {
                     for (i = 0; i < json['zone'].length; i++) {

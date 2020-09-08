@@ -118,7 +118,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 //'text' => $this->currency->addCurrencySymbol($totalDeliveryAmt, $this->session->data['currency'])
             );
 
-            $method_data = array(
+            $chamethod_data = array(
                 'code' => 'partner_shipping',
                 'title' => $this->language->get('text_title'),
                 'quote' => $quote_data,
