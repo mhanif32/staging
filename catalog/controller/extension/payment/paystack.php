@@ -64,7 +64,7 @@ class ControllerExtensionPaymentPaystack extends Controller
         $data['amount']   = intval($order_info['total'] * 100);
         $data['email']    = $order_info['email'];
         $data['callback'] = $this->url->link('extension/payment/paystack/callback', 'trxref=' . rawurlencode($data['ref']), 'SSL');
-
+//echo '<pre>';print_r($data);exit('ijiji');
         return $this->load->view('extension/payment/paystack', $data);
     }
 

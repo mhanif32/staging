@@ -142,10 +142,11 @@ class ControllerCommonHeader extends Controller
         } else { //after login
             // Default Shipping Address
             $defaultAddress = $this->model_account_address->getDefaultAddress();
+            //echo '<pre>';print_r($defaultAddress);exit('okokko');
             if (!empty($defaultAddress['country'])) {
 
                 $data['loggedInCountry'] = $this->session->data['loggedInCountry'] = !empty($defaultAddress['country']) ? $defaultAddress['country'] : '';
-                $data['loggedInState'] = $this->session->data['loggedInState'] = !empty($defaultAddress['state']) ? $defaultAddress['zone'] : '';
+                $data['loggedInState'] = $this->session->data['loggedInState'] = !empty($defaultAddress['zone']) ? $defaultAddress['zone'] : '';
                 $data['loggedInCity'] = $this->session->data['loggedInCity'] = !empty($defaultAddress['city']) ? $defaultAddress['city'] : '';
             } else {
                 if (empty($this->session->data['loggedInCountry'])) {
