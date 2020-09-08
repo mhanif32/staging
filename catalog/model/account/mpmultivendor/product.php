@@ -1,7 +1,24 @@
 <?php
 class ModelAccountMpmultivendorProduct extends Model {
 	public function addProduct($data, $mpseller_id) {
-		$sql = "INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', currency = '" . $this->db->escape($data['currency']) . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), mpseller_id = '". (int)$mpseller_id ."'";
+
+	    //for currency conversion
+        if(!empty($data['currency'])) {
+            if($data['currency'] == 'USD') {
+                $data['price'] = $this->request->post['local_price'];
+            } else {
+                $currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+
+                //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
+                $dataValue = $data['local_price'] / $currData['value'];
+                $data['price'] = number_format($dataValue, 4);
+                //echo '<pre>';print_r($dataValue);exit('okok');
+            }
+        } else {
+            $data['price'] = $data['local_price'];
+        }
+
+		$sql = "INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', local_price = '" . (float)$data['local_price'] . "', currency = '" . $this->db->escape($data['currency']) . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), mpseller_id = '". (int)$mpseller_id ."'";
 
 		$this->db->query($sql);
 
@@ -145,7 +162,24 @@ class ModelAccountMpmultivendorProduct extends Model {
 	}
 
 	public function editProduct($product_id, $data, $mpseller_id) {
-		$sql = "UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', currency = '" . $this->db->escape($data['currency']) . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "' AND mpseller_id = '". (int)$mpseller_id ."'";
+
+        //for currency conversion
+        if(!empty($data['currency'])) {
+            if($data['currency'] == 'USD') {
+                $data['price'] = $this->request->post['local_price'];
+            } else {
+                $currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+
+                //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
+                $dataValue = $data['local_price'] / $currData['value'];
+                $data['price'] = number_format($dataValue, 4);
+                //echo '<pre>';print_r($dataValue);exit('okok');
+            }
+        } else {
+            $data['price'] = $data['local_price'];
+        }
+
+		$sql = "UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', show_size_chart = '" . (int)$data['show_size_chart'] . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', local_price = '" . (float)$data['local_price'] . "', currency = '" . $this->db->escape($data['currency']) . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . (int)$data['tax_class_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "' AND mpseller_id = '". (int)$mpseller_id ."'";
 
 		$this->db->query($sql);
 

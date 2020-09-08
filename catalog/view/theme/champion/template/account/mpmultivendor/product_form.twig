@@ -261,17 +261,6 @@
 {#                                                     </div> #}
 {#                                                     </div> #}
                                                     <div class="col-md-4 form-group">
-                                                        <label class="col-sm-12 control-label" for="input-price">
-									<span data-toggle="tooltip"
-                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span><a
-                                                                    class="text-danger">*</a></label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" name="price" value="{{ price }}"
-                                                                   placeholder="{{ entry_price }}" id="input-price"
-                                                                   class="form-control"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
                                                         <label class="col-sm-12 control-label" for="input-currency">
                                                             <span data-toggle="tooltip"> Currency</span><a
                                                                     class="text-danger">*</a></label>
@@ -288,6 +277,18 @@
                                                                     {% endif %}
                                                                 {% endfor %}
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-group">
+                                                        <label class="col-sm-12 control-label" for="input-price">
+									<span data-toggle="tooltip"
+                                          title="Enter price in Dollar, its a default currency. The price will automatically reflected when currency changes."> {{ entry_price }}</span><a
+                                                                    class="text-danger">*</a></label>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" name="local_price" value="{{ local_price }}"
+                                                                   placeholder="{{ entry_local_price }}" id="input-price"
+                                                                   class="form-control"/>
+                                                            <input type="hidden" name="price" value="{{ price }}" />
                                                         </div>
                                                     </div>
 

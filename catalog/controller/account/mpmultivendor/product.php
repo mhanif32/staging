@@ -1412,41 +1412,45 @@ class ControllerAccountMpmultivendorProduct extends Controller
             $data['shipping'] = 1;
         }
 
-        $this->load->model('localisation/currency');
-        if (isset($this->request->post['price'])) {
-            $data['price'] = $this->request->post['price'];
-        } elseif (!empty($product_info)) {
-            $data['price'] = $product_info['price'];
-
-            //load other currency prices
-            if (!empty($data['price'])) {
-
-                //euru value
-                $euroData = $this->model_localisation_currency->getCurrencyByCode('EUR');
-                $euroValue = $euroData['value'] * $data['price'];
-                $data['price_euro'] = number_format($euroValue, 4);
-
-                //naira value
-                $nairaData = $this->model_localisation_currency->getCurrencyByCode('NGN');
-                $nairaValue = $nairaData['value'] * $data['price'];
-                $data['price_naira'] = number_format($nairaValue, 4);
-
-                //pound value
-                $poundData = $this->model_localisation_currency->getCurrencyByCode('GBP');
-                $poundValue = $poundData['value'] * $data['price'];
-                $data['price_pound'] = number_format($poundValue, 4);
-            }
-
-        } else {
-            $data['price'] = '';
-        }
-
         if (isset($this->request->post['currency'])) {
             $data['currency'] = $this->request->post['currency'];
         } elseif (!empty($product_info)) {
             $data['currency'] = $product_info['currency'];
         } else {
             $data['currency'] = '';
+        }
+
+        $this->load->model('localisation/currency');
+        if (isset($this->request->post['price'])) {
+            $data['price'] = $this->request->post['price'];
+//            //load price
+//            if (!empty($this->request->post['price'])) {
+//
+//                if(!empty($this->request->post['currency'])) {
+//                    if($this->request->post['currency'] == 'USD') {
+//                        $data['price'] = $this->request->post['local_price'];
+//                    } else {
+//                        $currData = $this->model_localisation_currency->getCurrencyByCode($this->request->post['currency']);
+//                        //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
+//                        $dataValue = $this->request->post['local_price'] * $currData['value'];
+//                        $data['price'] = $dataValue;
+//                    }
+//                } else {
+//                    $data['price'] = $this->request->post['local_price'];
+//                }
+//            }
+        } elseif (!empty($product_info)) {
+            $data['price'] = $product_info['price'];
+        } else {
+            $data['price'] = '';
+        }
+
+        if (isset($this->request->post['local_price'])) {
+            $data['local_price'] = $this->request->post['local_price'];
+        } elseif (!empty($product_info)) {
+            $data['local_price'] = $product_info['local_price'];
+        } else {
+            $data['local_price'] = '';
         }
 
         $data['tax_classes'] = $this->model_account_mpmultivendor_product->getTaxClasses();
