@@ -116,7 +116,7 @@ class ModelCatalogProduct extends Model {
             $sql .= " AND pl.zone_id = '" . (int)$data['product_state'] . "'";
         }
         $sql .= " AND pl.zone_id = '0'";
-echo $sql;
+
 		if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
 			$sql .= " AND (";
 
