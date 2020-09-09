@@ -22,7 +22,7 @@
           {% if sellers %}
           <div class="row">
           {% for seller in sellers %}
-          <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="mpseller-wrap card">
               <a href="{{ seller.href }}" style="background: url({{ seller.banner }}) no-repeat center; background-size: cover;">
                 {#<img src="{{ seller.banner }}" alt="" title="" class="img-fluid">#}
@@ -57,7 +57,7 @@
                     </div>
                     <div class="seller-detail mt-3">
                       <ul class="list-unstyled">
-                        <li class="store-name"><a href="{{ seller.href }}" class="f-20 font-weight-bold">{{ seller.store_name }}</a></li>
+                        <li class="store-name text-truncate"><a href="{{ seller.href }}" class="f-20 font-weight-bold">{{ seller.store_name }}</a></li>
                         {% if display_seller_name %}
                         <li class="f-15"><i class="fa fa-user-o"></i> {{ seller.store_owner }}</li>
                         {% endif %}
