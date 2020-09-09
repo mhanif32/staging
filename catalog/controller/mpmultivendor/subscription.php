@@ -21,7 +21,6 @@ class ControllerMpmultivendorSubscription extends Controller
             $this->response->redirect($this->url->link('account/login', '', true));
         }
 
-
         if (!$this->config->get('mpmultivendor_status')) {
             $this->response->redirect($this->url->link('common/home', '', true));
         }
@@ -51,6 +50,8 @@ class ControllerMpmultivendorSubscription extends Controller
         //plans
         $data['plans'] = $this->model_mpmultivendor_subscription->getSubscriptionPlans();
         $data['action_subscribe'] = $this->url->link('mpmultivendor/subscription/add', '', true);
+        $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
+        $data['checkPlan'] = !empty($checkPlan) ? true : false;
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
     }
 
