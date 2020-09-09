@@ -374,7 +374,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.mpseller_id = '". (int)$data['filter_mpseller_id'] ."'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {
@@ -439,7 +439,7 @@ class ModelAccountMpmultivendorProduct extends Model {
         WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.mpseller_id = '". (int)$data['filter_mpseller_id'] ."'";
 
         if (!empty($data['filter_name'])) {
-            $sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+            $sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
 
         if (!empty($data['filter_model'])) {
@@ -506,7 +506,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql .= "  AND p.mpseller_id = '". (int)$data['filter_mpseller_id'] ."'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {
@@ -539,7 +539,7 @@ class ModelAccountMpmultivendorProduct extends Model {
         $sql .= "  AND p.mpseller_id = '". (int)$data['filter_mpseller_id'] ."'";
 
         if (!empty($data['filter_name'])) {
-            $sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+            $sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
 
         if (!empty($data['filter_model'])) {
@@ -773,7 +773,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT *, (SELECT name FROM " . DB_PREFIX . "filter_group_description fgd WHERE f.filter_group_id = fgd.filter_group_id AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS `group` FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE fd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND fd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND fd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sql .= " ORDER BY f.sort_order ASC";
@@ -1049,7 +1049,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " WHERE name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " WHERE name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sort_data = array(
@@ -1133,7 +1133,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "download d LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE dd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND dd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND dd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sort_data = array(
@@ -1174,7 +1174,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT *, (SELECT agd.name FROM " . DB_PREFIX . "attribute_group_description agd WHERE agd.attribute_group_id = a.attribute_group_id AND agd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS attribute_group FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND ad.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND ad.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_attribute_group_id'])) {
@@ -1220,7 +1220,7 @@ class ModelAccountMpmultivendorProduct extends Model {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND od.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND od.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sort_data = array(
