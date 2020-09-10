@@ -394,10 +394,12 @@ class ControllerAccountAddress extends Controller {
 			$data['country_id'] = $this->config->get('config_country_id');
 		}
 
+        $this->load->model('localisation/area');
 		if (isset($this->request->post['zone_id'])) {
 			$data['zone_id'] = (int)$this->request->post['zone_id'];
 		}  elseif (!empty($address_info)) {
 			$data['zone_id'] = $address_info['zone_id'];
+            $data['addressAreas'] = $this->model_localisation_area->getAreasByZoneId($address_info['zone_id']);
 		} else {
 			$data['zone_id'] = '';
 		}

@@ -1,5 +1,5 @@
 {{ header }}
-<section class="bg-gray-100" id="account-address" >
+<section class="bg-gray-100" id="account-address">
     <div class="container">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
@@ -14,14 +14,15 @@
                         <div class="container">
                             <h3 class="mb-4 text-left f-20 text-uppercase">{{ heading_title }}</h3>
                             <form action="{{ action }}" method="post" enctype="multipart/form-data"
-                                  class="form-horizontal border p-3" style="background: #FBFDFF">
+                                  class="form-horizontal border p-3 manage-address" style="background: #FBFDFF">
                                 <fieldset>
                                     <h5 class="text-success text-uppercase f-14 my-3">{{ text_address }}</h5>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-firstname">{{ entry_firstname }} <span class="text-danger">*</span></label>
+                                                       for="input-firstname">{{ entry_firstname }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="firstname" value="{{ firstname }}"
                                                            placeholder="{{ entry_firstname }}" id="input-firstname"
@@ -34,7 +35,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-lastname">{{ entry_lastname }} <span class="text-danger">*</span></label>
+                                                       for="input-lastname">{{ entry_lastname }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="lastname" value="{{ lastname }}"
                                                            placeholder="{{ entry_lastname }}" id="input-lastname"
@@ -47,7 +49,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group required">
                                                 <label class="control-label"
-                                                       for="input-address-1">{{ entry_address_1 }} <span class="text-danger">*</span></label>
+                                                       for="input-address-1">{{ entry_address_1 }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="address_1" value="{{ address_1 }}"
                                                            placeholder="{{ entry_address_1 }}" id="input-address-1"
@@ -97,9 +100,11 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-zone">{{ entry_zone }} <span class="text-danger">*</span></label>
+                                                <label class="control-label" for="input-zone">{{ entry_zone }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
-                                                    <select name="zone_id" id="input-zone" class="form-control">
+                                                    <select name="zone_id" id="input-zone"
+                                                            class="form-control addressZone">
                                                     </select>
                                                     {% if error_zone %}
                                                         <div class="text-danger">{{ error_zone }}</div>
@@ -108,9 +113,20 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group required">
-                                                <label class="control-label" for="input-city_id">{{ entry_city }} <span class="text-danger">*</span></label>
+                                                <label class="control-label" for="input-city_id">{{ entry_city }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
                                                     <select name="city_id" id="input-city_id" class="form-control">
+                                                        {% if addressAreas %}
+                                                            <option value="">Select</option>
+                                                            {% for myarea in addressAreas %}
+                                                                {% if myarea.area_id == city_id %}
+                                                                    <option value="{{ myarea.area_id }}" selected="selected">{{ myarea.name }}</option>
+                                                                {% else %}
+                                                                    <option value="{{ myarea.area_id }}">{{ myarea.name }}</option>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
                                                     </select>
                                                     {% if error_city_id %}
                                                         <div class="text-danger">{{ error_city_id }}</div>
@@ -119,14 +135,15 @@
                                                         <div class="text-danger">{{ error_city_id }}</div>
                                                     {% endif %} </div>
 
-                                                <input type="text" name="city" value="{{ city }}"
+                                                <input type="hidden" name="city" value="{{ city }}"
                                                        id="input-cityName" class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="control-label"
-                                                       for="input-postcode">{{ entry_postcode }} <span class="text-danger">*</span></label>
+                                                       for="input-postcode">{{ entry_postcode }} <span
+                                                            class="text-danger">*</span></label>
                                                 <div class="">
                                                     <input type="text" name="postcode" value="{{ postcode }}"
                                                            placeholder="{{ entry_postcode }}" id="input-postcode"
@@ -189,14 +206,16 @@
                                                                             <label>
                                                                                 <input type="radio"
                                                                                        name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                                       value="{{ custom_field_value.custom_field_value_id }}" class="icheck-input"
+                                                                                       value="{{ custom_field_value.custom_field_value_id }}"
+                                                                                       class="icheck-input"
                                                                                        checked="checked"/>
                                                                                 {{ custom_field_value.name }}</label>
                                                                         {% else %}
                                                                             <label>
                                                                                 <input type="radio"
                                                                                        name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]"
-                                                                                       value="{{ custom_field_value.custom_field_value_id }}" class="icheck-input"/>
+                                                                                       value="{{ custom_field_value.custom_field_value_id }}"
+                                                                                       class="icheck-input"/>
                                                                                 {{ custom_field_value.name }}</label>
                                                                         {% endif %} </div>
                                                                 {% endfor %} </div>
@@ -370,18 +389,22 @@
                                                 <label class="control-label">{{ entry_default }}</label>
                                                 <div class=""> {% if default %}
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="1" class="icheck-input"
+                                                            <input type="radio" name="default" value="1"
+                                                                   class="icheck-input"
                                                                    checked="checked"/>
                                                             {{ text_yes }}</label>
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="0" class="icheck-input"/>
+                                                            <input type="radio" name="default" value="0"
+                                                                   class="icheck-input"/>
                                                             {{ text_no }}</label>
                                                     {% else %}
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="1" class="icheck-input"/>
+                                                            <input type="radio" name="default" value="1"
+                                                                   class="icheck-input"/>
                                                             {{ text_yes }}</label>
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="default" value="0" class="icheck-input"
+                                                            <input type="radio" name="default" value="0"
+                                                                   class="icheck-input"
                                                                    checked="checked"/>
                                                             {{ text_no }}</label>
                                                     {% endif %} </div>
@@ -505,19 +528,13 @@
         $.ajax({
             url: 'index.php?route=account/account/country&country_id=' + this.value,
             dataType: 'json',
-            beforeSend: function () {
-                $('select[name=\'country_id\']').prop('disabled', true);
-            },
-            complete: function () {
-                $('select[name=\'country_id\']').prop('disabled', false);
-            },
+            // beforeSend: function () {
+            //     $('select[name=\'country_id\']').prop('disabled', true);
+            // },
+            // complete: function () {
+            //     $('select[name=\'country_id\']').prop('disabled', false);
+            // },
             success: function (json) {
-                if (json['postcode_required'] == '1') {
-                    $('input[name=\'postcode\']').parent().parent().addClass('required');
-                } else {
-                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
-                }
-
                 html = '<option value="">{{ text_select }}</option>';
 
                 if (json['zone'] && json['zone'] != '') {
@@ -533,8 +550,13 @@
                 } else {
                     html += '<option value="0" selected="selected">{{ text_none }}</option>';
                 }
-
                 $('select[name=\'zone_id\']').html(html);
+
+                if (json['postcode_required'] == '1') {
+                    $('input[name=\'postcode\']').parent().parent().addClass('required');
+                } else {
+                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -550,21 +572,21 @@
         $.ajax({
             url: 'index.php?route=account/account/zone&zone_id=' + this.value,
             dataType: 'json',
-            beforeSend: function () {
-                $('select[name=\'zone_id\']').prop('disabled', true);
-            },
-            complete: function () {
-                $('select[name=\'zone_id\']').prop('disabled', false);
-            },
+            // beforeSend: function () {
+            //     $('select[name=\'zone_id\']').prop('disabled', true);
+            // },
+            // complete: function () {
+            //     $('select[name=\'zone_id\']').prop('disabled', false);
+            // },
             success: function (json) {
-                console.log(json);
+                console.log(json['area']);
                 areaHtml = '<option value="">{{ text_select }}</option>';
 
                 if (json['area'] && json['area'] != '') {
                     for (i = 0; i < json['area'].length; i++) {
                         areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
 
-                        if (json['area'][i]['area_id'] == '{{ area_id }}') {
+                        if (json['area'][i]['area_id'] == '{{ city_id }}') {
                             areaHtml += ' selected="selected"';
                         }
 
@@ -581,13 +603,13 @@
         });
     });
 
-    $('select[name=\'zone_id\']').trigger('change');
+    //$('select[name=\'zone_id\']').trigger('change');
     //--></script>
 
 <script>
     $('#input-city_id').on('change', function () {
-       var cityName = $('#input-city_id').find('option:selected').text();
-       $('#input-cityName').val(cityName);
+        var cityName = $('#input-city_id').find('option:selected').text();
+        $('#input-cityName').val(cityName);
     });
 </script>
 {{ footer }}
