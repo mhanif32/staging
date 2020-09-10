@@ -1943,6 +1943,9 @@ ul.breadcrumb li {
 .our-partner .owl-nav button:focus {
   outline: none; }
 
+@media only screen and (min-width: 1024px) {
+  .pricing-subscription .row {
+    max-width: 75%; } }
 .pricing-subscription #form-subscription .pricing-divider-img {
   position: absolute;
   left: 0;
@@ -2006,8 +2009,8 @@ ul.breadcrumb li {
 .pricing-subscription .group label:not(:last-child) {
   border-bottom: 1px solid #F0F5FA; }
 .pricing-subscription label > span {
-  width: 80px;
-  text-align: right;
+  width: 50px;
+  text-align: left;
   margin-right: 30px; }
 .pricing-subscription .field {
   background: transparent;
