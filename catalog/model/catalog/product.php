@@ -719,9 +719,9 @@ class ModelCatalogProduct extends Model {
         //hide products of disabled sellers
 
         $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
-        if (!empty($countryId)) {
-            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
-        }
+//        if (!empty($countryId)) {
+//            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
+//        }
 
         $sql .= " WHERE mp.status = 1 AND name = 'Designer Brands'";
         $query = $this->db->query($sql);

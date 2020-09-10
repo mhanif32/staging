@@ -519,6 +519,8 @@ class ControllerAccountMpmultivendorProduct extends Controller
                 'name' => $result['name'],
                 'model' => $result['model'],
                 'price' => $result['price'],
+                'local_price' => $result['local_price'],
+                'currency' => $result['currency'],
                 'special' => $special,
                 'quantity' => $result['quantity'],
                 'status' => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),

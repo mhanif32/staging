@@ -134,6 +134,7 @@
                                                     {% else %}
                                                         <a href="{{ sort_model }}">{{ column_model }}</a>
                                                     {% endif %}</td>
+                                                <td class="text-right">Currency</td>
                                                 <td class="text-right">{% if sort == 'p.price' %}
                                                         <a href="{{ sort_price }}"
                                                            class="{{ order|lower }}">{{ column_price }}</a>
@@ -174,14 +175,17 @@
                                                                                      class="img-thumbnail"></td>
                                                         <td class="text-left">{{ product.name }}</td>
                                                         <td class="text-left">{{ product.model }}</td>
-                                                        <td class="text-right">{% if product.special %}
-                                                                <span style="text-decoration: line-through;">{{ product.price }}</span>
-                                                                <br/>
-                                                                <div class="text-danger">{{ product.special }}</div>
-                                                            {% else %}
-                                                                {{ product.price }}
-                                                            {% endif %}
-                                                        </td>
+{#                                                        <td class="text-right">{% if product.special %}#}
+{#                                                                <span style="text-decoration: line-through;">{{ product.price }}</span>#}
+{#                                                                <br/>#}
+{#                                                                <div class="text-danger">{{ product.special }}</div>#}
+{#                                                            {% else %}#}
+{#                                                                {{ product.price }}#}
+{#                                                            {% endif %}#}
+{#                                                        </td>#}
+                                                        <td class="text-left"><small>{{ product.currency }}</small></td>
+                                                        <td class="text-right">{{ product.local_price }}</td>
+
                                                         <td class="text-right">{% if product.quantity <= 0 %}
                                                                 <span class="label label-warning">{{ product.quantity }}</span>
                                                             {% elseif product.quantity <= 5 %}

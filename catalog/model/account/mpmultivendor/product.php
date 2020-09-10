@@ -401,6 +401,8 @@ class ModelAccountMpmultivendorProduct extends Model {
 			'pd.name',
 			'p.model',
 			'p.price',
+			'p.local_price',
+			'p.currency',
 			'p.quantity',
 			'p.status',
 			'p.sort_order'

@@ -344,13 +344,19 @@
 
     // Payment Address
     $(document).delegate('#button-payment-address', 'click', function () {
+
+
         $.ajax({
             url: 'index.php?route=checkout/payment_address/save',
             type: 'post',
             data: $('#collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'password\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address textarea, #collapse-payment-address select'),
             dataType: 'json',
             beforeSend: function () {
-                $('#button-payment-address').button('loading');
+                //$('#button-payment-address').button('loading');
+                $('#button-payment-address').prop('disabled', true);
+                $('#button-payment-address').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+                );
             },
             complete: function () {
                 $('#button-payment-address').button('reset');
@@ -455,7 +461,11 @@
             data: $('#collapse-shipping-address input[type=\'text\'], #collapse-shipping-address input[type=\'date\'], #collapse-shipping-address input[type=\'datetime-local\'], #collapse-shipping-address input[type=\'time\'], #collapse-shipping-address input[type=\'password\'], #collapse-shipping-address input[type=\'checkbox\']:checked, #collapse-shipping-address input[type=\'radio\']:checked, #collapse-shipping-address textarea, #collapse-shipping-address select'),
             dataType: 'json',
             beforeSend: function () {
-                $('#button-shipping-address').button('loading');
+                //$('#button-shipping-address').button('loading');
+                $('#button-shipping-address').prop('disabled', true);
+                $('#button-shipping-address').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+                );
             },
             success: function (json) {
                 $('.alert-dismissible, .text-danger').remove();
@@ -731,7 +741,11 @@
             data: $('#collapse-shipping-method input[type=\'radio\']:checked, #collapse-shipping-method textarea'),
             dataType: 'json',
             beforeSend: function () {
-                $('#button-shipping-method').button('loading');
+                //$('#button-shipping-method').button('loading');
+                $('#button-shipping-method').prop('disabled', true);
+                $('#button-shipping-method').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+                );
             },
             success: function (json) {
                 $('.alert-dismissible, .text-danger').remove();
@@ -780,7 +794,11 @@
             data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea, #input-deliverydate'),
             dataType: 'json',
             beforeSend: function () {
-                $('#button-payment-method').button('loading');
+                //$('#button-payment-method').button('loading');
+                $('#button-shipping-method').prop('disabled', true);
+                $('#button-shipping-method').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+                );
             },
             success: function (json) {
                 $('.alert-dismissible, .text-danger').remove();
