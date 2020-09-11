@@ -237,6 +237,45 @@ class ControllerMpmultivendorSubscription extends Controller
         }
     }
 
+    public function cancel()
+    {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+        //cancel subscription plan
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription/cancel', '', true);
+            $this->response->redirect($this->url->link('account/login', '', true));
+        }
+
+        $this->load->model('mpmultivendor/subscription');
+        $this->load->model('account/customer');
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            //load secret key
+            if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
+                $stripe_secret_key = $this->config->get('payment_stripe_live_secret_key');
+            } else {
+                $stripe_secret_key = $this->config->get('payment_stripe_test_secret_key');
+            }
+            $this->load->library('stripe');
+            \Stripe\Stripe::setApiKey($stripe_secret_key);
+
+            $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
+
+            //cancel plan
+            if($customer['subscription_plan'] != null) {
+                $subscription = \Stripe\Subscription::retrieve($customer['subscription_plan']);
+                $subscription->cancel();
+            }
+            //remove subscription entry from the table
+            $this->model_mpmultivendor_subscription->removeUserSubscription($customer['subscription_plan_id']);
+
+            //$this->model_mpmultivendor_subscription->cancelSubscriptionPlan();
+        }
+
+    }
+
     protected function validateForm()
     {
         return true;

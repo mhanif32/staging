@@ -271,6 +271,7 @@ class ControllerCheckoutCart extends Controller {
 		}
 
 		$this->load->model('catalog/product');
+		$this->load->model('catalog/category');
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -314,6 +315,35 @@ class ControllerCheckoutCart extends Controller {
 					$json['error']['recurring'] = $this->language->get('error_recurring_required');
 				}
 			}
+
+			//check Supermarket products not select with NonSupermarket products, both at a time in a cart
+            $this->session->data['isSuperMarketInCart'] = '';
+            $this->session->data['isNonSuperMarketInCart'] = '';
+            //for Cart products
+            foreach ($this->cart->getProducts() as $product) {
+
+                $dataProduct = $this->model_catalog_category->checkProductCategory($product['product_id']);
+                if(!empty($dataProduct)) {
+                    $this->session->data['isSuperMarketInCart'] = true;
+                } else {
+                    $this->session->data['isNonSuperMarketInCart'] = true;
+                }
+            }
+            //for selected product
+            $currentProduct = $this->model_catalog_category->checkProductCategory($product_id);
+            if(!empty($currentProduct)) {
+                $this->session->data['isSuperMarketInCart'] = true;
+            } else {
+                $this->session->data['isNonSuperMarketInCart'] = true;
+            }
+
+            if($this->session->data['isSuperMarketInCart'] == true && $this->session->data['isNonSuperMarketInCart'] == true) {
+
+                $json['error']['supermarket'] = $this->language->get('error_supermarket');
+            }
+
+//            echo '<pre>';echo $this->session->data['isSuperMarketInCart'].'<br>';
+//            echo $this->session->data['isNonSuperMarketInCart'].'<br>';exit('aaaa');
 
 			if (!$json) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $recurring_id);

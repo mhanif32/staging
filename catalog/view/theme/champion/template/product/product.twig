@@ -641,6 +641,10 @@
                         $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
                     }
 
+                    if (json['error']['supermarket']) {
+                        $('.breadcrumb').after('<div class="alert alert-danger alert-dismissible"><div class="text-danger">' + json['error']['supermarket'] + '</div></div>');
+                    }
+
                     // Highlight any found errors
                     $('.text-danger').parent().addClass('has-error');
                 }

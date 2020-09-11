@@ -16,8 +16,14 @@
 
             {% if checkPlan %}
                 <h4 class="f-35 text-center font-weight-bold">Update Membership Plan</h4>
-                <div class="text-center mb-2"><small>Upgrade / Degrade your membership plan from here</small></div>
+                <div class="text-center mb-2"><small>Upgrade / Degrade your membership plan from here</small>
+                    <button class="btn btn-success cancel-plan" data-id="{{ subscribed_plan.plan_id }}">Cancel
+                        Plan
+                    </button>
+                </div>
                 <span class="btn-sm btn-success">{{ subscribed_plan.name }}</span>
+
+
             {% else %}
                 <h4 class="f-35 text-center font-weight-bold mb-5">Subscribe New Membership Plan</h4>
             {% endif %}
@@ -178,5 +184,35 @@
             name: name,
         };
         stripe.createToken(card, options).then(setOutcome);
+    });
+</script>
+
+<script>
+    $('.cancel-plan').on('click', function (){
+        if (confirm('Are you want to cancel/delete a plan? Press OK to cancel/delete a plan.')) {
+            var subscription_plan_id = $('.cancel-plan').attr('data-id');
+            $.ajax({
+                url: 'index.php?route=mpmultivendor/subscription/cancel',
+                dataType: 'json',
+                type: 'post',
+                data: {subscription_plan_id: subscription_plan_id},
+                beforeSend: function () {
+
+                },
+                complete: function () {
+                    $('#button-cancel-submit').button('reset');
+                },
+                success: function (json) {
+
+                    if (json['error']) {
+                        $('#showCancelError').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
     });
 </script>
