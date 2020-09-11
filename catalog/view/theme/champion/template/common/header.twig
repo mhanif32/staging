@@ -211,20 +211,20 @@
                 <div class="collapse navbar-collapse nav-scroller" id="navbarsExample08">
                     <ul class="navbar-nav navbar-nav-menu ">
                         {# {% if loggedInCountry %} #}
-                        {% if logged %}
-                            <div class="home-location d-flex d-flex-row d-flex-nowrap">
-                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
-                                    <i class="fa fa-map-marker text-danger"></i>
-                                </div>
-                                <div class="home-location-text d-flex d-flex-column bg-black text-white">
-                                    <a href="{{ manage_address_link }}" class="button w-100 text-white text-truncate"
-                                       type="button"
-                                       data-hover=""
-                                       data-active="I'M ACTIVE">Select Your Delivery Location
-                                        <br><span>{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>
-                                </div>
-                            </div>
-                        {% else %}
+{#                        {% if logged %}#}
+{#                            <div class="home-location d-flex d-flex-row d-flex-nowrap">#}
+{#                                <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">#}
+{#                                    <i class="fa fa-map-marker text-danger"></i>#}
+{#                                </div>#}
+{#                                <div class="home-location-text d-flex d-flex-column bg-black text-white">#}
+{#                                    <a href="{{ manage_address_link }}" class="button w-100 text-white text-truncate"#}
+{#                                       type="button"#}
+{#                                       data-hover=""#}
+{#                                       data-active="I'M ACTIVE">Select Your Delivery Location#}
+{#                                        <br><span>{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% else %}#}
                             <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
                                  data-toggle="modal"
                                  data-target="#exampleModalCenter">
@@ -235,16 +235,11 @@
                                     <a class="button w-100 text-white text-truncate" type="button" data-hover=""
                                        data-active="I'M ACTIVE">Select Your Delivery Location
                                         <br><span id="loggedInAddress">{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>
-
-
                                 </div>
                             </div>
-                        {% endif %}
+{#                        {% endif %}#}
 
                         <!-- Modal -->
-                        {% if logged %}
-
-                        {% else %}
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -303,7 +298,6 @@
                                 </div>
                             </div>
                         </div>
-                        {% endif %}
 
                         <div class="modal fade" id="modalCurrency" tabindex="-1" role="dialog"
                              aria-labelledby="modalCurrencyTitle" aria-hidden="true">
@@ -391,9 +385,6 @@
     });
 </script>
 
-{% if logged %}
-
-{% else %}
 <script type="text/javascript"><!--
     $('select[name=\'selectCountry\']').on('change', function () {
         $.ajax({
@@ -476,7 +467,6 @@
 
     $('select[name=\'zone_id\']').trigger('change');
     //--></script>
-{% endif %}
 
 <script>
     $(document).ready(function() {
