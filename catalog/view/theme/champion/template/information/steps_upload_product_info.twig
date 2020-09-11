@@ -1,16 +1,24 @@
 {{ header }}
 
 <section class="delivery-info delivery-partner-info faq-page faq-collapse" xmlns="">
+<div class="container">
+  <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
 
   <div class="container my-5">
-    <div class="row bg-light py-5">
-      <div class="col-12">
+
+    <div class="bg-light py-5">
+
         <div class="banner-title text-center">
           <h3 class="f-25">
               {{ stepsUploadProduct }}
           </h3>
         </div>
-      </div>
+
     </div>
 
     <div class="row mt-4">
