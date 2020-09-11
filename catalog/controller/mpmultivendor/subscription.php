@@ -53,6 +53,7 @@ class ControllerMpmultivendorSubscription extends Controller
         $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
         $data['checkPlan'] = !empty($checkPlan) ? true : false;
         $data['subscribed_plan'] = $checkPlan;
+        //echo '<pre>';print_r($checkPlan);exit('okokok');
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
     }
 

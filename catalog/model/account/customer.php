@@ -291,7 +291,7 @@ class ModelAccountCustomer extends Model
 
     public function getSellerPlan($customer_id)
     {
-        $query = $this->db->query("SELECT name FROM " . DB_PREFIX . "subscription_plan sp LEFT JOIN " . DB_PREFIX . "subscription_user_plan sup ON (sp.plan_id = sup.subscription_plan_id) WHERE stripe_status = 'active' and customer_id = '" . (int)$customer_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "subscription_plan sp LEFT JOIN " . DB_PREFIX . "subscription_user_plan sup ON (sp.plan_id = sup.subscription_plan_id) WHERE stripe_status = 'active' and customer_id = '" . (int)$customer_id . "'");
 
         return $query->row;
     }
