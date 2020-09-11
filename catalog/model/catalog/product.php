@@ -737,6 +737,36 @@ class ModelCatalogProduct extends Model {
         }
     }
 
+    public function getCountDesignerBrandsImage($countryId) {
+        $sql = "SELECT COUNT(pc.category_id) AS total, pc.category_id, c.image FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (pc.category_id = cd.category_id)";
+
+        //countrywise location products
+        $sql .= " LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = pc.product_id)";
+        if (!empty($countryId)) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
+        }
+
+        //hide products of disabled sellers
+
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+//        if (!empty($countryId)) {
+//            $sql .= " AND pl.country_id = '" . (int)$countryId . "'";
+//        }
+
+        $sql .= " WHERE mp.status = 1 AND name = 'Designer Brands'";
+        $query = $this->db->query($sql);
+
+        if (isset($query->row['total'])) {
+            return [
+                'total' => $query->row['total'],
+                'path' => $query->row['category_id'],
+                'image' => $query->row['image']
+            ];
+        } else {
+            return 0;
+        }
+    }
+
     public function getIsProductPurchasedForReview($product_id, $customer_id)
     {
         $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order o RIGHT JOIN " . DB_PREFIX . "order_product op ON (o.order_id = op.order_id) WHERE op.product_id = '".$product_id."' and o.customer_id = '".$customer_id."'");

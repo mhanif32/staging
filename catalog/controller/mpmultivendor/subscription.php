@@ -52,6 +52,7 @@ class ControllerMpmultivendorSubscription extends Controller
         $data['action_subscribe'] = $this->url->link('mpmultivendor/subscription/add', '', true);
         $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
         $data['checkPlan'] = !empty($checkPlan) ? true : false;
+        $data['subscribed_plan'] = $checkPlan;
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
     }
 

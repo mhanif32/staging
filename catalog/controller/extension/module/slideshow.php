@@ -80,10 +80,11 @@ class ControllerExtensionModuleSlideshow extends Controller {
 
         //brand category and path
         $categoryDesignerBrands = $this->model_catalog_product->getCountDesignerBrands($countryId);
+        $designerBrandImage = $this->model_catalog_product->getCountDesignerBrandsImage($countryId);
         $data['count_brands'] = $categoryDesignerBrands['total'];
         $data['path_brands'] = !empty($categoryDesignerBrands['total']) ? $this->url->link('product/category', 'path=' . $categoryDesignerBrands['path']) : '#';
-        if ($categoryDesignerBrands['image']) {
-            $data['brand_thumb'] = $this->model_tool_image->resize($categoryDesignerBrands['image'], 250, 177);
+        if ($designerBrandImage['image']) {
+            $data['brand_thumb'] = $this->model_tool_image->resize($designerBrandImage['image'], 250, 177);
         } else {
             $data['brand_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
         }

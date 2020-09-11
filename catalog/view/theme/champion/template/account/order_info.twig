@@ -501,6 +501,8 @@
 </script>
 <script type="text/javascript">
     $('#button-cancel-submit').click(function () {
+
+
         var selectReason = $('#selectReason').val();
         var order_id = $('#orderId').val();
         var inputReason = $('#inputReason').val();
@@ -510,7 +512,11 @@
             type: 'post',
             data: {selectReason: selectReason, inputReason: inputReason, order_id: order_id},
             beforeSend: function () {
-                $('#button-cancel-submit').button('loading');
+
+                $('#button-cancel-submit').prop('disabled', true);
+                $('#button-cancel-submit').html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+                );
             },
             complete: function () {
                 $('#button-cancel-submit').button('reset');

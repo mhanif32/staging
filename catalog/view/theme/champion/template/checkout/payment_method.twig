@@ -36,15 +36,15 @@
             {% endif %}
                 &nbsp;{{ text_agree }}</p>
 
-            <input type="button" value="{{ button_continue }}" id="button-payment-method"
-                   data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
+            <button id="button-payment-method"
+                    data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
         </div>
     </div>
 {% else %}
     <div class="buttons">
         <div class="pull-right">
-            <input type="button" value="{{ button_continue }}" id="button-payment-method"
-                   data-loading-text="{{ text_loading }}" class="btn btn-primary spinner-loading"/>
+            <button id="button-payment-method"
+                    data-loading-text="{{ text_loading }}" class="btn btn-primary spinner-loading">{{ button_continue }}</button>
         </div>
     </div>
 {% endif %}

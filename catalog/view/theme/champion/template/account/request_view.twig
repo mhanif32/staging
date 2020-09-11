@@ -166,13 +166,18 @@
 <script type="text/javascript"><!--
     $('button[id^=\'accept\']').on('click', function () {
 
+        $('#accept').prop('disabled', true);
+        $('#accept').html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+        );
+
         var request_id = {{ request_id }}
             $.ajax({
                 url: 'index.php?route=account/request/acceptRequest',
                 method: 'post',
                 data: {request_id: request_id},
                 success: function (response) {
-console.log(response);
+
                     if (response['success']) {
                         $('#option-button').slideUp();
                         $('#option-button').after('<span style="font-size: 19px; text-align: center;color: green;">' + response['success'] + '</span>');
@@ -189,6 +194,10 @@ console.log(response);
 
     $('button[id^=\'decline\']').on('click', function () {
 
+        $('#decline').prop('disabled', true);
+        $('#decline').html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+        );
         var request_id = {{ request_id }}
             $.ajax({
                 url: 'index.php?route=account/request/declineRequest',
