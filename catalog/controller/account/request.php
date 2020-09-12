@@ -6,7 +6,6 @@ class ControllerAccountRequest extends Controller
 
     public function index()
     {
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request', '', true);
 
@@ -60,7 +59,6 @@ class ControllerAccountRequest extends Controller
 
     public function view()
     {
-
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
@@ -122,16 +120,14 @@ class ControllerAccountRequest extends Controller
             if (empty($otherRequests)) {
                 $customer = $this->model_account_customer->getCustomer($requestData['customer_id']);
                 if (!empty($requestData)) {
+
                     $this->model_account_request->updateRequest($requestId, $isAccept = 1);
                     $json['success'] = 'You have successfully accepted the Delivery Request.';
 
                     $this->load->model('account/customer');
                     $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
-
                     $deliveryPartData = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
-
                     $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
-
                     $orderData = $this->model_account_order->getOrder($requestData['order_id']);
 
                     //Send Mail to Delivery Partner
@@ -192,6 +188,39 @@ class ControllerAccountRequest extends Controller
                     $mail->setHtml($mailTextAdmin);
                     $mail->setText(html_entity_decode($mailTextAdmin, ENT_QUOTES, 'UTF-8'));
                     $mail->send();
+
+                    //send mail to the seller
+                    $orderSellers = $this->model_account_order->getMpsellerFromOrder();
+                    foreach ($orderSellers as $seller) {
+                        $dataSellerMail = [];
+                        $mail = new Mail($this->config->get('config_mail_engine'));
+                        $mail->parameter = $this->config->get('config_mail_parameter');
+                        $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                        $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                        $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                        $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                        $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                        $mail->setTo($seller['email']);
+                        $mail->setFrom($this->config->get('config_email'));
+                        $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                        $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request By Delivery Partner', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+                        if ($this->request->server['HTTPS']) {
+                            $server = $this->config->get('config_ssl');
+                        } else {
+                            $server = $this->config->get('config_url');
+                        }
+                        $dataSellerMail['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                        $dataSellerMail['order_id'] = $requestData['order_id'];
+                        $dataSellerMail['store_owner'] = $seller['store_owner'];
+                        $dataSellerMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
+                        $dataSellerMail['delivery_partner_name'] = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
+                        $dataSellerMail['view_order_link'] = $this->url->link('account/mpmultivendor/orders/info', '&order_id=' . $requestData['order_id'], true);
+                        $mailTextSeller = $this->load->view('mail/request_accept_alert_seller', $dataSellerMail);
+                        $mail->setHtml($mailTextSeller);
+                        $mail->setText(html_entity_decode($mailTextSeller, ENT_QUOTES, 'UTF-8'));
+                        $mail->send();
+                    }
                 }
             } else {
                 $json['warning'] = 'The Delivery Request has been already accepted by other delivery partner.';
