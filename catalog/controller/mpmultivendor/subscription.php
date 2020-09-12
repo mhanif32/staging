@@ -105,7 +105,6 @@ class ControllerMpmultivendorSubscription extends Controller
                 $card = $customerData['sources']['data'][0];
                 $this->model_mpmultivendor_subscription->saveStripeCard($card, $this->customer->getId());
             } else {
-                exit('test11');
                 //cancel plan
                 if($customer['subscription_plan'] != null) {
                     $subscription = \Stripe\Subscription::retrieve($customer['subscription_plan']);
