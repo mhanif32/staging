@@ -190,7 +190,7 @@ class ControllerAccountRequest extends Controller
                     $mail->send();
 
                     //send mail to the seller
-                    $orderSellers = $this->model_account_order->getMpsellerFromOrder();
+                    $orderSellers = $this->model_account_order->getMpsellerFromOrder($requestData['order_id']);
                     foreach ($orderSellers as $seller) {
                         $dataSellerMail = [];
                         $mail = new Mail($this->config->get('config_mail_engine'));
