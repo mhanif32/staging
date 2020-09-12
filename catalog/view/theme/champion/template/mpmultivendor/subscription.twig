@@ -16,104 +16,121 @@
 
             {% if checkPlan %}
                 <h4 class="f-35 text-center font-weight-bold">Update Membership Plan</h4>
-                <div class="text-center mb-2"><small>Upgrade / Degrade your membership plan from here</small>
-                    <button class="btn btn-success cancel-plan" data-id="{{ subscribed_plan.plan_id }}">Cancel
-                        Plan
-                    </button>
-                </div>
-                <span class="btn-sm btn-success">{{ subscribed_plan.name }}</span>
+
 
 
             {% else %}
                 <h4 class="f-35 text-center font-weight-bold mb-5">Subscribe New Membership Plan</h4>
             {% endif %}
 
-            <form id="form-subscription" action="{{ action_subscribe }}" method="post">
-                {% for plan in plans %}
-                    <div class="row m-auto text-center justify-content-center">
-                        <div class="col-md-5 princing-item mb-5">
+            <div class="row mt-5 w-100">
+                <div class="{% if checkPlan %} col-lg-6 {% else %} col-lg-12 {% endif %}">
+                    <form id="form-subscription" action="{{ action_subscribe }}" method="post">
+                        {% for plan in plans %}
+                            <div class="row m-auto text-center {% if checkPlan %} justify-content-end {% else %} justify-content-center {% endif %}" style="{% if checkPlan %} width: 100% {% endif %}">
 
-                            <div class="pricing-divider d-flex align-items-center">
-                                {% if (subscribed_plan.subscription_plan_id == plan.plan_id) %}
-                                    <div class="card-body bg-white mt-0 shadow">
-                                        <input type="radio" name="radioPlan" value="{{ plan.stripe_plan_id }}"
-                                               data-id="{{ plan.plan_id }}" class="icheck-input checkPlan" disabled/>
-                                    </div>
-                                    <div class="card-text" style="background: grey !important;">
-                                        <h3 class="text-light plan-name">{{ plan.name }}</h3>
-                                        <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount">
-                                            Monthly rental is {{ plan.amount }} plus a {{ plan.rent_percentage }}% of
-                                            each
-                                            product sold
-                                        </h4>
-                                    </div>
-                                {% else %}
-                                    <div class="card-body bg-white mt-0 shadow">
-                                        <input type="radio" name="radioPlan" value="{{ plan.stripe_plan_id }}"
-                                               data-id="{{ plan.plan_id }}" class="icheck-input checkPlan"/>
-                                    </div>
-                                    <div class="card-text">
-                                        <h3 class="text-light plan-name">{{ plan.name }}</h3>
-                                        <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount">
-                                            Monthly rental is {{ plan.amount }} plus a {{ plan.rent_percentage }}% of
-                                            each
-                                            product sold
-                                        </h4>
-                                    </div>
-                                {% endif %}
+                                <div class="{% if checkPlan %} col-lg-8 {% else %} col-lg-5 {% endif %} princing-item mb-5">
+                                    <div class="pricing-divider d-flex align-items-center">
+                                        {% if (subscribed_plan.subscription_plan_id == plan.plan_id) %}
+                                            <div class="card-body bg-white mt-0 shadow">
+                                                <input type="radio" name="radioPlan" value="{{ plan.stripe_plan_id }}"
+                                                       data-id="{{ plan.plan_id }}" class="icheck-input checkPlan" disabled/>
+                                            </div>
+                                            <div class="card-text" style="background: grey !important;">
+                                                <h3 class="text-light plan-name">{{ plan.name }}</h3>
+                                                <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount">
+                                                    Monthly rental is {{ plan.amount }} plus a {{ plan.rent_percentage }}% of
+                                                    each
+                                                    product sold
+                                                </h4>
+                                            </div>
+                                        {% else %}
+                                            <div class="card-body bg-white mt-0 shadow">
+                                                <input type="radio" name="radioPlan" value="{{ plan.stripe_plan_id }}"
+                                                       data-id="{{ plan.plan_id }}" class="icheck-input checkPlan"/>
+                                            </div>
+                                            <div class="card-text">
+                                                <h3 class="text-light plan-name">{{ plan.name }}</h3>
+                                                <h4 class="my-0 display-2 text-light font-weight-normal mb-3 plan-amount">
+                                                    Monthly rental is {{ plan.amount }} plus a {{ plan.rent_percentage }}% of
+                                                    each
+                                                    product sold
+                                                </h4>
+                                            </div>
+                                        {% endif %}
 
 
-                                {# <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' #}
-                                {# id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' #}
-                                {# width='300px' x='0px' xml:space='preserve' y='0px'> #}
-                                {# <path class='deco-layer deco-layer--4' #}
-                                {# d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' #}
-                                {# fill='#FFFFFF'></path> #}
-                                {# </svg> #}
+                                        {# <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' #}
+                                        {# id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' #}
+                                        {# width='300px' x='0px' xml:space='preserve' y='0px'> #}
+                                        {# <path class='deco-layer deco-layer--4' #}
+                                        {# d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' #}
+                                        {# fill='#FFFFFF'></path> #}
+                                        {# </svg> #}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="text-provide-details row m-auto justify-content-end" style="{% if checkPlan %} width: 100% {% endif %}">
+                            <div class="col-md-10">
+                                <p>
+                                    Please provide your name and card details where the monthly rental would be deducted. You
+                                    can change/add new cards from your dashboard as need be.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="row m-auto text-center justify-content-end" style="{% if checkPlan %} width: 100% {% endif %}">
+
+                            <div class="col-md-10">
+                                <div class="group ">
+                                    <label>
+                                        <span>Name</span>
+                                        <input id="name" name="sellerName" class="field" placeholder="Jane Doe"/>
+                                    </label>
+                                    <label>
+                                        <span>Card</span>
+                                        <div id="card-element" class="field"></div>
+                                    </label>
+                                </div>
+
+
+                                <input type="hidden" name="stripe_token" id="stripe_token"/>
+                                <input type="hidden" name="plan_id" id="plan_id">
+
+                                <input type="submit" value="Pay"
+                                       class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
+                                <div class="outcome">
+                                    <div class="error"></div>
+                                    <div class="success">
+                                        {# Success! Your Stripe token is <span class="token"></span> #}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-
-                <div class="text-provide-details row m-auto justify-content-center">
-                    <div class="col-md-7">
-                        <p>
-                            Please provide your name and card details where the monthly rental would be deducted. You
-                            can change/add new cards from your dashboard as need be.
-                        </p>
-                    </div>
-
+                    </form>
                 </div>
 
-                <div class="row m-auto text-center justify-content-center">
+                {% if checkPlan %}
+                <div class="col-lg-3 text-center">
 
-                    <div class="col-md-7">
-                        <div class="group">
-                            <label>
-                                <span>Name</span>
-                                <input id="name" name="sellerName" class="field" placeholder="Jane Doe"/>
-                            </label>
-                            <label>
-                                <span>Card</span>
-                                <div id="card-element" class="field"></div>
-                            </label>
-                        </div>
+                    <span class="btn-sm btn-success">{{ subscribed_plan.name }}</span>
 
+                    <div class="text-center mb-2"><small>Upgrade / Degrade your membership plan from here</small>
 
-                        <input type="hidden" name="stripe_token" id="stripe_token"/>
-                        <input type="hidden" name="plan_id" id="plan_id">
-
-                        <input type="submit" value="Pay"
-                               class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
-                        <div class="outcome">
-                            <div class="error"></div>
-                            <div class="success">
-                                {# Success! Your Stripe token is <span class="token"></span> #}
-                            </div>
-                        </div>
                     </div>
+                    <button class="btn btn-success cancel-plan" data-id="{{ subscribed_plan.plan_id }}">Cancel
+                        Plan
+                    </button>
+
                 </div>
-            </form>
+                {% endif %}
+
+
+            </div>
+
         </div>
     </div>
 </div>
