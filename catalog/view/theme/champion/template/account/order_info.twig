@@ -26,8 +26,8 @@
                         {{ heading_title }}
                     </h3>
                 </div>
-
-                <table class="table table-hover bg-white box-shadow">
+<div class="table-responsive box-shadow">
+                <table class="table table-hover bg-white">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" colspan="2">
@@ -57,7 +57,10 @@
                     </tr>
                     </tbody>
                 </table>
-                <table class="table table-hover bg-white box-shadow">
+</div>
+                <div class="table-responsive box-shadow">
+
+                <table class="table table-hover bg-white ">
                     <thead>
                     <tr>
                         <td class="text-left f-20 font-weight-black" style="width: 50%; vertical-align: top;">
@@ -76,6 +79,7 @@
                         {% endif %} </tr>
                     </tbody>
                 </table>
+                </div>
                 <div class="form-signin card px-3 box-shadow mb-4">
                     <h3 class="f-20 font-weight-bold text-uppercase my-3">Order Price Details</h3>
                     <div class="table-responsive">
@@ -158,7 +162,9 @@
                     </div>
                 </div>
                 {% if comment %}
-                    <table class="table table-hover">
+                <div class="table-responsive">
+
+                <table class="table table-hover">
                         <thead>
                         <tr>
                             <td class="text-left">{{ text_comment }}</td>
@@ -170,10 +176,13 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
                 {% endif %}
                 {% if histories %}
                     <div class="form-signin card px-3 box-shadow mb-4">
                         <h3 class="f-20 font-weight-bold text-uppercase my-3">{{ text_history }}</h3>
+                        <div class="table-responsive">
+
                         <table class="table table-hover">
                             <thead>
                             <tr class="f-15 font-weight-bold bg-light">
@@ -200,6 +209,7 @@
                             </tbody>
 
                         </table>
+                        </div>
                     </div>
                 {% endif %}
                 {{ content_bottom }}</div>
