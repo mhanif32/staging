@@ -91,9 +91,10 @@ class ControllerMpmultivendorSubscription extends Controller
             //create a stripe customer
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
 
-            //echo '<pre>';print_r($customer);exit('ookk');
+            //echo '<pre>';print_r($customer['stripe_customer_id']);exit('ookk');
 
             if(empty($customer['stripe_customer_id'])) {
+
                 $customerData = \Stripe\Customer::create([
                     'name' => $sellerName,
                     'email' => $customer['email'],
@@ -104,7 +105,7 @@ class ControllerMpmultivendorSubscription extends Controller
                 $card = $customerData['sources']['data'][0];
                 $this->model_mpmultivendor_subscription->saveStripeCard($card, $this->customer->getId());
             } else {
-
+                exit('test11');
                 //cancel plan
                 if($customer['subscription_plan'] != null) {
                     $subscription = \Stripe\Subscription::retrieve($customer['subscription_plan']);
@@ -246,7 +247,7 @@ class ControllerMpmultivendorSubscription extends Controller
             $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription/cancel', '', true);
             $this->response->redirect($this->url->link('account/login', '', true));
         }
-
+        $json = array();
         $this->load->model('mpmultivendor/subscription');
         $this->load->model('account/customer');
 
@@ -270,10 +271,13 @@ class ControllerMpmultivendorSubscription extends Controller
             }
             //remove subscription entry from the table
             $this->model_mpmultivendor_subscription->removeUserSubscription($customer['subscription_plan_id']);
-
-            //$this->model_mpmultivendor_subscription->cancelSubscriptionPlan();
+            $json['success'] = 'Success : Membership Plan has been cancelled successfully.';
+        } else {
+            $json['error'] = 'Warning : Something wrong happened, please try again.';
         }
 
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 
     protected function validateForm()

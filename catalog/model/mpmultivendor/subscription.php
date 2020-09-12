@@ -77,6 +77,6 @@ class ModelMpmultivendorSubscription extends Model {
     {
         $this->db->query("DELETE FROM " . DB_PREFIX . "subscription_user_plan WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 
-        $this->db->query("UPDATE " . DB_PREFIX . "customer SET stripe_customer_id = ' ', subscription_plan_id = ' ', subscription_plan = ' ' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "customer SET stripe_customer_id = NULL, subscription_plan_id = '', subscription_plan = NULL WHERE customer_id = '" . (int)$this->customer->getId() . "'");
     }
 }

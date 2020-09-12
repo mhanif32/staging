@@ -100,7 +100,7 @@
                                 <input type="hidden" name="stripe_token" id="stripe_token"/>
                                 <input type="hidden" name="plan_id" id="plan_id">
 
-                                <input type="submit" value="Pay"
+                                <input type="submit" value="Pay" id="button-pay-submit"
                                        class="btn btn-primary w-100 bg-success my-3 border-0 custom-btn">
                                 <div class="outcome">
                                     <div class="error"></div>
@@ -166,8 +166,8 @@
         errorElement.classList.remove('visible');
 
         if (result.token) {
-// Use the token to create a charge or a customer
-// https://stripe.com/docs/charges
+            // Use the token to create a charge or a customer
+            // https://stripe.com/docs/charges
             //successElement.querySelector('.token').textContent = result.token.id;
             $('#stripe_token').val(result.token.id);
             var plan_id = $("input[name*='radioPlan']:checked").attr('data-id');
@@ -188,6 +188,11 @@
     });
 
     document.querySelector('form#form-subscription').addEventListener('submit', function (e) {
+
+        $('#button-pay-submit').prop('disabled', true);
+        $('#button-pay-submit').html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{ text_loading }}`
+        );
 
         e.preventDefault();
         var name = document.getElementById('name').value;
@@ -210,20 +215,12 @@
             var subscription_plan_id = $('.cancel-plan').attr('data-id');
             $.ajax({
                 url: 'index.php?route=mpmultivendor/subscription/cancel',
-                dataType: 'json',
                 type: 'post',
                 data: {subscription_plan_id: subscription_plan_id},
-                beforeSend: function () {
-
-                },
-                complete: function () {
-                    $('#button-cancel-submit').button('reset');
-                },
                 success: function (json) {
 
-                    if (json['error']) {
-                        $('#showCancelError').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
-                    }
+                    alert(json['success']);
+                    location.reload();
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
