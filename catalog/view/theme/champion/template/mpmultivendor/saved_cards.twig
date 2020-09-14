@@ -17,7 +17,7 @@
                                             class="fa fa-check-circle"></i> {{ success }}</div>
                             {% endif %}
 
-                            <h4 class="f-35 text-center mb-5 font-weight-bold">My Stripe Saved Cards</h4>
+                            <h4 class="f-35 text-center mb-5 font-weight-bold">My Saved Cards</h4>
 
                             {# TODO : Design UI changes #}
                             {% for card in savedCards %}
@@ -25,7 +25,7 @@
                                 <li>
                                     <span>{{ card.last4 }}</span>
 
-                                    <button class="btn btn-success removeCard" data-id="{{ card.user_stripe_card_id }}" onclick="confirm('Do you want to remove this card?')" >Remove</button>
+                                    <button class="btn btn-success removeCard" data-id="{{ card.user_stripe_card_id }}" onclick="confirm('This card will be permanently deleted. Are you sure you want to delete this saved card?')" >Remove</button>
                                 </li>
                             </ul>
                                 {% endfor %}

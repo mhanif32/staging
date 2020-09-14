@@ -1628,24 +1628,9 @@ span {
 
 }
 
-  .group {
-    background: white;
-    box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10),
-    0 3px 6px 0 rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
+  .group { background: white; box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10), 0 3px 6px 0 rgba(0, 0, 0, 0.08); border-radius: 4px; margin-bottom: 20px; }
 
-  label {
-    position: relative;
-    color: #8898AA;
-    font-weight: 300;
-    height: 40px;
-    line-height: 40px;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: row;
-  }
+  label { position: relative; color: #8898AA; font-weight: 300; height: 40px; line-height: 40px; margin-left: 20px; display: flex; flex-direction: row; }
 
   .group label:not(:last-child) {
     border-bottom: 1px solid #F0F5FA;
@@ -1684,49 +1669,13 @@ span {
   }
  }
 
-
-
-
-
-
-
-
-
-
-
-
 #fillAddressModal {
   .modal-lg {
-  .modal-content{
-  overflow:hidden;
-  a.h2{
-    color:#01B0F1;
-    margin-bottom:0;
-    text-decoration:none;
-  }
-    .top-strip {
-      height: 155px;
-      background: #01B0F1;
-      transform: rotate(141deg);
-      margin-top: -106px;
-      margin-right: 457px;
-      margin-left: -130px;
-      border-bottom: 65px solid #E0F5F8;
-      border-top: 10px solid #E0F5F8;
-    }
-    .bottom-strip {
-      height: 155px;
-      background: #01B0F1;
-      transform: rotate(135deg);
-      margin-top: -115px;
-      margin-right: -339px;
-      margin-left: 421px;
-      border-bottom: 65px solid #E0F5F8;
-      border-top: 10px solid #E0F5F8;
-    }
-  }
-  }
-}
+  .modal-content{ overflow:hidden;
+  a.h2{ color:#01B0F1; margin-bottom:0; text-decoration:none; }
+    .top-strip { height: 130px; background: #01B0F1; transform: rotate(141deg); margin-top: -106px; margin-right: 457px; margin-left: -130px; border-bottom: 65px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
+    .bottom-strip { height: 80px; background: #01B0F1; transform: rotate(135deg); margin-top: -76px; margin-right: -339px; margin-left: 421px; border-bottom: 20px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
+  } } }
 
 #mv-reviews {
 .review-block {
@@ -1739,12 +1688,7 @@ span {
       span.fa { font-size: 12px; }
     }
   }
-  .review-btns {
-    position: relative;
-    width: 100%;
-    right: 0;
-    top: 5px;
+  .review-btns { position: relative; width: 100%; right: 0; top: 5px;
     .btn-group { .btn { font-size: 12px; } }
   }
-}
-}
+} }
