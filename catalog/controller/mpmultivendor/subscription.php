@@ -48,7 +48,26 @@ class ControllerMpmultivendorSubscription extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         //plans
-        $data['plans'] = $this->model_mpmultivendor_subscription->getSubscriptionPlans();
+        $planList = $this->model_mpmultivendor_subscription->getSubscriptionPlans();
+        foreach ($planList as $item) {
+
+            $currData = $this->model_localisation_currency->getCurrencyByCode($this->session->data['currency']);
+            $dataValue = $item['amount'] * $currData['value'];
+            $amount = round($dataValue, 2);
+
+            $data['plans'][] = array(
+                'plan_id' => $item['plan_id'],
+                'name' => $item['name'],
+                'amount' => $this->currency->getSymbolLeft($this->session->data['currency']) . $amount . $this->currency->getSymbolRight($this->session->data['currency']),
+                'currency' =>  $this->session->data['currency'],
+                'interval' => $item['interval'],
+                'interval_count' => $item['interval_count'],
+                'stripe_plan_id' => $item['stripe_plan_id'],
+                'sort_order' => $item['sort_order'],
+                'rent_percentage' => $item['rent_percentage'],
+                'date_added' => $item['date_added']
+            );
+        }
         $data['action_subscribe'] = $this->url->link('mpmultivendor/subscription/add', '', true);
         $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
         $data['checkPlan'] = !empty($checkPlan) ? true : false;
