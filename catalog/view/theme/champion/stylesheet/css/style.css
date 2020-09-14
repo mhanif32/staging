@@ -2065,7 +2065,7 @@ ul.breadcrumb li {
     margin-bottom: 0;
     text-decoration: none; }
   #fillAddressModal .modal-lg .modal-content .top-strip {
-    height: 155px;
+    height: 130px;
     background: #01B0F1;
     -webkit-transform: rotate(141deg);
             transform: rotate(141deg);
@@ -2075,14 +2075,14 @@ ul.breadcrumb li {
     border-bottom: 65px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
   #fillAddressModal .modal-lg .modal-content .bottom-strip {
-    height: 155px;
+    height: 80px;
     background: #01B0F1;
     -webkit-transform: rotate(135deg);
             transform: rotate(135deg);
-    margin-top: -115px;
+    margin-top: -76px;
     margin-right: -339px;
     margin-left: 421px;
-    border-bottom: 65px solid #E0F5F8;
+    border-bottom: 20px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
 
 #mv-reviews .review-block .panel-heading .cust {
