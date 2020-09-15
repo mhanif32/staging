@@ -519,7 +519,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
                 'name' => $result['name'],
                 'model' => $result['model'],
                 'price' => $result['price'],
-                'local_price' => $result['local_price'],
+                'local_price' => $this->currency->getSymbolLeft($result['currency']) . $result['local_price'] . $this->currency->getSymbolRight($result['currency']),
                 'currency' => $result['currency'],
                 'special' => $special,
                 'quantity' => $result['quantity'],

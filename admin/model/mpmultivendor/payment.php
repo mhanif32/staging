@@ -46,6 +46,7 @@ class ModelMpmultivendorPayment extends Model {
 			if ($data['limit'] < 1) {
 				$data['limit'] = 20;
 			}
+			//echo $sql;exit('okoko');
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
