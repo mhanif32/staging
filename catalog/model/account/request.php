@@ -50,6 +50,13 @@ class ModelAccountRequest extends Model
         return $query->row;
     }
 
+    public function getRequestAcceptedByOther($order_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request WHERE order_id = '" . (int)$order_id . "' and is_accept = 1 and delivery_partner_id != '".$this->customer->getId()."'");
+
+        return $query->row;
+    }
+
     public function getOrderData($order_id)
     {
         $order_query = $this->db->query("SELECT order_id, invoice_no, invoice_prefix, firstname, lastname, email, telephone, shipping_address_1, shipping_address_2, shipping_postcode, shipping_city, shipping_zone, shipping_country, total FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");

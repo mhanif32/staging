@@ -33,9 +33,9 @@ class ControllerAccountRequest extends Controller
         foreach ($requests as $request) {
 
             $orderData = $this->model_account_request->getOrderData($request['order_id']);
-
+            $isRequestAcceptedByOther = $this->model_account_request->getRequestAcceptedByOther($request['order_id']);
             $requestArray = array();
-            if (!empty($orderData['firstname'])) {
+            if (!empty($orderData['firstname']) && empty($isRequestAcceptedByOther)) {
                 $requestArray['request_id'] = $request['request_id'];
                 //$customer = $this->model_account_customer->getCustomer($request['customer_id']);
                 $requestArray['customer_name'] = @$orderData['firstname'] . ' ' . @$orderData['lastname'];
