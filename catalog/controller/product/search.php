@@ -244,11 +244,15 @@ class ControllerProductSearch extends Controller
                     $tax = false;
                 }
 
+
+
                 if ($this->config->get('config_review_status')) {
                     $rating = (int)$result['rating'];
                 } else {
                     $rating = false;
                 }
+
+                $storeData = $this->model_catalog_product->getSellerFromMpsellerId($result['mpseller_id']);
 
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
@@ -260,6 +264,7 @@ class ControllerProductSearch extends Controller
                     'tax' => $tax,
                     'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
                     'rating' => $result['rating'],
+                    'seller_name' => $storeData['store_name'],
                     'href' => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
                 );
             }
