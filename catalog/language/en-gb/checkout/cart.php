@@ -39,4 +39,4 @@ $_['error_minimum']            = 'Minimum order amount for %s is %s!';
 $_['error_required']           = '%s required!';
 $_['error_product']            = 'Warning: There are no products in your cart!';
 $_['error_recurring_required'] = 'Please select a payment recurring!';
-$_['error_supermarket']        = 'You can not add Supermarket and Non Supermarket products at a time!';
+$_['error_supermarket']        = 'Note : Supermarket and non-Supermarket products cannot be processed in the same order. Please shop for supermarket products in a different order and do same for non-Supermarket products.';
