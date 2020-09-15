@@ -209,6 +209,7 @@ class ControllerProductCategory extends Controller
                     $rating = false;
                 }
 
+                $storeData = $this->model_catalog_product->getSellerFromMpsellerId($result['mpseller_id']);
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
                     'thumb' => $image,
@@ -219,6 +220,7 @@ class ControllerProductCategory extends Controller
                     'tax' => $tax,
                     'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
                     'rating' => $result['rating'],
+                    'seller_name' => $storeData['store_name'],
                     'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
                 );
             }
