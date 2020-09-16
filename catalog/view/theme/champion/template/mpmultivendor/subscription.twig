@@ -208,13 +208,6 @@
         var options = {
             name: name,
         };
-
-        if ($(".checkPlan").is(":not(':checked')")) {
-            var errorPlan = document.querySelector('.error');
-            errorPlan.textContent = "You must select a plan";
-            errorPlan.classList.add('visible');
-            return;
-        }
         stripe.createToken(card, options).then(setOutcome);
     });
 </script>
