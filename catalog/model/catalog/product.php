@@ -659,6 +659,7 @@ class ModelCatalogProduct extends Model {
             return 0;
         }
     }
+
     public function getCategoryMen() {
         $query = $this->db->query("SELECT c.category_id, c.image FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE name = 'Men'");
         if (isset($query->row)) {
@@ -695,6 +696,7 @@ class ModelCatalogProduct extends Model {
         }
         return false;
     }
+
     public function getCategoryWomen() {
         $query = $this->db->query("SELECT c.category_id, c.image FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE name = 'Women'");
         if (isset($query->row)) {
@@ -772,5 +774,15 @@ class ModelCatalogProduct extends Model {
         $query = $this->db->query("SELECT store_owner, store_name FROM " . DB_PREFIX . "mpseller mp LEFT JOIN " . DB_PREFIX . "product p ON (p.mpseller_id = mp.mpseller_id) WHERE mp.mpseller_id = '".$mpseller_id."'");
 
         return $query->row;
+    }
+
+    public function getIsProductPurchasedForReview($product_id, $customer_id)
+    {
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order o RIGHT JOIN " . DB_PREFIX . "order_product op ON (o.order_id = op.order_id) WHERE op.product_id = '".$product_id."' and o.customer_id = '".$customer_id."'");
+
+        if (isset($query->row['total'])) {
+            return $query->row['total'];
+        }
+        return 0;
     }
 }

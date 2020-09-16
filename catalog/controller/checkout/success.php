@@ -39,7 +39,7 @@ class ControllerCheckoutSuccess extends Controller
                 //For Single Seller
                 if (count($totalSellers) == 1) {
                     $mpSellerData = $this->model_account_request->getMpSellerdata($totalSellers[0]);
-
+//echo '<pre>';print_r($shippingAddress['zone_id']);exit('kokok');
                     //Same City
                     if (!empty($mpSellerData['city']) && strtolower($mpSellerData['city']) == strtolower($shippingAddress['city']) && $shippingAddress['zone_id'] == $mpSellerData['zone_id']) {
 
@@ -47,8 +47,8 @@ class ControllerCheckoutSuccess extends Controller
                     }
                     //Same State
                     if (!empty($mpSellerData['city']) && strtolower($mpSellerData['city']) != strtolower($shippingAddress['city']) && $shippingAddress['zone_id'] == $mpSellerData['zone_id']) {
-                        //echo '<pre>';print_r($orderId);exit('okoko');
                         $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shippingAddress, $mpSellerData['mpseller_id'], 2);
+                        //echo '<pre>';print_r($deliveryPartners);exit('kokok');
                     }
                     //Same Country
                     if (!empty($mpSellerData['city']) && strtolower($mpSellerData['city']) != strtolower($shippingAddress['city']) && $shippingAddress['zone_id'] != $mpSellerData['zone_id'] && $shippingAddress['country_id'] == $mpSellerData['country_id']) {

@@ -28,7 +28,7 @@ class ModelAccountCustomer extends Model
         }
 
         //delivery partner
-        if($data['role'] == 'delivery-partner') {
+        if ($data['role'] == 'delivery-partner') {
             $sqlDelInfo = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET delivery_type = '" . $this->db->escape($data['delivery_type']) . "', customer_id = '" . (int)$customer_id . "'";
             $this->db->query($sqlDelInfo);
         }
@@ -231,29 +231,29 @@ class ModelAccountCustomer extends Model
         $result2 = $this->db->query($sql);
 
         $fileSql = '';
-        if(!empty($dataFile['id_proof'])) {
-            $fileSql.=" id_proof = '".$this->db->escape($dataFile['id_proof'])."', ";
+        if (!empty($dataFile['id_proof'])) {
+            $fileSql .= " id_proof = '" . $this->db->escape($dataFile['id_proof']) . "', ";
         }
-        if(!empty($dataFile['address_proof'])) {
-            $fileSql.=" address_proof = '".$this->db->escape($dataFile['address_proof'])."', ";
+        if (!empty($dataFile['address_proof'])) {
+            $fileSql .= " address_proof = '" . $this->db->escape($dataFile['address_proof']) . "', ";
         }
-        if(!empty($dataFile['travel_license'])) {
-            $fileSql.=" travel_license = '".$this->db->escape($dataFile['travel_license'])."', ";
+        if (!empty($dataFile['travel_license'])) {
+            $fileSql .= " travel_license = '" . $this->db->escape($dataFile['travel_license']) . "', ";
         }
-        if(!empty($dataFile['vehicle_insurance'])) {
-            $fileSql.=" vehicle_insurance = '".$this->db->escape($dataFile['vehicle_insurance'])."', ";
+        if (!empty($dataFile['vehicle_insurance'])) {
+            $fileSql .= " vehicle_insurance = '" . $this->db->escape($dataFile['vehicle_insurance']) . "', ";
         }
 
         if ($result2->num_rows > 0) {
             $sql = "UPDATE " . DB_PREFIX . "delivery_partner_info SET ";
-            $sql.= $fileSql;
-            $sql.="`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "', `delivery_type` = '" . $this->db->escape($data['delivery_type']) . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
+            $sql .= $fileSql;
+            $sql .= "`vehicle_type` = '" . $this->db->escape($data['vehicle_type']) . "', `delivery_type` = '" . $this->db->escape($data['delivery_type']) . "' WHERE `customer_id` = '" . (int)$customer_id . "'";
             $this->db->query($sql);
         } else {
 
             $sql = "INSERT INTO " . DB_PREFIX . "delivery_partner_info SET vehicle_type = '" . $this->db->escape($data['vehicle_type']) . "', delivery_type = '" . $this->db->escape($data['delivery_type']) . "',";
-            $sql.= $fileSql;
-            $sql.="customer_id = '" . (int)$customer_id . "'";
+            $sql .= $fileSql;
+            $sql .= "customer_id = '" . (int)$customer_id . "'";
             $this->db->query($sql);
         }
 
@@ -265,18 +265,21 @@ class ModelAccountCustomer extends Model
                 $area = !empty($info['area_id']) ? $this->db->escape($info['area_id']) : '';
                 $areaData = $this->getArea($area);
 
-                $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
+                if(!empty($areaData['name'])) {
+                    $this->db->query("INSERT INTO `" . DB_PREFIX . "delivery_partner_countries` SET customer_id = '" . (int)$customer_id . "', 
             country_id = '" . $this->db->escape($info['country_id']) . "', 
             zone_id = '" . $this->db->escape($info['zone_id']) . "',
             area_id = '" . $area . "',
             area_name = '" . $areaData['name'] . "',
             added_date = NOW()
             ");
+                }
             }
         }
     }
 
-    public function getArea($area_id) {
+    public function getArea($area_id)
+    {
         $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "area WHERE area_id = '" . (int)$area_id . "'");
 
         return $query->row;
