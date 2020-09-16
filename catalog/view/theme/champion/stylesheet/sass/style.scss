@@ -344,7 +344,9 @@ header {background: white;z-index: 3; position: relative;
     .product-card-featured { .rating{.fa-stack{width: 1em;height: 1em;line-height: 1em;}} }
   }
   a{text-decoration: none;}
-  .card-body {padding: 0;}
+  .card-body {padding: 0;
+    .seller-name { position: absolute; top: 3px; left: 3px; background: $success; font-size: 12px; padding: 2px 5px; color: white; border-radius: 3px; width: 100px; }
+  }
   .product-card:hover .view-details{background-color: $success !important; transition: all .7s ease;}
 
 }
