@@ -216,9 +216,19 @@ class ModelAccountOrder extends Model
 
     public function getLatestOrderHistory($order_id, $customer_id)
     {
-        $query = $this->db->query("SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id ORDER BY oh.order_history_id DESC LIMIT 1");
-
+        $sql = "SELECT oh.order_status_id FROM `" . DB_PREFIX . "order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and o.customer_id = $customer_id ORDER BY oh.order_history_id DESC LIMIT 1";
+        $query = $this->db->query($sql);
         return $query->row['order_status_id'];
+    }
+
+    public function getShippedHistoryBySeller($order_id)
+    {
+        $sql = "SELECT oh.order_status_id FROM `" . DB_PREFIX . "mpseller_order_history` oh LEFT JOIN `" . DB_PREFIX . "order` o ON (o.order_id = oh.order_id) WHERE oh.order_id = '" . (int)$order_id . "' and oh.order_status_id = '3' ORDER BY oh.mpseller_order_history_id DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        if(!empty($query->row)) {
+            return $query->row['order_status_id'];
+        }
+        return false;
     }
 
     public function createInvoiceNo($order_id) {

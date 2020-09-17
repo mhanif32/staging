@@ -357,12 +357,13 @@ class ControllerAccountOrder extends Controller {
             $data['author'] = $this->customer->getFirstName() .' '. $this->customer->getLastName();
 
             $order_status_id = $this->model_account_order->getLatestOrderHistory($order_id, $this->customer->getId());
+            $order_status_by_seller = $this->model_account_order->getShippedHistoryBySeller($order_id);
             $data['isVisibleCancelBtn'] =  false;
-
-            if (in_array($order_status_id, array(1, 2,15))) {
-                $data['isVisibleCancelBtn'] = true;
+            if($order_status_by_seller != 3) {
+                if (in_array($order_status_id, array(1, 2, 3, 15))) {
+                    $data['isVisibleCancelBtn'] = true;
+                }
             }
-            //echo '<pre>';print_r($data);exit('aaa');
 			$this->response->setOutput($this->load->view('account/order_info', $data));
 		} else {
 			return new Action('error/not_found');
