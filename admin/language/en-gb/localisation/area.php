@@ -4,7 +4,7 @@ $_['heading_title']          = 'Areas';
 
 // Text
 $_['text_success']           = 'Success: You have modified areas!';
-$_['text_list']              = 'area List';
+$_['text_list']              = 'Area List';
 $_['text_add']               = 'Add Area';
 $_['text_upload']            = 'Upload';
 $_['text_edit']              = 'Edit Area';

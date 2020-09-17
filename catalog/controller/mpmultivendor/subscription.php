@@ -90,7 +90,7 @@ class ControllerMpmultivendorSubscription extends Controller
         $this->load->model('mpmultivendor/subscription');
         $this->load->model('account/customer');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm() && !empty($this->request->post['radioPlan'])) {
 
             //load secret key
             if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
@@ -166,6 +166,9 @@ class ControllerMpmultivendorSubscription extends Controller
             $planData = $this->model_mpmultivendor_subscription->getSubscriptionPlan($plan_id);
             $this->session->data['success'] = 'Success : You have successfully subscribed to the '.$planData['name'].' Plan.';
             $this->response->redirect($this->url->link('account/account', '', true));
+        } else {
+            $this->session->data['success'] = 'WARNING : You must Select Plan .';
+            $this->response->redirect($this->url->link('mpmultivendor/subscription', '', true));
         }
     }
 
@@ -305,8 +308,8 @@ class ControllerMpmultivendorSubscription extends Controller
 //            $this->error['warning'] = $this->language->get('error_permission');
 //        }
 //
-//        if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
-//            $this->error['name'] = $this->language->get('error_name');
+//        if (empty($this->request->post['radioPlan'])) {
+//            $this->error['name'] = 'Please select a plan.';
 //        }
 //        return !$this->error;
     }
