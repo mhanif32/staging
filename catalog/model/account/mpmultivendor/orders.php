@@ -314,6 +314,10 @@ class ModelAccountMpmultivendorOrders extends Model {
 			/* Email Work Starts */
 			// Send email to customer when seller update their order
 			if($notify) {
+
+			    //insert date in order history
+//                $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '" . (int)$notify . "', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
+
 				$language = new Language($order_info['language_code']);
 				$language->load($order_info['language_code']);
 				$language->load('mpmultivendor_mail/seller_order_edit');
@@ -563,4 +567,11 @@ class ModelAccountMpmultivendorOrders extends Model {
 			return null;	
 		}
 	}
+
+    public function getDeliveryOrderRequestStatus($order_id)
+    {
+        $query = $this->db->query("SELECT status FROM `" . DB_PREFIX . "delivery_partner_request` dpr WHERE dpr.is_accept = 1 AND dpr.order_id = '".(int)$order_id."'");
+
+        return $query->row;
+    }
 }

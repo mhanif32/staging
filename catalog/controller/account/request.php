@@ -320,9 +320,6 @@ class ControllerAccountRequest extends Controller
 
     public function orders()
     {
-//        error_reporting(E_ALL);
-//        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request/orders', '', true);
 
@@ -375,7 +372,6 @@ class ControllerAccountRequest extends Controller
 
     public function assignedOrderView()
     {
-
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
@@ -426,6 +422,59 @@ class ControllerAccountRequest extends Controller
             if (!empty($this->request->post['selectStatus'])) {
                 $this->model_account_request->updateStatus($requestId, $this->request->post);
                 $this->session->data['success'] = 'Your order status has been successfully updated.';
+
+                //update delivery charges on the basis of distance between customer & seller
+                $dp_status = $this->request->post['selectStatus'];
+                if($dp_status == 'Parcel delivered') {
+
+
+                }
+
+                //send mail to seller when updates
+                $requestData = $this->model_account_request->getRequestData($requestId);
+                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
+                //echo '<pre>';print_r($sellerData);exit('okkoko');
+
+                if ($this->request->server['HTTPS']) {
+                    $server = $this->config->get('config_ssl');
+                } else {
+                    $server = $this->config->get('config_url');
+                }
+                $mail = new Mail($this->config->get('config_mail_engine'));
+                $mail->parameter = $this->config->get('config_mail_parameter');
+                $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                $mail->setTo($sellerData['email']);
+                $mail->setFrom($this->config->get('config_email'));
+                $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Delivery Partner Changed Status', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
+                $dataDp['logo'] = $server . 'image/' . $this->config->get('config_logo');
+                $dataDp['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
+                $dataDp['seller_name'] = $sellerData['store_owner'];
+                $dataDp['orderId'] = '#' . $requestData['order_id'];
+//                $delPartnerData = $this->model_account_customer->getCustomer($deliveryPartner['customer_id']);
+//
+//                if(!empty($delPartnerData)) { // if delivery partner not found
+//                    $dataDp['delivery_partner_name'] = $delPartnerData['firstname'] . ' ' . $delPartnerData['lastname'];
+//                    $dataDp['orderId'] = '#' . $orderId;
+//                    $dataDp['delivery_address'] = $shippingAddress['address_1'] . ', ' . $shippingAddress['city'] . ', ' . $shippingAddress['zone'] . ', ' . $shippingAddress['country'];
+//                    $dataDp['seller_name'] = $mpSellerData['store_owner'];
+//
+//                    //echo '<pre>';print_r($mpSellerData);exit('asd');
+//                    $zone = $this->model_localisation_zone->getZone($mpSellerData['zone_id']);
+//                    $country = $this->model_localisation_country->getCountry($mpSellerData['country_id']);
+//
+//                    $dataDp['seller_address'] = $mpSellerData['address'] . ', ' . $mpSellerData['city'] . ', ' . $zone['name'] . ', ' . $country['name'];
+                $dataDp['request_view_link'] = $this->url->link('account/request/index', '', true);
+                $mailText = $this->load->view('mail/dp_changed_status_toseller', $dataDp);
+                $mail->setHtml($mailText);
+                $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+                $mail->send();
+
             }
         }
 

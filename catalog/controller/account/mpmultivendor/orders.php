@@ -149,10 +149,14 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 		$results = $this->model_account_mpmultivendor_orders->getOrders($filter_data);
 
 		foreach ($results as $result) {
-			$data['orders'][] = array(
+
+            $deliveryRequest = $this->model_account_mpmultivendor_orders->getDeliveryOrderRequestStatus($result['order_id']);
+
+            $data['orders'][] = array(
 				'order_id'   => $result['order_id'],
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
+                'delivery_status' => !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-',
 				'by_admin_status'     => $result['by_admin_status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
@@ -517,8 +521,11 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 
 			$data['order_statuses'] = $this->model_account_mpmultivendor_orders->getOrderStatuses();
 
-			$data['continue'] = $this->url->link('account/mpmultivendor/orders', '', true);
+			//delivery partner status
+            $deliveryRequest = $this->model_account_mpmultivendor_orders->getDeliveryOrderRequestStatus($order_info['order_id']);
+            $data['delivery_status'] = !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-';
 
+			$data['continue'] = $this->url->link('account/mpmultivendor/orders', '', true);
 			$data['mpseller_links'] = $this->load->controller('account/mpmultivendor/mpseller_links');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -727,7 +734,6 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 		if(!$seller_info) {
 			$json['redirect'] = $this->url->link('account/account', '', true);
 		}
-
 
 		if(!empty($seller_info)) {
 			$mpseller_id = $seller_info['mpseller_id'];

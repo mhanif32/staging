@@ -1,0 +1,63 @@
+{{ header }}
+<div id="account-order-list" class="bg-light">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="row">
+            <div id="content" class="col-sm-12 pb-5">{{ content_top }}
+
+                <div class="form-signin card px-4 box-shadow">
+                    <div>
+                        {# <a href="{{ back_url }}" class="position-absolute f-35"><i #}
+                        {# class="fas fa-long-arrow-alt-left on-hover"></i></a> #}
+
+
+                        <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">
+                            Delivery Partner Order Payments
+                        </h3>
+                    </div>
+                    <hr style="margin: 15px -25px">
+                    <div class="table-responsive">
+                        <table class="table border-bottom-0">
+                            <thead>
+                            <tr class="bg-light font-weight-bold text-uppercase">
+                                <td class="text-center">{{ column_order_id }}</td>
+                                <td class="text-center">{{ column_customer }}</td>
+                                <td class="text-center">Order Total</td>
+                                <td class="text-center">Delivery Charges</td>
+                                <td class="text-center">{{ column_date_added }}</td>
+{#                                <td></td>#}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td class="text-center">#{{ order.order_id }}</td>
+                                    <td class="text-center">{{ order.name }}</td>
+                                    <td class="text-center">{{ order.total }}</td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center">{{ order.date_added }}</td>
+{#                                    <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip"#}
+{#                                                               title="{{ button_view }}"#}
+{#                                                               class="btn btn-success btn-sm">View</a>#}
+{#                                    </td>#}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 text-left">{{ pagination }}</div>
+                        <div class="col-sm-6 text-right">{{ results }}</div>
+                    </div>
+                    {{ content_bottom }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
