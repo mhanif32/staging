@@ -119,6 +119,21 @@ class ModelAccountOrder extends Model
         return $query->rows;
     }
 
+    public function getDeliveryPartnersOrders($start = 0, $limit = 20)
+    {
+        if ($start < 0) {
+            $start = 0;
+        }
+
+        if ($limit < 1) {
+            $limit = 1;
+        }
+
+        $query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value, o.shipping_address_1, o.shipping_address_2, o.shipping_city, o.shipping_zone, o.shipping_country, o.shipping_postcode, dpr.mpseller_id FROM `" . DB_PREFIX . "delivery_partner_request` dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE  dpr.delivery_partner_id = '" . (int)$this->customer->getId() . "' and dpr.is_accept = 1 AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
+
+        return $query->rows;
+    }
+
     public function getOrderProduct($order_id, $order_product_id)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
@@ -168,9 +183,14 @@ class ModelAccountOrder extends Model
         return $query->row['total'];
     }
 
+    public function getTotalDeliveryPartnersOrders()
+    {
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "delivery_partner_request` dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id WHERE dpr.delivery_partner_id = '" . (int)$this->customer->getId() . "' and dpr.is_accept = 1 AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "'");
+        return $query->row['total'];
+    }
+
     public function getTrackTotalOrders($order_id = NULL, $email, $order_invoice)
     {
-
         $sql = "SELECT os.name as status, o.order_id, o.invoice_prefix, o.invoice_no FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.order_status_id > '0' AND ";
 
         //check for guest checkout

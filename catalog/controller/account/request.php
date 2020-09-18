@@ -320,9 +320,6 @@ class ControllerAccountRequest extends Controller
 
     public function orders()
     {
-//        error_reporting(E_ALL);
-//        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request/orders', '', true);
 
@@ -425,6 +422,13 @@ class ControllerAccountRequest extends Controller
             if (!empty($this->request->post['selectStatus'])) {
                 $this->model_account_request->updateStatus($requestId, $this->request->post);
                 $this->session->data['success'] = 'Your order status has been successfully updated.';
+
+                //update delivery charges on the basis of distance between customer & seller
+                $dp_status = $this->request->post['selectStatus'];
+                if($dp_status == 'Parcel delivered') {
+
+
+                }
 
                 //send mail to seller when updates
                 $requestData = $this->model_account_request->getRequestData($requestId);
