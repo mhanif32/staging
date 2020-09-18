@@ -537,13 +537,7 @@ header {
 .top-collection .card-body, .product-manufacturer .card-body {
   padding: 0; }
   .top-collection .card-body .seller-name, .product-manufacturer .card-body .seller-name {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    background: #01B0F1;
     font-size: 12px;
-    padding: 2px 5px;
-    color: white;
     border-radius: 3px;
     width: 100px; }
 .top-collection .product-card:hover .view-details, .product-manufacturer .product-card:hover .view-details {
