@@ -455,51 +455,33 @@ footer {
 }
 }
 
-//-========================login starts
+//========================login starts
 
-//{
-//.login-form {background-image: url("../../image/footwear-banner.png");background-repeat: no-repeat;background-size: cover;background-attachment: fixed;
-//  label {font-size: 0.9375rem;font-weight: 400;}
-//  form.form-signin { width: 100%; max-width: 330px; padding: 15px; margin: auto; background: #ffffff 0% 0% no-repeat padding-box;
-//    .form-control {  border: 1px solid #ccc5c540; border-radius: 0; }}
-//  @media only screen and (min-width: 600px) {
-//    form.form-signin {max-width: 350px;padding: 0px 25px 15px;border: 1px solid #00000029;background: #ffffff 0% 0% no-repeat padding-box;box-shadow: 0px 0px 6px #00000029;opacity: 1;}
-//  }
-//  #devider-login{
-//    width: 100%;height: 50px;text-align: center; font-size: 28px; position: relative;
-//    &:after{content: '';width: 100%; border-bottom: solid 1px $secondary;position: absolute;left: 0;top: 50%;z-index: 0;}
-//    .or-devider{width: auto;display: inline-block;z-index: 1;padding: 0 20px 0 20px;color: $secondary;position: relative;
-//      font-weight: lighter;margin: 0;font-size: 15px;background-color: $white;}
-//  }
-//}
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
+#account-login {
+.login-form {background-image: url("../../image/footwear-banner.png");background-repeat: no-repeat;background-size: cover;background-attachment: fixed;
+  label {font-size: 0.9375rem;font-weight: 400;}
+  form.form-signin { width: 100%; max-width: 330px; padding: 15px; margin: auto; background: #ffffff 0% 0% no-repeat padding-box;
+    .form-control {  border: 1px solid #ccc5c540; border-radius: 0; }}
+  @media only screen and (min-width: 600px) {
+    form.form-signin {max-width: 350px;padding: 0px 25px 15px;border: 1px solid #00000029;background: #ffffff 0% 0% no-repeat padding-box;box-shadow: 0px 0px 6px #00000029;opacity: 1;}
+  }
+  #devider-login{
+    width: 100%;height: 50px;text-align: center; font-size: 28px; position: relative;
+    &:after{content: '';width: 100%; border-bottom: solid 1px $secondary;position: absolute;left: 0;top: 50%;z-index: 0;}
+    .or-devider{width: auto;display: inline-block;z-index: 1;padding: 0 20px 0 20px;color: $secondary;position: relative;
+      font-weight: lighter;margin: 0;font-size: 15px;background-color: $white;}
+  }
+}
+}
 
 #account-register{}
 
 // .product-details
 
-.product-details {
-  background-color: #fafafa;
-  .container {
-    background-color: #fff;
-  }
+.product-details { background-color: #fafafa;
+  .container { background-color: #fff; }
 
-  img {
-    vertical-align: middle;
-  }
+  img { vertical-align: middle; }
 
   /* Position the image container (needed to position the left and right arrows) */
   .product-images {
