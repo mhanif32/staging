@@ -12,6 +12,7 @@ class ControllerAccountDeliverypartnerPayments extends Controller
         $data = json_decode($data);
         $time = 0;
         $distance = 0;
+        echo '<pre>';print_r($data->rows);exit('okokok');
         foreach($data->rows[0]->elements as $road) {
             $time += $road->duration->value;
             $distance += $road->distance->value;
