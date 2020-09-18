@@ -1,9 +1,13 @@
 <?php
 class ModelCatalogCategory extends Model {
 	public function getCategory($category_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
+//		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
+//
+//		return $query->row;
 
-		return $query->row;
+        $query = $this->db->query("SELECT DISTINCT *, (SELECT GROUP_CONCAT(cd1.name ORDER BY level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "category_description cd1 ON (cp.path_id = cd1.category_id AND cp.category_id != cp.path_id) WHERE cp.category_id = c.category_id AND cd1.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY cp.category_id) AS path FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd2 ON (c.category_id = cd2.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd2.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+
+        return $query->row;
 	}
 
 	public function getCategories($parent_id = 0) {
@@ -89,5 +93,34 @@ class ModelCatalogCategory extends Model {
         //check if relates with supermarket
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category pc where pc.product_id = '". (int)$product_id."' AND category_id = '116'");
         return $query->row;
+    }
+
+    public function getProductCategory($product_id)
+    {
+        //check if relates with supermarket
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category pc where pc.product_id = '". (int)$product_id."'");
+        $dataList = $query->rows;
+        foreach ($dataList as $data) {
+
+            $myCategory = $data['category_id'];
+            if($data['category_id'] == '116') {
+                return $data['category_id'];
+            } else {
+//exit($myCategory);
+                for($i = 0; $i <= 3; $i++) {
+                    $queryList = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c where c.parent_id = '" . (int)$myCategory . "'");
+                    $list = $queryList->rows;
+                    if(!empty($list)) {
+                        foreach ($list as $item) {
+                            if ($list['category_id'] == '116') {
+                                return $list['category_id'];
+                            }
+                            $myCategory = $list['category_id'];
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

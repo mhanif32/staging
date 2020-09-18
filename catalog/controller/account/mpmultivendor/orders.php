@@ -728,7 +728,6 @@ class ControllerAccountMpmultivendorOrders extends Controller {
 			$json['redirect'] = $this->url->link('account/account', '', true);
 		}
 
-
 		if(!empty($seller_info)) {
 			$mpseller_id = $seller_info['mpseller_id'];
 		} else {
