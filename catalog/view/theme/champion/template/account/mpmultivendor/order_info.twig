@@ -145,8 +145,10 @@
                     </table>
                 {% endif %}
                 <h3>{{ text_history }}</h3>
+                {% if delivery_status %}
+                    <strong>Delivery Partner Status : {{ delivery_status }}</strong>
+                {% endif %}
                 <div id="history"></div>
-
 {#                {% if order_change_permission %}#}
                     <fieldset>
                         <legend>{{ text_history_add }}</legend>

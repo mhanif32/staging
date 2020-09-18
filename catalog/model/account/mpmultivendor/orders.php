@@ -567,4 +567,11 @@ class ModelAccountMpmultivendorOrders extends Model {
 			return null;	
 		}
 	}
+
+    public function getDeliveryOrderRequestStatus($order_id)
+    {
+        $query = $this->db->query("SELECT status FROM `" . DB_PREFIX . "delivery_partner_request` dpr WHERE dpr.is_accept = 1 AND dpr.order_id = '".(int)$order_id."'");
+
+        return $query->row;
+    }
 }
