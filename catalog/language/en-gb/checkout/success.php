@@ -8,8 +8,8 @@ $_['text_checkout']        = 'Checkout';
 $_['text_success']         = 'Success';
 $_['text_customer']        = '<p>Your order has been successfully placed.</p>
 <p>You will receive a mail shortly containing all the necessary informations on your order.</p>
-<p>Your Order Number is <b>#%s</b></p>
-<p>Order Invoice Number is <b>%s</b></p>
+<p>Your Order Number is <b> #%s </b></p>
+<p>Order Invoice Number is <b> %s </b></p>
 
 <p>If your purchase has an associated download, you can go to the account <a href="%s" class="text-success">downloads</a> page to view them.</p>
 

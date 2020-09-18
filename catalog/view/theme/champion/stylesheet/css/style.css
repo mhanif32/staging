@@ -537,13 +537,7 @@ header {
 .top-collection .card-body, .product-manufacturer .card-body {
   padding: 0; }
   .top-collection .card-body .seller-name, .product-manufacturer .card-body .seller-name {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    background: #01B0F1;
     font-size: 12px;
-    padding: 2px 5px;
-    color: white;
     border-radius: 3px;
     width: 100px; }
 .top-collection .product-card:hover .view-details, .product-manufacturer .product-card:hover .view-details {
@@ -719,6 +713,58 @@ footer ul {
       top: 50%;
       z-index: 0; }
     .account-login .login-form #devider-login .or-devider, #account-login .login-form #devider-login .or-devider, #account-forgotten .login-form #devider-login .or-devider, #account-reset .login-form #devider-login .or-devider {
+      width: auto;
+      display: inline-block;
+      z-index: 1;
+      padding: 0 20px 0 20px;
+      color: #8B8B8B;
+      position: relative;
+      font-weight: lighter;
+      margin: 0;
+      font-size: 15px;
+      background-color: #fff; }
+
+#account-login .login-form {
+  background-image: url("../../image/footwear-banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; }
+  #account-login .login-form label {
+    font-size: 0.9375rem;
+    font-weight: 400; }
+  #account-login .login-form form.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    background: #ffffff 0% 0% no-repeat padding-box; }
+    #account-login .login-form form.form-signin .form-control {
+      border: 1px solid #ccc5c540;
+      border-radius: 0; }
+  @media only screen and (min-width: 600px) {
+    #account-login .login-form form.form-signin {
+      max-width: 350px;
+      padding: 0px 25px 15px;
+      border: 1px solid #00000029;
+      background: #ffffff 0% 0% no-repeat padding-box;
+      -webkit-box-shadow: 0px 0px 6px #00000029;
+              box-shadow: 0px 0px 6px #00000029;
+      opacity: 1; } }
+  #account-login .login-form #devider-login {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 28px;
+    position: relative; }
+    #account-login .login-form #devider-login:after {
+      content: '';
+      width: 100%;
+      border-bottom: solid 1px #8B8B8B;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      z-index: 0; }
+    #account-login .login-form #devider-login .or-devider {
       width: auto;
       display: inline-block;
       z-index: 1;
