@@ -8,6 +8,20 @@ class ModelCheckoutOrder extends Model {
 		// Products
 		if (isset($data['products'])) {
 			foreach ($data['products'] as $product) {
+
+                //save admin fee on per product on the basis of Subscribed Seller Plan
+//                $query = $this->db->query("SELECT sp.rent_percentage FROM " . DB_PREFIX . "product p
+//        LEFT JOIN " . DB_PREFIX . "mpseller mp ON p.mpseller_id=mp.mpseller_id
+//        LEFT JOIN " . DB_PREFIX . "customer cus ON cus.customer_id=mp.customer_id
+//        LEFT JOIN " . DB_PREFIX . "subscription_plan sp ON sp.plan_id=cus.subscription_plan_id
+//        WHERE p.product_id = '" . (int)$product['product_id'] . "'");
+//                $planData = $query->row;
+//                $adminFee = 0;
+//                if (!empty($planData)) {
+//                    $eachProductFee = (float)$product['price'] * $planData['rent_percentage'] / 100;
+//                    $adminFee = $eachProductFee * (int)$product['quantity'];
+//                }
+
 				$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
 
 				$order_product_id = $this->db->getLastId();
