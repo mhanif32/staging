@@ -423,15 +423,23 @@ class ControllerAccountRequest extends Controller
                 $this->model_account_request->updateStatus($requestId, $this->request->post);
                 $this->session->data['success'] = 'Your order status has been successfully updated.';
 
+                $requestData = $this->model_account_request->getRequestData($requestId);
+                $orderData = $this->model_account_request->getOrderData($requestData['order_id']);
+
                 //update delivery charges on the basis of distance between customer & seller
+                $distance = 1;
                 $dp_status = $this->request->post['selectStatus'];
                 if($dp_status == 'Parcel delivered') {
 
-
+                    //todo: calculate distance
+                    $dataCharges = array(
+                        'delivery_charges' => 3.53 + (0.25 * $distance),
+                        'currency' => $orderData['currency_code']
+                    );
+                    $this->model_account_request->updateCharges($requestId, $dataCharges);
                 }
 
                 //send mail to seller when updates
-                $requestData = $this->model_account_request->getRequestData($requestId);
                 $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
                 //echo '<pre>';print_r($sellerData);exit('okkoko');
 

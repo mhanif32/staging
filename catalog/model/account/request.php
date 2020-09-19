@@ -59,7 +59,7 @@ class ModelAccountRequest extends Model
 
     public function getOrderData($order_id)
     {
-        $order_query = $this->db->query("SELECT order_id, invoice_no, invoice_prefix, firstname, lastname, email, telephone, shipping_address_1, shipping_address_2, shipping_postcode, shipping_city, shipping_zone, shipping_country, total FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");
+        $order_query = $this->db->query("SELECT order_id, invoice_no, invoice_prefix, firstname, lastname, email, telephone, shipping_address_1, shipping_address_2, shipping_postcode, shipping_city, shipping_zone, shipping_country, total, currency_code FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");
 
         return $order_query->row;
     }
@@ -84,4 +84,13 @@ class ModelAccountRequest extends Model
         $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_request SET status = '" . $this->db->escape($data['selectStatus']) . "', other_status_specification = '".$this->db->escape($data['inputOtherSpecification'])."' WHERE request_id = '" . (int)$requestId . "' and delivery_partner_id = '" . (int)$delivery_partner_id . "'");
         return true;
     }
+
+    public function updateCharges($requestId, $data)
+    {
+        $delivery_partner_id = $this->customer->getId();
+        $this->db->query("UPDATE " . DB_PREFIX . "delivery_partner_request SET delivery_charges = '" . $this->db->escape($data['delivery_charges']) . "', currency = '".$this->db->escape($data['currency'])."' WHERE request_id = '" . (int)$requestId . "' and delivery_partner_id = '" . (int)$delivery_partner_id . "'");
+        return true;
+    }
+
+
 }

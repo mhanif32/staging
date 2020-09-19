@@ -1,22 +1,9 @@
 <?php
 
-class ControllerAccountDeliverypartnerPayments extends Controller
+class ControllerDeliverypartnerPayments extends Controller
 {
     public function index()
     {
-//        $key = 'AIzaSyB65K6J8mCTzwU8hhfUtCMDS5t_Uq351iA';
-//        $addressFrom = 'Nandanvan, Nagpur, Maharashtra, India';
-//        $addressTo = 'Rakesh Layout, Nagpur, Maharashtra, India';
-//
-//// Get distance in km
-//        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
-//
-//
-//        echo '<pre>';
-//        print_r($distance);
-//        exit('okoko');
-//        exit('okokok');
-
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
@@ -61,20 +48,19 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 
         $data['orders'] = array();
 
-        $this->load->model('account/order');
-        $this->load->model('account/request');
+        $this->load->model('deliverypartner/payments');
         $this->load->model('localisation/zone');
         $this->load->model('localisation/country');
 
-        $order_total = $this->model_account_order->getTotalDeliveryPartnersOrders();
+        $order_total = $this->model_deliverypartner_payments->getTotalDeliveryPartnersOrders();
 
-        $results = $this->model_account_order->getDeliveryPartnersOrders(($page - 1) * 10, 10);
-//echo '<pre>'; print_r($results); exit('okoko');
+        $results = $this->model_deliverypartner_payments->getDeliveryPartnersOrders(($page - 1) * 10, 10);
+
         foreach ($results as $result) {
-            $product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
-            $voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
+            $product_total = $this->model_deliverypartner_payments->getTotalOrderProductsByOrderId($result['order_id']);
+            $voucher_total = $this->model_deliverypartner_payments->getTotalOrderVouchersByOrderId($result['order_id']);
 
-            $seller = $this->model_account_request->getMpSellerdata($result['mpseller_id']);
+            $seller = $this->model_deliverypartner_payments->getMpSellerdata($result['mpseller_id']);
             $seller_address = $seller['address'];
             $seller_city = $seller['city'];
             $seller_zone = $this->model_localisation_zone->getZone($seller['zone_id']);
@@ -102,19 +88,13 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($order_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($order_total - 10)) ? $order_total : ((($page - 1) * 10) + 10), $order_total, ceil($order_total / 10));
 
-        $data['continue'] = $this->url->link('account/account', '', true);
+        $data['user_token'] = $this->session->data['user_token'];
 
-        $data['column_left'] = $this->load->controller('common/column_left');
-        $data['column_right'] = $this->load->controller('common/column_right');
-        $data['content_top'] = $this->load->controller('common/content_top');
-        $data['content_bottom'] = $this->load->controller('common/content_bottom');
-        $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
-//        $data['back_url'] = $this->url->link('account/account', '', true);
-//        $data['track_link'] = $this->url->link('account/order/track', '', true);
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['footer'] = $this->load->controller('common/footer');
 
-
-        $this->response->setOutput($this->load->view('account/deliverypartner/payment_list', $data));
+        $this->response->setOutput($this->load->view('deliverypartner/payment_list', $data));
     }
 
     protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)

@@ -40,9 +40,9 @@
             <tfoot>
             {% for total in totals %}
                 <tr>
-                    {#<td class="border-0"></td>#}
-                    {#<td class="border-0"></td>#}
-                    {#<td class="border-0"></td>#}
+                    {# <td class="border-0"></td> #}
+                    {# <td class="border-0"></td> #}
+                    {# <td class="border-0"></td> #}
                     <td class="text-right border-0" colspan="4"><strong>{{ total.title }}:</strong></td>
                     <td class="text-right border-0">{{ total.text }}</td>
                 </tr>
@@ -51,12 +51,15 @@
         </table>
     </div>
 
-    {% if subTotal >= max_checkout_amount %}
-    {{ payment }}
-      {% else %}
-          <div class="alert alert-danger alert-dismissible">Warning: Minimum Order 'Sub-Total' Amount on this site is {{ max_checkout_amount }}!<button type="button" class="close" data-dismiss="alert">×</button></div>
-      {% endif %}
-        {% else %}
+{#    {% if subTotal >= max_checkout_amount %}#}
+        {{ payment }}
+{#    {% else %}#}
+{#        <div class="alert alert-danger alert-dismissible">Warning: Minimum Order 'Sub-Total' Amount on this site#}
+{#            is {{ max_checkout_amount }}!#}
+{#            <button type="button" class="close" data-dismiss="alert">×</button>#}
+{#        </div>#}
+{#    {% endif %}#}
+{% else %}
     <script type="text/javascript"><!--
         location = '{{ redirect }}';
         //--></script>
