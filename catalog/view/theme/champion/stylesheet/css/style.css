@@ -537,7 +537,7 @@ header {
 .top-collection .card-body, .product-manufacturer .card-body {
   padding: 0; }
   .top-collection .card-body .seller-name, .product-manufacturer .card-body .seller-name {
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 3px;
     width: 100px; }
 .top-collection .product-card:hover .view-details, .product-manufacturer .product-card:hover .view-details {
