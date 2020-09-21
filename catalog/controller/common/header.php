@@ -115,6 +115,7 @@ class ControllerCommonHeader extends Controller
         $data['cart'] = $this->load->controller('common/cart');
         $data['menu'] = $this->load->controller('common/menu');
         $data['show_top_bar'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'common/home') ? true : false;
+        $data['show_top_menu'] = (empty($this->request->get['route']) || $this->request->get['route'] == 'account/account') ? false : true;
 
         $data['countries'] = $this->model_localisation_country->getCountries();
 

@@ -17,7 +17,7 @@ class ModelDeliverypartnerPayments extends Model {
             $limit = 1;
         }
 
-        $query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value, o.shipping_address_1, o.shipping_address_2, o.shipping_city, o.shipping_zone, o.shipping_country, o.shipping_postcode, dpr.mpseller_id FROM `" . DB_PREFIX . "delivery_partner_request` dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE dpr.is_accept = 1 AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
+        $query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value, o.shipping_address_1, o.shipping_address_2, o.shipping_city, o.shipping_zone, o.shipping_country, o.shipping_postcode, dpr.mpseller_id, dpr.delivery_charges, dpr.delivery_partner_id, dpr.status as delivery_status FROM `" . DB_PREFIX . "delivery_partner_request` dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE dpr.is_accept = 1 AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
 
         return $query->rows;
     }
@@ -39,6 +39,13 @@ class ModelDeliverypartnerPayments extends Model {
     public function getMpSellerdata($mpseller_id)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller WHERE mpseller_id = '" . (int)$mpseller_id . "'");
+
+        return $query->row;
+    }
+
+    public function getCustomer($customer_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
 
         return $query->row;
     }

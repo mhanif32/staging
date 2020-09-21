@@ -7,11 +7,11 @@ class ControllerDeliverypartnerPayments extends Controller
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
-        if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/order', '', true);
-
-            $this->response->redirect($this->url->link('account/login', '', true));
-        }
+//        if (!$this->customer->isLogged()) {
+//            $this->session->data['redirect'] = $this->url->link('account/order', '', true);
+//
+//            $this->response->redirect($this->url->link('account/login', '', true));
+//        }
 
         $this->load->language('account/order');
 
@@ -57,8 +57,6 @@ class ControllerDeliverypartnerPayments extends Controller
         $results = $this->model_deliverypartner_payments->getDeliveryPartnersOrders(($page - 1) * 10, 10);
 
         foreach ($results as $result) {
-            $product_total = $this->model_deliverypartner_payments->getTotalOrderProductsByOrderId($result['order_id']);
-            $voucher_total = $this->model_deliverypartner_payments->getTotalOrderVouchersByOrderId($result['order_id']);
 
             $seller = $this->model_deliverypartner_payments->getMpSellerdata($result['mpseller_id']);
             $seller_address = $seller['address'];
@@ -66,15 +64,20 @@ class ControllerDeliverypartnerPayments extends Controller
             $seller_zone = $this->model_localisation_zone->getZone($seller['zone_id']);
             $seller_country = $this->model_localisation_country->getCountry($seller['country_id']);
 
+            //delivery_partner_id
+            $delivery_partner = $this->model_deliverypartner_payments->getCustomer($result['delivery_partner_id']);
 
             $data['orders'][] = array(
                 'order_id' => $result['order_id'],
                 'name' => $result['firstname'] . ' ' . $result['lastname'],
+                'delivery_partner_name' => $delivery_partner['firstname'] . ' ' . $result['lastname'],
+                'delivery_charges' => $result['delivery_charges'],
                 'status' => $result['status'],
+                'delivery_status' => $result['delivery_status'],
+                'total' => $result['total'],
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-                'products' => ($product_total + $voucher_total),
                 'total' => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-                'view' => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
+                //'view' => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
             );
         }
 

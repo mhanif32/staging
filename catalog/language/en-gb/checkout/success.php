@@ -7,7 +7,7 @@ $_['text_basket']          = 'Shopping Cart';
 $_['text_checkout']        = 'Checkout';
 $_['text_success']         = 'Success';
 $_['text_customer']        = '<p>Your order has been successfully placed.</p>
-<p>You will receive a mail shortly containing all the necessary informations on your order.</p>
+<p>You will receive a mail shortly containing all the necessary information on your order.</p>
 <p>Your Order Number is <b> #%s </b></p>
 <p>Order Invoice Number is <b> %s </b></p>
 
