@@ -16,23 +16,23 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 //        print_r($distance);
 //        exit('okoko');
 //        exit('okokok');
-        $going='Nandanvan, Nagpur, Maharashtra, India';
-
-        $address =$going; // Google HQ
-        $prepAddr = str_replace(' ','+',$address);
-        $apiKey = 'AIzaSyB65K6J8mCTzwU8hhfUtCMDS5t_Uq351iA'; // Google maps now requires an API key.
-
-        $geocode=file_get_contents('https://maps.googleapis.com/maps/api/geocode/json? 
-   address='.urlencode($address).'&sensor=false&key='.$apiKey);
-
-        //print_r($geocode);
-
-        $output= json_decode($geocode);
-        $latitude = $output->results[0]->geometry->location->lat;
-        $longitude = $output->results[0]->geometry->location->lng;
-        echo '<pre>';
-        print_r($latitude);
-        exit('okoko');
+//        $going='Nandanvan, Nagpur, Maharashtra, India';
+//
+//        $address =$going; // Google HQ
+//        $prepAddr = str_replace(' ','+',$address);
+//        $apiKey = 'AIzaSyB65K6J8mCTzwU8hhfUtCMDS5t_Uq351iA'; // Google maps now requires an API key.
+//
+//        $geocode=file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?
+//   address='.urlencode($address).'&sensor=false&key='.$apiKey);
+//
+//        //print_r($geocode);
+//
+//        $output= json_decode($geocode);
+//        $latitude = $output->results[0]->geometry->location->lat;
+//        $longitude = $output->results[0]->geometry->location->lng;
+//        echo '<pre>';
+//        print_r($latitude);
+//        exit('okoko');
 
 
 
