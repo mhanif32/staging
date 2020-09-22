@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="text-left f-20">{{ text_final_commission }}: <b>{{ final_commission }}</b></h3>
+{#                                <h3 class="text-left f-20">{{ text_final_commission }}: <b>{{ final_commission }}</b></h3>#}
                                 <div class="table-responsive">
                                     <table class="table table-hover list">
                                         <thead>
@@ -115,7 +115,8 @@
                                                     <td class="text-left">{{ commission.price }}</td>
                                                     <td class="text-center">{{ commission.quantity }}</td>
                                                     <td class="text-left">{{ commission.total }}</td>
-                                                    <td class="text-left">{{ commission.amount }}</td>
+{#                                                    <td class="text-left">{{ commission.amount }}</td>#}
+                                                    <td class="text-left">{{ commission.admin_fee }}</td>
                                                     <td class="text-left">{{ commission.date_added }}</td>
                                                 </tr>
                                             {% endfor %}

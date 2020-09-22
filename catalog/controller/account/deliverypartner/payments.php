@@ -4,7 +4,7 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 {
     public function index()
     {
-        $key = 'AIzaSyB65K6J8mCTzwU8hhfUtCMDS5t_Uq351iA';
+        $key = 'AIzaSyCCcwKG3ab25lQIB7UDOuCjdUceqa8WRvY';
 //        $addressFrom = 'Nandanvan, Nagpur, Maharashtra, India';
 //        $addressTo = 'Rakesh Layout, Nagpur, Maharashtra, India';
 //
@@ -17,19 +17,39 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 //        exit('okoko');
 //        exit('okokok');
 
-        $address = str_replace(" ", "+", 'Mahal, Nagpur, India'); // replace all the white space with "+" sign to match with google search pattern
+        /*$address = str_replace(" ", "+", 'Mahal, Nagpur, India'); // replace all the white space with "+" sign to match with google search pattern
 
-        $url = "https://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+        $url = "https://maps.google.com/maps/api/geocode/json?sensor=false&address=$address&key=$key";
 
         $response = file_get_contents($url);
 
         $json = json_decode($response,TRUE); //generate array object from the response from the web
-
         print_r($json);
+        echo ($json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng']);*/
 
-        echo ($json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng']);
-        exit('okoko');
+        /*$address = "Kathmandu, Nepal";
+        $url = "https://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&key=".$key;
 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $responseJson = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($responseJson);
+
+        if ($response->status == 'OK') {
+            $latitude = $response->results[0]->geometry->location->lat;
+            $longitude = $response->results[0]->geometry->location->lng;
+
+            echo 'Latitude: ' . $latitude;
+            echo '<br />';
+            echo 'Longitude: ' . $longitude;
+        } else {
+            echo $response->status;
+            var_dump($response);
+        }
+        exit('okoko');*/
 
 
         error_reporting(E_ALL);

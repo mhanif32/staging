@@ -48,7 +48,7 @@ class ModelAccountMpmultivendorCommission extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-
+//echo $sql;exit('asd');
 		$query = $this->db->query($sql);
 
 		return $query->rows;
