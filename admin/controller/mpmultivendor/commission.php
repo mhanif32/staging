@@ -128,6 +128,7 @@ class ControllerMpmultivendorCommission extends Controller {
 				'quantity' 		  			=> $result['quantity'],
 				'total' 		  			=> $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'amount' 		  			=> $this->currency->format($result['amount'], $result['currency_code'], $result['currency_value']),
+                'admin_fee' 		  			=> $this->currency->format($result['admin_fee'], $result['currency_code'], $result['currency_value']),
 				'date_added'    			=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 			);
 		}

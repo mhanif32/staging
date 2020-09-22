@@ -99,11 +99,12 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_total; ?>"><?php echo $column_total; ?></a>
                     <?php } ?></td>
-                  <td class="text-right"><?php if ($sort == 'mc.amount') { ?>
+                  <!--<td class="text-right"><?php if ($sort == 'mc.amount') { ?>
                     <a href="<?php echo $sort_amount; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_amount; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_amount; ?>"><?php echo $column_amount; ?></a>
-                    <?php } ?></td>
+                    <?php } ?></td>-->
+                  <td class="text-right">Admin Fee</td>
                   <td class="text-right"><?php if ($sort == 'e.date_added') { ?>
                     <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
                     <?php } else { ?>
@@ -122,7 +123,8 @@
                   <td class="text-right"><?php echo $commission['price']; ?></td>
                   <td class="text-right"><?php echo $commission['quantity']; ?></td>
                   <td class="text-right"><?php echo $commission['total']; ?></td>
-                  <td class="text-right"><?php echo $commission['amount']; ?></td>
+<!--                  <td class="text-right"><?php echo $commission['amount']; ?></td>-->
+                  <td class="text-right"><?php echo $commission['admin_fee']; ?></td>
                   <td class="text-right"><?php echo $commission['date_added']; ?></td>
                 </tr>
                 <?php } ?>
