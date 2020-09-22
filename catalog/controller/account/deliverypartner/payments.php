@@ -19,7 +19,7 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 
         $address = str_replace(" ", "+", 'Mahal, Nagpur, India'); // replace all the white space with "+" sign to match with google search pattern
 
-        $url = "https://maps.google.com/maps/api/geocode/json?sensor=false&address=$address&key=$key";
+        $url = "https://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
 
         $response = file_get_contents($url);
 
