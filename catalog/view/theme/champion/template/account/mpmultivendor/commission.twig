@@ -92,12 +92,7 @@
                                                 {% else %}
                                                     <a href="{{ sort_total }}">{{ column_total }}</a>
                                                 {% endif %}</td>
-                                            <td class="text-right">{% if sort == 'mc.amount' %}
-                                                    <a href="{{ sort_amount }}"
-                                                       class="{{ order|lower }}">{{ column_amount }}</a>
-                                                {% else %}
-                                                    <a href="{{ sort_amount }}">{{ column_amount }}</a>
-                                                {% endif %}</td>
+                                            <td class="text-right">Admin Fee</td>
                                             <td class="text-right border-bottom">{% if sort == 'e.date_added' %}
                                                     <a href="{{ sort_date_added }}"
                                                        class="{{ order|lower }}">{{ column_date_added }}</a>
