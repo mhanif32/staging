@@ -482,4 +482,13 @@ class ModelSaleOrder extends Model {
 
         return $query->row;
     }
+
+    public function getSellerOrderStatus($order_id)
+    {
+//        $sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+
+        $query = $this->db->query("SELECT moh.order_id, os.name as seller_status FROM `" . DB_PREFIX . "mpseller_order_history` moh LEFT JOIN `" . DB_PREFIX . "order_status` os ON moh.order_status_id = os.order_status_id WHERE moh.order_id = '".(int)$order_id."' ORDER BY moh.mpseller_order_history_id DESC LIMIT 1");
+
+        return $query->row;
+    }
 }

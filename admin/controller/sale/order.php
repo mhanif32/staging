@@ -227,11 +227,13 @@ class ControllerSaleOrder extends Controller {
 		foreach ($results as $result) {
 
 		    $deliveryRequest = $this->model_sale_order->getDeliveryOrderRequestStatus($result['order_id']);
+		    $sellerStatus = $this->model_sale_order->getSellerOrderStatus($result['order_id']);
 
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
+				'seller_status' => !empty($sellerStatus['seller_status']) ? $sellerStatus['seller_status'] : '-',
 				'delivery_status' => !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-',
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -241,7 +243,7 @@ class ControllerSaleOrder extends Controller {
 				'edit'          => $this->url->link('sale/order/edit', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $result['order_id'] . $url, true)
 			);
 		}
-
+//echo '<pre>'; print_r($data);exit('uhuh');
 		$data['user_token'] = $this->session->data['user_token'];
 
 		if (isset($this->error['warning'])) {
