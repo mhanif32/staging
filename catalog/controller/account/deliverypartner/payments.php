@@ -4,18 +4,17 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 {
     public function index()
     {
-        $key = 'AIzaSyCCcwKG3ab25lQIB7UDOuCjdUceqa8WRvY';
-//        $addressFrom = 'Nandanvan, Nagpur, Maharashtra, India';
-//        $addressTo = 'Rakesh Layout, Nagpur, Maharashtra, India';
-//
-//// Get distance in km
-//        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
-//
-//
-//        echo '<pre>';
-//        print_r($distance);
-//        exit('okoko');
-//        exit('okokok');
+        $key = 'AIzaSyA1KlkW09_TLutu_Pg85h2YhU3jCRLqK1w';
+        $addressFrom = 'Wardha';
+        $addressTo = 'Nagpur';
+
+// Get distance in km
+        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
+
+
+        echo '<pre>';
+        print_r($distance);
+        exit('okoko');
 
         /*$address = str_replace(" ", "+", 'Mahal, Nagpur, India'); // replace all the white space with "+" sign to match with google search pattern
 
@@ -152,7 +151,6 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 
     protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)
     {
-
         // Change address format
         $formattedAddrFrom = str_replace(' ', '+', $addressFrom);
         $formattedAddrTo = str_replace(' ', '+', $addressTo);
