@@ -136,7 +136,8 @@
                                                     class="{{ order|lower }}">{{ column_status }}</a> {% else %} <a
                                                     href="{{ sort_status }}">{{ column_status }}</a> {% endif %}</td>
 
-                                        <td class="text-left">Delivery Status Update</td>
+                                        <td class="text-left">Seller Status</td>
+                                        <td class="text-left">Delivery Status</td>
 
                                         <td class="text-right">{% if sort == 'o.total' %} <a href="{{ sort_total }}"
                                                                                              class="{{ order|lower }}">{{ column_total }}</a> {% else %}
@@ -171,6 +172,7 @@
                                                 <td class="text-right">{{ order.order_id }}</td>
                                                 <td class="text-left">{{ order.customer }}</td>
                                                 <td class="text-left">{{ order.order_status }}</td>
+                                                <td class="text-left">{{ order.seller_status }}</td>
                                                 <td class="text-left">{{ order.delivery_status }}</td>
                                                 <td class="text-right">{{ order.total }}</td>
                                                 <td class="text-left">{{ order.date_added }}</td>
