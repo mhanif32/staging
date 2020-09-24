@@ -478,4 +478,11 @@ class ModelMpmultivendorMpseller extends Model {
 
 		return $query->rows;
 	}
+
+	public function getCustomerPlan($customer_id)
+    {
+        $query = $this->db->query("SELECT sp.name as plan_name FROM `" . DB_PREFIX . "subscription_plan` sp LEFT JOIN `" . DB_PREFIX . "customer` c ON c.subscription_plan_id = sp.plan_id WHERE c.customer_id = '" . (int)$customer_id . "'");
+
+        return $query->row;
+    }
 }

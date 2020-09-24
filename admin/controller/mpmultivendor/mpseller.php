@@ -347,11 +347,14 @@ class ControllerMpmultivendorMpseller extends Controller
                 $approve = '';
             }
 
+            $planData = $this->model_mpmultivendor_mpseller->getCustomerPlan($result['customer_id']);
+
             $data['mpsellers'][] = array(
                 'mpseller_id' => $result['mpseller_id'],
                 'customer_id' => $result['customer_id'],
                 'store_owner' => $result['store_owner'],
                 'store_name' => $result['store_name'],
+                'plan_name' => !empty($planData['plan_name']) ? $planData['plan_name'] : '',
                 'total_products' => $result['total_products'],
                 'email' => $result['email'],
                 'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -361,7 +364,7 @@ class ControllerMpmultivendorMpseller extends Controller
                 'edit' => $this->url->link('mpmultivendor/mpseller/edit', 'user_token=' . $this->session->data['user_token'] . '&mpseller_id=' . $result['mpseller_id'] . $url, true)
             );
         }
-
+//echo '<pre>';print_r($data);exit('okoko');
         $data['heading_title'] = $this->language->get('heading_title');
 
         $data['text_list'] = $this->language->get('text_list');
