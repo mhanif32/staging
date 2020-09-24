@@ -117,7 +117,7 @@ class ControllerAccountDeliverypartnerPayments extends Controller
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
                 'products' => ($product_total + $voucher_total),
                 'total' => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-                'delivery_charges' => 0.00,
+                'delivery_charges' => !empty($result['delivery_charges']) ? $this->currency->format($result['delivery_charges'], $result['currency']) : 0,
                 'view' => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
             );
         }
