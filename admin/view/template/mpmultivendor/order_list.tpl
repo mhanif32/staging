@@ -154,10 +154,10 @@
                   <td class="text-right"><?php echo $order['order_id']; ?></td>
                   <td class="text-left"><?php echo $order['customer']; ?></td>
                   <td class="text-center">
-                    <table class="table mp-orderproducts">
+                    <table class="table table-borderless mp-orderproducts">
                       <thead>
                         <tr>
-                          <td><?php echo $column_product_name; ?></td>
+                          <!--<td><?php echo $column_product_name; ?></td>-->
                           <td><?php echo $column_store_name; ?></td>
                           <td><?php echo $column_mpseller_order_status; ?></td>
                           <td><?php echo $column_view; ?></td>
@@ -166,7 +166,7 @@
                       <tbody>
                         <?php foreach($order['seller_products'] as $seller_product) { ?>
                         <tr>
-                          <td>
+                          <!--<td>
                             <?php foreach($seller_product['products'] as $product_name) { ?>
                             <?php if(count($seller_product['products']) > 1) { ?>
                             <span class="orderproduct-row"><?php echo $product_name; ?></span>
@@ -174,16 +174,16 @@
                             <span><?php echo $product_name; ?></span>
                             <?php } ?>
                             <?php } ?>
-                          </td>
-                          <td>
+                          </td>-->
+                          <td style="border-top: none;">
                             <?php if($seller_product['sold_by_type'] == 'admin') { ?>
                             <label class="label label-danger"><?php echo $seller_product['store_name']; ?></label>
                             <?php } else { ?>
                             <?php echo $seller_product['store_name']; ?>
                             <?php } ?>
                           </td>
-                          <td><?php echo $seller_product['order_status']; ?></td>
-                          <td>
+                          <td style="border-top: none;"><?php echo $seller_product['order_status']; ?></td>
+                          <td style="border-top: none;">
                             <?php if($seller_product['sold_by_type'] == 'seller') { ?>
                             <a data-link="<?php echo $seller_product['view']; ?>" data-seller="<?php echo $seller_product['mpseller_id']; ?>" data-order="<?php echo $seller_product['order_id']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-info btn-sm button-info button-info<?php echo $seller_product['order_id']; ?>-<?php echo $seller_product['mpseller_id']; ?>"><i class="fa fa-info-circle"></i></a></button>
                             <?php } ?>
