@@ -177,7 +177,17 @@
                                           style="font-size: 11px;"><?php echo $mpseller['total_products']; ?></span>
                                     <?php } ?></td>
                                 <td class="text-left"><?php echo $mpseller['email']; ?></td>
-                                <td class="text-left"><?php echo $mpseller['plan_name']; ?></td>
+
+                                <td class="text-left">
+                                    <?php
+                                    if(!empty($mpseller['plan_name'])) {
+                                    ?>
+                                    <strong>Plan : </strong><?php echo $mpseller['plan_name'];?><br>
+                                    <strong>Date On : </strong><?php echo $mpseller['start_date'];?><br>
+                                    <strong>Status : </strong><?php echo ucfirst($mpseller['stripe_status']);?>
+                                    <?php } ?>
+                                </td>
+
                                 <td class="text-left"><?php echo $mpseller['status']; ?></td>
                                 <td class="text-left"><?php echo $mpseller['date_added']; ?></td>
                                 <td class="text-right">

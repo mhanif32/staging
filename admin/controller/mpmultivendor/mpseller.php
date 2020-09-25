@@ -6,6 +6,9 @@ class ControllerMpmultivendorMpseller extends Controller
 
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         $this->load->language('mpmultivendor/mpseller');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -355,6 +358,9 @@ class ControllerMpmultivendorMpseller extends Controller
                 'store_owner' => $result['store_owner'],
                 'store_name' => $result['store_name'],
                 'plan_name' => !empty($planData['plan_name']) ? $planData['plan_name'] : '',
+                'amount' => !empty($planData['amount']) ? $planData['amount'] : '',
+                'start_date' => !empty($planData['start_date']) ? date('Y-m-d', $planData['start_date']) : '',
+                'stripe_status' => !empty($planData['stripe_status']) ? $planData['stripe_status'] : '',
                 'total_products' => $result['total_products'],
                 'email' => $result['email'],
                 'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
