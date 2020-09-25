@@ -43,10 +43,17 @@ class ControllerCommonHome extends Controller {
         $stringAddress = []; $strAddress = '';
         if(!empty($this->request->post) && $this->request->post['country']) {
 
-            //country
-            $country_id = $this->request->post['country'];
-            $countryData = $this->model_localisation_country->getCountry($country_id);
-            $stringAddress[] = $this->session->data['loggedInCountry'] = !empty($countryData['name']) ? $countryData['name'] : '';
+            unset($this->session->data['loggedInCountry']);
+            unset($this->session->data['loggedInState']);
+            unset($this->session->data['loggedInCity']);
+            unset($this->session->data['session_country_id']);
+
+            //city
+            if(!empty($this->request->post['city'])) {
+                $city_id = $this->request->post['city'];
+                $cityData = $this->model_localisation_area->getArea($city_id);
+                $stringAddress[] = $this->session->data['loggedInCity'] = !empty($cityData['name']) ? $cityData['name'] : '';
+            }
 
             //zone
             if(!empty($this->request->post['state'])) {
@@ -56,13 +63,11 @@ class ControllerCommonHome extends Controller {
                 $stringAddress[] = $this->session->data['loggedInState'] = !empty($zoneData['name']) ? $zoneData['name'] : '';
             }
 
-            //city
-            if(!empty($this->request->post['city'])) {
-                $city_id = $this->request->post['city'];
-                $cityData = $this->model_localisation_area->getArea($city_id);
-                $stringAddress[] = $this->session->data['loggedInCity'] = !empty($cityData['name']) ? $cityData['name'] : '';
-            }
-//print_r($stringAddress);exit('kokok');
+            //country
+            $country_id = $this->request->post['country'];
+            $countryData = $this->model_localisation_country->getCountry($country_id);
+            $stringAddress[] = $this->session->data['loggedInCountry'] = !empty($countryData['name']) ? $countryData['name'] : '';
+
             $this->session->data['session_country_id'] = $country_id;
             $strAddress = implode(', ', $stringAddress);
         }
