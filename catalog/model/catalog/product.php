@@ -87,7 +87,11 @@ class ModelCatalogProduct extends Model {
         //hide products of disabled sellers
         $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
 
-		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+        //hide products of non-membership sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "customer cus ON (cus.customer_id = mp.customer_id)";
+
+
+        $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {
@@ -168,9 +172,6 @@ class ModelCatalogProduct extends Model {
 			$sql .= ")";
 		}
 
-        //hide products of disabled sellers
-        $sql .= " AND mp.status = 1";
-
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
@@ -178,6 +179,11 @@ class ModelCatalogProduct extends Model {
         if (!empty($data['filter_location'])) {
             $sql .= " AND p.location = '" . $data['filter_location'] . "'";
         }
+
+        //hide products of disabled sellers
+        $sql .= " AND mp.status = 1";
+        //to hide products of non-membership products
+        $sql .= " AND cus.subscription_plan IS NOT NULL";
 
 		$sql .= " GROUP BY p.product_id";
 
@@ -509,6 +515,12 @@ class ModelCatalogProduct extends Model {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
 
+        //hide products of disabled sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "mpseller mp ON (mp.mpseller_id = p.mpseller_id)";
+
+        //hide products of non-membership sellers
+        $sql .= " LEFT JOIN " . DB_PREFIX . "customer cus ON (cus.customer_id = mp.customer_id)";
+
 		$sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
 		if (!empty($data['filter_category_id'])) {
@@ -597,6 +609,11 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
+
+        //hide products of disabled sellers
+        $sql .= " AND mp.status = 1";
+        //to hide products of non-membership products
+        $sql .= " AND cus.subscription_plan IS NOT NULL";
 
         //countrywise location
 //        if (isset($this->session->data['session_country_id'])) {

@@ -191,6 +191,7 @@ class ModelMpmultivendorOrder extends Model {
 			'customer',
 			'order_status',
 			'mpseller_order_status',
+			'mpseller',
 			'o.date_added',
 			'o.date_modified',
 			'o.total'

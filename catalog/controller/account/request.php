@@ -415,23 +415,49 @@ class ControllerAccountRequest extends Controller
     public function updateStatus()
     {
         $this->load->model('account/request');
+        $this->load->model('localisation/country');
+        $this->load->model('localisation/zone');
 
         $requestId = $this->request->get['id'];
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 
             if (!empty($this->request->post['selectStatus'])) {
+
                 $this->model_account_request->updateStatus($requestId, $this->request->post);
                 $this->session->data['success'] = 'Your order status has been successfully updated.';
 
                 $requestData = $this->model_account_request->getRequestData($requestId);
                 $orderData = $this->model_account_request->getOrderData($requestData['order_id']);
+                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
 
-                //update delivery charges on the basis of distance between customer & seller
-                $distance = 1;
                 $dp_status = $this->request->post['selectStatus'];
                 if($dp_status == 'Parcel delivered') {
 
-                    //todo: calculate distance
+                    //calculate distance
+                    $customerArray = [
+                        $orderData['shipping_address_1'],
+                        $orderData['shipping_city'],
+                        $orderData['shipping_zone'],
+                        $orderData['shipping_country']
+                    ];
+                    $customerAddress = implode(', ', $customerArray);
+
+                    $countryData = $this->model_localisation_country->getCountry($sellerData['country_id']);
+                    $zoneData = $this->model_localisation_zone->getZone($sellerData['zone_id']);
+                    $sellerArray = [
+                        $sellerData['address'],
+                        $sellerData['city'],
+                        $zoneData['name'],
+                        $countryData['name']
+                    ];
+                    $sellerAddress = implode(', ', $sellerArray);
+
+                    //update delivery charges on the basis of distance between customer & seller
+                    $key = 'AIzaSyA1KlkW09_TLutu_Pg85h2YhU3jCRLqK1w';
+                    $addressFrom = $sellerAddress;
+                    $addressTo = $customerAddress;
+                    $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
+
                     $dataCharges = array(
                         'delivery_charges' => 3.53 + (0.25 * $distance),
                         'currency' => $orderData['currency_code']
@@ -440,9 +466,6 @@ class ControllerAccountRequest extends Controller
                 }
 
                 //send mail to seller when updates
-                $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
-                //echo '<pre>';print_r($sellerData);exit('okkoko');
-
                 if ($this->request->server['HTTPS']) {
                     $server = $this->config->get('config_ssl');
                 } else {
@@ -488,5 +511,49 @@ class ControllerAccountRequest extends Controller
 
         //$this->response->redirect($this->url->link('account/request/view', 'id='.$requestId, true));
         $this->response->redirect($this->url->link('account/request/orders', '', true));
+    }
+
+    protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)
+    {
+        // Change address format
+        $formattedAddrFrom = str_replace(' ', '+', $addressFrom);
+        $formattedAddrTo = str_replace(' ', '+', $addressTo);
+
+        // Geocoding API request with start address
+        $geocodeFrom = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedAddrFrom . '&sensor=false&key=' . $apiKey);
+        $outputFrom = json_decode($geocodeFrom);
+        if (!empty($outputFrom->error_message)) {
+            return $outputFrom->error_message;
+        }
+
+        // Geocoding API request with end address
+        $geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedAddrTo . '&sensor=false&key=' . $apiKey);
+        $outputTo = json_decode($geocodeTo);
+        if (!empty($outputTo->error_message)) {
+            return $outputTo->error_message;
+        }
+
+        // Get latitude and longitude from the geodata
+        $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
+        $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
+        $latitudeTo = $outputTo->results[0]->geometry->location->lat;
+        $longitudeTo = $outputTo->results[0]->geometry->location->lng;
+
+        // Calculate distance between latitude and longitude
+        $theta = $longitudeFrom - $longitudeTo;
+        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+
+        // Convert unit and return distance
+        $unit = strtoupper($unit);
+        if ($unit == "K") {
+            return round($miles * 1.609344, 2) . ' km';
+        } elseif ($unit == "M") {
+            return round($miles * 1609.344, 2) . ' meters';
+        } else {
+            return round($miles, 2) . ' miles';
+        }
     }
 }

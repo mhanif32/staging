@@ -4,7 +4,6 @@ class ControllerProductSearch extends Controller
 {
     public function index()
     {
-
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
 
@@ -244,8 +243,6 @@ class ControllerProductSearch extends Controller
                     $tax = false;
                 }
 
-
-
                 if ($this->config->get('config_review_status')) {
                     $rating = (int)$result['rating'];
                 } else {
@@ -253,7 +250,6 @@ class ControllerProductSearch extends Controller
                 }
 
                 $storeData = $this->model_catalog_product->getSellerFromMpsellerId($result['mpseller_id']);
-
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
                     'thumb' => $image,

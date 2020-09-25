@@ -4,17 +4,15 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 {
     public function index()
     {
-        $key = 'AIzaSyA1KlkW09_TLutu_Pg85h2YhU3jCRLqK1w';
-        $addressFrom = 'Wardha';
-        $addressTo = 'Nagpur';
-
-// Get distance in km
-        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
-
-
-        echo '<pre>';
-        print_r($distance);
-        exit('okoko');
+//        $key = 'AIzaSyA1KlkW09_TLutu_Pg85h2YhU3jCRLqK1w';
+//        $addressFrom = 'Wardha';
+//        $addressTo = 'Nagpur';
+//
+//        // Get distance in km
+//        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
+//        echo '<pre>';
+//        print_r($distance);
+//        exit('okoko');
 
         /*$address = str_replace(" ", "+", 'Mahal, Nagpur, India'); // replace all the white space with "+" sign to match with google search pattern
 
@@ -49,7 +47,6 @@ class ControllerAccountDeliverypartnerPayments extends Controller
             var_dump($response);
         }
         exit('okoko');*/
-
 
         error_reporting(E_ALL);
         ini_set("display_errors", 1);
@@ -103,17 +100,15 @@ class ControllerAccountDeliverypartnerPayments extends Controller
         $order_total = $this->model_account_order->getTotalDeliveryPartnersOrders();
 
         $results = $this->model_account_order->getDeliveryPartnersOrders(($page - 1) * 10, 10);
-//echo '<pre>'; print_r($results); exit('okoko');
         foreach ($results as $result) {
             $product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
             $voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
 
-            $seller = $this->model_account_request->getMpSellerdata($result['mpseller_id']);
+            /*$seller = $this->model_account_request->getMpSellerdata($result['mpseller_id']);
             $seller_address = $seller['address'];
             $seller_city = $seller['city'];
             $seller_zone = $this->model_localisation_zone->getZone($seller['zone_id']);
-            $seller_country = $this->model_localisation_country->getCountry($seller['country_id']);
-
+            $seller_country = $this->model_localisation_country->getCountry($seller['country_id']);*/
 
             $data['orders'][] = array(
                 'order_id' => $result['order_id'],
@@ -122,7 +117,7 @@ class ControllerAccountDeliverypartnerPayments extends Controller
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
                 'products' => ($product_total + $voucher_total),
                 'total' => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-                'delivery_charges' => 0.00,
+                'delivery_charges' => !empty($result['delivery_charges']) ? $this->currency->format($result['delivery_charges'], $result['currency']) : 0,
                 'view' => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
             );
         }
@@ -137,8 +132,6 @@ class ControllerAccountDeliverypartnerPayments extends Controller
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($order_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($order_total - 10)) ? $order_total : ((($page - 1) * 10) + 10), $order_total, ceil($order_total / 10));
 
-
-
         $data['continue'] = $this->url->link('account/account', '', true);
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');
@@ -147,49 +140,5 @@ class ControllerAccountDeliverypartnerPayments extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $this->response->setOutput($this->load->view('account/deliverypartner/payment_list', $data));
-    }
-
-    protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)
-    {
-        // Change address format
-        $formattedAddrFrom = str_replace(' ', '+', $addressFrom);
-        $formattedAddrTo = str_replace(' ', '+', $addressTo);
-
-        // Geocoding API request with start address
-        $geocodeFrom = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedAddrFrom . '&sensor=false&key=' . $apiKey);
-        $outputFrom = json_decode($geocodeFrom);
-        if (!empty($outputFrom->error_message)) {
-            return $outputFrom->error_message;
-        }
-
-        // Geocoding API request with end address
-        $geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedAddrTo . '&sensor=false&key=' . $apiKey);
-        $outputTo = json_decode($geocodeTo);
-        if (!empty($outputTo->error_message)) {
-            return $outputTo->error_message;
-        }
-
-        // Get latitude and longitude from the geodata
-        $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
-        $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
-        $latitudeTo = $outputTo->results[0]->geometry->location->lat;
-        $longitudeTo = $outputTo->results[0]->geometry->location->lng;
-
-        // Calculate distance between latitude and longitude
-        $theta = $longitudeFrom - $longitudeTo;
-        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
-
-        // Convert unit and return distance
-        $unit = strtoupper($unit);
-        if ($unit == "K") {
-            return round($miles * 1.609344, 2) . ' km';
-        } elseif ($unit == "M") {
-            return round($miles * 1609.344, 2) . ' meters';
-        } else {
-            return round($miles, 2) . ' miles';
-        }
     }
 }
