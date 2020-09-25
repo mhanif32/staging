@@ -134,7 +134,11 @@ class ModelMpmultivendorOrder extends Model {
 	}
 
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id, o.store_name, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o LEFT JOIN ". DB_PREFIX ."mpseller_order_product mpo ON(o.order_id = mpo.order_id) WHERE o.order_id > 0";
+		$sql = "SELECT o.order_id, mp.store_name, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o LEFT JOIN ". DB_PREFIX ."mpseller_order_product mpo ON(o.order_id = mpo.order_id) ";
+
+        $sql .= " LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON mp.mpseller_id = mpo.mpseller_id";
+
+        $sql .= " WHERE o.order_id > 0";
 
 		if (isset($data['filter_order_status'])) {
 			$implode = array();
@@ -175,6 +179,13 @@ class ModelMpmultivendorOrder extends Model {
 		if (!empty($data['filter_customer'])) {
 			$sql .= " AND CONCAT(o.firstname, ' ', o.lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
+
+        if (!empty($data['filter_seller'])) {
+
+            //echo $this->db->escape($data['filter_seller']);exit('plplpl');
+
+            $sql .= " AND mp.store_name LIKE '%" . $this->db->escape($data['filter_seller']) . "%'";
+        }
 
 		if (!empty($data['filter_date_added'])) {
 			$sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
@@ -222,7 +233,7 @@ class ModelMpmultivendorOrder extends Model {
 		}
 
 		$query = $this->db->query($sql);
-
+//echo $sql;exit('okokok');
 		return $query->rows;
 	}
 
@@ -281,8 +292,10 @@ class ModelMpmultivendorOrder extends Model {
 	}
 
 	public function getTotalOrders($data = array()) {
-		$sql = "SELECT * FROM `" . DB_PREFIX . "order` o LEFT JOIN ". DB_PREFIX ."mpseller_order_product mpo ON(o.order_id = mpo.order_id) WHERE o.order_id > 0";
+		$sql = "SELECT * FROM `" . DB_PREFIX . "order` o LEFT JOIN ". DB_PREFIX ."mpseller_order_product mpo ON(o.order_id = mpo.order_id)";
 
+        $sql .= " LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON mp.mpseller_id = mpo.mpseller_id";
+        $sql .= " WHERE o.order_id > 0";
 		if (isset($data['filter_order_status'])) {
 			$implode = array();
 
@@ -322,6 +335,11 @@ class ModelMpmultivendorOrder extends Model {
 		if (!empty($data['filter_customer'])) {
 			$sql .= " AND CONCAT(o.firstname, ' ', o.lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
+
+        if (!empty($data['filter_seller'])) {
+
+            $sql .= " AND mp.store_name LIKE '%" . $this->db->escape($data['filter_seller']) . "%'";
+        }
 
 		if (!empty($data['filter_date_added'])) {
 			$sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";

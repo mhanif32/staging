@@ -3,6 +3,10 @@ class ControllerMpmultivendorOrder extends Controller {
 	private $error = array();
 
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('mpmultivendor/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -29,6 +33,12 @@ class ControllerMpmultivendorOrder extends Controller {
 		} else {
 			$filter_customer = null;
 		}
+
+        if (isset($this->request->get['filter_seller'])) {
+            $filter_seller = $this->request->get['filter_seller'];
+        } else {
+            $filter_seller = null;
+        }
 
 		if (isset($this->request->get['filter_order_status'])) {
 			$filter_order_status = $this->request->get['filter_order_status'];
@@ -82,6 +92,10 @@ class ControllerMpmultivendorOrder extends Controller {
 			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 
+        if (isset($this->request->get['filter_seller'])) {
+            $url .= '&filter_seller=' . urlencode(html_entity_decode($this->request->get['filter_seller'], ENT_QUOTES, 'UTF-8'));
+        }
+
 		if (isset($this->request->get['filter_order_status'])) {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
@@ -130,6 +144,7 @@ class ControllerMpmultivendorOrder extends Controller {
 		$filter_data = array(
 			'filter_order_id'      => $filter_order_id,
 			'filter_customer'	   => $filter_customer,
+			'filter_seller'	       => $filter_seller,
 			'filter_order_status'  => $filter_order_status,
 			'filter_mpseller_order_status'  => $filter_mpseller_order_status,
 			'filter_date_added'    => $filter_date_added,
@@ -281,6 +296,10 @@ class ControllerMpmultivendorOrder extends Controller {
 			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 
+        if (isset($this->request->get['filter_seller'])) {
+            $url .= '&filter_seller=' . urlencode(html_entity_decode($this->request->get['filter_seller'], ENT_QUOTES, 'UTF-8'));
+        }
+
 		if (isset($this->request->get['filter_order_status'])) {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
@@ -324,6 +343,10 @@ class ControllerMpmultivendorOrder extends Controller {
 			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 
+        if (isset($this->request->get['filter_seller'])) {
+            $url .= '&filter_seller=' . urlencode(html_entity_decode($this->request->get['filter_seller'], ENT_QUOTES, 'UTF-8'));
+        }
+
 		if (isset($this->request->get['filter_order_status'])) {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
@@ -360,6 +383,7 @@ class ControllerMpmultivendorOrder extends Controller {
 
 		$data['filter_order_id'] = $filter_order_id;
 		$data['filter_customer'] = $filter_customer;
+		$data['filter_seller'] = $filter_seller;
 		$data['filter_order_status'] = $filter_order_status;
 		$data['filter_mpseller_order_status'] = $filter_mpseller_order_status;
 		$data['filter_date_added'] = $filter_date_added;

@@ -279,6 +279,12 @@
                 url += '&filter_customer=' + encodeURIComponent(filter_customer);
             }
 
+            var filter_seller = $('input[name=\'filter_seller\']').val();
+
+            if (filter_seller) {
+                url += '&filter_seller=' + encodeURIComponent(filter_seller);
+            }
+
             var filter_order_status = $('select[name=\'filter_order_status\']').val();
 
             if (filter_order_status != '*') {
