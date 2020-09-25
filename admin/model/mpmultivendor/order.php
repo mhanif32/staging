@@ -136,9 +136,7 @@ class ModelMpmultivendorOrder extends Model {
 	public function getOrders($data = array()) {
 		$sql = "SELECT o.order_id, mp.store_name, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o LEFT JOIN ". DB_PREFIX ."mpseller_order_product mpo ON(o.order_id = mpo.order_id) ";
 
-        if (!empty($data['filter_seller'])) {
-            $sql .= " LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON mp.mpseller_id = mpo.mpseller_id";
-        }
+        $sql .= " LEFT JOIN `" . DB_PREFIX . "mpseller` mp ON mp.mpseller_id = mpo.mpseller_id";
 
         $sql .= " WHERE o.order_id > 0";
 
