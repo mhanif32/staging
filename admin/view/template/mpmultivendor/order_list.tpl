@@ -49,6 +49,13 @@
                                        placeholder="<?php echo $entry_customer; ?>" id="input-customer"
                                        class="form-control"/>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="input-seller">Store Name</label>
+                                <input type="text" name="filter_seller" value="<?php echo $filter_seller; ?>"
+                                       placeholder="Store Name" id="input-seller"
+                                       class="form-control"/>
+                            </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -117,17 +124,6 @@
                                     <span class="input-group-btn">
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           for="input-order-status"><?php echo $entry_order_status; ?></label>
-                                    <select name="filter_order_status" id="input-order-status" class="form-control">
-                                        <option value="*"></option>
-
-                                    </select>
-                                </div>
                             </div>
 
                             <button type="button" id="button-filter" class="btn btn-primary pull-right"><i

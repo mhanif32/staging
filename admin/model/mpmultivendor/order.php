@@ -176,6 +176,10 @@ class ModelMpmultivendorOrder extends Model {
 			$sql .= " AND CONCAT(o.firstname, ' ', o.lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
 
+        if (!empty($data['filter_seller'])) {
+            $sql .= " AND o.store_name LIKE '%" . $this->db->escape($data['filter_seller']) . "%'";
+        }
+
 		if (!empty($data['filter_date_added'])) {
 			$sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
