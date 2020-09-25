@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']          = 'Seller payment';
+$_['heading_title']          = 'Sellers Payment';
 
 // Text
 $_['text_success']           = 'Success: You have modified transactions!';
