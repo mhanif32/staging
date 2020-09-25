@@ -112,7 +112,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
-
+                                    <div class="d-flex justify-content-between">
                                     {% if isAcceptedByOthers %}
                                         <div id="option-button">
                                             <label>Accept or Decline Delivery Request.</label><br>
@@ -120,6 +120,10 @@
                                             <button class="btn btn-danger" id="decline">Decline</button>
                                         </div>
                                     {% endif %}
+                                        <div class="paid-delivery">
+                                            <label>You Will Be Paid.........For This Delivery</label>
+                                        </div>
+                                    </div>
 
                                     {% if is_accept == 1 %}
                                         <hr>

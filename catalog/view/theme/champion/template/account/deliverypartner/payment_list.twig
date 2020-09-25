@@ -20,22 +20,22 @@
                         <table class="table border-bottom-0">
                             <thead>
                             <tr class="bg-light font-weight-bold text-uppercase">
-                                <td class="text-center">{{ column_order_id }}</td>
-                                <td class="text-center">{{ column_customer }}</td>
-                                <td class="text-center">Order Total</td>
-                                <td class="text-center">Delivery Charges</td>
-                                <td class="text-center">{{ column_date_added }}</td>
+                                <td class="text-center f-15">{{ column_order_id }}</td>
+                                <td class="text-center f-15">{{ column_customer }}</td>
+                                {#<td class="text-center">Order Total</td>#}
+                                <td class="text-center f-15">Delivery Charges <br>Due To Delivery Partner</td>
+                                <td class="text-center f-15">{{ column_date_added }}</td>
 {#                                <td></td>#}
                             </tr>
                             </thead>
                             <tbody>
                             {% for order in orders %}
                                 <tr>
-                                    <td class="text-center">#{{ order.order_id }}</td>
-                                    <td class="text-center">{{ order.name }}</td>
-                                    <td class="text-center">{{ order.total }}</td>
-                                    <td class="text-center">{{ order.delivery_charges }}</td>
-                                    <td class="text-center">{{ order.date_added }}</td>
+                                    <td class="text-center f-13">#{{ order.order_id }}</td>
+                                    <td class="text-center f-13">{{ order.name }}</td>
+                                    {#<td class="text-center">{{ order.total }}</td>#}
+                                    <td class="text-center f-13">{{ order.delivery_charges }}</td>
+                                    <td class="text-center f-13">{{ order.date_added }}</td>
 {#                                    <td class="text-center"><a href="{{ order.view }}" data-toggle="tooltip"#}
 {#                                                               title="{{ button_view }}"#}
 {#                                                               class="btn btn-success btn-sm">View</a>#}
