@@ -61,10 +61,12 @@ class ControllerExtensionPaymentPaystack extends Controller
 
         $data['currency'] = $order_info['currency_code'];
         $data['ref']      = uniqid('' . $this->session->data['order_id'] . '-');
-        $data['amount']   = intval($order_info['total'] * 100);
+        //$data['amount']   = intval($order_info['total'] * 100);
+
+        $amount = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
+        $data['amount']   = intval($amount * 100);;
         $data['email']    = $order_info['email'];
         $data['callback'] = $this->url->link('extension/payment/paystack/callback', 'trxref=' . rawurlencode($data['ref']), 'SSL');
-//echo '<pre>';print_r($data);exit('ijiji');
         return $this->load->view('extension/payment/paystack', $data);
     }
 
