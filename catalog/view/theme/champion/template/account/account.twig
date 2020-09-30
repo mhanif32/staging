@@ -18,8 +18,12 @@
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
                             {% if is_seller and checkPlan.name %}
-                            <div class="text-right"><i class="fa fa-flag" aria-hidden="true"></i>
+                                <div class="text-right"><i class="fa fa-flag" aria-hidden="true"></i>
 {{ checkPlan.name }}</div>
+                            {% else %}
+                                <div class="mb-5">
+                                    "<span class="text-uppercase">Currently you are on a free plan that attracts 20% on all products sold from your store. To switch to another monthly plan, please go to the</span>:- Membership plan SECTION BELOW"
+                                </div>
                             {% endif %}
                             <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
                             <hr>
