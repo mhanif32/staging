@@ -481,7 +481,7 @@ class ModelMpmultivendorMpseller extends Model {
 
 	public function getCustomerPlan($customer_id)
     {
-        $query = $this->db->query("SELECT sp.name as plan_name, sup.amount, sup.start_date, sup.stripe_status FROM `" . DB_PREFIX . "subscription_plan` sp 
+        $query = $this->db->query("SELECT sp.name as plan_name, sup.* FROM `" . DB_PREFIX . "subscription_plan` sp 
         LEFT JOIN `" . DB_PREFIX . "customer` c ON c.subscription_plan_id = sp.plan_id 
         LEFT JOIN `" . DB_PREFIX . "subscription_user_plan` sup ON sup.subscription_plan_id = sp.plan_id 
         WHERE c.customer_id = '" . (int)$customer_id . "'");

@@ -64,6 +64,7 @@
                                 <li><a href="#tab-seo" data-toggle="tab"><?php echo $tab_seo; ?></a></li>
                                 <li><a href="#tab-commission" data-toggle="tab"><?php echo $tab_commission; ?></a></li>
                                 <li><a href="#tab-transaction" data-toggle="tab"><?php echo $tab_transaction; ?></a>
+                                <li><a href="#tab-membership" data-toggle="tab">Membership</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -374,7 +375,8 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">Address Proof</label>
                                         <div class="col-sm-10">
-                                            <a href="<?php echo $uploads_dir.$link_address_proof?>" class="btn btn-primary"
+                                            <a href="<?php echo $uploads_dir.$link_address_proof?>"
+                                               class="btn btn-primary"
                                                target="_blank">Click here to view Address Proof</a>
                                         </div>
                                     </div>
@@ -635,6 +637,42 @@
                                                 class="btn btn-primary"><i
                                                     class="fa fa-plus-circle"></i> <?php echo $button_transaction_add; ?>
                                         </button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-membership">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover">
+                                                    <tbody>
+                                                    <?php
+                                                    if(!empty($planData['plan_name'])) {
+                                                    ?>
+                                                    <tr>
+                                                        <td><strong>Plan : </strong></td>
+                                                        <td><label class="label label-success" style="font-size: 14px;"><?php echo $planData['plan_name'];?></label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Amount Paid : </strong></td>
+                                                        <td><?php echo $planData['stripe_amount'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Date On (Start Date): </strong></td>
+                                                        <td><?php echo $planData['start_date'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Date On (End Date): </strong></td>
+                                                        <td><?php echo $planData['end_date'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Status Of Membership : </strong></td>
+                                                        <td><?php echo ucfirst($planData['stripe_status']);?></td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
