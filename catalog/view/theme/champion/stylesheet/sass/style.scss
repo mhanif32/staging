@@ -12,7 +12,7 @@ body {
 }
 .main-body{ width: 100%;position: relative;min-height: calc(63vh - 13px); }
 h2 {font-size: calc(1.733rem + 0.9vw);font-weight: 700;}
-h3 {font-size: 2.8125rem;font-weight: 600;}
+h3 {  @media only screen and (min-width: 1024px) {font-size: 2.8125rem;font-weight: 600;}}
 h4 {font-size: 1.25rem;}
 h5 {font-size: 2.5rem;font-weight: 700;}
 .f-20{font-size: 1.25rem;}
@@ -1655,11 +1655,16 @@ span {
 
 #fillAddressModal {
   .modal-lg {
-  .modal-content{ overflow:hidden;
-  a.h2{ color:#01B0F1; margin-bottom:0; text-decoration:none; }
-    .top-strip { height: 130px; background: #01B0F1; transform: rotate(141deg); margin-top: -106px; margin-right: 457px; margin-left: -130px; border-bottom: 65px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
-    .bottom-strip { height: 80px; background: #01B0F1; transform: rotate(135deg); margin-top: -76px; margin-right: -339px; margin-left: 421px; border-bottom: 20px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
-  } } }
+    .modal-content{ overflow:hidden;
+      .top-strip {
+        @media only screen and (min-width: 768px) {height: 130px;}
+        height: 85px;
+        @media only screen and (max-width: 768px){}
+        background: #01B0F1; transform: rotate(141deg); margin-top: -106px; margin-right: 457px; margin-left: -130px; border-bottom: 65px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
+      .bottom-strip { height: 140px; background: #01B0F1; transform: rotate(135deg); margin-top: -76px; margin-right: -339px; margin-left: 421px; border-bottom: 20px solid #E0F5F8; border-top: 10px solid #E0F5F8; }
+      }
+  }
+}
 
 #mv-reviews {
 .review-block {
