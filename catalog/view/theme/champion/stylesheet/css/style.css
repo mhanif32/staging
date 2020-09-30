@@ -81,9 +81,10 @@ h2 {
   font-size: calc(1.733rem + 0.9vw);
   font-weight: 700; }
 
-h3 {
-  font-size: 2.8125rem;
-  font-weight: 600; }
+@media only screen and (min-width: 1024px) {
+  h3 {
+    font-size: 2.8125rem;
+    font-weight: 600; } }
 
 h4 {
   font-size: 1.25rem; }
@@ -2072,12 +2073,8 @@ ul.breadcrumb li {
 
 #fillAddressModal .modal-lg .modal-content {
   overflow: hidden; }
-  #fillAddressModal .modal-lg .modal-content a.h2 {
-    color: #01B0F1;
-    margin-bottom: 0;
-    text-decoration: none; }
   #fillAddressModal .modal-lg .modal-content .top-strip {
-    height: 130px;
+    height: 85px;
     background: #01B0F1;
     -webkit-transform: rotate(141deg);
             transform: rotate(141deg);
@@ -2086,6 +2083,9 @@ ul.breadcrumb li {
     margin-left: -130px;
     border-bottom: 65px solid #E0F5F8;
     border-top: 10px solid #E0F5F8; }
+    @media only screen and (min-width: 768px) {
+      #fillAddressModal .modal-lg .modal-content .top-strip {
+        height: 130px; } }
   #fillAddressModal .modal-lg .modal-content .bottom-strip {
     height: 80px;
     background: #01B0F1;

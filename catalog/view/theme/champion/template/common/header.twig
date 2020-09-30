@@ -330,19 +330,19 @@
 </header>
 
 <!-- Modal -->
-<div class="modal fade text-center py-5 subscribeModal-lg" id="fillAddressModal" tabindex="-1" role="dialog"
+<div class="modal fade py-5 subscribeModal-lg" id="fillAddressModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="top-strip"></div>
-                <a class="h2" href="javascript:void(0)" target="_blank">
-                    <img src="{{ popupLogo }}" alt="logo">
+                <a class="d-block text-center mt-4" href="javascript:void(0)" target="_blank">
+                    <img src="{{ popupLogo }}" alt="logo" class="img-fluid">
                 </a>
-                <h3 class="pt-3 mb-0 text-secondary welcome-title">Welcome to The Champion Mall</h3>
-                <div class="pb-1 pt-2 text-muted welcome-msg" style="height: 170px;">
+                <h3 class="pt-3 mb-0 text-secondary welcome-title text-center">Welcome to The Champion Mall</h3>
+                <div class="pb-1 pt-2 text-muted welcome-msg text-center" style="height: 170px;">
                     <p>{{ fillAddressMsg }}</p>
-                    <div class="delivery-location">
+                    <div class="delivery-location d-none d-md-block">
                         <a href="javascript:void(0)" id="selectDeliveryLocation" class="text-success">click here to
                             select your delivery location</a>
                     </div>
