@@ -2087,7 +2087,7 @@ ul.breadcrumb li {
       #fillAddressModal .modal-lg .modal-content .top-strip {
         height: 130px; } }
   #fillAddressModal .modal-lg .modal-content .bottom-strip {
-    height: 80px;
+    height: 140px;
     background: #01B0F1;
     -webkit-transform: rotate(135deg);
             transform: rotate(135deg);
