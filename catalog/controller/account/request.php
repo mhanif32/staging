@@ -349,6 +349,8 @@ class ControllerAccountRequest extends Controller
         foreach ($assignedOrders as $order) {
 
             $orderData = $this->model_account_request->getOrderData($order['order_id']);
+            $sellerOrderHistory = $this->model_account_request->getSellerOrderStatus($order['order_id'], $order['mpseller_id']);
+            $deliveryRequest = $this->model_account_request->getDeliveryOrderRequestStatus($order['order_id']);
 
             $orderArray = array();
             $orderArray['request_id'] = $order['request_id'];
@@ -357,6 +359,8 @@ class ControllerAccountRequest extends Controller
             $orderArray['delivery_location'] = $order['shipping_address_1'] . ', ' . $order['shipping_city'] . ', ' . $order['shipping_zone'] . ', ' . $order['shipping_country'];
             $seller = $this->model_account_request->getMpSellerdata($order['mpseller_id']);
             $orderArray['mpseller_name'] = $seller['store_owner'];
+            $orderArray['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
+            $orderArray['delivery_status'] = !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-';
 //            $requestArray['requested_date'] = $request['requested_date'];
 //            $requestArray['is_accept'] = $request['is_accept'];
             $orderArray['assignedOrderView'] = $this->url->link('account/request/assignedOrderView', '&id=' . $order['request_id'], true);
@@ -390,6 +394,7 @@ class ControllerAccountRequest extends Controller
 
         $requestData = $this->model_account_request->getRequestData($this->request->get['id']);
         $seller = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
+        $sellerOrderHistory = $this->model_account_request->getSellerOrderStatus($requestData['order_id'], $requestData['mpseller_id']);
 
         $data['seller'] = array(
             'store_owner' => $seller['store_owner'],
@@ -404,6 +409,7 @@ class ControllerAccountRequest extends Controller
         $data['is_accept'] = $requestData['is_accept'];
         $data['request_id'] = $requestData['request_id'];
         $data['status'] = $requestData['status'];
+        $data['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');

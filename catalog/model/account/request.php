@@ -92,5 +92,16 @@ class ModelAccountRequest extends Model
         return true;
     }
 
+    public function getSellerOrderStatus($orderId, $mpsellerId)
+    {
+        $query = $this->db->query("SELECT moh.order_status_id, os.name FROM " . DB_PREFIX . "mpseller_order_history moh LEFT JOIN `" . DB_PREFIX . "order_status` os ON moh.order_status_id = os.order_status_id WHERE moh.mpseller_id = '" . (int)$mpsellerId . "' and moh.order_id = '" . (int)$orderId . "' ORDER BY moh.mpseller_order_history_id DESC LIMIT 1");
+        return $query->row;
+    }
 
+    public function getDeliveryOrderRequestStatus($order_id)
+    {
+        $query = $this->db->query("SELECT status FROM `" . DB_PREFIX . "delivery_partner_request` dpr WHERE dpr.is_accept = 1 AND dpr.order_id = '".(int)$order_id."'");
+
+        return $query->row;
+    }
 }
