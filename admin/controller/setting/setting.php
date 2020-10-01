@@ -537,6 +537,12 @@ class ControllerSettingSetting extends Controller {
 			$data['config_checkout_id'] = $this->config->get('config_checkout_id');
 		}
 
+        if (isset($this->request->post['config_google_distance_api_key'])) {
+            $data['config_google_distance_api_key'] = $this->request->post['config_google_distance_api_key'];
+        } else {
+            $data['config_google_distance_api_key'] = $this->config->get('config_google_distance_api_key');
+        }
+
         if (isset($this->request->post['config_max_checkout_amount'])) {
             $data['config_max_checkout_amount'] = $this->request->post['config_max_checkout_amount'];
         } else {

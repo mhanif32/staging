@@ -298,4 +298,18 @@ class ModelAccountCustomer extends Model
 
         return $query->row;
     }
+
+    public function getFreePlanId()
+    {
+        $query = $this->db->query("SELECT plan_id FROM " . DB_PREFIX . "subscription_plan sp WHERE name = 'Free'");
+
+        return $query->row;
+    }
+
+    public function updateCustomerToFree($data, $customer_id)
+    {
+        $this->db->query("UPDATE " . DB_PREFIX . "customer SET `subscription_plan_id` = '".(int)$data['plan_id']."' WHERE customer_id = '" . (int)$customer_id . "'");
+
+        $this->db->query("INSERT INTO " . DB_PREFIX . "subscription_user_plan SET `subscription_plan_id` = '".(int)$data['plan_id']."', customer_id = '" . (int)$customer_id . "', stripe_subscription_id = 'NULL', stripe_customer_id = 'NULL', stripe_status = 'active', amount = '0.00', start_date = NOW(), end_date = NOW()");
+    }
 }

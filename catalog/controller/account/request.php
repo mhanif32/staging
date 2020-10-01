@@ -59,9 +59,6 @@ class ControllerAccountRequest extends Controller
 
     public function view()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request', '', true);
 
@@ -79,14 +76,16 @@ class ControllerAccountRequest extends Controller
         $otherRequests = $this->model_account_request->getOtherRequest($requestData['order_id']);
         $isAcceptedByOthers = empty($otherRequests) ? true : false;
         $seller = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
-
+        $sellerZoneData = $this->model_localisation_zone->getZone($seller['zone_id']);
+        $sellerCountryData = $this->model_localisation_country->getCountry($seller['country_id']);
+        $orderData = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['seller'] = array(
             'store_owner' => $seller['store_owner'],
             'store_name' => $seller['store_name'],
             'address' => $seller['address'],
             'city' => $seller['city'],
-            'zone' => $this->model_localisation_zone->getZone($seller['zone_id']),
-            'country' => $this->model_localisation_country->getCountry($seller['country_id']),
+            'zone' => $sellerZoneData,
+            'country' => $sellerCountryData,
             'email' => $seller['email'],
             'telephone' => $seller['telephone']
         );
@@ -94,8 +93,33 @@ class ControllerAccountRequest extends Controller
         $data['is_accept'] = $requestData['is_accept'];
         $data['request_id'] = $requestData['request_id'];
         $data['status'] = isset($requestData['status']) ? $requestData['status'] : '';
-        $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
+        $data['order'] = $orderData;
         $data['heading_title_view'] = $this->language->get('heading_title_view');
+
+        //estimated delivery fee
+        $key = $this->config->get('config_google_distance_api_key');
+        $sellerAddress = [
+            $seller['address'],
+            $seller['city'],
+            $sellerZoneData['name'],
+            $sellerCountryData['name']
+        ];
+        $sellerAddress = implode(', ', $sellerAddress);
+        $customerArray = [
+            $orderData['shipping_address_1'],
+            $orderData['shipping_city'],
+            $orderData['shipping_zone'],
+            $orderData['shipping_country']
+        ];
+        $customerAddress = implode(', ', $customerArray);
+
+        $addressFrom = $sellerAddress;
+        $addressTo = $customerAddress;
+        $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
+        $del_fee = 3.53 + (0.25 * $distance);
+        $dataCharges = $this->currency->format($del_fee, $orderData['currency_code'], $orderData['currency_value']);
+        $data['estm_delivery_fee'] = $dataCharges;
+
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
         $this->response->setOutput($this->load->view('account/request_view', $data));
@@ -459,7 +483,7 @@ class ControllerAccountRequest extends Controller
                     $sellerAddress = implode(', ', $sellerArray);
 
                     //update delivery charges on the basis of distance between customer & seller
-                    $key = 'AIzaSyA1KlkW09_TLutu_Pg85h2YhU3jCRLqK1w';
+                    $key = $this->config->get('config_google_distance_api_key');
                     $addressFrom = $sellerAddress;
                     $addressTo = $customerAddress;
                     $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
@@ -555,7 +579,7 @@ class ControllerAccountRequest extends Controller
         // Convert unit and return distance
         $unit = strtoupper($unit);
         if ($unit == "K") {
-            return round($miles * 1.609344, 2) . ' km';
+            return round($miles * 1.609344, 2);
         } elseif ($unit == "M") {
             return round($miles * 1609.344, 2) . ' meters';
         } else {
