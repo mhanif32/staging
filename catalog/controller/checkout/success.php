@@ -52,7 +52,7 @@ class ControllerCheckoutSuccess extends Controller
                     }
 
                     //Same Country
-                    if (!empty($seller['city']) && $shipAdd['zone_id'] != $seller['zone_id'] && $shipAdd['country_id'] == $seller['country_id']) {
+                    if (!empty($seller['city']) && $shipAdd['country_id'] == $seller['country_id']) {
 
                         $deliveryPartners = $this->model_account_request->sendRequestToDeliveryPartner($orderId, $shipAdd, $seller['mpseller_id'], 3);
                     }
