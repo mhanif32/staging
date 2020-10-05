@@ -27,7 +27,7 @@ $_['button_reviews']		= 'Profile Reviews';
 $_['button_orders']			= 'Orders';
 $_['button_commission']		= 'Commission';
 $_['button_transaction']	= 'Transactions';
-$_['button_transaction']	= 'Transactions';
+$_['button_transaction']	= 'Sellers Payment';
 $_['button_login']          = 'Login into Store';
 $_['button_message']		= 'Send Message';
 
