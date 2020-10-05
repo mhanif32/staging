@@ -456,13 +456,13 @@
 </div>
 <div class="checkbox">
     <label for="newsletter">
-        <input type="checkbox" name="newsletter" value="1" id="newsletter"/>
+        <input type="checkbox" name="newsletter" value="1" id="newsletter" checked="checked"/>
         {{ entry_newsletter }}</label>
 </div>
 {% if shipping_required %}
     <div class="checkbox">
         <label>
-            <input type="checkbox" name="shipping_address" value="1" checked="checked"/>
+            <input type="checkbox" name="shipping_address" value="1" />
             {{ entry_shipping }}</label>
     </div>
 {% endif %}
