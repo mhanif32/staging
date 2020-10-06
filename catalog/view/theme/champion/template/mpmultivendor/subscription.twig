@@ -133,12 +133,12 @@
                     <div class="col-lg-3 text-center">
                         Your current plan is:- <span class="btn-sm btn-success">{{ subscribed_plan.name }}</span>
 
-                        <div class="text-center mb-2 text-danger"><small>Please you can only change membership plan
-                                after one month from when you have chosen one.</small>
-                        </div>
+                        {#<div class="text-center mb-2 text-danger"><small>Please you can only change membership plan#}
+                                {#after one month from when you have chosen one.</small>#}
+                        {#</div>#}
 
                         {% if stop_subscription %}
-                            <strong>You cant cancel your plan till {{ end_date }}</strong>
+                            <strong>You can't cancel your plan till {{ end_date }}</strong>
                         {% else %}
                             <button class="btn btn-success cancel-plan" data-id="{{ subscribed_plan.plan_id }}">Cancel
                                 Plan
