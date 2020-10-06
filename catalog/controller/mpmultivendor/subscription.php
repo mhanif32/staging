@@ -72,15 +72,17 @@ class ControllerMpmultivendorSubscription extends Controller
         $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
         $data['checkPlan'] = !empty($checkPlan) ? true : false;
         $data['subscribed_plan'] = $checkPlan;
-        //echo '<pre>';print_r($checkPlan);exit('okokok');
+
+        if(!empty($checkPlan['end_date'])) {
+            $end_date = date('Y-m-d', $checkPlan['end_date']);
+            $data['stop_subscription'] = ($end_date < date('Y-m-d')) ? false : true;
+            $data['end_date'] = isset($checkPlan['end_date']) ? date('Y-m-d', $checkPlan['end_date']) : '';
+        }
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
     }
 
     public function add()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
 
