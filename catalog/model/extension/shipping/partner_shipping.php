@@ -4,7 +4,7 @@ class ModelExtensionShippingPartnerShipping extends Model
 {
     function getQuote($address)
     {
-        //echo '<pre>'; print_r($this->session->data); exit('iook');
+        //echo '<pre>'; print_r($this->session->data['currency']); exit('iook');
 
         $this->load->language('extension/shipping/partner_shipping');
         /**
@@ -40,16 +40,17 @@ class ModelExtensionShippingPartnerShipping extends Model
         }
 
         //$deliveryCharges = array_values($deliveryValues);
-        $totalDeliveryCharges = 0; $tempAmt = 0;
+        $totalDeliveryCharges = 0;
+        $tempAmt = 0;
         foreach ($deliveryValues as $key => $deliveryCharge) {
 
             $totalDeliveryAmt = 0;
             //check seller and customer locations are same
             $mpSellerId = $key;
-            $query = $this->db->query("SELECT * FROM ". DB_PREFIX ."mpseller m WHERE m.mpseller_id = '". (int)$mpSellerId ."' AND m.status = '1'");
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$mpSellerId . "' AND m.status = '1'");
             $mpSellerData = $query->row;
 
-            if(($mpSellerData['country_id'] == $address['country_id']) && ($mpSellerData['zone_id'] == $address['zone_id']) && ($mpSellerData['city'] == $address['city'])) {
+            if (($mpSellerData['country_id'] == $address['country_id']) && ($mpSellerData['zone_id'] == $address['zone_id']) && ($mpSellerData['city'] == $address['city']) && $address['country'] != 'Nigeria') {
 
                 $sellerZoneData = $this->getZone($mpSellerData['zone_id']);
                 $sellerCountryData = $this->getCountry($mpSellerData['country_id']);
@@ -73,7 +74,9 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
                 $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
-                $delivery_charge = 5.00 + (0.35 * $distance);
+
+                $currency = $this->getCurrencyByCode($this->session->data['currency']);
+                $delivery_charge = (5.00 / $currency['value']) + ((0.35 / $currency['value']) * $distance);
                 //$dataCharges = $this->currency->addCurrencySymbol($delivery_charge, $this->session->data['currency']);
                 $totalDeliveryAmt = $delivery_charge;
 
@@ -81,22 +84,22 @@ class ModelExtensionShippingPartnerShipping extends Model
                 //if seller and customer locations are same
                 $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
-                if($this->session->data['currency'] == 'NGN') {
+                if ($this->session->data['currency'] == 'NGN') {
                     //for NGN Currency only
                     if ($deliveryChargeNew <= 20000) {
 
-                        $tempAmt+= 4000;
+                        $tempAmt += 4000;
                     } else if ($deliveryChargeNew > 20000 && $deliveryChargeNew <= 30000) {
 
-                        $tempAmt+= 4600;
+                        $tempAmt += 4600;
                     } else if ($deliveryChargeNew > 30000 && $deliveryChargeNew <= 35000) {
 
-                        $tempAmt+= 4800;
+                        $tempAmt += 4800;
                     } else if ($deliveryChargeNew > 35000 && $deliveryChargeNew <= 40000) {
 
-                        $tempAmt+= 4950;
+                        $tempAmt += 4950;
                     } else if ($deliveryChargeNew > 40000) {
-                        $tempAmt+= $deliveryChargeNew * 13 / 100;
+                        $tempAmt += $deliveryChargeNew * 13 / 100;
                     }
 
                     //get USD rate from the currency
@@ -107,32 +110,32 @@ class ModelExtensionShippingPartnerShipping extends Model
                 } else {
 
                     //for currency USD
-                    if($this->session->data['currency'] != 'USD') {
+                    if ($this->session->data['currency'] != 'USD') {
                         $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
                     }
 
                     if ($deliveryChargeNew <= 50) {
-                        $tempAmt+= 19.20;
-                    } else if($deliveryChargeNew > 50 && $deliveryChargeNew <= 80) {
-                        $tempAmt+= 20;
-                    } else if($deliveryChargeNew > 80 && $deliveryChargeNew <= 100) {
-                        $tempAmt+= 22;
-                    } else if($deliveryChargeNew > 100 && $deliveryChargeNew <= 150) {
-                        $tempAmt+= 24.50;
-                    } else if($deliveryChargeNew > 150 && $deliveryChargeNew <= 250) {
-                        $tempAmt+= 25;
-                    } else if($deliveryChargeNew > 250 && $deliveryChargeNew <= 500) {
-                        $tempAmt+= 30;
-                    } else if($deliveryChargeNew > 500) {
-                        $tempAmt+= $deliveryChargeNew * 10 / 100;
+                        $tempAmt += 19.20;
+                    } else if ($deliveryChargeNew > 50 && $deliveryChargeNew <= 80) {
+                        $tempAmt += 20;
+                    } else if ($deliveryChargeNew > 80 && $deliveryChargeNew <= 100) {
+                        $tempAmt += 22;
+                    } else if ($deliveryChargeNew > 100 && $deliveryChargeNew <= 150) {
+                        $tempAmt += 24.50;
+                    } else if ($deliveryChargeNew > 150 && $deliveryChargeNew <= 250) {
+                        $tempAmt += 25;
+                    } else if ($deliveryChargeNew > 250 && $deliveryChargeNew <= 500) {
+                        $tempAmt += 30;
+                    } else if ($deliveryChargeNew > 500) {
+                        $tempAmt += $deliveryChargeNew * 10 / 100;
                     }
 
-                    if($this->session->data['currency'] == 'USD') {
+                    if ($this->session->data['currency'] == 'USD') {
 
                         $totalDeliveryAmt = $tempAmt;
                     } else {
 
-                        $NGN_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code = '".$this->session->data['currency']."'");
+                        $NGN_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code = '" . $this->session->data['currency'] . "'");
                         $nigeria_data = $NGN_query->row;
                         $usdAmt = $tempAmt / $nigeria_data['value'];
                         $totalDeliveryAmt = number_format($usdAmt, 4);
@@ -142,7 +145,6 @@ class ModelExtensionShippingPartnerShipping extends Model
             $totalDeliveryCharges += $totalDeliveryAmt;
         }
         //END : Champion Mall Delivery Charges Algorithm
-
         $method_data = array();
         if ($status) {
             $quote_data = array();
@@ -211,14 +213,23 @@ class ModelExtensionShippingPartnerShipping extends Model
         }
     }
 
-    public function getCountry($country_id) {
+    public function getCountry($country_id)
+    {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "' AND status = '1'");
 
         return $query->row;
     }
 
-    public function getZone($zone_id) {
+    public function getZone($zone_id)
+    {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE zone_id = '" . (int)$zone_id . "' AND status = '1'");
+
+        return $query->row;
+    }
+
+    public function getCurrencyByCode($currency)
+    {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE code = '" . $this->db->escape($currency) . "'");
 
         return $query->row;
     }
