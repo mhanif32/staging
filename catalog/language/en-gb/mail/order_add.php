@@ -30,6 +30,6 @@ $_['text_total']            = 'Total';
 $_['text_download']         = 'Once your payment has been confirmed you can click on the link below to access your downloadable products:';
 $_['text_comment']          = 'The comments for your order are:';
 $_['text_footer']           = 'For more information, enquiries, complaints please contact the following customer care services :
-info@thechampionmall.com';
+support@thechampionmall.com';
 $_['text_footer_1']           = 'You can also follow us on our social media platforms for updates.';
 $_['text_footer_2']         = 'Thank you for shopping on thechampionmall.com”';
