@@ -41,7 +41,7 @@ class ModelExtensionShippingPartnerShipping extends Model
 
         //$deliveryCharges = array_values($deliveryValues);
         $totalDeliveryCharges = 0;
-        $tempAmt = 0; $flat_fee = 0;
+        $tempAmt = 0;
         foreach ($deliveryValues as $key => $deliveryCharge) {
 
             $totalDeliveryAmt = 0;
@@ -75,8 +75,9 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $addressTo = $customerAddress;
                 $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
 
-                $delivery_charge = (0.35 * $distance);
-                $flat_fee += 5.00;
+                $currency = $this->getCurrencyByCode($this->session->data['currency']);
+                //$delivery_charge = (5.00 / $currency['value']) + ((0.35 / $currency['value']) * $distance);
+                $delivery_charge = 5.00 + (0.35 * $distance);
                 //$dataCharges = $this->currency->addCurrencySymbol($delivery_charge, $this->session->data['currency']);
                 $totalDeliveryAmt = $delivery_charge;
 
@@ -148,18 +149,13 @@ class ModelExtensionShippingPartnerShipping extends Model
         $method_data = array();
         if ($status) {
             $quote_data = array();
-
-            $amount1 = $this->currency->formatExceptSymbol($this->tax->calculate($totalDeliveryCharges, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
-            $amount2 = $amount1 + $flat_fee;
-
-            $this->currency->formatExceptSymbol($this->tax->calculate($totalDeliveryCharges, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
-
             $quote_data['partner_shipping'] = array(
                 'code' => 'partner_shipping.partner_shipping',
                 'title' => $this->language->get('text_description'),
-                'cost' => $totalDeliveryCharges + $flat_fee,
+                'cost' => $totalDeliveryCharges,
                 'tax_class_id' => $this->config->get('partner_shipping_tax_class_id'),
-                'text' => $this->currency->addCurrencySymbol($amount2, $this->session->data['currency'])
+                'text' => $this->currency->format($this->tax->calculate($totalDeliveryCharges, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
+                //'text' => $this->currency->addCurrencySymbol($totalDeliveryCharges, $this->session->data['currency'])
             );
 
             $method_data = array(
