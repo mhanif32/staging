@@ -235,38 +235,16 @@
                            id="input-payment-address-2" class="form-control"/>
                 </div>
                 <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-city">{{ entry_city }}<span class="text-danger">*</span></label>
-                    <input type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}"
-                           id="input-payment-city" class="form-control"/>
-                </div>
-                <div class="form-group required col-md-6">
-                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}<span class="text-danger">*</span></label>
-                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
-                           id="input-payment-postcode" class="form-control"/>
-                </div>
-                <div class="form-group required col-md-6">
                     <label class="control-label" for="input-payment-country">{{ entry_country }}<span class="text-danger">*</span></label>
                     <select name="country_id" id="input-payment-country" class="form-control">
                         <option value="">{{ text_select }}</option>
-
-
                         {% for country in countries %}
                             {% if country.country_id == country_id %}
-
-
                                 <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
-
-
                             {% else %}
-
-
                                 <option value="{{ country.country_id }}">{{ country.name }}</option>
-
-
                             {% endif %}
                         {% endfor %}
-
-
                     </select>
                 </div>
                 <div class="form-group required col-md-6">
@@ -274,6 +252,19 @@
                     <select name="zone_id" id="input-payment-zone" class="form-control">
                     </select>
                 </div>
+                <div class="form-group required col-md-6">
+                    <label class="control-label" for="input-payment-city">{{ entry_city }}<span class="text-danger">*</span></label>
+                    <select name="city_id" id="input-payment-city_id" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                    <input type="hidden" name="city" value="{{ city }}" id="input-payment-city" />
+                </div>
+                <div class="form-group required col-md-6">
+                    <label class="control-label" for="input-payment-postcode">{{ entry_postcode }}<span class="text-danger">*</span></label>
+                    <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}"
+                           id="input-payment-postcode" class="form-control"/>
+                </div>
+
                 {% for custom_field in custom_fields %}
                     {% if custom_field.location == 'address' %}
                         {% if custom_field.type == 'select' %}
@@ -642,3 +633,42 @@
 
     $('#collapse-payment-address select[name=\'country_id\']').trigger('change');
     //--></script>
+
+
+<script type="text/javascript"><!--
+    $('#collapse-payment-address select[name=\'zone_id\']').on('change', function () {
+        $.ajax({
+            url: 'index.php?route=account/account/zone&zone_id=' + this.value,
+            dataType: 'json',
+            success: function (json) {
+                //console.log(json['area']);
+                areaHtml = '<option value="">{{ text_select }}</option>';
+
+                if (json['area'] && json['area'] != '') {
+                    for (i = 0; i < json['area'].length; i++) {
+                        areaHtml += '<option value="' + json['area'][i]['area_id'] + '"';
+
+                        if (json['area'][i]['area_id'] == '{{ city_id }}') {
+                            areaHtml += ' selected="selected"';
+                        }
+
+                        areaHtml += '>' + json['area'][i]['name'] + '</option>';
+                    }
+                } else {
+                    areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
+                }
+                $('#collapse-payment-address select[name=\'city_id\']').html(areaHtml);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    //--></script>
+
+<script>
+    $('#input-payment-city_id').on('change', function () {
+        var cityName = $('#input-payment-city_id').find('option:selected').text();
+        $('#input-payment-city').val(cityName);
+    });
+</script>

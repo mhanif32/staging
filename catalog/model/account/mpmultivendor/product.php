@@ -8,11 +8,8 @@ class ModelAccountMpmultivendorProduct extends Model {
                 $data['price'] = $this->request->post['local_price'];
             } else {
                 $currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
-
-                //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
                 $dataValue = $data['local_price'] / $currData['value'];
-                $data['price'] = number_format($dataValue, 4);
-                //echo '<pre>';print_r($dataValue);exit('okok');
+                $data['price'] = round($dataValue, 4);
             }
         } else {
             $data['price'] = $data['local_price'];
@@ -82,13 +79,41 @@ class ModelAccountMpmultivendorProduct extends Model {
 
 		if (isset($data['product_discount'])) {
 			foreach ($data['product_discount'] as $product_discount) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
+
+                //for currency conversion
+                if(!empty($data['currency'])) {
+                    if($data['currency'] == 'USD') {
+                        $product_discount['price'] = $this->request->post['local_price'];
+                    } else {
+                        //$currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+                        $dataValueDisc = $product_discount['local_price'] / $currData['value'];
+                        $product_discount['price'] = round($dataValueDisc, 4);
+                    }
+                } else {
+                    $product_discount['price'] = $product_discount['local_price'];
+                }
+
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', local_price = '" . (float)$product_discount['local_price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
 			}
 		}
 
 		if (isset($data['product_special'])) {
 			foreach ($data['product_special'] as $product_special) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");
+
+                //for currency conversion
+                if(!empty($data['currency'])) {
+                    if($data['currency'] == 'USD') {
+                        $product_special['price'] = $this->request->post['local_price'];
+                    } else {
+                        //$currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+                        $dataValueSpec = $product_special['local_price'] / $currData['value'];
+                        $product_special['price'] = round($dataValueSpec, 4);
+                    }
+                } else {
+                    $product_special['price'] = $product_special['local_price'];
+                }
+
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', local_price = '" . (float)$product_special['local_price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");
 			}
 		}
 
@@ -254,7 +279,22 @@ class ModelAccountMpmultivendorProduct extends Model {
 
 		if (isset($data['product_discount'])) {
 			foreach ($data['product_discount'] as $product_discount) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
+
+                //for currency conversion
+                if(!empty($data['currency'])) {
+                    if($data['currency'] == 'USD') {
+                        $product_discount['price'] = $this->request->post['local_price'];
+                    } else {
+                        $currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+                        $dataValueDisc = $product_discount['local_price'] / $currData['value'];
+                        $product_discount['price'] = round($dataValueDisc, 4);
+                        //echo '<pre>';print_r($product_discount['price']); exit('okok');
+                    }
+                } else {
+                    $product_discount['price'] = $product_discount['local_price'];
+                }
+
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', local_price = '" . (float)$product_discount['local_price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
 			}
 		}
 
@@ -262,7 +302,21 @@ class ModelAccountMpmultivendorProduct extends Model {
 
 		if (isset($data['product_special'])) {
 			foreach ($data['product_special'] as $product_special) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");
+
+                //for currency conversion
+                if(!empty($data['currency'])) {
+                    if($data['currency'] == 'USD') {
+                        $product_special['price'] = $this->request->post['local_price'];
+                    } else {
+                        $currData = $this->model_localisation_currency->getCurrencyByCode($data['currency']);
+                        $dataValueSpec = $product_special['local_price'] / $currData['value'];
+                        $product_special['price'] = round($dataValueSpec, 4);
+                    }
+                } else {
+                    $product_special['price'] = $product_special['local_price'];
+                }
+
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', local_price = '" . (float)$product_special['local_price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");
 			}
 		}
 

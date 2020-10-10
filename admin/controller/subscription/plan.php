@@ -53,16 +53,6 @@ class ControllerSubscriptionPlan extends Controller
             ]);
 
             $this->session->data['success'] = $this->language->get('text_success');
-
-//            $stripe = new \Stripe\StripeObject('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v'
-//            );
-//            $price = $stripe->prices->create([
-//                'unit_amount' => $this->request->post['amount'],
-//                'currency' => 'usd',
-//                'recurring' => ['interval' => 'month'],
-//                'product' => $product['id'],
-//            ]);
-//echo '<pre>'; print_r($price); exit('okok');
             $parameters = [
                 "amount" => $this->request->post['amount'] * 100,
                 "interval" => $this->request->post['interval'],
@@ -82,14 +72,18 @@ class ControllerSubscriptionPlan extends Controller
 
     public function edit()
     {
-        $this->load->language('customer/customer_group');
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        $this->load->language('subscription/plan');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('customer/customer_group');
+        $this->load->model('subscription/plan');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_customer_customer_group->editCustomerGroup($this->request->get['customer_group_id'], $this->request->post);
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            $this->model_subscription_plan->editSubscriptionPlan($this->request->get['plan_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -107,7 +101,7 @@ class ControllerSubscriptionPlan extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('subscription/plan', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getForm();
@@ -359,6 +353,46 @@ class ControllerSubscriptionPlan extends Controller
             $plan_info = $this->model_subscription_plan->getSubscriptionPlan($this->request->get['plan_id']);
         }
 
+        if (isset($this->request->post['rent_percentage'])) {
+            $data['rent_percentage'] = $this->request->post['rent_percentage'];
+        } elseif (!empty($plan_info)) {
+            $data['rent_percentage'] = $plan_info['rent_percentage'];
+        } else {
+            $data['rent_percentage'] = '';
+        }
+
+        if (isset($this->request->post['amount'])) {
+            $data['amount'] = $this->request->post['amount'];
+        } elseif (!empty($plan_info)) {
+            $data['amount'] = $plan_info['amount'];
+        } else {
+            $data['amount'] = '';
+        }
+
+        if (isset($this->request->post['interval'])) {
+            $data['interval'] = $this->request->post['interval'];
+        } elseif (!empty($plan_info)) {
+            $data['interval'] = ucfirst($plan_info['interval']);
+        } else {
+            $data['interval'] = '';
+        }
+
+        if (isset($this->request->post['interval_count'])) {
+            $data['interval_count'] = $this->request->post['interval_count'];
+        } elseif (!empty($plan_info)) {
+            $data['interval_count'] = $plan_info['interval_count'];
+        } else {
+            $data['interval_count'] = '';
+        }
+
+        if (isset($this->request->post['name'])) {
+            $data['name'] = $this->request->post['name'];
+        } elseif (!empty($plan_info)) {
+            $data['name'] = $plan_info['name'];
+        } else {
+            $data['name'] = '';
+        }
+
         if (isset($this->request->post['sort_order'])) {
             $data['sort_order'] = $this->request->post['sort_order'];
         } elseif (!empty($plan_info)) {
@@ -371,7 +405,11 @@ class ControllerSubscriptionPlan extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('subscription/plan_form', $data));
+        if(!isset($this->request->get['plan_id'])) {
+            $this->response->setOutput($this->load->view('subscription/plan_form', $data));
+        } else {
+            $this->response->setOutput($this->load->view('subscription/plan_form_edit', $data));
+        }
     }
 
     protected function validateForm()

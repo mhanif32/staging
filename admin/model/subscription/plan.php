@@ -12,14 +12,8 @@ class ModelSubscriptionPlan extends Model {
 		return $customer_group_id;
 	}
 
-	public function editCustomerGroup($customer_group_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer_group SET approval = '" . (int)$data['approval'] . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE customer_group_id = '" . (int)$customer_group_id . "'");
-
-		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_group_description WHERE customer_group_id = '" . (int)$customer_group_id . "'");
-
-		foreach ($data['customer_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group_description SET customer_group_id = '" . (int)$customer_group_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "'");
-		}
+	public function editSubscriptionPlan($plan_id, $data) {
+		$this->db->query("UPDATE " . DB_PREFIX . "subscription_plan SET rent_percentage = '" . (float)$data['rent_percentage'] . "' WHERE plan_id = '" . (int)$plan_id . "'");
 	}
 
 	public function deleteCustomerGroup($customer_group_id) {
@@ -32,7 +26,7 @@ class ModelSubscriptionPlan extends Model {
 	}
 
 	public function getSubscriptionPlan($plan_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "plan p WHERE p.plan_id = '" . (int)$plan_id . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "subscription_plan p WHERE p.plan_id = '" . (int)$plan_id . "'");
 
 		return $query->row;
 	}

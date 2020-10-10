@@ -25,7 +25,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
 		$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor.css');
 
-		if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')){
+		if(strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')) {
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor-journal.css');			
 		}
 		
@@ -141,6 +141,12 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 		} else {
 			$data['error_review_seo_keyword'] = '';
 		}
+
+        if (isset($this->error['city_id'])) {
+            $data['error_city_id'] = $this->error['city_id'];
+        } else {
+            $data['error_city_id'] = '';
+        }
 
 		if (isset($this->error['city'])) {
 			$data['error_city'] = $this->error['city'];
@@ -268,6 +274,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
 		$this->load->model('localisation/country');
 		$this->load->model('localisation/zone');
+		$this->load->model('localisation/area');
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		$seller_info = $this->model_account_mpmultivendor_seller->getSellerInfo($this->customer->getId());
@@ -354,6 +361,14 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 			$data['fax'] = '';
 		}
 
+        if (isset($this->request->post['city_id'])) {
+            $data['city_id'] = $this->request->post['city_id'];
+        } elseif (!empty($seller_info)) {
+            $data['city_id'] = $seller_info['city_id'];
+        } else {
+            $data['city_id'] = '';
+        }
+
 		if(isset($this->request->post['city'])) {
 			$data['city'] = $this->request->post['city'];
 		} else if($seller_info) {
@@ -394,6 +409,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
             }
         } else if($seller_info) {
             $data['zone_id'] = $seller_info['zone_id'];
+            $data['addressAreas'] = $this->model_localisation_area->getAreasByZoneId($seller_info['zone_id']);
             if(!empty($data['country_id'])) {
                 $data['zonesData'] = $this->model_localisation_zone->getZonesByCountryId($data['country_id']);
             }

@@ -642,33 +642,43 @@
                                 <div class="tab-pane" id="tab-membership">
                                     <div class="row">
                                         <div class="col-sm-12">
+                                            <h2 class="panel-title"><strong>History of the Seller Subscriptions</strong></h2>
+                                            <br>
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-hover">
                                                     <tbody>
+                                                    <tr>
+                                                        <th>Sr</th>
+                                                        <th>Plan</th>
+                                                        <th>Amount Paid</th>
+                                                        <th>Date On (Start Date)</th>
+                                                        <th>Date On (End Date):</th>
+                                                        <th>Status Of Membership</th>
+                                                    </tr>
                                                     <?php
-                                                    if(!empty($planData['plan_name'])) {
+                                                    foreach($plans as $key => $planData) {
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $key+1; ?></td>
+                                                            <td><?php echo $planData['plan_name'];?></td>
+                                                            <td><?php echo $planData['stripe_amount'];?></td>
+                                                            <td><?php echo $planData['start_date'];?></td>
+                                                            <td><?php echo $planData['end_date'];?></td>
+                                                            <?php
+                                                            if($planData['stripe_status'] == 'active') {
+                                                            ?>
+                                                                <td><span class="label label-success" style="font-size: 10px;"><?php echo ucfirst($planData['stripe_status']);?></span></td>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <td><span class="label label-default" style="font-size: 10px;"><?php echo ucfirst($planData['stripe_status']);?></span></td>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </tr>
+                                                        <?php
+                                                    }
                                                     ?>
-                                                    <tr>
-                                                        <td><strong>Plan : </strong></td>
-                                                        <td><label class="label label-success" style="font-size: 14px;"><?php echo $planData['plan_name'];?></label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Amount Paid : </strong></td>
-                                                        <td><?php echo $planData['stripe_amount'];?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Date On (Start Date): </strong></td>
-                                                        <td><?php echo $planData['start_date'];?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Date On (End Date): </strong></td>
-                                                        <td><?php echo $planData['end_date'];?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Status Of Membership : </strong></td>
-                                                        <td><?php echo ucfirst($planData['stripe_status']);?></td>
-                                                    </tr>
-                                                    <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>

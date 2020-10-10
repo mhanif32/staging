@@ -246,10 +246,10 @@
                                         <div class="modal-body">
                                             <form id="changeCountryForm">
                                                 <div class="form-group">
-                                                    <label class="control-label f-13" for="input-country"><b>Please
+                                                    <label class="control-label f-13" for="input-country-popup"><b>Please
                                                             Select
                                                             Country For This Delivery</b></label>
-                                                    <select id="input-country" name="selectCountry"
+                                                    <select id="input-country-popup" name="selectCountryPopup"
                                                             class="form-control">
                                                         <option value="">---Select Country---</option>
                                                         {% for country in countries %}
@@ -259,29 +259,23 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label f-13" for="input-zone"><b>Now Select The
+                                                    <label class="control-label f-13" for="input-zone-popup"><b>Now Select The
                                                             State</b></label>
                                                     <div class="">
-                                                        <select name="zone_id" id="input-zone"
+                                                        <select name="zone_id_popup" id="input-zone-popup"
                                                                 class="form-control zoneSelect">
                                                             <option value="">---Select State---</option>
                                                         </select>
-                                                        {% if error_zone %}
-                                                            <div class="text-danger">{{ error_zone }}</div>
-                                                        {% endif %}
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="control-label f-13" for="input-city"><b>You Can Now
+                                                    <label class="control-label f-13" for="input-city-popup"><b>You Can Now
                                                             Select The City</b></label>
                                                     <div class="">
-                                                        <select name="city_id" id="input-city" class="form-control">
+                                                        <select name="city_id_popup" id="input-city-popup" class="form-control">
                                                             <option value="">---Select City---</option>
                                                         </select>
-                                                        {% if error_city %}
-                                                            <div class="text-danger">{{ error_city }}</div>
-                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </form>
@@ -356,9 +350,9 @@
     $('#confirm-address').on('click', function () {
 
         var data = {
-            country: $('#input-country').val(),
-            state: $('#input-zone').val(),
-            city: $('#input-city').val()
+            country: $('#input-country-popup').val(),
+            state: $('#input-zone-popup').val(),
+            city: $('#input-city-popup').val()
         };
 
         $.ajax({
@@ -386,23 +380,17 @@
 </script>
 
 <script type="text/javascript"><!--
-    $('select[name=\'selectCountry\']').on('change', function () {
+    $('select[name=\'selectCountryPopup\']').on('change', function () {
         $.ajax({
             url: 'index.php?route=account/account/country&country_id=' + this.value,
             dataType: 'json',
             beforeSend: function () {
-                $('select[name=\'selectCountry\']').prop('disabled', true);
+                $('select[name=\'selectCountryPopup\']').prop('disabled', true);
             },
             complete: function () {
-                $('select[name=\'selectCountry\']').prop('disabled', false);
+                $('select[name=\'selectCountryPopup\']').prop('disabled', false);
             },
             success: function (json) {
-                if (json['postcode_required'] == '1') {
-                    $('input[name=\'postcode\']').parent().parent().addClass('required');
-                } else {
-                    $('input[name=\'postcode\']').parent().parent().removeClass('required');
-                }
-
                 html = '<option value="">{{ text_select }}</option>';
 
                 if (json['zone'] && json['zone'] != '') {
@@ -419,17 +407,17 @@
                     html += '<option value="0" selected="selected">{{ text_none }}</option>';
                 }
 
-                $('select[name=\'zone_id\']').html(html);
+                $('select[name=\'zone_id_popup\']').html(html);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
     });
-    $('select[name=\'country_id\']').trigger('change');
+    $('select[name=\'selectCountryPopup\']').trigger('change');
 
     //on change of zone
-    $('select[name=\'zone_id\']').on('change', function () {
+    $('select[name=\'zone_id_popup\']').on('change', function () {
 
         $.ajax({
             url: 'index.php?route=account/account/zone&zone_id=' + this.value,
@@ -457,7 +445,7 @@
                 } else {
                     areaHtml += '<option value="0" selected="selected">{{ text_none }}</option>';
                 }
-                $('select[name=\'city_id\']').html(areaHtml);
+                $('select[name=\'city_id_popup\']').html(areaHtml);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -465,7 +453,7 @@
         });
     });
 
-    $('select[name=\'zone_id\']').trigger('change');
+    $('select[name=\'zone_id_popup\']').trigger('change');
     //--></script>
 
 <script>

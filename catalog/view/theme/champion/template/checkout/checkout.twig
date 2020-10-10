@@ -213,7 +213,7 @@
         $.ajax({
             url: 'index.php?route=checkout/register/save',
             type: 'post',
-            data: $('#collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'password\'], #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address textarea, #collapse-payment-address select'),
+            data: $('#collapse-payment-address input[type=\'hidden\'], #collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'password\'], #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address textarea, #collapse-payment-address select'),
             dataType: 'json',
             beforeSend: function () {
                 $('#button-register').button('loading');
@@ -225,6 +225,9 @@
                 if (json['redirect']) {
                     location = json['redirect'];
                 } else if (json['error']) {
+
+                    alert('error_found');
+
                     $('#button-register').button('reset');
 
                     if (json['error']['warning']) {
@@ -359,6 +362,7 @@
                 );
             },
             complete: function () {
+                alert('reset');
                 $('#button-payment-address').button('reset');
             },
             success: function (json) {

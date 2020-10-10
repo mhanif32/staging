@@ -481,10 +481,11 @@ class ModelMpmultivendorMpseller extends Model {
 
 	public function getCustomerPlan($customer_id)
     {
-        $query = $this->db->query("SELECT sp.name as plan_name, sup.* FROM `" . DB_PREFIX . "subscription_plan` sp 
-        LEFT JOIN `" . DB_PREFIX . "customer` c ON c.subscription_plan_id = sp.plan_id 
-        LEFT JOIN `" . DB_PREFIX . "subscription_user_plan` sup ON sup.subscription_plan_id = sp.plan_id 
-        WHERE c.customer_id = '" . (int)$customer_id . "'");
-        return $query->row;
+        $sql = "SELECT sp.name as plan_name, sup.* FROM `" . DB_PREFIX . "subscription_user_plan` sup
+        LEFT JOIN `" . DB_PREFIX . "subscription_plan` sp ON sp.plan_id = sup.subscription_plan_id 
+        WHERE sup.customer_id = '" . (int)$customer_id . "' ORDER BY sup.subscription_user_plan_id DESC";
+        //echo $sql;exit('huhuh');
+        $query = $this->db->query($sql);
+        return $query->rows;
     }
 }

@@ -73,7 +73,7 @@ class ModelAccountRequest extends Model
 
     public function getAssignedOrders($customerId)
     {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id WHERE dpr.delivery_partner_id = '" . (int)$customerId . "' and dpr.is_accept = 1");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "delivery_partner_request dpr LEFT JOIN `" . DB_PREFIX . "order` o ON dpr.order_id = o.order_id WHERE dpr.delivery_partner_id = '" . (int)$customerId . "' and dpr.is_accept = 1 ORDER BY dpr.request_id DESC");
 
         return $query->rows;
     }

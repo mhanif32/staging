@@ -90,7 +90,6 @@ class ModelCatalogProduct extends Model {
         //hide products of non-membership sellers
         $sql .= " LEFT JOIN " . DB_PREFIX . "customer cus ON (cus.customer_id = mp.customer_id)";
 
-
         $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
 		if (!empty($data['filter_category_id'])) {
@@ -183,7 +182,7 @@ class ModelCatalogProduct extends Model {
         //hide products of disabled sellers
         $sql .= " AND mp.status = 1";
         //to hide products of non-membership products
-        $sql .= " AND cus.subscription_plan IS NOT NULL";
+        $sql .= " AND cus.subscription_plan_id IS NOT NULL";
 
 		$sql .= " GROUP BY p.product_id";
 
@@ -603,7 +602,7 @@ class ModelCatalogProduct extends Model {
             $sql .= " AND pl.country_id = '" . (int)$data['product_country'] . "'";
         }
         if (!empty($data['product_state'])) {
-            $sql .= " AND pl.zone_id = '" . (int)$data['product_state'] . "'";
+            $sql .= " AND (pl.zone_id = '" . (int)$data['product_state'] . "' OR pl.zone_id = '0')";
         }
 
 		if (!empty($data['filter_manufacturer_id'])) {
@@ -613,7 +612,7 @@ class ModelCatalogProduct extends Model {
         //hide products of disabled sellers
         $sql .= " AND mp.status = 1";
         //to hide products of non-membership products
-        $sql .= " AND cus.subscription_plan IS NOT NULL";
+        $sql .= " AND cus.subscription_plan_id IS NOT NULL";
 
         //countrywise location
 //        if (isset($this->session->data['session_country_id'])) {
@@ -622,7 +621,6 @@ class ModelCatalogProduct extends Model {
 //        }
 
 		$query = $this->db->query($sql);
-        //echo '<pre>';print_r($query->row['total']);exit('okoko');
 		return $query->row['total'];
 	}
 

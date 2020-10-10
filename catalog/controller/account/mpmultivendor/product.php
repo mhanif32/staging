@@ -1748,11 +1748,14 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         $data['product_discounts'] = array();
 
+        //echo '<pre>'; print_r($product_discounts); exit('okoko');
+
         foreach ($product_discounts as $product_discount) {
             $data['product_discounts'][] = array(
                 'customer_group_id' => $product_discount['customer_group_id'],
                 'quantity' => $product_discount['quantity'],
                 'priority' => $product_discount['priority'],
+                'local_price' => $product_discount['local_price'],
                 'price' => $product_discount['price'],
                 'date_start' => ($product_discount['date_start'] != '0000-00-00') ? $product_discount['date_start'] : '',
                 'date_end' => ($product_discount['date_end'] != '0000-00-00') ? $product_discount['date_end'] : ''
@@ -1774,6 +1777,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
                 'customer_group_id' => $product_special['customer_group_id'],
                 'priority' => $product_special['priority'],
                 'price' => $product_special['price'],
+                'local_price' => $product_special['local_price'],
                 'date_start' => ($product_special['date_start'] != '0000-00-00') ? $product_special['date_start'] : '',
                 'date_end' => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] : ''
             );

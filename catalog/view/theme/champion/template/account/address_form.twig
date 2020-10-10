@@ -117,7 +117,7 @@
                                                             class="text-danger">*</span></label>
                                                 <div class="">
                                                     <select name="city_id" id="input-city_id" class="form-control">
-                                                        {% if addressAreas %}
+{#                                                        {% if addressAreas %}#}
                                                             <option value="">Select</option>
                                                             {% for myarea in addressAreas %}
                                                                 {% if myarea.area_id == city_id %}
@@ -126,7 +126,7 @@
                                                                     <option value="{{ myarea.area_id }}">{{ myarea.name }}</option>
                                                                 {% endif %}
                                                             {% endfor %}
-                                                        {% endif %}
+{#                                                        {% endif %}#}
                                                     </select>
                                                     {% if error_city_id %}
                                                         <div class="text-danger">{{ error_city_id }}</div>

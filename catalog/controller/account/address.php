@@ -403,7 +403,7 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$data['zone_id'] = '';
 		}
-
+//echo '<pre>';print_r($data['addressAreas']);exit('okoko');
 		$this->load->model('localisation/country');
 
 		$data['countries'] = $this->model_localisation_country->getCountries();

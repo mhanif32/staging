@@ -853,6 +853,9 @@ class ControllerMpmultivendorMpseller extends Controller
 
     protected function getForm()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         $this->document->addStyle('view/stylesheet/mpmultivendor/mpmultivendor.css');
 
         $data['heading_title'] = $this->language->get('heading_title');
@@ -1504,16 +1507,22 @@ class ControllerMpmultivendorMpseller extends Controller
         }
 
         //plan data
-        $planData = $this->model_mpmultivendor_mpseller->getCustomerPlan($mpseller_info['customer_id']);
-        $data['planData'] = [
-            'plan_name' => !empty($planData['plan_name']) ? $planData['plan_name'] : '',
-            'amount' => !empty($planData['amount']) ? $planData['amount'] : '',
-            'start_date' => !empty($planData['start_date']) ? date('Y-m-d', $planData['start_date']) : '',
-            'end_date' => !empty($planData['end_date']) ? date('Y-m-d', $planData['end_date']) : '',
-            'stripe_status' => !empty($planData['stripe_status']) ? $planData['stripe_status'] : '',
-            'stripe_amount' => !empty($planData['amount']) ? '$'.$planData['amount'] : '0',
-
-        ];
+        $seller_plans = $this->model_mpmultivendor_mpseller->getCustomerPlan($mpseller_info['customer_id']);
+        //echo '<pre>'; print_r($seller_plans); exit('okok');
+        $planArr = [];
+        foreach ($seller_plans as $planData) {
+            $dataPlanArr = [
+                'plan_name' => !empty($planData['plan_name']) ? $planData['plan_name'] : '',
+                'amount' => !empty($planData['amount']) ? $planData['amount'] : '',
+                'start_date' => !empty($planData['start_date']) ? date('Y-m-d', $planData['start_date']) : '',
+                'end_date' => !empty($planData['end_date']) ? date('Y-m-d', $planData['end_date']) : '',
+                'stripe_status' => !empty($planData['stripe_status']) ? $planData['stripe_status'] : '',
+                'stripe_amount' => !empty($planData['amount']) ? '$'.$planData['amount'] : '0',
+            ];
+            $planArr[] = $dataPlanArr;
+        }
+        //echo '<pre>';print_r($planArr);exit('plp');
+        $data['plans'] = $planArr;
         $this->load->model('localisation/language');
         $data['languages'] = $this->model_localisation_language->getLanguages();
 

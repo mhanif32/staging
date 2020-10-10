@@ -8,6 +8,13 @@ class ControllerInformationContact extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+            if ($this->request->server['HTTPS']) {
+                $server = $this->config->get('config_ssl');
+            } else {
+                $server = $this->config->get('config_url');
+            }
+
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
 			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -21,7 +28,14 @@ class ControllerInformationContact extends Controller {
 			$mail->setReplyTo($this->request->post['email']);
 			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode(sprintf($this->request->post['subject'], $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
-			$mail->setText($this->request->post['enquiry']);
+
+            $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+            $data['person_name'] = $this->request->post['name'];
+			$data['enquiry'] = $this->request->post['enquiry'];
+            $mailText = $this->load->view('mail/contact', $data);
+            $mail->setHtml($mailText);
+            $mail->setText(html_entity_decode($mailText, ENT_QUOTES, 'UTF-8'));
+
 			$mail->send();
 
 			$this->response->redirect($this->url->link('information/contact/success'));
