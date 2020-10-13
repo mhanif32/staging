@@ -17,6 +17,7 @@ $_['column_action']     = 'Action';
 $_['entry_name']        = 'Subscription Plan Name';
 $_['entry_amount']      = 'Amount';
 $_['entry_interval']    = 'Interval';
+$_['entry_interval']    = 'Currency';
 $_['entry_interval_count']= 'Interval Count';
 $_['entry_rent_percentage']= 'Monthly rental percentage on each product sold (Number in %)';
 $_['entry_stripe_id']   = 'Stripe Plan ID';

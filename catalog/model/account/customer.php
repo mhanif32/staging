@@ -310,6 +310,6 @@ class ModelAccountCustomer extends Model
     {
         $this->db->query("UPDATE " . DB_PREFIX . "customer SET `subscription_plan_id` = '".(int)$data['plan_id']."' WHERE customer_id = '" . (int)$customer_id . "'");
 
-        $this->db->query("INSERT INTO " . DB_PREFIX . "subscription_user_plan SET `subscription_plan_id` = '".(int)$data['plan_id']."', customer_id = '" . (int)$customer_id . "', stripe_subscription_id = 'NULL', stripe_customer_id = 'NULL', stripe_status = 'active', amount = '0.00', start_date = NOW(), end_date = NOW()");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "subscription_user_plan SET `subscription_plan_id` = '".(int)$data['plan_id']."', customer_id = '" . (int)$customer_id . "', stripe_subscription_id = 'NULL', stripe_customer_id = 'NULL', stripe_status = 'active', amount = '0.00', start_date = 'NULL', end_date = 'NULL'");
     }
 }

@@ -51,15 +51,16 @@ class ControllerMpmultivendorSubscription extends Controller
         $planList = $this->model_mpmultivendor_subscription->getSubscriptionPlans();
         foreach ($planList as $item) {
 
-            $currData = $this->model_localisation_currency->getCurrencyByCode($this->session->data['currency']);
-            $dataValue = $item['amount'] * $currData['value'];
-            $amount = round($dataValue, 2);
+//            $currData = $this->model_localisation_currency->getCurrencyByCode($this->session->data['currency']);
+//            $dataValue = $item['amount'] * $currData['value'];
+//            $amount = round($dataValue, 2);
 
+            $currencyVal = strtoupper($item['currency']);
             $data['plans'][] = array(
                 'plan_id' => $item['plan_id'],
                 'name' => $item['name'],
-                'amount' => $this->currency->getSymbolLeft($this->session->data['currency']) . $amount . $this->currency->getSymbolRight($this->session->data['currency']),
-                'currency' =>  $this->session->data['currency'],
+                'amount' => $this->currency->getSymbolLeft($currencyVal) . $item['amount'] . $this->currency->getSymbolRight($currencyVal),
+                'currency' =>  $item['currency'],
                 'interval' => $item['interval'],
                 'interval_count' => $item['interval_count'],
                 'stripe_plan_id' => $item['stripe_plan_id'],
@@ -69,13 +70,17 @@ class ControllerMpmultivendorSubscription extends Controller
             );
         }
         $data['action_subscribe'] = $this->url->link('mpmultivendor/subscription/add', '', true);
+        //$data['isFreePlan'] = $this->model_mpmultivendor_subscription->checkIsFreePlan($this->customer->getId());
+
+        //print_r($data['isFreePlan']);exit('okokok');
+
         $checkPlan = $this->model_account_customer->getSellerPlan($this->customer->getId());
         $data['checkPlan'] = !empty($checkPlan) ? true : false;
         $data['subscribed_plan'] = $checkPlan;
 
         if(!empty($checkPlan['end_date'])) {
             $end_date = date('Y-m-d', $checkPlan['end_date']);
-            $data['stop_subscription'] = ($end_date < date('Y-m-d')) ? false : true;
+            $data['stop_subscription'] = ($end_date < date('Y-m-d') && $checkPlan['name'] == 'Free') ? false : true;
             $data['end_date'] = isset($checkPlan['end_date']) ? date('Y-m-d', $checkPlan['end_date']) : '';
         }
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
@@ -83,6 +88,9 @@ class ControllerMpmultivendorSubscription extends Controller
 
     public function add()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
 
@@ -112,9 +120,9 @@ class ControllerMpmultivendorSubscription extends Controller
             //create a stripe customer
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
 
-            //echo '<pre>';print_r($customer['stripe_customer_id']);exit('ookk');
+            //echo '<pre>';print_r($customer['subscription_plan_id']);exit('ookk');
 
-            if(empty($customer['stripe_customer_id'])) {
+            if(empty($customer['subscription_plan_id'])) {
 
                 $customerData = \Stripe\Customer::create([
                     'name' => $sellerName,

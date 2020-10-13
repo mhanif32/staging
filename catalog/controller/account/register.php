@@ -6,6 +6,8 @@ class ControllerAccountRegister extends Controller
 
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
 
         if ($this->customer->isLogged()) {
             $this->response->redirect($this->url->link('account/account', '', true));
@@ -34,7 +36,9 @@ class ControllerAccountRegister extends Controller
 //			unset($this->session->data['guest']);
 
             //if user is seller then subscribe seller to FREE plan
-            if (isset($this->request->get['role']) && $this->request->get['role'] == 'seller') {
+            if (!empty($this->request->get['role']) && trim($this->request->get['role']) == 'seller') {
+
+                //print_r($this->request->get['role']);exit('okoko');
 
                 $freePlan = $this->model_account_customer->getFreePlanId();
                 $this->model_account_customer->updateCustomerToFree($freePlan, $customer_id);
@@ -222,7 +226,7 @@ class ControllerAccountRegister extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
-        if (isset($this->request->get['role'])) {
+        if (!empty($this->request->get['role'])) {
             $data['action'] = $this->url->link('account/register', '&role=' . $this->request->get['role'], true);
         } else {
             $data['action'] = $this->url->link('account/register', '', true);

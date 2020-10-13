@@ -481,7 +481,7 @@ class ModelMpmultivendorMpseller extends Model {
 
 	public function getCustomerPlan($customer_id)
     {
-        $sql = "SELECT sp.name as plan_name, sup.* FROM `" . DB_PREFIX . "subscription_user_plan` sup
+        $sql = "SELECT sp.name as plan_name, sp.currency, sup.* FROM `" . DB_PREFIX . "subscription_user_plan` sup
         LEFT JOIN `" . DB_PREFIX . "subscription_plan` sp ON sp.plan_id = sup.subscription_plan_id 
         WHERE sup.customer_id = '" . (int)$customer_id . "' ORDER BY sup.subscription_user_plan_id DESC";
         //echo $sql;exit('huhuh');

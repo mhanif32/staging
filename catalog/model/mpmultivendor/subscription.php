@@ -6,13 +6,8 @@ class ModelMpmultivendorSubscription extends Model {
     }
 
     public function getSubscriptionPlans() {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "subscription_plan ORDER BY sort_order ASC");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "subscription_plan WHERE name != 'Free' ORDER BY sort_order ASC");
         return $query->rows;
-    }
-
-    public function createUserSubscription($data)
-    {
-        $this->db->query("INSERT INTO " . DB_PREFIX . "subscription_user_plan SET customer_id = '" . (int)$data['customer_id'] . "', subscription_plan_id = '" . (int)$data['subscription_plan_id'] . "', stripe_subscription_id = '" . $this->db->escape($data['stripe_subscription_id']) . "', amount = '" . (float)$data['amount'] . "', stripe_customer_id = '" . $this->db->escape($data['stripe_customer_id']) . "', stripe_status = '" . $this->db->escape($data['stripe_status']) ."', start_date = '" . $this->db->escape($data['start_date']) ."', end_date = '" . $this->db->escape($data['end_date']) ."', stripe_data = '" . $this->db->escape($data['end_date']) ."'");
     }
 
     public function updateUserSubscription($data, $oldData)
@@ -85,11 +80,23 @@ class ModelMpmultivendorSubscription extends Model {
         $this->db->query("DELETE FROM " . DB_PREFIX . "subscription_user_stripe_card WHERE user_stripe_card_id = '" . (int)$user_card_id . "' AND customer_id = '" . (int)$customer_id . "'");
     }
 
+    public function createUserSubscription($data)
+    {
+        $this->db->query("INSERT INTO " . DB_PREFIX . "subscription_user_plan SET customer_id = '" . (int)$data['customer_id'] . "', subscription_plan_id = '" . (int)$data['subscription_plan_id'] . "', stripe_subscription_id = '" . $this->db->escape($data['stripe_subscription_id']) . "', amount = '" . (float)$data['amount'] . "', stripe_customer_id = '" . $this->db->escape($data['stripe_customer_id']) . "', stripe_status = '" . $this->db->escape($data['stripe_status']) ."', start_date = '" . $this->db->escape($data['start_date']) ."', end_date = '" . $this->db->escape($data['end_date']) ."', stripe_data = '" . $this->db->escape($data['end_date']) ."'");
+    }
+
     public function removeUserSubscription($subscription_plan_id)
     {
         //$this->db->query("DELETE FROM " . DB_PREFIX . "subscription_user_plan WHERE customer_id = '" . (int)$this->customer->getId() . "'");
         $this->db->query("UPDATE " . DB_PREFIX . "subscription_user_plan SET stripe_status = 'cancelled' WHERE customer_id = '" . (int)$this->customer->getId() . "' AND subscription_plan_id = '".$subscription_plan_id."'");
 
         $this->db->query("UPDATE " . DB_PREFIX . "customer SET stripe_customer_id = NULL, subscription_plan_id = '', subscription_plan = NULL WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+    }
+
+    public function checkIsFreePlan($customer_id)
+    {
+//        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer cus LEFT JOIN " . DB_PREFIX . "subscription_plan sp ON (sp.plan_id = cus.subscription_plan_id) WHERE customer_id = '" . (int)$customer_id . "'");
+//
+//        return $query->row;
     }
 }

@@ -57,7 +57,7 @@ class ControllerSubscriptionPlan extends Controller
                 "amount" => $this->request->post['amount'] * 100,
                 "interval" => $this->request->post['interval'],
                 "product" => $product['id'],
-                "currency" => 'usd',
+                "currency" => $this->request->post['currency'],
                 "interval_count" => $this->request->post['interval_count']
             ];
             $response = \Stripe\Plan::create($parameters);
@@ -205,9 +205,12 @@ class ControllerSubscriptionPlan extends Controller
         $results = $this->model_subscription_plan->getSubscriptionPlans($filter_data);
 
         foreach ($results as $result) {
+
+            $amount = $this->currency->getSymbolLeft($result['currency']) . $result['amount'] . $this->currency->getSymbolRight($result['currency']);
+
             $data['plans'][] = array(
                 'plan_id' => $result['plan_id'],
-                'amount' => $result['amount'],
+                'amount' => $amount,
                 'date_added' => $result['date_added'],
                 'rent_percentage' => $result['rent_percentage'],
                 'name' => $result['name'] . (($result['plan_id'] == $this->config->get('plan_id')) ? $this->language->get('text_default') : null),
@@ -301,6 +304,12 @@ class ControllerSubscriptionPlan extends Controller
             $data['error_amount'] = $this->error['amount'];
         } else {
             $data['error_amount'] = array();
+        }
+
+        if (isset($this->error['currency'])) {
+            $data['error_currency'] = $this->error['currency'];
+        } else {
+            $data['error_currency'] = array();
         }
 
         if (isset($this->error['interval'])) {
