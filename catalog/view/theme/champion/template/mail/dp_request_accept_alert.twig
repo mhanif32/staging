@@ -86,7 +86,7 @@
                                         <h3 style="font-size: 20px; text-align: center; color: #191B20; font-weight:bold;">Dear {{ deliveryPartnerName }},</h3>
                                         <p style="margin-bottom: 0px; text-align: center;">
                                             {#You have successfully accepted the delivery request for order id {{ order_id }} for order placed by {{ customerName }} from {{ store_owner }}#}
-                                            The following order “{{ order_id }}” to be delivered to "customer address" has been placed and it's ready for pick up from "{{ store_owner }} and address".
+                                            The following order <strong>{{ order_id }}</strong> to be delivered to <strong>{{ customer_address }}</strong> has been placed and it's ready for pick up from <strong>{{ store_owner }}</strong> and <strong>{{ seller_address }}</strong>.
                                         </p>
                                             {#The following order  to be delivered to {{ customer_address }} has been placed and it's ready#}
                                             {#for pick up from Seller : {{ store_owner }} and Address : {{ seller_address }}.</p>#}
