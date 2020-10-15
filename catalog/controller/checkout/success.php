@@ -24,7 +24,8 @@ class ControllerCheckoutSuccess extends Controller
             $invoice_no = $this->model_account_order->createInvoiceNo($orderId);
 
             //START : send request to delivery partner
-            if (!empty($this->session->data['shipping_address'])) {
+            $shippingMethod = $this->session->data['shipping_method'];
+            if (!empty($this->session->data['shipping_address']) && $shippingMethod['code'] == 'partner_shipping.partner_shipping') {
 
                 $shipAdd = $this->session->data['shipping_address'];
 
