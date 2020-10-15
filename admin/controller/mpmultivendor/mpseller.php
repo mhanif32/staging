@@ -1511,13 +1511,18 @@ class ControllerMpmultivendorMpseller extends Controller
         //echo '<pre>'; print_r($seller_plans); exit('okok');
         $planArr = [];
         foreach ($seller_plans as $planData) {
+
+            //echo '<pre>'; print_r($planData);exit('okoko');
+
+            $planAmount = strtoupper($planData['currency']);
+            $amount = $this->currency->getSymbolLeft($planAmount) . $planData['amount'] . $this->currency->getSymbolRight($planAmount);
             $dataPlanArr = [
                 'plan_name' => !empty($planData['plan_name']) ? $planData['plan_name'] : '',
                 'amount' => !empty($planData['amount']) ? $planData['amount'] : '',
-                'start_date' => !empty($planData['start_date']) ? date('Y-m-d', $planData['start_date']) : '',
-                'end_date' => !empty($planData['end_date']) ? date('Y-m-d', $planData['end_date']) : '',
-                'stripe_status' => !empty($planData['stripe_status']) ? $planData['stripe_status'] : '',
-                'stripe_amount' => !empty($planData['amount']) ? '$'.$planData['amount'] : '0',
+                'start_date' => !empty($planData['start_date']) ? date('Y-m-d', $planData['start_date']) : '-',
+                'end_date' => !empty($planData['end_date']) ? date('Y-m-d', $planData['end_date']) : '-',
+                'stripe_status' => !empty($planData['stripe_status']) ? $planData['stripe_status'] : '-',
+                'stripe_amount' => $amount
             ];
             $planArr[] = $dataPlanArr;
         }

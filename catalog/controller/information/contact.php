@@ -3,34 +3,42 @@ class ControllerInformationContact extends Controller {
 	private $error = array();
 
 	public function index() {
+
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
 		$this->load->language('information/contact');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
+		    //echo '<pre>';print_r($this->request->post);exit('okok');
             if ($this->request->server['HTTPS']) {
                 $server = $this->config->get('config_ssl');
             } else {
                 $server = $this->config->get('config_url');
             }
 
-			$mail = new Mail($this->config->get('config_mail_engine'));
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
-			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
-			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+            $mail = new Mail($this->config->get('config_mail_engine'));
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
-			$mail->setTo($this->config->get('config_email'));
+            $mail->setTo($this->config->get('config_email'));
 			$mail->setFrom($this->config->get('config_email'));
-			$mail->setReplyTo($this->request->post['email']);
+			//$mail->setReplyTo($this->request->post['email']);
 			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode(sprintf($this->request->post['subject'], $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
 
             $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+
+            $data['owner_name'] = $this->config->get('config_owner');
             $data['person_name'] = $this->request->post['name'];
+            $data['person_email'] = $this->request->post['email'];
 			$data['enquiry'] = $this->request->post['enquiry'];
             $mailText = $this->load->view('mail/contact', $data);
             $mail->setHtml($mailText);
@@ -84,10 +92,12 @@ class ControllerInformationContact extends Controller {
 		}
 
 		$data['store'] = $this->config->get('config_name');
+		$data['owner_email'] = $this->config->get('config_email');
+		$data['owner_telephone'] = $this->config->get('config_telephone');
+        $data['owner_name'] = $this->config->get('config_owner');
 		$data['address'] = nl2br($this->config->get('config_address'));
 		$data['geocode'] = $this->config->get('config_geocode');
 		$data['geocode_hl'] = $this->config->get('config_language');
-		$data['telephone'] = $this->config->get('config_telephone');
 		$data['fax'] = $this->config->get('config_fax');
 		$data['open'] = nl2br($this->config->get('config_open'));
 		$data['comment'] = $this->config->get('config_comment');
