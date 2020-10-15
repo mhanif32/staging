@@ -648,7 +648,7 @@
                                                 <table class="table table-bordered table-hover">
                                                     <tbody>
                                                     <tr>
-                                                        <th>Sr</th>
+                                                        <th>S/N</th>
                                                         <th>Plan</th>
                                                         <th>Amount Paid</th>
                                                         <th>Date On (Start Date)</th>
