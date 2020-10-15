@@ -18,19 +18,24 @@
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
                             {% if is_seller and checkPlan.name %}
-                                <div class="text-right">
+                                <div class="d-flex justify-content-end align-items-end">
                                     {#<i class="fa fa-flag" aria-hidden="true"></i>#}
-                                    <span class="text-danger f-15 d-block">Your current plan is :-</span> <span class="d-block font-weight-bold f-15">{{ checkPlan.name }}</span>
-</div>
-                            {% endif %}
-                            {% if checkPlan.name == 'Free' %}
-                                <div class="mb-5">
-                                    <span class="f-15">Free Plan Attracts 20% on Products Sold. <br>
-                                        To change it, Go To Membership Plans Below.
+
+                                    {% if checkPlan.name == 'Free' %}
+                                        <span class="f-15 text-danger">Free Plan Attracts 20% on Products Sold. <br>
+                                            To change it, Go To Membership Plans Below.
+                                        </span>
+                                        {% else %}
+                                            <span class="text-danger f-15 ml-3">Your current plan is :-</span>
+                                    {% endif %}
+
+                                    <span class="font-weight-bold f-15">
+                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                        {{ checkPlan.name }}
                                     </span>
-                                    <span class="font-weight-bold f-15">{{ checkPlan.name }}</span>
                                 </div>
                             {% endif %}
+
                             <h3 class="f-20 font-weight-bold text-uppercase">{{ text_my_account }}</h3>
                             <hr>
                             <div class="row">
