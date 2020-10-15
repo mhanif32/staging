@@ -35,7 +35,10 @@ class ControllerInformationContact extends Controller {
 			$mail->setSubject(html_entity_decode(sprintf($this->request->post['subject'], $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
 
             $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+
+            $data['owner_name'] = $this->config->get('config_owner');
             $data['person_name'] = $this->request->post['name'];
+            $data['person_email'] = $this->request->post['email'];
 			$data['enquiry'] = $this->request->post['enquiry'];
             $mailText = $this->load->view('mail/contact', $data);
             $mail->setHtml($mailText);
