@@ -18,7 +18,7 @@
 
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
                             {% if is_seller and checkPlan.name %}
-                                <div class="text-right">
+                                <div class="d-flex justify-content-end align-items-end">
                                     {#<i class="fa fa-flag" aria-hidden="true"></i>#}
 
                                     {% if checkPlan.name == 'Free' %}
@@ -26,9 +26,13 @@
                                             To change it, Go To Membership Plans Below.
                                         </span>
                                         {% else %}
-                                            <span class="text-danger f-15">Your current plan is :-</span>
+                                            <span class="text-danger f-15 ml-3">Your current plan is :-</span>
                                     {% endif %}
-                                    <span class="font-weight-bold f-15">{{ checkPlan.name }}</span>
+
+                                    <span class="font-weight-bold f-15">
+                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                        {{ checkPlan.name }}
+                                    </span>
                                 </div>
                             {% endif %}
 
