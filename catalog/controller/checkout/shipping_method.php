@@ -45,9 +45,21 @@ class ControllerCheckoutShippingMethod extends Controller {
             $this->session->data['isSuperMarketProduct'] = '';
             foreach ($this->cart->getProducts() as $product) {
 
-                $dataProduct = $this->model_catalog_category->checkProductCategory($product['product_id']);
-                if(!empty($dataProduct)) {
-                    $this->session->data['isSuperMarketProduct'] = true;
+//                $dataProduct = $this->model_catalog_category->checkProductCategory($product['product_id']);
+//                if(!empty($dataProduct)) {
+//                    $this->session->data['isSuperMarketProduct'] = true;
+//                }
+                $categories = $this->model_catalog_product->getProductCategories($product['product_id']);
+                foreach ($categories as $category_id) {
+                    $category_info = $this->model_catalog_category->getCategory($category_id);
+                    if ($category_info) {
+                        $categoryLine = ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name'];
+                        if($categoryLine) {
+                            if(strpos($categoryLine, 'Supermarket') !== false){
+                                $this->session->data['isSuperMarketProduct'] = true;
+                            }
+                        }
+                    }
                 }
             }
 
