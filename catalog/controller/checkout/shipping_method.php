@@ -40,7 +40,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
-            //echo '<pre>';print_r($method_data);exit('okoko');
+
             //check products relates with Supermarket Category
             $this->session->data['isSuperMarketProduct'] = '';
             foreach ($this->cart->getProducts() as $product) {
@@ -54,6 +54,11 @@ class ControllerCheckoutShippingMethod extends Controller {
             if($this->session->data['isSuperMarketProduct'] == true) {
                 if(!empty($method_data['parcelforce_48'])) {
                     unset($method_data['parcelforce_48']);
+                }
+            } else {
+                //if non supermarket
+                if(!empty($method_data['partner_shipping'])) {
+                    unset($method_data['partner_shipping']);
                 }
             }
 			$this->session->data['shipping_methods'] = $method_data;
@@ -82,7 +87,6 @@ class ControllerCheckoutShippingMethod extends Controller {
 		} else {
 			$data['comment'] = '';
 		}
-
 		//echo '<pre>';print_r($data['shipping_methods']);exit('aaaa');
 		
 		$this->response->setOutput($this->load->view('checkout/shipping_method', $data));
