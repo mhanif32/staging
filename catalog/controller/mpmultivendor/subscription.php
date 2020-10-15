@@ -48,7 +48,7 @@ class ControllerMpmultivendorSubscription extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         //plans
-        $planList = $this->model_mpmultivendor_subscription->getSubscriptionPlans();
+        $planList = $this->model_mpmultivendor_subscription->getSubscriptionPlans($this->session->data['currency']);
         foreach ($planList as $item) {
 
 //            $currData = $this->model_localisation_currency->getCurrencyByCode($this->session->data['currency']);

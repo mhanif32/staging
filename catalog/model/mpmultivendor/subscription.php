@@ -5,8 +5,16 @@ class ModelMpmultivendorSubscription extends Model {
         return $query->row;
     }
 
-    public function getSubscriptionPlans() {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "subscription_plan WHERE name != 'Free' ORDER BY sort_order ASC");
+    public function getSubscriptionPlans($sessionCurrency = NULL)
+    {
+        $sql = "SELECT * FROM " . DB_PREFIX . "subscription_plan WHERE name != 'Free'";
+        if(!empty($sessionCurrency) && $sessionCurrency == 'NGN') {
+            $sql.=" and currency = 'ngn'";
+        } else {
+            $sql.=" and currency = 'usd'";
+        }
+        $sql.="ORDER BY sort_order ASC";
+        $query = $this->db->query($sql);
         return $query->rows;
     }
 
