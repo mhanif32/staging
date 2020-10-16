@@ -124,7 +124,7 @@ class ControllerMpmultivendorCommission extends Controller
 
         foreach ($results as $result) {
             if (!empty($result['admin_fee'])) {
-                $data['admin_fees'][$result['currency_code']][] = $result['admin_fee'];
+                $data['admin_fees'][$result['currency_code']][] = $this->currency->format($result['admin_fee'], $result['currency_code'], $result['currency_value']);
             }
 
             $data['commissions'][] = array(
@@ -145,12 +145,13 @@ class ControllerMpmultivendorCommission extends Controller
 
         foreach ($data['admin_fees'] as $key => $fee) {
 
-            $data['data'.$key]  = $this->currency->getSymbolLeft($key) . round(array_sum($fee), 2) . $this->currency->getSymbolRight($key);
+            $feeAmt = preg_replace("/[^0-9.]/", "", $fee);
+
+            $data['data'.$key]  = $this->currency->getSymbolLeft($key) . round(array_sum($feeAmt), 2) . $this->currency->getSymbolRight($key);
         }
+//echo '<pre>';print_r($feeAmt);exit('okoko');
 
-// echo '<pre>';print_r($data['admin_fees']);exit('okoko');
         $data['heading_title'] = $this->language->get('heading_title');
-
         $data['text_list'] = $this->language->get('text_list');
         $data['text_no_results'] = $this->language->get('text_no_results');
         $data['text_confirm'] = $this->language->get('text_confirm');

@@ -90,6 +90,7 @@
                 <?php } ?>
 
                 <br>
+                <br>
                 <div id="form-commission">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
