@@ -115,17 +115,27 @@ class ControllerMpmultivendorCommission extends Controller
             'limit' => $this->config->get('config_limit_admin')
         );
 
+        $filter_data_all = array(
+            'filter_mpseller_id' => $filter_mpseller_id,
+            'filter_store_owner' => $filter_store_owner,
+            'filter_date_start' => $filter_date_start,
+            'filter_date_end' => $filter_date_end,
+            'sort' => $sort,
+            'order' => $order
+        );
+
         $final_commission = $this->model_mpmultivendor_commission->getCommissionTotal($filter_data);
         $data['final_commission'] = $this->currency->format($final_commission, $this->config->get('config_currency'));
 
         $commission_total = $this->model_mpmultivendor_commission->getTotalCommissions($filter_data);
 
         $results = $this->model_mpmultivendor_commission->getCommissions($filter_data);
+        $results_all = $this->model_mpmultivendor_commission->getCommissions($filter_data_all);
 
         foreach ($results as $result) {
-            if (!empty($result['admin_fee'])) {
-                $data['admin_fees'][$result['currency_code']][] = $this->currency->format($result['admin_fee'], $result['currency_code'], $result['currency_value']);
-            }
+//            if (!empty($result['admin_fee'])) {
+//                $data['admin_fees'][$result['currency_code']][] = $this->currency->format($result['admin_fee'], $result['currency_code'], $result['currency_value']);
+//            }
 
             $data['commissions'][] = array(
                 'store_owner' => $result['store_owner'],
@@ -143,6 +153,12 @@ class ControllerMpmultivendorCommission extends Controller
             );
         }
 
+        //commission for all total
+        foreach ($results_all as $result_all) {
+            if (!empty($result_all['admin_fee'])) {
+                $data['admin_fees'][$result_all['currency_code']][] = $this->currency->format($result_all['admin_fee'], $result_all['currency_code'], $result_all['currency_value']);
+            }
+        }
         foreach ($data['admin_fees'] as $key => $fee) {
 
             $feeAmt = preg_replace("/[^0-9.]/", "", $fee);
