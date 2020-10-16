@@ -104,6 +104,12 @@ class ModelAccountOrder extends Model
         }
     }
 
+    public function getOrderForDelivery($order_id)
+    {
+        $order_query = $this->db->query("SELECT shipping_address_1, shipping_city, shipping_zone, shipping_country FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id != '0' AND order_status_id > '0'");
+        return $order_query->row;
+    }
+
     public function getOrders($start = 0, $limit = 20)
     {
         if ($start < 0) {

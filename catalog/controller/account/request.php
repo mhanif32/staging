@@ -156,7 +156,7 @@ class ControllerAccountRequest extends Controller
                     $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
                     $deliveryPartData = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
                     $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
-                    $orderData = $this->model_account_order->getOrder($requestData['order_id']);
+                    $orderData = $this->model_account_order->getOrderForDelivery($requestData['order_id']);
 
                     //Send Mail to Delivery Partner
                     $dataMail = [];
