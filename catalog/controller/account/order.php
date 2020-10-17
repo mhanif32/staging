@@ -555,7 +555,6 @@ class ControllerAccountOrder extends Controller {
 
             //to send mail to multiple sellers (having that seller's products bought by customer)
             $sellers = $this->model_account_order->getMpsellerFromOrder($order_id);
-            //print_r($sellers);exit('aaa');
             foreach ($sellers as $seller) {
                 $dataSeller = [];
                 $mail->setTo($seller['email']);
