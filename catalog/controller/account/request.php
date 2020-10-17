@@ -120,7 +120,10 @@ class ControllerAccountRequest extends Controller
         $addressFrom = $sellerAddress;
         $addressTo = $customerAddress;
         $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
-        $del_fee = 3.53 + (0.25 * $distance);
+
+        $configFlatCharge = (float) $this->config->get('config_flat_delivery_partner_fee');
+        $configFeeDistance = (float) $this->config->get('config_delivery_partner_fee_per_distance');
+        $del_fee = $configFlatCharge + ($configFeeDistance * $distance);
         $dataCharges = $this->currency->format($del_fee, $orderData['currency_code'], $orderData['currency_value']);
         $data['estm_delivery_fee'] = $dataCharges;
 
@@ -492,8 +495,10 @@ class ControllerAccountRequest extends Controller
                     $addressTo = $customerAddress;
                     $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
 
+                    $configFlatCharge = (float) $this->config->get('config_flat_delivery_partner_fee');
+                    $configFeeDistance = (float) $this->config->get('config_delivery_partner_fee_per_distance');
                     $dataCharges = array(
-                        'delivery_charges' => 3.53 + (0.25 * $distance),
+                        'delivery_charges' => $configFlatCharge + ($configFeeDistance * $distance),
                         'currency' => $orderData['currency_code']
                     );
                     $this->model_account_request->updateCharges($requestId, $dataCharges);

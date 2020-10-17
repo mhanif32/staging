@@ -77,7 +77,9 @@ class ModelExtensionShippingPartnerShipping extends Model
 
                 $currency = $this->getCurrencyByCode($this->session->data['currency']);
                 //$delivery_charge = (5.00 / $currency['value']) + ((0.35 / $currency['value']) * $distance);
-                $delivery_charge = 5.00 + (0.35 * $distance);
+                $configFlatCharge = (float) $this->config->get('config_flat_delivery_charges');
+                $configFlatChargeDistance = (float) $this->config->get('config_delivery_charge_per_distance');
+                $delivery_charge = $configFlatCharge + ($configFlatChargeDistance * $distance);
                 //$dataCharges = $this->currency->addCurrencySymbol($delivery_charge, $this->session->data['currency']);
                 $totalDeliveryAmt = $delivery_charge;
 

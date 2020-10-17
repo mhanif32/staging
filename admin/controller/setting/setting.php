@@ -728,6 +728,30 @@ class ControllerSettingSetting extends Controller {
 			'value' => 'contact'
 		);
 
+        if (isset($this->request->post['config_flat_delivery_charges'])) {
+            $data['config_flat_delivery_charges'] = $this->request->post['config_flat_delivery_charges'];
+        } else {
+            $data['config_flat_delivery_charges'] = $this->config->get('config_flat_delivery_charges');
+        }
+
+        if (isset($this->request->post['config_delivery_charge_per_distance'])) {
+            $data['config_delivery_charge_per_distance'] = $this->request->post['config_delivery_charge_per_distance'];
+        } else {
+            $data['config_delivery_charge_per_distance'] = $this->config->get('config_delivery_charge_per_distance');
+        }
+
+        if (isset($this->request->post['config_flat_delivery_partner_fee'])) {
+            $data['config_flat_delivery_partner_fee'] = $this->request->post['config_flat_delivery_partner_fee'];
+        } else {
+            $data['config_flat_delivery_partner_fee'] = $this->config->get('config_flat_delivery_partner_fee');
+        }
+
+        if (isset($this->request->post['config_delivery_partner_fee_per_distance'])) {
+            $data['config_delivery_partner_fee_per_distance'] = $this->request->post['config_delivery_partner_fee_per_distance'];
+        } else {
+            $data['config_delivery_partner_fee_per_distance'] = $this->config->get('config_delivery_partner_fee_per_distance');
+        }
+
 		if (isset($this->request->post['config_logo'])) {
 			$data['config_logo'] = $this->request->post['config_logo'];
 		} else {

@@ -1253,6 +1253,47 @@
                                     </div>
                                 </div>
                             </fieldset>
+
+                            <fieldset>
+                                <legend>Delivery Charges & Delivery Partner Fees</legend><small>(Note : All amounts should be in a Dollar)</small>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span data-toggle="tooltip" title="Flat Delivery Charges">Flat Delivery Charges</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="config_flat_delivery_charges"
+                                               value="{{ config_flat_delivery_charges }}"
+                                               id="input-flat-delivery-charges" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span data-toggle="tooltip" title="Delivery Charges">Delivery Charges(Km per distance)</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="config_delivery_charge_per_distance"
+                                               value="{{ config_delivery_charge_per_distance }}"
+                                               id="input-delivery-charge-per-distance" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span data-toggle="tooltip" title="Flat Delivery Partner Fee">Flat Delivery Partner Fee</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="config_flat_delivery_partner_fee"
+                                               value="{{ config_flat_delivery_partner_fee }}"
+                                               id="input-flat-delivery-partner-fee" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span data-toggle="tooltip" title="Delivery Partner Fee(Km per distance)">Delivery Partner Fee(Km per distance)</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="config_delivery_partner_fee_per_distance"
+                                               value="{{ config_delivery_partner_fee_per_distance }}"
+                                               id="input-delivery-partner-fee-per-distance" class="form-control"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+
                         </div>
                         <div class="tab-pane" id="tab-image">
                             <div class="form-group">
