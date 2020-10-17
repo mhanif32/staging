@@ -439,6 +439,7 @@ class ControllerMailOrder extends Controller {
                     'sellerStore' => !empty($sellerData['store_name']) ? $sellerData['store_name'] : '',
                     'sellerPhone' => !empty($sellerData['telephone']) ? $sellerData['telephone'] : '',
 				);
+				$sellerNames[] = !empty($sellerData['store_name']) ? $sellerData['store_name'] : '';
 			}
 			
 			$data['vouchers'] = array();
@@ -490,7 +491,8 @@ class ControllerMailOrder extends Controller {
             $dataAdmin['customer_address'] = $order_info['shipping_address_1'] . ', ' . $order_info['shipping_city'] . ', ' . $order_info['shipping_zone'] . ', ' . $order_info['shipping_country'];
             //echo '<pre>';print_r($order_info);exit('aaa');
             $dataAdmin['customer_name'] = $order_info['firstname'].' '.$order_info['lastname'];
-            //$dataAdmin['seller_name'] = $mpSellerData['store_owner'];
+            $sellerNameStr = implode(',', $sellerNames);
+            $dataAdmin['seller_names'] = $sellerNameStr;
             //$dataAdmin['order_link'] = $this->config->get('config_url') . '/admin/index.php?route=sale/order&user_token=' . $_['user_token'];
 
             $mailText = $this->load->view('mail/order_alert', $dataAdmin);
