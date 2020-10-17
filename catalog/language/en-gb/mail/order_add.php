@@ -2,7 +2,7 @@
 // Text
 $_['text_subject']          = '%s - Order %s';
 $_['text_greeting']         = 'Thank you for your recent purchase of goods on %s.com. Your order has been received and is been processed. A notification mail will be sent to you as soon as your order is processed.';
-$_['text_greeting_1'] = 'thechampionmall.com is here to provide you with all that you need for yourself and loved ones at ease.”';
+$_['text_greeting_1']       = 'thechampionmall.com is here to provide you with all that you need for yourself and loved ones at ease.”';
 
 $_['text_link']             = 'To view your order click on the link below : ';
 $_['text_table_invoice']             = 'This goes below the invoice';
