@@ -29,28 +29,31 @@
                                     <div class="">
                                         <p>Note : Check below delivery details & Accept/Decline your request from
                                             here.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
                                             <strong>Request Status : </strong>
-                                            {% if is_accept == 1 %} <span class="bg-success status">Accepted</span>
-                                            {% elseif is_accept == 2 %} <span class="bg-danger status">Declined</span>
-                                            {% else %} <span class="bg-warning status">Pending</span>
+                                            {% if is_accept == 1 %} <span class="bg-success status f-12">Accepted</span>
+                                            {% elseif is_accept == 2 %} <span class="bg-danger status f-12">Declined</span>
+                                            {% else %} <span class="bg-warning status f-12">Pending</span>
                                             {% endif %}
+                                                {% if status %}
+                                                    <div class="d-flex mt-2">
+                                                        <strong>Order Request Status : </strong> &nbsp;&nbsp;&nbsp;
+                                                        <span class="bg-danger status f-12">{{ status }}</span>
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                             <div>
                                                 <p class="mb-0"><strong>Order Id :</strong> # {{ order.order_id }}</p>
                                                 <p class="mb-0"><strong>Order Invoice Number :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                                 <p class="mb-0"><strong>Seller Order Status :</strong> {{ seller_order_status }}</p>
+                                                <p class="mb-0"><strong>Expected Delivery Date :</strong> {{ estimated_date }}</p>
+                                                <p class="mb-0"><strong>Preferred Delivery Date :</strong> {{ my_delivery_date }}</p>
                                             </div>
                                         </div>
-                                        {% if status %}
-                                            <div class="d-flex">
-                                                <strong>Order Request Status : </strong> &nbsp;&nbsp;&nbsp;
-                                                <span class="bg-danger status">{{ status }}</span>
-                                            </div>
-                                            <br>
-                                        {% endif %}
                                     </div>
+                                    <hr>
+                                    <p><strong>Customer Comment For Delivery :</strong> {{ customer_comment }}</p>
 
                                     <table class="table table-hover bg-white box-shadow">
                                         <thead>

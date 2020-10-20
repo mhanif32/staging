@@ -101,7 +101,12 @@ class ModelAccountRequest extends Model
     public function getDeliveryOrderRequestStatus($order_id)
     {
         $query = $this->db->query("SELECT status FROM `" . DB_PREFIX . "delivery_partner_request` dpr WHERE dpr.is_accept = 1 AND dpr.order_id = '".(int)$order_id."'");
+        return $query->row;
+    }
 
+    public function getOrderEstimatedDates($order_id)
+    {
+        $query = $this->db->query("SELECT o.my_delivery_date, o.estimated_date, o.comment FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '".(int)$order_id."'");
         return $query->row;
     }
 }
