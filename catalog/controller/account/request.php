@@ -426,6 +426,7 @@ class ControllerAccountRequest extends Controller
         $requestData = $this->model_account_request->getRequestData($this->request->get['id']);
         $seller = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
         $sellerOrderHistory = $this->model_account_request->getSellerOrderStatus($requestData['order_id'], $requestData['mpseller_id']);
+        $sellerOrderData = $this->model_account_request->getOrderEstimatedDates($requestData['order_id']);
 
         $data['seller'] = array(
             'store_owner' => $seller['store_owner'],
@@ -441,6 +442,9 @@ class ControllerAccountRequest extends Controller
         $data['request_id'] = $requestData['request_id'];
         $data['status'] = $requestData['status'];
         $data['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
+        $data['my_delivery_date'] = !empty($sellerOrderData['my_delivery_date']) ? $sellerOrderData['my_delivery_date'] : '-';
+        $data['estimated_date'] = !empty($sellerOrderData['estimated_date']) ? $sellerOrderData['estimated_date'] : '-';
+        $data['customer_comment'] = !empty($sellerOrderData['comment']) ? $sellerOrderData['comment'] : '-';
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
         $data['footer'] = $this->load->controller('common/footer');
