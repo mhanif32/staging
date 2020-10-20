@@ -550,61 +550,7 @@ footer {
   background-color: #fafafa;
 }
 
-// my-order
-.my-order {
-  .table {
-    thead {
-      background-color: #f6f6f6;
-      th {
-        border-bottom-width: 1px;
-        font-size: 0.9375rem;
-        font-weight: 600;
-      }
-    }
-    tbody {
-      td {
-        color: $black;
-        font-size: 0.8125rem;
-        font-weight: 400;
-        vertical-align: middle;     padding: 0;
-        span.onclick-remove{
-          display: list-item;
-          list-style-type: none;
-          text-align: right;
-          cursor: pointer;
-        }
-        i {
-          color: #fff;
-          font-size: 18px;
-          transition: all 0.5s ease;
-          &:hover {
-            color: $success;
-          }
-        }
-      }
-      .total {
-        td {
-          color: #272727;
 
-          font-size: 0.9375rem;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  // order-details-page-css
-  .arrived-to-deliver {
-    ul {
-      li {
-        font-size: 1rem;
-        color: #707070;
-        font-weight: 500;
-      }
-    }
-  }
-  .panel-group { .panel-heading { .panel-title { a { font-size: 15px; }}}}
-}
 
 // Your Shipping Address
 
@@ -1055,12 +1001,7 @@ footer {
     + img {cursor: pointer;}
   }}
 
-#product, .my-order{
-.number{span {cursor:pointer; }
-  .minus, .plus{width: 25px;background: #f2f2f2;border: 1px solid #ddd;display: inline-block;text-align: center;height: 31px;
-    line-height: 30px;}
-  input {width: 100px;text-align: center;}
-  }}
+
 
 // about-us
 #information-about{
@@ -1348,8 +1289,7 @@ i{width: 20px;}}}}
 #checkout-checkout{
   .steps-data{
     .panel-body {
-      margin: 0 0 8px 70px;
-      padding: 18px;
+      @media only screen and (min-width: 768px){ margin: 0 0 8px 70px; padding: 18px;}
     }
   .panel-default>.panel-heading { color: #333; background-color: #F2F9FF; border-bottom: 1px solid #3e8cd0; margin-bottom: 5px; padding: 0px 5px 0px 5px; position: relative;
 .panel-title{

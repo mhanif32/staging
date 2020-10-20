@@ -21,15 +21,20 @@
         <div class="row">{% endif %}{{ column_left }}{% if custom_themename == 'journal2' %}{{ column_right }}{% endif %}
 
             <div id="content" class="col-sm-12 my-5 py-3 mv-dashboard-wrap bg-white">{{ content_top }}{{ mpseller_links }}
-                <div class="pull-right"><a href="{{ invoice }}" target="_blank" data-toggle="tooltip"
-                                           title="{{ button_invoice_print }}" class="btn btn-primary"><i
-                                class="fa fa-print"></i></a> <a href="{{ shipping }}" target="_blank"
-                                                                data-toggle="tooltip"
-                                                                title="{{ button_shipping_print }}"
-                                                                class="btn btn-primary"><i class="fa fa-truck"></i></a>
-                    <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i
-                                class="fa fa-reply"></i></a></div>
+
                 <h3 class="f-25 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
+
+                <div class="pull-right-absolute">
+                    <a href="{{ invoice }}" target="_blank" data-toggle="tooltip"
+                       title="{{ button_invoice_print }}" class="btn btn-primary"><i
+                                class="fa fa-print"></i></a>
+                    <a href="{{ shipping }}" target="_blank" data-toggle="tooltip" title="{{ button_shipping_print }}"
+                       class="btn btn-primary"><i class="fa fa-truck"></i>
+                    </a>
+                    <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i
+                                class="fa fa-reply"></i>
+                    </a>
+                </div>
                 <table class="table table-hover list">
                     <thead class="bg-light">
                     <tr>
