@@ -11,7 +11,7 @@
     {% endif %}
     <div class="row">
         <div id="content" class="col-12 mb-5"> {{ content_top }}
-            <div class="form-signin card px-4 box-shadow">
+            <div class="form-signin card px-4 box-shadow py-3">
                 <div>
                     {#<a href="javascript:history.back(1);" class="position-absolute f-35"><i class="fas fa-long-arrow-alt-left on-hover" aria-hidden="true"></i></a>#}
                     <h3 class="f-20 font-weight-bold text-uppercase text-center mt-3">{{ heading_title }}</h3>
@@ -184,15 +184,18 @@
                     {{ captcha }}
                 </fieldset>
                 {% if text_agree %}
+                    {% if agree %}
+                        <input type="checkbox" name="agree" value="1" checked="checked"/>
+                    {% else %}
+                        <input type="checkbox" name="agree" value="1"/>
+                    {% endif %}
+                    {{ text_agree }}
                     <div class="buttons clearfix">
-                        <div class="pull-left"><a href="{{ back }}" class="btn btn-danger">{{ button_back }}</a></div>
-                        <div class="pull-right">{{ text_agree }}
-                            {% if agree %}
-                                <input type="checkbox" name="agree" value="1" checked="checked"/>
-                            {% else %}
-                                <input type="checkbox" name="agree" value="1"/>
-                            {% endif %}
-                            <input type="submit" value="{{ button_submit }}" class="btn btn-primary"/>
+                        <div class="pull-left">
+                           <input type="submit" value="{{ button_submit }}" class="btn btn-primary"/>
+                        </div>
+                        <div class="pull-right">
+                            <a href="{{ back }}" class="btn btn-danger">{{ button_back }}</a>
                         </div>
                     </div>
                 {% else %}

@@ -48,71 +48,70 @@
                                     </div>
                                     <br>
 
-                                    <table class="table table-hover bg-white box-shadow">
-                                        <thead>
-                                        <tr>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
+                                    <div class="row box-shadow mb-5 no-gutters">
+                                        <div class="col-md-6">
+                                            <div class="text-left f-18 font-weight-black border-bottom border-top px-2"
+                                                style="">
                                                 <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller Info</h3>
-                                            </td>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller
-                                                    Address</h3></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-left f-15">
+                                            </div>
+                                            <div class="text-left f-13 p-2">
                                                 <strong>Store Owner : </strong>{{ seller.store_owner }} <br>
                                                 <strong>Store Name : </strong>{{ seller.store_name }} <br>
                                                 <strong>Email : </strong>{{ seller.email }} <br>
                                                 <strong>Telephone : </strong>{{ seller.telephone }}
-                                            </td>
-                                            <td class="text-left f-15">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="text-left f-18 font-weight-black border-bottom border-top px-2"
+                                                 style="">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller
+                                                    Address</h3>
+                                            </div>
+                                            <div class="text-left f-13 p-2">
                                                 <strong>Address : </strong>{{ seller.address }} <br>
                                                 <strong>City : </strong>{{ seller.city }} <br>
                                                 <strong>State : </strong>{{ seller.zone.name }} <br>
                                                 <strong>Country : </strong>{{ seller.country.name }} <br>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    <table class="table table-hover bg-white box-shadow">
-                                        <thead>
-                                        <tr>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
+                                    <div class="row no-gutters box-shadow mb-4">
+
+                                        <div class="col-md-6">
+                                            <div class="text-left f-18 border-bottom border-top font-weight-black px-2"
+                                                style="">
                                                 <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery Info</h3>
-                                            </td>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
-                                                    Address</h3></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-left f-15">
+                                            </div>
+
+                                            <div class="text-left f-13 p-2">
                                                 <strong>Customer Name
                                                     : </strong>{{ order.shipping_firstname }} {{ order.shipping_lastname }}
                                                 <br>
                                                 <strong>Email : </strong>{{ order.email }} <br>
                                                 <strong>Telephone : </strong>{{ order.telephone }}
-                                            </td>
-                                            <td class="text-left f-15">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="text-left f-18 border-bottom border-top font-weight-black px-2"
+                                                 style="">
+                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
+                                                    Address</h3>
+                                            </div>
+                                                <div class="text-left f-13 p-2">
                                                 <strong>Address 1 : </strong>{{ order.shipping_address_1 }} <br>
                                                 <strong>Address 2 : </strong>{{ order.shipping_address_2 }} <br>
                                                 <strong>City : </strong>{{ order.shipping_city }} <br>
                                                 <strong>State : </strong>{{ order.shipping_zone }} <br>
                                                 <strong>Country : </strong>{{ order.shipping_country }} <br>
                                                 <strong>Post Code : </strong>{{ order.shipping_postcode }} <br>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="d-flex justify-content-between">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
                                     {% if isAcceptedByOthers %}
                                         <div id="option-button">
                                             <label>Accept or Decline Delivery Request.</label><br>
@@ -120,7 +119,7 @@
                                             <button class="btn btn-danger" id="decline">Decline</button>
                                         </div>
                                     {% endif %}
-                                        <div class="paid-delivery">
+                                        <div class="paid-delivery mt-4 mt-md-0">
                                             <label class="text-success">You Will Be Paid <strong>{{ estm_delivery_fee }}</strong> For This Delivery</label>
                                         </div>
                                     </div>

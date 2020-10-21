@@ -69,6 +69,90 @@ a.btn-primary:hover {
 .w-100 {
   width: 100% !important; }
 
+@media only screen and (min-width: 768px) {
+  .cart-dropdown {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content; } }
+
+.pull-right-absolute {
+  margin-bottom: 20px; }
+  @media only screen and (min-width: 768px) {
+    .pull-right-absolute {
+      position: absolute;
+      top: 25px;
+      right: 0; } }
+
+#product .number span, .my-order .number span {
+  cursor: pointer; }
+#product .number .minus, #product .number .plus, .my-order .number .minus, .my-order .number .plus {
+  width: 25px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  display: inline-block;
+  text-align: center;
+  height: 34px;
+  line-height: 29px; }
+#product .number input, .my-order .number input {
+  width: 100px;
+  text-align: center; }
+
+.cart-products .table tbody td {
+  padding: 0.75rem !important;
+  width: 2px;
+  margin-bottom: 20px; }
+  @media only screen and (max-width: 768px) {
+    .cart-products .table tbody td {
+      white-space: nowrap; } }
+.cart-products .number input {
+  width: 50px !important;
+  text-align: center; }
+
+.table tbody td {
+  padding: 0.75rem !important;
+  width: 2px;
+  margin-bottom: 20px; }
+  @media only screen and (max-width: 768px) {
+    .table tbody td {
+      white-space: nowrap; } }
+
+.my-order .table thead {
+  background-color: #f6f6f6; }
+  .my-order .table thead th {
+    border-bottom-width: 1px;
+    font-size: 0.9375rem;
+    font-weight: 600; }
+.my-order .table tbody td {
+  color: #000;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  vertical-align: middle; }
+  @media only screen and (max-width: 768px) {
+    .my-order .table tbody td {
+      white-space: nowrap; } }
+  .my-order .table tbody td span.onclick-remove {
+    display: list-item;
+    list-style-type: none;
+    text-align: right;
+    cursor: pointer; }
+  .my-order .table tbody td i {
+    color: #fff;
+    font-size: 18px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+    .my-order .table tbody td i:hover {
+      color: #01B0F1; }
+.my-order .table tbody .total td {
+  color: #272727;
+  font-size: 0.9375rem;
+  font-weight: 600; }
+.my-order .arrived-to-deliver ul li {
+  font-size: 1rem;
+  color: #707070;
+  font-weight: 500; }
+.my-order .panel-group .panel-heading .panel-title a {
+  font-size: 15px; }
+
 body {
   font-family: 'Arial', sans-serif; }
 
@@ -945,41 +1029,6 @@ footer ul {
 .product-you-may-also-like {
   background-color: #fafafa; }
 
-.my-order .table thead {
-  background-color: #f6f6f6; }
-  .my-order .table thead th {
-    border-bottom-width: 1px;
-    font-size: 0.9375rem;
-    font-weight: 600; }
-.my-order .table tbody td {
-  color: #000;
-  font-size: 0.8125rem;
-  font-weight: 400;
-  vertical-align: middle;
-  padding: 0; }
-  .my-order .table tbody td span.onclick-remove {
-    display: list-item;
-    list-style-type: none;
-    text-align: right;
-    cursor: pointer; }
-  .my-order .table tbody td i {
-    color: #fff;
-    font-size: 18px;
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease; }
-    .my-order .table tbody td i:hover {
-      color: #01B0F1; }
-.my-order .table tbody .total td {
-  color: #272727;
-  font-size: 0.9375rem;
-  font-weight: 600; }
-.my-order .arrived-to-deliver ul li {
-  font-size: 1rem;
-  color: #707070;
-  font-weight: 500; }
-.my-order .panel-group .panel-heading .panel-title a {
-  font-size: 15px; }
-
 .shipping-address [type="radio"]:checked,
 .shipping-address [type="radio"]:not(:checked) {
   display: none; }
@@ -1409,20 +1458,6 @@ footer ul {
   .radio-image [type=radio] + img {
     cursor: pointer; }
 
-#product .number span, .my-order .number span {
-  cursor: pointer; }
-#product .number .minus, #product .number .plus, .my-order .number .minus, .my-order .number .plus {
-  width: 25px;
-  background: #f2f2f2;
-  border: 1px solid #ddd;
-  display: inline-block;
-  text-align: center;
-  height: 31px;
-  line-height: 30px; }
-#product .number input, .my-order .number input {
-  width: 100px;
-  text-align: center; }
-
 #information-about .header-top-text {
   top: 65px;
   left: 24px; }
@@ -1632,9 +1667,10 @@ footer ul {
       background-color: #F2F9FF;
       border-color: red; }
 
-#checkout-checkout .steps-data .panel-body {
-  margin: 0 0 8px 70px;
-  padding: 18px; }
+@media only screen and (min-width: 768px) {
+  #checkout-checkout .steps-data .panel-body {
+    margin: 0 0 8px 70px;
+    padding: 18px; } }
 #checkout-checkout .steps-data .panel-default > .panel-heading {
   color: #333;
   background-color: #F2F9FF;

@@ -11,9 +11,10 @@
         <span class="d-block f-13">Cart</span>
     </button>
 
-    <ul class="dropdown-menu dropdown-menu-right" style="width: max-content;">
+    <ul class="dropdown-menu dropdown-menu-right cart-dropdown" style="">
         {% if products or vouchers %}
             <li>
+                <div class="table-responsive">
                 <table class="table table-striped">
                     {% for product in products %}
                         <tr>
@@ -50,9 +51,11 @@
                         </tr>
                     {% endfor %}
                 </table>
+                </div>
             </li>
             <li>
                 <div class="mx-3">
+                    <div class="table-responsive">
                     <table class="table table-bordered">
                         {% for total in totals %}
                             <tr>
@@ -61,6 +64,7 @@
                             </tr>
                         {% endfor %}
                     </table>
+                    </div>
                     <p class="text-right">
                         <a href="{{ cart }}"><strong><i class="fa fa-shopping-cart"></i> {{ text_cart }}</strong></a>
                         &nbsp;&nbsp;&nbsp;

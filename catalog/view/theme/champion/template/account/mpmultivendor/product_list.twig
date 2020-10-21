@@ -20,21 +20,23 @@
                                         </h3>
                                     </div>
                                     <div class="panel panel-default">
-
                                         <a href="{{ import_products }}" data-toggle="tooltip"
-                                           title="{{ button_import_products }}" class="btn btn-primary"><i
-                                                    class="fa fa-upload"></i> {{ button_import_products }}</a>
+                                           title="{{ button_import_products }}" class="btn btn-primary ml-2 mt-2 mt-lg-0"><i
+                                                    class="fa fa-upload"></i> {{ button_import_products }}
+                                        </a>
                                         <a href="{{ export_products }}" data-toggle="tooltip"
-                                           title="{{ button_export_products }}" class="btn btn-primary"><i
-                                                    class="fa fa-download"></i> {{ button_export_products }}</a>
+                                           title="{{ button_export_products }}" class="btn btn-primary ml-2 mt-2 mt-lg-0"><i
+                                                    class="fa fa-download"></i> {{ button_export_products }}
+                                        </a>
                                         <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}"
-                                           class="btn btn-primary"><i class="fa fa-plus"></i> Add Product</a>
+                                           class="btn btn-primary ml-2 mt-2 mt-lg-0"><i class="fa fa-plus"></i> Add Product
+                                        </a>
                                         <button type="button" form="form-product" data-toggle="tooltip"
-                                                title="{{ button_delete }}" class="btn btn-danger"
+                                                title="{{ button_delete }}" class="btn btn-danger ml-2 mt-2 mt-lg-0"
                                                 onclick="confirm('{{ text_confirm }}') ? $('#form-product').submit() : false;">
-                                            <i class="fa fa-trash-o"></i></button>
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
                                     </div>
-
                                 </div>
 
                                 <hr style="margin: 15px -25px">

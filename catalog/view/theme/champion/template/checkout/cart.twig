@@ -26,7 +26,7 @@
                     {#{% endif %}#}
                 </h3>
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-update-cart">
-                    <div class="table-responsive">
+                    <div class="table-responsive cart-products w-100">
                         <table class="table mb-0">
                             <thead class="text-center">
                             <tr>
@@ -45,19 +45,17 @@
                             <tbody class="text-left">
                             {% for product in products %}
                                 <tr>
-                                    <td class="text-left">
+                                    <td class="text-left cart-product-name">
                                         {% if product.thumb %}
 
                                             <a href="{{ product.href }}">
-                                                <img
-                                                        src="{{ product.thumb }}" alt="{{ product.name }}"
+                                                <img src="{{ product.thumb }}" alt="{{ product.name }}"
                                                         title="{{ product.name }}" class="img-thumbnail border-0"/>
 
                                             </a>
 
                                         {% endif %}
-                                        <a
-                                                href="{{ product.href }}">{{ product.name }}</a>
+                                        <a href="{{ product.href }}" class="name">{{ product.name }}</a>
                                         {% if not product.stock %}
                                             <span class="text-danger">***</span>
                                         {% endif %}
@@ -76,7 +74,7 @@
                                             <div>
 
                                         <span
-                                                onclick="cart.remove('{{ product.cart_id }}');" class="on-hover onclick-remove">
+                                                onclick="cart.remove('{{ product.cart_id }}');" class="on-hover onclick-remove badge badge-danger mt-3">
                                     Delete
                                         </span></div>
                                         </div>
