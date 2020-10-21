@@ -31,24 +31,17 @@ class ControllerCheckoutShippingMethod extends Controller {
 				}
 			}
 
-            //echo '<pre>';print_r($method_data);exit('okoko');
 			$sort_order = array();
 
 			foreach ($method_data as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
 			}
-
 			array_multisort($sort_order, SORT_ASC, $method_data);
-
 
             //check products relates with Supermarket Category
             $this->session->data['isSuperMarketProduct'] = '';
             foreach ($this->cart->getProducts() as $product) {
 
-//                $dataProduct = $this->model_catalog_category->checkProductCategory($product['product_id']);
-//                if(!empty($dataProduct)) {
-//                    $this->session->data['isSuperMarketProduct'] = true;
-//                }
                 $categories = $this->model_catalog_product->getProductCategories($product['product_id']);
                 foreach ($categories as $category_id) {
                     $category_info = $this->model_catalog_category->getCategory($category_id);
@@ -63,7 +56,7 @@ class ControllerCheckoutShippingMethod extends Controller {
                 }
             }
 
-            if($this->session->data['isSuperMarketProduct'] == true) {
+            if($this->session->data['isSuperMarketProduct'] == true || $this->session->data['shipping_address']['country_id'] == 156) {
                 if(!empty($method_data['parcelforce_48'])) {
                     unset($method_data['parcelforce_48']);
                 }

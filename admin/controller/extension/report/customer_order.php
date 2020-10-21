@@ -173,4 +173,8 @@ class ControllerExtensionReportCustomerOrder extends Controller {
 
 		return $this->load->view('extension/report/customer_order_info', $data);
 	}
+
+	public function export() {
+	    exit('kook');
+    }
 }

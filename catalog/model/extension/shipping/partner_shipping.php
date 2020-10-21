@@ -65,11 +65,12 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $sellerAddress = implode(', ', $sellerAddress);
                 $customerArray = [
                     $address['address_1'],
+                    $address['address_2'],
                     $address['city'],
                     $address['zone'],
                     $address['country']
                 ];
-                $customerAddress = implode(', ', $customerArray);
+                $customerAddress = implode(', ', array_filter($customerArray));
 
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
@@ -193,26 +194,30 @@ class ModelExtensionShippingPartnerShipping extends Model
         }
 
         // Get latitude and longitude from the geodata
-        $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
-        $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
-        $latitudeTo = $outputTo->results[0]->geometry->location->lat;
-        $longitudeTo = $outputTo->results[0]->geometry->location->lng;
+        if(!empty($outputFrom->results)) {
+            $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
+            $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
+            $latitudeTo = $outputTo->results[0]->geometry->location->lat;
+            $longitudeTo = $outputTo->results[0]->geometry->location->lng;
 
-        // Calculate distance between latitude and longitude
-        $theta = $longitudeFrom - $longitudeTo;
-        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
+            // Calculate distance between latitude and longitude
+            $theta = $longitudeFrom - $longitudeTo;
+            $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
 
-        // Convert unit and return distance
-        $unit = strtoupper($unit);
-        if ($unit == "K") {
-            return round($miles * 1.609344, 2);
-        } elseif ($unit == "M") {
-            return round($miles * 1609.344, 2) . ' meters';
+            // Convert unit and return distance
+            $unit = strtoupper($unit);
+            if ($unit == "K") {
+                return round($miles * 1.609344, 2);
+            } elseif ($unit == "M") {
+                return round($miles * 1609.344, 2) . ' meters';
+            } else {
+                return round($miles, 2) . ' miles';
+            }
         } else {
-            return round($miles, 2) . ' miles';
+            return 0;
         }
     }
 
