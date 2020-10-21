@@ -154,7 +154,11 @@ a.btn-primary:hover {
   font-size: 15px; }
 
 body {
-  font-family: 'Arial', sans-serif; }
+  font-family: 'Arial', sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 .main-body {
   width: 100%;
