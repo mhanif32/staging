@@ -472,13 +472,11 @@ class ControllerProductProduct extends Controller {
 
             //estimated Delivery Dates
             $productCategoryData = $this->model_catalog_category->checkProductCategory($data['product_id']);
-            //echo '<pre>'; print_r($productCategoryData); exit('aaaa');
             if(!empty($productCategoryData)) {
                 $estimatedDateText = 'Delivered in '. $this->config->get('config_minGroceryDays') .' - '.$this->config->get('config_maxGroceryDays').' days';
             } else {
                 $estimatedDateText = 'Delivered in '. $this->config->get('config_minGeneralDays') .' - '.$this->config->get('config_maxGeneralDays').' days';
             }
-
             $data['estimatedDateText'] = $estimatedDateText;
 
             //view seller profile link

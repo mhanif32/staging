@@ -18,7 +18,17 @@ class ControllerCheckoutSuccess extends Controller
 
             $orderId = $this->session->data['order_id'];
 
-            //TODO Update Order : Set order delivery date
+            //Update Order : Set order delivery date
+//            if($this->session->data['isSuperMarketProduct'] == true) {
+//                $estDeliveryDays = (int) $this->config->get('config_maxGroceryDays');
+//            } else {
+//                $this->session->data['shipping_address']['']
+//
+//                $estDeliveryDays = (int) $this->config->get('config_maxGeneralDays');
+//            }
+
+
+
 
             //Generated alphanumeric order number
             $invoice_no = $this->model_account_order->createInvoiceNo($orderId);
