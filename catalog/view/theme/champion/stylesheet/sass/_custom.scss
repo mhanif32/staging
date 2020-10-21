@@ -1,6 +1,4 @@
-.cart-dropdown {
-  @media only screen and (min-width: 768px) {width: max-content;}
-}
+.cart-dropdown { @media only screen and (min-width: 768px) {width: max-content;} }
 .pull-right-absolute { margin-bottom: 20px; @media only screen and (min-width: 768px) { position: absolute; top: 25px; right: 0;}}
 #product, .my-order{
   .number{span {cursor:pointer; }

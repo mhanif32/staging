@@ -8,7 +8,7 @@
 
 body {
   //font-family: "Poppins", sans-serif;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;user-select: none;
 }
 .main-body{ width: 100%;position: relative;min-height: calc(63vh - 13px); }
 h2 {font-size: calc(1.733rem + 0.9vw);font-weight: 700;}
