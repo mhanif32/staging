@@ -576,12 +576,12 @@ class ControllerAccountRequest extends Controller
         }
 
         // Get latitude and longitude from the geodata
-        if(!empty($outputFrom->results[0]) || !empty($outputTo->results[0])) {
+        if(!empty($outputFrom->results[0]) && !empty($outputTo->results[0])) {
 
-            $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
-            $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
-            $latitudeTo = $outputTo->results[0]->geometry->location->lat;
-            $longitudeTo = $outputTo->results[0]->geometry->location->lng;
+            $latitudeFrom = isset($outputFrom->results[0]) ? $outputFrom->results[0]->geometry->location->lat : '';
+            $longitudeFrom = isset($outputFrom->results[0]) ? $outputFrom->results[0]->geometry->location->lng : '';
+            $latitudeTo = isset($outputTo->results[0]) ? $outputTo->results[0]->geometry->location->lat : '';
+            $longitudeTo = isset($outputTo->results[0]) ? $outputTo->results[0]->geometry->location->lng : '';
 
             // Calculate distance between latitude and longitude
             $theta = $longitudeFrom - $longitudeTo;
