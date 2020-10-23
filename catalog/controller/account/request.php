@@ -43,7 +43,7 @@ class ControllerAccountRequest extends Controller
                 $requestArray['delivery_location'] = $orderData['shipping_address_1'] . ', ' . $orderData['shipping_city'] . ', ' . $orderData['shipping_zone'] . ', ' . $orderData['shipping_country'];
                 $seller = $this->model_account_request->getMpSellerdata($request['mpseller_id']);
 
-                if(empty($seller)) {
+                if (empty($seller)) {
                     continue;
                 }
                 $requestArray['mpseller_name'] = !empty($seller) ? $seller['store_owner'] : '';
@@ -121,8 +121,8 @@ class ControllerAccountRequest extends Controller
         $addressTo = $customerAddress;
         $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
 
-        $configFlatCharge = (float) $this->config->get('config_flat_delivery_partner_fee');
-        $configFeeDistance = (float) $this->config->get('config_delivery_partner_fee_per_distance');
+        $configFlatCharge = (float)$this->config->get('config_flat_delivery_partner_fee');
+        $configFeeDistance = (float)$this->config->get('config_delivery_partner_fee_per_distance');
         $del_fee = $configFlatCharge + ($configFeeDistance * $distance);
         $dataCharges = $this->currency->format($del_fee, $orderData['currency_code'], $orderData['currency_value']);
         $data['estm_delivery_fee'] = $dataCharges;
@@ -382,20 +382,21 @@ class ControllerAccountRequest extends Controller
             $orderData = $this->model_account_request->getOrderData($order['order_id']);
             $sellerOrderHistory = $this->model_account_request->getSellerOrderStatus($order['order_id'], $order['mpseller_id']);
             $deliveryRequest = $this->model_account_request->getDeliveryOrderRequestStatus($order['order_id']);
-
-            $orderArray = array();
-            $orderArray['request_id'] = $order['request_id'];
-            $orderArray['customer_name'] = $order['firstname'] . ' ' . $order['lastname'];
-            $orderArray['order_id'] = $order['order_id'];
-            $orderArray['delivery_location'] = $order['shipping_address_1'] . ', ' . $order['shipping_city'] . ', ' . $order['shipping_zone'] . ', ' . $order['shipping_country'];
             $seller = $this->model_account_request->getMpSellerdata($order['mpseller_id']);
-            $orderArray['mpseller_name'] = $seller['store_owner'];
-            $orderArray['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
-            $orderArray['delivery_status'] = !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-';
-//            $requestArray['requested_date'] = $request['requested_date'];
-//            $requestArray['is_accept'] = $request['is_accept'];
-            $orderArray['assignedOrderView'] = $this->url->link('account/request/assignedOrderView', '&id=' . $order['request_id'], true);
-            $orderSection[] = $orderArray;
+
+            if (!empty($seller)) {
+                $orderArray = array();
+                $orderArray['request_id'] = $order['request_id'];
+                $orderArray['customer_name'] = $order['firstname'] . ' ' . $order['lastname'];
+                $orderArray['order_id'] = $order['order_id'];
+                $orderArray['delivery_location'] = $order['shipping_address_1'] . ', ' . $order['shipping_city'] . ', ' . $order['shipping_zone'] . ', ' . $order['shipping_country'];
+
+                $orderArray['mpseller_name'] = $seller['store_owner'];
+                $orderArray['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
+                $orderArray['delivery_status'] = !empty($deliveryRequest['status']) ? $deliveryRequest['status'] : '-';
+                $orderArray['assignedOrderView'] = $this->url->link('account/request/assignedOrderView', '&id=' . $order['request_id'], true);
+                $orderSection[] = $orderArray;
+            }
         }
 
         $data['orders'] = $orderSection;
@@ -407,9 +408,6 @@ class ControllerAccountRequest extends Controller
 
     public function assignedOrderView()
     {
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/request', '', true);
 
@@ -442,8 +440,8 @@ class ControllerAccountRequest extends Controller
         $data['request_id'] = $requestData['request_id'];
         $data['status'] = $requestData['status'];
         $data['seller_order_status'] = !empty($sellerOrderHistory['name']) ? $sellerOrderHistory['name'] : '-';
-        $data['my_delivery_date'] = !empty($sellerOrderData['my_delivery_date']) ? $sellerOrderData['my_delivery_date'] : '-';
-        $data['estimated_date'] = !empty($sellerOrderData['estimated_date']) ? $sellerOrderData['estimated_date'] : '-';
+        $data['my_delivery_date'] = !empty($sellerOrderData['my_delivery_date']) ? $sellerOrderData['my_delivery_date'] : '';
+        $data['estimated_date'] = !empty($sellerOrderData['estimated_date']) ? $sellerOrderData['estimated_date'] : '';
         $data['customer_comment'] = !empty($sellerOrderData['comment']) ? $sellerOrderData['comment'] : '-';
         $data['order'] = $this->model_account_request->getOrderData($requestData['order_id']);
         $data['heading_title_view'] = $this->language->get('heading_title_view');
@@ -472,7 +470,7 @@ class ControllerAccountRequest extends Controller
                 $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
 
                 $dp_status = $this->request->post['selectStatus'];
-                if($dp_status == 'Parcel delivered') {
+                if ($dp_status == 'Parcel delivered') {
 
                     //calculate distance
                     $customerArray = [
@@ -499,8 +497,8 @@ class ControllerAccountRequest extends Controller
                     $addressTo = $customerAddress;
                     $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
 
-                    $configFlatCharge = (float) $this->config->get('config_flat_delivery_partner_fee');
-                    $configFeeDistance = (float) $this->config->get('config_delivery_partner_fee_per_distance');
+                    $configFlatCharge = (float)$this->config->get('config_flat_delivery_partner_fee');
+                    $configFeeDistance = (float)$this->config->get('config_delivery_partner_fee_per_distance');
                     $dataCharges = array(
                         'delivery_charges' => $configFlatCharge + ($configFeeDistance * $distance),
                         'currency' => $orderData['currency_code']

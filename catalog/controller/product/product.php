@@ -755,13 +755,13 @@ class ControllerProductProduct extends Controller {
                 $title = 'Dress shirt sizes, Neck size';
             }
             else if($sizeChartId == 9) {
-                $title = 'Women\'s Shoe Size Conversion Chart';
+                $title = 'Women Shoe Size Conversion Chart';
             }
             else if($sizeChartId == 10) {
-                $title = 'Men\'s Shoe Size Conversion Chart';
+                $title = 'Men Shoe Size Conversion Chart';
             }
             else if($sizeChartId == 11) {
-                $title = 'Kids\' Shoe Size Conversion Chart';
+                $title = 'Kids Shoe Size Conversion Chart';
             }
             else {
                 $title = 'No records';

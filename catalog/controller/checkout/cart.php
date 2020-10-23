@@ -326,18 +326,22 @@ class ControllerCheckoutCart extends Controller {
             foreach ($this->cart->getProducts() as $product) {
 
                 $categories = $this->model_catalog_product->getProductCategories($product['product_id']);
-                foreach ($categories as $category_id) {
-                    $category_info = $this->model_catalog_category->getCategory($category_id);
-                    if ($category_info) {
-                        $categoryLine = ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name'];
-                        if($categoryLine) {
-                            if(strpos($categoryLine, 'Supermarket') !== false){
-                                $this->session->data['isSuperMarketInCart'] = true;
-                            } else {
-                                $this->session->data['isNonSuperMarketInCart'] = true;
+                if(!empty($categories)) {
+                    foreach ($categories as $category_id) {
+                        $category_info = $this->model_catalog_category->getCategory($category_id);
+                        if ($category_info) {
+                            $categoryLine = ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name'];
+                            if($categoryLine) {
+                                if(strpos($categoryLine, 'Supermarket') !== false){
+                                    $this->session->data['isSuperMarketInCart'] = true;
+                                } else {
+                                    $this->session->data['isNonSuperMarketInCart'] = true;
+                                }
                             }
                         }
                     }
+                } else {
+                    $this->session->data['isNonSuperMarketInCart'] = true;
                 }
             }
 
@@ -441,6 +445,7 @@ class ControllerCheckoutCart extends Controller {
         }
 
         $this->load->model('catalog/product');
+        $this->load->model('catalog/category');
 
         $product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -484,6 +489,58 @@ class ControllerCheckoutCart extends Controller {
                 if (!in_array($recurring_id, $recurring_ids)) {
                     $json['error']['recurring'] = $this->language->get('error_recurring_required');
                 }
+            }
+
+            //check Supermarket products not select with NonSupermarket products, both at a time in a cart
+            $this->session->data['isSuperMarketInCart'] = '';
+            $this->session->data['isNonSuperMarketInCart'] = '';
+            //for Cart products (check supermarket)
+            foreach ($this->cart->getProducts() as $product) {
+
+                $categories = $this->model_catalog_product->getProductCategories($product['product_id']);
+                if(!empty($categories)) {
+                    foreach ($categories as $category_id) {
+                        $category_info = $this->model_catalog_category->getCategory($category_id);
+                        if ($category_info) {
+                            $categoryLine = ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name'];
+                            if($categoryLine) {
+                                if(strpos($categoryLine, 'Supermarket') !== false){
+                                    $this->session->data['isSuperMarketInCart'] = true;
+                                } else {
+                                    $this->session->data['isNonSuperMarketInCart'] = true;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    $this->session->data['isNonSuperMarketInCart'] = true;
+                }
+            }
+//            print_r($this->session->data['isNonSuperMarketInCart']);
+//            exit('koko');
+
+            //for selected product (check supermarket)
+            $categories = $this->model_catalog_product->getProductCategories($product_id);
+            foreach ($categories as $category_id) {
+                $category_info = $this->model_catalog_category->getCategory($category_id);
+
+                if ($category_info) {
+                    $categoryLine = ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name'];
+                    if($categoryLine) {
+                        if(strpos($categoryLine, 'Supermarket') !== false){
+                            $this->session->data['isSuperMarketInCart'] = true;
+                        } else {
+                            $this->session->data['isNonSuperMarketInCart'] = true;
+                        }
+                    }
+                }
+            }
+
+
+
+            if($this->session->data['isSuperMarketInCart'] == true && $this->session->data['isNonSuperMarketInCart'] == true) {
+
+                $json['error']['supermarket'] = $this->language->get('error_supermarket');
             }
 
             if (!$json) {

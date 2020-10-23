@@ -47,13 +47,14 @@
                                                 <p class="mb-0"><strong>Order Invoice Number :</strong> {{ order.invoice_prefix }}{{ order.invoice_no }}</p>
                                                 <p class="mb-0"><strong>Seller Order Status :</strong> {{ seller_order_status }}</p>
                                                 <p class="mb-0"><strong>Expected Delivery Date :</strong> {{ estimated_date }}</p>
-                                                <p class="mb-0"><strong>Preferred Delivery Date :</strong> {{ my_delivery_date }}</p>
+                                                {% if my_delivery_date %}
+                                                    <p class="mb-0"><strong>Preferred Delivery Date :</strong> {{ my_delivery_date }}</p>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <p><strong>Customer Comment For Delivery :</strong> {{ customer_comment }}</p>
-
                                     <table class="table table-hover bg-white box-shadow">
                                         <thead>
                                         <tr>

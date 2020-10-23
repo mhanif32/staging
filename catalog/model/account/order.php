@@ -284,4 +284,10 @@ class ModelAccountOrder extends Model
 
         return $query->rows;
     }
+
+    public function updateOrderEstDate($order_id, $days)
+    {
+        $estDate = Date('Y-m-d', strtotime('+'.$days.' days'));
+        $this->db->query("UPDATE `" . DB_PREFIX . "order` SET estimated_date = '" . $estDate . "' WHERE order_id = '" . (int)$order_id . "'");
+    }
 }

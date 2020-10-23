@@ -1385,7 +1385,7 @@ ul.breadcrumb li {
 .table {
   thead {
     tr { th {
-      font-size: 14px;
+      font-size: 14px; white-space: nowrap;
       span {
         font-weight: 100;
         font-size: 13px;
@@ -1393,7 +1393,7 @@ ul.breadcrumb li {
     } }
   }
   tbody {
-    tr { th, td {font-size: 12px; } }
+    tr { th, td {font-size: 12px;white-space: nowrap; } }
   }
 }
 }

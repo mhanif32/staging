@@ -13,22 +13,32 @@ class ControllerCheckoutSuccess extends Controller
         $this->load->model('account/order');
         $this->load->model('localisation/zone');
         $this->load->model('localisation/country');
+        $this->load->model('mpmultivendor/mv_seller');
 
         if (isset($this->session->data['order_id'])) {
 
             $orderId = $this->session->data['order_id'];
 
             //Update Order : Set order delivery date
-//            if($this->session->data['isSuperMarketProduct'] == true) {
-//                $estDeliveryDays = (int) $this->config->get('config_maxGroceryDays');
-//            } else {
-//                $this->session->data['shipping_address']['']
-//
-//                $estDeliveryDays = (int) $this->config->get('config_maxGeneralDays');
-//            }
-
-
-
+            if($this->session->data['isSuperMarketProduct'] == true) {
+                $estDeliveryDays = (int) $this->config->get('config_maxGroceryDays');
+            } else {
+                $customerState = $this->session->data['shipping_address']['zone_id'];
+                $interStateOrder = false;
+                foreach ($this->cart->getProducts() as $product) {
+                    //print_r($product['product_id']);exit('ook');
+                    $sellerData = $this->model_mpmultivendor_mv_seller->getSellerFrmProduct($product['product_id']);
+                    if($customerState != $sellerData['zone_id']) {
+                        $interStateOrder = true;
+                    }
+                }
+                if($interStateOrder == true) {
+                    $estDeliveryDays = (int) $this->config->get('config_maxInterstateDays');
+                } else {
+                    $estDeliveryDays = (int) $this->config->get('config_maxGeneralDays');
+                }
+            }
+            $this->model_account_order->updateOrderEstDate($orderId, $estDeliveryDays);
 
             //Generated alphanumeric order number
             $invoice_no = $this->model_account_order->createInvoiceNo($orderId);
