@@ -130,8 +130,11 @@ class ControllerCommonHeader extends Controller
 
             $ip = $_SERVER['REMOTE_ADDR'];
             $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+            $this->session->data['loggedInCity'] = !empty($dataArray->geoplugin_city) ? $dataArray->geoplugin_city : '';
             $this->session->data['loggedInState'] = !empty($dataArray->geoplugin_regionName) ? $dataArray->geoplugin_regionName : '';
             $this->session->data['loggedInCountry'] = !empty($dataArray->geoplugin_countryName) ? $dataArray->geoplugin_countryName : '';
+
+            $data['loggedInCity'] = $this->session->data['loggedInCity'];
             $data['loggedInState'] = $this->session->data['loggedInState'];
             $data['loggedInCountry'] = $this->session->data['loggedInCountry'];
         } else {
