@@ -576,7 +576,7 @@ class ControllerAccountRequest extends Controller
         }
 
         // Get latitude and longitude from the geodata
-        if(!empty($outputFrom->results) || !empty($outputTo->results)) {
+        if(!empty($outputFrom->results[0]) || !empty($outputTo->results[0])) {
 
             $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
             $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
