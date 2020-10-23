@@ -51,7 +51,7 @@
                                     <div class="row box-shadow mb-5 no-gutters">
                                         <div class="col-md-6">
                                             <div class="text-left f-18 font-weight-black border-bottom border-top px-2"
-                                                style="">
+                                                 style="">
                                                 <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller Info</h3>
                                             </div>
                                             <div class="text-left f-13 p-2">
@@ -80,7 +80,7 @@
 
                                         <div class="col-md-6">
                                             <div class="text-left f-18 border-bottom border-top font-weight-black px-2"
-                                                style="">
+                                                 style="">
                                                 <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery Info</h3>
                                             </div>
 
@@ -99,7 +99,7 @@
                                                 <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
                                                     Address</h3>
                                             </div>
-                                                <div class="text-left f-13 p-2">
+                                            <div class="text-left f-13 p-2">
                                                 <strong>Address 1 : </strong>{{ order.shipping_address_1 }} <br>
                                                 <strong>Address 2 : </strong>{{ order.shipping_address_2 }} <br>
                                                 <strong>City : </strong>{{ order.shipping_city }} <br>
@@ -112,51 +112,60 @@
                                     </div>
 
                                     <div class="d-flex flex-column flex-md-row justify-content-between">
-                                    {% if isAcceptedByOthers %}
-                                        <div id="option-button">
-                                            <label>Accept or Decline Delivery Request.</label><br>
-                                            <button class="btn btn-success" id="accept">Accept</button>
-                                            <button class="btn btn-danger" id="decline">Decline</button>
-                                        </div>
-                                    {% endif %}
-                                        <div class="paid-delivery mt-4 mt-md-0">
-                                            <label class="text-success">You Will Be Paid <strong>{{ estm_delivery_fee }}</strong> For This Delivery</label>
-                                        </div>
+                                        {% if isAcceptedByOthers %}
+                                            <div id="option-button">
+                                                <label>Accept or Decline Delivery Request.</label><br>
+                                                <button class="btn btn-success" id="accept">Accept</button>
+                                                <button class="btn btn-danger" id="decline">Decline</button>
+                                            </div>
+                                        {% endif %}
+                                        {% if is_distance %}
+                                            <div class="paid-delivery mt-4 mt-md-0">
+                                                <label class="text-success">You Will Be Paid
+                                                    <strong>{{ estm_delivery_fee }}</strong> For This Delivery</label>
+                                            </div>
+                                        {% else %}
+                                            <div class="paid-delivery mt-4 mt-md-0">
+                                                <label class="text-danger">Sorry : Your location is not detected by
+                                                    google map.</label>
+                                            </div>
+                                        {% endif %}
                                     </div>
 
                                     {% if is_accept == 1 %}
                                         <hr>
-                                        {#<h3 class="f-20 font-weight-bold text-uppercase my-2">Update Order Status</h3>#}
-                                        {#<form action="{{ action_order_request_status }}" id="formOrderStatus" name="formOrderStatus" method="post">#}
-                                            {#<div class="form-group required">#}
-                                                {#<label class="control-label" for="selectStatus">Select Order Request Status </label>#}
-                                                {#<select name="selectStatus" id="selectStatus" class="form-control" readonly>#}
-                                                    {#<option value="">Select</option>#}
-                                                    {#<option value="Order picked up">Order picked up</option>#}
-                                                    {#<option value="En route Delivery">En route Delivery</option>#}
-                                                    {#<option value="Parcel delivered">Parcel delivered</option>#}
-                                                    {#<option value="Customer not at home">Customer not at home</option>#}
-                                                    {#<option value="Wrong delivery address">Wrong delivery address</option>#}
-                                                    {#<option value="Parcel not delivered">Parcel not delivered</option>#}
-                                                    {#<option value="Parcel returned to seller">Parcel returned to seller</option>#}
-                                                    {#<option value="Parcel left with the neighbour">Parcel left with the neighbour</option>#}
-                                                    {#<option value="Others">Others (Please specify)</option>#}
-                                                {#</select>#}
-                                                {#<div class="text-danger">{{ error_message }}</div>#}
-                                            {#</div>#}
+                                        {# <h3 class="f-20 font-weight-bold text-uppercase my-2">Update Order Status</h3> #}
+                                        {# <form action="{{ action_order_request_status }}" id="formOrderStatus" name="formOrderStatus" method="post"> #}
+                                        {# <div class="form-group required"> #}
+                                        {# <label class="control-label" for="selectStatus">Select Order Request Status </label> #}
+                                        {# <select name="selectStatus" id="selectStatus" class="form-control" readonly> #}
+                                        {# <option value="">Select</option> #}
+                                        {# <option value="Order picked up">Order picked up</option> #}
+                                        {# <option value="En route Delivery">En route Delivery</option> #}
+                                        {# <option value="Parcel delivered">Parcel delivered</option> #}
+                                        {# <option value="Customer not at home">Customer not at home</option> #}
+                                        {# <option value="Wrong delivery address">Wrong delivery address</option> #}
+                                        {# <option value="Parcel not delivered">Parcel not delivered</option> #}
+                                        {# <option value="Parcel returned to seller">Parcel returned to seller</option> #}
+                                        {# <option value="Parcel left with the neighbour">Parcel left with the neighbour</option> #}
+                                        {# <option value="Others">Others (Please specify)</option> #}
+                                        {# </select> #}
+                                        {# <div class="text-danger">{{ error_message }}</div> #}
+                                        {# </div> #}
 
-                                            {#<div class="form-group" style="display: none" id="textOtherSpecification">#}
-                                                {#<label for="inputOtherSpecification" class="control-label">Please Tell Us The Other Specification</label>#}
-                                                {#<textarea id="inputOtherSpecification" name="inputOtherSpecification" class="form-control" cols="25" rows="6"></textarea>#}
-                                                {#<div class="text-danger">{{ error_message }}</div>#}
-                                            {#</div>#}
+                                        {# <div class="form-group" style="display: none" id="textOtherSpecification"> #}
+                                        {# <label for="inputOtherSpecification" class="control-label">Please Tell Us The Other Specification</label> #}
+                                        {# <textarea id="inputOtherSpecification" name="inputOtherSpecification" class="form-control" cols="25" rows="6"></textarea> #}
+                                        {# <div class="text-danger">{{ error_message }}</div> #}
+                                        {# </div> #}
 
-                                            {#<div class="buttons clearfix">#}
-                                                {#<input type="submit" class="btn btn-success pull-right button-cancel-submit" id="button-cancel-submit" value="Submit">#}
-                                            {#</div>#}
-                                        {#</form>#}
+                                        {# <div class="buttons clearfix"> #}
+                                        {# <input type="submit" class="btn btn-success pull-right button-cancel-submit" id="button-cancel-submit" value="Submit"> #}
+                                        {# </div> #}
+                                        {# </form> #}
 
-                                        <h3 class="f-15 font-weight-bold my-2">Please click on "Assigned Orders" on your dashboard to update order delivery status.</h3>
+                                        <h3 class="f-15 font-weight-bold my-2">Please click on "Assigned Orders" on your
+                                            dashboard to update order delivery status.</h3>
                                     {% endif %}
                                 </div>
                             </div>

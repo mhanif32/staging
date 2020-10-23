@@ -126,6 +126,7 @@ class ControllerAccountRequest extends Controller
         $del_fee = $configFlatCharge + ($configFeeDistance * $distance);
         $dataCharges = $this->currency->format($del_fee, $orderData['currency_code'], $orderData['currency_value']);
         $data['estm_delivery_fee'] = $dataCharges;
+        $data['is_distance'] = $distance;
 
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
@@ -575,26 +576,31 @@ class ControllerAccountRequest extends Controller
         }
 
         // Get latitude and longitude from the geodata
-        $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
-        $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
-        $latitudeTo = $outputTo->results[0]->geometry->location->lat;
-        $longitudeTo = $outputTo->results[0]->geometry->location->lng;
+        if(!empty($outputFrom->results) || !empty($outputTo->results)) {
 
-        // Calculate distance between latitude and longitude
-        $theta = $longitudeFrom - $longitudeTo;
-        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
+            $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
+            $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
+            $latitudeTo = $outputTo->results[0]->geometry->location->lat;
+            $longitudeTo = $outputTo->results[0]->geometry->location->lng;
 
-        // Convert unit and return distance
-        $unit = strtoupper($unit);
-        if ($unit == "K") {
-            return round($miles * 1.609344, 2);
-        } elseif ($unit == "M") {
-            return round($miles * 1609.344, 2) . ' meters';
+            // Calculate distance between latitude and longitude
+            $theta = $longitudeFrom - $longitudeTo;
+            $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+
+            // Convert unit and return distance
+            $unit = strtoupper($unit);
+            if ($unit == "K") {
+                return round($miles * 1.609344, 2);
+            } elseif ($unit == "M") {
+                return round($miles * 1609.344, 2) . ' meters';
+            } else {
+                return round($miles, 2) . ' miles';
+            }
         } else {
-            return round($miles, 2) . ' miles';
+            return false;
         }
     }
 }
