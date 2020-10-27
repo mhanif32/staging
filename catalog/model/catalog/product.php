@@ -80,7 +80,7 @@ class ModelCatalogProduct extends Model {
 		}
 
         //countrywise location products
-        if (!empty($data['product_country'])) {
+        if (!empty($data['product_country']) || !empty($data['product_state'])) {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
 
@@ -510,7 +510,7 @@ class ModelCatalogProduct extends Model {
 		}
 
         //countrywise location
-        if (!empty($data['product_country'])) {
+        if (!empty($data['product_country']) || !empty($data['product_state'])) {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_location pl ON (pl.product_id = p.product_id)";
         }
 
@@ -619,7 +619,7 @@ class ModelCatalogProduct extends Model {
 //            $country_id = $this->session->data['session_country_id'];
 //            $sql .=" and pl.country_id = '".$country_id."'";
 //        }
-
+//echo $sql;exit('okoko');
 		$query = $this->db->query($sql);
 		return $query->row['total'];
 	}

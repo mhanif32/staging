@@ -41,10 +41,9 @@ class ModelExtensionShippingPartnerShipping extends Model
 
         //$deliveryCharges = array_values($deliveryValues);
         $totalDeliveryCharges = 0;
-        $tempAmt = 0;
         foreach ($deliveryValues as $key => $deliveryCharge) {
 
-            $totalDeliveryAmt = 0;
+            $totalDeliveryAmt = 0; $tempAmt = 0;
             //check seller and customer locations are same
             $mpSellerId = $key;
             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$mpSellerId . "' AND m.status = '1'");
@@ -55,7 +54,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $sellerZoneData = $this->getZone($mpSellerData['zone_id']);
                 $sellerCountryData = $this->getCountry($mpSellerData['country_id']);
 
-                $key = $this->config->get('config_google_distance_api_key');
+                $googleKey = $this->config->get('config_google_distance_api_key');
                 $sellerAddress = [
                     $mpSellerData['address'],
                     $mpSellerData['city'],
@@ -74,10 +73,8 @@ class ModelExtensionShippingPartnerShipping extends Model
 
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
-                $distance = $this->getDistance($addressFrom, $addressTo, "K", $key);
+                $distance = $this->getDistance($addressFrom, $addressTo, "K", $googleKey);
 
-                $currency = $this->getCurrencyByCode($this->session->data['currency']);
-                //$delivery_charge = (5.00 / $currency['value']) + ((0.35 / $currency['value']) * $distance);
                 $configFlatCharge = (float) $this->config->get('config_flat_delivery_charges');
                 $configFlatChargeDistance = (float) $this->config->get('config_delivery_charge_per_distance');
                 $delivery_charge = $configFlatCharge + ($configFlatChargeDistance * $distance);
@@ -148,6 +145,7 @@ class ModelExtensionShippingPartnerShipping extends Model
             }
             $totalDeliveryCharges += $totalDeliveryAmt;
         }
+
         //END : Champion Mall Delivery Charges Algorithm
         $method_data = array();
         if ($status) {
@@ -169,7 +167,6 @@ class ModelExtensionShippingPartnerShipping extends Model
                 'error' => false
             );
         }
-
         return $method_data;
     }
 
