@@ -49,7 +49,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
         $data['leftMsgDesc'] = html_entity_decode(substr($leftSlideMsg['description'], 0, 250), ENT_QUOTES, 'UTF-8');
 
         //Retailers
-        $this->load->model('catalog/product');
+        /*$this->load->model('catalog/product');
         $data['count_retailers'] = $this->model_catalog_product->getRetailersCount();
         $data['sellers_href'] = $this->url->link('mpmultivendor/mv_seller', '', true);
         //Start : men count and path
@@ -87,15 +87,19 @@ class ControllerExtensionModuleSlideshow extends Controller {
             $data['brand_thumb'] = $this->model_tool_image->resize($designerBrandImage['image'], 250, 177);
         } else {
             $data['brand_thumb'] = $this->model_tool_image->resize('placeholder.png', 250, 177);;
-        }
+        }*/
 
-        $this->load->model('design/banner');
-        $retailerBanner = $this->model_design_banner->getBannerSingle(9);
-        $data['RetailerBanners'] = array(
-            'title' => $retailerBanner['title'],
-            'link'  => $retailerBanner['link'],
-            'image' => $this->model_tool_image->resize($retailerBanner['image'], 250, 177)
-        );
+        //4 category banners below main banner
+        $categoryResults = $this->model_design_banner->getBanner(9);
+        foreach ($categoryResults as $categoryResult) {
+            if (is_file(DIR_IMAGE . $categoryResult['image'])) {
+                $data['category_banners'][] = array(
+                    'title' => $categoryResult['title'],
+                    'link'  => $categoryResult['link'],
+                    'image' => $this->model_tool_image->resize($categoryResult['image'], 250, 180)
+                );
+            }
+        }
 
         return $this->load->view('extension/module/slideshow', $data);
 

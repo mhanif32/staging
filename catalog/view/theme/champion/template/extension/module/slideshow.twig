@@ -32,58 +32,26 @@
     </div>
 </div>
 
+{% if category_banners %}
 <section class="home-categories mt-3">
     <div class="container">
         <div class="row">
+            {% for category_banner in category_banners %}
             <div class="col-md-3 col-6">
-                <a href="{{ sellers_href }}">
+                <a href="{{ category_banner.link }}">
                     <div class="">
-                        <img src="{{ RetailerBanners.image }}" alt="" class="img-fluid">
+                        <img src="{{ category_banner.image }}" alt="" class="img-fluid">
                         <div class="">
-                            <h6 class="f-20 card-text font-weight-bold text-primary mb-0">{{ RetailerBanners.title }}</h6>
-                            <p>
-                                {{ count_retailers }} Sellers
-                            </p>
+                            <h6 class="f-20 card-text font-weight-bold text-primary mb-0">{{ category_banner.title }}</h6>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-md-3 col-6">
-                <a href="{{ path_brands }}">
-                <div class="">
-                    <img src="{{ brand_thumb }}" alt="" class="img-fluid">
-                    <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Designer Brands</h6>
-                        <p class="f-14"> {{ count_brands }} Items</p>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col-md-3 col-6">
-                <a href="{{ path_men }}">
-                <div class="">
-                    <img src="{{ men_thumb }}" alt="" class="img-fluid">
-                    <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Men</h6>
-                        <p class="f-14"> {{ count_men }} Items</p>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col-md-3 col-6">
-                <a href="{{ path_women }}">
-                <div class="">
-                    <img src="{{ women_thumb }}" alt="" class="img-fluid">
-                    <div class="">
-                        <h6 class="f-20 card-text font-weight-bold text-primary mb-0">Women</h6>
-                        <p class="f-14"> {{ count_women }} Items</p>
-                    </div>
-                </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
 <script type="text/javascript"><!--
     $('#slideshow{{ module }}').swiper({
