@@ -23,8 +23,24 @@ class ModelCatalogCategory extends Model {
     }
 
     public function getNewCategories($parent_id = NULL) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.top = '0' AND c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY RAND(), LCASE(cd.name) limit 6");
 
+	    /*$sql = "SELECT * FROM " . DB_PREFIX . "category c
+        LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id)
+        LEFT JOIN " . DB_PREFIX . "product_to_category pc ON (c.category_id = pc.category_id)
+        LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = pc.product_id)
+        WHERE c.status = '1' GROUP BY pc.category_id ORDER BY p.product_id DESC limit 6";*/
+
+        $sql = "SELECT
+          DISTINCT pc.category_id, 
+          (SELECT cd.name FROM " . DB_PREFIX . "category_description cd WHERE cd.category_id = pc.category_id) AS category_name,
+          (SELECT c.image FROM " . DB_PREFIX . "category c WHERE c.category_id = pc.category_id) AS image_name
+        FROM
+          " . DB_PREFIX . "product p
+          INNER JOIN " . DB_PREFIX . "product_to_category pc ON pc.`product_id` = p.`product_id`
+          ORDER BY p.product_id DESC
+          LIMIT 6";
+	    //echo $sql; exit('plpl');
+        $query = $this->db->query($sql);
         return $query->rows;
     }
 
