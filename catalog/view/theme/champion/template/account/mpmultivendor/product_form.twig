@@ -17,7 +17,8 @@
                                     <div>
                                         <h3 class="f-20 font-weight-bold text-uppercase mt-3">
                                             {{ heading_title }}
-                                        </h3></div>
+                                        </h3>
+                                    </div>
                                     <div class="my-auto">
                                         <button type="submit" form="form-product" data-toggle="tooltip"
                                                 title="{{ button_save }}" class="btn btn-primary"><i
@@ -1212,7 +1213,7 @@
 
                                                                                         <td class="text-right">
                                                                                             <button type="button"
-                                                                                                    onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();"
+                                                                                                    onclick="$(this).tooltip('dispose');$('#option-value-row{{ option_value_row }}').remove();"
                                                                                                     data-toggle="tooltip"
                                                                                                     title="{{ button_remove }}"
                                                                                                     class="btn btn-danger"
@@ -2072,7 +2073,7 @@
         html += '    <option value="-">-</option>';
         html += '  </select>';
         html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" /></td>';
-        html += '  <td class="text-right"><button type="button" onclick="$(this).tooltip(\'destroy\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" rel="tooltip" title="{{ button_remove }}" class="btn btn-danger" style= "padding: 2px;"><i class="fa fa-minus-circle"></i></button></td>';
+        html += '  <td class="text-right"><button type="button" onclick="$(this).tooltip(\'dispose\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" rel="tooltip" title="{{ button_remove }}" class="btn btn-danger" style= "padding: 2px;"><i class="fa fa-minus-circle"></i></button></td>';
         html += '</tr>';
 
         $('#option-value' + option_row + ' tbody').append(html);
