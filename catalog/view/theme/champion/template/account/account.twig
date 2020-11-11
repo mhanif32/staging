@@ -278,6 +278,34 @@
                                 {% endif %}
                             </div>
 
+                            <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_affiliate }}</h3>
+                            <hr>
+                            {% if not tracking %}
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ affiliate }}">
+                                                    <i class="fa fa-pagelines f-60 text-success" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ affiliate }}"
+                                                       class="f-15 font-weight-bold">{{ text_affiliate_add }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ affiliate }}" class="f-13 text-muted">{{ text_affiliate_add }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
+                                <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+                            {% endif %}
+
                             {% if credit_cards %}
                                 <h3 class="f-20 font-weight-bold text-uppercase">{{ text_credit_card }}</h3>
                                 <hr>
