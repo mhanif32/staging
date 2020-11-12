@@ -10,7 +10,14 @@ class ControllerAccountTracking extends Controller {
 		$this->load->model('account/customer');
 
 		$affiliate_info = $this->model_account_customer->getAffiliate($this->customer->getId());
-			
+		$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+
+		if($customer_info['role'] != 'buyer') {
+
+            $this->session->data['success'] = 'Warning : You dont have an access of Affiliate functionality';
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+
 		if ($affiliate_info) {
 			$this->load->language('account/tracking');
 	
