@@ -14,6 +14,12 @@ class ControllerAccountAffiliate extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/customer');
+        $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+        if($customer_info['role'] != 'buyer') {
+
+            $this->session->data['success'] = 'Warning : You dont have an access of Affiliate functionality';
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->addAffiliate($this->customer->getId(), $this->request->post);
@@ -38,6 +44,12 @@ class ControllerAccountAffiliate extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/customer');
+        $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+        if($customer_info['role'] != 'buyer') {
+
+            $this->session->data['success'] = 'Warning : You dont have an access of Affiliate functionality';
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->editAffiliate($this->customer->getId(), $this->request->post);

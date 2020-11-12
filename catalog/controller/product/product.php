@@ -16,8 +16,6 @@ class ControllerProductProduct extends Controller {
         $this->load->model('account/mpmultivendor/seller');
 
         $data['continue_href'] = $this->url->link('common/home', '', true);
-
-
         if (isset($this->request->get['path'])) {
 			$path = '';
 

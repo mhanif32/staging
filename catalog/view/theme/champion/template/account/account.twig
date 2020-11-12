@@ -292,6 +292,7 @@
                                 {% endif %}
                             </div>
 
+                            {% if role == 'buyer' %}
                             <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_affiliate }}</h3>
                             <hr>
                             <div class="row">
@@ -354,6 +355,7 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            {% endif %}
 
                             {% if credit_cards %}
                                 <h3 class="f-20 font-weight-bold text-uppercase">{{ text_credit_card }}</h3>
