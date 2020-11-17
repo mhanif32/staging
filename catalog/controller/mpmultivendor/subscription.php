@@ -82,8 +82,7 @@ class ControllerMpmultivendorSubscription extends Controller
             $data['end_date'] = isset($checkPlan['end_date']) ? date('Y-m-d', $checkPlan['end_date']) : '';
         }
 
-        //print_r($data['stop_subscription']);exit('okokok');
-
+        //print_r($data['subscribed_plan']);exit('okokok');
         $this->response->setOutput($this->load->view('mpmultivendor/subscription', $data));
     }
 
