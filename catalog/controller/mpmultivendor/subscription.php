@@ -78,7 +78,8 @@ class ControllerMpmultivendorSubscription extends Controller
 
         if(!empty($checkPlan['end_date'])) {
             $end_date = date('Y-m-d', $checkPlan['end_date']);
-            $data['stop_subscription'] = ($end_date < date('Y-m-d') && $checkPlan['name'] == 'Free') ? false : true;
+            //$data['stop_subscription'] = ($end_date < date('Y-m-d') && $checkPlan['name'] == 'Free') ? false : true;
+            $data['stop_subscription'] = ($end_date < date('Y-m-d')) ? false : true;
             $data['end_date'] = isset($checkPlan['end_date']) ? date('Y-m-d', $checkPlan['end_date']) : '';
         }
 
