@@ -130,8 +130,6 @@
                     </div>
 
                     {% if checkPlan %}
-                    {% if subscribed_plan.name == 'Free' %}
-                    {% else %}
                     <div class="col-lg-3 text-center">
                         Your current plan is:- <span class="btn-sm btn-success">{{ subscribed_plan.name }}</span>
                         <br>
@@ -148,7 +146,6 @@
                             </button>
                         {% endif %}
                     </div>
-                    {% endif %}
                 </div>
                 {% endif %}
             </div>
