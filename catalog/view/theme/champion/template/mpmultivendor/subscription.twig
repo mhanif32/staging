@@ -175,7 +175,7 @@
 {{ footer }}
 
 <script>
-    var stripe = Stripe('pk_test_51H8inyJvSOEFkXrXeZUINSYh5ItyqZSskzu1mfmVTGTHoEcp5KNiBtdGjiKfjiLh9wwdTjnifMuHfbWGLFuCyc2A0052ZePgjl');
+    var stripe = Stripe('{{ stripe_key }}');
     var elements = stripe.elements();
 
     var card = elements.create('card', {
