@@ -46,7 +46,12 @@ class ControllerSubscriptionPlan extends Controller
 
             //todo create a plan
             $this->load->library('stripe');
-            \Stripe\Stripe::setApiKey('sk_test_51H8inyJvSOEFkXrXcFESwhvDkx08F0DI8KfkUnwO14cGKdxv36U0hWj9GSusI2ZMrd3NJaLBI3u13Q26Uj9osSTH00b6wMWu3v');
+            if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
+                $stripe_secret_key = $this->config->get('payment_stripe_live_secret_key');
+            } else {
+                $stripe_secret_key = $this->config->get('payment_stripe_test_secret_key');
+            }
+            \Stripe\Stripe::setApiKey($stripe_secret_key);
 
             $product = \Stripe\Product::create([
                 'name' => $this->request->post['name'],

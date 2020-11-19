@@ -121,8 +121,6 @@ class ControllerMpmultivendorSubscription extends Controller
             //create a stripe customer
             $customer = $this->model_account_customer->getStripeCustomerId($this->customer->getId());
 
-            //echo '<pre>';print_r($customer['subscription_plan_id']);exit('ookk');
-
             if(empty($customer['subscription_plan_id'])) {
 
                 $customerData = \Stripe\Customer::create([
@@ -135,6 +133,7 @@ class ControllerMpmultivendorSubscription extends Controller
                 $card = $customerData['sources']['data'][0];
                 $this->model_mpmultivendor_subscription->saveStripeCard($card, $this->customer->getId());
             } else {
+
                 //cancel plan
                 if($customer['subscription_plan'] != null) {
                     $subscription = \Stripe\Subscription::retrieve($customer['subscription_plan']);
