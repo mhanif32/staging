@@ -47,6 +47,13 @@ class ControllerMpmultivendorSubscription extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
+        if($this->config->get('payment_stripe_environment') == 'live' || (isset($this->request->request['livemode']) && $this->request->request['livemode'] == "true")) {
+            $stripe_secret_key = $this->config->get('payment_stripe_live_public_key');
+        } else {
+            $stripe_secret_key = $this->config->get('payment_stripe_test_public_key');
+        }
+        $data['stripe_key'] = $stripe_secret_key;
+
         //plans
         $planList = $this->model_mpmultivendor_subscription->getSubscriptionPlans($this->session->data['currency']);
         foreach ($planList as $item) {
