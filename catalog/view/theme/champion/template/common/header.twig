@@ -227,87 +227,6 @@
                             </div>
                             {# {% endif %} #}
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content w-auto m-auto">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-success text-uppercase f-13"
-                                                id="exampleModalLongTitle">Where would you like your order
-                                                delivered?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="changeCountryForm">
-                                                <div class="form-group">
-                                                    <label class="control-label f-13" for="input-country-popup"><b>Please
-                                                            Select
-                                                            Country For This Delivery</b></label>
-                                                    <select id="input-country-popup" name="selectCountryPopup"
-                                                            class="form-control">
-                                                        <option value="">---Select Country---</option>
-                                                        {% for country in countries %}
-                                                            <option value="{{ country.country_id }}">{{ country.name }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label f-13" for="input-zone-popup"><b>Now Select The
-                                                            State</b></label>
-                                                    <div class="">
-                                                        <select name="zone_id_popup" id="input-zone-popup"
-                                                                class="form-control zoneSelect">
-                                                            <option value="">---Select State---</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label f-13" for="input-city-popup"><b>You Can Now
-                                                            Select The City</b></label>
-                                                    <div class="">
-                                                        <select name="city_id_popup" id="input-city-popup" class="form-control">
-                                                            <option value="">---Select City---</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
-                                            </button>
-                                            <button type="button" class="btn btn-primary" id="confirm-address">Submit
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal fade" id="modalCurrency" tabindex="-1" role="dialog"
-                                 aria-labelledby="modalCurrencyTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content w-auto m-auto">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-success text-uppercase f-13"
-                                                id="modalCurrencyTitle">What Is Your Payment Card Currency?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group text-left">
-                                                <label class="control-label f-13" for="input-country"><b>Please Change
-                                                        Currency From Below Dropdown</b></label>
-                                                {{ currency }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             {# {% endif %} #}
                             {{ menu }}
@@ -332,7 +251,7 @@
                 <h3 class="pt-3 mb-0 text-secondary welcome-title text-center">Welcome to The Champion Mall</h3>
                 <div class="pb-1 pt-2 text-muted welcome-msg text-center" style="height: 170px;">
                     <p>{{ fillAddressMsg }}</p>
-                    <div class="delivery-location d-none d-md-block">
+                    <div class="delivery-location">
                         <a href="javascript:void(0)" id="selectDeliveryLocation" class="text-success">click here to
                             select your delivery location</a>
                     </div>
@@ -342,7 +261,90 @@
         </div>
     </div>
 </div>
+<!--model 2-->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content w-auto m-auto">
+            <div class="modal-header">
+                <h5 class="modal-title text-success text-uppercase f-13"
+                    id="exampleModalLongTitle">Where would you like your order
+                    delivered?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changeCountryForm">
+                    <div class="form-group">
+                        <label class="control-label f-13" for="input-country-popup"><b>Please
+                                Select
+                                Country For This Delivery</b></label>
+                        <select id="input-country-popup" name="selectCountryPopup"
+                                class="form-control">
+                            <option value="">---Select Country---</option>
+                            {% for country in countries %}
+                                <option value="{{ country.country_id }}">{{ country.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="control-label f-13" for="input-zone-popup"><b>Now Select The
+                                State</b></label>
+                        <div class="">
+                            <select name="zone_id_popup" id="input-zone-popup"
+                                    class="form-control zoneSelect">
+                                <option value="">---Select State---</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label f-13" for="input-city-popup"><b>You Can Now
+                                Select The City</b></label>
+                        <div class="">
+                            <select name="city_id_popup" id="input-city-popup" class="form-control">
+                                <option value="">---Select City---</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="confirm-address">Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCurrency" tabindex="-1" role="dialog"
+     aria-labelledby="modalCurrencyTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content w-auto m-auto">
+            <div class="modal-header">
+                <h5 class="modal-title text-success text-uppercase f-13"
+                    id="modalCurrencyTitle">What Is Your Payment Card Currency?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group text-left">
+                    <label class="control-label f-13" for="input-country"><b>Please Change
+                            Currency From Below Dropdown</b></label>
+                    {{ currency }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--model end-->
 <script>
     $('#confirm-address').on('click', function () {
 
