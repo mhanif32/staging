@@ -28,7 +28,7 @@
 
                                     <div class="">
                                         <p>Note : Update Order Status Below.</p>
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between flex-xl-row flex-column">
                                             <div class="">
                                             <strong>Request Status : </strong>
                                             {% if is_accept == 1 %} <span class="bg-success status f-12">Accepted</span>
@@ -55,70 +55,74 @@
                                     </div>
                                     <hr>
                                     <p><strong>Customer Comment For Delivery :</strong> {{ customer_comment }}</p>
-                                    <table class="table table-hover bg-white box-shadow">
-                                        <thead>
-                                        <tr>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller Info</h3>
-                                            </td>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller
-                                                    Address</h3></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-left f-15">
-                                                <strong>Store Owner : </strong>{{ seller.store_owner }} <br>
-                                                <strong>Store Name : </strong>{{ seller.store_name }} <br>
-                                                <strong>Email : </strong>{{ seller.email }} <br>
-                                                <strong>Telephone : </strong>{{ seller.telephone }}
-                                            </td>
-                                            <td class="text-left f-15">
-                                                <strong>Address : </strong>{{ seller.address }} <br>
-                                                <strong>City : </strong>{{ seller.city }} <br>
-                                                <strong>State : </strong>{{ seller.zone.name }} <br>
-                                                <strong>Country : </strong>{{ seller.country.name }} <br>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover bg-white box-shadow">
+                                            <thead>
+                                            <tr>
+                                                <td class="text-left f-20 font-weight-black"
+                                                    style="width: 50%; vertical-align: top;">
+                                                    <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller Info</h3>
+                                                </td>
+                                                <td class="text-left f-20 font-weight-black"
+                                                    style="width: 50%; vertical-align: top;">
+                                                    <h3 class="f-20 font-weight-bold text-uppercase my-2">Seller
+                                                        Address</h3></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-left f-15">
+                                                    <strong>Store Owner : </strong>{{ seller.store_owner }} <br>
+                                                    <strong>Store Name : </strong>{{ seller.store_name }} <br>
+                                                    <strong>Email : </strong>{{ seller.email }} <br>
+                                                    <strong>Telephone : </strong>{{ seller.telephone }}
+                                                </td>
+                                                <td class="text-left f-15">
+                                                    <strong>Address : </strong>{{ seller.address }} <br>
+                                                    <strong>City : </strong>{{ seller.city }} <br>
+                                                    <strong>State : </strong>{{ seller.zone.name }} <br>
+                                                    <strong>Country : </strong>{{ seller.country.name }} <br>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                    <table class="table table-hover bg-white box-shadow">
-                                        <thead>
-                                        <tr>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery Info</h3>
-                                            </td>
-                                            <td class="text-left f-20 font-weight-black"
-                                                style="width: 50%; vertical-align: top;">
-                                                <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
-                                                    Address</h3></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-left f-15">
-                                                <strong>Customer Name
-                                                    : </strong>{{ order.shipping_firstname }} {{ order.shipping_lastname }}
-                                                <br>
-                                                <strong>Email : </strong>{{ order.email }} <br>
-                                                <strong>Telephone : </strong>{{ order.telephone }}
-                                            </td>
-                                            <td class="text-left f-15">
-                                                <strong>Address 1 : </strong>{{ order.shipping_address_1 }} <br>
-                                                <strong>Address 2 : </strong>{{ order.shipping_address_2 }} <br>
-                                                <strong>City : </strong>{{ order.shipping_city }} <br>
-                                                <strong>State : </strong>{{ order.shipping_zone }} <br>
-                                                <strong>Country : </strong>{{ order.shipping_country }} <br>
-                                                <strong>Post Code : </strong>{{ order.shipping_postcode }} <br>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover bg-white box-shadow">
+                                            <thead>
+                                            <tr>
+                                                <td class="text-left f-20 font-weight-black"
+                                                    style="width: 50%; vertical-align: top;">
+                                                    <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery Info</h3>
+                                                </td>
+                                                <td class="text-left f-20 font-weight-black"
+                                                    style="width: 50%; vertical-align: top;">
+                                                    <h3 class="f-20 font-weight-bold text-uppercase my-2">Delivery
+                                                        Address</h3></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-left f-15">
+                                                    <strong>Customer Name
+                                                        : </strong>{{ order.shipping_firstname }} {{ order.shipping_lastname }}
+                                                    <br>
+                                                    <strong>Email : </strong>{{ order.email }} <br>
+                                                    <strong>Telephone : </strong>{{ order.telephone }}
+                                                </td>
+                                                <td class="text-left f-15">
+                                                    <strong>Address 1 : </strong>{{ order.shipping_address_1 }} <br>
+                                                    <strong>Address 2 : </strong>{{ order.shipping_address_2 }} <br>
+                                                    <strong>City : </strong>{{ order.shipping_city }} <br>
+                                                    <strong>State : </strong>{{ order.shipping_zone }} <br>
+                                                    <strong>Country : </strong>{{ order.shipping_country }} <br>
+                                                    <strong>Post Code : </strong>{{ order.shipping_postcode }} <br>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                     {% if is_accept == 1 %}
                                         <hr>

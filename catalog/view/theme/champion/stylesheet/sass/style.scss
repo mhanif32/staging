@@ -9,32 +9,33 @@
 body {
   //font-family: "Poppins", sans-serif;
   font-family: 'Arial', sans-serif;user-select: none;
+  @media only screen and (max-width: 600px) { font-size: 12px; }
 }
 .main-body{ width: 100%;position: relative;min-height: calc(63vh - 13px); }
 h2 {font-size: calc(1.733rem + 0.9vw);font-weight: 700;}
-h3 {  @media only screen and (min-width: 1024px) {font-size: 2.8125rem;font-weight: 600;}}
+h3 { @media only screen and (min-width: 1024px) {font-size: 2.8125rem;font-weight: 600;}}
 h4 {font-size: 1.25rem;}
 h5 {font-size: 2.5rem;font-weight: 700;}
-.f-20{font-size: 1.25rem;}
-.f-15{font-size: 0.9375rem;}
-.f-14{font-size: 0.875rem;}
-.f-18{font-size: 1.125rem;}
-.f-35{font-size: 2.1875rem;}
-.f-12{font-size: 12px;}
-.f-13{font-size: 0.8125rem;}
-.f-120 {font-size: 7.5rem;}
-.f-60 {font-size: 60px;}
+.f-20{font-size: 1.25rem;@media only screen and (max-width: 600px) {font-size: 15px;}}
+.f-15{font-size: 0.9375rem;@media only screen and (max-width: 600px) {font-size: 12px;}}
+.f-14{font-size: 0.875rem; @media only screen and (max-width: 600px) {font-size: 11px;}}
+.f-18{font-size: 1.125rem; @media only screen and (max-width: 600px) {font-size: 13px;}}
+.f-35{font-size: 2.1875rem;@media only screen and (max-width: 600px) {font-size: 25px;}}
+.f-12{font-size: 12px; @media only screen and (max-width: 600px) {font-size: 10px;}}
+.f-13{font-size: 0.8125rem; @media only screen and (max-width: 600px) {font-size: 11px;}}
+.f-120 {font-size: 7.5rem;@media only screen and (max-width: 600px) {font-size: 85px;}}
+.f-60 {font-size: 60px; @media only screen and (max-width: 600px) {font-size: 40px;}}
 .alert {margin-bottom: 0;}
 .box-shadow{box-shadow: 0px 0px 6px #00000029;}
 .font-weight-medium{font-weight:500;}
 .font-family-opensans{font-family: 'Open Sans', sans-serif;}
-.f-25{font-size: 1.5625rem;}
+.f-25{font-size: 1.5625rem;@media only screen and (max-width: 600px) {font-size: 18px;}}
 .on-hover{&:hover{color: $success;}}
 .on-hover-shadow{&:hover{box-shadow: 0px 0px 6px #00000029;}}
 .text-wrap {width: 140px;overflow: hidden;white-space: nowrap!important;text-overflow: ellipsis;}
 .justify-content-flex-end {justify-content: flex-end;}
 a{text-decoration: none;&:hover{text-decoration: none;}}
-p {font-size: 0.9375rem;}
+p {font-size: 0.9375rem; @media only screen and (max-width: 600px) {font-size: 12px;}}
 .btn-border-div {z-index: 1;}
 .custom-btn {color: #FFFFFF;text-transform: uppercase;font-size: 0.875rem;font-weight: bold;}
 .btn{border-radius: 0;}
@@ -1229,7 +1230,15 @@ i{width: 20px;}}}}
     .col-md-6{transition: all .6s ease;
       &:hover{background-color: #87cefa52; transition: all .6s ease;}
       .media { align-items: center;
+        @media only screen and (max-width: 600px) {
+        .media-left { width: 30px;
+          i {font-size: 30px; }
+        }}
       p { margin-bottom: 0; }}
+      &.left-border {border-left: 1px solid lighten(black, 80%);
+        @media only screen and (max-width: 600px) { border-left: none; }
+
+      }
     }
   }
 }
@@ -1343,6 +1352,7 @@ i{width: 20px;}}}}
   }
   .swiper-pagination {
     bottom: 20px;
+    @media only screen and (max-width: 600px){display: none;}
   }
   .swiper-pagination-bullet {
     width: 20px;
