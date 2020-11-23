@@ -157,7 +157,7 @@ class ControllerAccountRequest extends Controller
                     $json['success'] = 'You have successfully accepted the Delivery Request.';
 
                     $this->load->model('account/customer');
-                    $customerData = $this->model_account_customer->getCustomer($this->customer->getId());
+                    $customerData = $this->model_account_customer->getCustomer($requestData['customer_id']);
                     $deliveryPartData = $this->model_account_customer->getCustomer($requestData['delivery_partner_id']);
                     $sellerData = $this->model_account_request->getMpSellerdata($requestData['mpseller_id']);
                     $orderData = $this->model_account_order->getOrderForDelivery($requestData['order_id']);
@@ -171,7 +171,7 @@ class ControllerAccountRequest extends Controller
                     $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
                     $mail->smtp_port = $this->config->get('config_mail_smtp_port');
                     $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-                    $mail->setTo($customerData['email']);
+                    $mail->setTo($deliveryPartData['email']);
                     $mail->setFrom($this->config->get('config_email'));
                     $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
                     $mail->setSubject(html_entity_decode(sprintf('The Champion Mall : Accepted Delivery Request', $this->config->get('config_name'), $requestData['order_id']), ENT_QUOTES, 'UTF-8'));
@@ -185,7 +185,7 @@ class ControllerAccountRequest extends Controller
                     $dataMail['deliveryPartnerName'] = $deliveryPartData['firstname'] . ' ' . $deliveryPartData['lastname'];
                     $dataMail['store_owner'] = $sellerData['store_owner'];
                     $dataMail['seller_address'] = $sellerData['address'];
-                    $dataMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
+                    //$dataMail['customerName'] = $customerData['firstname'] . ' ' . $customerData['lastname'];
                     $dataMail['customer_address'] = $orderData['shipping_address_1'] . ' ' . $orderData['shipping_city'] . ' ' . $orderData['shipping_zone'] . ' ' . $orderData['shipping_country'];
                     $dataMail['view_request_link'] = $this->url->link('account/request/view', '&id=' . $requestData['request_id'], true);
                     $mailText = $this->load->view('mail/dp_request_accept_alert', $dataMail);
