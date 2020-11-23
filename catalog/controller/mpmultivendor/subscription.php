@@ -172,17 +172,22 @@ class ControllerMpmultivendorSubscription extends Controller
             $this->model_mpmultivendor_subscription->createUserSubscription($subscriptionData);
 
             //update customer table
-            $updateCustomer = [
-                'stripe_subscription_id' => $stripedata['id'],
-                'stripe_customer_id' => $stripedata['customer'],
-                'subscription_plan_id' => $plan_id,
-                'subscription_plan' => $stripedata['id']
-            ];
-            $this->model_mpmultivendor_subscription->updateCustomer($updateCustomer, $this->customer->getId());
+            if($stripedata['status'] == 'active') {
+                $updateCustomer = [
+                    'stripe_subscription_id' => $stripedata['id'],
+                    'stripe_customer_id' => $stripedata['customer'],
+                    'subscription_plan_id' => $plan_id,
+                    'subscription_plan' => $stripedata['id']
+                ];
+                $this->model_mpmultivendor_subscription->updateCustomer($updateCustomer, $this->customer->getId());
 
-            $planData = $this->model_mpmultivendor_subscription->getSubscriptionPlan($plan_id);
-            $this->session->data['success'] = 'Success : You have successfully subscribed to the '.$planData['name'].' Plan.';
-            $this->response->redirect($this->url->link('account/account', '', true));
+                $planData = $this->model_mpmultivendor_subscription->getSubscriptionPlan($plan_id);
+                $this->session->data['success'] = 'Success : You have successfully subscribed to the '.$planData['name'].' Plan.';
+                $this->response->redirect($this->url->link('account/account', '', true));
+            } else {
+                $this->session->data['warning'] = 'Warning : Something wrong happen.';
+                $this->response->redirect($this->url->link('mpmultivendor/subscription', '', true));
+            }
         } else {
             $this->session->data['success'] = 'WARNING : You must Select Plan .';
             $this->response->redirect($this->url->link('mpmultivendor/subscription', '', true));
