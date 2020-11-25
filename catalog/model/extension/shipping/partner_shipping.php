@@ -4,7 +4,9 @@ class ModelExtensionShippingPartnerShipping extends Model
 {
     function getQuote($address)
     {
-        //echo '<pre>'; print_r($this->session->data['currency']); exit('iook');
+        //echo '<pre>'; print_r($address); exit('iook');
+
+        //$this->getSellers();
 
         $this->load->language('extension/shipping/partner_shipping');
         /**
@@ -49,7 +51,11 @@ class ModelExtensionShippingPartnerShipping extends Model
             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$mpSellerId . "' AND m.status = '1'");
             $mpSellerData = $query->row;
 
+            //echo '<pre>'; print_r($address); /*exit('iook');*/
+            //echo '<pre>'; print_r($mpSellerData); exit('iook');
+
             if (($mpSellerData['country_id'] == $address['country_id']) && ($mpSellerData['zone_id'] == $address['zone_id']) && ($mpSellerData['city'] == $address['city']) && $address['country'] != 'Nigeria') {
+                //exit('here');
 
                 $sellerZoneData = $this->getZone($mpSellerData['zone_id']);
                 $sellerCountryData = $this->getCountry($mpSellerData['country_id']);
@@ -74,6 +80,9 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
                 $distance = $this->getDistance($addressFrom, $addressTo, "K", $googleKey);
+                // my change
+                $sellerIDs = $this->getSellers();
+                $distance = $this->getTotalDistance($sellerIDs, $customerArray);
 
                 $configFlatCharge = (float) $this->config->get('config_flat_delivery_charges');
                 $configFlatChargeDistance = (float) $this->config->get('config_delivery_charge_per_distance');
@@ -82,7 +91,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 $totalDeliveryAmt = $delivery_charge;
 
             } else {
-                //if seller and customer locations are same
+                //if seller and customer locations are not the same
                 $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
                 if ($this->session->data['currency'] == 'NGN') {
@@ -168,6 +177,140 @@ class ModelExtensionShippingPartnerShipping extends Model
             );
         }
         return $method_data;
+    }
+
+    /**
+     * Get all the unique sellers of products in the cart.
+     * @return array
+     */
+    protected function getSellers()
+    {
+        //$cartProducts = $this->cart->getProducts();
+        //$sellers =  new \Ds\Set();
+        $sellers = [];
+
+        foreach($this->cart->getProducts() as $product){
+            //echo '<pre>'; print_r($product) . '</pre>';
+            $sellers[] = $product['mpseller_id'];
+            //$sellers->add();
+        }
+        return array_unique($sellers);
+    }
+
+    /**
+     * Get the address in a format expected by google geo - code.
+     * @param $sellerID
+     * @return array|string
+     */
+    protected function getGoogleFormattedAddress($sellerID)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$sellerID . "' AND m.status = '1'");
+        $sellerData = $query->row;
+
+        //echo '<pre>'; print_r($sellerData) . '</pre>'; exit('here');
+
+        $sellerZoneData = $this->getZone($sellerData['zone_id']);
+        $sellerCountryData = $this->getCountry($sellerData['country_id']);
+
+        $sellerAddress = [
+            $sellerData['address'],
+            $sellerData['city'],
+            $sellerZoneData['name'],
+            $sellerCountryData['name']
+        ];
+        $sellerAddress = implode(', ', $sellerAddress);
+
+        return $sellerAddress;
+    }
+
+    /**
+     * Returns the total distance, following the format that if more than one seller,
+     * we calculate distance from first seller to next seller and then from last seller
+     * to customer.
+     * @param $sellerIDs
+     * @param $customerAddress
+     * @param string $unit
+     * @return float|int|string
+     */
+    protected function getTotalDistance($sellerIDs, $customerAddress, $unit = "K")
+    {
+        $googleKey = $this->config->get('config_google_distance_api_key');
+        $totalDistance = 0;
+        // distance from last seller to customer
+        $customerAddress = implode(', ', array_filter($customerAddress));
+        $prevSellerAddress = null;
+
+        // handle type of seller quickly
+        if (count($sellerIDs) <= 1){
+            $lastSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[0]);
+            $totalDistance += $this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey);
+            return $totalDistance;
+        }
+
+        // handle 2 type seller
+        if (count($sellerIDs) <= 2){
+            $prevSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[0]);
+            $lastSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[1]);
+            // get distance btw seller 1 and seller 2
+            $totalDistance += $this->getDistance($prevSellerAddress, $lastSellerAddress, $unit, $googleKey);
+            // get distance btw last seller (2) and customer
+            $totalDistance += $this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey);
+            return $totalDistance;
+        }
+
+        // handles all cases above 2
+        for($i = 0; $i < count($sellerIDs) - 1; $i++){
+            /*
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$sellerIDs[$i] . "' AND m.status = '1'");
+            $sellerData = $query->row;
+
+            $sellerAddress = [
+                $sellerData['address'],
+                $sellerData['city'],
+                $sellerData['name'],
+                $sellerData['name']
+            ];
+            $sellerAddress = implode(', ', $sellerAddress);
+
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$sellerIDs[$i+1] . "' AND m.status = '1'");
+            $nextSellerData = $query->row;
+
+            $nextSellerAddress = [
+                $nextSellerData['address'],
+                $nextSellerData['city'],
+                $nextSellerData['name'],
+                $nextSellerData['name']
+            ];
+            $nextSellerAddress = implode(', ', $nextSellerAddress);
+            */
+
+            $sellerAddress = $this->getGoogleFormattedAddress($sellerIDs[$i]);
+            $nextSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[$i+1]);
+            $totalDistance += $this->getDistance($sellerAddress, $nextSellerAddress, $unit, $googleKey);
+
+            $prevSellerAddress = $nextSellerAddress;
+        }
+
+        // get details of the last seller and add the address
+        /*
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "mpseller m WHERE m.mpseller_id = '" . (int)$sellerIDs[array_key_last($sellerIDs)] . "' AND m.status = '1'");
+        $nextSellerData = $query->row;
+
+        $lastSellerAddress = [
+            $nextSellerData['address'],
+            $nextSellerData['city'],
+            $nextSellerData['name'],
+            $nextSellerData['name']
+        ];
+        $lastSellerAddress = implode(', ', $lastSellerAddress);
+        */
+        $lastSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[count($sellerIDs) - 1]);
+        $totalDistance += $this->getDistance($prevSellerAddress, $lastSellerAddress, $unit, $googleKey);
+
+        // distance from last seller to customer
+        $totalDistance += $this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey);
+
+        return $totalDistance;
     }
 
     protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)
