@@ -436,6 +436,14 @@ class ControllerCommonColumnLeft extends Controller
                 );
             }
 
+            if ($this->user->hasPermission('access', 'subscription/executive_member_plan')) {
+                $system[] = array(
+                    'name' => $this->language->get('text_em_subscription_plan'),
+                    'href' => $this->url->link('subscription/executive_member_plan', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
+
             // Users
             $user = array();
 

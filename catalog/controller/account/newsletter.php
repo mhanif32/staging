@@ -19,8 +19,6 @@ class ControllerAccountNewsletter extends Controller
 
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 
-            //echo $this->customer->getEmail();exit('oko');
-
             $this->load->model('account/customer');
 
             $this->model_account_customer->editNewsletter($this->request->post['newsletter']);

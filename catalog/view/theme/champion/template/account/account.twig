@@ -6,6 +6,7 @@
                 <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
             {% endfor %}
         </ul>
+
         <div class="row">
             <div class="col-12">
                 <div class="pb-5">
@@ -19,14 +20,14 @@
                             <h4 class="f-35 text-center mb-5 font-weight-bold">DASHBOARD</h4>
                             {% if is_seller and checkPlan.name %}
                                 <div class="d-flex justify-content-end align-items-end">
-                                    {#<i class="fa fa-flag" aria-hidden="true"></i>#}
+                                    {# <i class="fa fa-flag" aria-hidden="true"></i> #}
 
                                     {% if checkPlan.name == 'Free' %}
                                         <span class="f-15 text-danger">Free Plan Attracts 20% on Products Sold. <br>
                                             To change it, Go To Membership Plans Below.
                                         </span>
-                                        {% else %}
-                                            <span class="text-danger f-15 ml-3">Your current plan is :-</span>
+                                    {% else %}
+                                        <span class="text-danger f-15 ml-3">Your current plan is :-</span>
                                     {% endif %}
 
                                     <span class="font-weight-bold f-15">
@@ -113,7 +114,8 @@
                                                        class="f-15 font-weight-bold">{{ text_customer_order }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ customer_order_href }}" class="f-13 text-muted">View customer order</a>
+                                                    <a href="{{ customer_order_href }}" class="f-13 text-muted">View
+                                                        customer order</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -131,10 +133,12 @@
                                             <div class="media-body">
                                                 <h4 class="media-heading mb-0">
                                                     <a href="{{ step_upload_href }}"
-                                                       class="f-15 font-weight-bold text-danger">Steps To Upload Products</a>
+                                                       class="f-15 font-weight-bold text-danger">Steps To Upload
+                                                        Products</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ step_upload_href }}" class="f-13 text-muted">Step by step instructions how to upload your product</a>
+                                                    <a href="{{ step_upload_href }}" class="f-13 text-muted">Step by
+                                                        step instructions how to upload your product</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -188,7 +192,8 @@
                                         <div class="media">
                                             <div class="media-left mr-3">
                                                 <a href="{{ delivery_partner_request_link }}">
-                                                    <i class="fa fa-cart-arrow-down f-60 text-success" aria-hidden="true"></i>
+                                                    <i class="fa fa-cart-arrow-down f-60 text-success"
+                                                       aria-hidden="true"></i>
 
                                                 </a>
                                             </div>
@@ -198,7 +203,8 @@
                                                        class="f-15 font-weight-bold">Delivery Requests</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ delivery_partner_request_link }}" class="f-13 text-muted">Accept your delivery requests</a>
+                                                    <a href="{{ delivery_partner_request_link }}"
+                                                       class="f-13 text-muted">Accept your delivery requests</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -216,7 +222,8 @@
                                                        class="f-15 font-weight-bold">Assigned Orders</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ delivery_partner_orders_link }}" class="f-13 text-muted">Check your assigned orders</a>
+                                                    <a href="{{ delivery_partner_orders_link }}"
+                                                       class="f-13 text-muted">Check your assigned orders</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -225,7 +232,8 @@
                                         <div class="media">
                                             <div class="media-left mr-3">
                                                 <a href="{{ deliverypartner_message_href }}">
-                                                    <i class="fa fa-comments-o f-60 text-success" aria-hidden="true"></i>
+                                                    <i class="fa fa-comments-o f-60 text-success"
+                                                       aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="media-body">
@@ -234,7 +242,9 @@
                                                        class="f-15 font-weight-bold">Message to Admin</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ deliverypartner_message_href }}" class="f-13 text-muted">For admin enquiry you can send message to admin</a>
+                                                    <a href="{{ deliverypartner_message_href }}"
+                                                       class="f-13 text-muted">For admin enquiry you can send message to
+                                                        admin</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -251,9 +261,9 @@
                                                     <a href="{{ set_delivery_area_link }}"
                                                        class="f-15 font-weight-bold">How to Set Your Delivery Area</a>
                                                 </h4>
-                                                {#<p>#}
-                                                    {#<a href="{{ set_delivery_area_link }}" class="f-13 text-muted">Check your assigned orders</a>#}
-                                                {#</p>#}
+                                                {# <p> #}
+                                                {# <a href="{{ set_delivery_area_link }}" class="f-13 text-muted">Check your assigned orders</a> #}
+                                                {# </p> #}
                                             </div>
                                         </div>
                                     </div>
@@ -261,22 +271,91 @@
                                         <div class="media">
                                             <div class="media-left mr-3">
                                                 <a href="{{ deliverypartner_payment_href }}">
-                                                    <i class="fa fa-comments-o f-60 text-success" aria-hidden="true"></i>
+                                                    <i class="fa fa-comments-o f-60 text-success"
+                                                       aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="media-body">
                                                 <h4 class="media-heading mb-0">
                                                     <a href="{{ deliverypartner_payment_href }}"
-                                                       class="f-15 font-weight-bold">Delivery Fee Due To You For Your Deliveries</a>
+                                                       class="f-15 font-weight-bold">Delivery Fee Due To You For Your
+                                                        Deliveries</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ deliverypartner_payment_href }}" class="f-13 text-muted">Check delivery partner order payments from here</a>
+                                                    <a href="{{ deliverypartner_payment_href }}"
+                                                       class="f-13 text-muted">Check delivery partner order payments
+                                                        from here</a>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 {% endif %}
                             </div>
+
+                            {% if role == 'buyer' %}
+                            <h3 class="f-20 font-weight-bold text-uppercase mt-4">{{ text_my_affiliate }}</h3>
+                            <hr>
+                            <div class="row">
+                                {% if not tracking %}
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ affiliate }}">
+                                                    <i class="fa fa-pagelines f-60 text-success" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ affiliate }}"
+                                                       class="f-15 font-weight-bold">{{ text_affiliate_add }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ affiliate }}"
+                                                       class="f-13 text-muted">{{ text_affiliate_add }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ affiliate }}">
+                                                    <i class="fa fa-pagelines f-60 text-success" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ affiliate }}"
+                                                       class="f-15 font-weight-bold">{{ text_affiliate_edit }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ affiliate }}" class="f-13 text-muted">{{ text_affiliate_edit }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ tracking }}">
+                                                    <i class="fa fa-leaf f-60 text-success" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ tracking }}"
+                                                       class="f-15 font-weight-bold">{{ text_tracking }}</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ tracking }}" class="f-13 text-muted">{{ text_tracking }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
 
                             {% if credit_cards %}
                                 <h3 class="f-20 font-weight-bold text-uppercase">{{ text_credit_card }}</h3>
@@ -309,145 +388,152 @@
 
 
                             {% if role == 'buyer' %}
-                            <h3 class="f-20 font-weight-bold text-uppercase mt-4">MY ORDERS</h3>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ order_hidtory_link }}">
-                                                <i class="fas fa-shopping-bag f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ order_hidtory_link }}"
-                                                   class="f-15 font-weight-bold">Order History</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ order_hidtory_link }}" class="f-13 text-muted">View order
-                                                    history details</a>
-                                            </p>
+                                <h3 class="f-20 font-weight-bold text-uppercase mt-4">MY ORDERS</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ order_hidtory_link }}">
+                                                    <i class="fas fa-shopping-bag f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ order_hidtory_link }}"
+                                                       class="f-15 font-weight-bold">Order History</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ order_hidtory_link }}" class="f-13 text-muted">View
+                                                        order
+                                                        history details</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6 py-3 pl-md-5 border-left">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ transactions_link }}">
-                                                <i class="fas fa-random f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ transactions_link }}"
-                                                   class="f-15 font-weight-bold">Your Transactions</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ transactions_link }}" class="f-13 text-muted">View your Transactions</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ return_href }}">
-                                                <i class="fas fa-redo f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ return_href }}"
-                                                   class="f-15 font-weight-bold">Return Product History</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ return_href }}" class="f-13 text-muted">View your return product
-                                                    history</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 py-3 pl-md-5 border-left">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ sales_special_href }}">
-                                                <i class="fas fa-bullhorn f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ sales_special_href }}"
-                                                   class="f-15 font-weight-bold">Sales & Special Offer Products</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ sales_special_href }}" class="f-13 text-muted">View Sales & Special Offer Products</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ downloads_href }}">
-                                                <i class="fas fa-download f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ downloads_href }}"
-                                                   class="f-15 font-weight-bold">Downloads</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ downloads_href }}" class="f-13 text-muted">View your Downloads </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% if reward %}
                                     <div class="col-md-6 py-3 pl-md-5 border-left">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ reward_href }}">
-                                                <i class="fas fa-award f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ reward_href }}"
-                                                   class="f-15 font-weight-bold">YOUR REWARD POINTS</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ reward_href }}" class="f-13 text-muted">View your total number of reward points</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endif %}
-
-                              <div class="col-md-6 py-3">
-                                    <div class="media">
-                                        <div class="media-left mr-3">
-                                            <a href="{{ recurring_href }}">
-                                                <i class="far fa-credit-card f-60 text-success"></i>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading mb-0">
-                                                <a href="{{ recurring_href }}"
-                                                   class="f-15 font-weight-bold">Recurring Payments</a>
-                                            </h4>
-                                            <p>
-                                                <a href="{{ recurring_href }}" class="f-13 text-muted">View your Recurring Payments history</a>
-                                            </p>
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ transactions_link }}">
+                                                    <i class="fas fa-random f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ transactions_link }}"
+                                                       class="f-15 font-weight-bold">Your Transactions</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ transactions_link }}" class="f-13 text-muted">View your
+                                                        Transactions</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ return_href }}">
+                                                    <i class="fas fa-redo f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ return_href }}"
+                                                       class="f-15 font-weight-bold">Return Product History</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ return_href }}" class="f-13 text-muted">View your return
+                                                        product
+                                                        history</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-3 pl-md-5 border-left">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ sales_special_href }}">
+                                                    <i class="fas fa-bullhorn f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ sales_special_href }}"
+                                                       class="f-15 font-weight-bold">Sales & Special Offer Products</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ sales_special_href }}" class="f-13 text-muted">View
+                                                        Sales & Special Offer Products</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ downloads_href }}">
+                                                    <i class="fas fa-download f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ downloads_href }}"
+                                                       class="f-15 font-weight-bold">Downloads</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ downloads_href }}" class="f-13 text-muted">View your
+                                                        Downloads </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if reward %}
+                                        <div class="col-md-6 py-3 pl-md-5 border-left">
+                                            <div class="media">
+                                                <div class="media-left mr-3">
+                                                    <a href="{{ reward_href }}">
+                                                        <i class="fas fa-award f-60 text-success"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading mb-0">
+                                                        <a href="{{ reward_href }}"
+                                                           class="f-15 font-weight-bold">YOUR REWARD POINTS</a>
+                                                    </h4>
+                                                    <p>
+                                                        <a href="{{ reward_href }}" class="f-13 text-muted">View your
+                                                            total number of reward points</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="col-md-6 py-3">
+                                        <div class="media">
+                                            <div class="media-left mr-3">
+                                                <a href="{{ recurring_href }}">
+                                                    <i class="far fa-credit-card f-60 text-success"></i>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading mb-0">
+                                                    <a href="{{ recurring_href }}"
+                                                       class="f-15 font-weight-bold">Recurring Payments</a>
+                                                </h4>
+                                                <p>
+                                                    <a href="{{ recurring_href }}" class="f-13 text-muted">View your
+                                                        Recurring Payments history</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                             {% endif %}
 
@@ -511,7 +597,8 @@
                                                        class="f-15 font-weight-bold">{{ checkIsSellerApprovedtext }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ seller_link }}" class="f-13 text-muted">Shop Details.</a>
+                                                    <a href="{{ seller_link }}" class="f-13 text-muted">Shop
+                                                        Details.</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -572,7 +659,8 @@
                                                        class="f-15 font-weight-bold">{{ edit_special_product }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ edit_special_product_href }}" class="f-13 text-muted">Edit your
+                                                    <a href="{{ edit_special_product_href }}" class="f-13 text-muted">Edit
+                                                        your
                                                         existing sales/special products</a>
                                                 </p>
                                             </div>
@@ -592,7 +680,9 @@
                                                        class="f-15 font-weight-bold">Pending Orders</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ update_order_status_link }}" class="f-13 text-muted"> A link attached to display all orders that require status update accordingly</a>
+                                                    <a href="{{ update_order_status_link }}" class="f-13 text-muted"> A
+                                                        link attached to display all orders that require status update
+                                                        accordingly</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -611,7 +701,8 @@
                                                        class="f-15 font-weight-bold">{{ text_commission }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ product_commission_href }}" class="f-13 text-muted">View your commission</a>
+                                                    <a href="{{ product_commission_href }}" class="f-13 text-muted">View
+                                                        your commission</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -621,7 +712,8 @@
                                         <div class="media">
                                             <div class="media-left mr-3">
                                                 <a href="{{ subscription_plan_href }}">
-                                                    <i class="far fa-address-card f-60 text-success" aria-hidden="true"></i>
+                                                    <i class="far fa-address-card f-60 text-success"
+                                                       aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="media-body">
@@ -630,7 +722,8 @@
                                                        class="f-15 font-weight-bold">Membership Plans</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ subscription_plan_href }}" class="f-13 text-muted"> Please select a suitable membership plan for your store. </a>
+                                                    <a href="{{ subscription_plan_href }}" class="f-13 text-muted">
+                                                        Please select a suitable membership plan for your store. </a>
                                                 </p>
                                             </div>
                                         </div>
@@ -650,7 +743,8 @@
                                                        class="f-15 font-weight-bold">{{ text_saved_cards }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ saved_cards_href }}" class="f-13 text-muted">Connect or Register with Stripe</a>
+                                                    <a href="{{ saved_cards_href }}" class="f-13 text-muted">Connect or
+                                                        Register with Stripe</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -675,7 +769,8 @@
                                                        class="f-15 font-weight-bold">{{ text_seller_enquiries }}</a>
                                                 </h4>
                                                 <p>
-                                                    <a href="{{ my_seller_enquiries_href }}" class="f-13 text-muted">A place where you can get information</a>
+                                                    <a href="{{ my_seller_enquiries_href }}" class="f-13 text-muted">A
+                                                        place where you can get information</a>
                                                 </p>
                                             </div>
                                         </div>
