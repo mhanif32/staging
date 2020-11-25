@@ -684,21 +684,11 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         //for profile right column
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
-
-        if (VERSION < '2.2.0.0') {
-            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/product_list.tpl')) {
-                $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/mpmultivendor/product_list.tpl', $data));
-            } else {
-                $this->response->setOutput($this->load->view('default/template/account/mpmultivendor/product_list.tpl', $data));
-            }
-        } else {
-            $this->response->setOutput($this->load->view('account/mpmultivendor/product_list', $data));
-        }
+        $this->response->setOutput($this->load->view('account/mpmultivendor/product_list', $data));
     }
 
     protected function getSpecialList()
     {
-
         if (strpos($this->config->get('config_template'), 'journal2') === 0 || defined('JOURNAL3_ACTIVE')) {
             $this->document->addStyle('catalog/view/theme/default/stylesheet/mpmultivendor-journal.css');
         }
@@ -1017,7 +1007,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
         $pagination->total = $product_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('mpmultivendor_seller_list');
-        $pagination->url = $this->url->link('account/mpmultivendor/product', '' . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('account/mpmultivendor/product/special', '' . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -1052,9 +1042,6 @@ class ControllerAccountMpmultivendorProduct extends Controller
         if ($this->config->get('config_template')) {
             $custom_themename = $this->config->get('config_template');
         }
-        // else{
-        // 	$custom_themename = 'default';
-        // }
 
         if (defined('JOURNAL3_ACTIVE')) {
             $custom_themename = 'journal3';
@@ -1072,16 +1059,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
 
         //for profile right column
         $data['profile_column_left'] = $this->load->controller('common/profile_column_left');
-
-        if (VERSION < '2.2.0.0') {
-            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/mpmultivendor/product_list.tpl')) {
-                $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/account/mpmultivendor/product_list.tpl', $data));
-            } else {
-                $this->response->setOutput($this->load->view('default/template/account/mpmultivendor/product_list.tpl', $data));
-            }
-        } else {
-            $this->response->setOutput($this->load->view('account/mpmultivendor/special_product_list', $data));
-        }
+        $this->response->setOutput($this->load->view('account/mpmultivendor/special_product_list', $data));
     }
 
     protected function getForm()
