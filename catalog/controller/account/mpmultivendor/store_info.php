@@ -215,7 +215,7 @@ class ControllerAccountMpmultivendorStoreInfo extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_store_info'),
-			'href' => $this->url->link('account/store_info', '', true)
+			'href' => $this->url->link('account/mpmultivendor/store_info', '', true)
 		);
 
 		$data['action'] = $this->url->link('account/mpmultivendor/store_info', '', true);
