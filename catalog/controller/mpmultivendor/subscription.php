@@ -4,6 +4,9 @@ class ControllerMpmultivendorSubscription extends Controller
 {
     public function index()
     {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('mpmultivendor/subscription', '', true);
 
@@ -138,6 +141,7 @@ class ControllerMpmultivendorSubscription extends Controller
                 $customerId = $customerData['id'];
                 //save stripe card
                 $card = $customerData['sources']['data'][0];
+
                 $this->model_mpmultivendor_subscription->saveStripeCard($card, $this->customer->getId());
             } else {
 
@@ -151,11 +155,15 @@ class ControllerMpmultivendorSubscription extends Controller
 
                 $customerId = $customer['stripe_customer_id'];
             }
-
+            //print_r($card);exit('okok');
             //create a subscription
             $stripedata = \Stripe\Subscription::create([
                 "customer" => $customerId,
                 'items' => [['plan' => $product]],
+//                'type' => 'three_d_secure',
+//                'three_d_secure' => [
+//                    'card' => $card['id'],
+//                ],
             ]);
 
             //entry in user subscription table
