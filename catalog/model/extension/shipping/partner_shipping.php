@@ -189,7 +189,8 @@ class ModelExtensionShippingPartnerShipping extends Model
 
         foreach($this->cart->getProducts() as $product){
             //echo '<pre>'; print_r($product) . '</pre>';
-            $sellers[] = $product['mpseller_id'];
+            if (!in_array($product['mpseller_id'], $sellers))
+                $sellers[] = $product['mpseller_id'];
             //$sellers->add();
         }
         return array_unique($sellers);
