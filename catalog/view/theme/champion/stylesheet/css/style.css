@@ -160,11 +160,7 @@ table thead td {
   vertical-align: middle; }
 
 body {
-  font-family: 'Arial', sans-serif;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; }
+  font-family: 'Arial', sans-serif; }
   @media only screen and (max-width: 600px) {
     body {
       font-size: 12px; } }
