@@ -6,8 +6,6 @@ class ModelExtensionShippingPartnerShipping extends Model
     {
         //echo '<pre>'; print_r($address); exit('iook');
 
-        //$this->getSellers();
-
         $this->load->language('extension/shipping/partner_shipping');
         /**
          * Query for finding if the customer is from the same zone as selected by the admin in the backend
@@ -315,18 +313,26 @@ class ModelExtensionShippingPartnerShipping extends Model
 
     protected function getDistance($addressFrom, $addressTo, $unit, $apiKey)
     {
-        $endpoint = sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%s&destinations=%s&key=%s", $addressFrom, $addressTo, $apiKey);
+        $endpoint = "https://maps.googleapis.com/maps/api/distancematrix/json?";
+        $query_data = [
+            //'units' => 'imperial', // returns it in km
+            'origins' => $addressFrom,
+            'destinations' => $addressTo,
+            'key' => $apiKey
+        ];
+
+        $endpoint .= http_build_query($query_data);
         $distanceMatrixAPI = file_get_contents($endpoint);
-        if ($distanceMatrixAPI->status != "OK" || count($distanceMatrixAPI->rows) == 0){
-            return $distanceMatrixAPI->status;
+        $outputReturned = json_decode($distanceMatrixAPI);
+        if ($outputReturned->status != "OK" || count($outputReturned->rows) == 0){
+            return $outputReturned->status;
         }
 
         // good to take info
-        $response = $distanceMatrixAPI->rows[0];
+        $response = $outputReturned->rows[0];
         $distance = $response->elements[0]->distance->text;
         $value = explode(" ", $distance);
-        $toKm = round($value[0] * 1.609344, 2);
-        return $toKm;
+        return $value[0];
     }
 
     protected function getDistanceOLD($addressFrom, $addressTo, $unit = '', $apiKey)
