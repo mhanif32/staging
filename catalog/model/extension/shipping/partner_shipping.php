@@ -79,7 +79,7 @@ class ModelExtensionShippingPartnerShipping extends Model
 
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
-                $distance = $this->getDistance($addressFrom, $addressTo, "K", $googleKey);
+                $distance = $this->getDistanceOLD($addressFrom, $addressTo, "K", $googleKey);
                 // my change
                 $sellerIDs = $this->getSellers();
                 $distance = $this->getTotalDistance($sellerIDs, $customerArray);
@@ -313,7 +313,23 @@ class ModelExtensionShippingPartnerShipping extends Model
         return $totalDistance;
     }
 
-    protected function getDistance($addressFrom, $addressTo, $unit = '', $apiKey)
+    protected function getDistance($addressFrom, $addressTo, $unit, $apiKey)
+    {
+        $endpoint = sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%s&destinations=%s&key=%s", $addressFrom, $addressTo, $apiKey);
+        $distanceMatrixAPI = file_get_contents($endpoint);
+        if ($distanceMatrixAPI->status != "OK" || count($distanceMatrixAPI->rows) == 0){
+            return $distanceMatrixAPI->status;
+        }
+
+        // good to take info
+        $response = $distanceMatrixAPI->rows[0];
+        $distance = $response->elements[0]->distance->text;
+        $value = explode(" ", $distance);
+        $toKm = round($value[0] * 1.609344, 2);
+        return $toKm;
+    }
+
+    protected function getDistanceOLD($addressFrom, $addressTo, $unit = '', $apiKey)
     {
         // Change address format
         $formattedAddrFrom = str_replace(' ', '+', $addressFrom);
