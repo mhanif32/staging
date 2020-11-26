@@ -159,6 +159,14 @@ table thead td {
 .table th, .table td {
   vertical-align: middle; }
 
+.home-location-mob-icon {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px; }
+
+.home-location-mob-text {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px; }
+
 body {
   font-family: 'Arial', sans-serif; }
   @media only screen and (max-width: 600px) {

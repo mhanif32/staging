@@ -75,7 +75,7 @@
 <header>
     <div class="container">
         <div class="row">
-            <div class="col-12 m-auto d-lg-none d-flex justify-content-between">
+            <div class="col-12 m-auto d-lg-none d-flex justify-content-between align-items-center">
                 {% if logged %}
                     <div class="dropdown show d-inline-block">
                         <a class="btn btn-white bg-white border-0 text-primary px-2" href="#"
@@ -124,6 +124,20 @@
                         </div>
                     </div>
                 {% endif %}
+                <div class="home-location d-lg-none d-flex d-flex-row d-flex-nowrap" type="button"
+                     data-toggle="modal"
+                     data-target="#exampleModalCenter">
+                    <div class="home-location-icon home-location-mob-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
+                        <i class="fa fa-map-marker text-danger"></i>
+                    </div>
+                    <div class="home-location-text home-location-mob-text d-flex d-flex-column bg-black text-white">
+                        <a class="button w-100 text-white px-2 text-truncate" type="button" data-hover=""
+                           data-active="I'M ACTIVE">Select Your Delivery Location
+                            <br><span
+                                    id="loggedInAddress">{{ loggedInCity }} {{ loggedInState }} {{ loggedInCountry }}</span></a>
+                    </div>
+                </div>
+
                 <div class="d-inline-block align-items-center order-1 order-xl-3 cart-icons">
                     {{ cart }}
                 </div>
@@ -212,7 +226,7 @@
                     </button>
                     <div class="collapse navbar-collapse nav-scroller" id="navbarsExample08">
                         <ul class="navbar-nav navbar-nav-menu ">
-                            <div class="home-location d-flex d-flex-row d-flex-nowrap" type="button"
+                            <div class="home-location d-none d-lg-flex d-flex-row d-flex-nowrap" type="button"
                                  data-toggle="modal"
                                  data-target="#exampleModalCenter">
                                 <div class="home-location-icon bg-success d-flex d-flex-column align-items-center justify-content-center px-2">
