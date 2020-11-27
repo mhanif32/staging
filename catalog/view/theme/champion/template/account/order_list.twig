@@ -63,7 +63,7 @@
                         {# </tbody> #}
                         {# </table> #}
                         {# </div> #}
-                        <div class="table-responsive">
+                        <div class="table-responsive d-none">
                             <table class="table border-bottom-0">
                                 <thead>
                                 <tr class="bg-light font-weight-bold text-uppercase">
@@ -112,6 +112,60 @@
                                 </tbody>
                             </table>
                         </div>
+
+
+                        <div class="row">
+                            {% for order in orders %}
+                                <div class="col-12 mb-4 border-bottom">
+                                    <ul class="list-unstyled row justify-content-lg-between">
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong>{{ column_order_id }} :</strong>
+                                            #{{ order.order_id }}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong>{{ column_customer }} :</strong>
+                                            {{ order.name }}}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong>{{ column_product }} :</strong>
+                                            {{ order.products }}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong>{{ column_status }} :</strong>
+                                            {% if order.status == 'Pending' %}
+                                                <span class="btn-sm btn-warning">{{ order.status }}</span>
+                                            {% elseif order.status == 'Shipped' %}
+                                                <span class="btn-sm btn-gold">{{ order.status }}</span>
+                                            {% elseif order.status == 'Complete' %}
+                                                <span class="btn-sm btn-success">{{ order.status }}</span>
+                                            {% elseif order.status == 'Processing' %}
+                                                <span class="btn-sm btn-danger">{{ order.status }}</span>
+                                            {% else %}
+                                                <span class="btn-sm btn-primary">{{ order.status }}</span>
+                                            {% endif %}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong> {{ column_total }} :</strong>
+                                            {{ order.total }}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <strong> {{ column_date_added }} :</strong>
+                                            {{ order.date_added }}
+                                        </li>
+                                        <li class="col-lg-custom col-md-3 col-12" >
+                                            <a href="{{ order.view }}" data-toggle="tooltip"
+                                               title="{{ button_view }}"
+                                               class="btn btn-success btn-sm">View</a>
+                                            <a href="{{ track_link }}" data-toggle="tooltip" title="Track Order"
+                                               class="btn on-hover-shadow on-hover "><i
+                                                        class="fa fa-truck f-22"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
                         <div class="row">
                             <div class="col-sm-6 text-left">{{ pagination }}</div>
                             <div class="col-sm-6 text-right">{{ results }}</div>
