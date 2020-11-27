@@ -27,7 +27,7 @@
 
                                     <hr style="margin: 15px -25px">
                                     {% if orders %}
-                                        <div class="table-responsive">
+                                        <div class="table-responsive d-none d-lg-block">
                                             <table class="table border-bottom-0">
                                                 <thead>
                                                 <tr class="bg-light font-weight-bold text-uppercase">
@@ -66,6 +66,42 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+<div class="row d-lg-none">
+    {% for order in orders %}
+    <div class="col-12 mb-4 border-bottom">
+        <ul class="list-unstyled">
+            <li>
+               <strong>Order ID :</strong>
+                #{{ order.order_id }}
+            </li>
+            <li>
+                <strong>Customer :</strong>
+                {{ order.customer_name }}
+            </li>
+            <li>
+                <strong>Seller Status :</strong>
+                {{ order.seller_order_status }}
+            </li>
+            <li>
+                <strong>Delivery Status :</strong>
+                {{ order.delivery_status }}
+            </li>
+            <li>
+                <strong> Delivery Location :</strong>
+                {{ order.delivery_location }}
+            </li>
+            <li>
+                <a href="{{ order.assignedOrderView }}"
+                   data-toggle="tooltip"
+                   title="{{ button_view }}"
+                   class="btn btn-success btn-sm">View</a>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
                                         <div class="row">
                                             <div class="col-sm-6 text-left">{{ pagination }}</div>
                                             <div class="col-sm-6 text-right">{{ results }}</div>

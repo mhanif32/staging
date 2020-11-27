@@ -167,6 +167,19 @@ table thead td {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px; }
 
+@media (min-width: 1200px) {
+  .col-lg-custom {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px; }
+
+  .col-lg-custom {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+    max-width: 20%; } }
 body {
   font-family: 'Arial', sans-serif; }
   @media only screen and (max-width: 600px) {

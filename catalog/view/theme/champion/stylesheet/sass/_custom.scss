@@ -52,3 +52,10 @@ table thead td {white-space: nowrap;}
 //mobile select location
 .home-location-mob-icon {border-top-left-radius: 15px; border-bottom-left-radius: 15px; }
 .home-location-mob-text{    border-top-right-radius: 15px; border-bottom-right-radius: 15px;}
+
+
+// product-listing 5 column
+@media (min-width: 1200px) {
+  .col-lg-custom { position: relative; width: 100%; min-height: 1px; padding-right: 10px; padding-left: 10px; }
+  .col-lg-custom { -webkit-box-flex: 0; flex: 0 0 20%; max-width: 20%; }
+}
