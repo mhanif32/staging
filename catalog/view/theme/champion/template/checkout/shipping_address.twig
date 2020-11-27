@@ -88,6 +88,9 @@
 
                 <select name="city_id" id="input-shipping-city_id" class="form-control">
                     <option value="">Select</option>
+                    {% for city in cities %}
+                        <option value="{{ city.area_id }}">{{ city.name }}</option>
+                    {% endfor %}
                 </select>
                 <input type="hidden" name="city" value="" id="input-shipping-city"
                        class="form-control"/>
@@ -409,7 +412,6 @@
     });
 
     $('#collapse-shipping-address select[name=\'country_id\']').trigger('change');
-    $('#collapse-shipping-address select[name=\'zone_id\']').trigger('change');
     //--></script>
 
 <script type="text/javascript"><!--
@@ -448,7 +450,7 @@
         });
     });
 
-    $('#collapse-shipping-address select[name=\'zone_id\']').trigger('change');
+    //$('#collapse-shipping-address select[name=\'zone_id\']').trigger('change');
     //--></script>
 <script>
     $('#input-shipping-city_id').on('change', function () {

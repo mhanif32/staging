@@ -89,6 +89,9 @@
                             class="text-danger">*</span></label>
                 <select name="city_id" id="input-payment-city_id" class="form-control">
                     <option value="">Select</option>
+                    {% for city in cities %}
+                        <option value="{{ city.area_id }}">{{ city.name }}</option>
+                    {% endfor %}
                 </select>
                 <input type="hidden" name="city" value="" id="input-payment-city"
                        class="form-control"/>

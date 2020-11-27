@@ -26,8 +26,13 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		}
 
 		$this->load->model('localisation/country');
+		$this->load->model('localisation/area');
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
+        $data['cities'] = '';
+        if(!empty($data['zone_id'])) {
+            $data['cities'] = $this->model_localisation_area->getAreasByZoneId($data['zone_id']);
+        }
 
 		// Custom Fields
 		$data['custom_fields'] = array();
