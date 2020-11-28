@@ -1404,23 +1404,25 @@ class ControllerAccountMpmultivendorProduct extends Controller
         if (isset($this->request->post['price'])) {
             $data['price'] = $this->request->post['price'];
 //            //load price
-//            if (!empty($this->request->post['price'])) {
-//
-//                if(!empty($this->request->post['currency'])) {
-//                    if($this->request->post['currency'] == 'USD') {
-//                        $data['price'] = $this->request->post['local_price'];
-//                    } else {
-//                        $currData = $this->model_localisation_currency->getCurrencyByCode($this->request->post['currency']);
-//                        //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
-//                        $dataValue = $this->request->post['local_price'] * $currData['value'];
-//                        $data['price'] = $dataValue;
-//                    }
-//                } else {
-//                    $data['price'] = $this->request->post['local_price'];
-//                }
-//            }
+            if (!empty($this->request->post['price'])) {
+
+                if(!empty($this->request->post['currency'])) {
+                    if($this->request->post['currency'] == 'USD') {
+                        $data['price'] = $this->request->post['local_price'];
+                    } else {
+                        $currData = $this->model_localisation_currency->getCurrencyByCode($this->request->post['currency']);
+                        //$usdData = $this->model_localisation_currency->getCurrencyByCode('USD');
+                        $dataValue = $this->request->post['local_price'] * $currData['value'];
+                        $data['price'] = $dataValue;
+                    }
+                } else {
+                    $data['price'] = $this->request->post['local_price'];
+                }
+            }
         } elseif (!empty($product_info)) {
+
             $data['price'] = $product_info['price'];
+
         } else {
             $data['price'] = '';
         }
@@ -1428,7 +1430,17 @@ class ControllerAccountMpmultivendorProduct extends Controller
         if (isset($this->request->post['local_price'])) {
             $data['local_price'] = $this->request->post['local_price'];
         } elseif (!empty($product_info)) {
-            $data['local_price'] = $product_info['local_price'];
+
+            if (!empty($product_info['price'])) {
+                if(!empty($product_info['currency'])) {
+                    $currData = $this->model_localisation_currency->getCurrencyByCode($product_info['currency']);
+                    $dataValue = $product_info['price'] * $currData['value'];
+                    $data['local_price'] = ($product_info['currency'] == 'USD') ? $product_info['local_price'] : $dataValue;
+                } else {
+                    $data['local_price'] = $this->request->post['local_price'];
+                }
+            }
+            //$data['local_price'] = $product_info['local_price'];
         } else {
             $data['local_price'] = '';
         }
