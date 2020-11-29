@@ -81,14 +81,20 @@ class ModelExtensionShippingPartnerShipping extends Model
                 // my change
                 $sellerIDs = $this->getSellers();
                 $distance = $this->getTotalDistance($sellerIDs, $customerArray);
+                //echo '<pre>'; print_r($distance) . '</pre>';
+
 
                 $configFlatCharge = (float) $this->config->get('config_flat_delivery_charges');
+                //echo '<pre>'; print_r($configFlatCharge) . '</pre>';
                 $configFlatChargeDistance = (float) $this->config->get('config_delivery_charge_per_distance');
+                //echo '<pre>'; print_r($configFlatChargeDistance) . '</pre>';
                 $delivery_charge = $configFlatCharge + ($configFlatChargeDistance * $distance);
                 //$dataCharges = $this->currency->addCurrencySymbol($delivery_charge, $this->session->data['currency']);
                 $totalDeliveryAmt = $delivery_charge;
+                //echo '<pre>'; print_r($delivery_charge) . '</pre>';
 
             } else {
+                //echo '<pre>'; print_r('here one') . '</pre>';
                 //if seller and customer locations are not the same
                 $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
 
@@ -116,7 +122,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                     $usdAmt = $tempAmt / $nigeria_data['value'];
                     $totalDeliveryAmt = number_format($usdAmt, 4);
                 } else {
-
+                    //echo '<pre>'; print_r('here two') . '</pre>';
                     //for currency USD
                     if ($this->session->data['currency'] != 'USD') {
                         $deliveryChargeNew = $this->currency->formatExceptSymbol($this->tax->calculate($deliveryCharge, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency']);
@@ -139,10 +145,10 @@ class ModelExtensionShippingPartnerShipping extends Model
                     }
 
                     if ($this->session->data['currency'] == 'USD') {
-
+                        //echo '<pre>'; print_r('here three') . '</pre>';
                         $totalDeliveryAmt = $tempAmt;
                     } else {
-
+                        //echo '<pre>'; print_r('here four') . '</pre>';
                         $NGN_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code = '" . $this->session->data['currency'] . "'");
                         $nigeria_data = $NGN_query->row;
                         $usdAmt = $tempAmt / $nigeria_data['value'];
@@ -150,7 +156,15 @@ class ModelExtensionShippingPartnerShipping extends Model
                     }
                 }
             }
-            $totalDeliveryCharges += $totalDeliveryAmt;
+            //echo '<pre>'; print_r($totalDeliveryCharges) . '</pre>';
+            /**
+             * bcos we removed the double charging.
+             */
+            //$totalDeliveryCharges += $totalDeliveryAmt;
+            $totalDeliveryCharges = $totalDeliveryAmt;
+            //echo '<pre>'; print_r($totalDeliveryAmt) . '</pre>';
+            //echo '<pre>'; print_r($this->session->data['currency']) . '</pre>';
+            //echo '<pre>'; print_r($totalDeliveryCharges);
         }
 
         //END : Champion Mall Delivery Charges Algorithm
@@ -163,6 +177,11 @@ class ModelExtensionShippingPartnerShipping extends Model
                 'cost' => $totalDeliveryCharges,
                 'tax_class_id' => $this->config->get('partner_shipping_tax_class_id'),
                 'text' => $this->currency->format($this->tax->calculate($totalDeliveryCharges, $this->config->get('partner_shipping_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
+                /**
+                 * 1. we already local currency so no need of conversion using the format()
+                 */
+                //'text' => $this->currency->format($totalDeliveryCharges, $this->session->data['currency'])
+                //'text' => number_format($totalDeliveryCharges, 2)
                 //'text' => $this->currency->addCurrencySymbol($totalDeliveryCharges, $this->session->data['currency'])
             );
 
@@ -174,6 +193,7 @@ class ModelExtensionShippingPartnerShipping extends Model
                 'error' => false
             );
         }
+        //echo '<pre>'; print_r($method_data); exit('iook');
         return $method_data;
     }
 
@@ -242,6 +262,9 @@ class ModelExtensionShippingPartnerShipping extends Model
         // handle type of seller quickly
         if (count($sellerIDs) <= 1){
             $lastSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[0]);
+            //echo '<pre>'; print_r($lastSellerAddress) . '</pre>';
+            //echo '<pre>'; print_r($customerAddress) . '</pre>';
+            //echo '<pre>'; print_r($this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey)) . '</pre>';
             $totalDistance += $this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey);
             return $totalDistance;
         }
@@ -250,9 +273,16 @@ class ModelExtensionShippingPartnerShipping extends Model
         if (count($sellerIDs) <= 2){
             $prevSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[0]);
             $lastSellerAddress = $this->getGoogleFormattedAddress($sellerIDs[1]);
+            //echo '<pre>'; print_r($prevSellerAddress) . '</pre>';
+            //echo '<pre>'; print_r($lastSellerAddress) . '</pre>';
+            //echo '<pre>'; print_r($this->getDistance($prevSellerAddress, $lastSellerAddress, $unit, $googleKey)) . '</pre>';
             // get distance btw seller 1 and seller 2
             $totalDistance += $this->getDistance($prevSellerAddress, $lastSellerAddress, $unit, $googleKey);
             // get distance btw last seller (2) and customer
+            //echo '<pre>'; print_r($this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey)) . '</pre>';
+            //echo '<pre>'; print_r($lastSellerAddress) . '</pre>';
+            //echo '<pre>'; print_r($customerAddress) . '</pre>';
+            //echo '<pre>'; print_r($this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey)) . '</pre>';
             $totalDistance += $this->getDistance($lastSellerAddress, $customerAddress, $unit, $googleKey);
             return $totalDistance;
         }
@@ -323,8 +353,10 @@ class ModelExtensionShippingPartnerShipping extends Model
         ];
 
         $endpoint .= http_build_query($query_data);
+        //echo '<pre>'; print_r($endpoint) . '</pre>';
         $distanceMatrixAPI = file_get_contents($endpoint);
         $outputReturned = json_decode($distanceMatrixAPI);
+        //echo '<pre>'; print_r($outputReturned) . '</pre>';
         if ($outputReturned->status != "OK" || count($outputReturned->rows) == 0){
             return $outputReturned->status;
         }
