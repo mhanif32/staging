@@ -22,7 +22,7 @@ class ModelExtensionShippingPartnerShipping extends Model
         }
 
         /**
-         * This is the cost you want to set for using your shipping se:rvice
+         * This is the cost you want to set for using your shipping service
          * Instead of this, you can use the APIs to calculate your shipping rate
          * You can also make use of $address array as it contains the address of the customer
          * @var integer
