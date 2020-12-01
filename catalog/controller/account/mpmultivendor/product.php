@@ -513,13 +513,23 @@ class ControllerAccountMpmultivendorProduct extends Controller
                 }
             }
 
+            $local_price = 0;
+            if (!empty($result['price'])) {
+                if(!empty($result['currency'])) {
+                    $currData = $this->model_localisation_currency->getCurrencyByCode($result['currency']);
+                    $dataValue = $result['price'] * $currData['value'];
+                    $local_price = ($result['currency'] == 'USD') ? $result['local_price'] : $dataValue;
+                    $local_price = round($local_price, 2);
+                }
+            }
+
             $data['products'][] = array(
                 'product_id' => $result['product_id'],
                 'image' => $image,
                 'name' => $result['name'],
                 'model' => $result['model'],
                 'price' => $result['price'],
-                'local_price' => $this->currency->getSymbolLeft($result['currency']) . $result['local_price'] . $this->currency->getSymbolRight($result['currency']),
+                'local_price' => $this->currency->getSymbolLeft($result['currency']) . $local_price . $this->currency->getSymbolRight($result['currency']),
                 'currency' => $result['currency'],
                 'special' => $special,
                 'quantity' => $result['quantity'],
@@ -1435,7 +1445,7 @@ class ControllerAccountMpmultivendorProduct extends Controller
                 if(!empty($product_info['currency'])) {
                     $currData = $this->model_localisation_currency->getCurrencyByCode($product_info['currency']);
                     $dataValue = $product_info['price'] * $currData['value'];
-                    $data['local_price'] = ($product_info['currency'] == 'USD') ? $product_info['local_price'] : $dataValue;
+                    $data['local_price'] = ($product_info['currency'] == 'USD') ? $product_info['local_price'] : round($dataValue, 2);
                 } else {
                     $data['local_price'] = $this->request->post['local_price'];
                 }

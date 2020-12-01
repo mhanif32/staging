@@ -14,11 +14,14 @@ class ControllerCheckoutShippingMethod extends Controller {
             $this->load->model('catalog/category');
 
 			$results = $this->model_setting_extension->getExtensions('shipping');
+            //echo '<pre>';print_r($results);
 			foreach ($results as $result) {
 
 				if ($this->config->get('shipping_' . $result['code'] . '_status')) {
 					$this->load->model('extension/shipping/' . $result['code']);
 					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
+
+                    //echo '<pre>';print_r($quote);
 
 					if ($quote) {
 						$method_data[$result['code']] = array(
@@ -30,6 +33,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 					}
 				}
 			}
+			//exit();
 
 			$sort_order = array();
 
@@ -93,7 +97,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			$data['comment'] = '';
 		}
 		//echo '<pre>';print_r($data['shipping_methods']);exit('aaaa');
-		
+
 		$this->response->setOutput($this->load->view('checkout/shipping_method', $data));
 	}
 
