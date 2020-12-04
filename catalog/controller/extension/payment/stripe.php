@@ -26,7 +26,7 @@ class ControllerExtensionPaymentStripe extends Controller {
 		// get order billing country
 		$this->load->model('localisation/country');
   		$country_info = $this->model_localisation_country->getCountry($order_info['payment_country_id']);
-		
+
 		// we will use this owner info to send Stripe from client side
 		$data['billing_details'] = array(
 										'billing_details' => array(
@@ -50,7 +50,7 @@ class ControllerExtensionPaymentStripe extends Controller {
 	}
 
 	public function confirm(){
-		
+
 		$this->load->model('extension/payment/stripe');
 		$json = array('error' => 'Server did not get valid request to process');
 
@@ -64,7 +64,7 @@ class ControllerExtensionPaymentStripe extends Controller {
 			// retrieve json from POST body
 			$json_str = file_get_contents('php://input');
 			$json_obj = json_decode($json_str);
-			
+
 			// load stripe libraries
 			$this->initStripe();
 
@@ -93,11 +93,13 @@ class ControllerExtensionPaymentStripe extends Controller {
 					'currency' => strtolower($order_info['currency_code']),
 					'confirmation_method' => 'manual',
 					'confirm' => true,
+					'return_url' => $this->url->link('extension/payment/stripe/handleThreeD'),
 					'description' => "Charge for Order #".$order_info['order_id'],
 					'metadata' => array(
 												'order_id'	=> $order_info['order_id'],
 												'email'		=> $order_info['email']
 											),
+                    'payment_method_options' => ['card' => ['request_three_d_secure' => 'any']]
 				));
 			}
 
@@ -112,7 +114,34 @@ class ControllerExtensionPaymentStripe extends Controller {
 
 			if(!empty($intent)) {
 
+			    if ( !empty($intent->status) && ($intent->status == 'requires_action' || $intent->status == 'requires_source_action')){
+			        $action = !empty($intent->next_action) ? $intent->next_action :  null;
+			        if (!empty($action) && $action->type == 'redirect_to_url'){
+			            $json = ['success' => $action->redirect_to_url->url];
+			            $this->response->addHeader('Content-Type: application/json');
+			            $this->response->setOutput(json_encode($json));
+			            return;
+                    }
+
+			        if (!empty($action) && $action->type == 'use_stripe_sdk'){
+			            $json = ['requires_action' => true, 'payment_intent_client_secret' => $intent->client_secret];
+                    }
+                }
+
+			    // check for 3D secure
+                if ($intent->status == 'requires_action'){
+                    // inspect the next_action field
+                    $action = $intent->next_action;
+                    if (!empty($aaction) && $action->type == 'redirect_to_url'){
+                        header("Location: ". $action->redirect_to_url->url);
+                    }
+                }
+
 				// check if intent required any further action
+                /*
+                 * Removed since i already catered for it above with 3D secure.
+                 *
+                 *
 				if (($intent->status == 'requires_action' || $intent->status == 'requires_source_action') &&
 				$intent->next_action->type == 'use_stripe_sdk') {
 					// Tell the client to handle the action
@@ -121,6 +150,7 @@ class ControllerExtensionPaymentStripe extends Controller {
 						'payment_intent_client_secret' => $intent->client_secret
 					);
 				}
+                */
 
 				// payment is success, no further action required
 				else if ($intent->status == 'succeeded') {
@@ -146,7 +176,7 @@ class ControllerExtensionPaymentStripe extends Controller {
 		} catch (\Stripe\Error\Base $e) {
 			// Display error on client
 			$json = array('error' => $e->getMessage());
-			
+
 			$this->model_extension_payment_stripe->log($e->getFile(), $e->getLine(), "Stripe Exception caught in confirm() method", $e->getMessage());
 
 		} catch (\Exception $e) {
@@ -155,11 +185,56 @@ class ControllerExtensionPaymentStripe extends Controller {
 			$this->model_extension_payment_stripe->log($e->getFile(), $e->getLine(), "Exception caught in confirm() method", $e->getMessage());
 
 		}
-		
+
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 		return;
 	}
+
+	/*
+	 * Callback to handle cards that needs to undergo 3D secure authentication.
+	 */
+    public function handleThreeD()
+    {
+        try{
+            if (!isset($this->session->data['order_id'])){
+                $this->model_extension_payment_stripe->log(__FILE__, __LINE__, "Session Data ", $this->session->data);
+                throw new Exception("Your order seems lost in session. We did not charge your payment. Please contact administrator for more information.");
+            }
+
+            // load order model
+            $this->load->model('checkout/order');
+            $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+            if (empty($order_info)){
+                $this->model_extension_payment_stripe->log(__FILE__, __LINE__, "Order Data ", $this->order_info);
+                throw new Exception("Your order seems lost before payment. We did not charge your payment. Please contact administrator for more information.");
+            }
+
+            if (!empty($_GET['payment_intent'])){
+                $this->initStripe();
+                $intent = \Stripe\PaymentIntent::retrieve($_GET['payment_intent']);
+                if (empty($intent->payment_method) || $intent->payment_method == null) {
+                    $this->response->redirect($this->url->link('checkout/failure', '', true));
+                }
+
+                // confirm payment
+                $intent->confirm();
+                if (!empty($intent->status) && $intent->status == "succeeded"){
+                    $charge_result = $this->chargeAndUpdateOrder($intent, $order_info);
+                    if ($charge_result){
+                        $this->response->redirect($this->url->link('checkout/success', '', true));
+                    }
+                }
+            }
+
+        } catch (\Stripe\Error\Base $e){
+            $this->response->redirect($this->url->link('checkout/failure', '', true));
+
+        } catch (\Exception $e){
+            $json = ['error' => $e->getMessage()];
+            $this->response->redirect($this->url->link('checkout/failure', '', true));
+        }
+    }
 
 
 	/**
@@ -182,10 +257,10 @@ class ControllerExtensionPaymentStripe extends Controller {
 			} else {
 				$this->model_checkout_order->addOrderHistory($order_info['order_id'], $this->config->get('payment_stripe_order_failed_status_id'), $message, false);
 			}
-			
+
 			// charge completed successfully
 			return true;
-		
+
 		} else {
 			// charge could not be completed
 			return false;
