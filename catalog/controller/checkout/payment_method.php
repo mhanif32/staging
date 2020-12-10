@@ -15,7 +15,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				'taxes'  => &$taxes,
 				'total'  => &$total
 			);
-			
+
 			$this->load->model('setting/extension');
 
 			$sort_order = array();
@@ -31,7 +31,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			foreach ($results as $result) {
 				if ($this->config->get('total_' . $result['code'] . '_status')) {
 					$this->load->model('extension/total/' . $result['code']);
-					
+
 					// We have to put the totals in an array so that they pass by reference.
 					$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 				}
@@ -44,13 +44,16 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 			$results = $this->model_setting_extension->getExtensions('payment');
 
+            //echo '<pre>'; print_r($results) . '</pre>';exit('kc');
+
 			$recurring = $this->cart->hasRecurringProducts();
 
 			foreach ($results as $result) {
 				if ($this->config->get('payment_' . $result['code'] . '_status')) {
 					$this->load->model('extension/payment/' . $result['code']);
 
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+
+                    $method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
 
 					if ($method) {
 						if ($recurring) {
@@ -61,6 +64,11 @@ class ControllerCheckoutPaymentMethod extends Controller {
 							$method_data[$result['code']] = $method;
 						}
 					}
+
+                    if ($result['code'] == 'stripe')
+                    {
+                        echo '<pre>'; print_r($method) . '</pre>';
+                    }
 				}
 			}
 
@@ -78,7 +86,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
                 if(!empty($method_data['paystack'])) {
                     unset($method_data['paystack']);
                 }
-            } 
+            }
             if($this->session->data['currency'] == 'NGN') {
 				if(!empty($method_data['stripe'])) {
                     unset($method_data['stripe']);
@@ -133,6 +141,8 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		} else {
 			$data['agree'] = '';
 		}
+
+		//echo '<pre>'; print_r($data['payment_methods']) . '</pre>'; exit('kc');
 
 		$this->response->setOutput($this->load->view('checkout/payment_method', $data));
 	}

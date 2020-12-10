@@ -52,11 +52,18 @@ class ModelExtensionShippingPartnerShipping extends Model
             //echo '<pre>'; print_r($address); /*exit('iook');*/
             //echo '<pre>'; print_r($mpSellerData); exit('iook');
 
-            if (($mpSellerData['country_id'] == $address['country_id']) && ($mpSellerData['zone_id'] == $address['zone_id']) && ($mpSellerData['city'] == $address['city']) && $address['country'] != 'Nigeria') {
+            /**
+             * Removed this to ensure calculation can be done for locations in the same country but different zones and cities.
+             */
+            //if (($mpSellerData['country_id'] == $address['country_id']) && ($mpSellerData['zone_id'] == $address['zone_id']) && ($mpSellerData['city'] == $address['city']) && $address['country'] != 'Nigeria') {
+
+            $sellerZoneData = $this->getZone($mpSellerData['zone_id']);
+            $sellerCountryData = $this->getCountry($mpSellerData['country_id']);
+            if( ($sellerCountryData['name'] != 'Nigeria'  && $address['country']  != 'Nigeria') && $mpSellerData['country_id'] == $address['country_id']){
                 //exit('here');
 
-                $sellerZoneData = $this->getZone($mpSellerData['zone_id']);
-                $sellerCountryData = $this->getCountry($mpSellerData['country_id']);
+                //$sellerZoneData = $this->getZone($mpSellerData['zone_id']);
+                //$sellerCountryData = $this->getCountry($mpSellerData['country_id']);
 
                 $googleKey = $this->config->get('config_google_distance_api_key');
                 $sellerAddress = [
@@ -77,7 +84,7 @@ class ModelExtensionShippingPartnerShipping extends Model
 
                 $addressFrom = $sellerAddress;
                 $addressTo = $customerAddress;
-                $distance = $this->getDistanceOLD($addressFrom, $addressTo, "K", $googleKey);
+                //$distance = $this->getDistanceOLD($addressFrom, $addressTo, "K", $googleKey);
                 // my change
                 $sellerIDs = $this->getSellers();
                 $distance = $this->getTotalDistance($sellerIDs, $customerArray);
