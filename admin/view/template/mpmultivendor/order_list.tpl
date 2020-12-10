@@ -125,10 +125,13 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
                             </div>
-
-                            <button type="button" id="button-filter" class="btn btn-primary pull-right"><i
+                                <button type="button" id="button-filter" class="btn btn-primary pull-right"><i
                                         class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="<?php echo $export_url;?>" class="">Export CSV (Parcel Force)</a>
+                        <small>Note : At the time of uploading CSV in ParcelForce, CM (dimensions) should select during the upload process</small>
                     </div>
                 </div>
                 <form method="post" action="" enctype="multipart/form-data" id="form-order">

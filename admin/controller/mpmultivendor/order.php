@@ -12,8 +12,6 @@ class ControllerMpmultivendorOrder extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('mpmultivendor/order');
-
-
 		$this->load->model('localisation/order_status');
 
 		$this->getList();
@@ -399,6 +397,8 @@ class ControllerMpmultivendorOrder extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
+
+		$data['export_url'] = $this->url->link('mpmultivendor/order/export-parcel-force', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
 		$this->config->set('template_engine', 'template');
 		$this->response->setOutput($this->load->view('mpmultivendor/order_list', $data));
@@ -998,4 +998,145 @@ class ControllerMpmultivendorOrder extends Controller {
 			$this->response->setOutput($this->load->view('mpmultivendor/seller_ordertotal_info', $data));
 		}
 	}
+
+	public function exportParcelForce()
+    {
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        $this->load->model('mpmultivendor/order');
+        $this->load->model('mpmultivendor/product');
+        $this->load->model('localisation/country');
+        $this->load->model('localisation/length_class');
+        $this->load->model('localisation/order_status');
+
+        if (isset($this->request->get['filter_order_id'])) {
+            $filter_order_id = $this->request->get['filter_order_id'];
+        } else {
+            $filter_order_id = null;
+        }
+
+        if (isset($this->request->get['filter_customer'])) {
+            $filter_customer = $this->request->get['filter_customer'];
+        } else {
+            $filter_customer = null;
+        }
+
+        if (isset($this->request->get['filter_seller'])) {
+            $filter_seller = $this->request->get['filter_seller'];
+        } else {
+            $filter_seller = null;
+        }
+
+        if (isset($this->request->get['filter_order_status'])) {
+            $filter_order_status = $this->request->get['filter_order_status'];
+        } else {
+            $filter_order_status = null;
+        }
+
+        if (isset($this->request->get['filter_mpseller_order_status'])) {
+            $filter_mpseller_order_status = $this->request->get['filter_mpseller_order_status'];
+        } else {
+            $filter_mpseller_order_status = null;
+        }
+
+        if (isset($this->request->get['filter_date_added'])) {
+            $filter_date_added = $this->request->get['filter_date_added'];
+        } else {
+            $filter_date_added = null;
+        }
+
+        if (isset($this->request->get['filter_date_modified'])) {
+            $filter_date_modified = $this->request->get['filter_date_modified'];
+        } else {
+            $filter_date_modified = null;
+        }
+
+        if (isset($this->request->get['sort'])) {
+            $sort = $this->request->get['sort'];
+        } else {
+            $sort = 'o.order_id';
+        }
+
+        if (isset($this->request->get['order'])) {
+            $order = $this->request->get['order'];
+        } else {
+            $order = 'DESC';
+        }
+
+        if (isset($this->request->get['page'])) {
+            $page = $this->request->get['page'];
+        } else {
+            $page = 1;
+        }
+
+        $data['orders'] = array();
+
+        $filter_data = array(
+            'filter_order_id' => $filter_order_id,
+            'filter_customer' => $filter_customer,
+            'filter_seller' => $filter_seller,
+            'filter_order_status' => $filter_order_status,
+            'filter_mpseller_order_status' => $filter_mpseller_order_status,
+            'filter_date_added' => $filter_date_added,
+            'filter_date_modified' => $filter_date_modified,
+            'sort' => $sort,
+            'order' => $order,
+            'start' => ($page - 1) * $this->config->get('config_limit_admin'),
+            'limit' => $this->config->get('config_limit_admin')
+        );
+
+        require_once(DIR_SYSTEM.'library/PHPExcel.php');
+        $results = $this->model_mpmultivendor_order->getOrders($filter_data);
+
+        header('Content-type: text/csv');
+        $filename = "Orders_" . date("d-m-Y-His");
+        header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        $file = fopen('php://output', 'w');
+        fputcsv($file, array('Item Name', 'Value', 'Weight', 'Length', 'Width', 'Height', 'Name', 'Property', 'Street', 'Town', 'Country', 'PostCode', 'Country', 'Telephone'));
+        $data = [];
+        foreach ($results as $result) {
+            $order_products = $this->model_mpmultivendor_order->getExportOrderProducts($result['order_id']);
+            foreach ($order_products as $order_product) {
+
+                $product_id = $order_product['product_id'];
+                $order_id = $order_product['order_id'];
+                $productData = $this->model_mpmultivendor_product->getProduct($product_id);
+                $orderData = $this->model_mpmultivendor_order->getOrder($order_id);
+                $recipientName = $orderData['shipping_firstname'].' '.$orderData['shipping_lastname'];
+                $property = $orderData['shipping_address_1'];
+                $street = $orderData['shipping_address_2'];
+                $town = $orderData['shipping_city'];
+                $country = $orderData['shipping_country'];
+                $country_id = $orderData['shipping_country_id'];
+                $countryData = $this->model_localisation_country->getCountry($country_id);
+                $postCode = $orderData['shipping_zone_code'];
+                $telephone = $orderData['telephone'];
+
+                //get Dimensions of product
+                $weight = $productData['weight'];
+                $length_class_id = $productData['length_class_id'];
+                $lengthData = $this->model_localisation_length_class->getLengthClass($length_class_id);
+                if($lengthData['unit'] == 'cm') {
+                    $length = $productData['length'];
+                    $width = $productData['width'];
+                    $height = $productData['height'];
+                } else {
+                    $length = $this->length->convert($productData['length'], $lengthData['unit'], 'cm');
+                    $width = $this->length->convert($productData['width'], $lengthData['unit'], 'cm');
+                    $height = $this->length->convert($productData['height'], $lengthData['unit'], 'cm');
+                }
+                $data[] = array($order_product['name'], $order_product['total'], $weight, $length, $width, $height, $recipientName, $property, $street, $town, $country, $postCode, $countryData['iso_code_2'], $telephone);
+            }
+        }
+        //echo '<pre>';print_r($data);exit('okok');
+        // output each row of the data
+        foreach ($data as $row)
+        {
+            fputcsv($file, $row);
+        }
+        exit();
+    }
 }

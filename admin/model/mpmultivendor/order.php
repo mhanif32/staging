@@ -249,6 +249,14 @@ class ModelMpmultivendorOrder extends Model {
 		return $query->rows;
 	}
 
+    public function getExportOrderProducts($order_id) {
+        $query = $this->db->query("SELECT op.*, o.shipping_code FROM " . DB_PREFIX . "order_product op 
+        LEFT JOIN " . DB_PREFIX . "order o ON o.order_id = op.order_id
+        WHERE op.order_id = '" . (int)$order_id . "' and o.shipping_code = 'parcelforce_48.parcelforce_48' ORDER BY op.order_product_id ASC");
+
+        return $query->rows;
+    }
+
 	public function getMpsellerOrderProduct($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT mpo.order_id, mpo.order_product_id, mpo.order_status_id, mp.store_owner, mp.store_name, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = mpo.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status FROM " . DB_PREFIX . "mpseller_order_product mpo LEFT JOIN ". DB_PREFIX ."mpseller mp ON(mpo.mpseller_id=mp.mpseller_id) WHERE mpo.order_id = '" . (int)$order_id . "' AND mpo.order_product_id = '". (int)$order_product_id ."'");
 
